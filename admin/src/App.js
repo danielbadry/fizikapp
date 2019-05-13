@@ -18,7 +18,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 
 const App = () => (
-    <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+    <Admin dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} />
         <Resource name="users" list={UsersList} icon={UserIcon} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
