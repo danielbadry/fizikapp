@@ -1,6 +1,6 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
-import { ProductsList, ProductCreate, ProductEdit } from './products';
+import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
 import { UsersList } from './users';
 import { ShopsList } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
@@ -19,7 +19,7 @@ import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 
 const App = () => (
     <Admin dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')}>
-        <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} />
+        <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
         <Resource name="users" list={UsersList} icon={UserIcon} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
