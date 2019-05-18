@@ -12,6 +12,7 @@ import Home from '@material-ui/icons/Home';
 import Refresh from '@material-ui/icons/Refresh';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Tooltip from '@material-ui/core/Tooltip';
+import Badge from '@material-ui/core/Badge';
 
 const PostActions = ({
     bulkActions,
@@ -53,7 +54,9 @@ const PostActions = ({
         <RefreshButton />
         <Tooltip title="Up">
             <IconButton color="secondary">
-                <ExpandLess />
+                <Badge badgeContent={4} color="primary">
+                    <ExpandLess />
+                </Badge>
             </IconButton>
         </Tooltip>
         <Tooltip title="Back">
@@ -73,7 +76,10 @@ const PostActions = ({
         </Tooltip>
         <Tooltip title="Delete">
             <IconButton color="secondary">
+            <Badge badgeContent={4} color="primary" >
+
                 <DeleteIcon />
+                </Badge>
             </IconButton>
         </Tooltip>
         <Tooltip title="Refresh">
