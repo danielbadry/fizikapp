@@ -17,6 +17,7 @@ import ShoppingIcon from '@material-ui/icons/AddShoppingCart';
 import CommentIcon from '@material-ui/icons/Comment';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import authProvider from './authProvider';
+
 const App = () => (
     <Admin dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
