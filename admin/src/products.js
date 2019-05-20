@@ -1,24 +1,46 @@
 import React from 'react';
-import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField, SimpleShowLayout, ChipField, FileField, AutocompleteArrayInput ,FileInput, ImageField, ImageInput, NumberInput, BooleanInput, DateTimeInput, List, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, ShowButton, EditButton } from 'react-admin';
-
+import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
+        ChipField, FileField, AutocompleteArrayInput ,FileInput,
+        ImageField, ImageInput, NumberInput, BooleanInput, DateTimeInput, List, Create,
+        Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid,
+        TextField, DateField, ShowButton, EditButton } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import Chips from './chips';
 
+const validateUserCreation = (values) => {
+    const errors = {};
+    if (!values.name) {
+        errors.name = ['The name is required'];
+    }
+    return errors
+};
+
+const validateTitle = (value, allValues) => {
+    if (!value) {
+        return 'The title is required';
+    }
+    if (value.length < 3) {
+        return 'Must be over 3';
+    }
+    return [];
+}
+
 export const ProductCreate = (props) => (
-    <Create {...props}>
-        <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="title" />
-            {/* <RichTextInput source="description" /> */}
+    <Create {...props} redirect="show">
+        <SimpleForm validate={validateUserCreation}>
+            <TextInput source="name" label="name" />
+            <LongTextInput source="title" label="title" />
+            <RichTextInput source="description" label="description" />
             <Chips source="tags"></Chips>
-            <NumberInput source="price" />
-            <BooleanInput source="isEnable" />
-            <ImageInput source="thumbnail" label="Related pictures" accept="image/*">
+            <NumberInput source="price" label="price" />
+            <BooleanInput source="isEnable" label="enable" />
+            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <FileInput source="files" label="Related files" accept="application/pdf">
-                <FileField source="file" title="upload file" />
+            <FileInput source="files" label="video" accept="application/pdf" placeholder={<p>Drop video file here, or click to select it.</p>}>
+                <FileField source="file" title="aaaaa" />
             </FileInput>
-            <DateTimeInput source="publishedDate" />
+            <DateTimeInput source="publishedDate" label="publish date" />
         </SimpleForm>
     </Create>
 );
