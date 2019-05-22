@@ -26,20 +26,17 @@ const validateTitle = (value, allValues) => {
 }
 
 export const ProductCreate = (props) => (
-    <Create {...props} redirect="show">
-        <SimpleForm validate={validateUserCreation}>
+    <Create {...props} >
+        <SimpleForm >
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <RichTextInput source="description" label="description" />
             <Chips source="tags"></Chips>
             <NumberInput source="price" label="price" />
             <BooleanInput source="isEnable" label="enable" />
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
+            <ImageInput source="pictures" label="thumbnail image" accept="*">
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <FileInput source="files" label="video" accept="application/pdf" placeholder={<p>Drop video file here, or click to select it.</p>}>
-                <FileField source="file" title="aaaaa" />
-            </FileInput>
             <DateTimeInput source="publishedDate" label="publish date" />
         </SimpleForm>
     </Create>

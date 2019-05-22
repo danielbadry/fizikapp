@@ -97,7 +97,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             case CREATE:
                 url = `${apiUrl}/${resource}`;
                 options.method = 'POST';
-                options.body = JSON.stringify(params.data);
+                var formData = new FormData();
+                formData.append("username", "Groucho");
+                console.info('params:', params);
+                console.info(document.getElementById("pictures"));
+                formData.append("file", document.getElementById("pictures").files[0]);
+                console.info(params);
+                // return;
+                options.body = formData ;//JSON.stringify({'name':'milad'});
                 break;
             case DELETE:
                 url = `${apiUrl}/${resource}/${params.id}`;

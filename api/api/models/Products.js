@@ -25,12 +25,12 @@ module.exports = {
 
   },
 
-  afterCreate: async function(valuesToSet, proceed) {
+  //afterCreate: async function(valuesToSet, proceed) {
       // await Audit.create({name: 'alice'}, function(err, newUser) {
       //    return proceed();
       // }, { fetch: true });
       
-  }
+  //}
 
 };
 
