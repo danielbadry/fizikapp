@@ -78,7 +78,6 @@ const PostActions = ({
         <Tooltip title="Delete">
             <IconButton color="secondary">
             <Badge badgeContent={4} color="primary" >
-
                 <DeleteIcon />
                 </Badge>
             </IconButton>
@@ -98,10 +97,23 @@ const PostBulkActionButtons = props => (
     </Fragment>
 );
 
-export const CategoriesList = props => (
-    
+// const postRowClick = (id, basePath, record) => record.editable ? 'edit' : 'show';
+const postRowClick = (id, basePath, record) => {
+    console.info('id:', id);
+    console.info('basePath:', basePath);
+    console.info('record:', record);
+};
+
+const PostPanel = ({ id, record, resource }) => (
+   <span>hello</span>
+);
+
+export const CategoriesList = props => (    
     <List {...props} bulkActionButtons={<PostBulkActionButtons />} actions={<PostActions />} >
-        <Datagrid>
+        <Datagrid 
+            rowClick={postRowClick}
+            expand={<PostPanel />}
+            >
             <TextField source="name" />
             <TextField source="createdAt" />
             <TextField source="size" />
