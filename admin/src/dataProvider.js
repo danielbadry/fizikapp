@@ -98,12 +98,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 url = `${apiUrl}/${resource}`;
                 options.method = 'POST';
                 var formData = new FormData();
-                formData.append("username", "Groucho");
-                console.info('params:', params);
-                console.info(document.getElementById("pictures"));
-                formData.append("file", document.getElementById("pictures").files[0]);
-                console.info(params);
-                // return;
+                formData.append("file", document.getElementById("thumbnail").files[0]);
+                Object.keys(params.data).forEach(function (item) {
+                    formData.append(item, params.data[item]);
+                });
                 options.body = formData ;//JSON.stringify({'name':'milad'});
                 break;
             case DELETE:

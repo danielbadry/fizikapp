@@ -10,9 +10,10 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Home from '@material-ui/icons/Home';
 import Refresh from '@material-ui/icons/Refresh';
-import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Tooltip from '@material-ui/core/Tooltip';
 import Badge from '@material-ui/core/Badge';
+
+import CreateNewFolder from './CreateNewFolder';
 
 const PostActions = ({
     bulkActions,
@@ -69,7 +70,7 @@ const PostActions = ({
                 <Home />
             </IconButton>
         </Tooltip>
-        <Tooltip title="New Folder">
+        <Tooltip title="New">
             <IconButton color="secondary">
                 <CreateNewFolder />
             </IconButton>
@@ -98,9 +99,9 @@ const PostBulkActionButtons = props => (
 );
 
 export const CategoriesList = props => (
+    
     <List {...props} bulkActionButtons={<PostBulkActionButtons />} actions={<PostActions />} >
         <Datagrid>
-            <TextField source="id" />
             <TextField source="name" />
             <TextField source="createdAt" />
             <TextField source="size" />

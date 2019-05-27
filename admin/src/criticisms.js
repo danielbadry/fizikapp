@@ -4,7 +4,7 @@ export const CriticismsList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
-            <TextField source="userId" />
+            <TextField source="userName" />
             <TextField source="comment" />
         </Datagrid>
     </List>

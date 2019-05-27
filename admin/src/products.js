@@ -1,9 +1,9 @@
 import React from 'react';
 import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
-        ChipField, FileField, AutocompleteArrayInput ,FileInput,
-        ImageField, ImageInput, NumberInput, BooleanInput, DateTimeInput, List, Create,
-        Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField, ShowButton, EditButton } from 'react-admin';
+        ChipField, FileField ,FileInput,
+        ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
+        Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
+        TextField, DateField, ShowButton, EditButton, DateInput } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import Chips from './chips';
 
@@ -27,17 +27,27 @@ const validateTitle = (value, allValues) => {
 
 export const ProductCreate = (props) => (
     <Create {...props} >
-        <SimpleForm >
+        <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <RichTextInput source="description" label="description" />
             <Chips source="tags"></Chips>
             <NumberInput source="price" label="price" />
-            <BooleanInput source="isEnable" label="enable" />
-            <ImageInput source="pictures" label="thumbnail image" accept="*">
-                <ImageField source="src" title="title" />
+            <BooleanInput
+              source="isEnable"
+              label="enable"
+              options={{
+                checked:true,
+              }}
+              />
+            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
+                <ImageField source="thumbnail" title="title" />
             </ImageInput>
-            <DateTimeInput source="publishedDate" label="publish date" />
+            {/* <FileInput source="files" label="Related files" accept="application/pdf">
+                <FileField source="src" title="title" />
+            </FileInput> */}
+            {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
+            <DateInput source="publishDate" />
         </SimpleForm>
     </Create>
 );

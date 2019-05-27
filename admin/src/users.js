@@ -26,8 +26,9 @@ export const UsersList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
-            <TextField source="first_name" />
-            <TextField source="last_name" />
+            <TextField source="firstName" />
+            <TextField source="lastName" />
+            <TextField source="role" />
             <TextField source="email" />
             <TextField source="createdAt" />
             <TextField source="updatedAt" />
