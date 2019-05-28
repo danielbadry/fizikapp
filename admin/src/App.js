@@ -4,7 +4,7 @@ import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './product
 import { UsersList, UserCreate } from './users';
 import { ShopsList } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
-import { CategoriesList, CategoriesCreate } from './categories';
+import { CategoriesList } from './categories';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
 import Dashboard from './Dashboard';
@@ -22,7 +22,7 @@ const App = () => (
     <Admin dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
         <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} />
-        <Resource name="categories" create={CategoriesCreate} list={CategoriesList} icon={CategoryIcon} />
+        <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
         <Resource name="shops" list={ShopsList} icon={ShoppingIcon} />
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />

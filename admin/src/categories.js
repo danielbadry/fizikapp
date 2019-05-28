@@ -1,19 +1,36 @@
 import React, {Fragment} from 'react';
 import { List, Datagrid, TextField, BulkDeleteButton, Create, SimpleForm, TextInput } from 'react-admin';
 
-import Button from '@material-ui/core/Button';
-import { CardActions, CreateButton, ExportButton, RefreshButton } from 'react-admin';
+import { CardActions, Filter } from 'react-admin';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Home from '@material-ui/icons/Home';
-import Refresh from '@material-ui/icons/Refresh';
 import Tooltip from '@material-ui/core/Tooltip';
-import Badge from '@material-ui/core/Badge';
 
 import CreateNewFolder from './CreateNewFolder';
+
+const PostBulkActionButtons = props => (
+    <Fragment>
+        <BulkDeleteButton {...props} />
+        <div>Hi</div>
+    </Fragment>
+);
+
+// const postRowClick = (id, basePath, record) => record.editable ? 'edit' : 'show';
+const postRowClick = (id, basePath, record) => {
+    console.info('id:', id);
+    console.info('basePath:', basePath);
+    console.info('record:', record);
+};
+
+const PostPanel = ({ id, record, resource }) => (
+   <span>hello</span>
+);
+
+
 
 const PostActions = ({
     bulkActions,
@@ -43,77 +60,58 @@ const PostActions = ({
             displayedFilters,
             filterValues,
             context: 'button',
-        }) }
-        <CreateButton basePath={basePath} />
-        <ExportButton
-            disabled={total === 0}
-            resource={resource}
-            sort={currentSort}
-            filter={filterValues}
-            exporter={exporter}
-        />
-        <RefreshButton />
+        })}
+        
         <Tooltip title="Up">
             <IconButton color="secondary">
-                <Badge badgeContent={4} color="primary">
-                    <ExpandLess />
-                </Badge>
+                <ExpandLess />
             </IconButton>
         </Tooltip>
+        
         <Tooltip title="Back">
             <IconButton color="secondary">
                 <ChevronLeft />
             </IconButton>
         </Tooltip>
+        
         <Tooltip title="Home">
             <IconButton color="secondary">
                 <Home />
             </IconButton>
         </Tooltip>
+        
         <Tooltip title="New">
             <IconButton color="secondary">
-                <CreateNewFolder />
+                
             </IconButton>
         </Tooltip>
+
         <Tooltip title="Delete">
             <IconButton color="secondary">
-            <Badge badgeContent={4} color="primary" >
                 <DeleteIcon />
-                </Badge>
             </IconButton>
         </Tooltip>
-        <Tooltip title="Refresh">
-            <IconButton color="secondary">
-                <Refresh />
-            </IconButton>
-        </Tooltip>
+        <CreateNewFolder />
     </CardActions>
 );
 
-const PostBulkActionButtons = props => (
-    <Fragment>
-        <BulkDeleteButton {...props} />
-        <div>Hi</div>
-    </Fragment>
+const PostFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Search" source="_id" alwaysOn />
+    </Filter>
 );
 
-// const postRowClick = (id, basePath, record) => record.editable ? 'edit' : 'show';
-const postRowClick = (id, basePath, record) => {
-    console.info('id:', id);
-    console.info('basePath:', basePath);
-    console.info('record:', record);
-};
-
-const PostPanel = ({ id, record, resource }) => (
-   <span>hello</span>
-);
-
-export const CategoriesList = props => (    
-    <List {...props} bulkActionButtons={<PostBulkActionButtons />} actions={<PostActions />} >
+export const CategoriesList = props => (
+    <List {...props}
+        bulkActionButtons={<PostBulkActionButtons />}
+        actions={<PostActions />} 
+        filters={<PostFilter />}
+        >
         <Datagrid 
             rowClick={postRowClick}
             expand={<PostPanel />}
             >
+            <TextField source="_id" />
             <TextField source="name" />
             <TextField source="createdAt" />
             <TextField source="size" />
