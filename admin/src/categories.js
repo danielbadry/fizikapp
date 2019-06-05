@@ -9,8 +9,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Home from '@material-ui/icons/Home';
 import Tooltip from '@material-ui/core/Tooltip';
-
-import CreateNewFolder from './CreateNewFolder';
+import CatButton from './CatButton'
 
 const PostBulkActionButtons = props => (
     <Fragment>
@@ -30,7 +29,9 @@ const PostPanel = ({ id, record, resource }) => (
    <span>hello</span>
 );
 
-
+const showstate = e => {
+    
+}
 
 const PostActions = ({
     bulkActions,
@@ -75,7 +76,7 @@ const PostActions = ({
         </Tooltip>
         
         <Tooltip title="Home">
-            <IconButton color="secondary">
+            <IconButton color="secondary" onClick={showstate}>
                 <Home />
             </IconButton>
         </Tooltip>
@@ -91,7 +92,7 @@ const PostActions = ({
                 <DeleteIcon />
             </IconButton>
         </Tooltip>
-        <CreateNewFolder />
+        
     </CardActions>
 );
 
@@ -101,23 +102,28 @@ const PostFilter = (props) => (
     </Filter>
 );
 
+
+
 export const CategoriesList = props => (
-    <List {...props}
-        bulkActionButtons={<PostBulkActionButtons />}
-        actions={<PostActions />} 
-        filters={<PostFilter />}
-        >
-        <Datagrid 
-            rowClick={postRowClick}
-            expand={<PostPanel />}
+    <div>
+        <CatButton />
+        <List {...props}
+            bulkActionButtons={<PostBulkActionButtons />}
+            actions={<PostActions />} 
+            filters={<PostFilter />}
             >
-            <TextField source="_id" />
-            <TextField source="name" />
-            <TextField source="createdAt" />
-            <TextField source="size" />
-            <TextField source="fileCount" />
-        </Datagrid>
-    </List>
+            <Datagrid 
+                rowClick={postRowClick}
+                expand={<PostPanel />}
+                >
+                <TextField source="_id" />
+                <TextField source="name" />
+                <TextField source="createdAt" />
+                <TextField source="size" />
+                <TextField source="fileCount" />
+            </Datagrid>
+        </List>
+    </div>
 );
 
 export const CategoriesCreate = (props) => (

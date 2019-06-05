@@ -17,9 +17,11 @@ import ShoppingIcon from '@material-ui/icons/AddShoppingCart';
 import CommentIcon from '@material-ui/icons/Comment';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import authProvider from './authProvider';
+import catReducer from './redux/cat/reducer'
+
 
 const App = () => (
-    <Admin dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
+    <Admin customReducers={{ catReducer }} dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
         <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
