@@ -1,10 +1,10 @@
 import React from 'react';
+import catReducer from './reducer';
 import { Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
 import { UsersList, UserCreate } from './users';
 import { ShopsList } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
-import { CategoriesList } from './categories';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
 import Dashboard from './Dashboard';
@@ -17,8 +17,7 @@ import ShoppingIcon from '@material-ui/icons/AddShoppingCart';
 import CommentIcon from '@material-ui/icons/Comment';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import authProvider from './authProvider';
-import catReducer from './redux/cat/reducer'
-
+import { CategoriesList } from './categories';
 
 const App = () => (
     <Admin customReducers={{ catReducer }} dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
@@ -30,6 +29,7 @@ const App = () => (
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
         <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
     </Admin>
+    
 );
 
 export default App;

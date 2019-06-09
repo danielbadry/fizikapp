@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import { increaseCatSizeAction } from './action';
 
-import { increaseCatSizeAction } from './redux/cat/action'
-
-class CatButton extends React.PureComponent {
+class CatButton extends React.Component {
     render() {
         const { myCat, increaseCatSize } = this.props;
         return (<Button onClick={() => increaseCatSize(2) }>click me {myCat}</Button>)

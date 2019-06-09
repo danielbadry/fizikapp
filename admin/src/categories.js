@@ -9,8 +9,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Home from '@material-ui/icons/Home';
 import Tooltip from '@material-ui/core/Tooltip';
-import CatButton from './CatButton'
-
+import CatButton from './CatButton';
 const PostBulkActionButtons = props => (
     <Fragment>
         <BulkDeleteButton {...props} />
@@ -106,7 +105,6 @@ const PostFilter = (props) => (
 
 export const CategoriesList = props => (
     <div>
-        <CatButton />
         <List {...props}
             bulkActionButtons={<PostBulkActionButtons />}
             actions={<PostActions />} 
@@ -117,6 +115,7 @@ export const CategoriesList = props => (
                 expand={<PostPanel />}
                 >
                 <TextField source="_id" />
+                <CatButton />
                 <TextField source="name" />
                 <TextField source="createdAt" />
                 <TextField source="size" />
