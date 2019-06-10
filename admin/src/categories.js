@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import { List, Datagrid, TextField, BulkDeleteButton, Create, SimpleForm, TextInput } from 'react-admin';
+import { List, Datagrid, TextField, BooleanInput, BulkDeleteButton, Create, SimpleForm, TextInput } from 'react-admin';
 
 import { CardActions, Filter } from 'react-admin';
 
@@ -8,8 +8,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Home from '@material-ui/icons/Home';
+import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Tooltip from '@material-ui/core/Tooltip';
 import CatButton from './CatButton';
+import TextInputJadid from './TextInputJadid';
+import MyList from './MyList';
+
 const PostBulkActionButtons = props => (
     <Fragment>
         <BulkDeleteButton {...props} />
@@ -19,9 +23,9 @@ const PostBulkActionButtons = props => (
 
 // const postRowClick = (id, basePath, record) => record.editable ? 'edit' : 'show';
 const postRowClick = (id, basePath, record) => {
-    console.info('id:', id);
-    console.info('basePath:', basePath);
-    console.info('record:', record);
+    // console.info('id:', id);
+    // console.info('basePath:', basePath);
+    // console.info('record:', record);
 };
 
 const PostPanel = ({ id, record, resource }) => (
@@ -68,12 +72,6 @@ const PostActions = ({
             </IconButton>
         </Tooltip>
         
-        <Tooltip title="Back">
-            <IconButton color="secondary">
-                <ChevronLeft />
-            </IconButton>
-        </Tooltip>
-        
         <Tooltip title="Home">
             <IconButton color="secondary" onClick={showstate}>
                 <Home />
@@ -82,7 +80,7 @@ const PostActions = ({
         
         <Tooltip title="New">
             <IconButton color="secondary">
-                
+                <CreateNewFolder />
             </IconButton>
         </Tooltip>
 
@@ -97,15 +95,14 @@ const PostActions = ({
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search" source="_id" alwaysOn />
+        <TextInputJadid status="alwaysOn" source="name" />
     </Filter>
 );
 
-
-
 export const CategoriesList = props => (
     <div>
-        <List {...props}
+        <MyList />
+        {/* <List {...props}
             bulkActionButtons={<PostBulkActionButtons />}
             actions={<PostActions />} 
             filters={<PostFilter />}
@@ -114,14 +111,14 @@ export const CategoriesList = props => (
                 rowClick={postRowClick}
                 expand={<PostPanel />}
                 >
-                <TextField source="_id" />
+                <TextField source="id" />
                 <CatButton />
                 <TextField source="name" />
                 <TextField source="createdAt" />
                 <TextField source="size" />
                 <TextField source="fileCount" />
             </Datagrid>
-        </List>
+        </List> */}
     </div>
 );
 

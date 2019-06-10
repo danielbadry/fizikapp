@@ -7,8 +7,10 @@ import { ShopsList } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
+import { PoliceList } from './police';
 import Dashboard from './Dashboard';
 import dataProvider from './dataProvider';
+import NotificationsPaused from '@material-ui/icons/NotificationsPaused';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import UserIcon from '@material-ui/icons/Group';
 import CategoryIcon from '@material-ui/icons/CreateNewFolder';
@@ -28,8 +30,8 @@ const App = () => (
         <Resource name="shops" list={ShopsList} icon={ShoppingIcon} />
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
         <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
-    </Admin>
-    
+        <Resource name="police" icon={NotificationsPaused} list={PoliceList} />
+    </Admin>  
 );
 
 export default App;
