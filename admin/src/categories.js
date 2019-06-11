@@ -9,7 +9,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ChevronLeft from '@material-ui/icons/ExpandLess';
 import Home from '@material-ui/icons/Home';
 import CreateNewFolder from '@material-ui/icons/ExpandLess';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip'
 import CatButton from './CatButton';
 import TextInputJadid from './TextInputJadid';
 import MyList from './MyList';

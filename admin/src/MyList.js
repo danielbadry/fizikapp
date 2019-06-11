@@ -9,13 +9,12 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Home from '@material-ui/icons/Home';
+import FileCopy from '@material-ui/icons/FileCopy';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import { showNotification, GET_ONE, GET_LIST, withDataProvider } from 'react-admin';
+import { GET_ONE, GET_LIST, withDataProvider } from 'react-admin';
 import dataProvider from './dataProvider';
-import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 function createData(id, name) {
@@ -44,6 +43,7 @@ class Mylist extends React.Component {
       ]
     }
   }
+  
   componentDidMount() {
     const { dataProvider } = this.props;
     dataProvider(GET_LIST, 'categories', {
@@ -61,6 +61,11 @@ class Mylist extends React.Component {
   }
 
   componentWillUnmount() {
+    
+  }
+  
+  handleDblClickOnRow (rowId, event) {
+    console.info('dbl click:', rowId);
     
   }
 
@@ -86,6 +91,12 @@ class Mylist extends React.Component {
         </IconButton>
       </Tooltip>
       
+      <Tooltip title="copy">
+        <IconButton color="primary">
+            <FileCopy />
+        </IconButton>
+      </Tooltip>
+      
       <Tooltip title="new">
         <IconButton color="primary">
             <CreateNewFolder />
@@ -101,7 +112,7 @@ class Mylist extends React.Component {
         </TableHead>
         <TableBody>
           {this.state.rows.map(row => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
