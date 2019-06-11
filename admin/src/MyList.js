@@ -9,17 +9,15 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Home from '@material-ui/icons/Home';
-import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { showNotification, GET_ONE, GET_LIST, withDataProvider } from 'react-admin';
+import dataProvider from './dataProvider';
+import { push } from 'react-router-redux';
+import PropTypes from 'prop-types';
+
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -41,45 +39,56 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function Mylist() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
+class Mylist extends React.Component {
   
-  function handleClickOpen() {
-    setOpen(true);
-  
+  constructor(props) {
+    super(props);
+    const { dataProvider, dispatch, record } = this.props;
+    dataProvider(GET_LIST, 'categories', {
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: 'id', order: 'DESC' }
+    })
+    .then((res) => {
+      showNotification('Comment approved');
+      console.info(res)
+    })
+    .catch((e) => {
+        showNotification('Error: comment not approved', 'warning')
+    });
   }
+
+  componentDidMount() {
+    console.info('componentDidMount happened');
+  }
+
+  componentWillUnmount() {
+    console.info('componentWillUnmount happened');
+  }
+
+  render() {
     return (
     <Paper>
       
       <Tooltip  title="up">
-        <IconButton className={classes.button}>
+        <IconButton>
             <ExpandLess />
         </IconButton>
       </Tooltip>
       
       <Tooltip title="delete">
-        <IconButton className={classes.button}>
+        <IconButton>
             <DeleteIcon />
         </IconButton>
       </Tooltip>
       
       <Tooltip title="home">
-        <IconButton color="primary" className={classes.button}>
+        <IconButton color="primary">
             <Home />
         </IconButton>
       </Tooltip>
       
       <Tooltip title="new">
-        <IconButton onClick={handleClickOpen} color="primary" className={classes.button}>
+        <IconButton color="primary">
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
@@ -108,28 +117,11 @@ function Mylist() {
           ))}
         </TableBody>
       </Table>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="dir name"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            create
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Paper>
-  );
+  )
+};
 }
-
-export default Mylist;
+Mylist.propTypes = {
+  dataProvider: PropTypes.func.isRequired,
+};
+export default withDataProvider(Mylist);

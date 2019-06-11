@@ -56,6 +56,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         const options = {};
         switch (type) {
             case GET_LIST: {
+                // const { page, perPage } = params.pagination;
                 const { page, perPage } = params.pagination;
                 const { field, order } = params.sort;
                 const where = convertToWaterline(params.filter)
