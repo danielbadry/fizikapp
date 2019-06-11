@@ -18,17 +18,9 @@ import dataProvider from './dataProvider';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(id, name) {
+  return { id, name };
 }
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -43,26 +35,33 @@ class Mylist extends React.Component {
   
   constructor(props) {
     super(props);
-    const { dataProvider, dispatch, record } = this.props;
+    this.state = {
+      rows : [
+        {
+          id:1,
+          name:'f1'
+        }
+      ]
+    }
+  }
+  componentDidMount() {
+    const { dataProvider } = this.props;
     dataProvider(GET_LIST, 'categories', {
       pagination: { page: 1, perPage: 10 },
       sort: { field: 'id', order: 'DESC' }
     })
     .then((res) => {
-      showNotification('Comment approved');
-      console.info(res)
+      this.setState({
+        rows:res.data
+      });
     })
     .catch((e) => {
-        showNotification('Error: comment not approved', 'warning')
+        console.info('Error: comment not approved', 'warning')
     });
   }
 
-  componentDidMount() {
-    console.info('componentDidMount happened');
-  }
-
   componentWillUnmount() {
-    console.info('componentWillUnmount happened');
+    
   }
 
   render() {
@@ -96,23 +95,17 @@ class Mylist extends React.Component {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>id</TableCell>
+            <TableCell align="right">name</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
+          {this.state.rows.map(row => (
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>
