@@ -88,7 +88,7 @@ class Mylist extends React.Component {
   render() {
     return (
     <Paper>
-      
+      <div dir="rtl">
       <Tooltip  title="up">
         <IconButton>
             <ExpandLess />
@@ -118,7 +118,7 @@ class Mylist extends React.Component {
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
-
+      </div>
       <Table>
         <TableHead>
           <TableRow>
