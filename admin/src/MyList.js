@@ -16,6 +16,13 @@ import IconButton from '@material-ui/core/IconButton';
 import { GET_ONE, GET_LIST, withDataProvider } from 'react-admin';
 import dataProvider from './dataProvider';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 function createData(id, name) {
   return { id, name };
@@ -34,13 +41,15 @@ class Mylist extends React.Component {
   
   constructor(props) {
     super(props);
+    // const [open, setOpen] = React.useState(false);
     this.state = {
       rows : [
         {
           id:1,
           name:'f1'
         }
-      ]
+      ],
+      open : false,
     }
   }
   
@@ -66,7 +75,14 @@ class Mylist extends React.Component {
   
   handleDblClickOnRow (rowId, event) {
     console.info('dbl click:', rowId);
-    
+  }
+
+  handleClickOpen() {
+    this.setState({open:true});
+  }
+
+  handleClose() {
+    this.setState({open:false});
   }
 
   render() {
@@ -98,7 +114,7 @@ class Mylist extends React.Component {
       </Tooltip>
       
       <Tooltip title="new">
-        <IconButton color="primary">
+        <IconButton onClick={this.handleClickOpen.bind(this)} color="primary">
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
@@ -121,6 +137,26 @@ class Mylist extends React.Component {
           ))}
         </TableBody>
       </Table>
+      <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="directory name"
+            type="text"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose.bind(this)} color="primary">
+            cancel
+          </Button>
+          <Button onClick={this.handleClose.bind(this)} color="primary">
+            create
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Paper>
   )
 };
