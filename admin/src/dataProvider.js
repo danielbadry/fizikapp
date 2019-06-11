@@ -59,12 +59,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 // const { page, perPage } = params.pagination;
                 const { page, perPage } = params.pagination;
                 const { field, order } = params.sort;
+                const rowId = params.rowId;
                 const where = convertToWaterline(params.filter)
                 const query = {
                     where: JSON.stringify(where),
                     sort: `${field} ${order}`,
                     skip: (page - 1) * perPage,
                     limit: perPage,
+                    rowId: rowId
                 };
                 url = `${apiUrl}/${resource}?${stringify(query)}`;
                 break;

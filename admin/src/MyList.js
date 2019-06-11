@@ -41,7 +41,6 @@ class Mylist extends React.Component {
   
   constructor(props) {
     super(props);
-    // const [open, setOpen] = React.useState(false);
     this.state = {
       rows : [
         {
@@ -50,14 +49,24 @@ class Mylist extends React.Component {
         }
       ],
       open : false,
+      currentDirectory : 0
     }
   }
   
   componentDidMount() {
+    this.fetchDirectory();
+  }
+
+  componentWillUnmount() {
+    
+  }
+  
+  fetchDirectory(rowId = this.state.currentDirectory) {
     const { dataProvider } = this.props;
     dataProvider(GET_LIST, 'categories', {
       pagination: { page: 1, perPage: 10 },
-      sort: { field: 'id', order: 'DESC' }
+      sort: { field: 'id', order: 'DESC' },
+      rowId : rowId
     })
     .then((res) => {
       this.setState({
@@ -69,12 +78,9 @@ class Mylist extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    
-  }
-  
   handleDblClickOnRow (rowId, event) {
-    console.info('dbl click:', rowId);
+    this.setState({currentDirectory: rowId});
+    this.fetchDirectory(rowId);
   }
 
   handleClickOpen() {
@@ -89,8 +95,8 @@ class Mylist extends React.Component {
     return (
     <Paper>
       <div dir="rtl">
-      <Tooltip  title="up">
-        <IconButton>
+      <Tooltip title="up">
+        <IconButton onClick={(e) => this.handleDblClickOnRow(this.state.currentDirectory, e)}>
             <ExpandLess />
         </IconButton>
       </Tooltip>
@@ -102,7 +108,7 @@ class Mylist extends React.Component {
       </Tooltip>
       
       <Tooltip title="home">
-        <IconButton color="primary">
+        <IconButton onClick={(e) => this.handleDblClickOnRow(0, e)} color="primary">
             <Home />
         </IconButton>
       </Tooltip>
