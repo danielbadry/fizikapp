@@ -20,7 +20,11 @@ import CommentIcon from '@material-ui/icons/Comment';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import authProvider from './authProvider';
 import { CategoriesList } from './categories';
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+am4core.useTheme(am4themes_animated);
 const App = () => (
     <Admin customReducers={{ catReducer }} dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
