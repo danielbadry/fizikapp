@@ -7,6 +7,7 @@ import { ShopsList } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
+import { RequestList } from './RequestList';
 import { PoliceList } from './police';
 import Dashboard from './Dashboard';
 import dataProvider from './dataProvider';
@@ -17,6 +18,7 @@ import CategoryIcon from '@material-ui/icons/CreateNewFolder';
 import VideoLbabelIcon from '@material-ui/icons/VideoLabel';
 import ShoppingIcon from '@material-ui/icons/AddShoppingCart';
 import CommentIcon from '@material-ui/icons/Comment';
+import VpnKey from '@material-ui/icons/VpnKey';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import authProvider from './authProvider';
 import { CategoriesList } from './categories';
@@ -35,6 +37,7 @@ const App = () => (
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
         <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
         <Resource name="police" icon={NotificationsPaused} list={PoliceList} />
+        <Resource name="requests" icon={VpnKey} list={RequestList} />
     </Admin>  
 );
 
