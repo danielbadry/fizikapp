@@ -4,14 +4,14 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField, ShowButton, EditButton, DateInput } from 'react-admin';
-import RichTextInput from 'ra-input-rich-text';
+// import RichTextInput from 'ra-input-rich-text';
 
 export const RequestCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            <RichTextInput source="description" label="description" />
+            {/* <RichTextInput source="description" label="description" /> */}
             <NumberInput source="price" label="price" />
             <BooleanInput
               source="isEnable"

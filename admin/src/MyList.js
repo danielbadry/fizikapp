@@ -6,36 +6,19 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Home from '@material-ui/icons/Home';
-import FileCopy from '@material-ui/icons/FileCopy';
+import FileCopy from '@material-ui/icons/Delete';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import { GET_ONE, GET_LIST, withDataProvider } from 'react-admin';
-import dataProvider from './dataProvider';
+import { GET_LIST, withDataProvider } from 'react-admin';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-function createData(id, name) {
-  return { id, name };
-}
-
-const useStyles = makeStyles(theme => ({
-    fab: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }));
 
 class Mylist extends React.Component {
   

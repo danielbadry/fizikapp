@@ -3,7 +3,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField, ShowButton, EditButton, DateInput } from 'react-admin';
+        TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput, SelectInput } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import Chips from './chips';
 
@@ -43,11 +43,13 @@ export const ProductCreate = (props) => (
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
+            <ReferenceInput label="Tags" source="_id" reference="tags">
+                <SelectInput optionText="name" />
+            </ReferenceInput>
             {/* <FileInput source="files" label="Related files" accept="application/pdf">
                 <FileField source="src" title="title" />
             </FileInput> */}
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
-            <DateInput source="publishDate" />
         </SimpleForm>
     </Create>
 );
@@ -112,7 +114,6 @@ export const ProductsList = props => (
             <ChipField source="tags" label="Tags" />
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
-            <BooleanField source="downloadable" label="Downloadable" />
             <TextField source="createdAt" label="Created" />
             <TextField source="updatedAt" label="Update" />
             <EditButton />
