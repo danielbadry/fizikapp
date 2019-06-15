@@ -4,34 +4,17 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput, SelectInput } from 'react-admin';
+
 import RichTextInput from 'ra-input-rich-text';
-import Chips from './chips';
-
-const validateUserCreation = (values) => {
-    const errors = {};
-    if (!values.name) {
-        errors.name = ['The name is required'];
-    }
-    return errors
-};
-
-const validateTitle = (value, allValues) => {
-    if (!value) {
-        return 'The title is required';
-    }
-    if (value.length < 3) {
-        return 'Must be over 3';
-    }
-    return [];
-}
-
+import MyAutoSelect from './as';
 export const ProductCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
+            
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <RichTextInput source="description" label="description" />
-            <Chips source="tags"></Chips>
+            <MyAutoSelect />
             <NumberInput source="price" label="price" />
             <BooleanInput
               source="isEnable"
@@ -43,9 +26,7 @@ export const ProductCreate = (props) => (
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
-            <ReferenceInput label="Tags" source="_id" reference="tags">
-                <SelectInput optionText="name" />
-            </ReferenceInput>
+            
             {/* <FileInput source="files" label="Related files" accept="application/pdf">
                 <FileField source="src" title="title" />
             </FileInput> */}
