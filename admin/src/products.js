@@ -6,30 +6,25 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput, SelectInput } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
-import MyAutoSelect from './as';
+import MyAutoSelect from './MyAutoSelect';
 export const ProductCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
-            
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <RichTextInput source="description" label="description" />
-            <MyAutoSelect />
+            <MyAutoSelect source="tags" />
             <NumberInput source="price" label="price" />
-            <BooleanInput
-              source="isEnable"
-              label="enable"
-              options={{
-                checked:true,
-              }}
-              />
+            {/*
+            TODO: add boolean field here
+            */}
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
             
-            {/* <FileInput source="files" label="Related files" accept="application/pdf">
+            <FileInput source="files" label="Related files" accept="application/pdf">
                 <FileField source="src" title="title" />
-            </FileInput> */}
+            </FileInput>
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
         </SimpleForm>
     </Create>
@@ -42,6 +37,10 @@ export const ProductEdit = (props) => (
             <TextInput source="title" />
             <LongTextInput source="teaser" />
             <DateInput label="Publication date" source="published_at" />
+            <BooleanInput
+              source="isEnable"
+              label="enable"
+            />
         </SimpleForm>
     </Edit>
 );
