@@ -6,14 +6,15 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput, SelectInput } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
-import MyAutoSelect from './MyAutoSelect';
+import CatButton from './MyNewField';
 export const ProductCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <RichTextInput source="description" label="description" />
-            <MyAutoSelect source="tags" />
+            <CatButton />
+            {/* <Field source="tags" name="tags" component="input" type="number" placeholder="latitude" /> */}
             <NumberInput source="price" label="price" />
             {/*
             TODO: add boolean field here

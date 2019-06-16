@@ -1,26 +1,20 @@
 import React from 'react';
-// import Select from 'react-select';
-import Creatable from 'react-select/creatable';
 import makeAnimated from 'react-select/animated';
+import Creatable from 'react-select/creatable';
 
-class MyAutoSelect extends React.Component {
-  render() {
-    const animatedComponents = makeAnimated();
-
-    const options = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' }
-    ]
-      return (
-        <Creatable
-          components={animatedComponents}
-          name="colors"
-          isMulti
-          isClearable
-          options={options} />
-        )
-  } 
+const ReduxFormSelect = props => {
+  const { input, options } = props;
+  const animatedComponents = makeAnimated();
+  return (
+    <Creatable
+      isClearable  
+      isMulti 
+      {...input} 
+      onChange={value => input.onChange(value)} 
+      onBlur={() => input.onBlur(input.value)} 
+      options={options}
+      components={animatedComponents}
+    />
+  )
 }
-
-export default MyAutoSelect;
+export default ReduxFormSelect;
