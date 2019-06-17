@@ -7,6 +7,13 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import RichTextInput from 'ra-input-rich-text';
 import CatButton from './MyNewField';
+import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
+import Switch from '@material-ui/core/Switch';
+import QuizManager from './QuizManager';
 export const ProductCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
@@ -76,6 +83,12 @@ export const ProductShow = (props) => (
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>
+            <Tab label="quiz" path="quiz">
+            
+                
+                {/* a gridlist to show data */}
+                <QuizManager />
+            </Tab>
         </TabbedShowLayout>
     </Show>
 );
@@ -95,6 +108,7 @@ export const ProductsList = props => (
             <ChipField source="tags" label="Tags" />
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
+            <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="createdAt" label="Created" />
             <TextField source="updatedAt" label="Update" />
             <EditButton />
