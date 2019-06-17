@@ -9,7 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import { SimpleForm } from 'react-admin';
-import { RadioButtonGroupInput } from 'react-admin';
+import { RadioButtonGroupInput, BooleanField } from 'react-admin';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -19,7 +19,27 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PhoneIcon from '@material-ui/icons/Phone';
-
+import TextField from '@material-ui/core/TextField';
+import { Paper } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import FolderIcon from '@material-ui/icons/Folder';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 // const useStyles = makeStyles(theme => ({
 //   root: {
 //     width: '100%',
@@ -76,34 +96,56 @@ render() {
             </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-                <FormControl component="fieldset">
-                    <RadioGroup
-                    aria-label="Gender"
-                    name="gender1"
-                    >
-                        <FormControlLabel
-                            value="female"
-                            control={<Radio />} 
-                            label="gravity is a state"
-                            />
-                        <FormControlLabel 
-                            value="male" 
-                            control={<Radio />} 
-                            label="Male"
-                            />
-                        <FormControlLabel 
-                            value="other" 
-                            control={<Radio />} 
-                            label="i dont know what is it" 
-                            />
-                        <FormControlLabel
-                            value="disabled"
-                            control={<Radio />}
-                            label="gravity is not very important in physics"
-                        />
-                    </RadioGroup>
-                </FormControl>
+            
+            <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>option</TableCell>
+            <TableCell>isAnswer</TableCell>
+            <TableCell>delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {[{id:1},{id:2}].map(row => (
+            <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="right">{row.name}</TableCell>
+              <TableCell align="right">
+              <BooleanField source="commentable" />
+
+            </TableCell>
+              <TableCell align="right">
+              <Fab aria-label="Delete">
+                <DeleteIcon />
+                </Fab>
+
+            </TableCell>
+
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+                
+                <Card>
+                    
+                <TextField
+        id="standard-name"
+        label="new option"
+        
+        margin="normal"
+      />
+                    
+                    <CardActions>
+                    <Fab variant="extended" color="primary" aria-label="Add">
+          <NavigationIcon />
+          add
+        </Fab>
+      </CardActions>
+                </Card>
             </ExpansionPanelDetails>
+            
         </ExpansionPanel>
        
     
