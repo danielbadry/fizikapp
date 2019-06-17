@@ -98,36 +98,36 @@ render() {
             <ExpansionPanelDetails>
             
             <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>option</TableCell>
-            <TableCell>isAnswer</TableCell>
-            <TableCell>delete</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {[{id:1},{id:2}].map(row => (
-            <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">
-              <BooleanField source="commentable" />
+                <TableHead>
+                <TableRow>
+                    <TableCell>option</TableCell>
+                    <TableCell>isAnswer</TableCell>
+                    <TableCell>delete</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                {[{id:1},{id:2}].map(row => (
+                    <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
+                    <TableCell component="th" scope="row">
+                        {row.id}
+                    </TableCell>
+                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">
+                    <BooleanField source="commentable" />
 
-            </TableCell>
-              <TableCell align="right">
-              <Fab aria-label="Delete">
-                <DeleteIcon />
-                </Fab>
+                    </TableCell>
+                    <TableCell align="right">
+                    <Fab aria-label="Delete">
+                        <DeleteIcon />
+                        </Fab>
 
-            </TableCell>
+                    </TableCell>
 
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-                
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            
                 <Card>
                     
                 <TextField
