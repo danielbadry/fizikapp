@@ -19,9 +19,7 @@ const Form = props => {
     },
   ];
   return (
-    
       <Field name="currentUser" onChange={handleSubmit} component={ReduxFormSelect} options={userOptions} />
-    
   )
 }
 

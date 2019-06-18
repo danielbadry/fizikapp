@@ -3,21 +3,23 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput, SelectInput } from 'react-admin';
+        TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
 import CatButton from './MyNewField';
-import Paper from '@material-ui/core/Paper';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
-import Switch from '@material-ui/core/Switch';
+
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Mycheckbox from './MyNewField2';
+
 
 export const ProductCreate = (props) => (
     <Create {...props} >
+        
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
@@ -28,6 +30,9 @@ export const ProductCreate = (props) => (
             {/*
             TODO: add boolean field here
             */}
+            
+            <Mycheckbox label="categories" />  
+            
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
