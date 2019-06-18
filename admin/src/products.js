@@ -14,6 +14,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import Switch from '@material-ui/core/Switch';
 import QuizManager from './QuizManager';
+import ProductReports from './ProductReports';
+
 export const ProductCreate = (props) => (
     <Create {...props} >
         <SimpleForm>
@@ -72,7 +74,7 @@ export const ProductShow = (props) => (
                 <TextField label="Nb views" source="views" />
             </Tab>
             <Tab label="reports" path="report" >
-                Reports
+                <ProductReports />
             </Tab>
             <Tab label="comments" path="comments">
                 <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
@@ -109,6 +111,7 @@ export const ProductsList = props => (
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
+            <TextField source="reportsCount" label="Reports Count" />
             <TextField source="createdAt" label="Created" />
             <TextField source="updatedAt" label="Update" />
             <EditButton />
