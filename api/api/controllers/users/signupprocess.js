@@ -16,7 +16,9 @@ module.exports = {
 
   },
 
-
+/*
+TODO: i must update below algorithm
+*/
   fn: async function (inputs) {
     
     let infoFromUsers = await Users.find({
@@ -31,25 +33,30 @@ module.exports = {
     }
 
     uniq = [...new Set(dateList)];
+    uniq.sort(function(a,b){
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a) - new Date(b);
+    });
 
-    for (let i = 0; i< infoFromUsers.length ; i ++) {
-      if (dateList[i] == )
+    dateList = [];
+    for (let d of uniq) {
+      let tempObject = {
+        date : d,
+        value : 0,
+        id:0
+      };
+      dateList.push(tempObject);
     }
 
-    // let data = [
-    //   {
-    //     date : 'Mon Jan 01 2018 00:00:00 GMT+0330 (Iran Standard Time)',
-    //     value : 17
-    //   },
-    //   {
-    //     date : 'Tue Jan 02 2018 00:00:00 GMT+0330 (Iran Standard Time)',
-    //     value : 25
-    //   },
-    //   {
-    //     date : 'Wed Jan 03 2018 00:00:00 GMT+0330 (Iran Standard Time)',
-    //     value : 27
-    //   },
-    // ];
+    for (let i = 0 ; i < infoFromUsers.length ; i ++) {
+      for (let j = 0 ; j < dateList.length ; j ++) {
+        if ( dateList[j].date == infoFromUsers[i].createdAt) {
+          dateList[j].value ++;
+          dateList[j].id ++;
+        }
+      }
+    }
 
     return dateList;
 
