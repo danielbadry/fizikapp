@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
@@ -8,6 +7,12 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 am4core.useTheme(am4themes_animated);
 
 class SignUpChart extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    console.info('constructore happened');
+  }
+
   componentDidMount() {
     let chart = am4core.create("chartdiv2", am4charts.XYChart);
 
@@ -17,8 +22,10 @@ class SignUpChart extends React.Component {
     let visits = 10;
     for (let i = 1; i < 366; i++) {
       visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-      data.push({ date: new Date(2018, 0, i), name: "name" + i, value: visits });
+      data.push({ date: new Date(2018, 0, i), value: visits });
     }
+
+    console.info('data:', data);
 
     chart.data = data;
 

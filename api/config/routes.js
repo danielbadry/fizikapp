@@ -9,5 +9,5 @@
  */
 
 module.exports.routes = {
-
+    'GET /users/signupprocess': 'UsersController.signupprocess'
 };
