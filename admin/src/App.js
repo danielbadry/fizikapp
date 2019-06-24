@@ -3,7 +3,7 @@ import catReducer from './reducer';
 import { Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
 import { UsersList, UserCreate } from './users';
-import { ShopsList } from './shops';
+import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
@@ -33,7 +33,7 @@ const App = () => (
         <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
-        <Resource name="shops" list={ShopsList} icon={ShoppingIcon} />
+        <Resource name="shops" list={ShopsList} icon={ShoppingIcon} show={shopShow} />
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
         <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
         <Resource name="police" icon={NotificationsPaused} list={PoliceList} />

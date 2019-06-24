@@ -9,5 +9,6 @@
  */
 
 module.exports.routes = {
-    'GET /users/signupprocess': 'UsersController.signupprocess'
+    'GET /users/signupprocess': 'UsersController.signupprocess',
+    'GET /shops/shopsprocess': 'ShopsController.shopsprocess'
 };

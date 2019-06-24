@@ -6,9 +6,17 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
-
+    totalPrice :{
+      type: 'string',
+      required : true
+    },
+    
+    userId :{
+      type: 'string',
+      required : true
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
