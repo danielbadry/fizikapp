@@ -1,6 +1,5 @@
 import React from 'react';
 import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
-        ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField, ShowButton, EditButton, DateInput } from 'react-admin';
