@@ -12,10 +12,15 @@ export const shopShow = (props) => (
             </Tab>
             
             <Tab label="records" path="records">
-                <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
+                <ReferenceManyField 
+                    reference="shopsdetails" 
+                    target="shopId" 
+                    filter={{ is_published: true }}
+                    addLabel={false}>
                     <Datagrid>
-                        <TextField source="body" />
-                        <DateField source="created_at" />
+                        <TextField source="shopId" />
+                        <TextField source="price" />
+                        <TextField source="createdAt" />
                         <EditButton />
                     </Datagrid>
                 </ReferenceManyField>
