@@ -4,7 +4,7 @@ export const PoliceList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
-            <TextField source="userName" />
+            <TextField source="userId" />
             <TextField source="comment" />
         </Datagrid>
     </List>
