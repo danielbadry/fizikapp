@@ -17,7 +17,7 @@ class SignUpChart extends React.Component {
   }
 
   componentDidMount() {
-    let chart = am4core.create("chartdiv2", am4charts.XYChart);
+    let chart = am4core.create("signChart", am4charts.XYChart);
 
     chart.paddingRight = 20;
 
@@ -71,7 +71,7 @@ class SignUpChart extends React.Component {
 
   render() {
     return (
-      <div id="chartdiv2" style={{ width: "50%", height: "500px" }}></div>
+      <div id="signChart" style={{ width: "50%", height: "500px" }}></div>
     );
   }
 }

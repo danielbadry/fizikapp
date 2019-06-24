@@ -16,18 +16,11 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs) {
-
-    let infoFromUsers = await Shops.find({
-      select:['id']
-    });
-    
-    return infoFromUsers;
-
+    let infoFromShops = await Shops.find();
     let dateList = [];
 
-    for (let d of infoFromUsers) {
+    for (let d of infoFromShops) {
       if (!dateList.includes(d.createdAt))
         dateList.push(d.createdAt);
     }
@@ -49,17 +42,16 @@ module.exports = {
       dateList.push(tempObject);
     }
 
-    for (let i = 0 ; i < infoFromUsers.length ; i ++) {
+    for (let i = 0 ; i < infoFromShops.length ; i ++) {
       for (let j = 0 ; j < dateList.length ; j ++) {
-        if ( dateList[j].date == infoFromUsers[i].createdAt) {
-          dateList[j].value ++;
+        if ( dateList[j].date == infoFromShops[i].createdAt) {
+          dateList[j].value = Number(dateList[j].value) + Number(infoFromShops[i].totalPrice);
           dateList[j].id ++;
         }
       }
     }
 
     return dateList;
-
   }
 
 

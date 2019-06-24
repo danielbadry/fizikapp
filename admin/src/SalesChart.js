@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { GET_LIST, withDataProvider } from 'react-admin';
+import PropTypes from 'prop-types';
 
 am4core.useTheme(am4themes_animated);
 
 class SalesChart extends React.Component {
+  
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
-    let chart = am4core.create("chartdiv", am4charts.XYChart);
+    let chart = am4core.create("salesChart", am4charts.XYChart);
 
     chart.paddingRight = 20;
 
@@ -17,30 +23,42 @@ class SalesChart extends React.Component {
     let visits = 10;
     for (let i = 1; i < 366; i++) {
       visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-      data.push({ date: new Date(2018, 0, i), name: "name" + i, value: visits });
+      data.push({ date: new Date(2018, 0, i), value: visits });
     }
+    
+    const { dataProvider } = this.props;
+    dataProvider(GET_LIST, 'shops/shopsprocess', {
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: 'id', order: 'DESC' }
+    })
+    .then((res) => {
+      console.info('res:', res.data);
+      chart.data = res.data;
 
-    chart.data = data;
+      let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+      dateAxis.renderer.grid.template.location = 0;
 
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.grid.template.location = 0;
+      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      valueAxis.tooltip.disabled = true;
+      valueAxis.renderer.minWidth = 35;
 
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
+      let series = chart.series.push(new am4charts.LineSeries());
+      series.dataFields.dateX = "date";
+      series.dataFields.valueY = "value";
 
-    let series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = "date";
-    series.dataFields.valueY = "value";
+      series.tooltipText = "{valueY.value}";
+      chart.cursor = new am4charts.XYCursor();
 
-    series.tooltipText = "{valueY.value}";
-    chart.cursor = new am4charts.XYCursor();
+      let scrollbarX = new am4charts.XYChartScrollbar();
+      scrollbarX.series.push(series);
+      chart.scrollbarX = scrollbarX;
 
-    let scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    chart.scrollbarX = scrollbarX;
+      this.chart = chart;
+    })
+    .catch((e) => {
+        console.info('Error: comment not approved', 'warning')
+    });
 
-    this.chart = chart;
   }
 
   componentWillUnmount() {
@@ -51,9 +69,12 @@ class SalesChart extends React.Component {
 
   render() {
     return (
-      <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+      <div id="salesChart" style={{ width: "100%", height: "500px" }}></div>
     );
   }
 }
 
-export default SalesChart;
+SalesChart.propTypes = {
+  dataProvider: PropTypes.func.isRequired,
+};
+export default withDataProvider(SalesChart);

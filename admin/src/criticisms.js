@@ -22,7 +22,7 @@ export const CriticismsList = props => (
     <List {...props}>
         <Datagrid expand={<CriticismsPanel />}>
             <TextField source="id" />
-            <TextField source="idUser" />
+            <TextField source="userId" />
             <TextField source="comment" />
         </Datagrid>
     </List>

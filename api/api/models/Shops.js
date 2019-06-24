@@ -10,15 +10,15 @@ module.exports = {
   attributes: {
     totalPrice :{
       type: 'string',
-      required : true
+      required : false
     },
     userId :{
       type: 'string',
-      required : true
+      required : false
     },
     status :{
       type: 'string',
-      required : true
+      required : false
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
