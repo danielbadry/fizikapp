@@ -1,5 +1,9 @@
 import React from 'react';
-import { List, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
+import { List, Create, Edit, SimpleForm, DisabledInput,
+         TextInput,Datagrid, TextField
+        }
+         from 'react-admin';
+         
 export const TagCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
