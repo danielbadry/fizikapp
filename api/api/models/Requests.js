@@ -8,7 +8,14 @@
 module.exports = {
   schema: true,
   attributes: {
-
+    userId :{
+      type: 'string',
+      required : false
+    },
+    question :{
+      type: 'string',
+      required : false
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

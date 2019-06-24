@@ -101,7 +101,7 @@ export const ProductShow = (props) => (
 );
 
 const PostPanel = ({ id, record, resource }) => (
-    <div>hello</div>
+    <div>product summery</div>
 );
 
 export const ProductsList = props => (

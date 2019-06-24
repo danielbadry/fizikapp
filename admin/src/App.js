@@ -7,7 +7,7 @@ import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
-import { RequestList } from './RequestList';
+import { RequestList, RequestShow } from './RequestList';
 import { PoliceList } from './police';
 import Dashboard from './Dashboard';
 import dataProvider from './dataProvider';
@@ -37,7 +37,7 @@ const App = () => (
         <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
         <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
         <Resource name="police" icon={NotificationsPaused} list={PoliceList} />
-        <Resource name="requests" icon={VpnKey} list={RequestList} />
+        <Resource name="requests" icon={VpnKey} list={RequestList} show={RequestShow} />
     </Admin>  
 );
 

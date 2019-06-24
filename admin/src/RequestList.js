@@ -88,7 +88,6 @@ export const RequestList = props => (
             <TextField source="question" />
             <TextField source="userId" label="user" />
             <TextField source="createdAt" label="Created" />
-            <TextField source="updatedAt" label="Update" />
             <EditButton />
             <ShowButton />
         </Datagrid>
