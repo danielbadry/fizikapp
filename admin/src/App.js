@@ -2,7 +2,7 @@ import React from 'react';
 import catReducer from './reducer';
 import { Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
-import { UsersList, UserCreate } from './users';
+import { UsersList, UserCreate, userShow } from './users';
 import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
@@ -30,7 +30,7 @@ am4core.useTheme(am4themes_animated);
 const App = () => (
     <Admin customReducers={{ catReducer }} dashboard={Dashboard} dataProvider={dataProvider('http://localhost:1337')} authProvider={authProvider}>
         <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
-        <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} />
+        <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
         <Resource name="shops" list={ShopsList} icon={ShoppingIcon} show={shopShow} />

@@ -12,8 +12,11 @@ module.exports = {
       type: 'string',
       required : true
     },
-    
     userId :{
+      type: 'string',
+      required : true
+    },
+    status :{
       type: 'string',
       required : true
     }

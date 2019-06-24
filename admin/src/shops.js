@@ -1,26 +1,17 @@
 import React from 'react';
-import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
+import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
     List, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
 export const shopShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
-            <Tab label="summary">
+            
+            <Tab label="information">
                 <TextField label="Id" source="id" />
                 <TextField source="title" />
                 <TextField source="teaser" />
             </Tab>
-            <Tab label="body" path="body">
-                <RichTextField source="body" addLabel={false} />
-            </Tab>
-            <Tab label="qa" path="qa">
-                <TextField label="Password (if protected post)" source="password" type="password" />
-                <DateField label="Publication date" source="published_at" />
-                <NumberField source="average_note" />
-                <BooleanField label="Allow comments?" source="commentable" defaultValue />
-                <TextField label="Nb views" source="views" />
-            </Tab>
             
-            <Tab label="comments" path="comments">
+            <Tab label="records" path="records">
                 <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
                     <Datagrid>
                         <TextField source="body" />
@@ -28,6 +19,14 @@ export const shopShow = (props) => (
                         <EditButton />
                     </Datagrid>
                 </ReferenceManyField>
+            </Tab>
+            
+            <Tab label="manage" path="manage">
+                <TextField label="Password (if protected post)" source="password" type="password" />
+                <DateField label="Publication date" source="published_at" />
+                <NumberField source="average_note" />
+                <BooleanField label="Allow comments?" source="commentable" defaultValue />
+                <TextField label="Nb views" source="views" />
             </Tab>
             
         </TabbedShowLayout>
@@ -41,6 +40,7 @@ export const ShopsList = props => (
             <TextField source="userId" label="user ID" />
             <TextField source="createdAt" label="shop Date" />
             <TextField source="totalPrice" />
+            <TextField source="status" />
         </Datagrid>
     </List>
 );
