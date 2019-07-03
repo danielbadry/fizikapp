@@ -1,10 +1,15 @@
 import React from 'react';
 import { List, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
-
+import ShoppingPlansPurchaseChart from './ShoppingPlansPurchaseChart';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="title" />
+            <TextInput source="name" />
+            <TextInput source="period" />
+            <TextInput source="price" />
         </SimpleForm>
     </Create>
 );
@@ -21,16 +26,24 @@ export const ShoppingplansEdit = (props) => (
 );
 
 export const ShoppingplansList = props => (
-    <List {...props}>
-        <Datagrid>
-            <TextField source="id" />
-            <TextField source="name" />
-            <TextField source="title" />
-            <TextField source="price" />
-            <TextField source="isDelete" />
-            <TextField source="downloadable" />
-            <TextField source="createdAt" />
-            <TextField source="updatedAt" />
-        </Datagrid>
-    </List>
+    <React.Fragment>
+        <List {...props}>
+            <Datagrid>
+                <TextField source="id" />
+                <TextField source="name" />
+                <TextField source="title" />
+                <TextField source="price" />
+                <TextField source="isDelete" />
+                <TextField source="downloadable" />
+                <TextField source="createdAt" />
+                <TextField source="updatedAt" />
+            </Datagrid>
+        </List>
+        <Card>
+        <CardHeader title="shopping plans purchase chart" />
+            <CardContent>
+                <ShoppingPlansPurchaseChart />
+            </CardContent>
+        </Card>
+    </React.Fragment>
 );

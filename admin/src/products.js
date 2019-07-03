@@ -91,9 +91,6 @@ export const ProductShow = (props) => (
                 </ReferenceManyField>
             </Tab>
             <Tab label="quiz" path="quiz">
-            
-                
-                {/* a gridlist to show data */}
                 <QuizManager />
             </Tab>
         </TabbedShowLayout>
@@ -108,7 +105,7 @@ export const ProductsList = props => (
     
     <List {...props}>
         <Datagrid rowClick="show" expand={<PostPanel />}>
-            <TextField source="id" />
+            {/* <TextField source="id" /> */}
             <ImageField source="thumbnail" />
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />
@@ -116,9 +113,9 @@ export const ProductsList = props => (
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
-            <TextField source="reportsCount" label="Reports Count" />
+            {/* <TextField source="reportsCount" label="Reports Count" /> */}
             <TextField source="createdAt" label="Created" />
-            <TextField source="updatedAt" label="Update" />
+            {/* <TextField source="updatedAt" label="Update" /> */}
             <EditButton />
             <ShowButton />
         </Datagrid>

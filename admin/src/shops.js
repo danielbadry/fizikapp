@@ -28,58 +28,6 @@ import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
                 <TextField source="teaser" />
             </Tab>
             
-            <Tab label="records" path="records">
-                {/* <ReferenceManyField 
-                    reference="shopsdetails" 
-                    target="shopId" 
-                    filter={{ is_published: true }}
-                    addLabel={false}>
-                    <Datagrid>
-                        <TextField source="shopId" />
-                        <TextField source="price" />
-                        <TextField source="createdAt" />
-                        <EditButton />
-                    </Datagrid>
-                </ReferenceManyField> */}
-                <br />
-                <br />
-                <Paper>
-                    
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-            </Tab>
-            
-            <Tab label="manage" path="manage">
-                <TextField label="Password (if protected post)" source="password" type="password" />
-                <DateField label="Publication date" source="published_at" />
-                <NumberField source="average_note" />
-                <BooleanField label="Allow comments?" source="commentable" defaultValue />
-                <TextField label="Nb views" source="views" />
-            </Tab>
-            
         </TabbedShowLayout>
     </Show>
 );
@@ -90,7 +38,7 @@ export const ShopsList = props => (
             <TextField source="id" />
             <TextField source="userId" label="user ID" />
             <TextField source="createdAt" label="shop Date" />
-            <TextField source="totalPrice" />
+            <TextField source="tarhName" />
             <TextField source="status" />
         </Datagrid>
     </List>

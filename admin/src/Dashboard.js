@@ -5,6 +5,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import ProductAnalytics from './ProductAnalytics';
 import SalesChart from './SalesChart';
 import SignUpChart from './SignUpChart';
+import OnlineUsersChart from './OnlineUsersChart';
+
 
 export default () => (
     <React.Fragment>
@@ -29,6 +31,14 @@ export default () => (
                 <SignUpChart />
             </CardContent>
         </Card>
+        
+        <Card>
+            <CardHeader title="Online Users Chart" />
+            <CardContent>
+                <OnlineUsersChart />
+            </CardContent>
+        </Card>
+
         
     </React.Fragment>
 );

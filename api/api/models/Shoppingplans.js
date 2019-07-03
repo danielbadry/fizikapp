@@ -22,7 +22,21 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
+    name :{
+      type: 'string',
+      required : false
+    },
+    
+    period :{
+      type: 'number',
+      required : false
+    },
+    
+    price :{
+      type: 'number',
+      required : false
+    },
+    
   },
 
 };

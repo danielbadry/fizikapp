@@ -29,5 +29,22 @@ module.exports = {
           name:'bye'
         });
       });
+  },
+  
+  findOne : async function (req, res) {
+    let summary = await Products.findOne({
+      id: req.param('id')
+    });
+    
+    let productsquestions = ProductsQuestions.findOne({
+      id:'5d1cd4b3451ec8609d1929a7'
+    });
+    
+    return res.json({
+      summary,
+      productsquestions
+    });
+    
   }
+
 };

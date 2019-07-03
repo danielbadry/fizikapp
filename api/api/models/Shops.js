@@ -8,7 +8,7 @@
 module.exports = {
   schema: true,
   attributes: {
-    totalPrice :{
+    tarhName :{
       type: 'string',
       required : false
     },

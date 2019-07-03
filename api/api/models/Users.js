@@ -33,6 +33,21 @@ module.exports = {
       required : false
     },
     
+    fullName :{
+      type: 'string',
+      required : false
+    },
+    
+    userName :{
+      type: 'string',
+      required : false
+    },
+    
+    fCoin :{
+      type: 'string',
+      required : false
+    },
+    
     birthDate :{
       type: 'string',
       required : false
