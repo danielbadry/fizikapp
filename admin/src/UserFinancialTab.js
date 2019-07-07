@@ -27,7 +27,7 @@ render () {
       ];
       
     return (
-        <Paper>
+        
           <Table>
             <TableHead>
               <TableRow>
@@ -52,7 +52,7 @@ render () {
               ))}
             </TableBody>
           </Table>
-        </Paper>
+        
       );
     }
 }

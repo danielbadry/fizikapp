@@ -12,6 +12,9 @@ import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
 import SwitchListSecondary from './UserManageTab';
 import UserFinancialTab from './UserFinancialTab';
+import UserActivityGrid from './UserActivityTab';
+
+
 export const userShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
@@ -26,22 +29,10 @@ export const userShow = (props) => (
             </Tab>
             
             <Tab label="activities" path="activities">
-                
-            <Datagrid rowClick="show">
-                <TextField source="fullName" />
-                <TextField source="lastLogin" />
-                <TextField source="role" />
-                <TextField source="fCoin" />
-                <TextField source="totalPurchase" />
-                <TextField source="email" />
-                <TextField source="userName" />
-                <TextField source="createdAt" />
-                <TextField source="numberOfInvitation" />
-                <TextField source="subType" />
-            </Datagrid>
-        
+                <UserActivityGrid />
             </Tab>
-                <Tab label="financial" path="financial">
+            
+            <Tab label="financial" path="financial">
                 <UserFinancialTab />
             </Tab>
 
