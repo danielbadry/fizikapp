@@ -6,11 +6,19 @@ import ProductAnalytics from './ProductAnalytics';
 import SalesChart from './SalesChart';
 import SignUpChart from './SignUpChart';
 import OnlineUsersChart from './OnlineUsersChart';
+import LocationSensitive from './LocationSensitiveMap';
 
 
 export default () => (
     <React.Fragment>
         
+        <Card>
+            <CardHeader title="LocationSensitive" />
+            <CardContent>
+                {/* <LocationSensitive /> */}
+            </CardContent>
+        </Card>
+
         <Card>
             <CardHeader title="Product Analytics" />
             <CardContent>

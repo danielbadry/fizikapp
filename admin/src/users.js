@@ -8,32 +8,54 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import  BestUsersChart  from './BestUsers';
+import Divider from '@material-ui/core/Divider';
+import Switch from '@material-ui/core/Switch';
+import SwitchListSecondary from './UserManageTab.js';
+
+const ActivitiesPanel = ({ id, record, resource }) => (
+    <div>user summery</div>
+);
+
 export const userShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
             
             <Tab label="information">
                 <TextField label="Id" source="id" />
-                <TextField source="title" />
-                <TextField source="teaser" />
+                <TextField source="city" />
+                <TextField source="email" />
+                <TextField source="phoneNumber" />
+                <TextField source="gender" />
+                <TextField source="grade" />
             </Tab>
             
-            <Tab label="activity" path="activity">
-                <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
-                    <Datagrid>
-                        <TextField source="body" />
-                        <DateField source="created_at" />
-                        <EditButton />
-                    </Datagrid>
-                </ReferenceManyField>
+            <Tab label="activities" path="activities">
+                
+            <Datagrid rowClick="show" expand={<ActivitiesPanel />}>
+                <TextField source="fullName" />
+                <TextField source="lastLogin" />
+                <TextField source="role" />
+                <TextField source="fCoin" />
+                <TextField source="totalPurchase" />
+                <TextField source="email" />
+                <TextField source="userName" />
+                <TextField source="createdAt" />
+                <TextField source="numberOfInvitation" />
+                <TextField source="subType" />
+            </Datagrid>
+        
             </Tab>
             
+            <Tab label="financial" path="financial">
+                <Datagrid>
+                    <TextField source="body" />
+                    <DateField source="created_at" />
+                    <EditButton />
+                </Datagrid>
+            </Tab>
+
             <Tab label="manage" path="manage">
-                <TextField label="Password (if protected post)" source="password" type="password" />
-                <DateField label="Publication date" source="published_at" />
-                <NumberField source="average_note" />
-                <BooleanField label="Allow comments?" source="commentable" defaultValue />
-                <TextField label="Nb views" source="views" />
+                <SwitchListSecondary />
             </Tab>
             
         </TabbedShowLayout>
@@ -62,27 +84,22 @@ export const UserCreate = (props) => (
 );
 
 export const UsersList = props => (
-    <React.Fragment>
-        <List {...props}>
-            
-            <Datagrid rowClick="show">
-                <TextField source="id" />
-                <TextField source="fullName" />
-                {/* <TextField source="lastName" /> */}
-                <TextField source="role" />
-                <TextField source="fCoin" />
-                <TextField source="email" />
-                <TextField source="userName" />
-                <TextField source="createdAt" />
-                {/* <TextField source="updatedAt" /> */}
-            </Datagrid>
-            
-        </List>
-        <Card>
-            <CardHeader title="best user Analytics" />
-                <CardContent>
-                    <BestUsersChart />
-                </CardContent>
-            </Card>
-    </React.Fragment>
+
+    <List {...props}>
+        
+        <Datagrid rowClick="show">
+            <TextField source="fullName" />
+            <TextField source="userName" />
+            <TextField source="lastLogin" />
+            <TextField source="role" />
+            <TextField source="fCoin" />
+            <TextField source="totalPurchase" />
+            <TextField source="email" />
+            <TextField source="createdAt" />
+            <TextField source="numberOfInvitation" />
+            <TextField source="subType" />
+        </Datagrid>
+        
+    </List>
+        
 );
