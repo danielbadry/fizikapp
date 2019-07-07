@@ -5,7 +5,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import QuestionAnswer from '@material-ui/core/QuestionAnswer';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Switch from '@material-ui/core/Switch';
 import WifiIcon from '@material-ui/icons/Wifi';
 import BluetoothIcon from '@material-ui/icons/Bluetooth';
@@ -23,7 +22,7 @@ class SwitchListSecondary extends React.Component {
 
     render() {
         return (
-            <List subheader={<ListSubheader>Settings</ListSubheader>} >
+            <List >
             
                 <ListItem>
                     <ListItemIcon>

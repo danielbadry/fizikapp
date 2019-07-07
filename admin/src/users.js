@@ -7,15 +7,11 @@ import { List, Datagrid, Create, SimpleForm, TextInput,
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import  BestUsersChart  from './BestUsers';
+import BestUsersChart  from './BestUsers';
 import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
-import SwitchListSecondary from './UserManageTab.js';
-
-const ActivitiesPanel = ({ id, record, resource }) => (
-    <div>user summery</div>
-);
-
+import SwitchListSecondary from './UserManageTab';
+import UserFinancialTab from './UserFinancialTab';
 export const userShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
@@ -31,7 +27,7 @@ export const userShow = (props) => (
             
             <Tab label="activities" path="activities">
                 
-            <Datagrid rowClick="show" expand={<ActivitiesPanel />}>
+            <Datagrid rowClick="show">
                 <TextField source="fullName" />
                 <TextField source="lastLogin" />
                 <TextField source="role" />
@@ -45,13 +41,8 @@ export const userShow = (props) => (
             </Datagrid>
         
             </Tab>
-            
-            <Tab label="financial" path="financial">
-                <Datagrid>
-                    <TextField source="body" />
-                    <DateField source="created_at" />
-                    <EditButton />
-                </Datagrid>
+                <Tab label="financial" path="financial">
+                <UserFinancialTab />
             </Tab>
 
             <Tab label="manage" path="manage">
