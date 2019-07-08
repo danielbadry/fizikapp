@@ -12,7 +12,7 @@ import FileCopy from '@material-ui/icons/Delete';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import { GET_LIST, withDataProvider } from 'react-admin';
+import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm } from 'react-admin';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -32,7 +32,8 @@ class Mylist extends React.Component {
         }
       ],
       open : false,
-      currentDirectory : 0
+      currentDirectory : 0,
+      folderName : 'fifi'
     }
   }
   
@@ -74,6 +75,23 @@ class Mylist extends React.Component {
     this.setState({open:false});
   }
 
+  createNewFolder = () => {
+    console.info('here');
+    const { dataProvider } = this.props;
+    dataProvider(CREATE, 'categories', {name:this.state.folderName })
+      .then((res) => {
+        this.fetchDirectory();
+        this.handleClose();
+      })
+      .catch((e) => {
+          console.info('Error: comment not approved', 'warning')
+      });
+  }
+  
+  setFolderName = (e) => {
+    this.setState({folderName:e.target.value});
+  };
+  
   render() {
     return (
     <Paper>
@@ -108,24 +126,34 @@ class Mylist extends React.Component {
         </IconButton>
       </Tooltip>
       </div>
+
       <Table>
+        
         <TableHead>
           <TableRow>
             <TableCell>id</TableCell>
             <TableCell align="right">name</TableCell>
           </TableRow>
         </TableHead>
+        
         <TableBody>
           {this.state.rows.map(row => (
             <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
+              
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
+
+              <TableCell align="right">
+                {row.name}
+              </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
+
       </Table>
+
       <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
         <DialogContent>
           <TextField
@@ -135,17 +163,19 @@ class Mylist extends React.Component {
             label="directory name"
             type="text"
             fullWidth
+            onChange={this.setFolderName.bind(this)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose.bind(this)} color="primary">
             cancel
           </Button>
-          <Button onClick={this.handleClose.bind(this)} color="primary">
+          <Button onClick={this.createNewFolder.bind(this)} color="primary">
             create
           </Button>
         </DialogActions>
       </Dialog>
+
     </Paper>
   )
 };

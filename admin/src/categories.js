@@ -100,30 +100,6 @@ const PostFilter = (props) => (
 export const CategoriesList = props => (
     <div>
         <MyList />
-        {/* <List {...props}
-            bulkActionButtons={<PostBulkActionButtons />}
-            actions={<PostActions />} 
-            filters={<PostFilter />}
-            >
-            <Datagrid 
-                rowClick={postRowClick}
-                expand={<PostPanel />}
-                >
-                <TextField source="id" />
-                <CatButton />
-                <TextField source="name" />
-                <TextField source="createdAt" />
-                <TextField source="size" />
-                <TextField source="fileCount" />
-            </Datagrid>
-        </List> */}
+        
     </div>
-);
-
-export const CategoriesCreate = (props) => (
-    <Create {...props}>
-        <SimpleForm>
-            <TextInput source="name" />
-        </SimpleForm>
-    </Create>
 );
