@@ -132,7 +132,7 @@ class Mylist extends React.Component {
         
         <TableHead>
           <TableRow>
-            <TableCell>id</TableCell>
+            
             <TableCell align="right">name</TableCell>
           </TableRow>
         </TableHead>
@@ -140,10 +140,6 @@ class Mylist extends React.Component {
         <TableBody>
           {this.state.rows.map(row => (
             <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
-              
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
 
               <TableCell align="right">
                 {row.name}

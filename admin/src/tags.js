@@ -25,7 +25,6 @@ export const TagEdit = (props) => (
 export const TagsList = props => (
     <List {...props}>
         <Datagrid>
-            <TextField source="id" />
             <TextField source="name" />
             <TextField source="count" />
         </Datagrid>

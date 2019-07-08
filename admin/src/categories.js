@@ -99,7 +99,6 @@ const PostFilter = (props) => (
 
 export const CategoriesList = props => (
     <div>
-        <MyList />
-        
+        <MyList />  
     </div>
 );
