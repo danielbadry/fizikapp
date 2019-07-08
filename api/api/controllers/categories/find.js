@@ -1,11 +1,8 @@
 module.exports = {
 
-
   friendlyName: 'Find',
 
-
   description: 'Find categories.',
-
 
   inputs: {
     rowId: {
@@ -14,15 +11,14 @@ module.exports = {
     },
   },
 
-
   exits: {
 
   },
 
-
   fn: async function (inputs) {
 
     // All done.
+    
     return Categories.find({
       where: {
         parentId:inputs.rowId,
@@ -31,6 +27,5 @@ module.exports = {
     });
 
   }
-
 
 };

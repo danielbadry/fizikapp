@@ -12,7 +12,7 @@ import FileCopy from '@material-ui/icons/Delete';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm } from 'react-admin';
+import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -38,7 +38,7 @@ class Mylist extends React.Component {
   }
   
   componentDidMount() {
-    this.fetchDirectory();
+    this.fetchDirectory(0);
   }
 
   componentWillUnmount() {
@@ -53,8 +53,10 @@ class Mylist extends React.Component {
       rowId : rowId
     })
     .then((res) => {
+      console.info('res:', res);
       this.setState({
-        rows:res.data
+        rows:res.data,
+        currentDirectory: rowId
       });
     })
     .catch((e) => {
@@ -62,8 +64,7 @@ class Mylist extends React.Component {
     });
   }
 
-  handleDblClickOnRow (rowId, event) {
-    console.info('rowId:', rowId);
+  handleDblClickOnRow (rowId) {
     this.setState({currentDirectory: rowId});
     this.fetchDirectory(rowId);
   }
@@ -75,13 +76,29 @@ class Mylist extends React.Component {
   handleClose() {
     this.setState({open:false});
   }
-
-  createNewFolder = () => {
-    console.info('here');
+  
+  goUp = () => {
     const { dataProvider } = this.props;
-    dataProvider(CREATE, 'categories', {name:this.state.folderName })
+    dataProvider(GET_ONE, 'categories', {
+      id : this.state.currentDirectory
+    })
+    .then((res) => {
+      this.fetchDirectory(res.data.parentId);
+
+    })
+    .catch((e) => {
+        console.info('Error: comment not approved', 'warning')
+    });
+  }
+  
+  createNewFolder = () => {
+    const { dataProvider } = this.props;
+    dataProvider(CREATE, 'categories', {
+        name:this.state.folderName,
+        parentId : this.state.currentDirectory
+      })
       .then((res) => {
-        this.fetchDirectory();
+        this.fetchDirectory(this.state.currentDirectory);
         this.handleClose();
       })
       .catch((e) => {
@@ -98,7 +115,7 @@ class Mylist extends React.Component {
     <Paper>
       <div dir="rtl">
       <Tooltip title="up">
-        <IconButton onClick={(e) => this.handleDblClickOnRow(this.state.currentDirectory, e)}>
+        <IconButton onClick={() => this.goUp()}>
             <ExpandLess />
         </IconButton>
       </Tooltip>
@@ -110,7 +127,7 @@ class Mylist extends React.Component {
       </Tooltip>
       
       <Tooltip title="home">
-        <IconButton onClick={(e) => this.handleDblClickOnRow(0, e)} color="primary">
+        <IconButton onClick={() => this.handleDblClickOnRow(0)} color="primary">
             <Home />
         </IconButton>
       </Tooltip>

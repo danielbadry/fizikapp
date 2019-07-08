@@ -16,7 +16,8 @@ module.exports = {
     
     parentId : {
       type: 'string',
-      required : false
+      // required : false,
+      defaultsTo: '0'
     },
 
     isDeleted : {
