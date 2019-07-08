@@ -63,6 +63,7 @@ class Mylist extends React.Component {
   }
 
   handleDblClickOnRow (rowId, event) {
+    console.info('rowId:', rowId);
     this.setState({currentDirectory: rowId});
     this.fetchDirectory(rowId);
   }

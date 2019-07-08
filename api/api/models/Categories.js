@@ -14,8 +14,15 @@ module.exports = {
       required : false
     },
     
-    
+    parentId : {
+      type: 'string',
+      required : false
+    },
 
+    isDeleted : {
+      type: 'boolean',
+      required: false
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
