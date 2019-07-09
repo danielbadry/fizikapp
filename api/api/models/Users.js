@@ -49,7 +49,7 @@ module.exports = {
     },
     
     birthDate :{
-      type: 'string',
+      type: 'datetime',
       required : false
     },
     
@@ -79,7 +79,7 @@ module.exports = {
     },
     
     address :{
-      type: 'string',
+      type: 'json',
       required : false
     },
 
