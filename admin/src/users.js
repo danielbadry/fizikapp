@@ -9,7 +9,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import BestUsersChart  from './BestUsers';
 import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
-import SwitchListSecondary from './UserManageTab';
+import UserManageTab from './UserManageTab';
 import UserFinancialTab from './UserFinancialTab';
 import UserActivityGrid from './UserActivityTab';
 
@@ -36,7 +36,7 @@ export const userShow = (props) => (
             </Tab>
 
             <Tab label="manage" path="manage">
-                <SwitchListSecondary />
+                <UserManageTab />
             </Tab>
             
         </TabbedShowLayout>
@@ -87,12 +87,12 @@ export const UsersList = props => (
         
         <Datagrid rowClick="show">
             <TextField source="userName" label="user id" />
-            <TextField source="name" label="name" />
+            <TextField source="fullName" label="full name" />
             <TextField source="lastLogin" label="last login" />
-            <TextField source="totalPurchase" />
-            <TextField source="fCoin" />
+            <TextField source="totalPurchase" label="total purchase" />
+            <TextField source="fCoin" label="f coin" />
             <TextField source="createdAt" label="register date" />
-            <TextField source="numberOfInvitation" label="number of invitation" />
+            <TextField source="numberOfInvitation" label="invitations" />
             <TextField source="subType" label="sub type" />
         </Datagrid>
         

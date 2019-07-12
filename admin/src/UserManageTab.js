@@ -10,15 +10,62 @@ import WifiIcon from '@material-ui/icons/Wifi';
 import BluetoothIcon from '@material-ui/icons/Bluetooth';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
+import PropTypes from 'prop-types';
+import { UPDATE } from 'ra-core';
 
-class SwitchListSecondary extends React.Component {
+class UserManageTab extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            checked: 0
+            checked: 0,
+            message : '',
+            fCoin : 0
         };
     }
+    
+    setMessage = (e) => {
+        this.setState({message:e.target.value});
+      };
+    
+    setFcoin = (e) => {
+    this.setState({fCoin:e.target.value});
+    };
+    
+    sendMessage = () => {
+        const { dataProvider } = this.props;
+        dataProvider(CREATE, 'messages', {
+            type:'user',
+            sender :'1212121',
+            receiver : '23232323',
+            message:this.state.message
+          })
+          .then((res) => {
+            this.fetchDirectory(this.state.currentDirectory);
+            this.handleClose();
+          })
+          .catch((e) => {
+              console.info('Error: comment not approved', 'warning')
+          });
+        }  
+    
+    sendFcoin = () => {
+        const { dataProvider } = this.props;
+        const updatedRecord = {
+            fCoin : this.state.fCoin
+        }
+        dataProvider(UPDATE, 'users', {
+                id: '5d288be3687e8927b4c99320',
+                data: updatedRecord
+            })
+          .then((res) => {
+            
+          })
+          .catch((e) => {
+              console.info('Error: comment not approved', 'warning')
+          });
+        }  
 
     render() {
         return (
@@ -45,16 +92,19 @@ class SwitchListSecondary extends React.Component {
                     <ListItemText id="switch-list-label-wifi" primary="Give F-Coin" />
                     <TextField
                         id="standard-number"
+                        onChange={this.setFcoin.bind(this)}
                         label="Amount"
-                        value="20"
                         type="number"
                         InputLabelProps={{
-                        shrink: true,
+                            shrink: true,
                         }}
                         margin="normal"
                     />
                     <ListItemSecondaryAction>
-                    <Button color="secondary">
+                    <Button 
+                        color="secondary"
+                        onClick={this.sendFcoin.bind(this)}
+                        >
                         Send F-Coin
                     </Button>
                     </ListItemSecondaryAction>
@@ -67,6 +117,7 @@ class SwitchListSecondary extends React.Component {
                     <ListItemText id="switch-list-label-wifi" primary="Message" />
                     <TextField
                         id="standard-number"
+                        onChange={this.setMessage.bind(this)}
                         label="message"
                         type="text"
                         InputLabelProps={{
@@ -75,7 +126,10 @@ class SwitchListSecondary extends React.Component {
                         margin="normal"
                     />
                     <ListItemSecondaryAction>
-                    <Button color="secondary">
+                    <Button 
+                        color="secondary"
+                        onClick={this.sendMessage.bind(this)}
+                        >
                         Send Message
                     </Button>
                     </ListItemSecondaryAction>
@@ -133,6 +187,7 @@ class SwitchListSecondary extends React.Component {
                             edge="end"
                             // checked={this.state.checked.indexOf('wifi') !== -1}
                             inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
+                            onChange={handleAuthorization('checkedA')}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
@@ -142,4 +197,9 @@ class SwitchListSecondary extends React.Component {
     }
 }
 
-export default SwitchListSecondary; 
+
+UserManageTab.propTypes = {
+    dataProvider: PropTypes.func.isRequired,
+};
+
+  export default withDataProvider(UserManageTab);

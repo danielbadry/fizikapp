@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Create, Edit, SimpleForm, DisabledInput,
-         TextInput,Datagrid, TextField
+         TextInput,Datagrid, TextField, EditButton
         }
          from 'react-admin';
          
@@ -27,6 +27,7 @@ export const TagsList = props => (
         <Datagrid>
             <TextField source="name" />
             <TextField source="count" />
+            <EditButton />
         </Datagrid>
     </List>
 );

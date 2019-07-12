@@ -33,11 +33,6 @@ module.exports = {
       required : false
     },
     
-    fullName :{
-      type: 'string',
-      required : false
-    },
-    
     userName :{
       type: 'string',
       required : false
@@ -49,7 +44,7 @@ module.exports = {
     },
     
     birthDate :{
-      type: 'datetime',
+      type: 'string',
       required : false
     },
     
@@ -81,6 +76,36 @@ module.exports = {
     address :{
       type: 'json',
       required : false
+    },
+    
+    suspend :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : false
+    },
+    
+    commentAuthorization :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : true
+    },
+    
+    reportAuthorization :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : true
+    },
+    
+    requestAuthorization :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : true
+    },
+    
+    QAAuthorization :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : true
     },
 
   },
