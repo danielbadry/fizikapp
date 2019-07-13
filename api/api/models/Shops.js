@@ -8,16 +8,24 @@
 module.exports = {
   schema: true,
   attributes: {
+    
     tarhName :{
       type: 'string',
       required : false
     },
+
     userId :{
       type: 'string',
       required : false
     },
+    
     status :{
       type: 'string',
+      required : false
+    },
+    
+    isDeleted :{
+      type: 'boolean',
       required : false
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

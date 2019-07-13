@@ -3,7 +3,7 @@ import { findDOMNode, render } from "react-dom";
 import HighMaps from "highcharts/highmaps";
 import irAll from "./irAll";
 
-class CustomHighMap extends Component {
+class userSignupSensitiveLocation extends Component {
   componentDidMount() {
     // load modules
 
@@ -109,4 +109,4 @@ class CustomHighMap extends Component {
   }
 }
 
-export default CustomHighMap;
+export default userSignupSensitiveLocation;

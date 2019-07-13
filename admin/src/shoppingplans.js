@@ -1,9 +1,6 @@
 import React from 'react';
 import { List, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
-import ShoppingPlansPurchaseChart from './ShoppingPlansPurchaseChart';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
+
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
@@ -39,11 +36,6 @@ export const ShoppingplansList = props => (
                 <TextField source="updatedAt" />
             </Datagrid>
         </List>
-        <Card>
-        <CardHeader title="shopping plans purchase chart" />
-            <CardContent>
-                <ShoppingPlansPurchaseChart />
-            </CardContent>
-        </Card>
+        
     </React.Fragment>
 );

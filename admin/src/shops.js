@@ -5,6 +5,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ShoppingPlansPurchaseChart from './ShoppingPlansPurchaseChart';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 
 import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
     List, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
@@ -33,13 +37,21 @@ import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
 );
 
 export const ShopsList = props => (
-    <List {...props}>
-        <Datagrid rowClick="show">
-            <TextField source="id" />
-            <TextField source="userId" label="user ID" />
-            <TextField source="createdAt" label="shop Date" />
-            <TextField source="tarhName" />
-            <TextField source="status" />
-        </Datagrid>
-    </List>
+    <React.Fragment>
+        <List {...props}>
+            <Datagrid rowClick="show">
+                <TextField source="id" />
+                <TextField source="userId" label="user ID" />
+                <TextField source="createdAt" label="shop Date" />
+                <TextField source="tarhName" />
+                <TextField source="status" />
+            </Datagrid>
+        </List>
+        <Card>
+            <CardHeader title="shopping plans purchase chart" />
+                <CardContent>
+                    <ShoppingPlansPurchaseChart />
+                </CardContent>
+        </Card>
+    </React.Fragment>
 );

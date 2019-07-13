@@ -187,7 +187,7 @@ class UserManageTab extends React.Component {
                             edge="end"
                             // checked={this.state.checked.indexOf('wifi') !== -1}
                             inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
-                            onChange={handleAuthorization('checkedA')}
+                            // onChange={handleAuthorization('checkedA')}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>

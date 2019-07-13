@@ -6,7 +6,8 @@ import ProductAnalytics from './ProductAnalytics';
 import SalesChart from './SalesChart';
 import SignUpChart from './SignUpChart';
 import OnlineUsersChart from './OnlineUsersChart';
-import CustomHighMap from './LocationSensitiveMap';
+import UserSignupSensitiveLocation from './userSignupSensitiveLocation';
+import ShoppingSensitiveLocation from './shoppingSensitiveLocation';
 
 export default () => (
     <React.Fragment>
@@ -14,7 +15,7 @@ export default () => (
         <Card>
             <CardHeader title="LocationSensitive" />
             <CardContent>
-                <CustomHighMap name="CodeSandbox" />
+                <UserSignupSensitiveLocation name="CodeSandbox" />
             </CardContent>
         </Card>
 
@@ -43,6 +44,13 @@ export default () => (
             <CardHeader title="Online Users Chart" />
             <CardContent>
                 <OnlineUsersChart />
+            </CardContent>
+        </Card>
+        
+        <Card>
+            <CardHeader title="shopping sensitive location" />
+            <CardContent>
+                <ShoppingSensitiveLocation />
             </CardContent>
         </Card>
 
