@@ -12,7 +12,7 @@ import Switch from '@material-ui/core/Switch';
 import UserManageTab from './UserManageTab';
 import UserFinancialTab from './UserFinancialTab';
 import UserActivityGrid from './UserActivityTab';
-
+import Thumbnail from './ThumbnailImage';
 
 export const userShow = (props) => (
     <Show {...props}>
@@ -86,6 +86,7 @@ export const UsersList = props => (
     <List {...props}>
         
         <Datagrid rowClick="show">
+            <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="userName" label="user id" />
             <TextField source="fullName" label="full name" />
             <TextField source="jalaaliRegisterDate" label="last login" />

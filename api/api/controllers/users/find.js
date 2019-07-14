@@ -36,6 +36,7 @@ module.exports = {
         d.lastLogin = new Date();
 
         d.numberOfInvitation = 3;
+        d.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
     }
     return allUsers;
 
