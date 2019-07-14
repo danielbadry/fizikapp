@@ -1,19 +1,16 @@
-import React from 'react';
+import React , { Fragment } from 'react';
 import {    List, Datagrid, Create, SimpleForm, TextInput,
             ImageInput, ImageField, SelectInput, Show, TabbedShowLayout,
             Tab, TextField, AutocompleteInput, NumberInput
         } from 'react-admin';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-import BestUsersChart  from './BestUsers';
-import Divider from '@material-ui/core/Divider';
-import Switch from '@material-ui/core/Switch';
+
 import UserManageTab from './UserManageTab';
 import UserFinancialTab from './UserFinancialTab';
 import UserActivityGrid from './UserActivityTab';
 import Thumbnail from './ThumbnailImage';
-
+import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
+import { change } from 'redux-form'
+import {GetProvincesFor, GetCitiesFor, countries} from './GetCitiesFor';
 export const userShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
@@ -41,6 +38,45 @@ export const userShow = (props) => (
             
         </TabbedShowLayout>
     </Show>
+); 
+
+export const UserCreatee = (props) => (
+    <Create {...props}>
+        <SimpleForm>
+            <FormDataConsumer>
+                {({ formData, dispatch, ...rest }) => (
+                    <Fragment>
+                        <SelectInput
+                            source="country"
+                            label="country"
+                            choices={countries}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'province', null)
+                            )}
+                             {...rest}
+                        />
+                        <SelectInput
+                            source="province"
+                            label="province"
+                            choices={GetProvincesFor(formData.country)}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'city', null)
+                            )}
+                            {...rest}
+
+                        />
+                        <SelectInput
+                            source="city"
+                            label="city"
+                            choices={GetCitiesFor(formData.province)}
+                            {...rest}
+
+                        />
+                    </Fragment>
+                )}
+            </FormDataConsumer>
+        </SimpleForm>
+    </Create>
 );
 
 export const UserCreate = (props) => (
@@ -56,23 +92,44 @@ export const UserCreate = (props) => (
                 { id: '1', name: 'female' },
                 { id: '2', name: 'others' },
             ]} />
-            <AutocompleteInput 
-                source="address.country"
-                label="country"
-                choices={[
-                    {id:'iran',name:'iran'},
-                    {id:'afghanistan',name:'afghanistan'},
-                    {id:'italy',name:'italy'},
-                    {id:'russia',name:'russia'},
-                    {id:'usa',name:'usa'},
-                    {id:'japan',name:'japan'},
-                    {id:'turkey',name:'turkey'},
-                    {id:'brazil',name:'brazil'},
-                    {id:'canada',name:'canada'},
-                    {id:'panama',name:'panama'},
-                    {id:'belgum',name:'belgum'},
-                ]}
-                />
+            
+            <SelectInput source="grade" choices={[
+                { id: '0', name: 'دهم' },
+                { id: '1', name: 'یازدهم' },
+                { id: '2', name: 'دوازدهم' },
+            ]} />
+            <FormDataConsumer>
+                {({ formData, dispatch, ...rest }) => (
+                    <Fragment>
+                        <SelectInput
+                            source="country"
+                            label="country"
+                            choices={countries}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'province', null)
+                            )}
+                             {...rest}
+                        />
+                        <SelectInput
+                            source="province"
+                            label="province"
+                            choices={GetProvincesFor(formData.country)}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'city', null)
+                            )}
+                            {...rest}
+
+                        />
+                        <SelectInput
+                            source="city"
+                            label="city"
+                            choices={GetCitiesFor(formData.province)}
+                            {...rest}
+
+                        />
+                    </Fragment>
+                )}
+            </FormDataConsumer>
             <ImageInput source="thumbnail" label="Related pictures" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>

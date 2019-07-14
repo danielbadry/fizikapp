@@ -2,7 +2,7 @@ import React from 'react';
 import catReducer from './reducer';
 import { Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
-import { UsersList, UserCreate, userShow } from './users';
+import { UsersList, UserCreate, UserCreatee, userShow } from './users';
 import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';

@@ -39,8 +39,9 @@ module.exports = {
     },
     
     fCoin :{
-      type: 'string',
-      required : false
+      type: 'number',
+      required : false,
+      defaultsTo : 0
     },
     
     birthDate :{
@@ -49,11 +50,6 @@ module.exports = {
     },
     
     thumbnailSrc :{
-      type: 'string',
-      required : false
-    },
-    
-    profileSrc :{
       type: 'string',
       required : false
     },
@@ -73,9 +69,14 @@ module.exports = {
       required : false
     },
     
+    grade :{
+      type: 'string',
+      required : false
+    },
+    
     address :{
       type: 'json',
-      required : false
+      required : false,
     },
     
     suspend :{
