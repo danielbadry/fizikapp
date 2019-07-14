@@ -7,15 +7,10 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import RichTextInput from 'ra-input-rich-text';
 import CatButton from './MyNewField';
-
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Mycheckbox from './MyNewField2';
-
+import Thumbnail from './ThumbnailImage';
 
 export const ProductCreate = (props) => (
     <Create {...props} >
@@ -105,17 +100,14 @@ export const ProductsList = props => (
     
     <List {...props}>
         <Datagrid rowClick="show" expand={<PostPanel />}>
-            {/* <TextField source="id" /> */}
-            <ImageField source="thumbnail" />
+            <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />
             <ChipField source="tags" label="Tags" />
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
-            {/* <TextField source="reportsCount" label="Reports Count" /> */}
             <TextField source="createdAt" label="Created" />
-            {/* <TextField source="updatedAt" label="Update" /> */}
             <EditButton />
             <ShowButton />
         </Datagrid>

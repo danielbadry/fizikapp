@@ -1,12 +1,13 @@
 import React , { Fragment } from 'react';
 import {    List, Datagrid, Create, SimpleForm, TextInput,
             ImageInput, ImageField, SelectInput, Show, TabbedShowLayout,
-            Tab, TextField, AutocompleteInput, NumberInput
+            Tab, TextField, NumberInput
         } from 'react-admin';
 
 import UserManageTab from './UserManageTab';
 import UserFinancialTab from './UserFinancialTab';
 import UserActivityGrid from './UserActivityTab';
+import AlignItemsList from './UserActivityTab2';
 import Thumbnail from './ThumbnailImage';
 import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form'
@@ -25,7 +26,7 @@ export const userShow = (props) => (
             </Tab>
             
             <Tab label="activities" path="activities">
-                <UserActivityGrid />
+                <AlignItemsList />
             </Tab>
             
             <Tab label="financial" path="financial">

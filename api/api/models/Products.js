@@ -57,7 +57,7 @@ module.exports = {
       required : false
     },
     
-    thumbnailSrc :{
+    thumbnail :{
       type: 'string',
       required : false
     },

@@ -5,7 +5,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 class UserActivityGrid extends React.Component {
     
@@ -18,14 +19,7 @@ render () {
     return (
         
           <Table>
-            <TableHead>
-
-                <TableRow>
-                    <TableCell>operation</TableCell>
-                    <TableCell align="right">Value</TableCell>
-                </TableRow>
-            
-            </TableHead>
+           
             <TableBody>
                 {[
                     {
@@ -46,24 +40,31 @@ render () {
                     },
                     {
                         operation:'number of passed queries',
-                        value: 2
+                        value: 22
                     },
                     {
                         operation:'shopping level',
-                        value: 2
+                        value: 3
                     }
                 ].map(row => (
-                    <TableRow key={row.name}>
-
+                    <TableRow key={row.value}>
+                        
                         <TableCell component="th" scope="row">
                             {row.operation}
                         </TableCell>
 
-                        <TableCell align="right">
+                        <TableCell>
                             {row.value}
+                        </TableCell>
+                        
+                        <TableCell>
+                            {/* <Fab color="primary" aria-label="Add">
+                                <NavigationIcon />
+                            </Fab> */}
                         </TableCell>
 
                     </TableRow>
+                  
                 ))}
             </TableBody>
           </Table>
