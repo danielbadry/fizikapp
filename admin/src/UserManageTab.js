@@ -2,11 +2,9 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import QuestionAnswer from '@material-ui/core/QuestionAnswer';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Switch from '@material-ui/core/Switch';
-import BluetoothIcon from '@material-ui/icons/Bluetooth';
 import VoiceOverOffIcon from '@material-ui/icons/VoiceOverOff';
 import MoneyIcon from '@material-ui/icons/Money';
 import MessageIcon from '@material-ui/icons/Message';
@@ -16,7 +14,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
+import { withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
 import PropTypes from 'prop-types';
 import { UPDATE } from 'ra-core';
 
@@ -25,7 +23,11 @@ class UserManageTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: 0,
+            suspend: false,
+            commentAuthorization : true,
+            reportAuthorization : true,
+            requestAuthorization : true,
+            QAAuthorization : true,
             message : '',
             fCoin : 0
         };
@@ -36,8 +38,26 @@ class UserManageTab extends React.Component {
       };
     
     setFcoin = (e) => {
-    this.setState({fCoin:e.target.value});
+        this.setState({fCoin:e.target.value});
     };
+    
+    handleAuthorization = (authorizationType) => {
+        this.setState({ [authorizationType.target.name] : authorizationType.target.checked });
+        const { dataProvider } = this.props;
+        const updatedRecord = {
+            [authorizationType.target.name] : authorizationType.target.checked
+        }
+        dataProvider(UPDATE, 'users', {
+            id: '5d288be3687e8927b4c99320',
+            data: updatedRecord
+        })
+        .then((res) => {
+            
+        })
+        .catch((e) => {
+            console.info('Error: comment not approved', 'warning')
+        });
+    }
     
     sendMessage = () => {
         const { dataProvider } = this.props;
@@ -85,8 +105,10 @@ class UserManageTab extends React.Component {
                     <ListItemSecondaryAction>
                     <Switch
                         edge="end"
-                        // checked={this.state.checked.indexOf('wifi') !== -1}
+                        checked={this.state.suspend}
+                        name="suspend"
                         inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
+                        onChange={this.handleAuthorization.bind(this)}
                     />
                     </ListItemSecondaryAction>
                 </ListItem>
@@ -149,8 +171,10 @@ class UserManageTab extends React.Component {
                     <ListItemSecondaryAction>
                     <Switch
                         edge="end"
-                        // checked={this.state.checked.indexOf('wifi') !== -1}
+                        checked={this.state.commentAuthorization}
+                        name="commentAuthorization"
                         inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
+                        onChange={this.handleAuthorization.bind(this)}
                     />
                     </ListItemSecondaryAction>
                 </ListItem>
@@ -163,8 +187,10 @@ class UserManageTab extends React.Component {
                     <ListItemSecondaryAction>
                         <Switch
                             edge="end"
-                            // checked={this.state.checked.indexOf('wifi') !== -1}
+                            checked={this.state.reportAuthorization}
+                            name="reportAuthorization"
                             inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
+                            onChange={this.handleAuthorization.bind(this)}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
@@ -177,8 +203,10 @@ class UserManageTab extends React.Component {
                     <ListItemSecondaryAction>
                         <Switch
                             edge="end"
-                            // checked={this.state.checked.indexOf('wifi') !== -1}
+                            checked={this.state.requestAuthorization}
+                            name="requestAuthorization"
                             inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
+                            onChange={this.handleAuthorization.bind(this)}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
@@ -191,9 +219,10 @@ class UserManageTab extends React.Component {
                     <ListItemSecondaryAction>
                         <Switch
                             edge="end"
-                            // checked={this.state.checked.indexOf('wifi') !== -1}
+                            checked={this.state.QAAuthorization}
+                            name="QAAuthorization"
                             inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
-                            // onChange={handleAuthorization('checkedA')}
+                            onChange={this.handleAuthorization.bind(this)}
                         />
                     </ListItemSecondaryAction>
                 </ListItem>
