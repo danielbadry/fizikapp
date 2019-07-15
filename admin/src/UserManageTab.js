@@ -6,8 +6,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Switch from '@material-ui/core/Switch';
-import WifiIcon from '@material-ui/icons/Wifi';
 import BluetoothIcon from '@material-ui/icons/Bluetooth';
+import VoiceOverOffIcon from '@material-ui/icons/VoiceOverOff';
+import MoneyIcon from '@material-ui/icons/Money';
+import MessageIcon from '@material-ui/icons/Message';
+import CommentIcon from '@material-ui/icons/Comment';
+import ReportIcon from '@material-ui/icons/Report';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
@@ -73,7 +79,7 @@ class UserManageTab extends React.Component {
             
                 <ListItem>
                     <ListItemIcon>
-                    <WifiIcon />
+                    <VoiceOverOffIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-wifi" primary="suspend" />
                     <ListItemSecondaryAction>
@@ -87,7 +93,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                    <WifiIcon />
+                    <MoneyIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-wifi" primary="Give F-Coin" />
                     <TextField
@@ -112,7 +118,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                    <WifiIcon />
+                    <MessageIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-wifi" primary="Message" />
                     <TextField
@@ -137,7 +143,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                    <WifiIcon />
+                    <CommentIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-wifi" primary="comment authorization" />
                     <ListItemSecondaryAction>
@@ -151,7 +157,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                        <BluetoothIcon />
+                        <ReportIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-bluetooth" primary="report authorization" />
                     <ListItemSecondaryAction>
@@ -165,7 +171,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                        <BluetoothIcon />
+                        <LiveHelpIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-bluetooth" primary="request authorization" />
                     <ListItemSecondaryAction>
@@ -179,7 +185,7 @@ class UserManageTab extends React.Component {
                 
                 <ListItem>
                     <ListItemIcon>
-                        <BluetoothIcon />
+                        <QuestionAnswerIcon />
                     </ListItemIcon>
                     <ListItemText id="switch-list-label-bluetooth" primary="QA authorization" />
                     <ListItemSecondaryAction>
@@ -202,4 +208,4 @@ UserManageTab.propTypes = {
     dataProvider: PropTypes.func.isRequired,
 };
 
-  export default withDataProvider(UserManageTab);
+export default withDataProvider(UserManageTab);
