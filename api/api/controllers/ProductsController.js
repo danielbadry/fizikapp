@@ -36,11 +36,12 @@ module.exports = {
       id: req.param('id')
     });
     
-    let productsquestions = ProductsQuestions.findOne({
-      id:'5d1cd4b3451ec8609d1929a7'
+    let productsquestions = await Productsquestions.find({
+        where : {isDelete : false}
     });
-    
+   
     return res.json({
+      id:req.param('id'),
       summary,
       productsquestions
     });
