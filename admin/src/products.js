@@ -11,7 +11,7 @@ import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
-import TreeComponent from './TreeComponent';
+import Comments from './Comments';
 
 export const ProductCreate = (props) => (
     <Create {...props} >
@@ -67,7 +67,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <TreeComponent {...props} />
+                <Comments {...props} />
             </Tab>
 
             <Tab label="reports" path="report" >
