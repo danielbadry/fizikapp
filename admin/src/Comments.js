@@ -13,12 +13,6 @@ class Comments extends React.Component {
     
     constructor (props) {
         super(props);
-        
-        // console.info(props.record.productsquestions);
-
-        // change flat list into tree list
-        // this.state.tree = this.unflatten(props.record.productsquestions);
-        console.info(this.props.record.productsquestions);
     }
     
     componentDidMount () {
@@ -31,8 +25,10 @@ class Comments extends React.Component {
           mappedArr = {},
           arrElem,
           mappedElem;
-
+      {/*TODO: we MUST create a component for COMMENT as a tree view!*/}
       // First map the nodes of the array to an object -> create a hash table.
+
+      {/*TODO: we must change the below code to a function!*/} 
       for(var i = 0, len = this.props.record.productsquestions.length; i < len; i++) {
         arrElem = this.props.record.productsquestions[i];
         mappedArr[arrElem.id] = arrElem;
