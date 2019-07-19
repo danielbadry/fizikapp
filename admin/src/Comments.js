@@ -4,59 +4,58 @@ class Comments extends React.Component {
     
     constructor (props) {
         super(props);
-        this.state = {};
+        
+        // console.info(props.record.productsquestions);
+
+        // change flat list into tree list
+        // this.state.tree = this.unflatten(props.record.productsquestions);
+        console.info(this.props.record.productsquestions);
     }
-  
+    
     componentDidMount () {
        
     }
     
     render () {
-        const Menu = ({data}) => {
+
+      var data = [],
+          mappedArr = {},
+          arrElem,
+          mappedElem;
+
+      // First map the nodes of the array to an object -> create a hash table.
+      for(var i = 0, len = this.props.record.productsquestions.length; i < len; i++) {
+        arrElem = this.props.record.productsquestions[i];
+        mappedArr[arrElem.id] = arrElem;
+        mappedArr[arrElem.id]['children'] = [];
+      }
+
+      for (var id in mappedArr) {
+        if (mappedArr.hasOwnProperty(id)) {
+          mappedElem = mappedArr[id];
+          // If the element is not at the root level, add it to its parent array of children.
+          if (mappedElem.parentId) {
+            mappedArr[mappedElem['parentId']]['children'].push(mappedElem);
+          }
+          // If the element is at the root level, add it to first level elements array.
+          else {
+            data.push(mappedElem);
+          }
+        }
+      }
+
+      const Menu = ({data}) => {
             return (
               <ul>
                 {data.map((m,i) => {
                   return (<li key={i}>
-                    {m.title}
+                    {m.message}
                     {m.children && <Menu data={m.children} />}
                   </li>);
                 })}
               </ul>
             );
           }
-
-        let data = [
-            {
-              title: "Top level 1",
-              slug: "top-level-1",
-              children: [
-                {
-                  title: "Sub level 1",
-                  slug: "sub-level-1",
-                  children: [
-                    {
-                      title: "Sub Sub Level 1",
-                      slug: "sub-sub-level-1",
-                      children: [
-                        {
-                          title: "Sub Sub Level 2",
-                          slug: "sub-sub-level-2"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Sub level 2",
-                  slug: "sub-level-2"
-                }
-              ]
-            },
-            {
-              title: "Top level 2",
-              slug: "top-level 2"
-            }
-          ];
 
         return (
             <Menu data={data} />
