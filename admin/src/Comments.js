@@ -1,4 +1,13 @@
 import React from 'react';
+import Thumbnail from './ThumbnailImage';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 class Comments extends React.Component {
     
@@ -45,15 +54,41 @@ class Comments extends React.Component {
       }
 
       const Menu = ({data}) => {
+        {/*TODO: we have lots of errors in console for this DOM node style!*/}
             return (
-              <ul>
+              <List>
                 {data.map((m,i) => {
-                  return (<li key={i}>
-                    {m.message}
-                    {m.children && <Menu data={m.children} />}
-                  </li>);
+                  return (
+                     
+                    <ListItem key={i} alignItems="flex-start">
+                      <ListItemAvatar>
+                        <Avatar alt="Remy Sharp" src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={m.message}
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              component="span"
+                              variant="body2"
+                              color="textPrimary"
+                            >
+                              Ali Connors
+                            </Typography>
+                            
+                            {" — 2 days ago - "} 
+                            <Link href="http://www.google.com">
+                              reply
+                            </Link>
+                            {m.children && <Menu data={m.children} />}
+                          </React.Fragment>
+                        }
+                      />
+                      
+                    </ListItem>
+                  );
                 })}
-              </ul>
+              </List>
             );
           }
 
