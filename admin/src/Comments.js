@@ -15,30 +15,19 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_ONE } from 'react-admin';
+import PropTypes from 'prop-types';
+import Di from './d';
 
 class Comments extends React.Component {
     
     constructor (props) {
         super(props);
-        this.state = {
-          open : false
-        }
+        
     }
     
     componentDidMount () {
        
-    }
-    
-    handleClickOpen() {
-      this.setState((state, props) => {
-        return {open: true};
-      });
-    }
-    
-    handleClose() {
-      this.setState((state, props) => {
-        return {open: false};
-      });
     }
 
     render () {
@@ -95,41 +84,9 @@ class Comments extends React.Component {
                             </Typography>
                             
                             {" — 2 days ago - "} 
-                            <Link
-                              component="button"
-                              variant="body2"
-                              onClick={this.handleClickOpen.bind(this)}
-                            >
-                              reply
-                            </Link>
                             
-                            <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
-                              <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                              <DialogContent>
-                                <DialogContentText>
-                                  To subscribe to this website, please enter your email address here. We will send updates
-                                  occasionally.
-                                </DialogContentText>
-                                <TextField
-                                  autoFocus
-                                  margin="dense"
-                                  id="name"
-                                  label="Email Address"
-                                  type="email"
-                                  fullWidth
-                                />
-                              </DialogContent>
-                              <DialogActions>
-                                <Button onClick={this.handleClose.bind(this)} color="primary">
-                                  Cancel
-                                </Button>
-                                <Button onClick={this.handleClose.bind(this)} color="primary">
-                                  Subscribe
-                                </Button>
-                              </DialogActions>
-                            </Dialog>
-
-                            {m.children && <Menu data={m.children} />}
+                            <Di />
+                            {/* {m.children && <Menu data={m.children} />} */}
                           </React.Fragment>
                         }
                       />
