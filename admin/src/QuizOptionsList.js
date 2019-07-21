@@ -9,6 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import DoneIcon from '@material-ui/icons/Done';
 import Tooltip from '@material-ui/core/Tooltip';
+import ClearIcon from '@material-ui/icons/Clear';
+
 class QuizOptionsList extends React.Component {
     
     constructor ( props ) {
@@ -31,7 +33,7 @@ class QuizOptionsList extends React.Component {
                         <TableCell align="right">
                         <Tooltip title="make this option the correct answer">
                             <IconButton aria-label="Done">
-                                <DoneIcon fontSize="small" />
+                                <ClearIcon fontSize="small" />
                             </IconButton>
                         </Tooltip>
                         </TableCell>
@@ -60,7 +62,7 @@ class QuizOptionsList extends React.Component {
                         <TableCell component="th" scope="row">answer 3</TableCell>
                         <TableCell align="right">
                         <IconButton aria-label="Delete">
-                            <DoneIcon fontSize="small" />
+                            <ClearIcon fontSize="small" />
                         </IconButton>
                         </TableCell>
                         <TableCell align="right">
@@ -73,7 +75,7 @@ class QuizOptionsList extends React.Component {
                         <TableCell component="th" scope="row">answer 4</TableCell>
                         <TableCell align="right">
                         <IconButton aria-label="Delete">
-                            <DoneIcon fontSize="small" />
+                            <ClearIcon fontSize="small" />
                         </IconButton>
                         </TableCell>
                         <TableCell align="right">
