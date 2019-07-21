@@ -7,7 +7,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import RichTextInput from 'ra-input-rich-text';
 import CatButton from './MyNewField';
-import QuizManager from './QuizManager';
+import NestedList from './QuizManager2';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
@@ -85,7 +85,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="quiz" path="quiz">
-                <QuizManager />
+                <NestedList />
             </Tab>
 
         </TabbedShowLayout>
