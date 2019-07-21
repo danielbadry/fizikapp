@@ -46,7 +46,7 @@ class QuizOptionsList extends React.Component {
                         <TableCell align="right">
                         <Tooltip title="this is the correct answer">
                         <IconButton aria-label="Delete">
-                            <DoneIcon fontSize="small" />
+                            <DoneIcon fontSize="small" color="primary" />
                         </IconButton>
                         </Tooltip>
                         </TableCell>

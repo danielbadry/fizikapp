@@ -73,7 +73,7 @@ class NestedList extends React.Component {
         </ListItem>
         <ListItem button>
             <ListItemIcon>
-            <SlowMotionVideo />
+            <SlowMotionVideo color="secondary" />
             </ListItemIcon>
             <ListItemText primary="question 2" />
             <Tooltip title="visible">
