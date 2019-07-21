@@ -12,6 +12,10 @@ import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
 import Comments from './Comments';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 export const ProductCreate = (props) => (
     <Create {...props} >
@@ -85,6 +89,9 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="quiz" path="quiz">
+                <Button variant="outlined">
+                    new answer
+                </Button>
                 <NestedList />
             </Tab>
 

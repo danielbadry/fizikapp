@@ -60,7 +60,7 @@ class NestedList extends React.Component {
             
             <Tooltip title="add option">
                 <IconButton>
-                    <AddIcon />
+                    <AddIcon fontSize="small" />
                 </IconButton>
             </Tooltip>
             
