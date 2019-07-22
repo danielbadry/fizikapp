@@ -23,9 +23,10 @@ module.exports = {
   fn: async function (inputs) {
     let allTags = await Tags.find();
     for (let tag of allTags) {
-      tag.jalaaliCreatedDate = momentJalaali(tag.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('en');
-      tag.jalaaliUserFriendlyCreatedDate = moment(tag.createdAt, "YYYYMMDD").fromNow();
+      tag.jalaaliCreatedDate = momentJalaali(tag.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      tag.jalaaliUserFriendlyCreatedDate = moment(tag.createdAt).fromNow();
   }
 
   return allTags;
