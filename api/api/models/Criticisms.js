@@ -8,14 +8,22 @@
 module.exports = {
   schema: true,
   attributes: {
+    
     userId :{
       type: 'string',
       required : false
     },
-    comment :{
+    
+    message :{
       type: 'string',
       required : false
-    }
+    },
+    
+    response :{
+      type: 'string',
+      required : false
+    },
+
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

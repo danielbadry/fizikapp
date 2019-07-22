@@ -2,6 +2,7 @@ import React from 'react';
 import { List, Datagrid, TextField } from 'react-admin';
 import MyTextField from './MyTextfield';
 import Button from '@material-ui/core/Button';
+import Thumbnail from './ThumbnailImage';
 
 const CriticismsPanel = ({ id, record, resource }) => (
     <React.Fragment>
@@ -21,9 +22,13 @@ const CriticismsPanel = ({ id, record, resource }) => (
 export const CriticismsList = props => (
     <List {...props}>
         <Datagrid expand={<CriticismsPanel />}>
-            <TextField source="id" />
-            <TextField source="userId" />
-            <TextField source="comment" />
+            <Thumbnail source="thumbnail" label="thumbnail" />
+            <TextField source="userName" />
+            <TextField source="name" />
+            <TextField source="message" />
+            <TextField source="response" />
+            <TextField source="jalaaliCreatedDate" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" />
         </Datagrid>
     </List>
 );
