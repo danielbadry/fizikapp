@@ -82,7 +82,7 @@ export const UserCreatee = (props) => (
 
 export const UserCreate = (props) => (
     <Create {...props}>
-        <SimpleForm>
+        <SimpleForm >
             <TextInput source="first_name" label="first name" />
             <TextInput source="last_name" label="last name" />
             <TextInput source="email" label="email" />

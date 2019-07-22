@@ -6,7 +6,7 @@ import { List, Create, Edit, SimpleForm, DisabledInput,
          
 export const TagCreate = (props) => (
     <Create {...props}>
-        <SimpleForm>
+        <SimpleForm redirect="list">
             <TextInput source="name" />
         </SimpleForm>
     </Create>
@@ -25,8 +25,10 @@ export const TagEdit = (props) => (
 export const TagsList = props => (
     <List {...props}>
         <Datagrid>
-            <TextField source="name" />
-            <TextField source="count" />
+            <TextField source="name" label="Name" />
+            <TextField source="count" label="Count" />
+            <TextField source="jalaaliCreatedDate" label="Jalaali date" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" label="Jalaali user friendly date" />
             <EditButton />
         </Datagrid>
     </List>
