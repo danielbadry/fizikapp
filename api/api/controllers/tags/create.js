@@ -25,8 +25,13 @@ module.exports = {
       createdAt : await sails.helpers.dateParse()
     });
 
-    return Tags.find(where)
-      .sort('createdAt DESC')
+    let list = Tags.find({
+      isDeleted : false
+    })
+    .limit(1)
+    .sort ('createdAt DESC');
+    return list;
+    // return sails.helpers.fetchFirstElement(JSON.stringify(list));
   }
 
 

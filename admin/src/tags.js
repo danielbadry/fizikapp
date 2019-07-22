@@ -26,6 +26,7 @@ export const TagsList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="name" label="Name" />
+            <TextField source="id" label="id" />
             <TextField source="count" label="Count" />
             <TextField source="jalaaliCreatedDate" label="Jalaali date" />
             <TextField source="jalaaliUserFriendlyCreatedDate" label="Jalaali user friendly date" />

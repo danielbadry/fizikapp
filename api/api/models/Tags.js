@@ -17,6 +17,11 @@ module.exports = {
       type: 'number',
       required : false
     },
+    
+    isDeleted : {
+      type : 'boolean',
+      defaultsTo : false  
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ e╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
