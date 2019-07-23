@@ -1,21 +1,16 @@
 import React from 'react';
-import { List, Datagrid, TextField } from 'react-admin';
-import MyTextField from './MyTextfield';
-import Button from '@material-ui/core/Button';
+import { List, Datagrid, TextField, BooleanField } from 'react-admin';
 import Thumbnail from './ThumbnailImage';
+import Divider from '@material-ui/core/Divider';
+import CriticismsReponseBox from './CriticismsReponseBox'
 
 const CriticismsPanel = ({ id, record, resource }) => (
     <React.Fragment>
-    <MyTextField
-        id="filled-multiline-flexible"
-        label="response"
-        multiline
-        rowsMax="4"
-        margin="normal"
-      />
-    <Button variant="outlined" color="primary">
-      send
-    </Button>  
+        {record.message}
+        <Divider />
+        {record.response}
+        <Divider />
+        {!record.response ? <CriticismsReponseBox record={record} /> : <div>respond before</div>}
     </React.Fragment>
 );
 
@@ -26,6 +21,7 @@ export const CriticismsList = props => (
             <TextField source="userName" />
             <TextField source="name" />
             <TextField source="message" />
+            <BooleanField source="isResponsed" label="isResponsed" />
             <TextField source="response" />
             <TextField source="jalaaliCreatedDate" />
             <TextField source="jalaaliUserFriendlyCreatedDate" />

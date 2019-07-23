@@ -93,9 +93,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 break;
             }
             case UPDATE:
+                
                 url = `${apiUrl}/${resource}/${params.id}`;
                 options.method = 'PUT';
                 options.body = JSON.stringify(params.data);
+                console.info('body:', options.body);
                 break;
             case CREATE:
                 url = `${apiUrl}/${resource}`;
