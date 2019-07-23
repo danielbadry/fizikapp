@@ -11,10 +11,11 @@ class CriticismsReponseBox extends React.Component {
         this.state = {
             response : ''
         }
+        console.info('props:', props);
     }
     
     componentDidMount () {
-        console.info('inam id:', this.props.id);
+        
     }
     
     handleChange = (e) => {
@@ -25,6 +26,7 @@ class CriticismsReponseBox extends React.Component {
     }
     
     handleClick = () => {
+
         const { dataProvider, dispatch, record } = this.props;
         const updatedRecord = { response: this.state.response };
         dataProvider(UPDATE, 'criticisms', { id: record.id, data: updatedRecord })

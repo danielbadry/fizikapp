@@ -14,6 +14,11 @@ module.exports = {
       required : false
     },
     
+    userName :{
+      type: 'string',
+      required : false
+    },
+    
     message :{
       type: 'string',
       required : false
@@ -21,6 +26,26 @@ module.exports = {
     
     response :{
       type: 'string',
+      required : false
+    },
+    
+    uid :{
+      type: 'json',
+      required : false
+    },
+    
+    jalaaliCreatedDate :{
+      type: 'string',
+      required : false
+    },
+    
+    jalaaliUserFriendlyCreatedDate :{
+      type: 'string',
+      required : false
+    },
+    
+    isDeleted :{
+      type: 'boolean',
       required : false
     },
 
