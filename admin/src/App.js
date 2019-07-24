@@ -7,7 +7,7 @@ import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit } from './shoppingplans';
-import { RequestList, RequestShow } from './RequestList';
+import { RequestList, RequestShow } from './Requests';
 import { PoliceList } from './police';
 import Dashboard from './Dashboard';
 import dataProvider from './dataProvider';

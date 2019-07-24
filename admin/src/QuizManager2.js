@@ -23,10 +23,10 @@ import QuizOptionsList from './QuizOptionsList';
 class NestedList extends React.Component {
  
   constructor (props) {
-      super (props);
-    this.state = {
-        open : false
-    }    
+        super (props);
+        this.state = {
+            open : false
+        }    
   }  
 
   handleClick() {
