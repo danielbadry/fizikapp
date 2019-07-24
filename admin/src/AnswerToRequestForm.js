@@ -9,6 +9,7 @@ class AnswerToRequestForm extends React.Component {
     
     constructor (props) {
         super(props);
+        
         this.state = {
             formName : 'answerToRequest',
             response : ''
@@ -21,9 +22,15 @@ class AnswerToRequestForm extends React.Component {
           });
     }
 
+    componentDidMount () {
+
+    }
+
     submitForm() {
-        console.info(dataProvider);
+        // console.info(dataProvider);
         // return;
+        // const { dataProvider, dispatch, record } = this.props;
+        const dataProvider = dataProvider
         dataProvider('http://localhost:1337/requests', { method: 'POST', body: {name:'ali'} })
             .then(() => {
                 // showNotification('Comment approved');

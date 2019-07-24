@@ -100,6 +100,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 console.info('body:', options.body);
                 break;
             case CREATE:
+                console.info('question:', params);
                 url = `${apiUrl}/${resource}`;
                 options.method = 'POST';
                 var formData = new FormData();

@@ -2,25 +2,27 @@ import React from 'react';
 import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField, ShowButton, EditButton, DateInput } from 'react-admin';
+        TextField, DateField, ShowButton, EditButton, DateInput, TabbedForm, FormTab } from 'react-admin';
         import RichTextInput from 'ra-input-rich-text';
 
 import Thumbnail from './ThumbnailImage';
 import RequestsUsersAnswer from './RequestsUsersAnswer';
-import AnswerToRequestForm from './AnswerToRequestForm';
+import RequestsResponseBox from './RequestsResponseBox';
+
+export const RequestEdit = (props) => (
+    <Edit title="Product edit" {...props}>
+       
+    </Edit>
+);
 
 export const RequestShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
+            
             <Tab label="question">
-                <TextField label="Id" source="id" />
                 <TextField source="title" />
-                <TextField source="teaser" />
             </Tab>
             
-            <Tab label="my answer" path="myanswer">
-                <AnswerToRequestForm {...props} />
-            </Tab>
             <Tab label="users answer" path="usersanswer" >
                 <RequestsUsersAnswer />
             </Tab>
@@ -29,21 +31,24 @@ export const RequestShow = (props) => (
     </Show>
 );
 
-const PostPanel = ({ id, record, resource }) => (
-    <div>hello</div>
+const RequestPanel = ({ id, record, resource }) => (
+    <React.Fragment>
+        <div>{record.question}</div>
+        {!record.isResponsed ? <RequestsResponseBox record={record} /> : <div>respond before</div>}
+    </React.Fragment>
 );
 
 export const RequestList = props => (
     
     <List {...props}>
-        <Datagrid rowClick="show">
+        <Datagrid rowClick="show" expand={<RequestPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="title" />
             <TextField source="userName" />
             <TextField source="name" />
             <TextField source="jalaaliCreatedDate" />
             <TextField source="jalaaliUserFriendlyCreatedDate" />
-            <ShowButton />
+            <BooleanField source="isResponsed" label="isResponsed" />
         </Datagrid>
     </List>
 );
