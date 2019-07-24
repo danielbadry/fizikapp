@@ -1,22 +1,62 @@
 import React from 'react';
-import { SimpleForm, FileInput, FileField, LongTextInput } from 'react-admin';
+import { SimpleForm, LongTextInput, CREATE,UPDATE , withDataProvider } from 'react-admin';
+import { push } from 'react-router-redux';
+import dataProvider from './dataProvider';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class AnswerToRequestForm extends React.Component {
     
     constructor (props) {
         super(props);
+        this.state = {
+            formName : 'answerToRequest',
+            response : ''
+        }
     }
 
-    render () {
+    setResponse (e) {
+        this.setState((state, props) => {
+            return {response: e.target.value};
+          });
+    }
+
+    submitForm() {
+        console.info(dataProvider);
+        // return;
+        dataProvider('http://localhost:1337/requests', { method: 'POST', body: {name:'ali'} })
+            .then(() => {
+                // showNotification('Comment approved');
+                // push('/comments');
+            })
+            .catch((e) => {
+                // showNotification('Error: comment not approved', 'warning')
+            });
+    }
+
+    render (props) {
         return (
-            <SimpleForm>
-                <LongTextInput source="title" label="title" />
-                <FileInput source="files" label="Related files" accept="application/pdf">
-                    <FileField source="src" title="title" />
-                </FileInput>
+            <SimpleForm
+                submitOnEnter = {false}
+                save={this.submitForm.bind(this)}
+                form={this.state.formName}
+                {...props}
+            >
+                <LongTextInput 
+                    source="title" 
+                    label="title"
+                    onChange={this.setResponse.bind(this)}
+                    />
             </SimpleForm>
         )
     }
 
 }
+
+AnswerToRequestForm.propTypes = {
+    // dataProvider: PropTypes.func.isRequired,
+    // dispatch: PropTypes.func.isRequired,
+    // record: PropTypes.object,
+};
+
 export default AnswerToRequestForm;

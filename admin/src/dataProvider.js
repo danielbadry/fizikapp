@@ -116,6 +116,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
                 // formData.append('name', params.name);
                 options.body = formData ;//JSON.stringify({'name':'milad'});
+                console.info('res:', options.body);
                 break;
             case DELETE:
                 url = `${apiUrl}/${resource}/${params.id}`;
