@@ -33,7 +33,7 @@ export const RequestShow = (props) => (
 
 const RequestPanel = ({ id, record, resource }) => (
     <React.Fragment>
-        <div>{record.question}</div>
+        <div>{record.message}</div>
         {!record.isResponsed ? <RequestsResponseBox record={record} /> : <div>respond before</div>}
     </React.Fragment>
 );

@@ -19,7 +19,7 @@ module.exports = {
       required : false
     },
     
-    question :{
+    message :{
       type: 'string',
       required : false
     },
@@ -29,7 +29,7 @@ module.exports = {
       required : false
     },
     
-    isDelete :{
+    isDeleted :{
       type: 'boolean',
       required : false
     }

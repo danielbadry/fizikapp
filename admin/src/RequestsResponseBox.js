@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { push } from 'react-router-redux';
-import { UPDATE, withDataProvider} from 'react-admin';
+import { CREATE, withDataProvider} from 'react-admin';
 import MyTextField from './MyTextfield';
 
 class RequestsResponseBox extends React.Component {
@@ -11,7 +11,6 @@ class RequestsResponseBox extends React.Component {
         this.state = {
             response : ''
         }
-        console.info('props:', props);
     }
     
     componentDidMount () {
@@ -28,8 +27,11 @@ class RequestsResponseBox extends React.Component {
     handleClick = () => {
 
         const { dataProvider, dispatch, record } = this.props;
-        const updatedRecord = { response: this.state.response };
-        dataProvider(UPDATE, 'requests', { id: record.id, data: updatedRecord })
+        const ResponseRecord = { 
+            message: this.state.response,
+            parentId: record.id
+        };
+        dataProvider(CREATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
                
                dispatch(push('/requests'));
@@ -54,7 +56,7 @@ class RequestsResponseBox extends React.Component {
                     label="Approve" 
                     onClick={this.handleClick} 
                     >
-                    approve
+                    send answer
                 </Button>
             </React.Fragment>
         )
