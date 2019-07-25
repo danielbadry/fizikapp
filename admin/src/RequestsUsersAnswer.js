@@ -19,6 +19,7 @@ class RequestsUsersAnswer extends React.Component {
         this.state = {
             open : false
         }
+        console.info('props:', props);
     }
 
     handleClick() {
@@ -32,61 +33,47 @@ class RequestsUsersAnswer extends React.Component {
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                // subheader={
-                //     <ListSubheader component="div" id="nested-list-subheader">
-                //     Nested List Items
-                //     </ListSubheader>
-                // }
-                >
-                
-                <ListItem button>
-                <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                    primary="Brunch this weekend?"
-                    secondary={
-                        <React.Fragment>
-                        <Typography
-                            component="span"
-                            variant="body2"
-                            color="textPrimary"
+                >    
+                {this.props.record.usersAnswers.map((userAnswer, index) =>
+                    <React.Fragment
+                        key={index}
                         >
-                            Ali Connors
-                        </Typography>
-                        {" — I'll be in your neighborhood doing errands this…"}
-                        </React.Fragment>
-                    }
-                />
-                </ListItem>
-                
-                <ListItem button>
-                    <ListItemIcon>
-                        <Thumbnail source="thumbnail" label="thumbnail" />
-                    </ListItemIcon>
-                    <ListItemText primary="Drafts" />
-                </ListItem>
-                
-                <ListItem button onClick={this.handleClick.bind(this)}>
-                    <ListItemIcon>
-                        <Thumbnail source="thumbnail" label="thumbnail" />
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox" />
-                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                
-                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                    <ListItem button>
-                        <ListItemIcon>
-                        <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary="Starred" />
-                    </ListItem>
-                    </List>
-                </Collapse>
+                        <ListItem button onClick={this.handleClick.bind(this)}>
+                            <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={userAnswer.title}
+                                secondary={
+                                    <React.Fragment>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                        <span>esm{userAnswer.name}</span>
+                                    </Typography>
+                                    {userAnswer.message}
+                                    </React.Fragment>
+                                }
+                            />
+                            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                            </ListItem>
+                        
+                        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                            <ListItem button>
+                                <ListItemIcon>
+                                <StarBorder />
+                                </ListItemIcon>
+                                <ListItemText primary="Starred" />
+                            </ListItem>
+                            </List>
+                        </Collapse>
+                    </React.Fragment>
+                )}
 
-                </List>
+            </List>
         )
     }
 }

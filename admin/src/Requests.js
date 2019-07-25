@@ -20,11 +20,12 @@ export const RequestShow = (props) => (
         <TabbedShowLayout>
             
             <Tab label="question">
-                <TextField source="title" />
+                <TextField source="thumbnail" label="title" />
+                <TextField source="message" />
             </Tab>
             
             <Tab label="users answer" path="usersanswer" >
-                <RequestsUsersAnswer />
+                <RequestsUsersAnswer {...props} />
             </Tab>
             
         </TabbedShowLayout>
@@ -34,7 +35,7 @@ export const RequestShow = (props) => (
 const RequestPanel = ({ id, record, resource }) => (
     <React.Fragment>
         <div>{record.message}</div>
-        {!record.isResponsed ? <RequestsResponseBox record={record} /> : <div>respond before</div>}
+        {!record.isResponsed ? <RequestsResponseBox record={record} /> : <div>{record.adminAnswer[0].message}</div>}
     </React.Fragment>
 );
 
