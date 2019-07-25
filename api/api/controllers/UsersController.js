@@ -8,24 +8,24 @@
 module.exports = {
   
     create: async function(req,res) {
-        await Products
-          .create({
-            firstName:req.param('firstName'),
-          })
-          .then(function(){
-            
-            req.file('thumbnail').upload({
-                saveAs : 'ali.jpg'
-            },function(err, uploadedFiles) {
-              if (err)
-                return res.serverError(err);
+        await Users
+            .create({
+                firstName:req.param('firstName'),
+            })
+            .then(function(){
+                let user = User.find({
+                    isDeleted: false,
+                    
+                });
+                res.ok({
+                    name : x.firstName
+                });
+                // req.file('thumbnail').upload({
+                //     saveAs : 'a.jpg'
+                // },function(err, uploadedFiles) {
+                //   if (err)
+                //     return res.serverError(err);
+                // });
             });
-
-          })
-          .then (function() {
-            return res.json({
-              name:'bye'
-            });
-          });
-      },
+    },
 };
