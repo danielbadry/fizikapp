@@ -100,24 +100,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 console.info('body:', options.body);
                 break;
             case CREATE:
-                console.info('question:', params);
                 url = `${apiUrl}/${resource}`;
                 options.method = 'POST';
                 var formData = new FormData();
-                
-                // formData.append("file", document.getElementById("thumbnail").files[0]);
+                if (document.getElementById("thumbnail").files[0])
+                    formData.append("thumbnail", document.getElementById("thumbnail").files[0]);
                 Object.keys(params.data).forEach(function (item) {
-                    formData.append(item, params.data[item]);
+                    if(item != 'thumbnail')
+                        formData.append(item, params.data[item]);
                 });
-                
-                // formData.append("file", document.getElementById("thumbnail").files[0]);
-                // Object.keys(params).forEach(function (item) {
-                //     formData.append(item, params[item]);
-                // });
-
-                // formData.append('name', params.name);
                 options.body = formData ;//JSON.stringify({'name':'milad'});
-                console.info('res:', options.body);
+                console.info('body:', options.body);
                 break;
             case DELETE:
                 url = `${apiUrl}/${resource}/${params.id}`;

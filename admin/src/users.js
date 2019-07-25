@@ -83,21 +83,23 @@ export const UserCreatee = (props) => (
 export const UserCreate = (props) => (
     <Create {...props}>
         <SimpleForm >
-            <TextInput source="first_name" label="first name" />
-            <TextInput source="last_name" label="last name" />
+            <TextInput source="firstName" label="first name" />
+            <TextInput source="lastName" label="last name" />
             <TextInput source="email" label="email" />
-            <TextInput source="username" label="user" />
-            <NumberInput source="fcoin" label="default f-coin" />
+            <TextInput source="userName" label="username" />
+            <TextInput source="mobile" label="mobile" />
+            <TextInput source="phone" label="phone" />
+            <NumberInput source="fCoin" label="default f-coin" />
             <SelectInput source="gender" choices={[
-                { id: '0', name: 'male' },
-                { id: '1', name: 'female' },
-                { id: '2', name: 'others' },
+                { id: 'male', name: 'male' },
+                { id: 'female', name: 'female' },
+                { id: 'others', name: 'others' },
             ]} />
             
             <SelectInput source="grade" choices={[
-                { id: '0', name: 'دهم' },
-                { id: '1', name: 'یازدهم' },
-                { id: '2', name: 'دوازدهم' },
+                { id: '10', name: 'دهم' },
+                { id: '11', name: 'یازدهم' },
+                { id: '12', name: 'دوازدهم' },
             ]} />
             <FormDataConsumer>
                 {({ formData, dispatch, ...rest }) => (
@@ -150,7 +152,7 @@ export const UsersList = props => (
             <TextField source="jalaaliRegisterDate" label="last login" />
             <TextField source="totalPurchase" label="total purchase" />
             <TextField source="fCoin" label="f coin" />
-            <TextField source="createdAt" label="register date" />
+            <TextField source="jalaaliUserFriendlyRegisterDate" label="register date" />
             <TextField source="numberOfInvitation" label="invitations" />
             <TextField source="subType" label="sub type" />
         </Datagrid>
