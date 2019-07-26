@@ -5,7 +5,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
-import RichTextInput from 'ra-input-rich-text';
+
 import TagComponent from './TagComponent';
 import NestedList from './QuizManager2';
 import ProductReports from './ProductReports';
@@ -16,30 +16,33 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-
+// import RichTextInput from 'ra-input-rich-text';
+import RichTextInput from 'aor-rich-text-input';
 export const ProductCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            {/* <RichTextInput source="description" label="description" /> */}
+            {/*
+            TODO: add richTextInput here
+            */}
+            <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            {/* <Field source="tags" name="tags" component="input" type="number" placeholder="latitude" /> */}
-            {/* <NumberInput source="price" label="price" /> */}
+            <NumberInput source="price" label="price" />
             {/*
             TODO: add boolean field here
             */}
             
             {/* <Mycheckbox label="categories" />   */}
             
-            {/* <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
+            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
             
             <FileInput source="files" label="Related files" accept="application/pdf">
                 <FileField source="src" title="title" />
-            </FileInput> */}
+            </FileInput>
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
         </SimpleForm>
     </Create>

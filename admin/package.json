@@ -40,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "ra-input-rich-text": "^2.9.2",
+    "aor-rich-text-input": "^1.0.2",
     "react-highcharts": "^16.0.2"
   }
 }
