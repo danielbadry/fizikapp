@@ -8,24 +8,44 @@
 module.exports = {
   
     create: async function(req,res) {
-        await Users
+        let user = await Users
             .create({
                 firstName:req.param('firstName'),
+            }).fetch();
+
+        await req.file('thumbnail').upload({
+                dirname: '../../public/uploads/',
+                saveAs : user.id + '.jpg'
+            },function(err, uploadedFiles) {
+              if (err)
+                return res.serverError(err);
+            }); 
+        
+        await Users.updateOne({
+                id: user.id
             })
-            .then(function(){
-                let user = User.find({
-                    isDeleted: false,
+            .set({
+                thumbnail: user.id + '.jpg'
+            }); 
+
+        return res.ok({
+            id: user.id,
+
+        });       
+            // .then(function(){
+            //     let user = User.find({
+            //         isDeleted: false,
                     
-                });
-                res.ok({
-                    name : x.firstName
-                });
+            //     });
+            //     res.ok({
+            //         name : x.firstName
+            //     });
                 // req.file('thumbnail').upload({
                 //     saveAs : 'a.jpg'
                 // },function(err, uploadedFiles) {
                 //   if (err)
                 //     return res.serverError(err);
                 // });
-            });
+            // });
     },
 };

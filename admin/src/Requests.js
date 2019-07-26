@@ -43,7 +43,7 @@ export const RequestList = props => (
     
     <List {...props}>
         <Datagrid rowClick="show" expand={<RequestPanel />}>
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <ImageField source="../../api/assets/images/5d3a9761743b7e1ed4b53843.jpg" />
             <TextField source="title" />
             <TextField source="userName" />
             <TextField source="name" />
