@@ -103,8 +103,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 url = `${apiUrl}/${resource}`;
                 options.method = 'POST';
                 var formData = new FormData();
-                if (document.getElementById("thumbnail").files[0])
-                    formData.append("thumbnail", document.getElementById("thumbnail").files[0]);
+                // if (document.getElementById("thumbnail").files[0])
+                //     formData.append("thumbnail", document.getElementById("thumbnail").files[0]);
                 Object.keys(params.data).forEach(function (item) {
                     if(item != 'thumbnail')
                         formData.append(item, params.data[item]);
