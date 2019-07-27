@@ -37,7 +37,7 @@ module.exports = {
     });
     
     let productsquestions = await Productsquestions.find({
-        where : {isDelete : false}
+        where : {isDeleted : false}
     });
    
     return res.json({

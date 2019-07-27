@@ -59,7 +59,7 @@ class Comments extends React.Component {
           }
         }
       }
-
+      console.info('data:', data);
       const Menu = ({data}) => {
         {/*TODO: we have lots of errors in console for this DOM node style!*/}
             return (
@@ -86,7 +86,7 @@ class Comments extends React.Component {
                             {" — 2 days ago - "} 
                             
                             <Di />
-                            {/* {m.children && <Menu data={m.children} />} */}
+                            {m.children && <Menu data={m.children} />}
                           </React.Fragment>
                         }
                       />

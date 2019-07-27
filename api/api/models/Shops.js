@@ -9,17 +9,32 @@ module.exports = {
   schema: true,
   attributes: {
     
-    tarhName :{
+    name :{
       type: 'string',
       required : false
     },
 
-    userId :{
+    userName :{
+      type: 'string',
+      required : false
+    },
+    
+    type :{
+      type: 'string',
+      required : false
+    },
+    
+    amount :{
       type: 'string',
       required : false
     },
     
     status :{
+      type: 'string',
+      required : false
+    },
+    
+    thumbnail :{
       type: 'string',
       required : false
     },

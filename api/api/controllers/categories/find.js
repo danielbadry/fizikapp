@@ -7,7 +7,7 @@ module.exports = {
   inputs: {
     rowId: {
       type: 'string',
-      required: true
+      required: false
     },
   },
 

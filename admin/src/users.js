@@ -147,7 +147,7 @@ export const UsersList = props => (
         
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="userName" label="user id" />
+            <TextField source="userName" label="username" />
             <TextField source="fullName" label="full name" />
             <TextField source="jalaaliRegisterDate" label="last login" />
             <TextField source="totalPurchase" label="total purchase" />
