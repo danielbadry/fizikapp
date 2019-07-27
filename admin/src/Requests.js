@@ -34,22 +34,29 @@ export const RequestShow = (props) => (
 
 const RequestPanel = ({ id, record, resource }) => (
     <React.Fragment>
+        <p><strong>Question:</strong></p>
         <div>{record.message}</div>
-        {!record.isResponsed ? <RequestsResponseBox record={record} /> : <div>{record.adminAnswer[0].message}</div>}
+        {
+            !record.isResponsed ? <RequestsResponseBox record={record} /> : 
+            
+            <div>
+                <p><strong>Admin answer:</strong></p>
+                {record.adminAnswer[0].message}
+            </div>
+    }
     </React.Fragment>
 );
 
 export const RequestList = props => (
-    
     <List {...props}>
         <Datagrid rowClick="show" expand={<RequestPanel />}>
-            <ImageField source="../../api/assets/images/5d3a9761743b7e1ed4b53843.jpg" />
-            <TextField source="title" />
-            <TextField source="userName" />
-            <TextField source="name" />
-            <TextField source="jalaaliCreatedDate" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" />
-            <BooleanField source="isResponsed" label="isResponsed" />
+            <Thumbnail source="thumbnail" label="thumbnail" />
+            <TextField source="name" label="name" />
+            <TextField source="userName" label="user name" />
+            <TextField source="title" label="title" />
+            <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
+            <BooleanField source="isResponsed" label="isResponsed" label="isResponsed" />
         </Datagrid>
     </List>
 );

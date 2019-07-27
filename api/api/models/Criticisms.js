@@ -19,7 +19,22 @@ module.exports = {
       required : false
     },
     
+    name :{
+      type: 'string',
+      required : false
+    },
+    
     message :{
+      type: 'string',
+      required : false
+    },
+    
+    title :{
+      type: 'string',
+      required : false
+    },
+    
+    thumbnail :{
       type: 'string',
       required : false
     },
@@ -28,22 +43,7 @@ module.exports = {
       type: 'string',
       required : false
     },
-    
-    uid :{
-      type: 'json',
-      required : false
-    },
-    
-    jalaaliCreatedDate :{
-      type: 'string',
-      required : false
-    },
-    
-    jalaaliUserFriendlyCreatedDate :{
-      type: 'string',
-      required : false
-    },
-    
+
     isDeleted :{
       type: 'boolean',
       required : false

@@ -34,7 +34,7 @@ class RequestsResponseBox extends React.Component {
         dataProvider(CREATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
                
-               dispatch(push('/requests'));
+               push('/requests');
             })
             .catch((e) => {
                
@@ -46,12 +46,13 @@ class RequestsResponseBox extends React.Component {
             <React.Fragment>
                 <MyTextField
                     id="filled-multiline-flexible"
-                    label="response"
+                    label="what do you think?"
                     multiline
                     rowsMax="4"
                     margin="normal"
                     onChange={this.handleChange.bind(this)}
                 />
+                <br />
                 <Button 
                     label="Approve" 
                     onClick={this.handleClick} 

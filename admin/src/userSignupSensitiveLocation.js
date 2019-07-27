@@ -45,7 +45,7 @@ class userSignupSensitiveLocation extends Component {
     const options = {
 
       title: {
-        text: "HighMap Test"
+        text: ""
       },
       plotOptions: {
         map: {
@@ -68,7 +68,7 @@ class userSignupSensitiveLocation extends Component {
       },
 
       subtitle: {
-        text: "IRAN",
+        text: "",
         floating: true,
         align: "right",
         y: 50,
@@ -80,9 +80,9 @@ class userSignupSensitiveLocation extends Component {
         {
           mapData: irAll,
           data: data,
-          name: "IRAN",
+          name: "",
           dataLabels: {
-            enabled: true,
+            enabled: false,
             format: "{point.name}"
           }
         }

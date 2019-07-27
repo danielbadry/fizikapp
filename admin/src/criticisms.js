@@ -18,13 +18,12 @@ export const CriticismsList = props => (
     <List {...props}>
         <Datagrid expand={<CriticismsPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="userName" />
-            <TextField source="name" />
-            <TextField source="message" />
+            <TextField source="userName" label="userame" />
+            <TextField source="name" label="name" />
+            <TextField source="title" label="title" />
             <BooleanField source="isResponsed" label="isResponsed" />
-            <TextField source="response" />
-            <TextField source="jalaaliCreatedDate" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" />
+            <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
         </Datagrid>
     </List>
 );

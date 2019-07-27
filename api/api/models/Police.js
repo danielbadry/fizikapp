@@ -12,7 +12,23 @@ module.exports = {
       type: 'string',
       required : false
     },
-    comment :{
+    
+    message :{
+      type: 'string',
+      required : false
+    },
+    
+    thumbnail :{
+      type: 'string',
+      required : false
+    },
+    
+    name :{
+      type: 'string',
+      required : false
+    },
+    
+    userName :{
       type: 'string',
       required : false
     }

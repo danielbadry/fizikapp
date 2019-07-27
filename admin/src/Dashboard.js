@@ -13,7 +13,7 @@ export default () => (
     <React.Fragment>
         
         <Card>
-            <CardHeader title="LocationSensitive" />
+            <CardHeader title="User Signup Location Sensitive" />
             <CardContent>
                 <UserSignupSensitiveLocation name="CodeSandbox" />
             </CardContent>

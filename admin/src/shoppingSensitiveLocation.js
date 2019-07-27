@@ -45,7 +45,7 @@ class shoppingSensitiveLocation extends Component {
     const options = {
 
       title: {
-        text: "HighMap Test"
+        text: ""
       },
       plotOptions: {
         map: {

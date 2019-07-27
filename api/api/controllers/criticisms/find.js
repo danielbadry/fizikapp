@@ -25,11 +25,7 @@ module.exports = {
     let allCriticisms = await Criticisms.find();
     
     for (let criticism of allCriticisms) { 
-      criticism.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
-      criticism.userName = 'milad';  
-      criticism.name = 'milad khanmohammadi';  
-      criticism.isResponsed = false;  
-      
+      criticism.isResponsed = false;
       moment.locale('en');
       criticism.jalaaliCreatedDate = momentJalaali(criticism.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');

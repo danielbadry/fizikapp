@@ -9,6 +9,7 @@ const MyTextField = props => {
         multiline
         rowsMax="4"
         margin="normal"
+        fullWidth
         {...props}
       />
   )

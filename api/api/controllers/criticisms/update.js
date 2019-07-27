@@ -35,9 +35,7 @@ module.exports = {
     .set({
       response: inputs.response
     });
-    result.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
-    result.userName = 'milad';  
-    result.name = 'milad khanmohammadi';  
+    
     result.isResponsed = true;  
     
     moment.locale('en');

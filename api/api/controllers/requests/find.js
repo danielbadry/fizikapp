@@ -26,13 +26,12 @@ module.exports = {
       parentId: null,
       isDeleted : false
     });
-    
-    if (allRequests.length) {
+    if (allRequests && allRequests.length) {
       for (let request of allRequests) {
         request.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
         request.userName = 'milad';  
         request.name = 'milad khanmohammadi';  
-        request.isResponsed = true;  
+          
         moment.locale('en');
         request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
         moment.locale('fa');
@@ -52,12 +51,13 @@ module.exports = {
           userId: null
         });
 
+        (request.adminAnswer.length == 0) ? request.isResponsed = false  : request.isResponsed = true;
       }
       return allRequests;
     }
       
     else
-      return 'nothing';
+      return [];
 
   }
 
