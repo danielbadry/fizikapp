@@ -22,17 +22,22 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    name :{
+    type :{
       type: 'string',
       required : false
     },
     
-    period :{
+    duration :{
       type: 'number',
       required : false
     },
     
-    price :{
+    firstPrise :{
+      type: 'number',
+      required : false
+    },
+    
+    secondPrise :{
       type: 'number',
       required : false
     },

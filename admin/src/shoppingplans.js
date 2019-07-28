@@ -1,12 +1,15 @@
 import React from 'react';
-import { List, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
+import { List,NumberInput, Create, Edit, SimpleForm, 
+        DisabledInput, TextInput, DateInput, LongTextInput, Datagrid, 
+        TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab } from 'react-admin';
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="period" />
-            <TextInput source="price" />
+            <TextInput source="type" label="type" />
+            <NumberInput source="duration" label="duration" />
+            <NumberInput source="firstPrise" label="first Prise" />
+            <NumberInput source="secondPrise" label="second Prise" />
         </SimpleForm>
     </Create>
 );
@@ -14,26 +17,40 @@ export const ShoppingplansCreate = (props) => (
 export const ShoppingplansEdit = (props) => (
     <Edit title="Shoppingplans edit" {...props}>
         <SimpleForm>
-            <DisabledInput label="Id" source="id" />
-            <TextInput source="title" />
-            <LongTextInput source="teaser" />
-            <DateInput label="Publication date" source="published_at" />
+            <TextInput source="type" label="type" />
+            <NumberInput source="duration" label="duration" />
+            <NumberInput source="firstPrise" label="first prise" />
+            <NumberInput source="secondPrise" label="second prise" />
         </SimpleForm>
     </Edit>
+);
+
+export const ShoppingplansShow = (props) => (
+    <Show {...props}>
+        <TabbedShowLayout>
+
+            <Tab label="information">
+                <TextField source="id" label="Id" />
+                <TextField source="type" label="type" />
+                <TextField source="firstPrise" label="first prise" />
+                <TextField source="secondPrise" label="second prise" />
+                <TextField source="duration" label="duration" />
+            </Tab>
+
+        </TabbedShowLayout>
+    </Show>
 );
 
 export const ShoppingplansList = props => (
     <React.Fragment>
         <List {...props}>
             <Datagrid>
-                <TextField source="id" />
-                <TextField source="name" />
-                <TextField source="title" />
-                <TextField source="price" />
-                <TextField source="isDelete" />
-                <TextField source="downloadable" />
-                <TextField source="createdAt" />
-                <TextField source="updatedAt" />
+                <TextField source="type" label="type" />
+                <TextField source="firstPrise" label="first prise" />
+                <TextField source="secondPrise" label="second prise" />
+                <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="update date" />
+                <EditButton />
+                <ShowButton />
             </Datagrid>
         </List>
         
