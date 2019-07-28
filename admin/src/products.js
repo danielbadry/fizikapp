@@ -102,14 +102,10 @@ export const ProductShow = (props) => (
     </Show>
 );
 
-const PostPanel = ({ id, record, resource }) => (
-    <div>product summery</div>
-);
-
 export const ProductsList = props => (
     
     <List {...props}>
-        <Datagrid rowClick="show" expand={<PostPanel />}>
+        <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />

@@ -9,12 +9,6 @@ import Thumbnail from './ThumbnailImage';
 import RequestsUsersAnswer from './RequestsUsersAnswer';
 import RequestsResponseBox from './RequestsResponseBox';
 
-export const RequestEdit = (props) => (
-    <Edit title="Product edit" {...props}>
-       
-    </Edit>
-);
-
 export const RequestShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>

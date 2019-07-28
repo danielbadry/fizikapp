@@ -17,7 +17,8 @@ export const userShow = (props) => (
         <TabbedShowLayout>
             
             <Tab label="information">
-                <TextField label="Id" source="id" />
+                <TextField source="id" label="Id" />
+                <TextField source="jalaaliUserFriendlyRegisterDate" label="register date" />
                 <TextField source="city" />
                 <TextField source="email" />
                 <TextField source="phoneNumber" />
@@ -152,7 +153,6 @@ export const UsersList = props => (
             <TextField source="jalaaliRegisterDate" label="last login" />
             <TextField source="totalPurchase" label="total purchase" />
             <TextField source="fCoin" label="f coin" />
-            <TextField source="jalaaliUserFriendlyRegisterDate" label="register date" />
             <TextField source="numberOfInvitation" label="invitations" />
             <TextField source="subType" label="sub type" />
         </Datagrid>
