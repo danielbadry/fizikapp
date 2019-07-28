@@ -10,19 +10,23 @@ module.exports = {
   inputs: {
     
     type: {
-      type: 'string'
+      type: 'string',
+      required : false
     },
 
     duration :{
       type: 'number',
+      required : false
     },
     
     firstPrise :{
       type: 'number',
+      required : false
     },
     
     secondPrise :{
       type: 'number',
+      required : false
     },
   },
 

@@ -48,6 +48,7 @@ export const ShoppingplansList = props => (
                 <TextField source="type" label="type" />
                 <TextField source="firstPrise" label="first prise" />
                 <TextField source="secondPrise" label="second prise" />
+                <TextField source="duration" label="duration" />
                 <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="update date" />
                 <EditButton />
                 <ShowButton />
