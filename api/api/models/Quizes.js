@@ -20,8 +20,8 @@ module.exports = {
     },
     
     options :{
-      type: 'string',
-      required : false
+      type: 'json',
+      columnType : 'array'
     },
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

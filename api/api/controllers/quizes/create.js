@@ -10,6 +10,9 @@ module.exports = {
   inputs: {
     question :{
       type : 'string'
+    },
+    options :{
+      type : 'string'
     }
   },
 
@@ -23,6 +26,7 @@ module.exports = {
 
     return await Quizes.create({
       question: inputs.question,
+      options:[],
       createdAt : await sails.helpers.dateParse()
     }).fetch();
 

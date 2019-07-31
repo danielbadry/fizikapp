@@ -62,10 +62,10 @@ class QuizManager extends React.Component {
             return response.json();
         })
         .then((myJson) => {
-            console.info('ress:', myJson);
             this.setState((state, props) => {
                 return {quizes: myJson};
             });
+            this.handleClose();
         })
         .catch((e) => {
             // showNotification('Error: comment not approved', 'warning')
@@ -81,10 +81,7 @@ class QuizManager extends React.Component {
             return response.json();
         })
         .then((myJson) => {
-            console.info(myJson);
-            this.setState((state, props) => {
-                return {quizes: myJson};
-            });
+            this.fetchQuizes();
         })
         .catch((e) => {
             // showNotification('Error: comment not approved', 'warning')
