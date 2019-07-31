@@ -30,14 +30,11 @@ module.exports = {
     let productsquestions = await Productsquestions.find({
         where : {isDeleted : false}
     });
-    
-    let quizes = await Quizes.find();
 
     return ({
       id: inputs.id,
       summary,
       productsquestions,
-      quizes
     });
 
   }

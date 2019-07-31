@@ -6,8 +6,23 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
+    
+    question :{
+      type: 'string',
+      required : false
+    },
+    
+    productId :{
+      type: 'string',
+      required : false
+    },
+    
+    options :{
+      type: 'string',
+      required : false
+    },
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
