@@ -14,6 +14,11 @@ module.exports = {
       required : false
     },
     
+    isDeleted :{
+      type: 'boolean',
+      required : false
+    },
+    
     productId :{
       type: 'string',
       required : false

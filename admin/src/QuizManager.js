@@ -41,7 +41,9 @@ class QuizManager extends React.Component {
             open : true,
             quizes: [],
             dialogOpen: false,
-            text:''
+            text:'',
+            showOptionDialog: false,
+            optionText: ''
         }    
         
     }  
@@ -87,6 +89,22 @@ class QuizManager extends React.Component {
             // showNotification('Error: comment not approved', 'warning')
         });
     }
+    
+    insertQuizOption = () => {
+        const dataRecord = {
+            question: this.state.text
+        }
+        fetch('http://localhost:1337/quizes', { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
 
     handleClickOpen = () => {
         this.setState((state, props) => {
@@ -106,6 +124,25 @@ class QuizManager extends React.Component {
             return {text: event.target.value};
         });
     }
+    
+    setOptionText = (event) => {
+        event.persist();
+        this.setState((state, props) => {
+            return {optionText: event.target.value};
+        });
+    }
+
+    showAddOptionDialog = () => {
+        this.setState((state, props) => {
+            return {showOptionDialog: true};
+        });
+    }
+    
+    closeOptionDialog = () => {
+        this.setState((state, props) => {
+            return {showOptionDialog: false};
+        });
+    }
 
     render () {
 
@@ -113,22 +150,21 @@ class QuizManager extends React.Component {
         <React.Fragment>
         
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-            Open form dialog
+            ADD
         </Button>
 
         <Dialog open={this.state.dialogOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Quiz</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+            write question here
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
-            type="email"
+            label="question"
+            type="text"
             fullWidth
             onChange={this.setItemText.bind()}
           />
@@ -139,6 +175,36 @@ class QuizManager extends React.Component {
           </Button>
           <Button color="primary" onClick={this.insertQuizItem}>
             Insert
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog 
+        open={this.state.showOptionDialog} 
+        onClose={this.closeOptionDialog} 
+        aria-labelledby="form-dialog-title"
+        >
+        <DialogTitle id="form-dialog-title">Option</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            write option here
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="option title"
+            type="text"
+            fullWidth
+            onChange={this.setOptionText.bind()}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={this.handleClose}>
+            Cancel
+          </Button>
+          <Button color="primary" onClick={this.insertQuizItem}>
+            Insert Option
           </Button>
         </DialogActions>
       </Dialog>
@@ -163,7 +229,10 @@ class QuizManager extends React.Component {
                             </IconButton>
                         </Tooltip>
                         
-                        <Tooltip title="add option">
+                        <Tooltip 
+                            title="add option"
+                            onClick={this.showAddOptionDialog}
+                            >
                             <IconButton>
                                 <AddIcon />
                             </IconButton>
