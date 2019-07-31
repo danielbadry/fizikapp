@@ -3,7 +3,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ReferenceArrayInput,SelectArrayInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
 
 import TagComponent from './TagComponent';
@@ -106,7 +106,12 @@ export const ProductsList = props => (
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />
-            <ChipField source="tags" label="Tags" />
+            {/* <ChipField source="tagsArray" /> */}
+            <ReferenceArrayInput reference="tagsArray" source="tags">
+                <SelectArrayInput>
+                    <ChipField source="name" />
+                </SelectArrayInput>
+            </ReferenceArrayInput>
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
