@@ -1,6 +1,6 @@
 import React , { Fragment } from 'react';
 import {    List, Datagrid, Create, SimpleForm, TextInput,
-            ImageInput, ImageField, SelectInput, Show, TabbedShowLayout,
+            ImageInput, ImageField, BooleanField, SelectInput, Show, TabbedShowLayout,
             Tab, TextField, NumberInput
         } from 'react-admin';
 
@@ -12,18 +12,21 @@ import Thumbnail from './ThumbnailImage';
 import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form'
 import {GetProvincesFor, GetCitiesFor, countries} from './GetCitiesFor';
+
 export const userShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
             
             <Tab label="information">
                 <TextField source="id" label="Id" />
-                <TextField source="jalaaliUserFriendlyRegisterDate" label="register date" />
-                <TextField source="city" />
+                <TextField source="jalaaliFullUserFriendlyCreatedDate" label="register date" />
                 <TextField source="email" />
-                <TextField source="phoneNumber" />
+                <TextField source="phone" />
+                <TextField source="mobile" />
+                <BooleanField source="suspend" />
                 <TextField source="gender" />
                 <TextField source="grade" />
+                <TextField source="address" />
             </Tab>
             
             <Tab label="activities" path="activities">

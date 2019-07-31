@@ -7,7 +7,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 
 import TagComponent from './TagComponent';
-import NestedList from './QuizManager2';
+import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
@@ -92,10 +92,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="quiz" path="quiz">
-                <Button variant="outlined">
-                    new answer
-                </Button>
-                <NestedList />
+                <QuizManager />
             </Tab>
 
         </TabbedShowLayout>

@@ -30,22 +30,5 @@ module.exports = {
         });
       });
   },
-  
-  findOne : async function (req, res) {
-    let summary = await Products.findOne({
-      id: req.param('id')
-    });
-    
-    let productsquestions = await Productsquestions.find({
-        where : {isDeleted : false}
-    });
-   
-    return res.json({
-      id:req.param('id'),
-      summary,
-      productsquestions
-    });
-    
-  }
 
 };

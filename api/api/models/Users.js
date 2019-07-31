@@ -33,6 +33,11 @@ module.exports = {
       required : false
     },
     
+    gender :{
+      type: 'string',
+      required : false
+    },
+    
     userName :{
       type: 'string',
       required : false
@@ -95,6 +100,11 @@ module.exports = {
       type: 'boolean',
       required : false,
       defaultsTo : true
+    },
+    
+    isDeleted :{
+      type: 'boolean',
+      required : false
     },
     
     requestAuthorization :{
