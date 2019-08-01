@@ -23,6 +23,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import TableHead from '@material-ui/core/TableHead';
 import Button from '@material-ui/core/Button';
@@ -133,7 +134,10 @@ class QuizManager extends React.Component {
 
     handleClose = () => {
         this.setState((state, props) => {
-            return {dialogOpen: false};
+            return {
+                dialogOpen: false,
+                showOptionDialog: false
+            };
         });
     }
     
@@ -160,14 +164,37 @@ class QuizManager extends React.Component {
         });
     }
     
-    makeThisOptionCorrectAnswer = () => {
+    makeThisOptionCorrectAnswer = (quizItemId, optionId, flag, value) => {
         const dataRecord = {
-           quizItemId: '5d4280e29c6d300478f6395f',
-           optionId: 1,
-           isAnswer: true
+           optionId: optionId,
+           flag: flag,
+           value: value
         };
         
-        fetch('http://localhost:1337/quizes/' + this.state.itemId , {
+        fetch('http://localhost:1337/quizes/' + quizItemId , {
+            method: 'PUT', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
+    deleteThisOption = (quizItemId, optionId, flag, value) => {
+        const dataRecord = {
+           optionId: optionId,
+           flag: flag,
+           value: value 
+        };
+        
+        fetch('http://localhost:1337/quizes/' + quizItemId , {
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -307,22 +334,40 @@ class QuizManager extends React.Component {
                             <TableBody>
                                 {item.options.map(
                                     (option, optionIndex) => (
-                                        <TableRow key={optionIndex}>
+                                        <TableRow 
+                                            key={optionIndex}
+                                            >
                                             <TableCell component="th" scope="row">{option.title}</TableCell>
                                             <TableCell align="right">
-                                            <Tooltip 
-                                                title="make this option the correct answer"
-                                                onClick={this.makeThisOptionCorrectAnswer}
-                                                >
-                                                <IconButton aria-label="Done">
-                                                    <ClearIcon fontSize="small" />
-                                                </IconButton>
-                                            </Tooltip>
+                    {option.isAnswer ?  
+                    <Tooltip 
+                            title="correct answer"
+                            >
+                            <IconButton aria-label="Done">
+                                <CheckIcon fontSize="small"/>
+                            </IconButton>
+                        </Tooltip>
+                        : 
+                        <Tooltip 
+                            title="make this option the correct answer"
+                            onClick={() => this.makeThisOptionCorrectAnswer(item.id,option.id,'isAnswer', true)}
+                            >
+                            <IconButton aria-label="Done">
+                                <ClearIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                    }
+
                                             </TableCell>
                                             <TableCell align="right">
-                                                <IconButton aria-label="Delete">
-                                                    <DeleteIcon fontSize="small" />
-                                                </IconButton>
+                                                <Tooltip
+                                                    title="delete option"
+                                                    onClick={() => this.deleteThisOption(item.id,option.id, 'delete', true)}
+                                                    >
+                                                    <IconButton aria-label="Delete">
+                                                        <DeleteIcon fontSize="small" />
+                                                    </IconButton>
+                                                </Tooltip>
                                             </TableCell>
                                         </TableRow>
                                     )
