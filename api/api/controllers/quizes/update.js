@@ -8,9 +8,15 @@ module.exports = {
 
 
   inputs: {
+    
     id : {
       type: 'string'
+    },
+    
+    optionText : {
+      type: 'string'
     }
+    
   },
 
 
@@ -28,7 +34,7 @@ module.exports = {
 
     let options = quizItem.options;
     let optionObject = {
-      title : 'selam',
+      title : inputs.optionText,
       isAnswer: false,
       createdAt : '2019-07-28T17:56:29',
       updatedAt : '2019-07-28T17:56:29'

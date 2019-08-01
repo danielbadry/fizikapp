@@ -36,6 +36,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class QuizManager extends React.Component {
  
     constructor (props) {
+        console.info('props:', props);
         super (props);
         this.state = {
             open : true,
@@ -43,7 +44,8 @@ class QuizManager extends React.Component {
             dialogOpen: false,
             text:'',
             showOptionDialog: false,
-            optionText: ''
+            optionText: '',
+            itemId:''
         }    
         
     }  
@@ -76,9 +78,26 @@ class QuizManager extends React.Component {
     
     insertQuizItem = () => {
         const dataRecord = {
-            question: this.state.text
+            question: this.state.text,
+            productId: this.props.record.id
         }
         fetch('http://localhost:1337/quizes', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
+    insertQuizItemOption = () => {
+        const dataRecord = {
+            optionText: this.state.optionText
+        }
+        fetch('http://localhost:1337/quizes/' + this.state.itemId , { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
         .then((response) => {
             return response.json();
         })
@@ -132,9 +151,12 @@ class QuizManager extends React.Component {
         });
     }
 
-    showAddOptionDialog = () => {
+    showAddOptionDialog = (obj, parentid) => {
         this.setState((state, props) => {
-            return {showOptionDialog: true};
+            return {
+                showOptionDialog: true,
+                itemId: obj
+            };
         });
     }
     
@@ -203,7 +225,7 @@ class QuizManager extends React.Component {
           <Button color="primary" onClick={this.handleClose}>
             Cancel
           </Button>
-          <Button color="primary" onClick={this.insertQuizItem}>
+          <Button color="primary" onClick={this.insertQuizItemOption}>
             Insert Option
           </Button>
         </DialogActions>
@@ -231,7 +253,7 @@ class QuizManager extends React.Component {
                         
                         <Tooltip 
                             title="add option"
-                            onClick={this.showAddOptionDialog}
+                            onClick={this.showAddOptionDialog.bind(this, item.id)}
                             >
                             <IconButton>
                                 <AddIcon />
