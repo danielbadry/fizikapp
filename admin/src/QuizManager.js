@@ -160,6 +160,29 @@ class QuizManager extends React.Component {
         });
     }
     
+    makeThisOptionCorrectAnswer = () => {
+        const dataRecord = {
+           quizItemId: '5d4280e29c6d300478f6395f',
+           optionId: 1,
+           isAnswer: true
+        };
+        
+        fetch('http://localhost:1337/quizes/' + this.state.itemId , {
+            method: 'PUT', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
     closeOptionDialog = () => {
         this.setState((state, props) => {
             return {showOptionDialog: false};
@@ -287,7 +310,10 @@ class QuizManager extends React.Component {
                                         <TableRow key={optionIndex}>
                                             <TableCell component="th" scope="row">{option.title}</TableCell>
                                             <TableCell align="right">
-                                            <Tooltip title="make this option the correct answer">
+                                            <Tooltip 
+                                                title="make this option the correct answer"
+                                                onClick={this.makeThisOptionCorrectAnswer}
+                                                >
                                                 <IconButton aria-label="Done">
                                                     <ClearIcon fontSize="small" />
                                                 </IconButton>

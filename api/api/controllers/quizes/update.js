@@ -15,10 +15,21 @@ module.exports = {
     
     optionText : {
       type: 'string'
+    },
+    
+    optionId : {
+      type: 'string'
+    },
+    
+    quizItemId : {
+      type: 'string'
+    },
+    
+    isAnswer : {
+      type: 'boolean'
     }
     
   },
-
 
   exits: {
 

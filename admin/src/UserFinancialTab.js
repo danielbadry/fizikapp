@@ -19,11 +19,11 @@ class UserFinancialGrid extends React.Component {
 
 render () {
     const rows = [
-        this.createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        this.createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        this.createData('Eclair', 262, 16.0, 24, 6.0),
-        this.createData('Cupcake', 305, 3.7, 67, 4.3),
-        this.createData('Gingerbread', 356, 16.0, 49, 3.9),
+        this.createData('A', 159, 25030, 24, '6104-3372-5107-1500'),
+        this.createData('G', 237, 98000, 37, '6104-3372-5107-1500'),
+        this.createData('F', 262, 13100, 24, '6104-3372-5107-1500'),
+        this.createData('B', 305, 36900, 67, '6104-3372-5107-1500'),
+        this.createData('C', 356, 78200, 49, '6104-3372-5107-1500'),
       ];
       
     return (
@@ -31,11 +31,11 @@ render () {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell align="right">Date</TableCell>
+                <TableCell align="right">Price</TableCell>
+                <TableCell align="right">Transaction</TableCell>
+                <TableCell align="right">Cart Number</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
