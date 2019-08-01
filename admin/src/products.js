@@ -3,7 +3,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ReferenceArrayInput,SelectArrayInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ArrayField,SingleFieldList, ReferenceArrayInput,SelectArrayInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
 
 import TagComponent from './TagComponent';
@@ -68,9 +68,13 @@ export const ProductShow = (props) => (
         <TabbedShowLayout>
 
             <Tab label="information">
-                <TextField label="Id" source="id" />
-                <TextField source="title" />
-                <TextField source="teaser" />
+                <TextField source="id" label="Id" />
+                <TextField source="summary.title" label="title" />
+                <ArrayField source="tagsArray" label="Tags">
+                    <SingleFieldList>
+                        <ChipField source="name" />
+                    </SingleFieldList>
+                </ArrayField>
             </Tab>
 
             <Tab label="qa" path="qa">
@@ -107,11 +111,11 @@ export const ProductsList = props => (
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />
             {/* <ChipField source="tagsArray" /> */}
-            <ReferenceArrayInput reference="tagsArray" source="tags">
-                <SelectArrayInput>
+            <ArrayField source="tagsArray">
+                <SingleFieldList>
                     <ChipField source="name" />
-                </SelectArrayInput>
-            </ReferenceArrayInput>
+                </SingleFieldList>
+            </ArrayField>
             <TextField source="price" label="Price" />
             <BooleanField source="isEnable" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />

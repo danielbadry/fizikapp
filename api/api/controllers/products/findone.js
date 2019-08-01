@@ -22,7 +22,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
+    let tagsArray = [];
     let summary = await Products.findOne({
       id: inputs.id
     });
@@ -31,10 +31,18 @@ module.exports = {
         where : {isDeleted : false}
     });
 
+    for (let tag of summary.tags) {
+      let tagElement = await Tags.findOne({
+        id: tag.id
+      });
+      tagsArray.push(tagElement);
+    }
+
     return ({
       id: inputs.id,
       summary,
       productsquestions,
+      tagsArray
     });
 
   }

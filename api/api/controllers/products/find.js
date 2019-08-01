@@ -32,7 +32,7 @@ module.exports = {
         //  tidy up tags
         
         for (let tag of product.tags) {
-          let tagElement = await Tags.find({
+          let tagElement = await Tags.findOne({
             id: tag.id
           });
           tagsArray.push(tagElement);
