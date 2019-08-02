@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import ProductAnalytics from './ProductAnalytics';
+import EnhancedTable from './ProductAnalytics';
 import SalesChart from './SalesChart';
 import SignUpChart from './SignUpChart';
 import OnlineUsersChart from './OnlineUsersChart';
@@ -22,7 +22,7 @@ export default () => (
         <Card>
             <CardHeader title="Product Analytics" />
             <CardContent>
-                <ProductAnalytics />
+                <EnhancedTable />
             </CardContent>
         </Card>
 
