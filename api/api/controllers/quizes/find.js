@@ -19,7 +19,9 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    let quizes = await Quizes.find();
+    let quizes = await Quizes.find({
+      isDeleted: false
+    });
 
     for (let quiz of quizes) {
       let options = quiz.options;

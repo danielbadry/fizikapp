@@ -46,7 +46,8 @@ class QuizManager extends React.Component {
             text:'',
             showOptionDialog: false,
             optionText: '',
-            itemId:''
+            itemId:'',
+            showDeleteDialog: false
         }    
         
     }  
@@ -141,6 +142,14 @@ class QuizManager extends React.Component {
         });
     }
     
+    closeDeleteQuizDialog = () => {
+        this.setState((state, props) => {
+            return {
+                showDeleteDialog: false
+            };
+        });
+    }
+    
     setItemText = (event) => {
         event.persist();
         this.setState((state, props) => {
@@ -159,6 +168,17 @@ class QuizManager extends React.Component {
         this.setState((state, props) => {
             return {
                 showOptionDialog: true,
+                itemId: obj
+            };
+        });
+    }
+    
+    showDeleteOptionDialog = (obj, parentid) => {
+        console.info('obj:', obj);
+        console.info('parentid:', parentid);
+        this.setState((state, props) => {
+            return {
+                showDeleteDialog: true,
                 itemId: obj
             };
         });
@@ -210,6 +230,25 @@ class QuizManager extends React.Component {
         });
     }
     
+    deleteThisQuizItem = () => {
+        console.info('ena:', this.state.itemId);
+
+        fetch('http://localhost:1337/quizes/' + this.state.itemId, {
+            method: 'DELETE',
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+            this.closeDeleteQuizDialog();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
     closeOptionDialog = () => {
         this.setState((state, props) => {
             return {showOptionDialog: false};
@@ -250,6 +289,31 @@ class QuizManager extends React.Component {
           </Button>
         </DialogActions>
       </Dialog>
+
+        <Dialog 
+        open={this.state.showDeleteDialog} 
+        onClose={this.closeDeleteQuizDialog} 
+        aria-labelledby="form-dialog-title"
+        >
+            <DialogTitle id="alert-dialog-title">{"Delete Question?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    are you sure?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button color="primary">
+                    cancel
+                </Button>
+                <Button 
+                    color="primary" 
+                    onClick={() => this.deleteThisQuizItem()}                    
+                    autoFocus
+                    >
+                    delete
+                </Button>
+            </DialogActions>
+        </Dialog>
 
       <Dialog 
         open={this.state.showOptionDialog} 
@@ -310,7 +374,10 @@ class QuizManager extends React.Component {
                             </IconButton>
                         </Tooltip>
                         
-                        <Tooltip title="delete">
+                        <Tooltip 
+                            title="delete"
+                            onClick={this.showDeleteOptionDialog.bind(this, item.id)}
+                            >
                             <IconButton>
                                 <DeleteIcon />
                             </IconButton>
