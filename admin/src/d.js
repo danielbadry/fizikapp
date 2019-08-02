@@ -30,21 +30,43 @@ class Di extends React.Component {
             replyMessage: ''
           }
     }
-    sendReplyToQuestion = () => {
-        const { dataProvider } = this.props;
-        dataProvider(CREATE, 'productsquestions', {
-            message:this.state.replyMessage,
-          })
-          .then((res) => {
-            
-            this.handleClose();
-          })
-          .catch((e) => {
-              console.info('Error: comment not approved', 'warning')
-          });
+    
+    // sendReplyToQuestion = () => {
+    //   const { dataProvider } = this.props;
+    //   dataProvider(CREATE, 'productsquestions', {
+    //       message:this.state.replyMessage,
+    //     })
+    //     .then((res) => {
+          
+    //       this.handleClose();
+    //     })
+    //     .catch((e) => {
+    //         console.info('Error: comment not approved', 'warning')
+    //     });
+    //   }
+      sendReplyToQuestion = () => {
+        const dataRecord = {
+          message:this.state.replyMessage
+        }
+        fetch('http://localhost:1337/productsquestions', { 
+            method: 'POST', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+          }
+        )
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
       }
-  
+
       setReplyMessage = (e) => {
+        e.persist();
         this.setState((state, props) => {
           return {replyMessage: e.target.value};
         });

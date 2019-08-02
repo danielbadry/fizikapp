@@ -11,7 +11,7 @@ import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
-import Comments from './Comments';
+import ProductsQuestions from './ProductsQuestions';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
@@ -78,7 +78,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <Comments {...props} />
+                <ProductsQuestions {...props} />
             </Tab>
 
             <Tab label="reports" path="report" >

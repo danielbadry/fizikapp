@@ -19,17 +19,37 @@ import { GET_LIST, withDataProvider, CREATE, showNotification, SimpleForm, GET_O
 import PropTypes from 'prop-types';
 import Di from './d';
 
-class Comments extends React.Component {
+class ProductsQuestions extends React.Component {
     
     constructor (props) {
-        super(props);
-        
+
+      super(props);
+      this.state = {
+        productsQuestions: [],
+      }
+
     }
     
     componentDidMount () {
-       
+       this.fetchProductsQuestions();
     }
 
+    fetchProductsQuestions = () => {
+      fetch('http://localhost:1337/productsquestions', { method: 'GET', headers: {}})
+      .then((response) => {
+          return response.json();
+      })
+      .then((myJson) => {
+          this.setState((state, props) => {
+              return {productsQuestions: myJson};
+          });
+          this.handleClose();
+      })
+      .catch((e) => {
+          // showNotification('Error: comment not approved', 'warning')
+      });
+    }
+    
     render () {
 
       var data = [],
@@ -40,8 +60,8 @@ class Comments extends React.Component {
       // First map the nodes of the array to an object -> create a hash table.
 
       {/*TODO: we must change the below code to a function!*/} 
-      for(var i = 0, len = this.props.record.productsquestions.length; i < len; i++) {
-        arrElem = this.props.record.productsquestions[i];
+      for(var i = 0, len = this.state.productsQuestions.length; i < len; i++) {
+        arrElem = this.state.productsQuestions[i];
         mappedArr[arrElem.id] = arrElem;
         mappedArr[arrElem.id]['children'] = [];
       }
@@ -105,4 +125,4 @@ class Comments extends React.Component {
 
 }
 
-export default Comments;
+export default ProductsQuestions;
