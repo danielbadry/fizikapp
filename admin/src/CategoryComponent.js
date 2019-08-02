@@ -1,20 +1,20 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
-import ReduxFormSelect from './MyAutoSelect'
+import ReduxCategoryFormSelect from './CategoryAutoSelect'
 
-class TagForm extends React.Component {
+class CategoryComponent extends React.Component {
   
   constructor (props) {
     super (props);
     this.state = {
-      tags : []
+      allCategories : []
     }
   }
 
   componentDidMount () {
     let finalList = [];
     let tempObj = {};
-    fetch('http://localhost:1337/tags', { method: 'GET', headers: {}})
+    fetch('http://localhost:1337/categories/allCategories', { method: 'GET', headers: {}})
     .then((response) => {
         return response.json();
     })
@@ -28,7 +28,7 @@ class TagForm extends React.Component {
         }
       )
       this.setState((state, props) => {
-        return {tags: finalList};
+        return {allCategories: finalList};
       });
     })
     .catch((e) => {
@@ -41,17 +41,17 @@ class TagForm extends React.Component {
 
     return (
       <Field 
-        name="tags" 
+        name="categories" 
         onChange={handleSubmit} 
-        component={ReduxFormSelect} 
-        options={this.state.tags}
+        component={ReduxCategoryFormSelect} 
+        options={this.state.allCategories}
         />
     );
 
   }
   
 }
-TagForm.defaultProps = {
+CategoryComponent.defaultProps = {
   addLabel: true,
 };
-export default reduxForm({ form: 'record-form' })(TagForm);
+export default reduxForm({ form: 'record-form' })(CategoryComponent);

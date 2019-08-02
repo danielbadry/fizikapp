@@ -10,5 +10,6 @@
 
 module.exports.routes = {
     'GET /users/signupprocess': 'UsersController.signupprocess',
-    'GET /shops/shopsprocess': 'ShopsController.shopsprocess'
+    'GET /shops/shopsprocess': 'ShopsController.shopsprocess',
+    'GET /categories/allcategories': 'CategoriesController.allcategories'
 };

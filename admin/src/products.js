@@ -3,10 +3,11 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ArrayField,SingleFieldList, ReferenceArrayInput,SelectArrayInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
 
 import TagComponent from './TagComponent';
+import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
@@ -18,6 +19,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
+
 export const ProductCreate = (props) => (
     <Create {...props} >
         
@@ -29,6 +31,9 @@ export const ProductCreate = (props) => (
             */}
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
+            
+            <CategoryComponent source="categories" label="categories" />
+             
             <NumberInput source="price" label="price" />
             {/*
             TODO: add boolean field here
