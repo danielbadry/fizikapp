@@ -19,12 +19,12 @@ export default () => (
             </CardContent>
         </Card>
 
-        <Card>
-            <CardHeader title="Product Analytics" />
-            <CardContent>
+        {/* <Card> */}
+            {/* <CardHeader title="Product Analytics" />
+            <CardContent> */}
                 <EnhancedTable />
-            </CardContent>
-        </Card>
+            {/* </CardContent> */}
+        {/* </Card> */}
 
         <Card>
             <CardHeader title="Sales Chart" />

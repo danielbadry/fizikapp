@@ -20,24 +20,24 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, likes, dislikes, views, comments, reports, qa) {
+  return { name, likes, dislikes, views, comments, reports, qa };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('speed', 305, 3, 67, 4 , 67, 17),
+  createData('gravity', 452, 25, 51, 5 , 67, 6),
+  createData('grace', 262, 16, 24, 6 , 67, 6),
+  createData('newton', 159, 6, 24, 4 , 67, 6),
+  createData('Gingerbread', 356, 16, 49, 3 , 67, 6),
+  createData('Honeycomb', 408, 3, 87, 6 , 67, 6),
+  createData('Ice cream sandwich', 237, 9, 37, 6 , 67, 6),
+  createData('Jelly Bean', 375, 0, 94, 0 , 67, 6),
+  createData('KitKat', 518, 26, 65, 7 , 67, 6),
+  createData('Lollipop', 392, 0, 98, 0 , 67, 6),
+  createData('Marshmallow', 318, 0, 81, 2 , 67, 6),
+  createData('Nougat', 360, 19, 9, 37 , 67, 6),
+  createData('Oreo', 437, 18, 63, 4 , 67, 0),
 ];
 
 function desc(a, b, orderBy) {
@@ -65,11 +65,13 @@ function getSorting(order, orderBy) {
 }
 
 const headRows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'name' },
+  { id: 'likes', numeric: true, disablePadding: false, label: 'likes' },
+  { id: 'dislikes', numeric: true, disablePadding: false, label: 'dislikes' },
+  { id: 'views', numeric: true, disablePadding: false, label: 'views' },
+  { id: 'comments', numeric: true, disablePadding: false, label: 'comments' },
+  { id: 'reports', numeric: true, disablePadding: false, label: 'reports' },
+  { id: 'qa', numeric: true, disablePadding: false, label: 'qa' },
 ];
 
 function EnhancedTableHead(props) {
@@ -330,10 +332,12 @@ export default function EnhancedTable() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.likes}</TableCell>
+                      <TableCell align="right">{row.dislikes}</TableCell>
+                      <TableCell align="right">{row.views}</TableCell>
+                      <TableCell align="right">{row.comments}</TableCell>
+                      <TableCell align="right">{row.reports}</TableCell>
+                      <TableCell align="right">{row.qa}</TableCell>
                     </TableRow>
                   );
                 })}
