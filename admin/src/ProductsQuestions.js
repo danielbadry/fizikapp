@@ -25,13 +25,52 @@ class ProductsQuestions extends React.Component {
 
       super(props);
       this.state = {
+        open: false,
         productsQuestions: [],
       }
 
     }
     
     componentDidMount () {
-       this.fetchProductsQuestions();
+      this.fetchProductsQuestions();
+    }
+
+    sendReplyToQuestion = () => {
+      const dataRecord = {
+        message:this.replyMessage
+      }
+
+      fetch('http://localhost:1337/productsquestions', { 
+          method: 'POST', 
+          body : JSON.stringify(dataRecord), 
+          headers: {}
+        }
+      )
+      .then((response) => {
+        return response.json();
+      })
+      .then((myJson) => {
+          this.fetchProductsQuestions();
+      })
+      .catch((e) => {
+          // showNotification('Error: comment not approved', 'warning')
+      });
+    }
+
+    setReplyMessage = (e) => {
+      this.replyMessage = e.target.value;
+    };
+
+    handleClickOpen() {
+      this.setState((state, props) => {
+        return {open: true};
+      });
+    }
+    
+    handleClose() {
+      this.setState((state, props) => {
+        return {open: false};
+      });
     }
 
     fetchProductsQuestions = () => {
@@ -40,10 +79,10 @@ class ProductsQuestions extends React.Component {
           return response.json();
       })
       .then((myJson) => {
-          this.setState((state, props) => {
+        this.handleClose();  
+        this.setState((state, props) => {
               return {productsQuestions: myJson};
           });
-          this.handleClose();
       })
       .catch((e) => {
           // showNotification('Error: comment not approved', 'warning')
@@ -105,7 +144,38 @@ class ProductsQuestions extends React.Component {
                             
                             {" — 2 days ago - "} 
                             
-                            <Di />
+                            {/* start */}
+                            <React.Fragment>
+                              <Link
+                                  component="button"
+                                  variant="body2"
+                                  onClick={this.handleClickOpen.bind(this)}
+                              >
+                                  reply
+                              </Link>
+                              <div>milad</div>
+                              <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
+                                <DialogTitle id="form-dialog-title">reply</DialogTitle>
+                                <DialogContent>
+                                <TextField
+                                    margin="dense"
+                                    label="write your idea"
+                                    type="text"
+                                    onChange={this.setReplyMessage.bind()}
+                                    fullWidth
+                                />
+                                </DialogContent>
+                                <DialogActions>
+                                  <Button onClick={this.handleClose.bind(this)} color="primary">
+                                      Cancel
+                                  </Button>
+                                  <Button onClick={this.sendReplyToQuestion.bind(this)} color="primary">
+                                      Send
+                                  </Button>
+                                </DialogActions>
+                              </Dialog>
+                            </React.Fragment>
+                            {/* end */}
                             {m.children && <Menu data={m.children} />}
                           </React.Fragment>
                         }
