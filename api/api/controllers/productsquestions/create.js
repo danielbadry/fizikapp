@@ -10,7 +10,16 @@ module.exports = {
   inputs: {
     message: {
       type: 'string'
+    },
+    
+    parentId: {
+      type: 'string'
+    },
+    
+    productId: {
+      type: 'string'
     }
+    
   },
 
 
@@ -23,6 +32,9 @@ module.exports = {
     
     return await Productsquestions.create({
       message: inputs.message,
+      parentId: inputs.parentId,
+      productId: inputs.productId,
+      userId: null,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse()
     }).fetch();

@@ -28,16 +28,19 @@ class ProductsQuestions extends React.Component {
         open: false,
         productsQuestions: this.props.record.productsquestions,
       }
+      this.parentId = '';
 
     }
     
     componentDidMount () {
-      // console.info('propsss:', this.props);
+      
     }
 
     sendReplyToQuestion = () => {
       const dataRecord = {
-        message:this.replyMessage
+        message:this.replyMessage,
+        parentId: this.parentId,
+        productId: this.props.record.id
       }
 
       fetch('http://localhost:1337/productsquestions', { 
@@ -50,7 +53,8 @@ class ProductsQuestions extends React.Component {
         return response.json();
       })
       .then((myJson) => {
-          // this.fetchProductsQuestions();
+          this.handleClose();
+          this.fetchProductsQuestions();
       })
       .catch((e) => {
           // showNotification('Error: comment not approved', 'warning')
@@ -61,7 +65,8 @@ class ProductsQuestions extends React.Component {
       this.replyMessage = e.target.value;
     };
 
-    handleClickOpen() {
+    handleClickOpen(id) {
+      this.parentId = id;
       this.setState((state, props) => {
         return {open: true};
       });
@@ -73,21 +78,21 @@ class ProductsQuestions extends React.Component {
       });
     }
 
-    // fetchProductsQuestions = () => {
-    //   fetch('http://localhost:1337/productsquestions/', { method: 'GET', headers: {}})
-    //   .then((response) => {
-    //       return response.json();
-    //   })
-    //   .then((myJson) => {
-    //     this.handleClose();  
-    //     this.setState((state, props) => {
-    //           return {productsQuestions: myJson};
-    //       });
-    //   })
-    //   .catch((e) => {
-    //       // showNotification('Error: comment not approved', 'warning')
-    //   });
-    // }
+    fetchProductsQuestions = () => {
+      fetch('http://localhost:1337/productsquestions/', { method: 'GET', headers: {}})
+      .then((response) => {
+          return response.json();
+      })
+      .then((myJson) => {
+        this.handleClose();  
+        this.setState((state, props) => {
+              return {productsQuestions: myJson};
+          });
+      })
+      .catch((e) => {
+          // showNotification('Error: comment not approved', 'warning')
+      });
+    }
     
     render () {
 
@@ -155,7 +160,7 @@ class ProductsQuestions extends React.Component {
                               <Link
                                   component="button"
                                   variant="body2"
-                                  onClick={this.handleClickOpen.bind(this)}
+                                  onClick={() => this.handleClickOpen(m.id)}
                               >
                                   reply
                               </Link>

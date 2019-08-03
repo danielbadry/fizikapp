@@ -1,37 +1,32 @@
 var moment = require('moment');
 var momentJalaali = require('moment-jalaali');
-
 module.exports = {
 
-  friendlyName: 'Findone',
 
-  description: 'Findone products.',
+  friendlyName: 'Find',
+
+
+  description: 'Find productsquestions.',
+
 
   inputs: {
 
-    id :{
-      type: 'string'
-    }
-
   },
+
 
   exits: {
 
   },
 
-  fn: async function (inputs) {
-    let tagsArray = [];
-    let summary = await Products.findOne({
-      id: inputs.id
-    });
-    
-    let productsquestions = await Productsquestions.find({
-        where : {
-          isDeleted : false,
-          productId: inputs.id
-        }
-    });
 
+  fn: async function (inputs) {
+
+    let productsquestions = await Productsquestions.find({
+      where : {
+        isDeleted : false,
+        productId: inputs.id
+      }
+    });
     for (let productsquestion of productsquestions) {
       moment.locale('en');
       productsquestion.jalaaliCreatedDate = momentJalaali(productsquestion.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -55,21 +50,8 @@ module.exports = {
       }
       
     }
-    // let tags = JSON.parse(summary.tags);
-    // for (let tag of tags) {
-    //   let tagElement = await Tags.findOne({
-    //     id: tag.id
-    //   });
-    //   tagsArray.push(tagElement);
-    // }
-
-    return ({
-      id: inputs.id,
-      summary,
-      productsquestions,
-      tags: []
-    });
-
+    return productsquestions;
   }
+
 
 };
