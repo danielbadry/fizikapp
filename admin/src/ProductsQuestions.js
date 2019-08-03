@@ -128,7 +128,10 @@ class ProductsQuestions extends React.Component {
                      
                     <ListItem key={i} alignItems="flex-start">
                       <ListItemAvatar>
-                        <Avatar title={m.userInfo.firstName + ' ' + m.userInfo.lastName} alt={m.userInfo.firstName + ' ' + m.userInfo.lastName} src={m.userInfo.thumbnail} />
+                        <Avatar 
+                          title={m.userInfo.firstName + ' ' + m.userInfo.lastName} 
+                          alt={m.userInfo.firstName + ' ' + m.userInfo.lastName} 
+                          src={m.userInfo.thumbnail} />
                       </ListItemAvatar>
                       <ListItemText
                         primary={m.message}
@@ -139,7 +142,10 @@ class ProductsQuestions extends React.Component {
                               variant="body2"
                               color="textPrimary"
                             >
-                              {m.userInfo.firstName + ' ' + m.userInfo.lastName}
+                              <Link href={m.userInfo.url}>
+                                {m.userInfo.firstName + ' ' + m.userInfo.lastName}
+                              </Link>
+                              
                             </Typography>
                             &nbsp;
                             {m.jalaaliUserFriendlyCreatedDate} 

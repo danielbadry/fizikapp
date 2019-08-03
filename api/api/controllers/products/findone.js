@@ -45,6 +45,7 @@ module.exports = {
       });
       productsquestion.userInfo = user[0];
       productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + productsquestion.userInfo.thumbnail;
+      productsquestion.userInfo.url = 'http://localhost:3000/#/users/' + productsquestion.userInfo.id + '/show';
     }
     // let tags = JSON.parse(summary.tags);
     // for (let tag of tags) {
