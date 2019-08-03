@@ -107,10 +107,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 //     formData.append("thumbnail", document.getElementById("thumbnail").files[0]);
                 Object.keys(params.data).forEach(function (item) {
                     if(item != 'thumbnail')
-                        formData.append(item, params.data[item]);
+                        if (typeof(params.data[item]) != 'object')
+                            formData.append(item, params.data[item]);
+                        else
+                            formData.append(item, JSON.stringify(params.data[item]));
                 });
                 options.body = formData ;//JSON.stringify({'name':'milad'});
-                console.info('body:', options.body);
+                console.info('formData:', formData);
                 break;
             case DELETE:
                 url = `${apiUrl}/${resource}/${params.id}`;

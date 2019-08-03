@@ -31,7 +31,8 @@ module.exports = {
         where : {isDeleted : false}
     });
 
-    for (let tag of summary.tags) {
+    let tags = JSON.parse(summary.tags);
+    for (let tag of tags) {
       let tagElement = await Tags.findOne({
         id: tag.id
       });
@@ -42,7 +43,7 @@ module.exports = {
       id: inputs.id,
       summary,
       productsquestions,
-      tagsArray
+      tags: tagsArray
     });
 
   }

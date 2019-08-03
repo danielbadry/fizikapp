@@ -24,6 +24,7 @@ class CategoryComponent extends React.Component {
           tempObj = {};
           tempObj.label = item.name;
           tempObj.value = item.id;
+          tempObj.id = item.id;
           finalList.push(tempObj);
         }
       )
@@ -41,7 +42,7 @@ class CategoryComponent extends React.Component {
 
     return (
       <Field 
-        name="categories" 
+        name="category" 
         onChange={handleSubmit} 
         component={ReduxCategoryFormSelect} 
         options={this.state.allCategories}

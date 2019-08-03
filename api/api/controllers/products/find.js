@@ -30,8 +30,9 @@ module.exports = {
         moment.locale('fa');
         product.jalaaliUserFriendlyCreatedDate = moment(product.createdAt).fromNow();   
         //  tidy up tags
-        
-        for (let tag of product.tags) {
+        let tags = JSON.parse(product.tags);
+        tagsArray = [];
+        for (let tag of tags) {
           let tagElement = await Tags.findOne({
             id: tag.id
           });

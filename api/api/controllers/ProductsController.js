@@ -7,6 +7,7 @@
 
 module.exports = {
 
+  
   create: async function(req,res) {
     await Products
       .create({
@@ -15,8 +16,10 @@ module.exports = {
         price:req.param('price'),
         title:req.param('title'),
         tags:req.param('tags'),
-        isEnable:req.param('isEnable'),
-        publishDate:req.param('publishDate'),
+        category:req.param('category'),
+        isEnable: true,
+        createdAt : await sails.helpers.dateParse(),
+        updatedAt : await sails.helpers.dateParse()
       })
       .then(function(){
         req.file('file').upload(function(err, uploadedFiles) {
@@ -24,10 +27,12 @@ module.exports = {
             return res.serverError(err);
         });
       })
-      .then (function() {
-        return res.json({
-          name:'bye'
-        });
+      .then (async function() {
+        let allp = await Products
+        .find()
+        .sort('createdAt DESC')
+        .limit(1);
+        return res.json(allp[0]);
       });
   },
 

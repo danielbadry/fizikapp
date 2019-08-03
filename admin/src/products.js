@@ -32,7 +32,7 @@ export const ProductCreate = (props) => (
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
             
-            <CategoryComponent source="categories" label="categories" />
+            <CategoryComponent source="category" label="category" />
              
             <NumberInput source="price" label="price" />
             {/*

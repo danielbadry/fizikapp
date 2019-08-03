@@ -24,6 +24,7 @@ class TagForm extends React.Component {
           tempObj = {};
           tempObj.label = item.name;
           tempObj.value = item.id;
+          tempObj.id = item.id;
           finalList.push(tempObj);
         }
       )

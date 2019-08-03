@@ -38,7 +38,14 @@ module.exports = {
     },
     
     tags :{
-      type: 'string',
+      type: 'json',
+      columnType: 'array',
+      required : false
+    },
+    
+    category :{
+      type: 'json',
+      columnType: 'array',
       required : false
     },
     
@@ -72,21 +79,6 @@ module.exports = {
       required : false
     },
     
-    publishDate :{
-      type: 'string',
-      required : false
-    },
-
   },
-
-  afterCreate: async function(valuesToSet, proceed) {
-      await Audit.create(
-        {
-          action:'insert',
-          model:'prodcut'
-        }, function(err, newUser) {
-         return proceed();
-      }, { fetch: true });   
-  }
 
 };
