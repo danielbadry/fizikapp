@@ -83,7 +83,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions {...props} />
+                <ProductsQuestions />
             </Tab>
 
             <Tab label="reports" path="report" >

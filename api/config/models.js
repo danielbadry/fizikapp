@@ -71,6 +71,7 @@ module.exports.models = {
   attributes: {
     createdAt: { type: 'string', autoCreatedAt: true, columnType: 'datetime' },
     updatedAt: { type: 'string', autoUpdatedAt: true, columnType: 'datetime' },
+    isDeleted: { type: 'boolean', defaultsTo: false },
     id: { type: 'string', columnName: '_id' },
     //--------------------------------------------------------------------------
     //  /\   Using MongoDB?

@@ -22,17 +22,17 @@ import Di from './d';
 class ProductsQuestions extends React.Component {
     
     constructor (props) {
-
+      
       super(props);
       this.state = {
         open: false,
-        productsQuestions: [],
+        productsQuestions: this.props.record.productsquestions,
       }
 
     }
     
     componentDidMount () {
-      this.fetchProductsQuestions();
+      // console.info('propsss:', this.props);
     }
 
     sendReplyToQuestion = () => {
@@ -50,7 +50,7 @@ class ProductsQuestions extends React.Component {
         return response.json();
       })
       .then((myJson) => {
-          this.fetchProductsQuestions();
+          // this.fetchProductsQuestions();
       })
       .catch((e) => {
           // showNotification('Error: comment not approved', 'warning')
@@ -73,21 +73,21 @@ class ProductsQuestions extends React.Component {
       });
     }
 
-    fetchProductsQuestions = () => {
-      fetch('http://localhost:1337/productsquestions', { method: 'GET', headers: {}})
-      .then((response) => {
-          return response.json();
-      })
-      .then((myJson) => {
-        this.handleClose();  
-        this.setState((state, props) => {
-              return {productsQuestions: myJson};
-          });
-      })
-      .catch((e) => {
-          // showNotification('Error: comment not approved', 'warning')
-      });
-    }
+    // fetchProductsQuestions = () => {
+    //   fetch('http://localhost:1337/productsquestions/', { method: 'GET', headers: {}})
+    //   .then((response) => {
+    //       return response.json();
+    //   })
+    //   .then((myJson) => {
+    //     this.handleClose();  
+    //     this.setState((state, props) => {
+    //           return {productsQuestions: myJson};
+    //       });
+    //   })
+    //   .catch((e) => {
+    //       // showNotification('Error: comment not approved', 'warning')
+    //   });
+    // }
     
     render () {
 
@@ -139,10 +139,10 @@ class ProductsQuestions extends React.Component {
                               variant="body2"
                               color="textPrimary"
                             >
-                              Ali Connors
+                              {m.userInfo.firstName + ' ' + m.userInfo.lastName}
                             </Typography>
                             
-                            {" — 2 days ago - "} 
+                            {m.jalaaliUserFriendlyCreatedDate} 
                             
                             {/* start */}
                             <React.Fragment>
@@ -153,7 +153,7 @@ class ProductsQuestions extends React.Component {
                               >
                                   reply
                               </Link>
-                              <div>milad</div>
+                              {/* <div>milad</div> */}
                               <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
                                 <DialogTitle id="form-dialog-title">reply</DialogTitle>
                                 <DialogContent>
