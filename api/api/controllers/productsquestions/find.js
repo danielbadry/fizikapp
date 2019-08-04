@@ -44,9 +44,9 @@ module.exports = {
         productsquestion.userInfo.url = 'http://localhost:3000/#/users/' + productsquestion.userInfo.id + '/show';
       } else {
         productsquestion.userInfo = {};
-        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + '5d3c66fc823c3d1be8f529d3.jpg';
-        productsquestion.userInfo.firstName = 'admin';
-        productsquestion.userInfo.lastName = 'khan';
+        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + 'IMG_20190804_103448_895.jpg';
+        productsquestion.userInfo.firstName = 'iman';
+        productsquestion.userInfo.lastName = 'arghamy';
       }
       
     }

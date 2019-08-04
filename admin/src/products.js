@@ -13,6 +13,7 @@ import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
 import ProductsQuestions from './ProductsQuestions';
+import ProductsComments from './ProductsComments';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
@@ -61,7 +62,7 @@ export const ProductEdit = (props) => (
             <LongTextInput source="teaser" />
             <DateInput label="Publication date" source="published_at" />
             <BooleanInput
-              source="isEnable"
+              source="isEnabled"
               label="enable"
             />
         </SimpleForm>
@@ -91,13 +92,7 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="comments" path="comments">
-                <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
-                    <Datagrid>
-                        <TextField source="body" />
-                        <DateField source="created_at" />
-                        <EditButton />
-                    </Datagrid>
-                </ReferenceManyField>
+            <ProductsComments />
             </Tab>
 
             <Tab label="quiz" path="quiz">
@@ -122,7 +117,7 @@ export const ProductsList = props => (
                 </SingleFieldList>
             </ArrayField>
             <TextField source="price" label="Price" />
-            <BooleanField source="isEnable" label="Enable" />
+            <BooleanField source="isEnabled" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
             <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />

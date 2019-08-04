@@ -10,7 +10,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 class ProductReports extends React.Component {
     constructor (props) {
         super(props);
+        console.info('props:', props);
         this.state = {
+            isEnabled : this.props.record.summary.isEnabled,
             reports : [
                 {
                     id : 1,
@@ -27,7 +29,31 @@ class ProductReports extends React.Component {
             ]
         }
     }
-    render() {
+
+    handleEnableDisableProduct = () => {
+        const dataRecord = {
+            isEnabled: !this.state.isEnabled
+        }
+        fetch('http://localhost:1337/products/' + this.props.record.id , { 
+            method: 'PUT', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.setState((state, props) => {
+                return {isEnabled: !this.state.isEnabled};
+            });
+            console.info('result:', myJson);
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+      }
+    
+      render() {
         return (
             <React.Fragment>
                 <Table>
@@ -55,7 +81,13 @@ class ProductReports extends React.Component {
                     </TableBody>
                 </Table>
                 <Tooltip title="enable / disable">
-                    <Switch value="checkedC" inputProps={{ 'aria-label': 'primary checkbox' }} />
+                    <Switch 
+                        value="checkedC" 
+                        inputProps={{ 'aria-label': 'primary checkbox' }} 
+                        checked={this.state.isEnabled}
+                        name="reportAuthorization"
+                        onChange={this.handleEnableDisableProduct.bind(this)}
+                        />
                 </Tooltip>
             </React.Fragment>
         );
