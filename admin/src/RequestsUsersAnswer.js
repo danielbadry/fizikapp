@@ -12,6 +12,7 @@ import Thumbnail from './ThumbnailImage';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 class RequestsUsersAnswer extends React.Component {
     constructor (props) {
@@ -40,7 +41,10 @@ class RequestsUsersAnswer extends React.Component {
                         >
                         <ListItem button onClick={this.handleClick.bind(this)}>
                             <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                <Avatar 
+                                    alt="Remy Sharp" 
+                                    src={userAnswer.thumbnail}
+                                />
                             </ListItemAvatar>
                             <ListItemText
                                 primary={userAnswer.title}
@@ -51,16 +55,22 @@ class RequestsUsersAnswer extends React.Component {
                                         variant="body2"
                                         color="textPrimary"
                                     >
-                                        <span>esm{userAnswer.name}</span>
+                                        <span>
+                                        <Link href={userAnswer.userInfo.url}>
+                                            {userAnswer.userInfo.fullName}
+                                        </Link>
+                                        </span>
                                     </Typography>
-                                    {userAnswer.message}
+                                    <div>
+                                        {userAnswer.message}
+                                    </div>
                                     </React.Fragment>
                                 }
                             />
-                            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                            {/* {this.state.open ? <ExpandLess /> : <ExpandMore />} */}
                             </ListItem>
                         
-                        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                        {/* <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                             <ListItem button>
                                 <ListItemIcon>
@@ -69,7 +79,7 @@ class RequestsUsersAnswer extends React.Component {
                                 <ListItemText primary="Starred" />
                             </ListItem>
                             </List>
-                        </Collapse>
+                        </Collapse> */}
                     </React.Fragment>
                 )}
 

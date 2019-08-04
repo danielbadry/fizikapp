@@ -28,9 +28,17 @@ module.exports = {
       id: inputs.id,
       isDeleted : false
     });
-    request.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
-    request.userName = 'milad';  
-    request.name = 'milad khanmohammadi';  
+    
+    let user = await Users.find({
+      where : {
+        id: request.userId,
+        isDeleted: false
+      }
+    });
+
+    request.userInfo = user[0];
+    request.thumbnail = "http://localhost:1337/uploads/" + request.userInfo.thumbnail;
+    request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
     request.isResponsed = true;  
     moment.locale('en');
     request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -42,6 +50,17 @@ module.exports = {
       parentId: inputs.id,
       userId: {'!=' : null}
     });
+    for (let requestUserAnswer of request.usersAnswers) {
+      let user = await Users.find ({
+        where : {
+          id : requestUserAnswer.userId
+        }
+      });
+      requestUserAnswer.userInfo = user[0];
+      requestUserAnswer.userInfo.fullName = requestUserAnswer.userInfo.firstName + ' ' + requestUserAnswer.userInfo.lastName;
+      requestUserAnswer.userInfo.url = 'http://localhost:3000/#/users/' + requestUserAnswer.userInfo.id + '/show';
+      requestUserAnswer.thumbnail = "http://localhost:1337/uploads/" + requestUserAnswer.userInfo.thumbnail;
+    }
     
     // fetch admin answer
     request.adminAnswer = await Requests.find({

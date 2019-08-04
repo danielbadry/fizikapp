@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { push } from 'react-router-redux';
 import { CREATE, withDataProvider} from 'react-admin';
 import MyTextField from './MyTextfield';
+import { UPDATE } from 'ra-core';
 
 class RequestsResponseBox extends React.Component {
     
@@ -29,12 +30,11 @@ class RequestsResponseBox extends React.Component {
         const { dataProvider, dispatch, record } = this.props;
         const ResponseRecord = { 
             message: this.state.response,
-            parentId: record.id
+            parentId: record.id,
         };
-        dataProvider(CREATE, 'requests', { id: record.id, data: ResponseRecord })
+        dataProvider(UPDATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
-               
-               push('/requests');
+               dispatch(push('/requests'));
             })
             .catch((e) => {
                

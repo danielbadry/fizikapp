@@ -14,6 +14,11 @@ module.exports = {
       required : false
     },
     
+    adminAnswer :{
+      type: 'string',
+      required : false
+    },
+    
     title :{
       type: 'string',
       required : false

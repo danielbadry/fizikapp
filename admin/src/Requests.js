@@ -14,12 +14,15 @@ export const RequestShow = (props) => (
         <TabbedShowLayout>
             
             <Tab label="question">
-                <TextField source="thumbnail" label="title" />
-                <TextField source="message" />
+                <TextField source="title" label="title" />
+                <TextField source="message" label="message" />
+                <TextField source="userInfo.userName" label="user name" />
+                <TextField source="userInfo.fullName" label="Name" />
+                <Thumbnail source="thumbnail" label="thumbnail" />
             </Tab>
             
             <Tab label="users answer" path="usersanswer" >
-                <RequestsUsersAnswer {...props} />
+                <RequestsUsersAnswer />
             </Tab>
             
         </TabbedShowLayout>
@@ -31,8 +34,9 @@ const RequestPanel = ({ id, record, resource }) => (
         <p><strong>Question:</strong></p>
         <div>{record.message}</div>
         {
-            !record.isResponsed ? <RequestsResponseBox record={record} /> : 
-            
+            (record.isResponsed == '') ? 
+                <RequestsResponseBox record={record} /> 
+            : 
             <div>
                 <p><strong>Admin answer:</strong></p>
                 {record.adminAnswer[0].message}
@@ -45,8 +49,8 @@ export const RequestList = props => (
     <List {...props}>
         <Datagrid rowClick="show" expand={<RequestPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="name" />
-            <TextField source="userName" label="user name" />
+            <TextField source="userInfo.fullName" label="name" />
+            <TextField source="userInfo.userName" label="user name" />
             <TextField source="title" label="title" />
             <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
             <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />

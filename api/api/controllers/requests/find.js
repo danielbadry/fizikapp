@@ -26,11 +26,16 @@ module.exports = {
       parentId: null,
       isDeleted : false
     });
-    if (allRequests && allRequests.length) {
+    
       for (let request of allRequests) {
-        request.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
-        request.userName = 'milad';  
-        request.name = 'milad khanmohammadi';  
+        let user = await Users.find ({
+          where : {
+            id : request.userId
+          }
+        });
+        request.userInfo = user[0];
+        request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
+        request.thumbnail = "http://localhost:1337/uploads/" + request.userInfo.thumbnail;
           
         moment.locale('en');
         request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -48,16 +53,12 @@ module.exports = {
         request.adminAnswer = await Requests.find({
           isDeleted: false,
           parentId: request.id,
-          userId: null
+          userId: ''
         });
 
-        (request.adminAnswer.length == 0) ? request.isResponsed = false  : request.isResponsed = true;
+        (request.adminAnswer == '') ? request.isResponsed = false  : request.isResponsed = true;
       }
       return allRequests;
-    }
-      
-    else
-      return [];
 
   }
 

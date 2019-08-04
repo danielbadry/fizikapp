@@ -26,15 +26,15 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
-    return await Requests.create({
+ 
+      await Requests.create({
         createdAt : await sails.helpers.dateParse(),
         updatedAt : await sails.helpers.dateParse(),
         parentId : inputs.parentId,
         message : inputs.message,
         isDeleted : false
-    }).fetch();
-
+    });
+      return await Requests.find();
   }
 
 
