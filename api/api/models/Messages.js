@@ -25,12 +25,7 @@ module.exports = {
       defaultsTo : false
     },
     
-    sender :{
-      type: 'string',
-      required : false
-    },
-    
-    receiver :{
+    userId :{
       type: 'string',
       required : false
     },
