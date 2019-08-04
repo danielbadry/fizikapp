@@ -80,7 +80,7 @@ class userSignupSensitiveLocation extends Component {
         {
           mapData: irAll,
           data: data,
-          name: "",
+          name: "iran",
           dataLabels: {
             enabled: false,
             format: "{point.name}"

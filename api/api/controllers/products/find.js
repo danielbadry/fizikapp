@@ -29,17 +29,18 @@ module.exports = {
         product.jalaaliCreatedDate = momentJalaali(product.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
         moment.locale('fa');
         product.jalaaliUserFriendlyCreatedDate = moment(product.createdAt).fromNow();   
+        
         //  tidy up tags
         // let tags = JSON.parse(product.tags);
-        // tagsArray = [];
-        // for (let tag of tags) {
-        //   let tagElement = await Tags.findOne({
-        //     id: tag.id
-        //   });
-        //   tagsArray.push(tagElement);
-        // }
-        // return tagsArray;
-        // product.tagsArray = tagsArray;
+        tagsArray = [];
+        for (let tag of product.tags) {
+          let tagElement = await Tags.findOne({
+            id: tag
+          });
+          tagsArray.push(tagElement);
+        }
+        
+        product.tagsArray = tagsArray;
     }
     
     return allProducts;

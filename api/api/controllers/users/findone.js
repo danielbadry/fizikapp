@@ -11,7 +11,9 @@ module.exports = {
 
 
   inputs: {
-
+    id: {
+      type: 'string'
+    }
   },
 
 

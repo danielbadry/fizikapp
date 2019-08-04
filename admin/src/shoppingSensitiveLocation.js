@@ -82,7 +82,7 @@ class shoppingSensitiveLocation extends Component {
           data: data,
           name: "IRAN",
           dataLabels: {
-            enabled: true,
+            enabled: false,
             format: "{point.name}"
           }
         }
