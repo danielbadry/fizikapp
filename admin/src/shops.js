@@ -42,10 +42,10 @@ export const ShopsList = props => (
         <List {...props}>
             <Datagrid rowClick="show">
                 <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="userName" label="username" />
-                <TextField source="name" label="name" />
+                <TextField source="userInfo.userName" label="username" />
+                <TextField source="userInfo.fullName" label="name" />
                 <TextField source="type" label="type" />
-                <TextField source="amount" label="amount" />
+                <TextField source="price" label="amount" />
                 <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
                 <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
             </Datagrid>

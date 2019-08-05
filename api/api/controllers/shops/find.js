@@ -23,12 +23,25 @@ module.exports = {
 
     let allShops = await Shops.find();
     
-    for (let shops of allShops) { 
-      shops.thumbnail = "http://localhost:1337/uploads/" + shops.thumbnail;
+    for (let shop of allShops) {
+      let user = await Users.find({
+        where : {
+          id : shop.userId
+        }
+      });
+      shop.userInfo = user[0];
+      shop.userInfo.fullName = shop.userInfo.firstName + ' ' + shop.userInfo.lastName;
+      shop.thumbnail = "http://localhost:1337/uploads/" + shop.userInfo.thumbnail;
+      let shoppingPlanName = await Shoppingplans.find({
+        id : shop.shoppingPlanId
+      });
+      shoppingPlanName = shoppingPlanName[0];
+      shop.type = shoppingPlanName.type;
+      shop.price = shoppingPlanName.secondPrise;
       moment.locale('en');
-      shops.jalaaliCreatedDate = momentJalaali(shops.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      shop.jalaaliCreatedDate = momentJalaali(shop.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
-      shops.jalaaliUserFriendlyCreatedDate = moment(shops.createdAt).fromNow();
+      shop.jalaaliUserFriendlyCreatedDate = moment(shop.createdAt).fromNow();
     }
 
     return allShops;
