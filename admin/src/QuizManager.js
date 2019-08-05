@@ -401,11 +401,11 @@ class QuizManager extends React.Component {
                         </ListItemIcon>
                         <ListItemText primary={item.question} />
                         
-                        <Tooltip title="visible">
+                        {/* <Tooltip title="visible">
                             <IconButton>
                                 <VisibilityOffIcon />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                         
                         <Tooltip 
                             title="add option"
