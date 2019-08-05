@@ -48,14 +48,18 @@ module.exports = {
           parentId: request.id,
           userId: {'!=' : null}
         });
-        
-        // fetch admin answer
-        request.adminAnswer = await Requests.find({
-          isDeleted: false,
-          parentId: request.id,
-          userId: ''
-        });
 
+        for (let requestUserAnswer of request.usersAnswers) {
+          let userAnswerUser = await Users.find ({
+            where : {
+              id : requestUserAnswer.userId
+            }
+          });
+          requestUserAnswer.userInfo = userAnswerUser[0];
+          requestUserAnswer.userInfo.fullName = requestUserAnswer.userInfo.firstName + ' ' + requestUserAnswer.userInfo.lastName;
+          requestUserAnswer.thumbnail = "http://localhost:1337/uploads/" + requestUserAnswer.userInfo.thumbnail;
+        }
+        
         (request.adminAnswer == '') ? request.isResponsed = false  : request.isResponsed = true;
       }
       return allRequests;

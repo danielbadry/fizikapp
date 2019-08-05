@@ -25,12 +25,12 @@ class RequestsResponseBox extends React.Component {
           });
     }
     
-    handleClick = () => {
-
+    sendAdminResponse = () => {
+        console.info('sendAdminResponse happend');
         const { dataProvider, dispatch, record } = this.props;
         const ResponseRecord = { 
-            message: this.state.response,
-            parentId: record.id,
+            adminAnswer: this.state.response,
+            id: record.id,
         };
         dataProvider(UPDATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
@@ -38,7 +38,7 @@ class RequestsResponseBox extends React.Component {
             })
             .catch((e) => {
                
-            });
+        });
     }
 
     render () {
@@ -55,7 +55,7 @@ class RequestsResponseBox extends React.Component {
                 <br />
                 <Button 
                     label="Approve" 
-                    onClick={this.handleClick} 
+                    onClick={this.sendAdminResponse} 
                     >
                     send answer
                 </Button>

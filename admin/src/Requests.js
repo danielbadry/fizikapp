@@ -39,7 +39,7 @@ const RequestPanel = ({ id, record, resource }) => (
             : 
             <div>
                 <p><strong>Admin answer:</strong></p>
-                {record.adminAnswer[0].message}
+                {record.adminAnswer}
             </div>
     }
     </React.Fragment>

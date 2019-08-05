@@ -12,6 +12,10 @@ module.exports = {
   inputs: {
     id: {
       type: 'string'
+    },
+    
+    adminAnswer: {
+      type: 'string'
     }
   },
 
@@ -27,7 +31,7 @@ module.exports = {
       id: inputs.id
     })
     .set({
-      adminAnswer: 'javab'
+      adminAnswer: inputs.adminAnswer
     });
 
     let user = await Users.find({
@@ -35,8 +39,11 @@ module.exports = {
         id : result.userId
       }
     });
-    
-    result.thumbnail = "http://localhost:1337/uploads/" + user[0].thumbnail;
+    user = user[0];
+    user.fullName = user.firstName + ' ' + user.lastName;
+    user.thumbnail = "http://localhost:1337/uploads/" + user.thumbnail;
+    result.userInfo = user;
+    result.thumbnail = user.thumbnail;
     result.isResponsed = true;  
     
     moment.locale('en');
