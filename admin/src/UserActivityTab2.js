@@ -25,11 +25,11 @@ class AlignItemsList extends React.Component {
         return (
         <List>
             <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                     <Avatar 
                         alt="Remy Sharp" 
                         src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                 primary="Number of watched videos"
                 secondary={
@@ -51,11 +51,11 @@ class AlignItemsList extends React.Component {
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
                 
-                    <ListItemAvatar>
+                    {/* <ListItemAvatar>
                         <Avatar 
                             alt="Remy Sharp" 
                             src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                    </ListItemAvatar>
+                    </ListItemAvatar> */}
                     <ListItemText
                     primary="Number of invitations"
                     secondary={
@@ -92,11 +92,11 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                     <Avatar 
                         alt="Total online time" 
                         src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                 primary="Number of registered device"
                 
@@ -120,11 +120,11 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                     <Avatar 
                         alt="Total online time" 
                         src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                 primary="Total online time"
               
@@ -133,11 +133,11 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                     <Avatar 
                         alt="Total online time" 
                         src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                 primary="Number of passed quizes"
                 secondary={
@@ -161,11 +161,11 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                     <Avatar 
                         alt="Total online time" 
                         src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText
                 primary="Shopping level"
                 secondary={
