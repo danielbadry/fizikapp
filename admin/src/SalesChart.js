@@ -69,7 +69,7 @@ class SalesChart extends React.Component {
 
   render() {
     return (
-      <div id="salesChart" style={{ width: "100%", height: "500px" }}></div>
+      <div id="salesChart" style={{ width: "40%", height: "500px", display:"inline-block" }}></div>
     );
   }
 }

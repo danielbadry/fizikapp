@@ -27,18 +27,19 @@ export default () => (
         {/* </Card> */}
 
         <Card>
-            <CardHeader title="Sales Chart" />
+            <CardHeader title="Sales Chart and Signup Chart" />
             <CardContent>
                 <SalesChart />
+                <SignUpChart />
             </CardContent>
         </Card>
         
-        <Card>
+        {/* <Card>
             <CardHeader title="Sign up Chart" />
             <CardContent>
                 <SignUpChart />
             </CardContent>
-        </Card>
+        </Card> */}
         
         <Card>
             <CardHeader title="Online Users Chart" />

@@ -71,7 +71,7 @@ class SignUpChart extends React.Component {
 
   render() {
     return (
-      <div id="signChart" style={{ width: "50%", height: "500px" }}></div>
+      <div id="signChart" style={{ width: "40%", height: "500px", display:"inline-block" }}></div>
     );
   }
 }
