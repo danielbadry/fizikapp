@@ -10,7 +10,21 @@ module.exports = {
 
 
   inputs: {
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
   },
 
 
@@ -19,9 +33,13 @@ module.exports = {
   },
 
 
-  fn: async function (req, res) {
-
-    let allUsers = await Users.find();
+  fn: async function (inputs) {
+    let finalData = {};
+    let dataLength = await Users.find();
+    let allUsers = await Users.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     for (let user of allUsers) {
         user.fullName = user.firstName + ' ' + user.lastName;
 
@@ -37,7 +55,9 @@ module.exports = {
         user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
         user.thumbnail = "http://localhost:1337/uploads/" + user.id + '.jpg';
     }
-    return allUsers;
+    finalData.dataLength = dataLength.length;
+    finalData.data = allUsers;
+    return finalData;
 
   }
 

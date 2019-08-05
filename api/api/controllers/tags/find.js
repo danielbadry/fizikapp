@@ -11,7 +11,21 @@ module.exports = {
 
 
   inputs: {
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
   },
 
 
@@ -21,15 +35,22 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    let allTags = await Tags.find();
+    let finalData = {};
+    let dataLength = await Tags.find();
+
+    let allTags = await Tags.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     for (let tag of allTags) {
       moment.locale('en');
       tag.jalaaliCreatedDate = momentJalaali(tag.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
       tag.jalaaliUserFriendlyCreatedDate = moment(tag.createdAt).fromNow();
   }
-
-  return allTags;
+  finalData.dataLength = dataLength.length;
+  finalData.data = allTags;
+  return finalData;
   }
 
 

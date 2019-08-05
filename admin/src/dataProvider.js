@@ -56,7 +56,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         const options = {};
         switch (type) {
             case GET_LIST: {
-                // const { page, perPage } = params.pagination;
                 const { page, perPage } = params.pagination;
                 const { field, order } = params.sort;
                 const rowId = params.rowId;
@@ -155,8 +154,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 //     );
                 // }
                 return {
-                    data: json,
-                    total: response.json.length
+                    data: json.data,
+                    total: json.dataLength
                 };
             case CREATE:
                 return { data: { ...params.data, id: json.id } };

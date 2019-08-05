@@ -11,7 +11,21 @@ module.exports = {
 
 
   inputs: {
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
   },
 
 
@@ -21,11 +35,15 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
+    let finalData = {};
+    let dataLength = await Requests.find();
     let allRequests = await Requests.find({
       parentId: null,
       isDeleted : false
-    });
+    })
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     
       for (let request of allRequests) {
         let user = await Users.find ({
@@ -62,8 +80,9 @@ module.exports = {
         
         (request.adminAnswer == '') ? request.isResponsed = false  : request.isResponsed = true;
       }
-      return allRequests;
-
+      finalData.dataLength = dataLength.length;
+      finalData.data = allRequests;
+      return finalData;
   }
 
 };

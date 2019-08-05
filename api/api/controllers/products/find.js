@@ -10,7 +10,21 @@ module.exports = {
 
 
   inputs: {
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
   },
 
 
@@ -20,8 +34,13 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    let finalData = {};
     let tagsArray = [];
-    let allProducts = await Products.find();
+    let dataLength = await Products.find();
+    let allProducts = await Products.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     for (let product of allProducts) {
         // product.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
         product.hasQuiz = false;
@@ -32,18 +51,20 @@ module.exports = {
         
         //  tidy up tags
         // let tags = JSON.parse(product.tags);
-        tagsArray = [];
-        for (let tag of product.tags) {
-          let tagElement = await Tags.findOne({
-            id: tag
-          });
-          tagsArray.push(tagElement);
-        }
+        // tagsArray = [];
+        // for (let tag of product.tags) {
+        //   let tagElement = await Tags.findOne({
+        //     id: tag
+        //   });
+        //   tagsArray.push(tagElement);
+        // }
         
-        product.tagsArray = tagsArray;
+        // product.tagsArray = tagsArray;
     }
-    
-    return allProducts;
+
+    finalData.dataLength = dataLength.length;
+    finalData.data = allProducts;
+    return finalData;
 
   }
 

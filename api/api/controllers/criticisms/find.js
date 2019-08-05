@@ -11,7 +11,21 @@ module.exports = {
 
 
   inputs: {
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
   },
 
 
@@ -21,8 +35,12 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
-    let allCriticisms = await Criticisms.find();
+    let finalData = {};
+    let dataLength = await Criticisms.find();
+    let allCriticisms = await Criticisms.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     
     for (let criticism of allCriticisms) { 
       criticism.isResponsed = false;
@@ -31,8 +49,9 @@ module.exports = {
       moment.locale('fa');
       criticism.jalaaliUserFriendlyCreatedDate = moment(criticism.createdAt).fromNow();
     }
-
-    return allCriticisms;
+    finalData.dataLength = dataLength.length;
+    finalData.data = allCriticisms;
+    return finalData;
   }
 
 };

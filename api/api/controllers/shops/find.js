@@ -10,6 +10,22 @@ module.exports = {
 
 
   inputs: {
+    
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
+
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    }
 
   },
 
@@ -20,8 +36,11 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
-    let allShops = await Shops.find();
+    let finalData = {};
+    let allShops = await Shops.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
     
     for (let shop of allShops) {
       let user = await Users.find({
@@ -44,7 +63,10 @@ module.exports = {
       shop.jalaaliUserFriendlyCreatedDate = moment(shop.createdAt).fromNow();
     }
 
-    return allShops;
+    
+    finalData.dataLength = 45;
+    finalData.data = allShops;
+    return finalData;
 
   }
 
