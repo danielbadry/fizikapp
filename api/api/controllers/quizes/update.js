@@ -33,6 +33,10 @@ module.exports = {
       type: 'boolean'
     },
     
+    isOpen : {
+      type: 'boolean'
+    },
+    
   },
 
   exits: {
@@ -90,7 +94,8 @@ module.exports = {
       id: inputs.id,
     })
     .set({
-      options : options
+      options : options,
+      isOpen: inputs.isOpen
     });
 
     return result;

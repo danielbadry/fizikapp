@@ -111,6 +111,48 @@ class QuizManager extends React.Component {
         });
     }
     
+    expandLess = (itemId) => {
+        console.info('itemId', itemId);
+        const dataRecord = {
+            isOpen: false
+        }
+        fetch('http://localhost:1337/quizes/' + itemId , { 
+            method: 'PUT', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
+    expandMore = (itemId) => {
+        console.info('itemId', itemId);
+        const dataRecord = {
+            isOpen: true
+        }
+        fetch('http://localhost:1337/quizes/' + itemId , { 
+            method: 'PUT', 
+            body : JSON.stringify(dataRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            this.fetchQuizes();
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+    }
+    
     insertQuizOption = () => {
         const dataRecord = {
             question: this.state.text
@@ -382,10 +424,15 @@ class QuizManager extends React.Component {
                                 <DeleteIcon />
                             </IconButton>
                         </Tooltip>
-                        {this.state.open ? <ExpandLess onClick={this.handleClick.bind(this)} /> : <ExpandMore onClick={this.handleClick.bind(this)} />}
+                        {   item.isOpen 
+                            ? 
+                            <ExpandLess onClick={this.expandLess.bind(this, item.id)} /> 
+                            : 
+                            <ExpandMore onClick={this.expandMore.bind(this, item.id)} />
+                        }
                     </ListItem>
                     <Collapse 
-                        in={this.state.open} 
+                        in={item.isOpen}
                         timeout="auto" 
                         unmountOnExit 
                         >
@@ -425,20 +472,20 @@ class QuizManager extends React.Component {
                         </Tooltip>
                     }
 
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Tooltip
-                                                    title="delete option"
-                                                    onClick={() => this.deleteThisOption(item.id,option.id, 'delete', true)}
-                                                    >
-                                                    <IconButton aria-label="Delete">
-                                                        <DeleteIcon fontSize="small" />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </TableCell>
-                                        </TableRow>
-                                    )
-                                )}
+                        </TableCell>
+                        <TableCell align="right">
+                            <Tooltip
+                                title="delete option"
+                                onClick={() => this.deleteThisOption(item.id,option.id, 'delete', true)}
+                                >
+                                <IconButton aria-label="Delete">
+                                    <DeleteIcon fontSize="small" />
+                                </IconButton>
+                            </Tooltip>
+                        </TableCell>
+                    </TableRow>
+                    )
+                )}
 
                             </TableBody>
                         </Table>

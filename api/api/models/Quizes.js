@@ -29,6 +29,11 @@ module.exports = {
       columnType : 'array'
     },
     
+    isOpen :{
+      type: 'json',
+      columnType : 'array'
+    },
+    
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

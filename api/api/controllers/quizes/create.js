@@ -19,6 +19,11 @@ module.exports = {
 
     productId :{
       type : 'string'
+    },
+    
+    isOpen :{
+      type : 'boolean',
+      defaultsTo: true
     }
   },
 
