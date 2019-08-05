@@ -5,7 +5,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
 
-
+import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
 import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
@@ -102,10 +102,11 @@ export const ProductShow = (props) => (
         </TabbedShowLayout>
     </Show>
 );
+const ProductPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
 export const ProductsList = props => (
     
-    <List {...props}>
+    <List {...props} pagination={<ProductPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />

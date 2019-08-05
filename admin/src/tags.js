@@ -3,7 +3,8 @@ import { List, Create, Edit, SimpleForm, DisabledInput,
          TextInput,Datagrid, TextField, EditButton
         }
          from 'react-admin';
-         
+import { Pagination } from 'react-admin';
+
 export const TagCreate = (props) => (
     <Create {...props}>
         <SimpleForm redirect="list">
@@ -21,9 +22,9 @@ export const TagEdit = (props) => (
     </Edit>
 );
 
-
+const TagPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 export const TagsList = props => (
-    <List {...props}>
+    <List {...props} pagination={<TagPagination />}>
         <Datagrid>
             <TextField source="name" label="Name" />
             <TextField source="count" label="Count" />

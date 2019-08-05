@@ -8,6 +8,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 import Thumbnail from './ThumbnailImage';
 import RequestsUsersAnswer from './RequestsUsersAnswer';
 import RequestsResponseBox from './RequestsResponseBox';
+import { Pagination } from 'react-admin';
 
 export const RequestShow = (props) => (
     <Show {...props}>
@@ -45,8 +46,10 @@ const RequestPanel = ({ id, record, resource }) => (
     </React.Fragment>
 );
 
+const RequestPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+
 export const RequestList = props => (
-    <List {...props}>
+    <List {...props} pagination={<RequestPagination />}>
         <Datagrid rowClick="show" expand={<RequestPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="userInfo.fullName" label="name" />

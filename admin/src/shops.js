@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Thumbnail from './ThumbnailImage';
+import { Pagination } from 'react-admin';
 
 import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
     List, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
@@ -37,9 +38,11 @@ export const shopShow = (props) => (
     </Show>
 );
 
+const ShopPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+
 export const ShopsList = props => (
     <React.Fragment>
-        <List {...props}>
+        <List {...props} pagination={<ShopPagination />}>
             <Datagrid rowClick="show">
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="userInfo.userName" label="username" />

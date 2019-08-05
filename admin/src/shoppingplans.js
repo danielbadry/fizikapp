@@ -2,6 +2,7 @@ import React from 'react';
 import { List,NumberInput, Create, Edit, SimpleForm, 
         DisabledInput, TextInput, DateInput, LongTextInput, Datagrid, 
         TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab } from 'react-admin';
+import { Pagination } from 'react-admin';
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
@@ -41,9 +42,11 @@ export const ShoppingplansShow = (props) => (
     </Show>
 );
 
+const ShoppingplanPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+
 export const ShoppingplansList = props => (
     <React.Fragment>
-        <List {...props}>
+        <List {...props} pagination={<ShoppingplanPagination />}>
             <Datagrid>
                 <TextField source="type" label="type" />
                 <TextField source="firstPrise" label="first prise" />

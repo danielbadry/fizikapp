@@ -12,6 +12,7 @@ import Thumbnail from './ThumbnailImage';
 import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form'
 import {GetProvincesFor, GetCitiesFor, countries} from './GetCitiesFor';
+import { Pagination } from 'react-admin';
 
 export const userShow = (props) => (
     <Show {...props}>
@@ -145,10 +146,11 @@ export const UserCreate = (props) => (
     </Create>
 );
 
+const UserPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+
 export const UsersList = props => (
 
-    <List {...props}>
-        
+    <List {...props} pagination={<UserPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="userName" label="username" />
