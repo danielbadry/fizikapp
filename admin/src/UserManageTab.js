@@ -149,10 +149,10 @@ class UserManageTab extends React.Component {
                 </ListItem>
                 
                 <ListItem>
-                    <ListItemIcon>
+                    
+                <ListItemIcon>
                     <MoneyIcon />
                     </ListItemIcon>
-                    <ListItemText id="switch-list-label-wifi" primary="Give F-Coin" />
                     <TextField
                         id="standard-number"
                         onChange={this.setFcoin.bind(this)}
@@ -163,73 +163,56 @@ class UserManageTab extends React.Component {
                         }}
                         margin="normal"
                     />
-                    <ListItemSecondaryAction>
+
                     <Button 
-                        color="secondary"
+                        variant="contained" 
                         onClick={this.sendFcoin.bind(this)}
-                        >
+                        color="primary">
                         Send F-Coin
                     </Button>
-                    </ListItemSecondaryAction>
                 </ListItem>
                 
                 <ListItem alignItems="flex-start">
-        {/* <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-        </ListItemAvatar> */}
-        {/* <ListItemText
-          primary="file name"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                
-                color="textPrimary"
-              >
-              </Typography>
-              
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
-        /> */}
         
-        <input 
-            style={divStyle} 
-            accept="image/*" 
-            id="icon-button-file" 
-            type="file"
-            onChange={this.handleUpload()}
-            />
-        <label htmlFor="icon-button-file">
-            <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-            >
-            <AttachFileIcon />
-            </IconButton>
-        </label>
-        
-        <TextField
-            id="standard-number"
-            onChange={this.setMessage.bind(this)}
-            label="message"
-            type="text"
-            InputLabelProps={{
-                shrink: true,
-            }}
-            margin="normal"
-            fullWidth
-            InputLabelProps={{
-                shrink: true,
-              }}
-            style={{ margin: 8 }}
-        />
-        
-        <Button variant="contained" color="primary">
-            send
-        </Button>
+                    <input 
+                        style={divStyle} 
+                        accept="image/*" 
+                        id="icon-button-file" 
+                        type="file"
+                        onChange={this.handleUpload()}
+                        />
+                    <label htmlFor="icon-button-file">
+                        <IconButton
+                        color="primary"
+                        aria-label="upload picture"
+                        component="span"
+                        >
+                        <AttachFileIcon />
+                        </IconButton>
+                    </label>
+                    
+                    <TextField
+                        id="standard-number"
+                        onChange={this.setMessage.bind(this)}
+                        label="message"
+                        type="text"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="normal"
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        style={{ margin: 8 }}
+                    />
+                    
+                    <Button 
+                        variant="contained" 
+                        onClick={this.sendMessage.bind(this)}
+                        color="primary">
+                        send
+                    </Button>
         
       </ListItem>
                 
