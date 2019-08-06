@@ -11,5 +11,6 @@
 module.exports.routes = {
     'GET /users/signupprocess': 'UsersController.signupprocess',
     'GET /shops/shopsprocess': 'ShopsController.shopsprocess',
-    'GET /categories/allcategories': 'CategoriesController.allcategories'
+    'GET /categories/allcategories': 'CategoriesController.allcategories',
+    'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess'
 };

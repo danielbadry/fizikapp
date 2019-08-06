@@ -20,7 +20,12 @@ module.exports = {
 TODO: i must update below algorithm
 */
   fn: async function (inputs) {
-    
+    let finalData = {};
+    let dataLength = await Users.find()
+    .limit(inputs.limit)
+    .skip(inputs.skip)
+    ;
+
     let infoFromUsers = await Users.find({
       select:['id','createdAt']
     });
@@ -58,7 +63,9 @@ TODO: i must update below algorithm
       }
     }
 
-    return dateList;
+    finalData.dataLength = dataLength.length;
+    finalData.data = dateList;
+    return finalData;
 
   }
 

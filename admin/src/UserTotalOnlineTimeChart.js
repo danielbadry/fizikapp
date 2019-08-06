@@ -26,7 +26,7 @@ class UserTotalOnlineTimeChart extends React.Component {
     }
     
     const { dataProvider } = this.props;
-    dataProvider(GET_LIST, 'shops/shopsprocess', {
+    dataProvider(GET_LIST, 'users/signupprocess', {
       pagination: { page: 1, perPage: 10 },
       sort: { field: 'id', order: 'DESC' }
     })

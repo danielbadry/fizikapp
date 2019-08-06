@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import NumberOfInvitationsChart from './NumberOfInvitationsChart';
 import UserTotalOnlineTimeChart from './UserTotalOnlineTimeChart';
 import NumberOfWatchedVideosChart from './NumberOfWatchedVideosChart';
+import NumberOfRegisteredDevice from './NumberOfRegisteredDevice';
+import InvitationList from './InvitationsList';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -25,16 +27,12 @@ class AlignItemsList extends React.Component {
         return (
         <List>
             <ListItem alignItems="flex-start">
-                {/* <ListItemAvatar>
-                    <Avatar 
-                        alt="Remy Sharp" 
-                        src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar> */}
+
                 <ListItemText
                 primary="Number of watched videos"
                 secondary={
                     <React.Fragment>
-                    <Typography
+                    {/* <Typography
                         component="span"
                         variant="body2"
                         
@@ -42,7 +40,7 @@ class AlignItemsList extends React.Component {
                     >
                         Ali Connors
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
+                    {" — I'll be in your neighborhood doing errands this…"} */}
                     </React.Fragment>
                 }
                 />
@@ -50,94 +48,36 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                
-                    {/* <ListItemAvatar>
-                        <Avatar 
-                            alt="Remy Sharp" 
-                            src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                    </ListItemAvatar> */}
-                    <ListItemText
-                    primary="Number of invitations"
-                    secondary={
-                        <React.Fragment>
-                        
-                        </React.Fragment>
-                    }
-                    />
-                   <NumberOfInvitationsChart /> 
-                   <List dense>
-                        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(value => {
-                            const labelId = `checkbox-list-secondary-label-${value}`;
-                            return (
-                            <ListItem key={value} button>
-                                <ListItemAvatar>
-                                <Avatar
-                                    alt={`Avatar n°${value + 1}`}
-                                    src={`/static/images/avatar/${value + 1}.jpg`}
-                                />
-                                </ListItemAvatar>
-                                <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-                                <ListItemSecondaryAction>
-                                {/* <Checkbox
-                                    edge="end"
-                                    
-                                    checked={checked.indexOf(value) !== -1}
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                /> */}
-                                </ListItemSecondaryAction>
-                            </ListItem>
-                            );
-                        })}
-                    </List>
+                <ListItemText
+                primary="Number of invitations"
+                secondary={
+                    <NumberOfInvitationsChart /> 
+                }
+                />
+                <InvitationList />
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                {/* <ListItemAvatar>
-                    <Avatar 
-                        alt="Total online time" 
-                        src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar> */}
                 <ListItemText
                 primary="Number of registered device"
-                
+                secondary={
+                    <NumberOfRegisteredDevice /> 
+                }
                 />
-                <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-    >
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="mobile" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="tablet" />
-      </ListItem></List>
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                {/* <ListItemAvatar>
-                    <Avatar 
-                        alt="Total online time" 
-                        src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar> */}
                 <ListItemText
                 primary="Total online time"
-              
+                secondary={
+                    <UserTotalOnlineTimeChart /> 
+                }
                 />
-                <UserTotalOnlineTimeChart />
+                {/* <UserTotalOnlineTimeChart /> */}
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                {/* <ListItemAvatar>
-                    <Avatar 
-                        alt="Total online time" 
-                        src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar> */}
+
                 <ListItemText
                 primary="Number of passed quizes"
                 secondary={
@@ -161,11 +101,7 @@ class AlignItemsList extends React.Component {
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
-                {/* <ListItemAvatar>
-                    <Avatar 
-                        alt="Total online time" 
-                        src="https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg" />
-                </ListItemAvatar> */}
+
                 <ListItemText
                 primary="Shopping level"
                 secondary={

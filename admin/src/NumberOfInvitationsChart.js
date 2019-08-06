@@ -6,7 +6,6 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { GET_LIST, withDataProvider } from 'react-admin';
 import PropTypes from 'prop-types';
 
-
 class NumberOfInvitationsChart extends React.Component {
   
   constructor(props) {
@@ -17,7 +16,6 @@ class NumberOfInvitationsChart extends React.Component {
     let chart = am4core.create("NumberOfInvitationsChart", am4charts.XYChart);
 
     chart.paddingRight = 20;
-
     let data = [];
     let visits = 10;
     for (let i = 1; i < 366; i++) {
@@ -26,7 +24,7 @@ class NumberOfInvitationsChart extends React.Component {
     }
     
     const { dataProvider } = this.props;
-    dataProvider(GET_LIST, 'shops/shopsprocess', {
+    dataProvider(GET_LIST, 'users/signupprocess', {
       pagination: { page: 1, perPage: 10 },
       sort: { field: 'id', order: 'DESC' }
     })
@@ -68,7 +66,7 @@ class NumberOfInvitationsChart extends React.Component {
 
   render() {
     return (
-      <div id="NumberOfInvitationsChart" style={{ width: "100%", height: "500px" }}>milad</div>
+      <div id="NumberOfInvitationsChart" style={{ width: "70%", height: "500px" }}>milad</div>
     );
   }
 }

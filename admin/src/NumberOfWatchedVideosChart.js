@@ -265,7 +265,7 @@ loop();
 
   render() {
     return (
-      <div id="NumberOfWatchedVideosChart" style={{ width: "100%", height: "500px" }}>milad</div>
+      <div id="NumberOfWatchedVideosChart" style={{ width: "70%", height: "200px" }}>milad</div>
     );
   }
 }
