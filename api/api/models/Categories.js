@@ -16,7 +16,6 @@ module.exports = {
     
     parentId : {
       type: 'string',
-      // required : false,
       defaultsTo: '0'
     },
 

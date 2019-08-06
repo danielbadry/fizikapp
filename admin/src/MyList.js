@@ -19,7 +19,11 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-
+import Avatar from '@material-ui/core/Avatar';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 class Mylist extends React.Component {
   
   constructor(props) {
@@ -53,7 +57,6 @@ class Mylist extends React.Component {
       rowId : rowId
     })
     .then((res) => {
-      console.info('res:', res);
       this.setState({
         rows:res.data,
         currentDirectory: rowId
@@ -92,18 +95,24 @@ class Mylist extends React.Component {
   }
   
   createNewFolder = () => {
-    const { dataProvider } = this.props;
-    dataProvider(CREATE, 'categories', {
-        name:this.state.folderName,
-        parentId : this.state.currentDirectory
-      })
-      .then((res) => {
-        this.fetchDirectory(this.state.currentDirectory);
-        this.handleClose();
-      })
-      .catch((e) => {
-          console.info('Error: comment not approved', 'warning')
-      });
+    const dataRecord = {
+      name:this.state.folderName,
+      parentId : this.state.currentDirectory
+    }
+    fetch('http://localhost:1337/categories', { method: 'POST', 
+      body : JSON.stringify(dataRecord), 
+      headers: {}
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+      this.fetchDirectory(this.state.currentDirectory);
+      this.handleClose();
+    })
+    .catch((e) => {
+        
+    });
   }
   
   setFolderName = (e) => {
@@ -113,7 +122,7 @@ class Mylist extends React.Component {
   render() {
     return (
     <Paper>
-      <div dir="rtl">
+      <div>
       <Tooltip title="up">
         <IconButton onClick={() => this.goUp()}>
             <ExpandLess />
@@ -144,29 +153,50 @@ class Mylist extends React.Component {
         </IconButton>
       </Tooltip>
       </div>
+      <List dense>
 
-      <Table>
+      {this.state.rows.map((item, index) => {
+        return (
+          <ListItem 
+            key={item.id} 
+            // button
+            onDoubleClick={(e) => this.handleDblClickOnRow(item.id,e)}
+            >
+            <ListItemAvatar>
+              <Avatar src={item.thumbnail} />
+            </ListItemAvatar>
+            <ListItemText primary={item.name} />
+          </ListItem>
+        );
+      })}
+
+    </List>
+      {/* <Table>
         
         <TableHead>
           <TableRow>
-            
-            <TableCell align="right">name</TableCell>
+            <TableCell align="left">name</TableCell>
           </TableRow>
         </TableHead>
         
         <TableBody>
           {this.state.rows.map(row => (
             <TableRow key={row.id} onDoubleClick={(e) => this.handleDblClickOnRow(row.id,e)}>
-
-              <TableCell align="right">
+              <TableCell>
+              {/* <ListItemAvatar> 
+              <Avatar
+                alt={`Avatar n°${1}`}
+                src={`/static/images/avatar/${1}.jpg`}
+              />
+            </ListItemAvatar>
+                {row.itemType}
                 {row.name}
               </TableCell>
-
             </TableRow>
           ))}
         </TableBody>
 
-      </Table>
+      </Table> */}
 
       <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">
         <DialogContent>
