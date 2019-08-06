@@ -10,6 +10,7 @@ import MoneyIcon from '@material-ui/icons/Money';
 import MessageIcon from '@material-ui/icons/Message';
 import CommentIcon from '@material-ui/icons/Comment';
 import ReportIcon from '@material-ui/icons/Report';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,15 @@ import TextField from '@material-ui/core/TextField';
 import { withDataProvider, CREATE, showNotification } from 'react-admin';
 import PropTypes from 'prop-types';
 import { UPDATE } from 'ra-core';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import { makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+
 
 class UserManageTab extends React.Component {
     
@@ -112,8 +122,13 @@ class UserManageTab extends React.Component {
               console.info('Error: comment not approved', 'warning')
           });
         }  
-
+    handleUpload = (e) => {
+        console.info(e);
+    }
     render() {
+        const divStyle = {
+            display: 'none',
+          };
         return (
             <List >
             
@@ -158,30 +173,65 @@ class UserManageTab extends React.Component {
                     </ListItemSecondaryAction>
                 </ListItem>
                 
-                <ListItem>
-                    <ListItemIcon>
-                    <MessageIcon />
-                    </ListItemIcon>
-                    <ListItemText id="switch-list-label-wifi" primary="Message" />
-                    <TextField
-                        id="standard-number"
-                        onChange={this.setMessage.bind(this)}
-                        label="message"
-                        type="text"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        margin="normal"
-                    />
-                    <ListItemSecondaryAction>
-                    <Button 
-                        color="secondary"
-                        onClick={this.sendMessage.bind(this)}
-                        >
-                        Send Message
-                    </Button>
-                    </ListItemSecondaryAction>
-                </ListItem>
+                <ListItem alignItems="flex-start">
+        {/* <ListItemAvatar>
+          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+        </ListItemAvatar> */}
+        {/* <ListItemText
+          primary="file name"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                
+                color="textPrimary"
+              >
+              </Typography>
+              
+              {" — Wish I could come, but I'm out of town this…"}
+            </React.Fragment>
+          }
+        /> */}
+        
+        <input 
+            style={divStyle} 
+            accept="image/*" 
+            id="icon-button-file" 
+            type="file"
+            onChange={this.handleUpload()}
+            />
+        <label htmlFor="icon-button-file">
+            <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+            >
+            <AttachFileIcon />
+            </IconButton>
+        </label>
+        
+        <TextField
+            id="standard-number"
+            onChange={this.setMessage.bind(this)}
+            label="message"
+            type="text"
+            InputLabelProps={{
+                shrink: true,
+            }}
+            margin="normal"
+            fullWidth
+            InputLabelProps={{
+                shrink: true,
+              }}
+            style={{ margin: 8 }}
+        />
+        
+        <Button variant="contained" color="primary">
+            send
+        </Button>
+        
+      </ListItem>
                 
                 <ListItem>
                     <ListItemIcon>
