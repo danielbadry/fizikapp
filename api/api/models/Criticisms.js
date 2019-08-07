@@ -14,27 +14,12 @@ module.exports = {
       required : false
     },
     
-    userName :{
-      type: 'string',
-      required : false
-    },
-    
-    name :{
-      type: 'string',
-      required : false
-    },
-    
     message :{
       type: 'string',
       required : false
     },
     
     title :{
-      type: 'string',
-      required : false
-    },
-    
-    thumbnail :{
       type: 'string',
       required : false
     },

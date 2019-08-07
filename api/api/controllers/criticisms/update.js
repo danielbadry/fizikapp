@@ -35,8 +35,19 @@ module.exports = {
     .set({
       response: inputs.response
     });
-    
-    result.isResponsed = true;  
+    let user = await Users.find({
+      where: {
+        id: result.userId
+      }
+    })
+    user = user[0];
+    result.userInfo = user;
+    result.userInfo.fullName = result.userInfo.firstName + ' ' + result.userInfo.lastName;
+    result.thumbnail = "http://localhost:1337/uploads/" + result.userInfo.thumbnail;
+    if(result.response.length == 0)
+      result.isResponsed = false;
+    else
+      result.isResponsed = true;
     
     moment.locale('en');
     result.jalaaliCreatedDate = momentJalaali(result.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
