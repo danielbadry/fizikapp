@@ -115,7 +115,7 @@ class OnlineUsersChart extends React.Component {
 
   render() {
     return (
-      <div id="onlineUsersChart" style={{ width: "50%", height: "500px" }}></div>
+      <div id="onlineUsersChart" style={{ width: "40%", height: "300px", display:"inline-block" }}></div>
     );
   }
 }

@@ -40,14 +40,27 @@ export default () => (
                 <SignUpChart />
             </CardContent>
         </Card> */}
-        
+        <br />
         <Card>
             <CardHeader title="Online Users Chart" />
             <CardContent>
                 <OnlineUsersChart />
+                <div style={{
+                        display:"inline-block", 
+                        backgroundColor: '#f50057', 
+                        position: 'absolute',
+                        top: '71%',
+                        left: '58%',
+                        borderRadius: '41px',
+                        width: '169px',
+                        paddingLeft: '62px',
+                        color: 'ghostwhite'
+                    }}>
+                    <h2>1,259,302</h2>
+                </div>
             </CardContent>
         </Card>
-        
+        <br />
         <Card>
             <CardHeader title="shopping sensitive location" />
             <CardContent>
