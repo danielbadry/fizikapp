@@ -90,6 +90,11 @@ module.exports = {
       defaultsTo : false
     },
     
+    isOnline :{
+      type: 'boolean',
+      required : false,
+    },
+    
     commentAuthorization :{
       type: 'boolean',
       required : false,
