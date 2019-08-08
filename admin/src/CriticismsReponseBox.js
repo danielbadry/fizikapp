@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { push } from 'react-router-redux';
 import { UPDATE, withDataProvider} from 'react-admin';
 import MyTextField from './MyTextfield';
+import { increaseCatSizeAction } from './action';
 
 class CriticismsReponseBox extends React.Component {
     
@@ -26,17 +28,19 @@ class CriticismsReponseBox extends React.Component {
     }
     
     handleClick = () => {
-
         const { dataProvider, dispatch, record } = this.props;
         const updatedRecord = { response: this.state.response };
         dataProvider(UPDATE, 'criticisms', { id: record.id, data: updatedRecord })
             .then(() => {
-               
                dispatch(push('/criticisms'));
+               const increaseCatSize = this.props.increaseCatSize;
+                increaseCatSize(2);
             })
             .catch((e) => {
                
             });
+
+            
     }
 
     render () {
@@ -62,4 +66,20 @@ class CriticismsReponseBox extends React.Component {
 
 }
 
-export default withDataProvider(CriticismsReponseBox);
+const mapDispatchToProps = dispatch => ({
+    increaseCatSize: (howMuch) => {
+        fetch('http://localhost:1337/criticisms/badgecount', { method: 'GET', headers: {}})
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            dispatch(increaseCatSizeAction(myJson.data))
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+        
+    }
+});
+
+export default connect(null, mapDispatchToProps)(withDataProvider(CriticismsReponseBox));
