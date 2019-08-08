@@ -1,9 +1,13 @@
 import React from 'react';
 import { List, Datagrid, TextField, BooleanField } from 'react-admin';
 import Thumbnail from './ThumbnailImage';
-import Divider from '@material-ui/core/Divider';
 import CriticismsReponseBox from './CriticismsReponseBox'
 import { Pagination } from 'react-admin';
+import Button from '@material-ui/core/Button';
+
+let doIt = () => {
+    console.info('hello');
+}
 
 const CriticismsPanel = ({ id, record, resource }) => (
     <React.Fragment>
@@ -22,6 +26,7 @@ const CriticismsPanel = ({ id, record, resource }) => (
         }
     </React.Fragment>
 );
+
 const CriticismPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
 export const CriticismsList = props => (

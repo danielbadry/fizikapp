@@ -54,7 +54,7 @@ class CriticismsReponseBox extends React.Component {
                     label="Approve" 
                     onClick={this.handleClick} 
                     >
-                    approve
+                    send
                 </Button>
             </React.Fragment>
         )
