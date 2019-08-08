@@ -38,7 +38,7 @@ module.exports = {
     let finalData = {};
     let dataLength = await Requests.find();
     let allRequests = await Requests.find({
-      parentId: null,
+      parentId: '',
       isDeleted : false
     })
     .limit(inputs.limit)

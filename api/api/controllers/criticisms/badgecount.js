@@ -27,11 +27,7 @@ module.exports = {
       }
     });
     
-    let allPolice = await Police.find({
-      where : {
-        isDeleted: false
-      }
-    });
+    let allPolice = await Police.find();
     
     let allRequests = await Requests.find({
       where : {
@@ -44,7 +40,7 @@ module.exports = {
     finalData.data = {
       criticismsBadgeCount : allCriticisms.length,
       requestsBadgeCount : allRequests.length,
-      policeBadgeCount : 35//allPolice.length,
+      policeBadgeCount : allPolice.length,
     };
     return finalData;
   }
