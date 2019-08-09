@@ -48,8 +48,11 @@ module.exports = {
     
     moment.locale('en');
     result.jalaaliCreatedDate = momentJalaali(result.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+    result.jalaaliUpdatedDate = momentJalaali(result.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
     moment.locale('fa');
     result.jalaaliUserFriendlyCreatedDate = moment(result.createdAt).fromNow();
+    result.jalaaliUserFriendlyUpdatedDate = moment(result.updatedAt).fromNow();
+    result.jalaaliFullUserFriendlyUpdatedDate = result.jalaaliUpdatedDate + ' ' + result.jalaaliUserFriendlyUpdatedDate;
     return result;
 
   }

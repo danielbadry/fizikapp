@@ -36,7 +36,11 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
-    let dataLength = await Requests.find();
+    let dataLength = await Requests.find({
+      where : {
+        parentId: 0
+      }
+    });
     let allRequests = await Requests.find({
       parentId: '',
       isDeleted : false
@@ -57,9 +61,13 @@ module.exports = {
           
         moment.locale('en');
         request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+        request.jalaaliUpdatedDate = momentJalaali(request.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
         moment.locale('fa');
         request.jalaaliUserFriendlyCreatedDate = moment(request.createdAt).fromNow();
-        
+        request.jalaaliUserFriendlyUpdatedDate = moment(request.updatedAt).fromNow();
+        request.jalaaliFullUserFriendlyUpdatedDate = request.jalaaliUpdatedDate + ' ' + request.jalaaliUserFriendlyUpdatedDate;
+    
+
         // fetch users answers
         request.usersAnswers = await Requests.find({
           isDeleted: false,
@@ -80,7 +88,7 @@ module.exports = {
         
         (request.adminAnswer == '') ? request.isResponsed = false  : request.isResponsed = true;
       }
-      finalData.dataLength = dataLength.length;
+      finalData.dataLength = allRequests.length;
       finalData.data = allRequests;
       return finalData;
   }

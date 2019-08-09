@@ -43,6 +43,15 @@ module.exports = {
     ;
     
     for (let police of allPolice) {
+      let user = await Users.find({
+        where : {
+          id : police.userId
+        }
+      });
+      police.userInfo = user[0];
+      police.userInfo.fullName = police.userInfo.firstName + ' ' + police.userInfo.lastName;
+      police.thumbnail = "http://localhost:1337/uploads/" + police.userInfo.thumbnail;
+
       moment.locale('en');
       police.jalaaliCreatedDate = momentJalaali(police.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');

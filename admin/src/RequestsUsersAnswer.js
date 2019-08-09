@@ -56,7 +56,7 @@ class RequestsUsersAnswer extends React.Component {
                                         color="textPrimary"
                                     >
                                         <span>
-                                        <Link href={userAnswer.userInfo.url}>
+                                        <Link target="_blank" href={userAnswer.userInfo.url}>
                                             {userAnswer.userInfo.fullName}
                                         </Link>
                                         </span>

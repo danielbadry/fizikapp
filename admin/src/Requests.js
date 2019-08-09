@@ -9,7 +9,7 @@ import Thumbnail from './ThumbnailImage';
 import RequestsUsersAnswer from './RequestsUsersAnswer';
 import RequestsResponseBox from './RequestsResponseBox';
 import { Pagination } from 'react-admin';
-
+import MyUrlField from './MyUrlField';
 export const RequestShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
@@ -17,7 +17,7 @@ export const RequestShow = (props) => (
             <Tab label="question">
                 <TextField source="title" label="title" />
                 <TextField source="message" label="message" />
-                <TextField source="userInfo.userName" label="user name" />
+                <MyUrlField label="username"/>
                 <TextField source="userInfo.fullName" label="Name" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
             </Tab>
@@ -53,10 +53,10 @@ export const RequestList = props => (
         <Datagrid rowClick="show" expand={<RequestPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="userInfo.fullName" label="name" />
+            <MyUrlField label="username"/>
             <TextField source="userInfo.userName" label="user name" />
             <TextField source="title" label="title" />
-            <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
+            <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="Date" />
             <BooleanField source="isResponsed" label="isResponsed" label="isResponsed" />
         </Datagrid>
     </List>
