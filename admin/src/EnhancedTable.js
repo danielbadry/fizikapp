@@ -17,9 +17,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import Home from '@material-ui/icons/Home';
+import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
+import FileCopy from '@material-ui/icons/FileCopy';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -131,50 +134,9 @@ const useToolbarStyles = makeStyles(theme => ({
   },
 }));
 
-const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles();
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="h6" id="tableTitle">
-            Nutrition
-          </Typography>
-        )}
-      </div>
-      <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-      </div>
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
+// EnhancedTableToolbar.propTypes = {
+//   numSelected: PropTypes.number.isRequired,
+// };
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -274,7 +236,6 @@ export default function EnhancedTable() {
   }
   
   function handleDoubleClick(event, row) {
-    console.info(row);
     fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(row.id)}`, {
         method: "GET",
         headers: {},   
@@ -300,6 +261,34 @@ export default function EnhancedTable() {
     setPage(0);
   }
 
+  function goUp () {
+    fetch(`http://localhost:1337/categories/?id=${encodeURIComponent(0)}`, {
+        method: "GET",
+        headers: {},   
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        setRows(myJson.data);
+        // setFirstTime(false);
+    })
+    .catch((e) => {
+        
+    });
+    // const { dataProvider } = this.props;
+    // dataProvider(GET_ONE, 'categories', {
+    //   id : this.state.currentDirectory
+    // })
+    // .then((res) => {
+    //   this.fetchDirectory(res.data.parentId);
+
+    // })
+    // .catch((e) => {
+    //     console.info('Error: comment not approved', 'warning')
+    // });
+  }
+
   function handleChangeDense(event) {
     setDense(event.target.checked);
   }
@@ -307,11 +296,83 @@ export default function EnhancedTable() {
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
+  const classes1 = useToolbarStyles();
+  const { numSelected } = selected.length;
   return (
-    <div className={classes.root}>
+    <div className={classes1.root}>
       
+        
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+{/* start */}
+  
+    <Toolbar
+      className={clsx(classes1.root, {
+        [classes1.highlight]: numSelected > 0,
+      })}
+    >
+      <div className={classes1.title}>
+        {numSelected > 0 ? (
+          <Typography color="inherit" variant="subtitle1">
+            {numSelected} selected
+          </Typography>
+        ) : (
+          <Typography variant="h6" id="tableTitle">
+            
+          </Typography>
+        )}
+      </div>
+      <div className={classes1.spacer} />
+      <div className={classes1.actions}>
+        {numSelected > 0 ? (
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+        <div>
+        {/* <Tooltip title="Filter list">
+            <IconButton aria-label="filter list">
+              <FilterListIcon />
+            </IconButton>
+        </Tooltip> */}
+        <Tooltip title="up">
+            <IconButton onClick={() => goUp()}>
+                <ExpandLess />
+            </IconButton>
+        </Tooltip>
+        <Tooltip title="delete">
+        <IconButton>
+            <DeleteIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="home">
+        <IconButton onClick={() => this.handleDblClickOnRow(0)} color="primary">
+            <Home />
+        </IconButton>
+      </Tooltip>
+      
+      <Tooltip title="copy">
+        <IconButton color="primary">
+            <FileCopy />
+        </IconButton>
+      </Tooltip>
+      
+      <Tooltip title="new">
+        <IconButton 
+            // onClick={this.handleClickOpen.bind(this)} color="primary"
+        >
+            <CreateNewFolder />
+        </IconButton>
+      </Tooltip>
+        </div>     
+        )}
+      </div>
+    </Toolbar>
+
+{/* end */}
+
+
         <div className={classes.tableWrapper}>
           <Table
             className={classes.table}
