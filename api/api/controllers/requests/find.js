@@ -67,7 +67,6 @@ module.exports = {
         request.jalaaliUserFriendlyUpdatedDate = moment(request.updatedAt).fromNow();
         request.jalaaliFullUserFriendlyUpdatedDate = request.jalaaliUpdatedDate + ' ' + request.jalaaliUserFriendlyUpdatedDate;
     
-
         // fetch users answers
         request.usersAnswers = await Requests.find({
           isDeleted: false,

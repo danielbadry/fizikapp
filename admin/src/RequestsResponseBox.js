@@ -4,6 +4,8 @@ import { push } from 'react-router-redux';
 import { CREATE, withDataProvider} from 'react-admin';
 import MyTextField from './MyTextfield';
 import { UPDATE } from 'ra-core';
+import { increaseCatSizeAction } from './action';
+import { connect } from 'react-redux';
 
 class RequestsResponseBox extends React.Component {
     
@@ -35,6 +37,8 @@ class RequestsResponseBox extends React.Component {
         dataProvider(UPDATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
                dispatch(push('/requests'));
+               const increaseCatSize = this.props.increaseCatSize;
+               increaseCatSize(2);
             })
             .catch((e) => {
                
@@ -65,4 +69,20 @@ class RequestsResponseBox extends React.Component {
 
 }
 
-export default withDataProvider(RequestsResponseBox);
+const mapDispatchToProps = dispatch => ({
+    increaseCatSize: (howMuch) => {
+        fetch('http://localhost:1337/criticisms/badgecount', { method: 'GET', headers: {}})
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            dispatch(increaseCatSizeAction(myJson.data))
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+        
+    }
+});
+
+export default connect(null, mapDispatchToProps)(withDataProvider(RequestsResponseBox));
