@@ -23,6 +23,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import Home from '@material-ui/icons/Home';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import FileCopy from '@material-ui/icons/FileCopy';
+import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -198,6 +199,7 @@ export default function EnhancedTable() {
     });
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
+  const [itemsForCopy, setItemsForCopy] = React.useState([]);
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
@@ -335,8 +337,35 @@ console.info(currentDirectory);
     });
   }
   
-  function setFolderName(e) {
-    setFolderNameInState('hi');
+  function copySelected() {
+    let itemToCopyIDs = [];
+    for (let select of selected) {
+      for (let item of rows) {
+        if (select == item.name) {
+          itemToCopyIDs.push(item);
+        }
+      }
+    }
+    setItemsForCopy(itemToCopyIDs);
+  }
+  
+  function paste() {
+    console.info('ItemsForCopy:', itemsForCopy);
+    console.info('container folder:', currentDirectory);
+    const dataRecord = {
+      itemsForCopy: itemsForCopy,
+      currentDirectory: currentDirectory
+    }
+    fetch('http://localhost:1337/categories/paste', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        
+    })
+    .catch((e) => {
+        // showNotification('Error: comment not approved', 'warning')
+    });
   }
 
   function handleChangeDense(event) {
@@ -386,9 +415,9 @@ console.info(currentDirectory);
       <div className={classes1.spacer} />
       <div className={classes1.actions}>
         {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
-              <DeleteIcon />
+          <Tooltip title="paste">
+            <IconButton>
+              <CloudDoneIcon />
             </IconButton>
           </Tooltip>
         ) : (
@@ -403,9 +432,9 @@ console.info(currentDirectory);
                 <ExpandLess />
             </IconButton>
         </Tooltip>
-        <Tooltip title="delete">
-        <IconButton>
-            <DeleteIcon />
+        <Tooltip title="paste">
+        <IconButton onClick={() => paste()}>
+            <CloudDoneIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="home">
@@ -415,7 +444,7 @@ console.info(currentDirectory);
       </Tooltip>
       
       <Tooltip title="copy">
-        <IconButton color="primary">
+        <IconButton color="primary" onClick={() => copySelected()}>
             <FileCopy />
         </IconButton>
       </Tooltip>
