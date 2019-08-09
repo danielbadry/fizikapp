@@ -168,6 +168,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function EnhancedTable() {
     const [rows, setRows] = useState([]);
+    const [currentDirectory, setCurrentDirectory] = useState(0);
     const [firstTime, setFirstTime] = useState(true);
     const [rowId, setrowId] = useState(0);
 
@@ -236,6 +237,7 @@ export default function EnhancedTable() {
   }
   
   function handleDoubleClick(event, row) {
+    setCurrentDirectory(row);
     fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(row.id)}`, {
         method: "GET",
         headers: {},   
@@ -262,7 +264,9 @@ export default function EnhancedTable() {
   }
 
   function goUp () {
-    fetch(`http://localhost:1337/categories/?id=${encodeURIComponent(0)}`, {
+    console.info(currentDirectory);
+    // return;
+    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
         method: "GET",
         headers: {},   
     })
@@ -271,22 +275,10 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
         setRows(myJson.data);
-        // setFirstTime(false);
     })
     .catch((e) => {
         
     });
-    // const { dataProvider } = this.props;
-    // dataProvider(GET_ONE, 'categories', {
-    //   id : this.state.currentDirectory
-    // })
-    // .then((res) => {
-    //   this.fetchDirectory(res.data.parentId);
-
-    // })
-    // .catch((e) => {
-    //     console.info('Error: comment not approved', 'warning')
-    // });
   }
 
   function handleChangeDense(event) {
