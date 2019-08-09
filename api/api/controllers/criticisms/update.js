@@ -53,6 +53,7 @@ module.exports = {
     result.jalaaliCreatedDate = momentJalaali(result.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
     moment.locale('fa');
     result.jalaaliUserFriendlyCreatedDate = moment(result.createdAt).fromNow();
+    result.jalaaliFullUserFriendlyCreatedDate = result.jalaaliCreatedDate + ' ' + result.jalaaliUserFriendlyCreatedDate;
     return result;
 
   }

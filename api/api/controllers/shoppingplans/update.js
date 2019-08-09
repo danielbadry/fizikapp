@@ -13,6 +13,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    id :{
+      type: 'string',
+      required : false
+    },
 
     duration :{
       type: 'number',
@@ -39,7 +44,7 @@ module.exports = {
 
   fn: async function (inputs) {
     let result = await Shoppingplans.updateOne({
-      id: '5d3da285e13afa08f0451490'
+      id: inputs.id
     })
     .set({
         type: inputs.type,

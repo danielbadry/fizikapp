@@ -12,7 +12,6 @@ import UserTotalOnlineTimeChart from './UserTotalOnlineTimeChart';
 import NumberOfWatchedVideosChart from './NumberOfWatchedVideosChart';
 import NumberOfRegisteredDevice from './NumberOfRegisteredDevice';
 import InvitationList from './InvitationsList';
-import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
@@ -20,7 +19,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import { Link as RouterLink } from 'react-router-dom';
 class AlignItemsList extends React.Component {
 
     render() {

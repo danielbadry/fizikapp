@@ -33,7 +33,6 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs) {
     let finalData = {};
     let dataLength = await Shoppingplans.find();

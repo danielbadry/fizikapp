@@ -11,9 +11,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Thumbnail from './ThumbnailImage';
 import { Pagination } from 'react-admin';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import MyUrlField from './MyUrlField';
 
 import {Show, TabbedShowLayout, Tab, NumberField,BooleanField,
-    List, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from 'react-admin';
+    List, ReferenceManyField, Datagrid, TextField, DateField, EditButton, UrlField  } from 'react-admin';
     function createData(name, calories, fat, carbs, protein) {
         return { name, calories, fat, carbs, protein };
       }
@@ -43,14 +46,14 @@ const ShopPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 
 export const ShopsList = props => (
     <React.Fragment>
         <List {...props} pagination={<ShopPagination />}>
-            <Datagrid rowClick="show">
+            <Datagrid >{/*  rowClick="show" */}
                 <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="userInfo.userName" label="username" />
+                <MyUrlField label="username"/>
                 <TextField source="userInfo.fullName" label="name" />
                 <TextField source="type" label="type" />
                 <TextField source="price" label="amount" />
-                <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
-                <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
+                <TextField source="jalaaliFullUserFriendlyCreatedDate" label="purchased Date" />
+
             </Datagrid>
         </List>
         <Card>

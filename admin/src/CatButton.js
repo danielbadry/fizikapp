@@ -12,10 +12,13 @@ class CatButton extends React.Component {
 
     render() {
         const { myCat, increaseCatSize } = this.props;
-        return (<Button
-                 onClick={() => increaseCatSize(2) }>
-                        click me {myCat}
-                </Button>)
+        return (
+            <span></span>
+        // <Button
+        //          onClick={() => increaseCatSize(2) }>
+        //                 click me {myCat}
+        //         </Button>
+                )
     }
     
 }

@@ -22,7 +22,8 @@ module.exports = {
 
     return await Tags.create({
       name: inputs.name,
-      createdAt : await sails.helpers.dateParse()
+      createdAt : await sails.helpers.dateParse(),
+      updatedAt : await sails.helpers.dateParse()
     }).fetch();
 
   }

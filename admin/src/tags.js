@@ -16,7 +16,6 @@ export const TagCreate = (props) => (
 export const TagEdit = (props) => (
     <Edit title="tag edit" {...props}>
         <SimpleForm>
-            <DisabledInput label="Id" source="id" />
             <TextInput source="name" />
         </SimpleForm>
     </Edit>
@@ -28,8 +27,8 @@ export const TagsList = props => (
         <Datagrid>
             <TextField source="name" label="Name" />
             <TextField source="count" label="Count" />
-            <TextField source="jalaaliCreatedDate" label="Jalaali date" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" label="Jalaali user friendly date" />
+            {/* <TextField source="jalaaliCreatedDate" label="Jalaali date" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" label="Jalaali user friendly date" /> */}
             <EditButton />
         </Datagrid>
     </List>

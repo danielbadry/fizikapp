@@ -37,6 +37,7 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
+    let allShopsLength = await Shops.find();
     let allShops = await Shops.find()
     .limit(inputs.limit)
     .skip(inputs.skip)
@@ -61,10 +62,12 @@ module.exports = {
       shop.jalaaliCreatedDate = momentJalaali(shop.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
       shop.jalaaliUserFriendlyCreatedDate = moment(shop.createdAt).fromNow();
+      shop.jalaaliFullUserFriendlyCreatedDate = shop.jalaaliCreatedDate + ' ' + shop.jalaaliUserFriendlyCreatedDate;
+
     }
 
     
-    finalData.dataLength = 45;
+    finalData.dataLength = allShopsLength.length;
     finalData.data = allShops;
     return finalData;
 

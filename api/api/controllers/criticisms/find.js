@@ -61,6 +61,7 @@ module.exports = {
       criticism.jalaaliCreatedDate = momentJalaali(criticism.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
       criticism.jalaaliUserFriendlyCreatedDate = moment(criticism.createdAt).fromNow();
+      criticism.jalaaliFullUserFriendlyCreatedDate = criticism.jalaaliCreatedDate + ' ' + criticism.jalaaliUserFriendlyCreatedDate;
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allCriticisms;

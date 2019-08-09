@@ -6,7 +6,7 @@ import { Pagination } from 'react-admin';
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
-        <SimpleForm>
+        <SimpleForm redirect="list">
             <TextInput source="type" label="type" />
             <NumberInput source="duration" label="duration" />
             <NumberInput source="firstPrise" label="first Prise" />

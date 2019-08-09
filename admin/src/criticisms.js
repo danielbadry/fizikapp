@@ -4,6 +4,7 @@ import Thumbnail from './ThumbnailImage';
 import CriticismsReponseBox from './CriticismsReponseBox'
 import { Pagination } from 'react-admin';
 import Button from '@material-ui/core/Button';
+import MyUrlField from './MyUrlField';
 
 let doIt = () => {
     console.info('hello');
@@ -33,12 +34,13 @@ export const CriticismsList = props => (
     <List {...props} pagination={<CriticismPagination />}>
         <Datagrid expand={<CriticismsPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="userInfo.userName" label="userame" />
+            <MyUrlField label="username"/>
             <TextField source="userInfo.fullName" label="name" />
             <TextField source="title" label="title" />
             <BooleanField source="isResponsed" label="isResponsed" />
-            <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
+            {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
+            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" /> */}
+            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
         </Datagrid>
     </List>
 );
