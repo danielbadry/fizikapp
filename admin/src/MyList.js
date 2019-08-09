@@ -124,7 +124,7 @@ class Mylist extends React.Component {
   render() {
     return (
     <Paper>
-      <div>
+      {/* <div>
       <Tooltip title="up">
         <IconButton onClick={() => this.goUp()}>
             <ExpandLess />
@@ -154,7 +154,7 @@ class Mylist extends React.Component {
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
-      </div>
+      </div> */}
 
       <EnhancedTable />
 

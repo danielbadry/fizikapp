@@ -22,7 +22,7 @@ module.exports = {
     let dataLength = await Categories.find();
     
     let allItems = await Categories.find({
-      where: {
+        where: {
         parentId:inputs.rowId,
         isDeleted: false
       }

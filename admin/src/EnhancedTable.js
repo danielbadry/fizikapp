@@ -23,6 +23,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import Home from '@material-ui/icons/Home';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import FileCopy from '@material-ui/icons/FileCopy';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -168,6 +170,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function EnhancedTable() {
     const [rows, setRows] = useState([]);
+    const [folderName, setFolderNameInState] = useState('');
     const [currentDirectory, setCurrentDirectory] = useState(0);
     const [firstTime, setFirstTime] = useState(true);
     const [rowId, setrowId] = useState(0);
@@ -266,7 +269,23 @@ export default function EnhancedTable() {
   function goUp () {
     console.info(currentDirectory);
     // return;
-    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
+    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory)}`, {
+        method: "GET",
+        headers: {},   
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        setRows(myJson.data);
+    })
+    .catch((e) => {
+        
+    });
+  }
+  
+  function handleDblClickOnRow () {
+    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(0)}`, {
         method: "GET",
         headers: {},   
     })
@@ -281,6 +300,45 @@ export default function EnhancedTable() {
     });
   }
 
+  function createNewFolderr () {
+console.info(currentDirectory);
+    const dataRecord = {
+      name:values.name,
+      parentId : currentDirectory
+    }
+    fetch('http://localhost:1337/categories', { method: 'POST', 
+      body : JSON.stringify(dataRecord), 
+      headers: {}
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+      fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory)}`, {
+          method: "GET",
+          headers: {},   
+      })
+      .then((response) => {
+          return response.json();
+      })
+      .then((myJson) => {
+          setRows(myJson.data);
+          // setFirstTime(false);
+      })
+      .catch((e) => {
+          
+      });
+        
+    })
+    .catch((e) => {
+        
+    });
+  }
+  
+  function setFolderName(e) {
+    setFolderNameInState('hi');
+  }
+
   function handleChangeDense(event) {
     setDense(event.target.checked);
   }
@@ -290,13 +348,25 @@ export default function EnhancedTable() {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   const classes1 = useToolbarStyles();
   const { numSelected } = selected.length;
+  const [values, setValues] = React.useState({
+    name: ''
+  });
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
+  };
   return (
     <div className={classes1.root}>
       
         
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
 {/* start */}
-  
+  <TextField
+        id="standard-name"
+        label="Name"
+        value={values.name}
+        onChange={handleChange('name')}
+        margin="normal"
+      />
     <Toolbar
       className={clsx(classes1.root, {
         [classes1.highlight]: numSelected > 0,
@@ -339,7 +409,7 @@ export default function EnhancedTable() {
         </IconButton>
       </Tooltip>
       <Tooltip title="home">
-        <IconButton onClick={() => this.handleDblClickOnRow(0)} color="primary">
+        <IconButton onClick={() => handleDblClickOnRow()} color="primary">
             <Home />
         </IconButton>
       </Tooltip>
@@ -352,8 +422,7 @@ export default function EnhancedTable() {
       
       <Tooltip title="new">
         <IconButton 
-            // onClick={this.handleClickOpen.bind(this)} color="primary"
-        >
+            onClick={()=> createNewFolderr()} color="primary">
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
@@ -395,7 +464,7 @@ export default function EnhancedTable() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -444,6 +513,27 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+       {/* <Dialog open={true} aria-labelledby="form-dialog-title">
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="directory name"
+            type="text"
+            fullWidth
+            // onChange={}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary">
+            cancel
+          </Button>
+          <Button color="primary">
+            create
+          </Button>
+        </DialogActions>
+      </Dialog>  */}
     </div>
   );
 }
