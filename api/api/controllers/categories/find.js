@@ -1,3 +1,5 @@
+var moment = require('moment');
+var momentJalaali = require('moment-jalaali');
 module.exports = {
 
   friendlyName: 'Find',
@@ -27,6 +29,11 @@ module.exports = {
     });
 
     for (let item of allItems) {
+      moment.locale('en');
+      item.jalaaliCreatedDate = momentJalaali(item.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      item.jalaaliUserFriendlyCreatedDate = moment(item.createdAt).fromNow();
+      item.fullJalaali = item.jalaaliCreatedDate + ' ' + item.jalaaliUserFriendlyCreatedDate;
       item.itemType = 'folder';
       item.thumbnail = 'http://localhost:1337/uploads/folder.png';
     }
@@ -46,7 +53,7 @@ module.exports = {
       }
     }
 
-    finalData.dataLength = dataLength.length;
+    finalData.dataLength = allItems.length;
     finalData.data = allItems;
     return finalData;
   }

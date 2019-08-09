@@ -24,6 +24,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import EnhancedTable from './EnhancedTable' ;
+
 class Mylist extends React.Component {
   
   constructor(props) {
@@ -153,7 +155,10 @@ class Mylist extends React.Component {
         </IconButton>
       </Tooltip>
       </div>
-      <List dense>
+
+      <EnhancedTable />
+
+      {/* <List>
 
       {this.state.rows.map((item, index) => {
         return (
@@ -170,7 +175,7 @@ class Mylist extends React.Component {
         );
       })}
 
-    </List>
+    </List> */}
       {/* <Table>
         
         <TableHead>
