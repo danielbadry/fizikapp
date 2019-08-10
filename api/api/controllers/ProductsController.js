@@ -9,7 +9,7 @@ module.exports = {
 
   create: async function(req,res) {
     
-    await Products
+    let product = await Products
       .create({
         name:req.param('name'),
         description:req.param('description'),
@@ -18,30 +18,42 @@ module.exports = {
         tags:req.param('tags'),
         isEnable:req.param('isEnable'),
         publishDate:req.param('publishDate'),
+        createdAt : await sails.helpers.dateParse(),
+        updatedAt : await sails.helpers.dateParse()
       })
-      .then(function(){
-        
-        req.file('thumbnail').upload({
-          dirname: require('path').resolve(sails.config.appPath, 'assets/files/productImage')
-        },function (err, uploadedFiles) {
-          if (err) return res.serverError(err);
+      .fetch();
+      
+      await req.file('thumbnail').upload({
+        dirname: require('path').resolve(sails.config.appPath, 'assets/files/productImage'),
+        saveAs : product.id + '.jpg'
+      }, async function (err, uploadedFiles) {
+        await Products.updateOne({
+          id: product.id
+        })
+        .set({
+          thumbnail: product.id + '.jpg'
         });
-        
-        req.file('file').upload({
-          maxBytes: 100000000,
-          dirname: require('path').resolve(sails.config.appPath, 'assets/files/productFiles')
-        },function (err, uploadedFiles) {
-          if (err) return res.serverError(err);
-        });
-
-        
-      })
-      .then (async function() {
-        let allp = await Products
-        .find()
-        .sort('createdAt DESC')
-        .limit(1);
-        return res.json(allp[0]);
+        if (err) return res.serverError(err);
       });
+      
+      await req.file('file').upload({
+        maxBytes: 100000000,
+        dirname: require('path').resolve(sails.config.appPath, 'assets/files/productFiles'),
+        saveAs : product.id + '.avi'
+      },async function (err, uploadedFiles) {
+        await Products.updateOne({
+          id: product.id 
+        })
+        .set({
+          mainFileSrc: product.id + '.avi'
+        });
+        if (err) return res.serverError(err);
+      });
+
+      let allp = await Products
+      .find()
+      .sort('createdAt DESC')
+      .limit(1);
+      return res.json(allp[0]);
   }
 };

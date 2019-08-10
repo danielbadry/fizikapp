@@ -42,7 +42,7 @@ module.exports = {
     .skip(inputs.skip)
     ;
     for (let product of allProducts) {
-        // product.thumbnail = 'https://lh3.googleusercontent.com/-zyP6Q-Ma140/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdArKMW1jV7KBlXHFKywuHtUjuspw.CMID/s96-c/photo.jpg';
+        product.thumbnail = "http://localhost:1337/files/productImage/" + product.thumbnail;
         product.hasQuiz = false;
         moment.locale('en');
         product.jalaaliCreatedDate = momentJalaali(product.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -50,17 +50,18 @@ module.exports = {
         product.jalaaliUserFriendlyCreatedDate = moment(product.createdAt).fromNow();   
         product.jalaaliUserFriendlyCreatedDate = moment(product.createdAt).fromNow();
         product.jalaaliFullUserFriendlyCreatedDate = product.jalaaliCreatedDate + ' ' + product.jalaaliUserFriendlyCreatedDate;
-        //  tidy up tags
-        // let tags = JSON.parse(product.tags);
-        // tagsArray = [];
-        // for (let tag of product.tags) {
-        //   let tagElement = await Tags.findOne({
-        //     id: tag
-        //   });
-        //   tagsArray.push(tagElement);
-        // }
         
-        // product.tagsArray = tagsArray;
+        //  tidy up tags
+        let tags = JSON.parse(product.tags);
+        tagsArray = [];
+        for (let tag of tags) {
+          let tagElement = await Tags.findOne({
+            id: tag.id
+          });
+          tagsArray.push(tagElement);
+        }
+        
+        product.tagsArray = tagsArray;
     }
 
     finalData.dataLength = dataLength.length;
