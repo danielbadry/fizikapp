@@ -75,8 +75,11 @@ export const ProductShow = (props) => (
 
             <Tab label="information">
                 <TextField source="id" label="Id" />
+                <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
-                <ArrayField source="tagsArray" label="Tags">
+                <TextField source="summary.name" label="name" />
+                <TextField source="summary.description" label="description" />
+                <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />
                     </SingleFieldList>
@@ -110,8 +113,6 @@ export const ProductsList = props => (
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
-            {/* <TextField source="title" label="Title" /> */}
-            {/* <ChipField source="tagsArray" /> */}
             <ArrayField source="tagsArray">
                 <SingleFieldList>
                     <ChipField source="name" />

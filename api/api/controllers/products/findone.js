@@ -86,20 +86,30 @@ module.exports = {
       }
       
     }
-    // let tags = JSON.parse(summary.tags);
-    // for (let tag of tags) {
-    //   let tagElement = await Tags.findOne({
-    //     id: tag.id
-    //   });
-    //   tagsArray.push(tagElement);
-    // }
+    summary.thumbnail = "http://localhost:1337/files/productImage/" + summary.thumbnail;
+    //  tidy up tags
+    if (summary.tags) {
+      let tags = JSON.parse(summary.tags);
+      tagsArray = [];
+    
+      for (let tag of tags) {
+        let tagElement = await Tags.findOne({
+          id: tag.id
+        });
+        tagsArray.push(tagElement);
+      }
+      summary.tagsArray = tagsArray;
+    }
+    else
+    product.tagsArray = [];
 
     return ({
       id: inputs.id,
       summary,
       productsquestions,
       productscomments,
-      tags: []
+      tags: [],
+      thumbnail: summary.thumbnail
     });
 
   }

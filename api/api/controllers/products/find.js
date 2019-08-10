@@ -52,16 +52,20 @@ module.exports = {
         product.jalaaliFullUserFriendlyCreatedDate = product.jalaaliCreatedDate + ' ' + product.jalaaliUserFriendlyCreatedDate;
         
         //  tidy up tags
-        let tags = JSON.parse(product.tags);
-        tagsArray = [];
-        for (let tag of tags) {
-          let tagElement = await Tags.findOne({
-            id: tag.id
-          });
-          tagsArray.push(tagElement);
-        }
+        if (product.tags) {
+          let tags = JSON.parse(product.tags);
+          tagsArray = [];
         
-        product.tagsArray = tagsArray;
+          for (let tag of tags) {
+            let tagElement = await Tags.findOne({
+              id: tag.id
+            });
+            tagsArray.push(tagElement);
+          }
+          product.tagsArray = tagsArray;
+        }
+        else
+        product.tagsArray = [];
     }
 
     finalData.dataLength = dataLength.length;
