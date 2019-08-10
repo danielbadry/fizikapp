@@ -60,7 +60,7 @@ module.exports = {
       defaultsTo: true
     },
     
-    isDelete :{
+    isDeleted :{
       type: 'boolean',
       required : false
     },

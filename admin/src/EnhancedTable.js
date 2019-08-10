@@ -285,7 +285,7 @@ export default function EnhancedTable() {
         .then(function(re){
           console.info('re', re);
           setCurrentDirectory(re);
-          return re.json();
+          // return re.json();
         })
         ; // make a 2nd request and return a promise
       })
@@ -385,22 +385,58 @@ export default function EnhancedTable() {
   }
   
   function paste() {
-    console.info('ItemsForCopy:', itemsForCopy);
-    console.info('container folder:', currentDirectory);
     const dataRecord = {
       itemsForCopy: itemsForCopy,
       currentDirectory: currentDirectory
     }
-    fetch('http://localhost:1337/categories/paste', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
-    .then((response) => {
-        return response.json();
-    })
-    .then((myJson) => {
+
+
+    var url = 'http://localhost:1337/categories/paste';
+
+    var result = fetch(url, {
+        method: 'POST',
+        body : JSON.stringify(dataRecord)
+      }).then(function(response) {
+        return response.json(); // pass the data as promise to next then block
+      }).then(function(data) {
+      
+        return fetch(`http://localhost:1337/categories/?rowId=0`)
         
-    })
-    .catch((e) => {
-        // showNotification('Error: comment not approved', 'warning')
+        ; // make a 2nd request and return a promise
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .catch(function(error) {
+        console.log('Request failed', error)
+      })
+
+    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
+    result.then(function(r) {
+      console.log(r); // 2nd request result
     });
+
+
+
+
+
+
+    // console.info('ItemsForCopy:', itemsForCopy);
+    // console.info('container folder:', currentDirectory);
+    // const dataRecord = {
+    //   itemsForCopy: itemsForCopy,
+    //   currentDirectory: currentDirectory
+    // }
+    // fetch('http://localhost:1337/categories/paste', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
+    // .then((response) => {
+    //     return response.json();
+    // })
+    // .then((myJson) => {
+        
+    // })
+    // .catch((e) => {
+    //     // showNotification('Error: comment not approved', 'warning')
+    // });
   }
 
   function handleChangeDense(event) {
@@ -478,7 +514,7 @@ export default function EnhancedTable() {
         </IconButton>
       </Tooltip>
       
-      <Tooltip title="copy">
+      <Tooltip title="cut">
         <IconButton color="primary" onClick={() => copySelected()}>
             <FileCopy />
         </IconButton>
