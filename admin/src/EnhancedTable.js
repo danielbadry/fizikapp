@@ -267,59 +267,6 @@ export default function EnhancedTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
-
-  function goUp () {
-
-    var url = `http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
-    var result = fetch(url, {
-        method: 'get',
-      }).then(function(response) {
-        return response.json(); // pass the data as promise to next then block
-      }).then(function(data) {
-        console.log('data.data:', data.data);
-        setRows(data.data);
-        return fetch(`http://localhost:1337/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
-        .then(function(resp){
-          return resp.json();
-        })
-        .then(function(re){
-          console.info('re', re);
-          setCurrentDirectory(re);
-          // return re.json();
-        })
-        ; // make a 2nd request and return a promise
-      })
-      .then(function(response) {
-        console.info('response.json:', response.json());
-        return response.json();
-      })
-      .catch(function(error) {
-        
-      })
-
-    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
-    result.then(function(r) {
-      console.log(r); // 2nd request result
-    });
-
-    // console.info(currentDirectory);
-    // fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
-    //     method: "GET",
-    //     headers: {},   
-    // })
-    // .then((response) => {
-    //     return response.json();
-    // })
-    // .then((myJson) => {
-    //     setRows(myJson.data);
-    //     console.info('myJson:', myJson);
-
-        
-    // })
-    // .catch((e) => {
-        
-    // });
-  }
   
   function handleDblClickOnRow () {
     fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(0)}`, {
@@ -350,20 +297,49 @@ export default function EnhancedTable() {
     const dataRecord = {
       itemsForDelete: itemToDelete,
     }
-    fetch('http://localhost:1337/categories/deleteitems', {
+
+    var url = 'http://localhost:1337/categories/deleteitems';
+    var result = fetch(url, {
         method: 'POST',
-        body : JSON.stringify(dataRecord),
-        headers: {}
-    })
-    .then((response) => {
+        body : JSON.stringify(dataRecord)
+      }).then(function(response) {
+        return response.json(); // pass the data as promise to next then block
+      }).then(function(data) {
+        return fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        .then(function(resp){
+          return resp.json();
+        })
+        .then(function(re){
+          setRows(re.data);
+        })
+        ; // make a 2nd request and return a promise
+      })
+      .then(function(response) {
         return response.json();
-    })
-    .then((myJson) => {
-        
-    })
-    .catch((e) => {
-        // showNotification('Error: comment not approved', 'warning')
+      })
+      .catch(function(error) {
+        console.log('Request failed', error)
+      })
+
+    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
+    result.then(function(r) {
+      console.log(r); // 2nd request result
     });
+
+    // fetch('http://localhost:1337/categories/deleteitems', {
+    //     method: 'POST',
+    //     body : JSON.stringify(dataRecord),
+    //     headers: {}
+    // })
+    // .then((response) => {
+    //     return response.json();
+    // })
+    // .then((myJson) => {
+        
+    // })
+    // .catch((e) => {
+    //     // showNotification('Error: comment not approved', 'warning')
+    // });
   }
 
   function createNewFolderr () {
@@ -413,24 +389,55 @@ export default function EnhancedTable() {
     setItemsForCopy(itemToCopyIDs);
   }
   
+  function goUp () {
+    var url = `http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
+    var result = fetch(url, {
+        method: 'get',
+      }).then(function(response) {
+        return response.json(); // pass the data as promise to next then block
+      }).then(function(data) {
+        setRows(data.data);
+        return fetch(`http://localhost:1337/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
+        .then(function(resp){
+          return resp.json();
+        })
+        .then(function(re){
+          setCurrentDirectory(re);
+        })
+        ; // make a 2nd request and return a promise
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .catch(function(error) {
+      })
+
+    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
+    result.then(function(r) {
+      console.log(r); // 2nd request result
+    });
+
+  }
+
   function paste() {
     const dataRecord = {
       itemsForCopy: itemsForCopy,
       currentDirectory: currentDirectory
     }
-
-
     var url = 'http://localhost:1337/categories/paste';
-
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-      
-        return fetch(`http://localhost:1337/categories/?rowId=0`)
-        
+        return fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        .then(function(resp){
+          return resp.json();
+        })
+        .then(function(re){
+          setRows(re.data);
+        })
         ; // make a 2nd request and return a promise
       })
       .then(function(response) {
@@ -445,27 +452,6 @@ export default function EnhancedTable() {
       console.log(r); // 2nd request result
     });
 
-
-
-
-
-
-    // console.info('ItemsForCopy:', itemsForCopy);
-    // console.info('container folder:', currentDirectory);
-    // const dataRecord = {
-    //   itemsForCopy: itemsForCopy,
-    //   currentDirectory: currentDirectory
-    // }
-    // fetch('http://localhost:1337/categories/paste', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
-    // .then((response) => {
-    //     return response.json();
-    // })
-    // .then((myJson) => {
-        
-    // })
-    // .catch((e) => {
-    //     // showNotification('Error: comment not approved', 'warning')
-    // });
   }
 
   function handleChangeDense(event) {

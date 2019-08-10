@@ -51,6 +51,10 @@ module.exports = {
       }
     }
 
+    return({
+      res: 'OK'
+    });
+
   }
 
 };
