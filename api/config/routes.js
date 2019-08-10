@@ -13,5 +13,6 @@ module.exports.routes = {
     'GET /shops/shopsprocess': 'ShopsController.shopsprocess',
     'GET /categories/allcategories': 'CategoriesController.allcategories',
     'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess',
-    'GET /criticisms/badgecount': 'CriticismsController.badgecount'
+    'GET /criticisms/badgecount': 'CriticismsController.badgecount',
+    'GET /categories/findparentdirectoryid': 'CategoriesController.findparentdirectoryid'
 };

@@ -269,23 +269,56 @@ export default function EnhancedTable() {
   }
 
   function goUp () {
-    console.info(currentDirectory);
-    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
-        method: "GET",
-        headers: {},   
-    })
-    .then((response) => {
+
+    var url = `http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
+    var result = fetch(url, {
+        method: 'get',
+      }).then(function(response) {
+        return response.json(); // pass the data as promise to next then block
+      }).then(function(data) {
+        console.log('data.data:', data.data);
+        setRows(data.data);
+        return fetch(`http://localhost:1337/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
+        .then(function(resp){
+          return resp.json();
+        })
+        .then(function(re){
+          console.info('re', re);
+          setCurrentDirectory(re);
+          return re.json();
+        })
+        ; // make a 2nd request and return a promise
+      })
+      .then(function(response) {
+        console.info('response.json:', response.json());
         return response.json();
-    })
-    .then((myJson) => {
-        setRows(myJson.data);
-        console.info('myJson:', myJson);
-        let dd = {id:myJson.data[0].parentId} || {id:0};
-        setCurrentDirectory(dd);
-    })
-    .catch((e) => {
+      })
+      .catch(function(error) {
         
+      })
+
+    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
+    result.then(function(r) {
+      console.log(r); // 2nd request result
     });
+
+    // console.info(currentDirectory);
+    // fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
+    //     method: "GET",
+    //     headers: {},   
+    // })
+    // .then((response) => {
+    //     return response.json();
+    // })
+    // .then((myJson) => {
+    //     setRows(myJson.data);
+    //     console.info('myJson:', myJson);
+
+        
+    // })
+    // .catch((e) => {
+        
+    // });
   }
   
   function handleDblClickOnRow () {
