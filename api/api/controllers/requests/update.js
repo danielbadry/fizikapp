@@ -41,7 +41,7 @@ module.exports = {
     });
     user = user[0];
     user.fullName = user.firstName + ' ' + user.lastName;
-    user.thumbnail = "http://localhost:1337/uploads/" + user.thumbnail;
+    user.thumbnail = "http://localhost:1337/files/usersImage/" + user.thumbnail;
     result.userInfo = user;
     result.thumbnail = user.thumbnail;
     result.isResponsed = true;  

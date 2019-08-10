@@ -37,7 +37,7 @@ module.exports = {
     });
 
     request.userInfo = user[0];
-    request.thumbnail = "http://localhost:1337/uploads/" + request.userInfo.thumbnail;
+    request.thumbnail = "http://localhost:1337/files/usersImage/" + request.userInfo.thumbnail;
     request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
     request.isResponsed = true;  
     moment.locale('en');
@@ -59,7 +59,7 @@ module.exports = {
       requestUserAnswer.userInfo = user[0];
       requestUserAnswer.userInfo.fullName = requestUserAnswer.userInfo.firstName + ' ' + requestUserAnswer.userInfo.lastName;
       requestUserAnswer.userInfo.url = 'http://localhost:3000/#/users/' + requestUserAnswer.userInfo.id + '/show';
-      requestUserAnswer.thumbnail = "http://localhost:1337/uploads/" + requestUserAnswer.userInfo.thumbnail;
+      requestUserAnswer.thumbnail = "http://localhost:1337/files/usersImage/" + requestUserAnswer.userInfo.thumbnail;
     }
     
     // fetch admin answer

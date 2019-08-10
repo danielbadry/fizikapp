@@ -15,5 +15,6 @@ module.exports.routes = {
     'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess',
     'GET /criticisms/badgecount': 'CriticismsController.badgecount',
     'GET /categories/findparentdirectoryid': 'CategoriesController.findparentdirectoryid',
-    'POST /categories/paste': 'CategoriesController.paste'
+    'POST /categories/paste': 'CategoriesController.paste',
+    'POST /categories/deleteitems': 'CategoriesController.deleteitems'
 };

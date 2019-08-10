@@ -54,6 +54,7 @@ module.exports = {
         user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
         user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
         user.thumbnail = "http://localhost:1337/files/usersImage/" + user.id + '.jpg';
+        
         let lastShop = await Shops.find({
           where: {
             userId: user.id
@@ -61,14 +62,16 @@ module.exports = {
         })
         .sort('createdAt DESC')
         .limit(1);
-        let id = lastShop[0].shoppingPlanId;
-
-        let res = await Shoppingplans.find({
-          where: {
-            id: id
-          }
-        });
-        user.subType = res[0].type;
+        if (lastShop.length){
+          let id = lastShop[0].shoppingPlanId;
+          let res = await Shoppingplans.find({
+            where: {
+              id: id
+            }
+          });
+          user.subType = res[0].type;
+        }
+        
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allUsers;

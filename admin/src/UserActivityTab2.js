@@ -111,9 +111,9 @@ class AlignItemsList extends React.Component {
                         
                         color="textPrimary"
                     >
-                        Ali Connors
+                        + 100 $
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
+                    
                     </React.Fragment>
                 }
                 />

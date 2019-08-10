@@ -57,7 +57,7 @@ module.exports = {
         });
         request.userInfo = user[0];
         request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
-        request.thumbnail = "http://localhost:1337/uploads/" + request.userInfo.thumbnail;
+        request.thumbnail = "http://localhost:1337/files/usersImage/" + request.userInfo.thumbnail;
           
         moment.locale('en');
         request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

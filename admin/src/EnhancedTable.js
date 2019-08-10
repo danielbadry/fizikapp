@@ -337,6 +337,35 @@ export default function EnhancedTable() {
     });
   }
 
+  function deleteRows () {
+    let itemToDelete = [];
+    for (let select of selected) {
+      for (let item of rows) {
+        if (select == item.name) {
+          itemToDelete.push(item);
+        }
+      }
+    }
+    
+    const dataRecord = {
+      itemsForDelete: itemToDelete,
+    }
+    fetch('http://localhost:1337/categories/deleteitems', {
+        method: 'POST',
+        body : JSON.stringify(dataRecord),
+        headers: {}
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        
+    })
+    .catch((e) => {
+        // showNotification('Error: comment not approved', 'warning')
+    });
+  }
+
   function createNewFolderr () {
     const dataRecord = {
       name:values.name,
@@ -524,6 +553,13 @@ export default function EnhancedTable() {
         <IconButton 
             onClick={()=> createNewFolderr()} color="primary">
             <CreateNewFolder />
+        </IconButton>
+      </Tooltip>
+      
+      <Tooltip title="new">
+        <IconButton 
+            onClick={()=> deleteRows()} color="primary">
+            <DeleteIcon />
         </IconButton>
       </Tooltip>
         </div>     

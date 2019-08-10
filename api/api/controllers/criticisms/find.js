@@ -52,7 +52,7 @@ module.exports = {
       user = user[0];
       criticism.userInfo = user;
       criticism.userInfo.fullName = criticism.userInfo.firstName + ' ' + criticism.userInfo.lastName;
-      criticism.thumbnail = "http://localhost:1337/uploads/" + criticism.userInfo.thumbnail;
+      criticism.thumbnail = "http://localhost:1337/files/usersImage/" + criticism.userInfo.thumbnail;
       if(criticism.response.length == 0)
         criticism.isResponsed = false;
       else
