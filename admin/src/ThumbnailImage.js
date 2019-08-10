@@ -14,7 +14,6 @@ const styles = {
   };
 
 function Thumbnail(props) {
-    console.info('p:', props.record);
     const { classes } = props;
     return (
         <React.Fragment>

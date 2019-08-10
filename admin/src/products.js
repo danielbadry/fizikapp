@@ -24,7 +24,7 @@ import RichTextInput from 'aor-rich-text-input';
 export const ProductCreate = (props) => (
     <Create {...props} >
         
-        <SimpleForm>
+        <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             {/*
@@ -46,8 +46,8 @@ export const ProductCreate = (props) => (
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
             
-            <FileInput source="files" label="Related files" accept="application/pdf">
-                <FileField source="src" title="title" />
+            <FileInput source="file" label="Related files" accept="video/avi">
+                <FileField source="file" title="title" />
             </FileInput>
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
         </SimpleForm>
@@ -110,7 +110,7 @@ export const ProductsList = props => (
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
-            <TextField source="title" label="Title" />
+            {/* <TextField source="title" label="Title" /> */}
             {/* <ChipField source="tagsArray" /> */}
             <ArrayField source="tagsArray">
                 <SingleFieldList>
@@ -120,8 +120,8 @@ export const ProductsList = props => (
             <TextField source="price" label="Price" />
             <BooleanField source="isEnabled" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
-            <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" />
+            {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" /> */}
+            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
             <ShowButton />
         </Datagrid>

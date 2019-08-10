@@ -7,8 +7,8 @@
 
 module.exports = {
 
-  
   create: async function(req,res) {
+    
     await Products
       .create({
         name:req.param('name'),
@@ -16,16 +16,25 @@ module.exports = {
         price:req.param('price'),
         title:req.param('title'),
         tags:req.param('tags'),
-        category:req.param('category'),
-        isEnable: true,
-        createdAt : await sails.helpers.dateParse(),
-        updatedAt : await sails.helpers.dateParse()
+        isEnable:req.param('isEnable'),
+        publishDate:req.param('publishDate'),
       })
       .then(function(){
-        req.file('file').upload(function(err, uploadedFiles) {
-          if (err)
-            return res.serverError(err);
+        
+        req.file('thumbnail').upload({
+          dirname: require('path').resolve(sails.config.appPath, 'assets/files/productImage')
+        },function (err, uploadedFiles) {
+          if (err) return res.serverError(err);
         });
+        
+        req.file('file').upload({
+          maxBytes: 100000000,
+          dirname: require('path').resolve(sails.config.appPath, 'assets/files/productFiles')
+        },function (err, uploadedFiles) {
+          if (err) return res.serverError(err);
+        });
+
+        
       })
       .then (async function() {
         let allp = await Products
@@ -34,6 +43,5 @@ module.exports = {
         .limit(1);
         return res.json(allp[0]);
       });
-  },
-
+  }
 };

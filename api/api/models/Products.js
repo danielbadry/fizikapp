@@ -56,7 +56,8 @@ module.exports = {
     
     isEnabled :{
       type: 'boolean',
-      required : false
+      required : false,
+      defaultsTo: true
     },
     
     isDelete :{
@@ -67,6 +68,24 @@ module.exports = {
     thumbnail :{
       type: 'string',
       required : false
+    },
+    
+    likes :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
+    },
+    
+    disLikes :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
+    },
+    
+    views :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
     },
     
     mainFileSrc :{

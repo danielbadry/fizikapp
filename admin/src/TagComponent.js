@@ -19,7 +19,7 @@ class TagForm extends React.Component {
         return response.json();
     })
     .then((myJson) => {
-      myJson.map(
+      myJson.data.map(
         (item) => {
           tempObj = {};
           tempObj.label = item.name;
