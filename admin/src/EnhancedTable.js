@@ -539,7 +539,7 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                       <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        <Avatar alt="Remy Sharp" src={row.thumbnail} />
                         </ListItemAvatar>
                         
                       </TableCell>

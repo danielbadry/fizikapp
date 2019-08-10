@@ -103,7 +103,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 var formData = new FormData();
                 
                 Object.keys(params.data).forEach(function (item) {
-                    if(item != "thumbnail" && item != "file" && item != "tags")
+                    if(item != "thumbnail" && item != "file" && item != "tags" && item != "category")
                         formData.append(item, params.data[item]);
                     
                     if (item == "thumbnail")
@@ -114,6 +114,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
                     if (item == "tags")
                         formData.append("tags", JSON.stringify(params.data[item]));
+                    
+                    if (item == "category")
+                        formData.append("category", JSON.stringify(params.data[item]));
 
                 });
                 

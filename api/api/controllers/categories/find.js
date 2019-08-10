@@ -35,7 +35,7 @@ module.exports = {
       item.jalaaliUserFriendlyCreatedDate = moment(item.createdAt).fromNow();
       item.fullJalaali = item.jalaaliCreatedDate + ' ' + item.jalaaliUserFriendlyCreatedDate;
       item.itemType = 'folder';
-      item.thumbnail = 'http://localhost:1337/uploads/folder.png';
+      item.thumbnail = 'http://localhost:1337/files/productImage/folder.png';
     }
 
     let allProducts = await Products.find({
@@ -48,7 +48,12 @@ module.exports = {
       let p = JSON.parse(product.category);
       if (p.id == inputs.rowId) {
         product.itemType = 'product';
-        product.thumbnail = 'http://localhost:1337/uploads/5d3c65cc823c3d1be8f529d2.jpg';
+        product.thumbnail = 'http://localhost:1337/files/productImage/' + product.thumbnail;
+        moment.locale('en');
+        product.jalaaliCreatedDate = momentJalaali(product.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+        moment.locale('fa');
+        product.jalaaliUserFriendlyCreatedDate = moment(product.createdAt).fromNow();
+        product.fullJalaali = product.jalaaliCreatedDate + ' ' + product.jalaaliUserFriendlyCreatedDate;
         allItems.push(product);
       }
     }

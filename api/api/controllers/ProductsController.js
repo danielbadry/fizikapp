@@ -16,6 +16,7 @@ module.exports = {
         price:req.param('price'),
         title:req.param('title'),
         tags:req.param('tags'),
+        category:req.param('category'),
         isEnable:req.param('isEnable'),
         publishDate:req.param('publishDate'),
         createdAt : await sails.helpers.dateParse(),
