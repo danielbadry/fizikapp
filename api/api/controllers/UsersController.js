@@ -11,41 +11,36 @@ module.exports = {
         let user = await Users
             .create({
                 firstName:req.param('firstName'),
+                lastName:req.param('lastName'),
+                email:req.param('email'),
+                userName:req.param('userName'),
+                mobile:req.param('mobile'),
+                phone:req.param('phone'),
+                fCoin:req.param('fCoin'),
+                gender:req.param('gender'),
+                grade:req.param('grade'),
+                createdAt : await sails.helpers.dateParse(),
+                updatedAt : await sails.helpers.dateParse(),
             }).fetch();
 
         await req.file('thumbnail').upload({
-                dirname: '../../public/uploads/',
+            dirname: require('path').resolve(sails.config.appPath, 'assets/files/usersImage'),
                 saveAs : user.id + '.jpg'
-            },function(err, uploadedFiles) {
-              if (err)
-                return res.serverError(err);
-            }); 
-        
-        await Users.updateOne({
-                id: user.id
-            })
-            .set({
-                thumbnail: user.id + '.jpg'
+            },async function(err, uploadedFiles) {
+                await Users.updateOne({
+                    id: user.id
+                })
+                .set({
+                    thumbnail: user.id + '.jpg'
+                });
+
+                if (err) return res.serverError(err);
             }); 
 
-        return res.ok({
-            id: user.id,
-
-        });       
-            // .then(function(){
-            //     let user = User.find({
-            //         isDeleted: false,
-                    
-            //     });
-            //     res.ok({
-            //         name : x.firstName
-            //     });
-                // req.file('thumbnail').upload({
-                //     saveAs : 'a.jpg'
-                // },function(err, uploadedFiles) {
-                //   if (err)
-                //     return res.serverError(err);
-                // });
-            // });
+        let allUsers = await Users
+        .find()
+        .sort('createdAt DESC')
+        .limit(1);
+        return res.json(allUsers[0]);
     },
 };

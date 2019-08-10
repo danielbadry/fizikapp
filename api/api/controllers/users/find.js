@@ -53,7 +53,7 @@ module.exports = {
         user.numberOfInvitation = 3;
         user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
         user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
-        user.thumbnail = "http://localhost:1337/uploads/" + user.id + '.jpg';
+        user.thumbnail = "http://localhost:1337/files/usersImage/" + user.id + '.jpg';
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allUsers;
