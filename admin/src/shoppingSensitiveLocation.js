@@ -105,7 +105,7 @@ class shoppingSensitiveLocation extends Component {
   }
 
   render() {
-    return <div className="in-highchart" />;
+    return <div className="in-highchart" style={{ width: "50%", height: "500px", display:"inline-block" }} />;
   }
 }
 

@@ -25,19 +25,19 @@ function createData(name, likes, dislikes, views, comments, reports, qa) {
 }
 
 const rows = [
-  createData('speed', 305, 3, 67, 4 , 67, 17),
-  createData('gravity', 452, 25, 51, 5 , 67, 6),
-  createData('grace', 262, 16, 24, 6 , 67, 6),
-  createData('newton', 159, 6, 24, 4 , 67, 6),
-  createData('Gingerbread', 356, 16, 49, 3 , 67, 6),
-  createData('Honeycomb', 408, 3, 87, 6 , 67, 6),
-  createData('Ice cream sandwich', 237, 9, 37, 6 , 67, 6),
-  createData('Jelly Bean', 375, 0, 94, 0 , 67, 6),
-  createData('KitKat', 518, 26, 65, 7 , 67, 6),
-  createData('Lollipop', 392, 0, 98, 0 , 67, 6),
-  createData('Marshmallow', 318, 0, 81, 2 , 67, 6),
-  createData('Nougat', 360, 19, 9, 37 , 67, 6),
-  createData('Oreo', 437, 18, 63, 4 , 67, 0),
+  createData('video 1', 305, 3, 67, 4 , 67, 17),
+  createData('video 2', 452, 25, 51, 5 , 67, 6),
+  createData('video 3', 262, 16, 24, 6 , 67, 6),
+  createData('video 4', 159, 6, 24, 4 , 67, 6),
+  createData('video 5', 356, 16, 49, 3 , 67, 6),
+  createData('video 6', 408, 3, 87, 6 , 67, 6),
+  createData('video 7', 237, 9, 37, 6 , 67, 6),
+  createData('video 8', 375, 0, 94, 0 , 67, 6),
+  createData('video 9', 518, 26, 65, 7 , 67, 6),
+  createData('video 10', 392, 0, 98, 0 , 67, 6),
+  createData('video 11', 318, 0, 81, 2 , 67, 6),
+  createData('video 12', 360, 19, 9, 37 , 67, 6),
+  createData('video 13', 437, 18, 63, 4 , 67, 0),
 ];
 
 function desc(a, b, orderBy) {
@@ -170,7 +170,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+            Products Statistics
           </Typography>
         )}
       </div>

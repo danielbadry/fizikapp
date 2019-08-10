@@ -17,6 +17,7 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    let finalData = {};
     let allShops = await Shops.find();
     let dateList = [];
 
@@ -58,7 +59,9 @@ module.exports = {
       }
     }
 
-    return dateList;
+    finalData.dataLength = allShops.length;
+    finalData.data = dateList;
+    return finalData;
   }
 
 

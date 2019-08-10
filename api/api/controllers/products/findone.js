@@ -45,13 +45,13 @@ module.exports = {
           }
         });
         productsquestion.userInfo = user[0];
-        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + productsquestion.userInfo.thumbnail;
+        productsquestion.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + productsquestion.userInfo.thumbnail;
         productsquestion.userInfo.url = 'http://localhost:3000/#/users/' + productsquestion.userInfo.id + '/show';
       } else {
         productsquestion.userInfo = {};
-        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + '5d3c66fc823c3d1be8f529d3.jpg';
-        productsquestion.userInfo.firstName = 'admin';
-        productsquestion.userInfo.lastName = 'khan';
+        productsquestion.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + '5d3c66fc823c3d1be8f529d3.jpg';
+        productsquestion.userInfo.firstName = 'iman';
+        productsquestion.userInfo.lastName = 'arghamy';
       }
       
     }
@@ -76,11 +76,11 @@ module.exports = {
           }
         });
         productscomment.userInfo = user[0];
-        productscomment.userInfo.thumbnail = 'http://localhost:1337/uploads/' + productscomment.userInfo.thumbnail;
+        productscomment.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + productscomment.userInfo.thumbnail;
         productscomment.userInfo.url = 'http://localhost:3000/#/users/' + productscomment.userInfo.id + '/show';
       } else {
         productscomment.userInfo = {};
-        productscomment.userInfo.thumbnail = 'http://localhost:1337/uploads/' + 'IMG_20190804_103448_895.jpg';
+        productscomment.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + 'IMG_20190804_103448_895.jpg';
         productscomment.userInfo.firstName = 'iman';
         productscomment.userInfo.lastName = 'arghamy';
       }

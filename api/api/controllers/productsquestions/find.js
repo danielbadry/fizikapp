@@ -40,11 +40,11 @@ module.exports = {
           }
         });
         productsquestion.userInfo = user[0];
-        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + productsquestion.userInfo.thumbnail;
+        productsquestion.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + productsquestion.userInfo.thumbnail;
         productsquestion.userInfo.url = 'http://localhost:3000/#/users/' + productsquestion.userInfo.id + '/show';
       } else {
         productsquestion.userInfo = {};
-        productsquestion.userInfo.thumbnail = 'http://localhost:1337/uploads/' + 'IMG_20190804_103448_895.jpg';
+        productsquestion.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + 'IMG_20190804_103448_895.jpg';
         productsquestion.userInfo.firstName = 'iman';
         productsquestion.userInfo.lastName = 'arghamy';
       }

@@ -43,7 +43,15 @@ module.exports = {
     ;
     for (let product of allProducts) {
         product.thumbnail = "http://localhost:1337/files/productImage/" + product.thumbnail;
+        let quizs = await Quizes.find({
+          where : {
+            productId: product.id
+          }
+        });
         product.hasQuiz = false;
+        if (quizs.length)
+          product.hasQuiz = true;
+        
         moment.locale('en');
         product.jalaaliCreatedDate = momentJalaali(product.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
         moment.locale('fa');

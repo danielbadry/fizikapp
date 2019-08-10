@@ -303,6 +303,7 @@ class QuizManager extends React.Component {
         <React.Fragment>
         
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+            <AddIcon />
             ADD
         </Button>
 
