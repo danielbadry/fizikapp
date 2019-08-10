@@ -172,7 +172,7 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable() {
     const [rows, setRows] = useState([]);
     const [folderName, setFolderNameInState] = useState('');
-    const [currentDirectory, setCurrentDirectory] = useState(0);
+    const [currentDirectory, setCurrentDirectory] = useState({id:0});
     const [firstTime, setFirstTime] = useState(true);
     const [rowId, setrowId] = useState(0);
 
@@ -270,8 +270,7 @@ export default function EnhancedTable() {
 
   function goUp () {
     console.info(currentDirectory);
-    // return;
-    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory)}`, {
+    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`, {
         method: "GET",
         headers: {},   
     })
@@ -280,6 +279,9 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
         setRows(myJson.data);
+        console.info('myJson:', myJson);
+        let dd = {id:myJson.data[0].parentId} || {id:0};
+        setCurrentDirectory(dd);
     })
     .catch((e) => {
         
@@ -303,11 +305,11 @@ export default function EnhancedTable() {
   }
 
   function createNewFolderr () {
-console.info(currentDirectory);
     const dataRecord = {
       name:values.name,
-      parentId : currentDirectory
+      parentId : currentDirectory.id
     }
+    
     fetch('http://localhost:1337/categories', { method: 'POST', 
       body : JSON.stringify(dataRecord), 
       headers: {}
@@ -316,7 +318,7 @@ console.info(currentDirectory);
         return response.json();
     })
     .then((myJson) => {
-      fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory)}`, {
+      fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
           method: "GET",
           headers: {},   
       })
@@ -325,7 +327,7 @@ console.info(currentDirectory);
       })
       .then((myJson) => {
           setRows(myJson.data);
-          // setFirstTime(false);
+
       })
       .catch((e) => {
           
