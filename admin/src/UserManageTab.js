@@ -107,20 +107,39 @@ class UserManageTab extends React.Component {
         }  
     
     sendFcoin = () => {
-        const { dataProvider } = this.props;
         const updatedRecord = {
-            fCoin : this.state.fCoin
+            fCoin : this.state.fCoin,
+            userId: this.props.record.id
         }
-        dataProvider(UPDATE, 'users', {
-                id: this.props.record.id,
-                data: updatedRecord
-            })
-          .then((res) => {
+        fetch('http://localhost:1337/users/sendfcoin', { 
+            method: 'PUT',
+            body : JSON.stringify(updatedRecord), 
+            headers: {}
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
             
-          })
-          .catch((e) => {
-              console.info('Error: comment not approved', 'warning')
-          });
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+
+        // const { dataProvider } = this.props;
+        // const updatedRecord = {
+        //     fCoin : this.state.fCoin
+        // }
+        // dataProvider(UPDATE, 'users', {
+        //         id: this.props.record.id,
+        //         data: updatedRecord
+        //     })
+        //   .then((res) => {
+            
+        //   })
+        //   .catch((e) => {
+        //       console.info('Error: comment not approved', 'warning')
+        //   });
         }  
     handleUpload = (e) => {
         console.info(e);

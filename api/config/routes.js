@@ -16,5 +16,6 @@ module.exports.routes = {
     'GET /criticisms/badgecount': 'CriticismsController.badgecount',
     'GET /categories/findparentdirectoryid': 'CategoriesController.findparentdirectoryid',
     'POST /categories/paste': 'CategoriesController.paste',
-    'POST /categories/deleteitems': 'CategoriesController.deleteitems'
+    'POST /categories/deleteitems': 'CategoriesController.deleteitems',
+    'PUT /users/sendfcoin': 'UsersController.sendfcoin'
 };

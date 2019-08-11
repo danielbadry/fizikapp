@@ -57,14 +57,9 @@ export const ProductCreate = (props) => (
 export const ProductEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
-            <DisabledInput label="Id" source="id" />
-            <TextInput source="title" />
-            <LongTextInput source="teaser" />
-            <DateInput label="Publication date" source="published_at" />
-            <BooleanInput
-              source="isEnabled"
-              label="enable"
-            />
+            <TextInput source="name" label="name" />
+            <LongTextInput source="title" label="title" />
+            <LongTextInput source="description" label="description" />
         </SimpleForm>
     </Edit>
 );
@@ -123,7 +118,7 @@ export const ProductsList = props => (
             <BooleanField source="hasQuiz" label="hasQuiz" />
             {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" /> */}
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
-            <EditButton />
+            {/* <EditButton /> */}
             <ShowButton />
         </Datagrid>
     </List>

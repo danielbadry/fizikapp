@@ -36,7 +36,7 @@ const App = () => (
         authProvider={authProvider}
         appLayout={MyLayout}
         >
-        <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} edit={ProductEdit} show={ProductShow} />
+        <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
         <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
