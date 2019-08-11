@@ -43,7 +43,7 @@ module.exports = {
     user = user[0];
     result.userInfo = user;
     result.userInfo.fullName = result.userInfo.firstName + ' ' + result.userInfo.lastName;
-    result.thumbnail = "http://localhost:1337/uploads/" + result.userInfo.thumbnail;
+    result.thumbnail = "http://localhost:1337/files/usersImage/" + result.userInfo.thumbnail;
     if(result.response.length == 0)
       result.isResponsed = false;
     else

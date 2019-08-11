@@ -50,7 +50,7 @@ module.exports = {
       });
       police.userInfo = user[0];
       police.userInfo.fullName = police.userInfo.firstName + ' ' + police.userInfo.lastName;
-      police.thumbnail = "http://localhost:1337/uploads/" + police.userInfo.thumbnail;
+      police.thumbnail = "http://localhost:1337/files/usersImage/" + police.userInfo.thumbnail;
 
       moment.locale('en');
       police.jalaaliCreatedDate = momentJalaali(police.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
