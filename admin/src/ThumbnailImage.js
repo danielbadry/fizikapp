@@ -6,11 +6,19 @@ import { makeStyles } from '@material-ui/styles';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
-    root: {
-        borderColor: '#19ab19',
-        borderWidth: '2px',
-        borderStyle: 'double'
+    
+    onlineUser: {
+        borderColor: '#39a739',
+        borderWidth: '4px',
+        borderStyle: 'solid'
     },
+    
+    offlineUser: {
+        borderColor: '#ccc',
+        borderWidth: '4px',
+        borderStyle: 'solid'
+    }
+
   };
 
 function Thumbnail(props) {
@@ -19,9 +27,9 @@ function Thumbnail(props) {
         <React.Fragment>
             <ListItemAvatar>
                 {(props.record.isOnline) ? 
-                <Avatar className={classes.root} alt="Remy Sharp" src={props.record[props.source]} />
+                <Avatar className={classes.onlineUser} title={props.record.firstName + ' ' + props.record.lastName} src={props.record[props.source]} />
                 :
-                <Avatar alt="Remy Sharp" src={props.record[props.source]} />
+                <Avatar className={classes.offlineUser} title={props.record.firstName + ' ' + props.record.lastName} src={props.record[props.source]} />
                 }
             </ListItemAvatar>
         </React.Fragment>

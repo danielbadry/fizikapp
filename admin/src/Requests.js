@@ -15,11 +15,12 @@ export const RequestShow = (props) => (
         <TabbedShowLayout>
             
             <Tab label="question">
-                <TextField source="title" label="title" />
-                <TextField source="message" label="message" />
-                <MyUrlField label="username"/>
-                <TextField source="userInfo.fullName" label="Name" />
+                <br />
                 <Thumbnail source="thumbnail" label="thumbnail" />
+                <MyUrlField label="username"/>
+                <TextField source="userInfo.fullName" label="" />
+                <TextField source="title" label="" />
+                <TextField source="message" label="" />
             </Tab>
             
             <Tab label="users answer" path="usersanswer" >

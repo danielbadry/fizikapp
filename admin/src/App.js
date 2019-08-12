@@ -36,15 +36,15 @@ const App = () => (
         authProvider={authProvider}
         appLayout={MyLayout}
         >
-        <Resource name="products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
-        <Resource name="users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
-        <Resource name="categories" list={CategoriesList} icon={CategoryIcon} />
-        <Resource name="tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
-        <Resource name="shops" list={ShopsList} icon={ShoppingIcon} show={shopShow} />
-        <Resource name="criticisms" list={CriticismsList} icon={CommentIcon} />
-        <Resource name="shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} show={ShoppingplansShow} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
-        <Resource name="police" icon={NotificationsPaused} list={PoliceList} />
-        <Resource name="requests" icon={VpnKey} list={RequestList} show={RequestShow} />
+        <Resource name="Products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
+        <Resource name="Users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
+        <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />
+        <Resource name="Tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
+        <Resource name="Shops" list={ShopsList} icon={ShoppingIcon} show={shopShow} />
+        <Resource name="Criticisms" list={CriticismsList} icon={CommentIcon} />
+        <Resource name="Shoppingplans" icon={InsertInvitationIcon} list={ShoppingplansList} show={ShoppingplansShow} create={ShoppingplansCreate} edit={ShoppingplansEdit} />
+        <Resource name="Police" icon={NotificationsPaused} list={PoliceList} />
+        <Resource name="Requests" icon={VpnKey} list={RequestList} show={RequestShow} />
     </Admin>  
 );
 

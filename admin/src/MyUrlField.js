@@ -3,7 +3,6 @@ import React from 'react';
 class MyUrlField extends React.Component {
     constructor (props) {
         super(props);
-        console.info('etelaat:', props);
     }
     render() {
         return (

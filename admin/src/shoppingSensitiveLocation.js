@@ -59,7 +59,7 @@ class shoppingSensitiveLocation extends Component {
       colorAxis: {
         min: 0,
         minColor: "#E6E7E8",
-        maxColor: "#005645"
+        maxColor: "#f90"
       },
       legend: {
         layout: "vertical",
@@ -71,7 +71,7 @@ class shoppingSensitiveLocation extends Component {
         text: "IRAN",
         floating: true,
         align: "right",
-        y: 50,
+        y: 40,
         style: {
           fontSize: "16px"
         }
