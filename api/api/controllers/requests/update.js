@@ -31,7 +31,8 @@ module.exports = {
       id: inputs.id
     })
     .set({
-      adminAnswer: inputs.adminAnswer
+      adminAnswer: inputs.adminAnswer,
+      updatedAt : await sails.helpers.dateParse(),
     });
 
     let user = await Users.find({

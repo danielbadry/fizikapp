@@ -1,7 +1,7 @@
 import React , { Fragment } from 'react';
 import {    List, Datagrid, Create, SimpleForm, TextInput,
             ImageInput, ImageField, BooleanField, SelectInput, Show, TabbedShowLayout,
-            Tab, TextField, NumberInput
+            Tab, TextField, NumberInput, Filter
         } from 'react-admin';
 
 import UserManageTab from './UserManageTab';
@@ -148,9 +148,16 @@ export const UserCreate = (props) => (
 
 const UserPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
+const PostFilter = (props) => (
+    <Filter {...props}>
+        {/* <TextInput label="Search" source="q" alwaysOn /> */}
+        <TextInput label="firstName" source="firstName" />
+    </Filter>
+);
+
 export const UsersList = props => (
 
-    <List {...props} pagination={<UserPagination />}>
+    <List {...props} pagination={<UserPagination />} filters={<PostFilter />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="userName" label="username" />

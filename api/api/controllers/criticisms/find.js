@@ -40,8 +40,23 @@ module.exports = {
     let allCriticisms = await Criticisms.find()
     .limit(inputs.limit)
     .skip(inputs.skip)
+    .sort([{createdAt :'DESC'}])
     ;
     
+    
+    // sort array based on their admin response status
+    let criticismWithNoResponse = [];
+    let criticismWithResponse = [];
+    for (let criticism of allCriticisms) {
+      if (criticism.response == '')
+        criticismWithNoResponse.push(criticism);
+      else 
+        criticismWithResponse.push(criticism);
+    }
+    allCriticisms = criticismWithNoResponse.concat(criticismWithResponse);
+    
+
+
     for (let criticism of allCriticisms) { 
       let user = await Users.find({
         where : {

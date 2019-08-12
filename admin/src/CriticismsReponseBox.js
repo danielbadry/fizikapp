@@ -32,7 +32,9 @@ class CriticismsReponseBox extends React.Component {
         const updatedRecord = { response: this.state.response };
         dataProvider(UPDATE, 'criticisms', { id: record.id, data: updatedRecord })
             .then(() => {
-               dispatch(push('/criticisms'));
+               dispatch(push(`/tags`));
+               let rand = Math.floor(Math.random() * 100) + 1;
+               dispatch(push(`/criticisms?limit=${10}&skip=${0}&rand=${rand}`));
                const increaseCatSize = this.props.increaseCatSize;
                 increaseCatSize(2);
             })

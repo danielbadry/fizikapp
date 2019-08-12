@@ -36,7 +36,9 @@ class RequestsResponseBox extends React.Component {
         };
         dataProvider(UPDATE, 'requests', { id: record.id, data: ResponseRecord })
             .then(() => {
-               dispatch(push('/requests'));
+               dispatch(push(`/tags`));
+               let rand = Math.floor(Math.random() * 100) + 1;
+               dispatch(push(`/requests?limit=${10}&skip=${0}&rand=${rand}`));
                const increaseCatSize = this.props.increaseCatSize;
                increaseCatSize(2);
             })

@@ -38,7 +38,7 @@ module.exports = {
     let finalData = {};
     let dataLength = await Requests.find({
       where : {
-        parentId: 0
+        parentId: ''
       }
     });
     let allRequests = await Requests.find({
@@ -47,8 +47,20 @@ module.exports = {
     })
     .limit(inputs.limit)
     .skip(inputs.skip)
+    .sort([{updatedAt :'DESC'}])
     ;
     
+    // sort array based on their admin response status
+    let requestWithNoResponse = [];
+    let requestWithResponse = [];
+    for (let request of allRequests) {
+      if (request.adminAnswer == '')
+        requestWithNoResponse.push(request);
+      else 
+        requestWithResponse.push(request);
+    }
+    allRequests = requestWithNoResponse.concat(requestWithResponse);
+    // return allRequests;
       for (let request of allRequests) {
         let user = await Users.find ({
           where : {

@@ -35,11 +35,29 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
-    let dataLength = await Users.find();
-    let allUsers = await Users.find()
-    .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
+    let allUsers;
+    // let dataLength = await Users.find();
+    if (inputs.where)
+    {
+      // return inputs.where
+      allUsers = await Users.find(
+        {
+          where: JSON.parse(inputs.where)
+        }
+      )
+      .limit(inputs.limit)
+      .skip(inputs.skip)
+      ;
+      dataLength = allUsers.length;
+    }
+
+    else {
+      allUsers = await Users.find()
+      .skip(inputs.skip)
+      ;
+      dataLength = allUsers.length;
+    }
+
     for (let user of allUsers) {
         user.fullName = user.firstName + ' ' + user.lastName;
 
@@ -73,11 +91,10 @@ module.exports = {
         }
         
     }
-    finalData.dataLength = dataLength.length;
+    finalData.dataLength = dataLength;
     finalData.data = allUsers;
     return finalData;
 
   }
-
 
 };
