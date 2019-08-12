@@ -151,7 +151,7 @@ const UserPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 
 const PostFilter = (props) => (
     <Filter {...props}>
         {/* <TextInput label="Search" source="q" alwaysOn /> */}
-        <TextInput label="firstName" source="firstName" />
+        <TextInput label="search by name" source="fullName" alwaysOn />
     </Filter>
 );
 
