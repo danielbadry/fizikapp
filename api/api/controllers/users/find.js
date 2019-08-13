@@ -57,6 +57,9 @@ module.exports = {
             },
             {
               lastName:{contains: conditions.fullName.contains}
+            },
+            {
+              userName:{contains: conditions.fullName.contains}
             }
           ]
         }
@@ -70,6 +73,9 @@ module.exports = {
             },
             {
               lastName:{contains: conditions.fullName.contains}
+            },
+            {
+              userName:{contains: conditions.fullName.contains}
             }
           ]
         }
