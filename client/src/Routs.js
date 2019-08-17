@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Requests from './Requests';
 import About from './About';
 import Home from './Home';
+import NewRequest from './NewRequest';
 
 class Routs extends React.Component {
     render() {
@@ -18,10 +19,14 @@ class Routs extends React.Component {
                     <li>
                         <Link to="/about">About</Link>
                     </li>
+                    <li>
+                        <Link to="/NewRequest">NewRequest</Link>
+                    </li>
                 </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/about" component={About} />
+                <Route path="/newRequest" component={NewRequest} />
             </Router>
         );
     }
