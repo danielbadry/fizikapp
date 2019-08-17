@@ -59,7 +59,7 @@ class shoppingSensitiveLocation extends Component {
       colorAxis: {
         min: 0,
         minColor: "#E6E7E8",
-        maxColor: "#f90"
+        maxColor: "#005645"
       },
       legend: {
         layout: "vertical",

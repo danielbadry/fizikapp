@@ -17,6 +17,12 @@ const styles = {
         borderColor: '#ccc',
         borderWidth: '4px',
         borderStyle: 'solid'
+    },
+    
+    suspendedUser: {
+        borderColor: '#ccc',
+        borderWidth: '4px',
+        borderStyle: 'solid'
     }
 
   };

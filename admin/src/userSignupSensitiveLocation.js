@@ -58,8 +58,8 @@ class userSignupSensitiveLocation extends Component {
       },
       colorAxis: {
         min: 0,
-        minColor: "#E6E7E8",
-        maxColor: "#2196f3"
+        minColor: "#f3dae2",
+        maxColor: "#f50057"
       },
       legend: {
         layout: "vertical",
