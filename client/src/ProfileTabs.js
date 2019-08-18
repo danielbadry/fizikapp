@@ -6,6 +6,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Badge from '@material-ui/core/Badge';
+import Inbox from './Inbox';
+import WatchedVideosList from './WatchedVideosList';
+import UserBasics from './UserBasics';
+import UserFinancialTab from './UserFinancialTab';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,19 +82,19 @@ export default function VerticalTabs() {
             } {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        Basics
+        <UserBasics />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Financial
+        <UserFinancialTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Watched videos
+        <WatchedVideosList />
       </TabPanel>
       <TabPanel value={value} index={3}>
         Settings
       </TabPanel>
-      <TabPanel value={value} index={3}>
-        Inbox
+      <TabPanel value={value} index={4}>
+        <Inbox />
       </TabPanel>
     </div>
   );
