@@ -5,16 +5,21 @@ import Typography from '@material-ui/core/Typography';
 import { Player } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ProductUserInteraction from "./ProductUserInteraction";
+import { Button } from '@material-ui/core';
 
 class Product extends React.Component {
     render() {
         return (
             <React.Fragment>
+                
                 <Player
                     playsInline
                     poster="/assets/poster.png"
                     src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
                     />
+                <Button variant="contained" color="primary">
+                    start quiz
+                </Button>
                 <Typography variant="h3" gutterBottom>
                     wath is gravity?
                 </Typography>
