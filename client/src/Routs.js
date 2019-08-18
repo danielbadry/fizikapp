@@ -5,12 +5,13 @@ import About from './About';
 import Home from './Home';
 import NewRequest from './NewRequest';
 import SignUp from './SignUp';
+import Request from './Request';
 
 class Routs extends React.Component {
     render() {
         return (
             <Router>
-                {/* <ul>
+                <ul>
                     <li>
                         <Link to="/">Home</Link>
                     </li>
@@ -26,9 +27,13 @@ class Routs extends React.Component {
                     <li>
                         <Link to="/signUp">SignUp</Link>
                     </li>
-                </ul> */}
+                    <li>
+                        <Link to="/request">Request</Link>
+                    </li>
+                </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
+                <Route path="/request" component={Request} />
                 <Route path="/about" component={About} />
                 <Route path="/newRequest" component={NewRequest} />
                 <Route path="/signUp" component={SignUp} />
