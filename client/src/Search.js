@@ -3,6 +3,27 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import VideoSearchList from './VideoSearchList';
+import RequestSearchList from './RequestSearchList';
+import UserSearchList from './UserSearchList';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      <Box p={3}>{children}</Box>
+    </Typography>
+  );
+}
 
 const AntTabs = withStyles({
   root: {
@@ -46,32 +67,6 @@ const AntTab = withStyles(theme => ({
   selected: {},
 }))(props => <Tab disableRipple {...props} />);
 
-const StyledTabs = withStyles({
-  indicator: {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    '& > div': {
-      maxWidth: 40,
-      width: '100%',
-      backgroundColor: '#635ee7',
-    },
-  },
-})(props => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
-
-const StyledTab = withStyles(theme => ({
-  root: {
-    textTransform: 'none',
-    color: '#fff',
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(15),
-    marginRight: theme.spacing(1),
-    '&:focus': {
-      opacity: 1,
-    },
-  },
-}))(props => <Tab disableRipple {...props} />);
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -99,23 +94,30 @@ export default function Search() {
     <div className={classes.root}>
       <div className={classes.demo1}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="All" />
           <AntTab label="Videos" />
+          <AntTab label="Requests" />
           <AntTab label="Articles" />
           <AntTab label="Exercises" />
-          <AntTab label="Programs" />
+          <AntTab label="Users" />
         </AntTabs>
-        <Typography className={classes.padding} />
-      </div>
-      <div className={classes.demo2}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="All" />
-          <StyledTab label="Videos" />
-          <StyledTab label="Articles" />
-          <StyledTab label="Exercises" />
-          <StyledTab label="Programs" />
-        </StyledTabs>
-        <Typography className={classes.padding} />
+        <div>
+          <div>result : 25</div>
+          <TabPanel value={value} index={0}>
+            <VideoSearchList />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <RequestSearchList />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            2
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            3
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <UserSearchList />
+          </TabPanel>
+        </div>
       </div>
     </div>
   );
