@@ -9,6 +9,7 @@ import Request from './Request';
 import Product from './Product';
 import Profile from './Profile';
 import Search from './Search';
+import Tamrins from './Tamrins';
 
 class Routs extends React.Component {
     render() {
@@ -42,6 +43,9 @@ class Routs extends React.Component {
                     <li>
                         <Link to="/search">Search</Link>
                     </li>
+                    <li>
+                        <Link to="/tamrins">Tamrins</Link>
+                    </li>
                 </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
@@ -52,6 +56,7 @@ class Routs extends React.Component {
                 <Route path="/product" component={Product} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search" component={Search} />
+                <Route path="/tamrins" component={Tamrins} />
             </Router>
         );
     }
