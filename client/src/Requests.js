@@ -16,6 +16,34 @@ import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
 
 class Requests extends React.Component {
+    constructor (props) {
+        super (props);
+        this.state = {
+            requests : []
+        }
+    }
+    componentDidMount() {
+        fetch('http://localhost:1337/requests/', {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(requests => {
+                console.info('requests:', requests);
+                this.setState((state, props) => {
+                return {requests: requests.data};
+                });
+            });
+    }
      handleDelete() {
         alert('You clicked the delete icon.');
       }
@@ -54,228 +82,13 @@ class Requests extends React.Component {
                     
                     <Grid item xs={12}>
                         <Paper>
-                        <List>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Summer BBQ"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        to Scott, Alex, Jennifer
-                                    </Typography>
-                                    {" — Wish I could come, but I'm out of town this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                            <ListItem alignItems="flex-start">
+                        <List>    
+                            {this.state.requests.map(
+                            (request, index) => 
+                            <ListItem 
+                                alignItems="flex-start"
+                                key={index}
+                                >
                                 <ListItemAvatar>
                                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                                 </ListItemAvatar>
@@ -296,6 +109,7 @@ class Requests extends React.Component {
                                 }
                                 />
                             </ListItem>
+                            )}
                             </List>
                         </Paper>
                     </Grid>
