@@ -17,7 +17,7 @@ class WatchedVideosList extends React.Component {
   }
 
   componentDidMount () {
-    fetch('http://localhost:1337/watchedvideos', {
+    fetch('http://localhost:1337/watchedvideos/userwatched', {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -41,27 +41,29 @@ class WatchedVideosList extends React.Component {
   render() {
     return (
       <List>
-
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textPrimary"
-                >
-                  Sandra Adams
-                </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
+        {this.state.watchedVideosList.map(
+          (uw, index) => 
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Oui Oui"
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      color="textPrimary"
+                    >
+                      Sandra Adams
+                    </Typography>
+                    {' — Do you have Paris recommendations? Have you ever…'}
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          )}
       </List>
     )
   };
