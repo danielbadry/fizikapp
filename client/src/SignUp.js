@@ -2,7 +2,47 @@ import React from 'react';
 import './DottedBox.css';
 
 class SignUp extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        }
+    }
 
+    handleChange = pr => event => {
+        event.persist();
+        this.setState((state, props) => {
+            return {[pr]: event.target.value};
+        });
+    };
+
+    signUp = () => {
+        let data = {
+            firstName : this.state.firstName,
+            lastName : this.state.lastName,
+            email : this.state.email
+        }
+        fetch('http://localhost:1337/users', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json())
+        .then(myJson => {
+            console.info('myJson:', myJson);
+        })
+        ; // parses JSON response into native JavaScript objects 
+    }
     componentDidMount() {
         const login = document.getElementById('login');
         const signup = document.getElementById('signup');
@@ -95,17 +135,39 @@ class SignUp extends React.Component {
             <legend className="form__legend">OR</legend>
             <form action="" className="form__body form-login">
             <div className="input__group">
-                <input className="form__input form__input-half" type="text" placeholder="first name" />
-                <input className="form__input form__input-half" type="text" placeholder="last name" />
+                <input 
+                    className="form__input form__input-half" 
+                    type="text" 
+                    placeholder="first name"
+                    value={this.state.firstName}
+                    onChange={this.handleChange('firstName')}
+                    />
+                <input 
+                    className="form__input form__input-half" 
+                    type="text" 
+                    placeholder="last name" 
+                    value={this.state.lastName}
+                    onChange={this.handleChange('lastName')}
+                    />
             </div>
             <div className="input__group">
-                <input className="form__input form__input-half" type="email" placeholder="email" />
+                <input 
+                    className="form__input form__input-half" 
+                    type="email" 
+                    placeholder="email" 
+                    value={this.state.email}
+                    onChange={this.handleChange('email')}
+                    />
                 <input className="form__input form__input-half" type="password" placeholder="password" />      
             </div>
             <div className="input__group">
                 <input className="form__input-checkbox" type="checkbox" /> I have read the <a href="#">terms and conditions</a>
             </div>
-            <button className="btn" type="submit">Sign up</button> 
+            <button 
+                className="btn" 
+                type="submit"
+                onClick={this.signUp}
+                >Sign up</button> 
             </form>  
             </fieldset>
             </div>
