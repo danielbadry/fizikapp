@@ -11,6 +11,14 @@ import Profile from './Profile';
 import Search from './Search';
 import Tamrins from './Tamrins';
 
+function Child({ match }) {
+    return (
+        <Request 
+            requestid={match.params.requestid}
+            />
+    );
+  }
+  
 class Routs extends React.Component {
     render() {
         return (
@@ -49,7 +57,7 @@ class Routs extends React.Component {
                 </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
-                <Route path="/request" component={Request} />
+                <Route path="/request/:requestid" component={Child} />
                 <Route path="/about" component={About} />
                 <Route path="/newRequest" component={NewRequest} />
                 <Route path="/signUp" component={SignUp} />
