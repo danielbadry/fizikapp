@@ -14,6 +14,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 class Requests extends React.Component {
     constructor (props) {
@@ -93,16 +95,19 @@ class Requests extends React.Component {
                                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                                 </ListItemAvatar>
                                 <ListItemText
-                                primary="Oui Oui"
+                                primary={<Link component={RouterLink} to={'https://google.com'}>
+                                    {request.title}
+                                </Link>}
                                 secondary={
                                     <React.Fragment>
                                     <Typography
                                         component="span"
                                         variant="body2"
-                                        
                                         color="textPrimary"
                                     >
-                                        Sandra Adams
+                                        <Link component={RouterLink} to={'https://google.com'}>
+                                            {request.userInfo.fullName}
+                                        </Link>
                                     </Typography>
                                     {' — Do you have Paris recommendations? Have you ever…'}
                                     </React.Fragment>
