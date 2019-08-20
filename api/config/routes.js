@@ -17,5 +17,6 @@ module.exports.routes = {
     'GET /categories/findparentdirectoryid': 'CategoriesController.findparentdirectoryid',
     'POST /categories/paste': 'CategoriesController.paste',
     'POST /categories/deleteitems': 'CategoriesController.deleteitems',
-    'PUT /users/sendfcoin': 'UsersController.sendfcoin'
+    'PUT /users/sendfcoin': 'UsersController.sendfcoin',
+    'GET /watchedvideos/userwatched': 'WatchedvideosController.userwatched'
 };
