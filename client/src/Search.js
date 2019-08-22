@@ -89,7 +89,11 @@ export default function Search(props) {
   
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [products, setProducts] = React.useState([]);
+  const [result, setResult] = React.useState({
+    allProducts: [],
+    allRequests: [],
+    allUsers: []
+  });
   const [firstTime, setFirstTime] = React.useState(true);
   
   function handleChange(event, newValue) {
@@ -108,17 +112,10 @@ export default function Search(props) {
       // body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
       .then(response => response.json())
-      .then(products => {
-          // this.setState((state, props) => {
-          // return {products: products};
-          // });
-          setProducts(products);
+      .then(nat => {
+          setResult(nat);
           setFirstTime(false);
       });
-  // Similar to componentDidMount and componentDidUpdate:
-  // useEffect(() => {
-    
-  // });
 
   return (
     <div className={classes.root}>
@@ -133,10 +130,10 @@ export default function Search(props) {
         <div>
           <div>result : 25</div>
           <TabPanel value={value} index={0}>
-            <ProductSearchList list={products} />
+            <ProductSearchList list={result.allProducts} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <RequestSearchList />
+            <RequestSearchList list={result.allRequests} />
           </TabPanel>
           <TabPanel value={value} index={2}>
             2
@@ -145,7 +142,7 @@ export default function Search(props) {
             3
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <UserSearchList />
+            <UserSearchList list={result.allUsers} />
           </TabPanel>
         </div>
       </div>

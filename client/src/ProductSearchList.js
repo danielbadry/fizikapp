@@ -25,7 +25,6 @@ export default function ProductSearchList(props) {
 
   return (
     <List className={classes.root}>
-
       {props.list.map(
         (item, index) => <ListItem 
                   key={index}
