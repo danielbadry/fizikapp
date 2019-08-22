@@ -4,9 +4,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import VideoSearchList from './VideoSearchList';
+import ProductSearchList from './ProductSearchList';
 import RequestSearchList from './RequestSearchList';
 import UserSearchList from './UserSearchList';
+import { useEffect } from 'react';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,19 +84,47 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Search() {
+export default function Search(props) {
+  console.info('props:', props);
+  
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const [products, setProducts] = React.useState([]);
+  const [firstTime, setFirstTime] = React.useState(true);
+  
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+  if(firstTime)
+    fetch(`http://localhost:1337/search/search?searchterm=${props.searchTerm}`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      // body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(products => {
+          // this.setState((state, props) => {
+          // return {products: products};
+          // });
+          setProducts(products);
+          setFirstTime(false);
+      });
+  // Similar to componentDidMount and componentDidUpdate:
+  // useEffect(() => {
+    
+  // });
 
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="Videos" />
+          <AntTab label="Products" />
           <AntTab label="Requests" />
           <AntTab label="Articles" />
           <AntTab label="Exercises" />
@@ -103,7 +133,7 @@ export default function Search() {
         <div>
           <div>result : 25</div>
           <TabPanel value={value} index={0}>
-            <VideoSearchList />
+            <ProductSearchList list={products} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <RequestSearchList />

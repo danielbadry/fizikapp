@@ -11,10 +11,18 @@ import Profile from './Profile';
 import Search from './Search';
 import Tamrins from './Tamrins';
 
-function Child({ match }) {
+function HandleRequest({ match }) {
     return (
         <Request 
             requestid={match.params.requestid}
+            />
+    );
+  }
+
+  function HandleSearch({ match }) {
+    return (
+        <Search 
+            searchTerm={match.params.searchTerm}
             />
     );
   }
@@ -57,13 +65,13 @@ class Routs extends React.Component {
                 </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
-                <Route path="/request/:requestid" component={Child} />
+                <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/about" component={About} />
                 <Route path="/newRequest" component={NewRequest} />
                 <Route path="/signUp" component={SignUp} />
                 <Route path="/product" component={Product} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/search" component={Search} />
+                <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/tamrins" component={Tamrins} />
             </Router>
         );
