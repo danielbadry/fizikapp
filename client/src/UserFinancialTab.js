@@ -20,6 +20,13 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import HorizontalLabelPositionBelowStepper from './ShoppingplanStepper';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -233,6 +240,7 @@ export default function UserFinancialTab() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [isOpenShoppingPlan, setIsOpenShoppingPlan] = React.useState(false);
 
   function handleRequestSort(event, property) {
     const isDesc = orderBy === property && order === 'desc';
@@ -281,7 +289,15 @@ export default function UserFinancialTab() {
   function handleChangeDense(event) {
     setDense(event.target.checked);
   }
-
+  
+  function closeIsOpenShoppingPlan() {
+    setIsOpenShoppingPlan(false);
+  }
+  
+  function openIsOpenShoppingPlan() {
+    setIsOpenShoppingPlan(true);
+  }
+  
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -291,9 +307,31 @@ export default function UserFinancialTab() {
       <h3>current plan: A</h3>  
       <h6>start date: 2019-05-03</h6>  
       <h6>end date: 2019-10-03</h6>  
-      <Button variant="contained" color="primary" className={classes.button}>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        className={classes.button}
+        onClick={openIsOpenShoppingPlan}
+        >
         خرید طرح
       </Button>
+      <Dialog open={isOpenShoppingPlan} onClose={closeIsOpenShoppingPlan} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Shopping plans list</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            DialogContentText
+          </DialogContentText>
+          <HorizontalLabelPositionBelowStepper />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeIsOpenShoppingPlan} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={closeIsOpenShoppingPlan} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Paper className={classes.paper}>
           
         <EnhancedTableToolbar numSelected={selected.length} />
