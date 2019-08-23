@@ -10,6 +10,7 @@ import Inbox from './Inbox';
 import WatchedVideosList from './WatchedVideosList';
 import UserBasics from './UserBasics';
 import UserFinancialTab from './UserFinancialTab';
+import UserRequests from './UserRequests';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,6 +81,11 @@ export default function VerticalTabs() {
                   Inbox
               </Badge>
             } {...a11yProps(4)} />
+        <Tab label={
+              <Badge className={classes.padding} color="secondary" badgeContent={+99}>
+                  Requests
+              </Badge>
+            } {...a11yProps(5)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <UserBasics />
@@ -95,6 +101,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Inbox />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <UserRequests />
       </TabPanel>
     </div>
   );

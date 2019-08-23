@@ -20,5 +20,6 @@ module.exports.routes = {
     'PUT /users/sendfcoin': 'UsersController.sendfcoin',
     'GET /watchedvideos/userwatched': 'WatchedvideosController.userwatched',
     'GET /search/search': 'SearchController.search',
-    'POST /users/authenticate': 'UsersController.authenticate'
+    'POST /users/authenticate': 'UsersController.authenticate',
+    'GET /requests/getuserrequests': 'RequestsController.getuserrequests'
 };
