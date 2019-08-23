@@ -39,12 +39,42 @@ class UserBasics extends React.Component {
 
     handleChange = pr => event => {
         event.persist();
-        this.setState({userBasicInfo:{...this.state.login, [pr]: event.target.value}})
+        this.setState({userBasicInfo:{...this.state.userBasicInfo, [pr]: event.target.value}});
+        console.info(this.state);
     };
 
+    updateForm = (event) => {
+        event.preventDefault();
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        fetch(`http://localhost:1337/users/${user.id}`, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(this.state.userBasicInfo), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json())
+        .then(userInfo => {
+            this.setState((state, props) => {
+                return {userBasicInfo: userInfo};
+            });
+        })
+        ;
+    }
+    
     render() {
         return(
-            <form noValidate autoComplete="off">
+            <form 
+                noValidate 
+                autoComplete="off"
+                onSubmit={this.updateForm}
+                >
                 <TextField
                     id="standard-name"
                     label="firstName"
@@ -125,7 +155,7 @@ class UserBasics extends React.Component {
                 <Button
                     type="submit"
                     variant="contained"
-                    component="span"
+                    component="button"
                     // disabled={this.haveErrors(errors)}
                 >
                     Save
