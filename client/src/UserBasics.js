@@ -2,16 +2,45 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
 class UserBasics extends React.Component {
     
     constructor(props) {
         super(props);
+        this.state = {
+            userBasicInfo : {}
+        };
     }
 
-    handleChange = (name) => {
-        console.info('name:', name);
+    componentDidMount() {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        fetch(`http://localhost:1337/users/${user.id}`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json())
+        .then(userInfo => {
+            this.setState((state, props) => {
+                return {userBasicInfo: userInfo};
+            });
+        })
+        ; // parses JSON response into native JavaScript objects     
     }
+
+    handleChange = pr => event => {
+        event.persist();
+        this.setState({userBasicInfo:{...this.state.login, [pr]: event.target.value}})
+    };
 
     render() {
         return(
@@ -19,48 +48,42 @@ class UserBasics extends React.Component {
                 <TextField
                     id="standard-name"
                     label="firstName"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.firstName}
                     onChange={this.handleChange('firstName')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
                     label="lastName"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.lastName}
                     onChange={this.handleChange('lastName')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
                     label="userName"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.userName}
                     onChange={this.handleChange('userName')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
                     label="password"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.password}
                     onChange={this.handleChange('password')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
                     label="email"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.email}
                     onChange={this.handleChange('email')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
                     label="phone"
-                    // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.phone}
                     onChange={this.handleChange('phone')}
                     margin="normal"
                 />
@@ -68,7 +91,7 @@ class UserBasics extends React.Component {
                     id="standard-name"
                     label="mobile"
                     // className={classes.textField}
-                    // value='name'
+                    value={this.state.userBasicInfo.mobile}
                     onChange={this.handleChange('mobile')}
                     margin="normal"
                 />
@@ -98,6 +121,15 @@ class UserBasics extends React.Component {
                     <MenuItem value={20}>یازدهم</MenuItem>
                     <MenuItem value={30}>دوازدهم</MenuItem>
                 </Select>
+
+                <Button
+                    type="submit"
+                    variant="contained"
+                    component="span"
+                    // disabled={this.haveErrors(errors)}
+                >
+                    Save
+                </Button>
 
             </form>
         );
