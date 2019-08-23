@@ -74,6 +74,11 @@ module.exports = {
       required : false
     },
     
+    password :{
+      type: 'string',
+      required : false
+    },
+    
     grade :{
       type: 'string',
       required : false

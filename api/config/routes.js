@@ -19,5 +19,6 @@ module.exports.routes = {
     'POST /categories/deleteitems': 'CategoriesController.deleteitems',
     'PUT /users/sendfcoin': 'UsersController.sendfcoin',
     'GET /watchedvideos/userwatched': 'WatchedvideosController.userwatched',
-    'GET /search/search': 'SearchController.search'
+    'GET /search/search': 'SearchController.search',
+    'POST /users/authenticate': 'UsersController.authenticate'
 };

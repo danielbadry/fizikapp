@@ -5,9 +5,15 @@ class SignUp extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            email: ''
+            signup: {
+                firstName: '',
+                lastName: '',
+                email: ''
+            },
+            login : {
+                email: '',
+                password: ''
+            }
         }
     }
 
@@ -17,6 +23,45 @@ class SignUp extends React.Component {
             return {[pr]: event.target.value};
         });
     };
+    
+    setLoginInfo = pr => event => {
+        event.persist();
+        this.setState({login:{...this.state.login, [pr]: event.target.value}})
+    };
+
+    /*
+        TODO: i must use oAuth technik in login because we use REST endpoint
+    */
+    authenticate = (event) => {
+        event.preventDefault();
+        let data = {
+            email : this.state.login.email,
+            password : this.state.login.password
+        }
+        fetch('http://localhost:1337/users/authenticate', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json())
+        .then(myJson => {
+            console.info('myJson:', myJson);
+            localStorage.setItem("userInfo", JSON.stringify(myJson));
+            /*
+                TODO: we must use redirect component from React-Router-Dom <Redirect>
+            */
+           window.location.href = "http://localhost:3000/profile";
+        })
+        ;
+    }
 
     signUp = () => {
         let data = {
@@ -99,9 +144,27 @@ class SignUp extends React.Component {
             <fieldset className="form">
                 <legend className="form__legend">OR</legend>
                 <form action="" className="form__body form-login">  
-                <input className="form__input" type="email" placeholder="email" />
-                <input className="form__input" type="password" placeholder="password" />   
-                <button className="btn" type="submit">Sign in</button> 
+                <input 
+                    className="form__input" 
+                    type="email" 
+                    placeholder="email" 
+                    value={this.state.login.email || ''}
+                    onChange={this.setLoginInfo('email')}
+                    />
+                <input 
+                    className="form__input" 
+                    type="password" 
+                    placeholder="password" 
+                    value={this.state.login.password || ''}
+                    onChange={this.setLoginInfo('password')}
+                    />   
+                <button 
+                    className="btn" 
+                    type="submit"
+                    onClick={this.authenticate}
+                    >
+                        Sign in
+                    </button> 
                 </form>  
             </fieldset>
             </div>

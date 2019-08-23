@@ -13,7 +13,7 @@ module.exports = {
     limit: {
       type: 'number'
     },
-    
+
     skip: {
       type: 'number'
     },
@@ -21,7 +21,7 @@ module.exports = {
     sort: {
       type: 'string'
     },
-    
+
     where: {
       type: 'string'
     }
@@ -34,7 +34,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-  
+
     let finalData = {};
     let allUsers = [];
     if(Object.keys(JSON.parse(inputs.where)).length === 0)
@@ -43,9 +43,8 @@ module.exports = {
       allUsers = await Users.find()
       .skip(inputs.skip)
       .limit(inputs.limit)
-      .sort([{createdAt :'DESC'}])
-      ;
-      dataLength = au.length;
+      .sort([{createdAt :'DESC'}]);
+dataLength = au.length;
     }
     else {
       let conditions = JSON.parse(inputs.where);
@@ -63,9 +62,8 @@ module.exports = {
             }
           ]
         }
-      )
-      ;
-      allUsers = await Users.find(
+      );
+allUsers = await Users.find(
         {
           or : [
             {
@@ -82,43 +80,42 @@ module.exports = {
       )
       .limit(inputs.limit)
       .skip(inputs.skip)
-      .sort([{createdAt :'DESC'}])
-      ;
-      dataLength = au.length;
+      .sort([{createdAt :'DESC'}]);
+dataLength = au.length;
     }
 
     for (let user of allUsers) {
-        user.fullName = user.firstName + ' ' + user.lastName;
+      user.fullName = user.firstName + ' ' + user.lastName;
 
-        // fetch all purchases of this user
-        user.totalPurchase = 2500;
-        moment.locale('en');
-        user.jalaaliRegisterDate = momentJalaali(user.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-        moment.locale('fa');
-        user.jalaaliUserFriendlyRegisterDate = moment(user.createdAt, "YYYYMMDD").fromNow();
-        user.lastLogin = new Date();
-        user.numberOfInvitation = 3;
-        user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
-        user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
-        user.thumbnail = "http://localhost:1337/files/usersImage/" + user.id + '.jpg';
-        
-        let lastShop = await Shops.find({
-          where: {
-            userId: user.id
-          }
-        })
+      // fetch all purchases of this user
+      user.totalPurchase = 2500;
+      moment.locale('en');
+      user.jalaaliRegisterDate = momentJalaali(user.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      user.jalaaliUserFriendlyRegisterDate = moment(user.createdAt, 'YYYYMMDD').fromNow();
+      user.lastLogin = new Date();
+      user.numberOfInvitation = 3;
+      user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
+      user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
+      user.thumbnail = 'http://localhost:1337/files/usersImage/' + user.id + '.jpg';
+
+      let lastShop = await Shops.find({
+        where: {
+          userId: user.id
+        }
+      })
         .sort('createdAt DESC')
         .limit(1);
-        if (lastShop.length){
-          let id = lastShop[0].shoppingPlanId;
-          let res = await Shoppingplans.find({
-            where: {
-              id: id
-            }
-          });
-          user.subType = res[0].type;
-        }
-        
+      if (lastShop.length){
+        let id = lastShop[0].shoppingPlanId;
+        let res = await Shoppingplans.find({
+          where: {
+            id: id
+          }
+        });
+        user.subType = res[0].type;
+      }
+
     }
     finalData.dataLength = dataLength;
     finalData.data = allUsers;
