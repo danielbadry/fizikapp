@@ -27,6 +27,14 @@ function HandleRequest({ match }) {
     );
   }
   
+  function HandleProduct({ match }) {
+    return (
+        <Product 
+            productid={match.params.productid}
+            />
+    );
+  }
+  
 class Routs extends React.Component {
     render() {
         return (
@@ -69,7 +77,7 @@ class Routs extends React.Component {
                 <Route path="/about" component={About} />
                 <Route path="/newRequest" component={NewRequest} />
                 <Route path="/signUp" component={SignUp} />
-                <Route path="/product" component={Product} />
+                <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/tamrins" component={Tamrins} />

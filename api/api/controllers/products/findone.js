@@ -100,9 +100,10 @@ module.exports = {
       }
       summary.tagsArray = tagsArray;
     }
-    else
-    product.tagsArray = [];
-
+    else{
+      summary.tagsArray = [];
+    }
+    
     return ({
       id: inputs.id,
       summary,
@@ -111,7 +112,6 @@ module.exports = {
       tags: [],
       thumbnail: summary.thumbnail
     });
-
   }
 
 };
