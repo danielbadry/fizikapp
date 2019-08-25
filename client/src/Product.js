@@ -4,16 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import { Player } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ProductUserInteraction from "./ProductUserInteraction";
-import { Button } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import Avatar from '@material-ui/core/Avatar';
-import AddIcon from '@material-ui/icons/Add';
-import PersonIcon from '@material-ui/icons/Person';
+
+import QuizComponent from './QuizComponent';
 
 class Product extends React.Component {
     constructor(props){
@@ -24,8 +16,7 @@ class Product extends React.Component {
             productscomments: [],
             tags: [],
             id: '',
-            thumbnail: '',
-            isQuizDialogOpen: false
+            thumbnail: ''
         }
     };
 
@@ -54,64 +45,18 @@ class Product extends React.Component {
                 });
             });
     }
-    
-    handleClose = () => {
-        this.setState({isQuizDialogOpen : false});
-    }
-    
-    handleOpen = () => {
-        this.setState((state, props) => {
-            return {isQuizDialogOpen: true};
-        });
-    }
 
     render() {
         return (
             <React.Fragment>
-                <Dialog 
-                    onClose={this.handleClose} 
-                    aria-labelledby="simple-dialog-title" 
-                    open={this.isQuizDialogOpen}
-                    >
-                    <DialogTitle 
-                        id="simple-dialog-title"
-                        >Set backup account
-                    </DialogTitle>
-                    <List>
-                        
-                        <ListItem>
-                            <ListItemAvatar>
-                            <Avatar>
-                                <PersonIcon />
-                            </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={'hello'} />
-                        </ListItem>
-
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                <AddIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="add account" />
-                        </ListItem>
-
-                    </List>
-                </Dialog>
 
                 <Player
                     playsInline
                     poster="/assets/poster.png"
                     src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
                     />
-                <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={this.handleOpen.bind(this)}
-                    >
-                    start quiz
-                </Button>
+                <QuizComponent />
+
                 <Typography variant="h3" gutterBottom>
                     {this.state.summary.title}
                 </Typography>
