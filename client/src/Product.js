@@ -1,6 +1,5 @@
 import React from 'react';
 import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
 import Typography from '@material-ui/core/Typography';
 import { Player } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css

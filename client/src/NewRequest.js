@@ -3,16 +3,59 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
+
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import RequestTag from './RequestTag';
 
 class NewRequest extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title : '',
+            message : '',
+            tags:[]
+        }
+    }
     
-    handleChange = () => {
-        console.info('hello');
+    showTags = (selectedItems, actionMeta) => {
+        console.info('selectedItems:', selectedItems);
+    }
+
+    handleChange = pr => event => {
+        event.persist();
+        this.setState((state, props) => {
+            return {[pr]: event.target.value};
+        });
+    };
+
+    sendRequest = () => {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        let data = {
+          title: this.state.title,
+          message: this.state.message,
+          userId: user.id
+        }
+
+        fetch(`http://localhost:1337/requests`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+                redirect: 'follow', // manual, *follow, error
+                referrer: 'no-referrer', // no-referrer, *client
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(request => {
+                this.setState((state, props) => {
+                    return ({title: '', message:''});
+                });
+            });
     }
 
     render () {
@@ -35,9 +78,9 @@ class NewRequest extends React.Component {
                             
                             <TextField
                                 id="standard-name"
-                                label="Name"
-                                value={values.name}
-                                onChange={this.handleChange('name')}
+                                label="title"
+                                value={this.state.title}
+                                onChange={this.handleChange('title')}
                                 margin="normal"
                             />
 
@@ -47,14 +90,24 @@ class NewRequest extends React.Component {
                                 style={{ margin: 8 }}
                                 placeholder="Placeholder"
                                 helperText="Full width!"
+                                value={this.state.message}
+                                onChange={this.handleChange('message')}
                                 fullWidth
                                 margin="normal"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
+                            
+                            <RequestTag 
+                                onChange={this.showTags.bind(this)}
+                            />
 
-                            <Button variant="contained" color="primary">
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={this.sendRequest}
+                                >
                                 send request
                             </Button>
                         </form>    
