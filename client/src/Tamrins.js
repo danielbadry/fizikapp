@@ -25,6 +25,28 @@ class Tamrins extends React.Component {
             selectedDate : 2018
         }
     }
+
+    componentDidMount() {
+        fetch(`http://localhost:1337/products/tamrins`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(quizes => {
+                this.setState({
+                   quizes: quizes 
+                });
+                console.info('hello:', quizes);
+            });
+    }
+    
     render() {
         return (
             <Grid container spacing={0}>
