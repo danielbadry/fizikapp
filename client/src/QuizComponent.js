@@ -100,6 +100,7 @@ class QuizComponent extends React.Component {
                                         {quiz.options.map(
                                             (option, ind) =>
                                             <RadioGroup
+                                            key={ind}
                                                 aria-label="gender"
                                                 name="gender1"
                                                 // className={classes.group}
@@ -112,7 +113,9 @@ class QuizComponent extends React.Component {
                                         )}
                                     </div>
                                 </div>:
-                                <div></div>
+                                <div
+                                key={index}
+                                ></div>
                                 )
                             
                             
