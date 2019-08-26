@@ -22,12 +22,24 @@ class Tamrins extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            selectedDate : 2018
+            startedDate : 2018,
+            endDate : 2018,
+            tamrins: [],
+            riazi : false,
+            tajrobi : true
         }
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:1337/products/tamrins`, {
+    handleField = field => () => {
+        this.setState({
+            [field]: !this.state[field]
+        });
+
+        this.fetchTamrins();
+    }
+
+    fetchTamrins = () => {
+        fetch(`http://localhost:1337/tamrins?tajrobi=${this.state.tajrobi}&riazi=${this.state.riazi}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -39,12 +51,16 @@ class Tamrins extends React.Component {
             referrer: 'no-referrer',
             })
             .then(response => response.json())
-            .then(quizes => {
+            .then(tamrins => {
                 this.setState({
-                   quizes: quizes 
+                   tamrins: tamrins.data
                 });
-                console.info('hello:', quizes);
+                console.info('tamrins:', tamrins);
             });
+    }
+
+    componentDidMount() {
+        this.fetchTamrins();
     }
     
     render() {
@@ -52,7 +68,15 @@ class Tamrins extends React.Component {
             <Grid container spacing={0}>
                 <Grid item xs={9}>
                     <Paper>
-                        <TamrinCard />  
+                        {
+                            this.state.tamrins.map(
+                                (tamrin, index) => 
+                                    <TamrinCard 
+                                        key= {index}
+                                    />
+                            )
+                        }  
+
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
@@ -60,25 +84,45 @@ class Tamrins extends React.Component {
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker 
                             views={["year"]}
-                            value={this.selectedDate} 
-                            // onChange={handleDateChange}
+                            value={this.startedDate} 
+                            onChange={this.filterResult}
+                        />
+                        <DatePicker 
+                            views={["year"]}
+                            value={this.endDate} 
+                            onChange={this.filterResult}
                         />
                         </MuiPickersUtilsProvider>
                         <Typography component="div">
                             <Grid component="label" container alignItems="center" spacing={1}>
-                                <Grid item>ریاضی</Grid>
-                                <Grid item>
-                                    <Switch
-                                    checked={true}
-                                    // onChange={}
-                                    value="checkedC"
+                                
+                                <FormControlLabel
+                                    control={
+                                    <Checkbox
+                                        checked={this.state.riazi}
+                                        onChange={this.handleField('riazi')}
+                                        value="riazi"
+                                        color="primary"
                                     />
-                                </Grid>
-                                <Grid item>تجربی</Grid>
+                                    }
+                                    label="riazi"
+                                />
+                                
+                                <FormControlLabel
+                                    control={
+                                    <Checkbox
+                                        checked={this.state.tajrobi}
+                                        onChange={this.handleField('tajrobi')}
+                                        value="tajrobi"
+                                        color="primary"
+                                    />
+                                    }
+                                    label="tajrobi"
+                                />
                             </Grid>
                         </Typography>
                         <FormControl component="fieldset">
-                            <FormLabel component="legend">Assign responsibility</FormLabel>
+                            <FormLabel component="legend">subjects</FormLabel>
                             <FormGroup>
                             <FormControlLabel
                                 control={<Checkbox checked={true} value="gilad" />}

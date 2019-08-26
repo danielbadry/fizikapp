@@ -11,6 +11,38 @@ module.exports = {
 
   inputs: {
 
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
+
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    },
+
+    tajrobi: {
+      type: 'boolean'
+    },
+
+    riazi: {
+      type: 'boolean'
+    },
+    
+    startedDate: {
+      type: 'string'
+    },
+    
+    endDate: {
+      type: 'string'
+    },
+
   },
 
 
