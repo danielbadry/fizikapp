@@ -17,25 +17,31 @@ import {
     DateTimePicker,
     MuiPickersUtilsProvider,
   } from "@material-ui/pickers";
+import TextField from '@material-ui/core/TextField';
 
 class Tamrins extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            startedDate : 2018,
-            endDate : 2018,
+            startedDate : 1390,
+            endDate : 1398,
             tamrins: [],
             riazi : false,
             tajrobi : true
         }
     }
 
-    handleField = field => () => {
+    handleField = field => (event) => {
+        event.persist();
+        console.info('field:', event.target.value);
         this.setState({
-            [field]: !this.state[field]
+            [field]: event.target.value
         });
-
-        this.fetchTamrins();
+        // this.setState((state, props) => {
+        //     return {[field]: event.target.value};
+        // });
+        // console.info('ena:', this.state);
+        // this.fetchTamrins();
     }
 
     fetchTamrins = () => {
@@ -62,7 +68,11 @@ class Tamrins extends React.Component {
     componentDidMount() {
         this.fetchTamrins();
     }
-    
+
+    yee = () => {
+        console.info('state:', this.state);
+    }
+
     render() {
         return (
             <Grid container spacing={0}>
@@ -81,18 +91,43 @@ class Tamrins extends React.Component {
                 </Grid>
                 <Grid item xs={3}>
                     <Paper>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker 
+                            minDate={Date("2010-01-01")}
+                            maxDate={Date("2030-01-01")}
                             views={["year"]}
                             value={this.startedDate} 
                             onChange={this.filterResult}
                         />
+                        </MuiPickersUtilsProvider>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker 
+                            minDate={Date("2015-01-01")}
+                            maxDate={Date("2022-01-01")}
                             views={["year"]}
                             value={this.endDate} 
                             onChange={this.filterResult}
                         />
-                        </MuiPickersUtilsProvider>
+                        </MuiPickersUtilsProvider> */}
+                        
+                        <TextField
+                            id="standard-name"
+                            label="Name"
+                            value={this.state.startedDate}
+                            // onChange={this.handleField('startedDate')}
+                            onKeyDown={this.handleField('startedDate')}
+                            onKeyUp={this.yee()}
+                            margin="normal"
+                        />
+                        
+                        <TextField
+                            id="standard-name"
+                            label="Name"
+                            value={this.state.endDate}
+                            onChange={this.handleField('endDate')}
+                            margin="normal"
+                        />
+
                         <Typography component="div">
                             <Grid component="label" container alignItems="center" spacing={1}>
                                 
@@ -100,7 +135,7 @@ class Tamrins extends React.Component {
                                     control={
                                     <Checkbox
                                         checked={this.state.riazi}
-                                        onChange={this.handleField('riazi')}
+                                        // onChange={this.handleField('riazi')}
                                         value="riazi"
                                         color="primary"
                                     />
@@ -112,7 +147,7 @@ class Tamrins extends React.Component {
                                     control={
                                     <Checkbox
                                         checked={this.state.tajrobi}
-                                        onChange={this.handleField('tajrobi')}
+                                        // onChange={this.handleField('tajrobi')}
                                         value="tajrobi"
                                         color="primary"
                                     />
