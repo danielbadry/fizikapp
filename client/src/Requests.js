@@ -21,9 +21,11 @@ class Requests extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            requests : []
+            requests : [],
+            tags: []
         }
     }
+
     componentDidMount() {
         fetch('http://localhost:1337/requests/', {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -40,19 +42,56 @@ class Requests extends React.Component {
             })
             .then(response => response.json())
             .then(requests => {
-                console.info('requests:', requests);
                 this.setState((state, props) => {
-                return {requests: requests.data};
+                    return {requests: requests.data};
                 });
             });
+
+        fetch('http://localhost:1337/tags/', {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(tags => {
+                for(let tag of tags.data) {
+                    tag.color = "primary";
+                    tag.isSelected = true;
+                }
+                this.setState((state, props) => {
+                    return {tags: tags.data};
+                });
+            });   
     }
-     handleDelete() {
-        alert('You clicked the delete icon.');
-      }
-    
-       handleClick() {
-        alert('You clicked the Chip.');
-      }
+
+    tagClicked = id => (event) => {
+        let listOfTags = this.state.tags;
+        for(let tag of listOfTags) {
+            if (tag.id == id) {
+                tag.isSelected = !tag.isSelected;
+                if(tag.isSelected) {
+                    tag.color = 'primary';
+                } else {
+                    tag.color = 'default';
+                }
+            }
+        }
+        this.setState((state, props) => {
+            return {tags: listOfTags};
+        }, function() {
+            console.info('state set:', this.state.tags);
+        });
+
+    }
+
     render() {
         
         return (
@@ -70,15 +109,21 @@ class Requests extends React.Component {
                     
                     <Grid item xs={12}>
                         <Paper>
-                        <Chip
-                            icon={<FaceIcon />}
-                            label="Primary Clickable Chip"
-                            clickable
-                            
-                            color="primary"
-                            onDelete={this.handleDelete}
-                            deleteIcon={<DoneIcon />}
-                        />
+
+                        {this.state.tags.map(
+                            (tag, index) =>
+                                <Chip
+                                    key={index}
+                                    icon={<FaceIcon />}
+                                    label={tag.name}
+                                    clickable
+                                    counter={tag.id}
+                                    color={tag.color}
+                                    onClick={this.tagClicked(tag.id)}
+                                    deleteIcon={<DoneIcon />}
+                                    />
+                        )}
+                        
                         </Paper>
                     </Grid>
                     
