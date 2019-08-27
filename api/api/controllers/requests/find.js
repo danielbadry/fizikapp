@@ -25,6 +25,10 @@ module.exports = {
     
     where: {
       type: 'string'
+    },
+    
+    tags: {
+      type: 'string'
     }
   },
 

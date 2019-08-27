@@ -19,6 +19,11 @@ module.exports = {
       required : false
     },
     
+    tags :{
+      type: 'string',
+      required : false
+    },
+    
     title :{
       type: 'string',
       required : false

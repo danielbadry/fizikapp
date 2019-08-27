@@ -26,8 +26,8 @@ class Requests extends React.Component {
         }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:1337/requests/', {
+    fetchRequests = () => {
+        fetch(`http://localhost:1337/requests?tags=${encodeURIComponent(JSON.stringify(this.state.tags))}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -38,7 +38,7 @@ class Requests extends React.Component {
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            data: JSON.stringify({name:'milad'}), // body data type must match "Content-Type" header
             })
             .then(response => response.json())
             .then(requests => {
@@ -46,7 +46,10 @@ class Requests extends React.Component {
                     return {requests: requests.data};
                 });
             });
+    }
 
+    componentDidMount() {
+        
         fetch('http://localhost:1337/tags/', {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -68,6 +71,8 @@ class Requests extends React.Component {
                 }
                 this.setState((state, props) => {
                     return {tags: tags.data};
+                }, function() {
+                    this.fetchRequests();
                 });
             });   
     }
@@ -88,6 +93,7 @@ class Requests extends React.Component {
             return {tags: listOfTags};
         }, function() {
             console.info('state set:', this.state.tags);
+            this.fetchRequests();
         });
 
     }
