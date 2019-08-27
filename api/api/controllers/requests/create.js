@@ -15,6 +15,18 @@ module.exports = {
 
     message : {
       type: 'string'
+    },
+    
+    title : {
+      type: 'string'
+    },
+    
+    userId : {
+      type: 'string'
+    },
+    
+    tags : {
+      type: 'string'
     }
 
   },
@@ -32,7 +44,11 @@ module.exports = {
         updatedAt : await sails.helpers.dateParse(),
         parentId : inputs.parentId,
         message : inputs.message,
-        isDeleted : false
+        title : inputs.title,
+        userId : inputs.userId,
+        tags : inputs.tags,
+        isDeleted : false,
+
     });
       return await Requests.find();
   }
