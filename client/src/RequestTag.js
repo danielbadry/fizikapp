@@ -12,7 +12,36 @@ class RequestTag extends React.Component {
     
     constructor(props) {
         super(props);
+        this.state = {
+            tags: []
+        }
     }
+
+    componentDidMount () {
+        let finalList = [];
+        let tempObj = {};
+        fetch('http://localhost:1337/tags', { method: 'GET', headers: {}})
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+          myJson.data.map(
+            (item) => {
+              tempObj = {};
+              tempObj.label = item.name;
+              tempObj.value = item.id;
+              tempObj.id = item.id;
+              finalList.push(tempObj);
+            }
+          )
+          this.setState((state, props) => {
+            return {tags: finalList};
+          });
+        })
+        .catch((e) => {
+            // showNotification('Error: comment not approved', 'warning')
+        });
+      }
 
     render() {
         return (
@@ -20,7 +49,7 @@ class RequestTag extends React.Component {
                 // defaultValue={[options[2], options[3]]}
                 isMulti
                 name="colors"
-                options={options}
+                options={this.state.tags}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 onChange={this.props.onChange}

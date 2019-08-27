@@ -20,6 +20,9 @@ class NewRequest extends React.Component {
     
     showTags = (selectedItems, actionMeta) => {
         console.info('selectedItems:', selectedItems);
+        this.setState((state, props) => {
+            return {tags: selectedItems};
+        });
     }
 
     handleChange = pr => event => {
@@ -34,7 +37,8 @@ class NewRequest extends React.Component {
         let data = {
           title: this.state.title,
           message: this.state.message,
-          userId: user.id
+          userId: user.id,
+          tags: JSON.stringify(this.state.tags)
         }
 
         fetch(`http://localhost:1337/requests`, {
@@ -68,57 +72,57 @@ class NewRequest extends React.Component {
         return (
             <Grid container spacing={3}>
                         
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-                    
-                    <Grid item xs={12}>
-                        <Paper>
-                        <form noValidate autoComplete="off">
-                            
-                            <TextField
-                                id="standard-name"
-                                label="title"
-                                value={this.state.title}
-                                onChange={this.handleChange('title')}
-                                margin="normal"
-                            />
+                <Grid item xs={12}>
+                    <MainHeader />
+                </Grid>
+                
+                <Grid item xs={12}>
+                    <Paper>
+                    <form noValidate autoComplete="off">
+                        
+                        <TextField
+                            id="standard-name"
+                            label="title"
+                            value={this.state.title}
+                            onChange={this.handleChange('title')}
+                            margin="normal"
+                        />
 
-                            <TextField
-                                id="standard-full-width"
-                                label="Label"
-                                style={{ margin: 8 }}
-                                placeholder="Placeholder"
-                                helperText="Full width!"
-                                value={this.state.message}
-                                onChange={this.handleChange('message')}
-                                fullWidth
-                                margin="normal"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            
-                            <RequestTag 
-                                onChange={this.showTags.bind(this)}
-                            />
+                        <TextField
+                            id="standard-full-width"
+                            label="Label"
+                            style={{ margin: 8 }}
+                            placeholder="Placeholder"
+                            helperText="Full width!"
+                            value={this.state.message}
+                            onChange={this.handleChange('message')}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        
+                        <RequestTag 
+                            onChange={this.showTags.bind(this)}
+                        />
 
-                            <Button 
-                                variant="contained" 
-                                color="primary"
-                                onClick={this.sendRequest}
-                                >
-                                send request
-                            </Button>
-                        </form>    
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item xs={12}>
-                        <Paper></Paper>
-                    </Grid>
+                        <Button 
+                            variant="contained" 
+                            color="primary"
+                            onClick={this.sendRequest}
+                            >
+                            send request
+                        </Button>
+                    </form>    
+                    </Paper>
+                </Grid>
+                
+                <Grid item xs={12}>
+                    <Paper></Paper>
+                </Grid>
 
-                    <MainFooter />
+                <MainFooter />
 
             </Grid>
         );
