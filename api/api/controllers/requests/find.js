@@ -40,11 +40,13 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
+    let finalRequests = [];
     let dataLength = await Requests.find({
       where : {
         parentId: ''
       }
     });
+    
     let allRequests = await Requests.find({
       parentId: '',
       isDeleted : false
@@ -54,6 +56,29 @@ module.exports = {
     .sort([{updatedAt :'DESC'}])
     ;
     
+    // filter allRequest based on tags
+    let tagIds = []; // list of comming tags id from the URL
+    let inTags = JSON.parse(inputs.tags);
+    for(let inTag of inTags) {
+      tagIds.push(inTag.id);
+    }
+
+    for (let request of allRequests) {
+      let aa = [];
+      requestTags = JSON.parse(request.tags);
+      for (let requestTag of requestTags) {
+        aa.push(requestTag.id);
+      }
+
+      for (let a of aa) {
+        if (tagIds.includes(a)) {
+          finalRequests.push(request);
+        }
+      }
+    }
+
+    // return (finalRequests);
+    allRequests = finalRequests;
     // sort array based on their admin response status
     let requestWithNoResponse = [];
     let requestWithResponse = [];

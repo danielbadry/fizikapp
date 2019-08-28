@@ -22,12 +22,13 @@ class Requests extends React.Component {
         super (props);
         this.state = {
             requests : [],
-            tags: []
+            tags: [],
+            activeTags: []
         }
     }
 
     fetchRequests = () => {
-        fetch(`http://localhost:1337/requests?tags=${encodeURIComponent(JSON.stringify(this.state.tags))}`, {
+        fetch(`http://localhost:1337/requests?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -70,7 +71,7 @@ class Requests extends React.Component {
                     tag.isSelected = true;
                 }
                 this.setState((state, props) => {
-                    return {tags: tags.data};
+                    return {tags: tags.data, activeTags:tags.data};
                 }, function() {
                     this.fetchRequests();
                 });
@@ -89,10 +90,17 @@ class Requests extends React.Component {
                 }
             }
         }
+        //  separate active tags
+        let at = [];
+        for(let tag of listOfTags) {
+            if(tag.isSelected) {
+                at.push(tag);                
+            }
+        }
         this.setState((state, props) => {
-            return {tags: listOfTags};
+            return {tags: listOfTags, activeTags:at};
         }, function() {
-            console.info('state set:', this.state.tags);
+            console.info('active tags:', this.state.activeTags);
             this.fetchRequests();
         });
 
