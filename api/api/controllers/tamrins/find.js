@@ -60,6 +60,9 @@ module.exports = {
     .skip(inputs.skip)
     ;
     for (let tamrin of allTamrins) {
+      
+      tamrin.riazi = (tamrin.riazi !='') ? true : false;
+      tamrin.tajrobi = (tamrin.tajrobi !='') ? true : false;
       moment.locale('en');
       tamrin.jalaaliCreatedDate = momentJalaali(tamrin.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');

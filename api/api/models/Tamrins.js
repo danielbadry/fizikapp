@@ -83,11 +83,12 @@ module.exports = {
       required : false
     },
     
-    field :{
-      type: 'string',
-      isIn: ['tajrobi', 'riazi'],
-      required : false,
-      defaultsTo: 'tajrobi'
+    tajrobi :{
+      type: 'string'
+    },
+    
+    riazi :{
+      type: 'string'
     },
     
   },

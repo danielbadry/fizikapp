@@ -21,6 +21,8 @@ import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
 import { RadioButtonGroupInput } from 'react-admin';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { CheckboxGroupInput } from 'react-admin';
 
 export const TamrinsCreate = (props) => (
     <Create {...props} >
@@ -28,11 +30,19 @@ export const TamrinsCreate = (props) => (
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
-            <RadioButtonGroupInput source="field" choices={[
-                { id: 'riazi', name: 'riazi' },
-                { id: 'tajrobi', name: 'tajrobi' },
+
+            <CheckboxGroupInput source="riazi" choices={[
+                { id: 'riazi', name: 'riazi' }
             ]} />
+            
+            <CheckboxGroupInput source="tajrobi" choices={[
+                { id: 'tajrobi', name: 'tajrobi' }
+            ]} />
+
             <SelectInput source="year" choices={[
+                { id: '1381', name: '1381' },
+                { id: '1382', name: '1382' },
+                { id: '1383', name: '1383' },
                 { id: '1384', name: '1384' },
                 { id: '1385', name: '1385' },
                 { id: '1386', name: '1386' },
@@ -48,6 +58,7 @@ export const TamrinsCreate = (props) => (
                 { id: '1396', name: '1396' },
                 { id: '1397', name: '1397' },
                 { id: '1398', name: '1398' },
+                { id: '1399', name: '1399' },
             ]} />
         </SimpleForm>
     </Create>
@@ -85,7 +96,8 @@ export const TamrinsList = props => (
             <TextField source="title" label="Title" />
             <TextField source="description" label="Description" />
             <TextField source="year" label="year" />
-            <TextField source="field" label="field" />
+            <BooleanField source="riazi" label="riazi" />
+            <BooleanField source="tajrobi" label="tajrobi" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
         </Datagrid>
     </List>
