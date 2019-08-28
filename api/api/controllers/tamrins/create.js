@@ -25,14 +25,10 @@ module.exports = {
       type: 'string'
     },
 
-    tajrobi :{
+    field :{
       type: 'string'
     },
     
-    riazi :{
-      type: 'string'
-    }
-
   },
 
 
@@ -45,14 +41,12 @@ module.exports = {
 
     return await Tamrins.create({
       name: inputs.name,
-      riazi: inputs.riazi,
-      tajrobi: inputs.tajrobi,
+      field: inputs.field,
       year: inputs.year,
       title: inputs.title,
       description: inputs.description,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
-      
     }).fetch();
 
   }

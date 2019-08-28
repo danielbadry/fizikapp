@@ -21,8 +21,6 @@ import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
 import { RadioButtonGroupInput } from 'react-admin';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { CheckboxGroupInput } from 'react-admin';
 
 export const TamrinsCreate = (props) => (
     <Create {...props} >
@@ -31,11 +29,8 @@ export const TamrinsCreate = (props) => (
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
 
-            <CheckboxGroupInput source="riazi" choices={[
-                { id: 'riazi', name: 'riazi' }
-            ]} />
-            
-            <CheckboxGroupInput source="tajrobi" choices={[
+            <RadioButtonGroupInput source="field" choices={[
+                { id: 'riazi', name: 'riazi' },
                 { id: 'tajrobi', name: 'tajrobi' }
             ]} />
 
@@ -96,8 +91,7 @@ export const TamrinsList = props => (
             <TextField source="title" label="Title" />
             <TextField source="description" label="Description" />
             <TextField source="year" label="year" />
-            <BooleanField source="riazi" label="riazi" />
-            <BooleanField source="tajrobi" label="tajrobi" />
+            <TextField source="riazi" label="riazi" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
         </Datagrid>
     </List>

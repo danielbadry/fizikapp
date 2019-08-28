@@ -27,12 +27,8 @@ module.exports = {
       type: 'string'
     },
 
-    tajrobi: {
-      type: 'boolean'
-    },
-
-    riazi: {
-      type: 'boolean'
+    field: {
+      type: 'string'
     },
     
     startedDate: {
@@ -50,19 +46,27 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs) {
-
+    var r = (start, end) => {
+      let ans = [];
+      for (let i = start ; i <= end ; i++) {
+        ans.push(i);
+      }
+      return ans;
+    }
     let finalData = {};
     let dataLength = await Tamrins.find();
-    let allTamrins = await Tamrins.find()
+    let allTamrins = await Tamrins.find({
+      where : {
+        field: inputs.field,
+        year: {'in': r(inputs.startedDate, inputs.endDate)}
+      }
+    })
     .limit(inputs.limit)
     .skip(inputs.skip)
     ;
+
     for (let tamrin of allTamrins) {
-      
-      tamrin.riazi = (tamrin.riazi !='') ? true : false;
-      tamrin.tajrobi = (tamrin.tajrobi !='') ? true : false;
       moment.locale('en');
       tamrin.jalaaliCreatedDate = momentJalaali(tamrin.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');

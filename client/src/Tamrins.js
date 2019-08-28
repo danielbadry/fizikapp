@@ -11,6 +11,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+
 import {
     DatePicker,
     TimePicker,
@@ -26,9 +29,18 @@ class Tamrins extends React.Component {
             startedDate : 1390,
             endDate : 1398,
             tamrins: [],
-            riazi : false,
-            tajrobi : true
+            field : 'riazi'
         }
+    }
+
+    handleCheckbox = field => (event) => {
+        event.persist();
+        this.setState({
+            [field]: !this.state[field]
+        }, function() {
+            this.fetchTamrins();        
+        });
+
     }
 
     handleField = field => (event) => {
@@ -36,16 +48,14 @@ class Tamrins extends React.Component {
         console.info('field:', event.target.value);
         this.setState({
             [field]: event.target.value
+        }, function() {
+            this.fetchTamrins();        
         });
-        // this.setState((state, props) => {
-        //     return {[field]: event.target.value};
-        // });
-        // console.info('ena:', this.state);
-        // this.fetchTamrins();
+
     }
 
     fetchTamrins = () => {
-        fetch(`http://localhost:1337/tamrins?tajrobi=${this.state.tajrobi}&riazi=${this.state.riazi}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
+        fetch(`http://localhost:1337/tamrins?field=${this.state.field}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -82,6 +92,7 @@ class Tamrins extends React.Component {
                             this.state.tamrins.map(
                                 (tamrin, index) => 
                                     <TamrinCard 
+                                        information={tamrin}
                                         key= {index}
                                     />
                             )
@@ -114,9 +125,7 @@ class Tamrins extends React.Component {
                             id="standard-name"
                             label="Name"
                             value={this.state.startedDate}
-                            // onChange={this.handleField('startedDate')}
-                            onKeyDown={this.handleField('startedDate')}
-                            onKeyUp={this.yee()}
+                            onChange={this.handleField('startedDate')}
                             margin="normal"
                         />
                         
@@ -131,29 +140,19 @@ class Tamrins extends React.Component {
                         <Typography component="div">
                             <Grid component="label" container alignItems="center" spacing={1}>
                                 
-                                <FormControlLabel
-                                    control={
-                                    <Checkbox
-                                        checked={this.state.riazi}
-                                        // onChange={this.handleField('riazi')}
-                                        value="riazi"
-                                        color="primary"
-                                    />
-                                    }
-                                    label="riazi"
-                                />
+                            <FormLabel component="legend">field</FormLabel>
+                            <RadioGroup
+                                aria-label="gender"
+                                name="field"
+                                // className={classes.group}
+                                value={this.state.field}
+                                onChange={this.handleField('field')}
+                                >
+                                    <FormControlLabel value="riazi" control={<Radio />} label="riazi" />
+                                    <FormControlLabel value="tajrobi" control={<Radio />} label="tajrobi" />
+                            </RadioGroup>
                                 
-                                <FormControlLabel
-                                    control={
-                                    <Checkbox
-                                        checked={this.state.tajrobi}
-                                        // onChange={this.handleField('tajrobi')}
-                                        value="tajrobi"
-                                        color="primary"
-                                    />
-                                    }
-                                    label="tajrobi"
-                                />
+                                
                             </Grid>
                         </Typography>
                         <FormControl component="fieldset">

@@ -17,24 +17,30 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TamrinCard() {
-  const classes = useStyles();
+class TamrinCard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // const classes = useStyles();
+render() {
 
   return (
-    <Card className={classes.card}>
+    <Card 
+      // className={classes.card}
+      >
       <CardActionArea>
         <CardMedia
-          className={classes.media}
+          // className={classes.media}
           image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {this.props.information.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {this.props.information.description}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -47,5 +53,9 @@ export default function TamrinCard() {
         </Button>
       </CardActions>
     </Card>
-  );
+  )
+
+};
+
 }
+export default TamrinCard;

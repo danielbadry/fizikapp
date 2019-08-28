@@ -79,18 +79,14 @@ module.exports = {
     },
     
     year :{
-      type: 'string',
+      type: 'number',
       required : false
     },
     
-    tajrobi :{
+    field :{
       type: 'string'
     },
-    
-    riazi :{
-      type: 'string'
-    },
-    
+  
   },
 
 };
