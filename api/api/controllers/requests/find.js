@@ -36,8 +36,7 @@ module.exports = {
   exits: {
 
   },
-
-
+  
   fn: async function (inputs) {
     let finalData = {};
     let finalRequests = [];
@@ -72,10 +71,13 @@ module.exports = {
 
       for (let a of aa) {
         if (tagIds.includes(a)) {
-          finalRequests.push(request);
+          if (await sails.helpers.requesthelper(request, finalRequests))
+            finalRequests.push(request);
         }
       }
     }
+
+    // iterate final Requests to make sure it has not repetitive element
 
     // return (finalRequests);
     allRequests = finalRequests;
