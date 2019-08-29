@@ -89,7 +89,6 @@ class Routs extends React.Component {
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/exercises" component={Exercises} />
                 <Route path="/learning-playground" component={LearningPlayground} />
-                <Route path="/about" component={About} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contact-us" component={ContactUs} />
                 <Route path="/privacy-policy" component={PrivacyPolicy} />
