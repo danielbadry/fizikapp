@@ -10,6 +10,13 @@ import Product from './Product';
 import Profile from './Profile';
 import Search from './Search';
 import Exercises from './Exercises';
+import LearningPlayground from './LearningPlayground';
+import Faq from './faq';
+import ContactUs from './ContactUs';
+import PrivacyPolicy from './PrivacyPolicy';
+import Disclaimer from './Disclaimer';
+import Careers from './Careers';
+import TermsConditions from './TermsConditions';
 
 function HandleRequest({ match }) {
     return (
@@ -19,21 +26,21 @@ function HandleRequest({ match }) {
     );
   }
 
-  function HandleSearch({ match }) {
+function HandleSearch({ match }) {
     return (
         <Search 
             searchTerm={match.params.searchTerm}
             />
     );
-  }
+}
   
-  function HandleProduct({ match }) {
+function HandleProduct({ match }) {
     return (
         <Product 
             productid={match.params.productid}
             />
     );
-  }
+}
   
 class Routs extends React.Component {
     render() {
@@ -81,6 +88,14 @@ class Routs extends React.Component {
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/exercises" component={Exercises} />
+                <Route path="/learning-playground" component={LearningPlayground} />
+                <Route path="/about" component={About} />
+                <Route path="/faq" component={Faq} />
+                <Route path="/contact-us" component={ContactUs} />
+                <Route path="/privacy-policy" component={PrivacyPolicy} />
+                <Route path="/disclaimer" component={Disclaimer} />
+                <Route path="/careers" component={Careers} />
+                <Route path="/terms-conditions" component={TermsConditions} />
             </Router>
         );
     }
