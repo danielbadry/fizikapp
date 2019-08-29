@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Criticisms from './Criticisms';
 
 class MainFooter extends React.Component {
     render() {
@@ -50,6 +51,9 @@ class MainFooter extends React.Component {
                             learning playground
                         </Link>
                     </div>
+               </Paper>
+               <Paper>
+               <Criticisms />
                </Paper>
             </Grid>
         );
