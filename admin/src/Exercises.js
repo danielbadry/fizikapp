@@ -22,7 +22,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RichTextInput from 'aor-rich-text-input';
 import { RadioButtonGroupInput } from 'react-admin';
 
-export const TamrinsCreate = (props) => (
+export const ExercisesCreate = (props) => (
     <Create {...props} >
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
@@ -59,7 +59,7 @@ export const TamrinsCreate = (props) => (
     </Create>
 );
 
-export const TamrinsEdit = (props) => (
+export const ExercisesEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
             <TextInput source="name" label="name" />
@@ -69,7 +69,7 @@ export const TamrinsEdit = (props) => (
     </Edit>
 );
 
-export const TamrinsShow = (props) => (
+export const ExercisesShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
             <Tab label="information">
@@ -81,11 +81,11 @@ export const TamrinsShow = (props) => (
     </Show>
 );
 
-const TamrinsPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+const ExercisesPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
-export const TamrinsList = props => (
+export const ExercisesList = props => (
     
-    <List {...props} pagination={<TamrinsPagination />}>
+    <List {...props} pagination={<ExercisesPagination />}>
         <Datagrid rowClick="show">
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />

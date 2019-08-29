@@ -59,11 +59,35 @@ module.exports = {
         }
       ]
     });
+    
+    let allExercises = await Users.find({
+      or : [
+        {
+          name:{contains: inputs.searchterm}
+        },
+        {
+          title:{contains: inputs.searchterm}
+        },
+        {
+          description:{contains: inputs.searchterm}
+        }
+      ]
+    });
+    
+    let allShoppingplans = await Users.find({
+      or : [
+        {
+          type:{contains: inputs.searchterm}
+        }
+      ]
+    });
 
     let data = {};
     data.allRequests = allRequests;
     data.allProducts = allProducts;
     data.allUsers = allUsers;
+    data.allShoppingplans = allShoppingplans;
+    data.allExercises = allExercises;
 
     return data;
 

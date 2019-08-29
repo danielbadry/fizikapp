@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-class TamrinCard extends React.Component {
+class ExerciseCard extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -58,4 +58,4 @@ render() {
 };
 
 }
-export default TamrinCard;
+export default ExerciseCard;

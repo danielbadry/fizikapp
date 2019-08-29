@@ -9,7 +9,7 @@ import Request from './Request';
 import Product from './Product';
 import Profile from './Profile';
 import Search from './Search';
-import Tamrins from './Tamrins';
+import Exercises from './Exercises';
 
 function HandleRequest({ match }) {
     return (
@@ -65,10 +65,10 @@ class Routs extends React.Component {
                         <Link to="/profile">Profile</Link>
                     </li>
                     <li>
-                        <Link to="/search">Search</Link>
+                        <Link to="/search/a">Search</Link>
                     </li>
                     <li>
-                        <Link to="/tamrins">Tamrins</Link>
+                        <Link to="/Exercises">Exercises</Link>
                     </li>
                 </ul>
                 <Route exact path="/" component={Home} />
@@ -80,7 +80,7 @@ class Routs extends React.Component {
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
-                <Route path="/tamrins" component={Tamrins} />
+                <Route path="/exercises" component={Exercises} />
             </Router>
         );
     }

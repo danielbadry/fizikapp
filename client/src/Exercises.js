@@ -1,7 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import TamrinCard from './TamrinCard';
+import ExerciseCard from './ExerciseCard';
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib1
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
@@ -22,7 +22,7 @@ import {
   } from "@material-ui/pickers";
 import TextField from '@material-ui/core/TextField';
 
-class Tamrins extends React.Component {
+class Exercises extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -91,7 +91,7 @@ class Tamrins extends React.Component {
                         {
                             this.state.tamrins.map(
                                 (tamrin, index) => 
-                                    <TamrinCard 
+                                    <ExerciseCard 
                                         information={tamrin}
                                         key= {index}
                                     />
@@ -183,4 +183,4 @@ class Tamrins extends React.Component {
   
 }
 
-export default Tamrins;
+export default Exercises;

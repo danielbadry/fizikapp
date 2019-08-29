@@ -6,9 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ProductSearchList from './ProductSearchList';
 import RequestSearchList from './RequestSearchList';
+import ShoppingplansSearchList from './ShoppingplansSearchList';
 import UserSearchList from './UserSearchList';
+import ExercisesSearchList from './ExercisesSearchList';
 import { useEffect } from 'react';
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -92,7 +93,9 @@ export default function Search(props) {
   const [result, setResult] = React.useState({
     allProducts: [],
     allRequests: [],
-    allUsers: []
+    allUsers: [],
+    allShoppingplans: [],
+    allExercises: []
   });
   const [firstTime, setFirstTime] = React.useState(true);
   
@@ -123,27 +126,29 @@ export default function Search(props) {
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Products" />
           <AntTab label="Requests" />
-          <AntTab label="Articles" />
+          <AntTab label="Shopping plans" />
           <AntTab label="Exercises" />
           <AntTab label="Users" />
         </AntTabs>
         <div>
-          <div>result : 25</div>
+    
           <TabPanel value={value} index={0}>
+            <div>result : 25</div>
             <ProductSearchList list={result.allProducts} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <RequestSearchList list={result.allRequests} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            2
+            <ShoppingplansSearchList list={result.allShoppingplans} />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            3
+            <ExercisesSearchList list={result.allExercises} />
           </TabPanel>
           <TabPanel value={value} index={4}>
             <UserSearchList list={result.allUsers} />
           </TabPanel>
+          
         </div>
       </div>
     </div>
