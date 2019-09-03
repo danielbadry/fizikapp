@@ -11,6 +11,7 @@ import WatchedVideosList from './WatchedVideosList';
 import UserBasics from './UserBasics';
 import UserFinancialTab from './UserFinancialTab';
 import UserRequests from './UserRequests';
+import FavoriteVideos from './FavoriteVideos';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,8 +75,8 @@ export default function VerticalTabs() {
       >
         <Tab label="Basics" {...a11yProps(0)} />
         <Tab label="Financial" {...a11yProps(1)} />
-        <Tab label="Watched videos" {...a11yProps(2)} />
-        <Tab label="Settings" {...a11yProps(3)} />
+        <Tab label="Watched Videos" {...a11yProps(2)} />
+        <Tab label="Favorite Videos" {...a11yProps(3)} />
         <Tab label={
               <Badge className={classes.padding} color="secondary" badgeContent={4}>
                   Inbox
@@ -97,7 +98,7 @@ export default function VerticalTabs() {
         <WatchedVideosList />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Settings
+        <FavoriteVideos />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Inbox />
