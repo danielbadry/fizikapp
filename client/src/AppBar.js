@@ -14,6 +14,13 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -78,6 +85,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const [isGoToSearchProcess, setIsGoToSearchProcess] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -89,6 +98,14 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(event.currentTarget);
   }
 
+  function redirectToSearchPage (e) {
+    console.info(e.keyCode);
+    switch (e.keyCode) {
+      case 13 :
+          setIsGoToSearchProcess(true);
+    }
+  }
+
   function handleMobileMenuClose() {
     setMobileMoreAnchorEl(null);
   }
@@ -96,6 +113,11 @@ export default function PrimarySearchAppBar() {
   function handleMenuClose() {
     setAnchorEl(null);
     handleMobileMenuClose();
+  }
+
+  function setSearchContent(e) {
+    setSearchValue(e.target.value);
+    console.info(e.target.value);
   }
 
   function handleMobileMenuOpen(event) {
@@ -158,7 +180,9 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
+if (isGoToSearchProcess) {
+  return <Redirect to={`/search/${searchValue}`}/>;
+} else 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -179,6 +203,8 @@ export default function PrimarySearchAppBar() {
               <SearchIcon />
             </div>
             <InputBase
+              onChange={ (e) => setSearchContent(e) }
+              onKeyDown={ (e) => redirectToSearchPage(e) }
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
