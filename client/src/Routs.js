@@ -8,8 +8,10 @@ import SignUp from './SignUp';
 import Request from './Request';
 import Product from './Product';
 import Profile from './Profile';
+import Shoppingplans from './Shoppingplans';
 import Search from './Search';
 import Exercises from './Exercises';
+import Definitions from './Definitions';
 import LearningPlayground from './LearningPlayground';
 import Faq from './faq';
 import ContactUs from './ContactUs';
@@ -22,6 +24,14 @@ function HandleRequest({ match }) {
     return (
         <Request 
             requestid={match.params.requestid}
+            />
+    );
+  }
+
+function HandleDefinition({ match }) {
+    return (
+        <Request 
+            requestid={match.params.definitionid}
             />
     );
   }
@@ -54,6 +64,12 @@ class Routs extends React.Component {
                         <Link to="/requests">Requests</Link>
                     </li>
                     <li>
+                        <Link to="/shopping-plans">Shopping plans</Link>
+                    </li>
+                    <li>
+                        <Link to="/definitions">Definitions</Link>
+                    </li>
+                    <li>
                         <Link to="/about">About</Link>
                     </li>
                     <li>
@@ -80,6 +96,9 @@ class Routs extends React.Component {
                 </ul>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
+                <Route path="/shopping-plans" component={Shoppingplans} />
+                <Route path="/definitions" component={Definitions} />
+                <Route path="/definition/:definitionid" component={HandleDefinition} />
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/about" component={About} />
                 <Route path="/newRequest" component={NewRequest} />

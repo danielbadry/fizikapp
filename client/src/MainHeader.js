@@ -8,15 +8,26 @@ class MainHeader extends React.Component {
         return (
           <div>
             <Paper>
-              <Button variant="contained">
+              <Button 
+                variant="contained"
+                
+                >
                 آموزش
               </Button>
     
-              <Button variant="contained" color="primary">
+              <Button 
+                variant="contained" 
+                color="primary"
+                href="exercises"
+                >
                 حل تمرین و تست
               </Button>
     
-              <Button variant="contained" color="secondary">
+              <Button 
+                variant="contained" 
+                color="secondary"
+                href="/requests"
+                >
                 درخواست ها
               </Button>
             </Paper>
