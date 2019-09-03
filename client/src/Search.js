@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ProductSearchList from './ProductSearchList';
 import RequestSearchList from './RequestSearchList';
+import DefinitionsList from './DefinitionsList';
 import ShoppingplansSearchList from './ShoppingplansSearchList';
 import UserSearchList from './UserSearchList';
 import ExercisesSearchList from './ExercisesSearchList';
@@ -125,16 +126,20 @@ export default function Search(props) {
       <div className={classes.demo1}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Products" />
-          <AntTab label="Requests" />
-          <AntTab label="Shopping plans" />
-          <AntTab label="Exercises" />
-          <AntTab label="Users" />
+          <AntTab label="Definitions" />
+          {/* <AntTab label="Shopping plans" /> */}
+          {/* <AntTab label="Exercises" /> */}
+          {/* <AntTab label="Users" /> */}
         </AntTabs>
         <div>
     
           <TabPanel value={value} index={0}>
             <div>result : 25</div>
             <ProductSearchList list={result.allProducts} />
+          </TabPanel>
+          <TabPanel value={value} index={0}>
+            <div>result : 25</div>
+            <DefinitionsList list={result.allDefinitions} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <RequestSearchList list={result.allRequests} />

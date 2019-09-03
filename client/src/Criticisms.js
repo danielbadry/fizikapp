@@ -70,7 +70,7 @@ userId: user.id
       onClick={this.sendCriticisms}
     //   className={classes.button}
       >
-        Primary
+        Send Message
       </Button>
 </React.Fragment>
         );

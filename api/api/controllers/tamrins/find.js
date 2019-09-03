@@ -63,7 +63,7 @@ module.exports = {
       }
     })
     .limit(inputs.limit)
-    .skip(inputs.skip)
+    .skip(inputs.skip)  
     ;
 
     for (let tamrin of allTamrins) {
