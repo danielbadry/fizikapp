@@ -1,5 +1,6 @@
 import React from 'react';
 import './DottedBox.css';
+import './font-style.css';
 
 class SignUp extends React.Component {
     constructor (props) {
@@ -94,15 +95,15 @@ class SignUp extends React.Component {
 
         const showText = {
         login : {
-            header : 'Not yet a member?',
+            header : 'هنوز عضو نشده اید؟',
             byline : 'Sign up and discover what we can do for you',
-            buttonText: 'Sign up'
+            buttonText: 'ورود'
         },
         
         signup : {
-            header : 'Already a member?',
-            byline : 'Sign in and see what\'s new since your last visit',
-            buttonText: 'Sign in'    
+            header : 'قبلا عضو بوده اید?',
+            byline : 'وارد شوید و ویدیوهای جدید را مشاهده کنید',
+            buttonText: 'ورود'    
         }
         }
         const switchButton = document.getElementById('switch-button');
@@ -125,8 +126,12 @@ class SignUp extends React.Component {
         return (
             <div className="main-page">
             <div className="smooth login" id="login">
-            <h1 className="login__header header">Welcome back to the party club</h1>
-            <p className="login__byline">It's good to see you again, come in using your favourite social network</p>
+            <h1 
+                className="login__header header iranfont"
+                >
+                به فیزیک اپ خوش آمدید
+            </h1>
+            <p className="login__byline iranfont">بهترین پلتفرم آموزش فیزیک با بیش از صدها هزار ساعت ویدیوی آموزشی</p>
             <div className="social-media__container">
             <span className="fa-stack fa-lg social-media__icon icon">
             <i className="fas fa-circle fa-stack-2x" style={{color: '#48556D'}}></i>
@@ -142,28 +147,28 @@ class SignUp extends React.Component {
             </span>
             </div>
             <fieldset className="form">
-                <legend className="form__legend">OR</legend>
+                <legend className="form__legend iranfont">یا</legend>
                 <form action="" className="form__body form-login">  
                 <input 
-                    className="form__input" 
+                    className="form__input iranfont" 
                     type="email" 
-                    placeholder="email" 
+                    placeholder="آدرس ایمیل" 
                     value={this.state.login.email || ''}
                     onChange={this.setLoginInfo('email')}
                     />
                 <input 
-                    className="form__input" 
+                    className="form__input iranfont" 
                     type="password" 
-                    placeholder="password" 
+                    placeholder="کلمه عبور" 
                     value={this.state.login.password || ''}
                     onChange={this.setLoginInfo('password')}
                     />   
                 <button 
-                    className="btn" 
+                    className="btn iranfont" 
                     type="submit"
                     onClick={this.authenticate}
                     >
-                        Sign in
+                        ورود
                     </button> 
                 </form>  
             </fieldset>
@@ -171,15 +176,15 @@ class SignUp extends React.Component {
 
             <div className="switch">
             <div className="switch__text-container"  id="switch-text">
-            <h1 className="switch__header header">Not yet a member?</h1>
-            <p>Sign up and discover what we can do for you</p>
+            <h1 className="switch__header header iranfont">هنوز عضو نیستید؟</h1>
+            <p className="iranfont">ثبت نام کنید و از آموزش به سبک جدید فیزیک لذت ببرید</p>
             </div>
-            <button className="btn-white btn" id="switch-button">Sign up</button>
+            <button className="btn-white btn iranfont" id="switch-button">ثبت نام</button>
             </div>
 
             <div className="smooth signup hide-view" id="signup">
-            <h1 className="signup__header header">Create a new account</h1>
-            <p className="signup__byline">You can use your favourite social network</p>
+            <h1 className="signup__header header iranfont">یک اکانت جدید بسازید</h1>
+            <p className="signup__byline iranfont">برای ثبت نام از شبکه های اجتماعی هم می توانید استفاده کنید</p>
             <div className="social-media__container">
             <span className="fa-stack fa-lg social-media__icon icon">
             <i className="fas fa-circle fa-stack-2x" style={{color: '#48556D'}}></i>
@@ -195,42 +200,42 @@ class SignUp extends React.Component {
             </span>
             </div>
             <fieldset className="form">
-            <legend className="form__legend">OR</legend>
+            <legend className="form__legend iranfont">یا</legend>
             <form action="" className="form__body form-login">
             <div className="input__group">
                 <input 
-                    className="form__input form__input-half" 
+                    className="form__input form__input-half iranfont" 
                     type="text" 
-                    placeholder="first name"
+                    placeholder="نام"
                     value={this.state.firstName}
                     onChange={this.handleChange('firstName')}
                     />
                 <input 
-                    className="form__input form__input-half" 
+                    className="form__input form__input-half iranfont" 
                     type="text" 
-                    placeholder="last name" 
+                    placeholder="نام خانوادگی" 
                     value={this.state.lastName}
                     onChange={this.handleChange('lastName')}
                     />
             </div>
             <div className="input__group">
                 <input 
-                    className="form__input form__input-half" 
+                    className="form__input form__input-half iranfont" 
                     type="email" 
-                    placeholder="email" 
+                    placeholder="آدرس ایمیل" 
                     value={this.state.email}
                     onChange={this.handleChange('email')}
                     />
-                <input className="form__input form__input-half" type="password" placeholder="password" />      
+                <input className="form__input form__input-half iranfont" type="password" placeholder="کلمه عبور" />      
             </div>
             <div className="input__group">
-                <input className="form__input-checkbox" type="checkbox" /> I have read the <a href="#">terms and conditions</a>
+                <input className="form__input-checkbox iranfont" type="checkbox" /> <span className="iranfont">را خوانده ام </span><a href="#" className="iranfont">قوانین و مقررات</a>
             </div>
             <button 
-                className="btn" 
+                className="btn iranfont" 
                 type="submit"
                 onClick={this.signUp}
-                >Sign up</button> 
+                >ثبت نام</button> 
             </form>  
             </fieldset>
             </div>
