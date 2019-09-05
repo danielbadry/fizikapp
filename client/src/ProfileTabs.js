@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import ReactDOM from "react-dom";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 import Badge from '@material-ui/core/Badge';
 import Inbox from './Inbox';
 import WatchedVideosList from './WatchedVideosList';
@@ -13,99 +12,124 @@ import UserFinancialTab from './UserFinancialTab';
 import UserRequests from './UserRequests';
 import FavoriteVideos from './FavoriteVideos';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+class ProfileTabs extends React.PureComponent {
+  state = { activeIndex: 0 };
 
+  handleChange = (_, activeIndex) => this.setState({ activeIndex });
+  render() {
+    const { activeIndex } = this.state;
+    return (
+      <div
+        style={{
+          display: "flex"
+        }}
+      >
+        <VerticalTabs value={activeIndex} onChange={this.handleChange}>
+          
+          <MyTab 
+            label="عمومی" 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+
+          <MyTab 
+            label="مالی" 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+          
+          <MyTab 
+            label="ویدیوهای دیده شده" 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+
+          <MyTab 
+            label="مورد علاقه ها" 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+          
+          <MyTab 
+            label={
+              <Badge 
+                color="secondary" 
+                badgeContent={+99}
+                >
+                  صندوق پیام
+              </Badge>
+            }
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+
+          <MyTab 
+            label={
+              <Badge 
+                color="secondary" 
+                badgeContent={+99}
+                >
+                  درخواست ها
+              </Badge>
+            }
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+
+        </VerticalTabs>
+
+        {activeIndex === 0 && <TabContainer>
+          <UserBasics />
+        </TabContainer>}
+        {activeIndex === 1 && <TabContainer>
+          <UserFinancialTab />
+        </TabContainer>}
+        {activeIndex === 2 && <TabContainer>
+          <WatchedVideosList />
+        </TabContainer>}
+        {activeIndex === 3 && <TabContainer>
+          <FavoriteVideos />
+        </TabContainer>}
+        {activeIndex === 4 && <TabContainer>
+          <Inbox />
+        </TabContainer>}
+        {activeIndex === 5 && <TabContainer>
+          <UserRequests />
+        </TabContainer>}
+      </div>
+    );
+  }
+}
+
+const VerticalTabs = withStyles(theme => ({
+  flexContainer: {
+    flexDirection: "column"
+  },
+  indicator: {
+    display: "none"
+  }
+}))(Tabs);
+
+const MyTab = withStyles(theme => ({
+  selected: {
+    color: "tomato",
+    borderRight: "2px solid tomato",
+    fontFamily: "IranSans"
+  }
+}))(Tab);
+
+function TabContainer(props) {
   return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      <Box p={3}>{children}</Box>
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
     </Typography>
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: 'flex',
-    height: 224,
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-export default function VerticalTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  function handleChange(event, newValue) {
-    setValue(newValue);
-  }
-
-  return (
-    <div className={classes.root}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabs}
-      >
-        <Tab label="Basics" {...a11yProps(0)} />
-        <Tab label="Financial" {...a11yProps(1)} />
-        <Tab label="Watched Videos" {...a11yProps(2)} />
-        <Tab label="Favorite Videos" {...a11yProps(3)} />
-        <Tab label={
-              <Badge className={classes.padding} color="secondary" badgeContent={4}>
-                  Inbox
-              </Badge>
-            } {...a11yProps(4)} />
-        <Tab label={
-              <Badge className={classes.padding} color="secondary" badgeContent={+99}>
-                  Requests
-              </Badge>
-            } {...a11yProps(5)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <UserBasics />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <UserFinancialTab />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <WatchedVideosList />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <FavoriteVideos />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <Inbox />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <UserRequests />
-      </TabPanel>
-    </div>
-  );
-}
+export default ProfileTabs;

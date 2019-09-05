@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 class UserBasics extends React.Component {
     
@@ -69,6 +70,7 @@ class UserBasics extends React.Component {
     }
     
     render() {
+    
         return(
             <form 
                 noValidate 
@@ -77,50 +79,94 @@ class UserBasics extends React.Component {
                 >
                 <TextField
                     id="standard-name"
-                    label="firstName"
+                    label="نام"
                     value={this.state.userBasicInfo.firstName}
                     onChange={this.handleChange('firstName')}
                     margin="normal"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
+                    InputProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                 />
                 <TextField
                     id="standard-name"
-                    label="lastName"
+                    label="نام خانوادگی"
                     value={this.state.userBasicInfo.lastName}
                     onChange={this.handleChange('lastName')}
                     margin="normal"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
+                    InputProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                 />
                 <TextField
                     id="standard-name"
-                    label="userName"
+                    label="نام کاربری"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                     value={this.state.userBasicInfo.userName}
                     onChange={this.handleChange('userName')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
-                    label="password"
+                    label="کلمه عبور"
                     value={this.state.userBasicInfo.password}
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                     onChange={this.handleChange('password')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
-                    label="email"
+                    label="ایمیل"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                     value={this.state.userBasicInfo.email}
                     onChange={this.handleChange('email')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
-                    label="phone"
+                    label="تلفن ثابت"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                     value={this.state.userBasicInfo.phone}
                     onChange={this.handleChange('phone')}
                     margin="normal"
                 />
                 <TextField
                     id="standard-name"
-                    label="mobile"
-                    // className={classes.textField}
+                    label="موبایل"
+                    InputLabelProps={{
+                        style: {
+                            fontFamily: "IranSans"
+                        }
+                    }}
                     value={this.state.userBasicInfo.mobile}
                     onChange={this.handleChange('mobile')}
                     margin="normal"
@@ -156,9 +202,10 @@ class UserBasics extends React.Component {
                     type="submit"
                     variant="contained"
                     component="button"
+                    style={{ fontFamily: 'IranSans' }}
                     // disabled={this.haveErrors(errors)}
                 >
-                    Save
+                    ذخیره
                 </Button>
 
             </form>
