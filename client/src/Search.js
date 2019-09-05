@@ -5,11 +5,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ProductSearchList from './ProductSearchList';
-import RequestSearchList from './RequestSearchList';
+import DefinitionsSearchList from './DefinitionsSearchList';
 import DefinitionsList from './DefinitionsList';
-import ShoppingplansSearchList from './ShoppingplansSearchList';
-import UserSearchList from './UserSearchList';
-import ExercisesSearchList from './ExercisesSearchList';
 import { useEffect } from 'react';
 
 function TabPanel(props) {
@@ -93,10 +90,7 @@ export default function Search(props) {
   const [value, setValue] = React.useState(0);
   const [result, setResult] = React.useState({
     allProducts: [],
-    allRequests: [],
-    allUsers: [],
-    allShoppingplans: [],
-    allExercises: []
+    allDefinitions: [],
   });
   const [firstTime, setFirstTime] = React.useState(true);
   
@@ -117,8 +111,10 @@ export default function Search(props) {
       })
       .then(response => response.json())
       .then(nat => {
-          setResult(nat);
-          setFirstTime(false);
+        console.info('nat:', nat);  
+        setResult(nat);
+        console.info('result', result);
+        setFirstTime(false);
       });
 
   return (
@@ -127,33 +123,17 @@ export default function Search(props) {
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Products" />
           <AntTab label="Definitions" />
-          {/* <AntTab label="Shopping plans" /> */}
-          {/* <AntTab label="Exercises" /> */}
-          {/* <AntTab label="Users" /> */}
         </AntTabs>
         <div>
     
           <TabPanel value={value} index={0}>
-            <div>result : 25</div>
             <ProductSearchList list={result.allProducts} />
           </TabPanel>
-          <TabPanel value={value} index={0}>
-            <div>result : 25</div>
-            <DefinitionsList list={result.allDefinitions} />
-          </TabPanel>
+
           <TabPanel value={value} index={1}>
-            <RequestSearchList list={result.allRequests} />
+            <DefinitionsSearchList list={result.allDefinitions} />
           </TabPanel>
-          <TabPanel value={value} index={2}>
-            <ShoppingplansSearchList list={result.allShoppingplans} />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <ExercisesSearchList list={result.allExercises} />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            <UserSearchList list={result.allUsers} />
-          </TabPanel>
-          
+
         </div>
       </div>
     </div>

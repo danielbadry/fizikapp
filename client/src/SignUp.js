@@ -1,6 +1,5 @@
 import React from 'react';
 import './DottedBox.css';
-import './font-style.css';
 
 class SignUp extends React.Component {
     constructor (props) {
@@ -96,7 +95,7 @@ class SignUp extends React.Component {
         const showText = {
         login : {
             header : 'هنوز عضو نشده اید؟',
-            byline : 'Sign up and discover what we can do for you',
+            byline : 'ثبت نام کنید و ببیند چه ویدیوهایی در این سایت می توانید مشاهده کنید',
             buttonText: 'ورود'
         },
         
