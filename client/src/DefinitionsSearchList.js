@@ -47,7 +47,7 @@ export default function DefinitionsSearchList(props) {
                     primary:classes.listItemText
                   }
                 }
-              primary={item.name}
+              primary={<a target="_blank" href={'/definitin/'+item.id}>{item.name}</a>}
               secondary={
                 <React.Fragment>
                   <Typography

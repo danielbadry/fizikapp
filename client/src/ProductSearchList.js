@@ -45,7 +45,7 @@ export default function ProductSearchList(props) {
                 primary:classes.listItemText
               }
             }
-              primary={item.name}
+              primary={<a target="_blank" href={'/product/'+item.id}>{item.name}</a>}
               secondary={
                 <React.Fragment>
                   <Typography
@@ -64,6 +64,7 @@ export default function ProductSearchList(props) {
                 </React.Fragment>
               }
             />
+            <Divider />
           </ListItem>
       )}
       
