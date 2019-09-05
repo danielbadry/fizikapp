@@ -56,7 +56,7 @@ class Routs extends React.Component {
     render() {
         return (
             <Router>
-                <ul>
+                {/* <ul>
                     <li>
                         <Link to="/">Home</Link>
                     </li>
@@ -93,7 +93,7 @@ class Routs extends React.Component {
                     <li>
                         <Link to="/Exercises">Exercises</Link>
                     </li>
-                </ul>
+                </ul> */}
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />

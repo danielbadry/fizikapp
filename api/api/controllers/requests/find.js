@@ -57,11 +57,17 @@ module.exports = {
     
     // filter allRequest based on tags
     let tagIds = []; // list of comming tags id from the URL
-    let inTags = JSON.parse(inputs.tags);
+    let inTags = [];
+    // return (JSON.parse(inputs.tags).length);
+    if(JSON.parse(inputs.tags).length === 0) {
+      inTags = await Tags.find();
+    } else {
+      inTags = JSON.parse(inputs.tags);
+    }
+    
     for(let inTag of inTags) {
       tagIds.push(inTag.id);
     }
-
     for (let request of allRequests) {
       let aa = [];
       requestTags = JSON.parse(request.tags);
@@ -128,7 +134,7 @@ module.exports = {
           requestUserAnswer.thumbnail = "http://localhost:1337/uploads/" + requestUserAnswer.userInfo.thumbnail;
         }
         
-        (request.adminAnswer == '') ? request.isResponsed = false  : request.isResponsed = true;
+        (request.adminAnswer === '') ? request.isResponsed = false  : request.isResponsed = true;
       }
       finalData.dataLength = allRequests.length;
       finalData.data = allRequests;

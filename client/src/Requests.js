@@ -67,8 +67,8 @@ class Requests extends React.Component {
             .then(response => response.json())
             .then(tags => {
                 for(let tag of tags.data) {
-                    tag.color = "primary";
-                    tag.isSelected = true;
+                    tag.color = "default";
+                    tag.isSelected = false;
                 }
                 this.setState((state, props) => {
                     return {tags: tags.data, activeTags:tags.data};
@@ -81,7 +81,7 @@ class Requests extends React.Component {
     tagClicked = id => (event) => {
         let listOfTags = this.state.tags;
         for(let tag of listOfTags) {
-            if (tag.id == id) {
+            if (tag.id === id) {
                 tag.isSelected = !tag.isSelected;
                 if(tag.isSelected) {
                     tag.color = 'primary';
@@ -116,7 +116,12 @@ class Requests extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                    <Button variant="contained">
+                    <Button 
+                        variant="contained"
+                        style={{
+                            fontFamily: "IranSans"
+                          }}
+                        >
                         ارسال درخواست
                     </Button>
                     </Grid>
@@ -128,13 +133,16 @@ class Requests extends React.Component {
                             (tag, index) =>
                                 <Chip
                                     key={index}
-                                    icon={<FaceIcon />}
+                                    // icon={<FaceIcon />}
                                     label={tag.name}
                                     clickable
                                     counter={tag.id}
                                     color={tag.color}
                                     onClick={this.tagClicked(tag.id)}
                                     deleteIcon={<DoneIcon />}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                      }}
                                     />
                         )}
                         

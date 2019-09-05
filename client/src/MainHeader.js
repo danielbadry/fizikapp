@@ -10,7 +10,9 @@ class MainHeader extends React.Component {
             <Paper>
               <Button 
                 variant="contained"
-                
+                style={{
+                  fontFamily: "IranSans"
+                }}
                 >
                 آموزش
               </Button>
@@ -19,6 +21,9 @@ class MainHeader extends React.Component {
                 variant="contained" 
                 color="primary"
                 href="exercises"
+                style={{
+                  fontFamily: "IranSans"
+                }}
                 >
                 حل تمرین و تست
               </Button>
@@ -27,8 +32,33 @@ class MainHeader extends React.Component {
                 variant="contained" 
                 color="secondary"
                 href="/requests"
+                style={{
+                  fontFamily: "IranSans"
+                }}
                 >
                 درخواست ها
+              </Button>
+
+              <Button 
+                variant="contained" 
+                color="secondary"
+                href="/definitions"
+                style={{
+                  fontFamily: "IranSans"
+                }}
+                >
+                تعریفی ها
+              </Button>
+
+              <Button 
+                variant="contained" 
+                color="secondary"
+                href="/shopping-plans"
+                style={{
+                  fontFamily: "IranSans"
+                }}
+                >
+                طرح خرید
               </Button>
             </Paper>
             <Paper>
