@@ -66,7 +66,7 @@ class DefinitionsList extends React.Component {
                   >
                     Sandra Adams
                   </Typography>
-                  {' — Do you have Paris recommendations? Have you ever…'}
+                  {item.description}
                 </React.Fragment>
               }
             />

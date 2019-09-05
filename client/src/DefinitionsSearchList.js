@@ -13,18 +13,27 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    fontFamily: 'IranSans'
   },
   inline: {
     display: 'inline',
+    fontFamily:'IranSans'
   },
+  listItemText:{
+    fontFamily:'IranSans',//Insert your required size
+  },
+  listItemDesc:{
+    fontFamily:'IranSans',//Insert your required size
+  }
 }));
 
 export default function DefinitionsSearchList(props) {
-  console.info('here in products:', props);
   const classes = useStyles();
 
   return (
-    <List className={classes.root}>
+    <List 
+      className={classes.root}
+      >
       {props.list.map(
         (item, index) => <ListItem 
                   key={index}
@@ -33,6 +42,11 @@ export default function DefinitionsSearchList(props) {
               <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
             </ListItemAvatar>
             <ListItemText
+              classes={
+                  {
+                    primary:classes.listItemText
+                  }
+                }
               primary={item.name}
               secondary={
                 <React.Fragment>
@@ -41,16 +55,19 @@ export default function DefinitionsSearchList(props) {
                     variant="body2"
                     className={classes.inline}
                     color="textPrimary"
-                  >
-                    Sandra Adams
+                    >
+                    {item.title}
                   </Typography>
-                  {' — Do you have Paris recommendations? Have you ever…'}
+                  <div
+                    className={classes.listItemDesc}
+                    >
+                    {item.description}
+                  </div>
                 </React.Fragment>
               }
             />
           </ListItem>
       )}
-      
     </List>
   );
 }

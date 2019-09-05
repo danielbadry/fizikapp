@@ -6,8 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ProductSearchList from './ProductSearchList';
 import DefinitionsSearchList from './DefinitionsSearchList';
-import DefinitionsList from './DefinitionsList';
-import { useEffect } from 'react';
+import './font-style.css';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,6 +41,7 @@ const AntTab = withStyles(theme => ({
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(4),
     fontFamily: [
+      'IranSans',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
@@ -84,7 +84,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Search(props) {
-  console.info('props:', props);
   
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -111,18 +110,24 @@ export default function Search(props) {
       })
       .then(response => response.json())
       .then(nat => {
-        console.info('nat:', nat);  
         setResult(nat);
-        console.info('result', result);
         setFirstTime(false);
       });
 
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
-        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="Products" />
-          <AntTab label="Definitions" />
+        <AntTabs 
+          value={value} 
+          onChange={handleChange} 
+          aria-label="ant example"
+          >
+          <AntTab 
+            label="ویدیوها" 
+            />
+          <AntTab 
+            label="تعریفی ها" 
+            />
         </AntTabs>
         <div>
     
