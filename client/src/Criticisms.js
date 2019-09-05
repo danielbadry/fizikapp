@@ -46,32 +46,55 @@ userId: user.id
     render() {
         return (
 <React.Fragment>
-<TextField
+    <TextField
         id="standard-title"
-        label="title"
+        label="عنوان"
         // className={classes.textField}
         value={this.state.title}
         onChange={this.handleChange('title')}
-        margin="normal"
-      />
+    margin="normal"
+        InputLabelProps={{
+            style: {
+                fontFamily: "IranSans"
+            }
+        }}
+        InputProps={{
+            style: {
+                fontFamily: "IranSans"
+            }
+        }}
+    />
 
-<TextField
+    <TextField
         id="standard-message"
-        label="message"
+        label="پیام"
         // className={classes.textField}
         value={this.state.message}
         onChange={this.handleChange('message')}
         margin="normal"
-      />
+        InputLabelProps={{
+            style: {
+                fontFamily: "IranSans"
+            }
+        }}
+        InputProps={{
+            style: {
+                fontFamily: "IranSans"
+            }
+        }}
+    />
 
-      <Button 
-      variant="contained" 
-      color="primary" 
-      onClick={this.sendCriticisms}
-    //   className={classes.button}
-      >
-        Send Message
-      </Button>
+    <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={this.sendCriticisms}
+        //   className={classes.button}
+        style={{
+            fontFamily: "IranSans"
+        }}
+        >
+        ارسال درخواست
+    </Button>
 </React.Fragment>
         );
     }

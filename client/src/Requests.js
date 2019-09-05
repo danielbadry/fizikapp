@@ -117,6 +117,7 @@ class Requests extends React.Component {
                     
                     <Grid item xs={12}>
                     <Button 
+                        href="/new-request"
                         variant="contained"
                         style={{
                             fontFamily: "IranSans"
@@ -162,7 +163,11 @@ class Requests extends React.Component {
                                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                                 </ListItemAvatar>
                                 <ListItemText
-                                primary={<Link component={RouterLink} to={'https://google.com'}>
+                                    primary={
+                                        <Link 
+                                            component={RouterLink} 
+                                            to={`/request/${request.id}`}
+                                            >
                                     {request.title}
                                 </Link>}
                                 secondary={

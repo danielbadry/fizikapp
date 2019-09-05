@@ -82,27 +82,41 @@ class NewRequest extends React.Component {
                         
                         <TextField
                             id="standard-name"
-                            label="title"
+                            label="عنوان"
                             value={this.state.title}
                             onChange={this.handleChange('title')}
                             margin="normal"
-                        />
-
-                        <TextField
-                            id="standard-full-width"
-                            label="Label"
-                            style={{ margin: 8 }}
-                            placeholder="Placeholder"
-                            helperText="Full width!"
-                            value={this.state.message}
-                            onChange={this.handleChange('message')}
-                            fullWidth
-                            margin="normal"
                             InputLabelProps={{
-                                shrink: true,
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                            InputProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
                             }}
                         />
                         
+                        <TextField
+                            id="standard-name"
+                            label="توضیحات کامل"
+                            value={this.state.message}
+                            onChange={this.handleChange('message')}
+                            margin="normal"
+                            fullWidth
+                            InputLabelProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                            InputProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                        />
+
                         <RequestTag 
                             onChange={this.showTags.bind(this)}
                         />
@@ -111,8 +125,11 @@ class NewRequest extends React.Component {
                             variant="contained" 
                             color="primary"
                             onClick={this.sendRequest}
+                            style={{
+                                fontFamily: "IranSans"
+                            }}
                             >
-                            send request
+                            ارسال درخواست
                         </Button>
                     </form>    
                     </Paper>

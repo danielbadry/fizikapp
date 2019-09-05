@@ -196,7 +196,7 @@ if (isGoToSearchProcess) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            fizik app
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -205,12 +205,17 @@ if (isGoToSearchProcess) {
             <InputBase
               onChange={ (e) => setSearchContent(e) }
               onKeyDown={ (e) => redirectToSearchPage(e) }
-              placeholder="Search…"
+              placeholder="جستجو کنید"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 
+                'aria-label': 'search',
+                style: {
+                  fontFamily: "IranSans_Light"
+                }
+              }}
             />
           </div>
           <div className={classes.grow} />
