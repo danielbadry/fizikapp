@@ -7,6 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 class WatchedVideosList extends React.Component {
   constructor(props) {
@@ -48,7 +50,15 @@ class WatchedVideosList extends React.Component {
                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
               </ListItemAvatar>
               <ListItemText
-                primary="Oui Oui"
+              primary={
+                <Link 
+                    component={RouterLink} 
+                    to={`/product/${uw.productInfo.id}`}
+                    style={{ fontFamily: 'IranSans_Light' }}
+                    >
+                  {uw.productInfo.name}
+                </Link>}
+                // primary={uw.productInfo.name}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -56,9 +66,15 @@ class WatchedVideosList extends React.Component {
                       variant="body2"
                       color="textPrimary"
                     >
-                      Sandra Adams
+                      <div
+                        style={{ fontFamily: 'IranSans_Light' }}
+                        >
+                        {uw.jalaaliUserFriendlyCreatedDate}
+                      </div>
                     </Typography>
-                    {' — Do you have Paris recommendations? Have you ever…'}
+                    <div
+                      style={{ fontFamily: 'IranSans_Light' }}
+                      >{uw.productInfo.description}</div>
                   </React.Fragment>
                 }
               />

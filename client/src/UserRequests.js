@@ -117,14 +117,13 @@ class Requests extends React.Component {
                   alignItems="flex-start"
                   key={index}
                   >
-                  <ListItemAvatar>
-                  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                  </ListItemAvatar>
+                  
                   <ListItemText
                       primary={
                           <Link 
                               component={RouterLink} 
                               to={`/request/${request.id}`}
+                              style={{ fontFamily: 'IranSans_Light' }}
                               >
                       {request.title}
                   </Link>}
@@ -135,11 +134,22 @@ class Requests extends React.Component {
                           variant="body2"
                           color="textPrimary"
                       >
-                          <Link component={RouterLink} to={'https://google.com'}>
+                        <div
+                            style={{ fontFamily: 'IranSans_Light' }}
+                            >
+                            {request.jalaaliUserFriendlyCreatedDate}
+                        </div>
+                          <Link 
+                            component={RouterLink} 
+                            to={'https://google.com'}
+                            style={{ fontFamily: 'IranSans_Light' }}
+                            >
                               {request.userInfo.fullName}
                           </Link>
                       </Typography>
-                      {' — Do you have Paris recommendations? Have you ever…'}
+                        <div
+                        style={{ fontFamily: 'IranSans_Light' }}
+                        >{request.message}</div>
                       </React.Fragment>
                   }
                   />

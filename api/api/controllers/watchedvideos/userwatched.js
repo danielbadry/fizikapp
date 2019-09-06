@@ -1,3 +1,5 @@
+var moment = require('moment');
+var momentJalaali = require('moment-jalaali');
 module.exports = {
 
 
@@ -18,11 +20,15 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // return 'hello';
-    // return await Watchedvideos.find();
+
     let userwatched = await Watchedvideos.find();
     for (let uw of userwatched) {
       
+      moment.locale('en');
+      uw.jalaaliCreatedDate = momentJalaali(uw.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      uw.jalaaliUserFriendlyCreatedDate = moment(uw.createdAt).fromNow();
+
       // find user
       let user = await Users.find({
         where : {
@@ -43,6 +49,5 @@ module.exports = {
 
     return userwatched;
   }
-
 
 };
