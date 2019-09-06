@@ -76,8 +76,11 @@ class QuizComponent extends React.Component {
                     variant="contained" 
                     color="primary"
                     onClick={this.handleDialogStatus}
+                    style={{
+                        fontFamily: "IranSans"
+                    }}
                     >
-                    start quiz
+                    شروع کوییز
                 </Button>
 
                 <Dialog 

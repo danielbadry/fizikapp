@@ -71,8 +71,20 @@ export default function ProductUserInteraction() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Question Answer" {...a11yProps(0)} />
-          <Tab label="Comments" {...a11yProps(1)} />
+          <Tab 
+            label="پرسش و پاسخ" 
+            {...a11yProps(0)} 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
+          <Tab 
+            label="نظرات" 
+            {...a11yProps(1)} 
+            style={{
+              fontFamily: "IranSans"
+            }}
+            />
          
         </Tabs>
       </AppBar>

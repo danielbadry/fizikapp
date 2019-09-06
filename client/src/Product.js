@@ -4,8 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import { Player } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ProductUserInteraction from "./ProductUserInteraction";
-
 import QuizComponent from './QuizComponent';
+import Grid from '@material-ui/core/Grid';
+import MainFooter from "./MainFooter";
+import Paper from '@material-ui/core/Paper';
 
 class Product extends React.Component {
     constructor(props){
@@ -16,12 +18,13 @@ class Product extends React.Component {
             productscomments: [],
             tags: [],
             id: '',
-            thumbnail: ''
+            thumbnail: '',
+            productId: props.productid
         }
     };
 
     componentDidMount(){
-        fetch(`http://localhost:1337/products/5d60cdf3072e9b266c306108`, {
+        fetch(`http://localhost:1337/products/${this.state.productId}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -34,7 +37,6 @@ class Product extends React.Component {
             })
             .then(response => response.json())
             .then(product => {
-                console.info('ine:', product);
                 this.setState({
                     summary: JSON.parse(JSON.stringify(product.summary)),
                     productsquestions: JSON.parse(JSON.stringify(product.productsquestions)),
@@ -48,28 +50,71 @@ class Product extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div>
+                <Grid container spacing={3}>
+                        
+                    <Grid item xs={12}>
+                        <MainHeader />
+                    </Grid>
+                    
+                    <Grid item xs={12}>
+                        <Paper>
+                            <Player
+                                playsInline
+                                poster="/assets/poster.png"
+                                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                                />
+                        </Paper>
+                    </Grid>
+                    
+                    <Grid item xs={4}>
+                        <Paper>
+                            <QuizComponent />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Paper>
+                            <Typography 
+                                variant="h6" 
+                                gutterBottom
+                                style={{ fontFamily: 'IranSans_Light' }}
+                                >
+                            {this.state.summary.title}
+                            </Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Paper>
+                            <Typography 
+                                variant="h6"
+                                gutterBottom
+                                style={{ fontFamily: 'IranSans_Light' }}
+                                >
+                                {this.state.summary.createdAt}
+                            </Typography>
+                        </Paper>
+                    </Grid>
+                    
+                    <Grid container>
+                    
+                    <Grid item xs={4}>
+                        <Typography 
+                            variant="span" 
+                            gutterBottom
+                            style={{ fontFamily: 'IranSans_Light' }}
+                            >
+                            {this.state.summary.description}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <ProductUserInteraction />
+                    </Grid>
+                    </Grid>
+                    
+                    <MainFooter />
+                </Grid>
+            </div>
 
-                <Player
-                    playsInline
-                    poster="/assets/poster.png"
-                    src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-                    />
-                <QuizComponent />
-
-                <Typography variant="h3" gutterBottom>
-                    {this.state.summary.title}
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                    {this.state.summary.createdAt}
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                    {this.state.summary.description}
-                </Typography>
-                
-                <ProductUserInteraction />
-
-            </React.Fragment>
         );
     }
 }

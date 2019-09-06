@@ -49,11 +49,6 @@ module.exports = {
       required : false
     },
     
-    price :{
-      type: 'string',
-      required : false
-    },
-    
     isEnabled :{
       type: 'boolean',
       required : false,

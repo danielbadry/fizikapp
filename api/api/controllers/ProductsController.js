@@ -13,7 +13,6 @@ module.exports = {
       .create({
         name:req.param('name'),
         description:req.param('description'),
-        price:req.param('price'),
         title:req.param('title'),
         tags:req.param('tags'),
         category:req.param('category'),

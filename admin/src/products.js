@@ -35,7 +35,7 @@ export const ProductCreate = (props) => (
             
             <CategoryComponent source="category" label="category" />
              
-            <NumberInput source="price" label="price" />
+            {/* <NumberInput source="price" label="price" /> */}
             {/*
             TODO: add boolean field here
             */}
