@@ -24,7 +24,11 @@ module.exports = {
     let summary = await Products.findOne({
       id: inputs.id
     });
-    
+    summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.mainFileSrc;
+    moment.locale('en');
+    summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+    moment.locale('fa');
+    summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
     let productsquestions = await Productsquestions.find({
         where : {
           isDeleted : false,

@@ -57,12 +57,13 @@ class Product extends React.Component {
                         <MainHeader />
                     </Grid>
                     
-                    <Grid item xs={12}>
+                    <Grid item xs={7}>
                         <Paper>
                             <Player
+                            
                                 playsInline
-                                poster="/assets/poster.png"
-                                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                                poster={this.state.thumbnail}
+                                src={this.state.summary.videoAddress}
                                 />
                         </Paper>
                     </Grid>
@@ -90,7 +91,7 @@ class Product extends React.Component {
                                 gutterBottom
                                 style={{ fontFamily: 'IranSans_Light' }}
                                 >
-                                {this.state.summary.createdAt}
+                                {this.state.summary.jalaaliUserFriendlyCreatedDate}
                             </Typography>
                         </Paper>
                     </Grid>
@@ -106,7 +107,7 @@ class Product extends React.Component {
                             {this.state.summary.description}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={12}>
                         <ProductUserInteraction />
                     </Grid>
                     </Grid>
