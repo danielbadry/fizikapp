@@ -57,7 +57,7 @@ class Product extends React.Component {
                         <MainHeader />
                     </Grid>
                     
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <Paper>
                             <Player
                             

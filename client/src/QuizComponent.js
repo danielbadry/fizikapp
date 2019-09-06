@@ -19,6 +19,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Typography from '@material-ui/core/Typography';
 
 class QuizComponent extends React.Component {
     
@@ -69,6 +70,11 @@ class QuizComponent extends React.Component {
     }
 
     render() {
+        const classes = {
+            radio : {
+                color : 'red'
+            }
+        }
         return(
             <React.Fragment>
 
@@ -87,10 +93,22 @@ class QuizComponent extends React.Component {
                     onClose={this.handleDialogStatus} 
                     aria-labelledby="simple-dialog-title" 
                     open={this.state.isQuizDialogOpen}
+                    style={{ 
+                        direction: 'rtl',
+                    }}
                     >
                     <DialogTitle 
                         id="simple-dialog-title"
-                        >quiz of this product
+                        >
+                            <Typography
+                                        style={{ 
+                                            fontFamily: 'IranSans_Light',
+                                            fontSize: 12
+                                        }}
+                                        >
+                                        اسم این ویدیو ذکر شود
+                                    </Typography>
+                            
                     </DialogTitle>
                     <DialogContent>
                     <DialogContentText>
@@ -98,7 +116,14 @@ class QuizComponent extends React.Component {
                             (index==this.state.step?<div
                                 key={index}
                                 >
-                                    <div>{quiz.question}</div>
+                                    <Typography
+                                        style={{ 
+                                            fontFamily: 'IranSans_Light',
+                                            fontSize: 12
+                                        }}
+                                        >
+                                        {quiz.question}
+                                    </Typography>
                                     <div>
                                         {quiz.options.map(
                                             (option, ind) =>
@@ -110,7 +135,22 @@ class QuizComponent extends React.Component {
                                                 // value={value}
                                                 // onChange={handleChange}
                                                 >
-                                                <FormControlLabel value="female" control={<Radio />} label={option.title} />
+                                                <FormControlLabel 
+                                                    value="female" 
+                                                    control={<Radio
+                                                        
+                                                        />} 
+                                                    label={
+                                                    <Typography 
+                                                        style={{ 
+                                                            fontFamily: 'IranSans_Light',
+                                                            fontSize: 12
+                                                        }}
+                                                        >
+                                                        {option.title}
+                                                        </Typography>
+                                                        }
+                                                    />
                                                 
                                             </RadioGroup>
                                         )}
@@ -130,14 +170,20 @@ class QuizComponent extends React.Component {
                     <Button 
                         color="primary"
                         onClick={this.checkAndGoBackStep}
+                        style={{
+                            fontFamily: "IranSans"
+                        }}
                         >
-                        Back
+                        سوال قبلی
                     </Button>
                     <Button 
                         color="primary"
                         onClick={this.checkAndGoNextStep}
+                        style={{
+                            fontFamily: "IranSans"
+                        }}
                         >
-                        Next
+                        سوال بعدی
                     </Button>
                     </DialogActions>
                 </Dialog>
