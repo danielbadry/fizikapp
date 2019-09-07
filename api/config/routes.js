@@ -21,6 +21,7 @@ module.exports.routes = {
     'GET /watchedvideos/userwatched': 'WatchedvideosController.userwatched',
     'GET /search/search': 'SearchController.search',
     'POST /users/authenticate': 'UsersController.authenticate',
+    'POST /watchedvideos/setuserwatchstatus': 'Watchedvideos.setuserwatchstatus',
     'GET /requests/getuserrequests': 'RequestsController.getuserrequests',
     'GET /products/tamrins': 'ProductsController.tamrins',
 };

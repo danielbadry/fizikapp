@@ -1,7 +1,16 @@
 import React from 'react';
 import MainHeader from "./MainHeader";
 import Typography from '@material-ui/core/Typography';
-import { Player } from 'video-react';
+import {
+    Player,
+    ControlBar,
+    ReplayControl,
+    ForwardControl,
+    CurrentTimeDisplay,
+    TimeDivider,
+    PlaybackRateMenuButton,
+    VolumeMenuButton
+  } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ProductUserInteraction from "./ProductUserInteraction";
 import QuizComponent from './QuizComponent';
@@ -19,10 +28,12 @@ class Product extends React.Component {
             tags: [],
             id: '',
             thumbnail: '',
-            productId: props.productid
+            productId: props.productid,
+            startTime: 8
         }
     };
 
+    
     componentDidMount(){
         fetch(`http://localhost:1337/products/${this.state.productId}`, {
             method: 'GET', 
@@ -43,11 +54,16 @@ class Product extends React.Component {
                     productscomments: JSON.parse(JSON.stringify(product.productscomments)),
                     tags: JSON.parse(JSON.stringify(product.tags)),
                     thumbnail: product.thumbnail,
-                    id: product.id
+                    id: product.id,
+                    startTime : 11
                 });
+            }, function() {
+                console.info('after set states');
             });
     }
-
+    getTime = () => {
+        return 25;
+    }
     render() {
         return (
             <div>
@@ -59,12 +75,38 @@ class Product extends React.Component {
                     
                     <Grid item xs={6}>
                         <Paper>
-                            <Player
-                            
-                                playsInline
+                            <div>zaman:{this.state.startTime}</div>
+                        <Player
+                            poster="/assets/poster.png"
+                            startTime = {this.state.startTime}
+                            >
+                        <source src="http://localhost:1337/files/productFiles/5d72312ac139752adc737766.mp4" />
+                        {/* <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" /> */}
+
+                        <ControlBar>
+                            <ReplayControl seconds={10} order={1.1} />
+                            <ForwardControl seconds={10} order={1.2} />
+                            <CurrentTimeDisplay order={4.1} />
+                            <TimeDivider order={4.2} />
+                            <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                            <VolumeMenuButton disabled />
+                        </ControlBar>
+                        </Player>
+                            {/* <Player
+                                // playsInline
                                 poster={this.state.thumbnail}
                                 src={this.state.summary.videoAddress}
                                 />
+                                <source src={this.state.summary.videoAddress} />
+                                <source src={this.state.summary.videoAddress} />
+                                <ControlBar>
+                                    <ReplayControl seconds={10} order={1.1} />
+                                    <ForwardControl seconds={30} order={1.2} />
+                                    <CurrentTimeDisplay order={4.1} />
+                                    <TimeDivider order={4.2} />
+                                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                                    <VolumeMenuButton disabled />
+                                </ControlBar> */}
                         </Paper>
                     </Grid>
                     

@@ -26,7 +26,7 @@
     -->
     <title>fizik App</title>
   </head>
-  <body>
+  <body >
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -41,3 +41,32 @@
     -->
   </body>
 </html>
+<script>
+window.onbeforeunload = WindowCloseHanlder;
+function WindowCloseHanlder()
+{
+  console.info('My Window is closing');
+  let user = JSON.parse(localStorage.getItem('userInfo'));
+  let data = {
+    userId: user.id,
+    productId: '5d60cdf3072e9b266c306108',
+    startTime: '75'
+  }
+  fetch(`http://localhost:1337/watchedvideos/setuserwatchstatus`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(product => {
+                
+            });
+}
+</script>

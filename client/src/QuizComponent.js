@@ -125,35 +125,33 @@ class QuizComponent extends React.Component {
                                         {quiz.question}
                                     </Typography>
                                     <div>
-                                        {quiz.options.map(
-                                            (option, ind) =>
-                                            <RadioGroup
-                                            key={ind}
-                                                aria-label="gender"
-                                                name="gender1"
-                                                // className={classes.group}
-                                                // value={value}
-                                                // onChange={handleChange}
-                                                >
-                                                <FormControlLabel 
-                                                    value="female" 
+                                        <RadioGroup
+                                            aria-label="gender"
+                                            name="gender1"
+                                            // className={classes.group}
+                                            // value={value}
+                                            // onChange={handleChange}
+                                            >
+                                                {quiz.options.map(
+                                                    (option, ind) =>
+                                                <FormControlLabel
+                                                    key={ind}
+                                                    value={option.id}
                                                     control={<Radio
-                                                        
-                                                        />} 
-                                                    label={
-                                                    <Typography 
-                                                        style={{ 
-                                                            fontFamily: 'IranSans_Light',
-                                                            fontSize: 12
-                                                        }}
-                                                        >
-                                                        {option.title}
-                                                        </Typography>
-                                                        }
-                                                    />
-                                                
-                                            </RadioGroup>
-                                        )}
+                                                    />}
+                                                label={
+                                                <Typography 
+                                                    style={{ 
+                                                        fontFamily: 'IranSans_Light',
+                                                        fontSize: 12
+                                                    }}
+                                                    >
+                                                    {option.title}
+                                                    </Typography>
+                                                    }
+                                                />
+                                            )}
+                                        </RadioGroup>
                                     </div>
                                 </div>:
                                 <div

@@ -24,6 +24,16 @@ module.exports = {
     let summary = await Products.findOne({
       id: inputs.id
     });
+    
+    // find video status for this user
+    let userVideoStatus = await Watchedvideos.findOne({
+      // userId : '5d73564134abe01014969d96',
+      // productId: inputs.id,
+      id: '5d735417c8b5fe2584a7006d'
+    });
+    
+    summary.startTime = userVideoStatus.startTime;
+
     summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.mainFileSrc;
     moment.locale('en');
     summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -91,6 +101,7 @@ module.exports = {
       
     }
     summary.thumbnail = "http://localhost:1337/files/productImage/" + summary.thumbnail;
+    
     //  tidy up tags
     if (summary.tags) {
       let tags = JSON.parse(summary.tags);
