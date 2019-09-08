@@ -15,6 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import ProductUserInteraction from "./ProductUserInteraction";
 
 class Definition extends React.Component {
     
@@ -98,7 +99,7 @@ class Definition extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                        qa/commment
+                        <ProductUserInteraction />
                     </Grid>
 
                     <MainFooter />
