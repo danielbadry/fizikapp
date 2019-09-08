@@ -1,5 +1,6 @@
 var moment = require('moment');
 var momentJalaali = require('moment-jalaali');
+
 module.exports = {
 
   friendlyName: 'Find',
@@ -42,13 +43,18 @@ module.exports = {
     let dataLength = await Definitions.find();
     let allRequests;
 
-    if(inputs.searchText != '')
+    if(inputs.searchText == '')
+    {
+      // return '1';
       allRequests = await Definitions.find()
       .limit(inputs.limit)
       .skip(inputs.skip)
       .sort([{updatedAt :'DESC'}])
       ;
+    }
+    
     else {
+      // return '2';
       allRequests = await Definitions.find({
         or : [
             {

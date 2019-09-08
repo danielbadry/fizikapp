@@ -122,7 +122,6 @@ class Requests extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                        <span>{this.state.searchText}</span>
                         <TextField
                             id="standard-message"
                             label="فیلتر"
