@@ -6,6 +6,7 @@ import Home from './Home';
 import NewRequest from './NewRequest';
 import SignUp from './SignUp';
 import Request from './Request';
+import Definition from './Definition';
 import Product from './Product';
 import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
@@ -30,7 +31,7 @@ function HandleRequest({ match }) {
 
 function HandleDefinition({ match }) {
     return (
-        <Request 
+        <Definition 
             requestid={match.params.definitionid}
             />
     );
