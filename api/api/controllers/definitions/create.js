@@ -9,6 +9,22 @@ module.exports = {
 
   inputs: {
 
+    name: {
+      type: 'string'
+    },
+    
+    title: {
+      type: 'string'
+    },
+    
+    description: {
+      type: 'string'
+    },
+    
+    tags: {
+      type: 'string'
+    },
+
   },
 
 
@@ -22,8 +38,9 @@ module.exports = {
     await Definitions.create({
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
-      name : inputs.parentId,
-      title : inputs.message,
+      name : inputs.name,
+      title : inputs.title,
+      description : inputs.description,
       tags : inputs.tags,
       isDeleted : false,
   });

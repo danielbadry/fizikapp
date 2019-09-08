@@ -26,7 +26,8 @@ export const DefinitionsCreate = (props) => (
         
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
+            <TextInput source="title" label="title" />
+            <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
@@ -51,10 +52,10 @@ export const DefinitionsShow = (props) => (
             <Tab label="information">
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="summary.title" label="title" />
-                <TextField source="summary.name" label="name" />
-                <TextField source="summary.description" label="description" />
-                <ArrayField source="summary.tagsArray" label="tags">
+                <TextField source="title" label="title" />
+                <TextField source="name" label="name" />
+                <TextField source="description" label="description" />
+                <ArrayField source="tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />
                     </SingleFieldList>
@@ -80,13 +81,7 @@ export const DefinitionsList = props => (
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
-            <ArrayField source="tagsArray">
-                <SingleFieldList>
-                    <ChipField source="name" />
-                </SingleFieldList>
-            </ArrayField>
-            <BooleanField source="isEnabled" label="Enable" />
-            {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" /> */}
+            <TextField source="title" label="title" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             {/* <EditButton /> */}
             <ShowButton />

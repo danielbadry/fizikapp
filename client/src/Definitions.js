@@ -13,22 +13,23 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-class Definitions extends React.Component {
+class Requests extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            definitions : [],
+            requests : [],
             tags: [],
-            activeTags: []
+            activeTags: [],
+            searchText: ''
         }
     }
 
-    fetchDefinitions = () => {
-        fetch(`http://localhost:1337/definitions?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}`, {
+    fetchRequests = () => {
+        fetch(`http://localhost:1337/definitions?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}&searchText=${this.state.searchText}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -42,9 +43,9 @@ class Definitions extends React.Component {
             data: JSON.stringify({name:'milad'}), // body data type must match "Content-Type" header
             })
             .then(response => response.json())
-            .then(definitions => {
+            .then(requests => {
                 this.setState((state, props) => {
-                    return {definitions: definitions.data};
+                    return {requests: requests.data};
                 });
             });
     }
@@ -67,13 +68,13 @@ class Definitions extends React.Component {
             .then(response => response.json())
             .then(tags => {
                 for(let tag of tags.data) {
-                    tag.color = "primary";
-                    tag.isSelected = true;
+                    tag.color = "default";
+                    tag.isSelected = false;
                 }
                 this.setState((state, props) => {
                     return {tags: tags.data, activeTags:tags.data};
                 }, function() {
-                    this.fetchDefinitions();
+                    this.fetchRequests();
                 });
             });   
     }
@@ -81,7 +82,7 @@ class Definitions extends React.Component {
     tagClicked = id => (event) => {
         let listOfTags = this.state.tags;
         for(let tag of listOfTags) {
-            if (tag.id == id) {
+            if (tag.id === id) {
                 tag.isSelected = !tag.isSelected;
                 if(tag.isSelected) {
                     tag.color = 'primary';
@@ -100,11 +101,16 @@ class Definitions extends React.Component {
         this.setState((state, props) => {
             return {tags: listOfTags, activeTags:at};
         }, function() {
-            console.info('active tags:', this.state.activeTags);
             this.fetchRequests();
         });
 
     }
+    
+    handleChange = () => event => {
+        this.setState({searchText: event.target.value }, function() {
+            this.fetchRequests();
+        });
+    };
 
     render() {
         
@@ -116,11 +122,27 @@ class Definitions extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                    <Button variant="contained">
-                        ارسال درخواست
-                    </Button>
+                        <span>{this.state.searchText}</span>
+                        <TextField
+                            id="standard-message"
+                            label="فیلتر"
+                            // className={classes.textField}
+                            // value={this.state.message}
+                            onChange={this.handleChange('message')}
+                            margin="normal"
+                            InputLabelProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                            InputProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                        />
                     </Grid>
-                    
+
                     <Grid item xs={12}>
                         <Paper>
 
@@ -128,13 +150,16 @@ class Definitions extends React.Component {
                             (tag, index) =>
                                 <Chip
                                     key={index}
-                                    icon={<FaceIcon />}
+                                    // icon={<FaceIcon />}
                                     label={tag.name}
                                     clickable
                                     counter={tag.id}
                                     color={tag.color}
                                     onClick={this.tagClicked(tag.id)}
                                     deleteIcon={<DoneIcon />}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                      }}
                                     />
                         )}
                         
@@ -144,8 +169,8 @@ class Definitions extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                         <List>    
-                            {this.state.definitions.map(
-                            (definitions, index) => 
+                            {this.state.requests.map(
+                            (request, index) => 
                             <ListItem 
                                 alignItems="flex-start"
                                 key={index}
@@ -154,8 +179,13 @@ class Definitions extends React.Component {
                                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                                 </ListItemAvatar>
                                 <ListItemText
-                                primary={<Link component={RouterLink} to={'https://google.com'}>
-                                    {definitions.title}
+                                    primary={
+                                        <Link 
+                                            component={RouterLink} 
+                                            to={`/definition/${request.id}`}
+                                            style={{ fontFamily: 'IranSans_Light' }}
+                                            >
+                                    {request.name}
                                 </Link>}
                                 secondary={
                                     <React.Fragment>
@@ -164,11 +194,17 @@ class Definitions extends React.Component {
                                         variant="body2"
                                         color="textPrimary"
                                     >
-                                        <Link component={RouterLink} to={'https://google.com'}>
-                                            test
-                                        </Link>
+                                        <div
+                                            style={{ fontFamily: 'IranSans_Light' }}
+                                            >
+                                            {request.title}
+                                        </div>
                                     </Typography>
-                                    {' — Do you have Paris recommendations? Have you ever…'}
+                                    <div
+                                        style={{ fontFamily: 'IranSans_Light' }}
+                                        >
+                                        {request.description}
+                                    </div>
                                     </React.Fragment>
                                 }
                                 />
@@ -184,4 +220,4 @@ class Definitions extends React.Component {
     }
 }
 
-export default Definitions;
+export default Requests;
