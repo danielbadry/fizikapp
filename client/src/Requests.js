@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField';
 
 class Requests extends React.Component {
     constructor (props) {
@@ -23,7 +24,8 @@ class Requests extends React.Component {
         this.state = {
             requests : [],
             tags: [],
-            activeTags: []
+            activeTags: [],
+            searchText: ''
         }
     }
 
@@ -106,6 +108,12 @@ class Requests extends React.Component {
 
     }
 
+    handleChange = () => event => {
+        this.setState({searchText: event.target.value }, function() {
+            this.fetchRequests();
+        });
+    }
+
     render() {
         
         return (
@@ -114,7 +122,26 @@ class Requests extends React.Component {
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
-                    
+                    <Grid item xs={12}>
+                        <TextField
+                            id="standard-message"
+                            label="فیلتر"
+                            // className={classes.textField}
+                            // value={this.state.message}
+                            onChange={this.handleChange('message')}
+                            margin="normal"
+                            InputLabelProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                            InputProps={{
+                                style: {
+                                    fontFamily: "IranSans"
+                                }
+                            }}
+                        />
+                    </Grid>
                     <Grid item xs={12}>
                     <Button 
                         href="/new-request"

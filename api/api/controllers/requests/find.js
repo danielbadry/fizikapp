@@ -29,6 +29,10 @@ module.exports = {
     
     tags: {
       type: 'string'
+    },
+
+    searchText: {
+      type: 'string'
     }
   },
 
@@ -46,15 +50,35 @@ module.exports = {
       }
     });
     
-    let allRequests = await Requests.find({
-      parentId: '',
-      isDeleted : false
-    })
-    .limit(inputs.limit)
-    .skip(inputs.skip)
-    .sort([{updatedAt :'DESC'}])
-    ;
-    
+    if(inputs.searchText == '')
+    {
+      let allRequests = await Requests.find({
+        parentId: '',
+        isDeleted : false
+      })
+      .limit(inputs.limit)
+      .skip(inputs.skip)
+      .sort([{updatedAt :'DESC'}])
+      ;
+    }
+    else {
+      // return '2';
+      allRequests = await Requests.find({
+        or : [
+            {
+              title:{contains: inputs.searchText}
+            },
+            {
+              description:{contains: inputs.searchText}
+            }
+          ]
+      })
+      .limit(inputs.limit)
+      .skip(inputs.skip)
+      .sort([{updatedAt :'DESC'}])
+      ;
+    }
+
     // filter allRequest based on tags
     let tagIds = []; // list of comming tags id from the URL
     let inTags = [];

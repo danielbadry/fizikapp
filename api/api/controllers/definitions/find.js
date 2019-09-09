@@ -45,7 +45,6 @@ module.exports = {
 
     if(inputs.searchText == '')
     {
-      // return '1';
       allRequests = await Definitions.find()
       .limit(inputs.limit)
       .skip(inputs.skip)
