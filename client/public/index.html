@@ -45,7 +45,6 @@
 window.onbeforeunload = WindowCloseHanlder;
 function WindowCloseHanlder()
 {
-  console.info('My Window is closing');
   let user = JSON.parse(localStorage.getItem('userInfo'));
   let data = {
     userId: user.id,
@@ -63,10 +62,6 @@ function WindowCloseHanlder()
             body: JSON.stringify(data),
             redirect: 'follow',
             referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(product => {
-                
             });
 }
 </script>

@@ -27,9 +27,22 @@ class Product extends React.Component {
             productscomments: [],
             tags: [],
             id: '',
+            isRender : false,
             thumbnail: '',
             productId: props.productid,
-            startTime: 8
+            startTime: 8,
+            userInteractionConfig : [
+                {
+                    type:'qa',
+                    label:'پرسش و پاسخ',
+                    model:'definitions'
+                },
+                {
+                    type:'comment',
+                    label:'نظرات',
+                    model:'definitions'
+                }
+            ]
         }
     };
 
@@ -48,23 +61,33 @@ class Product extends React.Component {
             })
             .then(response => response.json())
             .then(product => {
-                this.setState({
-                    summary: JSON.parse(JSON.stringify(product.summary)),
-                    productsquestions: JSON.parse(JSON.stringify(product.productsquestions)),
-                    productscomments: JSON.parse(JSON.stringify(product.productscomments)),
-                    tags: JSON.parse(JSON.stringify(product.tags)),
-                    thumbnail: product.thumbnail,
-                    id: product.id,
-                    startTime : 11
-                });
-            }, function() {
-                console.info('after set states');
+                this.setState(function(state, props) {
+                    return {
+                        summary: JSON.parse(JSON.stringify(product.summary)),
+                        productsquestions: JSON.parse(JSON.stringify(product.productsquestions)),
+                        productscomments: JSON.parse(JSON.stringify(product.productscomments)),
+                        tags: JSON.parse(JSON.stringify(product.tags)),
+                        thumbnail: product.thumbnail,
+                        id: product.id,
+                        startTime : 30,
+                        isRender: true
+                    };
+                  }, () => {
+                    this.setState(function(state, props) {
+                        return {
+                            isRender: true
+                        }});
+                  });
             });
     }
-    getTime = () => {
-        return 25;
-    }
+    
     render() {
+        if (!this.state.isRender) {
+            return(
+                <div>loading...</div>
+            )
+            
+        } else
         return (
             <div>
                 <Grid container spacing={3}>
@@ -75,13 +98,13 @@ class Product extends React.Component {
                     
                     <Grid item xs={6}>
                         <Paper>
-                            <div>zaman:{this.state.startTime}</div>
+                            
                         <Player
                             poster="/assets/poster.png"
                             startTime = {this.state.startTime}
                             >
-                        <source src="http://localhost:1337/files/productFiles/5d72312ac139752adc737766.mp4" />
-                        {/* <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" /> */}
+                                
+                        <source src={this.state.summary.videoAddress} />
 
                         <ControlBar>
                             <ReplayControl seconds={10} order={1.1} />
@@ -92,21 +115,7 @@ class Product extends React.Component {
                             <VolumeMenuButton disabled />
                         </ControlBar>
                         </Player>
-                            {/* <Player
-                                // playsInline
-                                poster={this.state.thumbnail}
-                                src={this.state.summary.videoAddress}
-                                />
-                                <source src={this.state.summary.videoAddress} />
-                                <source src={this.state.summary.videoAddress} />
-                                <ControlBar>
-                                    <ReplayControl seconds={10} order={1.1} />
-                                    <ForwardControl seconds={30} order={1.2} />
-                                    <CurrentTimeDisplay order={4.1} />
-                                    <TimeDivider order={4.2} />
-                                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
-                                    <VolumeMenuButton disabled />
-                                </ControlBar> */}
+                            
                         </Paper>
                     </Grid>
                     
@@ -150,7 +159,9 @@ class Product extends React.Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <ContentUserInteraction />
+                    <ContentUserInteraction
+                            config={this.state.userInteractionConfig}
+                            />
                     </Grid>
                     </Grid>
                     
