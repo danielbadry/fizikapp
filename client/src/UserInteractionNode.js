@@ -19,7 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Di from './d';
 
-class ProductsQuestions extends React.Component {
+class UserInteractionNode extends React.Component {
     
     constructor (props) {
       
@@ -31,13 +31,9 @@ class ProductsQuestions extends React.Component {
       this.parentId = '';
 
     }
-    
-componentWillMount() {
-
-}
 
     componentDidMount () {
-      fetch(`http://localhost:1337/productsquestions`, {
+      fetch(`http://localhost:1337/userinteractions?model=${this.props.model}&type=${this.props.type}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -227,4 +223,4 @@ componentWillMount() {
 
 }
 
-export default ProductsQuestions;
+export default UserInteractionNode;

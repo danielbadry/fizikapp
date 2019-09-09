@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ProductsQuestions from './ProductsQuestions';
+import UserInteractionNode from './UserInteractionNode';
 import ProductsComments from './ProductsComments';
 
 function TabPanel(props) {
@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ProductUserInteraction() {
+export default function ContentUserInteraction(props) {
+  console.info('propsesh:', props);
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -71,36 +72,53 @@ export default function ProductUserInteraction() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab 
-            label="پرسش و پاسخ" 
-            {...a11yProps(0)} 
-            style={{
-              fontFamily: "IranSans"
-            }}
-            />
-          <Tab 
-            label="نظرات" 
-            {...a11yProps(1)} 
-            style={{
-              fontFamily: "IranSans"
-            }}
-            />
+          
+          {
+            props.config.map(
+              (item, index) => 
+                <Tab 
+                  key={index}
+                  label={item.label} 
+                  {...a11yProps(index)} 
+                  style={{
+                    fontFamily: "IranSans"
+                  }}
+                  />
+            )
+          }
+          }
          
         </Tabs>
       </AppBar>
+      
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <ProductsQuestions />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        >
+        {
+          props.config.map(
+            (item, index) => 
+              <TabPanel 
+                key={index}
+                value={value} 
+                index={index} 
+                dir={theme.direction}
+                >
+                <UserInteractionNode
+                  model={item.model}
+                  type={item.type}
+                  />
+              </TabPanel>
+          )
+        }
+        
+        {/* <TabPanel value={value} index={1} dir={theme.direction}>
           <ProductsComments />
-        </TabPanel>
+        </TabPanel> */}
         
       </SwipeableViews>
+
     </div>
   );
 }

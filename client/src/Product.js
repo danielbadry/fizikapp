@@ -12,7 +12,7 @@ import {
     VolumeMenuButton
   } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
-import ProductUserInteraction from "./ProductUserInteraction";
+import ContentUserInteraction from "./ContentUserInteraction";
 import QuizComponent from './QuizComponent';
 import Grid from '@material-ui/core/Grid';
 import MainFooter from "./MainFooter";
@@ -150,7 +150,7 @@ class Product extends React.Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <ProductUserInteraction />
+                        <ContentUserInteraction />
                     </Grid>
                     </Grid>
                     
