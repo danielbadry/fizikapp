@@ -7,6 +7,7 @@ import NewRequest from './NewRequest';
 import SignUp from './SignUp';
 import Request from './Request';
 import Definition from './Definition';
+import Category from './Category';
 import Product from './Product';
 import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
@@ -27,7 +28,7 @@ function HandleRequest({ match }) {
             requestid={match.params.requestid}
             />
     );
-  }
+}
 
 function HandleDefinition({ match }) {
     return (
@@ -35,7 +36,15 @@ function HandleDefinition({ match }) {
             requestid={match.params.definitionid}
             />
     );
-  }
+}
+
+function HandleCategory({ match }) {
+    return (
+        <Category
+            categoryid={match.params.categoryid}
+            />
+    );
+}
 
 function HandleSearch({ match }) {
     return (
@@ -100,6 +109,7 @@ class Routs extends React.Component {
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/definitions" component={Definitions} />
                 <Route path="/definition/:definitionid" component={HandleDefinition} />
+                <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/about" component={About} />
                 <Route path="/new-request" component={NewRequest} />

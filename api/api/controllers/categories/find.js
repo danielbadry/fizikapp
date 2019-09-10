@@ -44,6 +44,8 @@ module.exports = {
       }
     });
 
+    // return allProducts.length;
+    if (allProducts.length > 0)
     for (let product of allProducts) {
       let p = JSON.parse(product.category);
       if (p.id == inputs.rowId) {
