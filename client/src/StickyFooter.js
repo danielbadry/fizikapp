@@ -250,10 +250,21 @@ export default function StickyFooter() {
         <div
             style={{
                 textAlign: 'center',
-                height: '40px'
+                height: '40px',
+                fontSize: '13px'
             }}
             >
-            Copyright© 2019 fizik.app
+            <span>1398</span>
+            <span 
+                style={{
+                    color:'red',
+                    margin: '0 6px'
+                }}
+            >
+                ❤
+            </span>
+            تهیه شده توسط تیم فیزیک اپ با   
+            
         </div>
     </div>
   );
