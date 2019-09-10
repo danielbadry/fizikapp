@@ -63,9 +63,9 @@ const useStyles = makeStyles(theme => ({
   },
 
   svgIcons: {
-    width: '40px',
+    width: '35px',
     display: 'inline-block',
-    height: '40px',
+    height: '35px',
     margin: '8px',
     // backgroundColor: 'cadetblue',
     // borderRadius: '50%',
