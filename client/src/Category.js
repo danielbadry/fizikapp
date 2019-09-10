@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 class Category extends React.Component {
     constructor (props) {
@@ -56,6 +57,20 @@ class Category extends React.Component {
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
+
+                    <Grid item xs={12}>
+                        <Paper elevation={0} >
+                            <Breadcrumbs separator="›" aria-label="breadcrumb">
+                                <Link color="inherit" href="/">
+                                    Material-UI
+                                </Link>
+                                <Link color="inherit" href="/getting-started/installation/">
+                                    Core
+                                </Link>
+                            <Typography color="textPrimary">Breadcrumb</Typography>
+                            </Breadcrumbs>
+                        </Paper>
+                    </Grid>
                     
                     <Grid item xs={12}>
                         <Paper>
@@ -67,17 +82,25 @@ class Category extends React.Component {
                                 key={index}
                                 >
                                 <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                                <Avatar 
+                                    alt="Cindy Baker" 
+                                    src={row.thumbnail} 
+                                    />
                                 </ListItemAvatar>
+                                
                                 <ListItemText
                                     primary={
                                         <Link 
                                             component={RouterLink} 
-                                            to={`/definition/${row.id}`}
+                                            to={
+                                                (row.itemType == 'product') ?
+                                                    `/product/${row.id}` :
+                                                        `/category/${row.id}`
+                                            }
                                             style={{ fontFamily: 'IranSans_Light' }}
                                             >
-                                    {row.name}
-                                </Link>}
+                                            {row.name}
+                                        </Link>}
                                 secondary={
                                     <React.Fragment>
                                     <Typography

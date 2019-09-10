@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
+import StickyFooter from "./StickyFooter";
 import PostCard from "./PostCard";
 
 class Requests extends React.Component {
@@ -44,7 +45,7 @@ class Requests extends React.Component {
                     </Grid>
                     </Grid>
                     
-                    <MainFooter />
+                    <StickyFooter />
                 </Grid>
             </div>
         );
