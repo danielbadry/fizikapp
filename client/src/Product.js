@@ -177,6 +177,12 @@ class Product extends React.Component {
                                 <RelatedProducts />
                             </Paper>
                         </Grid>
+                        <Grid item xs={7}>
+                        <Paper>
+                            <Typography>like 3 / dislike 4</Typography>
+                            <Typography>2019 june 22</Typography>
+                        </Paper>
+                        </Grid>
                     <Grid item xs={7}>
                         <Paper
                             style = {{
@@ -205,6 +211,15 @@ class Product extends React.Component {
                                 >
                                 {this.state.summary.description}
                             </Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <Paper
+                            style={{
+                                margin: '6%'
+                            }}
+                            >
+                            Social Share
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
