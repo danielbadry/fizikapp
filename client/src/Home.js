@@ -4,7 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
+import SingleRow from "./SingleRow";
 import PostCard from "./PostCard";
+import Typography from '@material-ui/core/Typography';
 
 class Requests extends React.Component {
     render() {
@@ -21,29 +23,20 @@ class Requests extends React.Component {
                     <Paper>slider</Paper>
                     </Grid>
                     
-                    <Grid item xs={4}>
-                    <Paper>دهم</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                    <Paper>یازدهم</Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                    <Paper>دوازدهم</Paper>
-                    </Grid>
+                    <SingleRow
+                        label="تعریفی ها"
+                        footer="مشاهده بیشتر تعریفی ها"
+                    />
+
+                    <SingleRow
+                        label="ویدیوها"
+                        footer="مشاهده بیشتر ویدیو ها"
+                    />
                     
-                    <Grid container>
-                    <Grid item xs={4}>
-                    
-                        <PostCard />
-                    
-                    </Grid>
-                    <Grid item xs={4}>
-                    <PostCard />
-                    </Grid>
-                    <Grid item xs={4}>
-                    <PostCard />
-                    </Grid>
-                    </Grid>
+                    <SingleRow
+                        label="تمرین ها"
+                        footer="مشاهده بیشتر تمرین ها"
+                    />
                     
                     <StickyFooter />
                 </Grid>
