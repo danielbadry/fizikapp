@@ -5,6 +5,8 @@ import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
 import SingleRow from "./SingleRow";
+import HeaderSlider from "./HeaderSlider";
+import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import PostCard from "./PostCard";
 import Typography from '@material-ui/core/Typography';
 
@@ -20,7 +22,10 @@ class Requests extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                    <Paper>slider</Paper>
+                    <Paper>
+                        <HeaderSlider />
+                        {/* <ReactTourGuideSlider /> */}
+                    </Paper>
                     </Grid>
                     
                     <SingleRow
