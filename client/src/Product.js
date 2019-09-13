@@ -1,6 +1,8 @@
 import React from 'react';
 import MainHeader from "./MainHeader";
+import SocialShare from "./SocialShare";
 import RelatedProducts from "./RelatedProducts";
+import ProductAppBar from "./ProductAppBar";
 import Typography from '@material-ui/core/Typography';
 import {
     Player,
@@ -93,7 +95,7 @@ class Product extends React.Component {
         return (
             <div>
                 <Grid container spacing={3}>
-                        
+                <SocialShare />
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
@@ -179,8 +181,7 @@ class Product extends React.Component {
                         </Grid>
                         <Grid item xs={7}>
                         <Paper>
-                            <Typography>like 3 / dislike 4</Typography>
-                            <Typography>2019 june 22</Typography>
+                            <ProductAppBar />
                         </Paper>
                         </Grid>
                     <Grid item xs={7}>
@@ -219,7 +220,7 @@ class Product extends React.Component {
                                 margin: '6%'
                             }}
                             >
-                            Social Share
+                            
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>

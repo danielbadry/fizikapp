@@ -12,7 +12,8 @@ class StickyFooter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            definitions: []
+            definitions: [],
+            products: []
         }
     }
 
@@ -34,6 +35,26 @@ class StickyFooter extends React.Component {
             .then(definitions => {
                 this.setState((state, props) => {
                 return {definitions: definitions};
+                });
+            });
+
+            fetch(`http://localhost:1337/products/`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(products => {
+                this.setState((state, props) => {
+                return {products: products.data};
                 });
             });
     }
@@ -225,16 +246,10 @@ class StickyFooter extends React.Component {
                 <div className={classes.rowSingle}>
                     <div className={classes.columnHeader}>آخرین ویدیو ها</div>
                     <ul className={classes.ul}>
-                        <li>ویدیو شماره یک</li>
-                        <li>ویدیو شماره دوم</li>
-                        <li>ویدیو شماره سوم</li>
-                        <li>ویدیو شماره چهارم</li>
-                        <li>ویدیو شماره پنجم</li>
-                        <li>ویدیو شماره ششم</li>
-                        <li>ویدیو شماره هفتم</li>
-                        <li>ویدیو شماره هشتم</li>
-                        <li>ویدیو شماره نهم</li>
-                        <li>ویدیو شماره دهم</li>
+{this.state.products.map(
+    (item, index) => 
+<li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
+)}  
                     </ul>
                 </div>
             </div>
