@@ -10,12 +10,14 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ContentUserInteraction from "./ContentUserInteraction";
+import RelatedDefinitons from "./RelatedDefinitons";
+import StickyFooter from "./StickyFooter";
+import Divider from '@material-ui/core/Divider';
 
 class Definition extends React.Component {
     
@@ -73,10 +75,24 @@ class Definition extends React.Component {
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
-                    
+
+                    <Grid item xs={10}>
+                        <Paper>
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: '300px',
+                                    backgroundImage:"url(https://cdn.pixabay.com/photo/2015/09/21/14/45/banner-header-949928_960_720.jpg)"
+                                }}
+                                >
+
+                            </div>
+                        </Paper>
+                    </Grid>
+
                     <Grid item xs={3}>
                         <Paper>
-                            something
+                            <RelatedDefinitons />
                         </Paper>
                     </Grid>
 
@@ -84,19 +100,33 @@ class Definition extends React.Component {
                         <Paper>
                             <h3
                                 style={{
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    direction: 'rtl',
+                                    padding: '2% 2% 0% 1%'
                                 }}
                                 >{this.state.definition.name}
                             </h3>  
+                            <Divider
+                                style={{
+                                    width:'90%',
+                                    border: '1px solid #eee',
+                                    direction: 'center'
+                                }}
+                            />
                             <h5
                                 style={{
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    direction: 'rtl',
+                                    padding: '2% 2% 0% 1%'
                                 }}
                                 >{this.state.definition.title}
                             </h5>
                             <p
                                 style={{
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    textAlign:'justify',
+                                    direction:'rtl',
+                                    padding: '3% 3% 3% 3%'
                                 }}
                                 >
                                 {this.state.definition.description}
@@ -116,7 +146,7 @@ class Definition extends React.Component {
                             />
                     </Grid>
 
-                    <MainFooter />
+                    <StickyFooter />
 
             </Grid>
         );
