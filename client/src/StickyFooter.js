@@ -8,75 +8,102 @@ import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
+class StickyFooter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            definitions: []
+        }
+    }
 
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
+    componentDidMount() {
+        fetch(`http://localhost:1337/definitions/relateddefinitions`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(definitions => {
+                this.setState((state, props) => {
+                return {definitions: definitions};
+                });
+            });
+    }
 
-  container: {
-    width: '100%',
-    fontFamily: 'IranSans_Light',
-    backgroundColor: '#262626',
-    color: 'aliceblue'
-  },
+    render() {
+        const classes = {
 
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
-
-  footer: {
-    padding: theme.spacing(2),
-    marginTop: 'auto',
-    backgroundColor: 'white',
-  },
-
-  column: {
-    float: 'left',
-    width: '33.33%',
-    padding: '10px',
-    height: '300px'
-  },
-
-  row: {
-    display: 'flex',
-  },
-
-  ul: {
-      fontSize: '14px',
-      direction: 'rtl',
-      listStyleType: 'none',
-      paddingRight: '10px'
-  },
-
-  columnHeader: {
-      direction: 'rtl',
-      color: '#e67e22',
-      fontSize: '14px'
-  },
-
-  rowSingle: {
-      width: '150px',
-      display: 'inline-block'
-  },
-
-  svgIcons: {
-    width: '35px',
-    display: 'inline-block',
-    height: '35px',
-    margin: '8px',
-    // backgroundColor: 'cadetblue',
-    // borderRadius: '50%',
-  }
-
-}));
-
-export default function StickyFooter() {
-  const classes = useStyles();
-
+            root: {
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
+            },
+          
+            container: {
+              width: '100%',
+              fontFamily: 'IranSans_Light',
+              backgroundColor: '#262626',
+              color: 'aliceblue'
+            },
+          
+            main: {
+              marginTop: '8',
+              marginBottom: '2',
+            },
+          
+            footer: {
+              padding: '2',
+              marginTop: 'auto',
+              backgroundColor: 'white',
+            },
+          
+            column: {
+              float: 'left',
+              width: '33.33%',
+              padding: '10px',
+              height: '300px'
+            },
+          
+            row: {
+              display: 'flex',
+            },
+          
+            ul: {
+                fontSize: '14px',
+                direction: 'rtl',
+                listStyleType: 'none',
+                paddingRight: '10px'
+            },
+          
+            columnHeader: {
+                direction: 'rtl',
+                color: '#e67e22',
+                fontSize: '14px'
+            },
+          
+            rowSingle: {
+                width: '150px',
+                display: 'inline-block'
+            },
+          
+            svgIcons: {
+              width: '35px',
+              display: 'inline-block',
+              height: '35px',
+              margin: '8px',
+              // backgroundColor: 'cadetblue',
+              // borderRadius: '50%',
+            }
+          
+          };
   return (
     <div className={classes.container}>
         <div className={classes.row}>
@@ -189,16 +216,10 @@ export default function StickyFooter() {
                 <div className={classes.rowSingle}>
                     <div className={classes.columnHeader}>آخرین تعریفی ها</div>
                     <ul className={classes.ul}>
-                        <li>تعریفی شماره یک</li>
-                        <li>تعریفی شماره دوم</li>
-                        <li>تعریفی شماره سوم</li>
-                        <li>تعریفی شماره چهارم</li>
-                        <li>تعریفی شماره پنجم</li>
-                        <li>تعریفی شماره ششم</li>
-                        <li>تعریفی شماره هفتم</li>
-                        <li>تعریفی شماره هشتم</li>
-                        <li>تعریفی شماره نهم</li>
-                        <li>تعریفی شماره دهم</li>
+                        {this.state.definitions.map(
+                            (item, index) => 
+                            <li key={index}><Link component={RouterLink} to={`/definitions/${item.id}`}>{item.name}</Link></li>
+                        )}
                     </ul>
                 </div>
                 <div className={classes.rowSingle}>
@@ -308,5 +329,6 @@ export default function StickyFooter() {
             
         </div>
     </div>
-  );
+  )};
 }
+export default StickyFooter;
