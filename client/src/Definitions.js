@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import StickyFooter from "./StickyFooter";
 
 class Requests extends React.Component {
     constructor (props) {
@@ -213,7 +214,7 @@ class Requests extends React.Component {
                         </Paper>
                     </Grid>
 
-                    <MainFooter />
+                    <StickyFooter />
             </Grid>
         );
     }

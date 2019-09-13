@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -131,18 +132,58 @@ export default function StickyFooter() {
                 }}
                 >
                 <div className={classes.rowSingle}>
-                    <div className={classes.columnHeader}>آخرین تمرین ها</div>
+                    <div className={classes.columnHeader}>بخش های اصلی سایت</div>
                     <ul className={classes.ul}>
-                        <li>تمرین شماره یک</li>
-                        <li>تمرین شماره دوم</li>
-                        <li>تمرین شماره سوم</li>
-                        <li>تمرین شماره چهارم</li>
-                        <li>تمرین شماره پنجم</li>
-                        <li>تمرین شماره ششم</li>
-                        <li>تمرین شماره هفتم</li>
-                        <li>تمرین شماره هشتم</li>
-                        <li>تمرین شماره نهم</li>
-                        <li>تمرین شماره دهم</li>
+                        <li>
+                        <Link component={RouterLink} to="/about">
+                            درباره ی ما
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/careers">
+                            فرصت های شغلی
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/faq">
+                            سوالات متداول
+                        </Link>    
+                            </li>
+                        <li>
+                        <Link component={RouterLink} to="/contact-us">
+                            ارتباط با ما
+                        </Link>
+                            </li>
+                        <li>
+                        <Link component={RouterLink} to="/terms-conditions">
+                            قوانین و مقررات
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/privacy-policy">
+                            حریم شخصی
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/about">
+                            اپلیکیشن Android
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/about">
+                            اپلیکیشن iOS
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/disclaimer">
+                            رفع مسوولیت
+                        </Link>
+                        </li>
+                        <li>
+                        <Link component={RouterLink} to="/about">
+                            آموزش
+                        </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className={classes.rowSingle}>
