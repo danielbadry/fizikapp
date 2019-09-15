@@ -44,7 +44,7 @@ module.exports = {
       tags : inputs.tags,
       isDeleted : false,
   });
-    return await Requests.find();
+    return await Definitions.find();
 
   }
 

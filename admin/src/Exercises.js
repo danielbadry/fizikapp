@@ -28,7 +28,10 @@ export const ExercisesCreate = (props) => (
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
-
+            <TagComponent source="tags" label="tags" />
+            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
+                <ImageField source="thumbnail" title="title" />
+            </ImageInput>
             <RadioButtonGroupInput source="field" choices={[
                 { id: 'riazi', name: 'riazi' },
                 { id: 'tajrobi', name: 'tajrobi' }
@@ -87,6 +90,7 @@ export const ExercisesList = props => (
     
     <List {...props} pagination={<ExercisesPagination />}>
         <Datagrid rowClick="show">
+            <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
             <TextField source="title" label="Title" />
             <TextField source="description" label="Description" />

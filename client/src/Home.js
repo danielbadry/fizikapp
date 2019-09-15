@@ -32,18 +32,21 @@ class Requests extends React.Component {
                         label="تعریفی ها"
                         footer="مشاهده بیشتر تعریفی ها"
                         model="definitions"
+                        linkToShowMore='/definitions'
                     />
 
                     <SingleRow
                         label="ویدیوها"
                         footer="مشاهده بیشتر ویدیو ها"
                         model="products"
+                        linkToShowMore='/products'
                     />
                     
                     <SingleRow
                         label="تمرین ها"
                         footer="مشاهده بیشتر تمرین ها"
                         model="exercises"
+                        linkToShowMore='/exercises'
                     />
                     
                     <StickyFooter />

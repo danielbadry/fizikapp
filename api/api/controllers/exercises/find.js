@@ -50,6 +50,7 @@ module.exports = {
     ;
 
     for (let exercise of exercises) {
+      exercise.thumbnail = "http://localhost:1337/files/exerciseImage/" + exercise.thumbnail;
       moment.locale('en');
       exercise.jalaaliCreatedDate = momentJalaali(exercise.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');

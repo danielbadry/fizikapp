@@ -29,7 +29,7 @@ render() {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+          image={this.props.item.thumbnail}
           title="Contemplative Reptile"
         />
         <CardContent>

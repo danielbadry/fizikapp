@@ -72,10 +72,10 @@ class SingleRow extends React.Component{
                         </Grid>
                     )}
                 </Grid>
-                
+
                 <Link 
                     component={RouterLink} 
-                    to="/learning-playground"
+                    to={this.props.linkToShowMore}
                     style={{ fontFamily: 'IranSans_Light' }}
                     >
                     {this.props.footer}

@@ -107,6 +107,7 @@ module.exports = {
     }
     
     for (let request of allRequests) {
+      request.thumbnail = "http://localhost:1337/files/definitionImage/" + request.thumbnail;
       moment.locale('en');
       request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       request.jalaaliUpdatedDate = momentJalaali(request.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
