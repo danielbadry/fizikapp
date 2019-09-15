@@ -6,6 +6,37 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
 class SingleRow extends React.Component{
+    
+    constructor(props) {
+        super (props);
+        this.state = {
+            rows:[]
+        }
+    }
+    
+    componentDidMount() {
+        fetch(`http://localhost:1337/${this.props.model}/`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(result => {
+                this.setState(function(state, props) {
+                    return {
+                        rows: result.data,
+                    };
+                }, () => {
+                        //  we can do something here after state set
+                });
+            });
+    }
 
     render() {
         return (
@@ -30,17 +61,18 @@ class SingleRow extends React.Component{
                     >
                     {this.props.label}
                 </div>
+
                 <Grid container xs={12}>
-                    <Grid item xs={4}>
-                        <PostCard />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <PostCard />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <PostCard />
-                    </Grid>
+                    {this.state.rows.map(
+                        (item, index) => 
+                        <Grid item xs={4}>
+                            <PostCard
+                                item = {item}
+                                />
+                        </Grid>
+                    )}
                 </Grid>
+                
                 <Link 
                     component={RouterLink} 
                     to="/learning-playground"

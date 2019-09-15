@@ -14,11 +14,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard() {
-  const classes = useStyles();
+class ImgMediaCard extends React.Component {
 
+constructor(props) {
+  super (props);
+  console.info('props:', props);
+}
+
+render() {
   return (
-    <Card className={classes.card}>
+    <Card>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -37,7 +42,7 @@ export default function ImgMediaCard() {
               direction: 'rtl'
             }}
             >
-            سرعت چیست
+            {this.props.item.name}
           </Typography>
           <Typography 
             variant="body2" 
@@ -49,8 +54,7 @@ export default function ImgMediaCard() {
               textAlign: 'justify'
             }}
             >
-          تندی (به انگلیسی: Velocity) در علم سینماتیک به مفهوم بزرگی سرعت برداری یک جسم گفته می‌شود. سرعت یک کمیت برداری است و واحد آن در SI متر بر ثانیه می‌باشد. سرعت متوسط به تغییرات جابجایی متحرک نسبت به زمان طی شده را سرعت متوسط می‌گویند
-          . سرعت لحظه‌ای نیز به صورت حد سرعت در صورتی که بازه زمانی به صفر میل کند، یا به عبارت دیگر سرعتی که متحرک در هر لحظه دارد، تعریف می‌گردد.
+            {this.props.item.description}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -65,3 +69,7 @@ export default function ImgMediaCard() {
     </Card>
   );
 }
+  
+}
+
+export default ImgMediaCard;

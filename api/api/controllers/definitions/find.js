@@ -43,7 +43,7 @@ module.exports = {
     let dataLength = await Definitions.find();
     let allRequests;
 
-    if(inputs.searchText == '')
+    if(inputs.searchText == '' || !inputs.searchText)
     {
       allRequests = await Definitions.find()
       .limit(inputs.limit)
@@ -72,35 +72,40 @@ module.exports = {
       .sort([{updatedAt :'DESC'}])
       ;
     }
-    // filter allRequest based on tags
-    let tagIds = []; // list of comming tags id from the URL
-    let inTags = [];
-    if(JSON.parse(inputs.tags).length === 0) {
-      inTags = await Tags.find();
-    } else {
-      inTags = JSON.parse(inputs.tags);
-    }
-    
-    for(let inTag of inTags) {
-      tagIds.push(inTag.id);
-    }
 
-    for (let request of allRequests) {
-      let aa = [];
-      requestTags = JSON.parse(request.tags);
-      for (let requestTag of requestTags) {
-        aa.push(requestTag.id);
+
+    // filter allRequest based on tags
+    if (inputs.tags)
+    {
+      let tagIds = []; // list of comming tags id from the URL
+      let inTags = [];
+      if(JSON.parse(inputs.tags).length === 0) {
+        inTags = await Tags.find();
+      } else {
+        inTags = JSON.parse(inputs.tags);
+      }
+      
+      for(let inTag of inTags) {
+        tagIds.push(inTag.id);
       }
 
-      for (let a of aa) {
-        if (tagIds.includes(a)) {
-          if (await sails.helpers.requesthelper(request, finalRequests))
-            finalRequests.push(request);
+      for (let request of allRequests) {
+        let aa = [];
+        requestTags = JSON.parse(request.tags);
+        for (let requestTag of requestTags) {
+          aa.push(requestTag.id);
+        }
+
+        for (let a of aa) {
+          if (tagIds.includes(a)) {
+            if (await sails.helpers.requesthelper(request, finalRequests))
+              finalRequests.push(request);
+          }
         }
       }
+      allRequests = finalRequests;
     }
-
-    allRequests = finalRequests;
+    
     for (let request of allRequests) {
       moment.locale('en');
       request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

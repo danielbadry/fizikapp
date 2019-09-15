@@ -4,31 +4,27 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create tamrins.',
+  description: 'Create exercises.',
 
 
   inputs: {
-    
-    name :{
-      type: 'string'
-    },
 
-    title :{
-      type: 'string'
-    },
-
-    description :{
-      type: 'string'
-    },
-
-    year :{
-      type: 'string'
-    },
-
-    field :{
+    tags : {
       type: 'string'
     },
     
+    name : {
+      type: 'string'
+    },
+    
+    title : {
+      type: 'string'
+    },
+    
+    description : {
+      type: 'string'
+    }
+
   },
 
 
@@ -39,14 +35,18 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    return await Tamrins.create({
+    return await Exercises.create({
       name: inputs.name,
-      field: inputs.field,
-      year: inputs.year,
       title: inputs.title,
       description: inputs.description,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
+      isEnabled : true,
+      likes : 0,
+      disLikes : 0,
+      views : 0,
+      tags : inputs.tags
+      
     }).fetch();
 
   }
