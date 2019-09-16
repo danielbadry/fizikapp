@@ -52,10 +52,10 @@ export const DefinitionsShow = (props) => (
             <Tab label="information">
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="title" label="title" />
-                <TextField source="name" label="name" />
-                <TextField source="description" label="description" />
-                <ArrayField source="tagsArray" label="tags">
+                <TextField source="summary.title" label="title" />
+                <TextField source="summary.name" label="name" />
+                <TextField source="summary.description" label="description" />
+                <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />
                     </SingleFieldList>
@@ -67,7 +67,7 @@ export const DefinitionsShow = (props) => (
             </Tab>
 
             <Tab label="comments" path="comments">
-            <ProductsComments />
+                <ProductsComments />
             </Tab>
 
         </TabbedShowLayout>
@@ -83,7 +83,7 @@ export const DefinitionsList = props => (
             <TextField source="name" label="Name" />
             <TextField source="title" label="title" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
-            {/* <EditButton /> */}
+            <EditButton />
             <ShowButton />
         </Datagrid>
     </List>

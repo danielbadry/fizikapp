@@ -118,7 +118,7 @@ export const ProductsList = props => (
             <BooleanField source="isEnabled" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
-            {/* <EditButton /> */}
+            <EditButton />
             <ShowButton />
         </Datagrid>
     </List>

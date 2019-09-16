@@ -106,15 +106,15 @@ module.exports = {
       allRequests = finalRequests;
     }
     
-    for (let request of allRequests) {
-      request.thumbnail = "http://localhost:1337/files/definitionImage/" + request.thumbnail;
+    for (let definition of allRequests) {
+      definition.thumbnail = "http://localhost:1337/files/definitionImage/" + definition.thumbnail;
       moment.locale('en');
-      request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-      request.jalaaliUpdatedDate = momentJalaali(request.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      definition.jalaaliUpdatedDate = momentJalaali(definition.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
-      request.jalaaliUserFriendlyCreatedDate = moment(request.createdAt).fromNow();
-      request.jalaaliUserFriendlyUpdatedDate = moment(request.updatedAt).fromNow();
-      request.jalaaliFullUserFriendlyUpdatedDate = request.jalaaliUpdatedDate + ' ' + request.jalaaliUserFriendlyUpdatedDate;
+      definition.jalaaliUserFriendlyCreatedDate = moment(definition.createdAt).fromNow();
+      definition.jalaaliUserFriendlyUpdatedDate = moment(definition.updatedAt).fromNow();
+      definition.jalaaliFullUserFriendlyCreatedDate = definition.jalaaliCreatedDate + ' ' + definition.jalaaliUserFriendlyCreatedDate;
     }
     finalData.dataLength = allRequests.length;
     finalData.data = allRequests;
