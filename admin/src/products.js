@@ -12,6 +12,7 @@ import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
+import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
 import Fab from '@material-ui/core/Fab';
@@ -46,7 +47,7 @@ export const ProductCreate = (props) => (
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
             
-            <FileInput source="file" label="Related files" accept="video/avi">
+            <FileInput source="file" label="Related files" accept="video/mp4">
                 <FileField source="file" title="title" />
             </FileInput>
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
@@ -73,6 +74,7 @@ export const ProductShow = (props) => (
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
                 <TextField source="summary.name" label="name" />
+                <VideoPlayerField />
                 <TextField source="summary.description" label="description" />
                 <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
@@ -113,10 +115,8 @@ export const ProductsList = props => (
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <TextField source="price" label="Price" />
             <BooleanField source="isEnabled" label="Enable" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
-            {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" /> */}
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             {/* <EditButton /> */}
             <ShowButton />

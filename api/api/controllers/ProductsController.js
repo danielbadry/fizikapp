@@ -16,10 +16,13 @@ module.exports = {
         title:req.param('title'),
         tags:req.param('tags'),
         category:req.param('category'),
-        isEnable:req.param('isEnable'),
+        isEnabled:true,
         publishDate:req.param('publishDate'),
         createdAt : await sails.helpers.dateParse(),
-        updatedAt : await sails.helpers.dateParse()
+        updatedAt : await sails.helpers.dateParse(),
+        likes : 0,
+        disLikes : 0,
+        views : 0
       })
       .fetch();
       
@@ -37,15 +40,15 @@ module.exports = {
       });
       
       await req.file('file').upload({
-        maxBytes: 100000000,
+        maxBytes: 1000000000,
         dirname: require('path').resolve(sails.config.appPath, 'assets/files/productFiles'),
-        saveAs : product.id + '.avi'
+        saveAs : product.id + '.mp4'
       },async function (err, uploadedFiles) {
         await Products.updateOne({
           id: product.id 
         })
         .set({
-          mainFileSrc: product.id + '.avi'
+          mainFileSrc: product.id + '.mp4'
         });
         if (err) return res.serverError(err);
       });

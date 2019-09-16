@@ -32,7 +32,8 @@ module.exports = {
       // id: inputs.id
     });
     
-    summary.startTime = userVideoStatus.startTime;
+    if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
+      summary.startTime = userVideoStatus.startTime;
 
     summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.mainFileSrc;
     moment.locale('en');
@@ -42,7 +43,9 @@ module.exports = {
     let productsquestions = await Userinteractions.find({
         where : {
           isDeleted : false,
-          // productId: inputs.id
+          modelId: inputs.id,
+          type:'qa',
+          model: 'products'
         }
     });
 
