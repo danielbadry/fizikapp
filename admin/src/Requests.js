@@ -3,7 +3,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField, ShowButton, EditButton, DateInput, TabbedForm, FormTab } from 'react-admin';
-        import RichTextInput from 'ra-input-rich-text';
+        // import RichTextInput from 'ra-input-rich-text';
 
 import Thumbnail from './ThumbnailImage';
 import RequestsUsersAnswer from './RequestsUsersAnswer';

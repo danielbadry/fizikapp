@@ -8,7 +8,6 @@
 module.exports = {
 
     create: async function(req,res) {
-    
         let exercise = await Exercises
           .create({
             name:req.param('name'),
@@ -17,6 +16,8 @@ module.exports = {
             tags:req.param('tags'),
             isEnable:req.param('isEnable'),
             likes:req.param('isEnable'),
+            year:req.param('year'),
+            field:req.param('field'),
             disLikes:req.param('isEnable'),
             views:req.param('isEnable'),
             createdAt : await sails.helpers.dateParse(),

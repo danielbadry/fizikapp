@@ -29,9 +29,7 @@ export const ExercisesCreate = (props) => (
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
-            </ImageInput>
+            
             <RadioButtonGroupInput source="field" choices={[
                 { id: 'riazi', name: 'riazi' },
                 { id: 'tajrobi', name: 'tajrobi' }
@@ -58,6 +56,11 @@ export const ExercisesCreate = (props) => (
                 { id: '1398', name: '1398' },
                 { id: '1399', name: '1399' },
             ]} />
+
+            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
+                <ImageField source="thumbnail" title="title" />
+            </ImageInput>
+
         </SimpleForm>
     </Create>
 );
@@ -75,11 +78,21 @@ export const ExercisesEdit = (props) => (
 export const ExercisesShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
+            
             <Tab label="information">
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
             </Tab>
+
+            <Tab label="qa" path="qa">
+                <ProductsQuestions />
+            </Tab>
+
+            <Tab label="comments" path="comments">
+                <ProductsComments />
+            </Tab>
+
         </TabbedShowLayout>
     </Show>
 );
@@ -95,8 +108,11 @@ export const ExercisesList = props => (
             <TextField source="title" label="Title" />
             <TextField source="description" label="Description" />
             <TextField source="year" label="year" />
-            <TextField source="riazi" label="riazi" />
+            <BooleanField source="isRiazi" label="riazi" />
+            <BooleanField source="isTajrobi" label="tajrobi" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
+            <EditButton />
+            <ShowButton />
         </Datagrid>
     </List>
 );

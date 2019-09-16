@@ -50,6 +50,8 @@ module.exports = {
     ;
 
     for (let exercise of exercises) {
+      exercise.isRiazi = false;
+      exercise.isTajrobi = false;
       exercise.thumbnail = "http://localhost:1337/files/exerciseImage/" + exercise.thumbnail;
       moment.locale('en');
       exercise.jalaaliCreatedDate = momentJalaali(exercise.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -57,6 +59,11 @@ module.exports = {
       exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();   
       exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();
       exercise.jalaaliFullUserFriendlyCreatedDate = exercise.jalaaliCreatedDate + ' ' + exercise.jalaaliUserFriendlyCreatedDate;
+      if (exercise.field == 'riazi')
+        exercise.isRiazi = true;
+      if (exercise.field == 'tajrobi')
+      exercise.isTajrobi = true;
+
     }
     finalData.dataLength = dataLength.length;
     finalData.data = exercises;
