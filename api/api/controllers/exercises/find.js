@@ -17,8 +17,19 @@ module.exports = {
     
     endDate :{
       type: 'string'
-    }
+    },
+    
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
   },
 
 

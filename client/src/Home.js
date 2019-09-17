@@ -33,6 +33,7 @@ class Requests extends React.Component {
                         footer="مشاهده بیشتر تعریفی ها"
                         model="definitions"
                         linkToShowMore='/definitions'
+                        count='3'
                     />
 
                     <SingleRow
@@ -40,6 +41,7 @@ class Requests extends React.Component {
                         footer="مشاهده بیشتر ویدیو ها"
                         model="products"
                         linkToShowMore='/products'
+                        count='3'
                     />
                     
                     <SingleRow
@@ -47,6 +49,7 @@ class Requests extends React.Component {
                         footer="مشاهده بیشتر تمرین ها"
                         model="exercises"
                         linkToShowMore='/exercises'
+                        count='3'
                     />
                     
                     <StickyFooter />

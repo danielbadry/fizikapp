@@ -18,7 +18,7 @@ class StickyFooter extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:1337/definitions/relateddefinitions`, {
+        fetch(`http://localhost:1337/definitions?limit=10`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -34,11 +34,13 @@ class StickyFooter extends React.Component {
             .then(response => response.json())
             .then(definitions => {
                 this.setState((state, props) => {
-                return {definitions: definitions};
+                return {
+                    definitions: definitions.data
+                };
                 });
             });
 
-            fetch(`http://localhost:1337/products/`, {
+        fetch(`http://localhost:1337/products?limit=10`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -54,7 +56,10 @@ class StickyFooter extends React.Component {
             .then(response => response.json())
             .then(products => {
                 this.setState((state, props) => {
-                return {products: products.data};
+                return {
+                    products: products.data
+                    
+                    };
                 });
             });
     }
@@ -234,24 +239,27 @@ class StickyFooter extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className={classes.rowSingle}>
-                    <div className={classes.columnHeader}>آخرین تعریفی ها</div>
-                    <ul className={classes.ul}>
-                        {this.state.definitions.map(
-                            (item, index) => 
-                            <li key={index}><Link component={RouterLink} to={`/definitions/${item.id}`}>{item.name}</Link></li>
-                        )}
-                    </ul>
-                </div>
+
                 <div className={classes.rowSingle}>
                     <div className={classes.columnHeader}>آخرین ویدیو ها</div>
                     <ul className={classes.ul}>
-{this.state.products.map(
-    (item, index) => 
-<li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
-)}  
+                        {this.state.definitions.map(
+                            (item, index) => 
+                        <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
+                        )}  
                     </ul>
                 </div>
+
+                <div className={classes.rowSingle}>
+                    <div className={classes.columnHeader}>آخرین ویدیو ها</div>
+                    <ul className={classes.ul}>
+                        {this.state.products.map(
+                            (item, index) => 
+                        <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
+                        )}  
+                    </ul>
+                </div>
+
             </div>
         </div>
         <div

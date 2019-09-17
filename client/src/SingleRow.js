@@ -15,7 +15,7 @@ class SingleRow extends React.Component{
     }
     
     componentDidMount() {
-        fetch(`http://localhost:1337/${this.props.model}/`, {
+        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
