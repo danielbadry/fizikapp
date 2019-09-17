@@ -3,7 +3,8 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton, 
+        DateInput ,ReferenceInput } from 'react-admin';
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
@@ -85,6 +86,7 @@ export const DefinitionsList = props => (
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
             <ShowButton />
+            <DeleteButton />
         </Datagrid>
     </List>
 );
