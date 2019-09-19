@@ -53,7 +53,6 @@ module.exports = {
     }
     
     else {
-      // return '2';
       allRequests = await Definitions.find({
         or : [
             {

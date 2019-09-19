@@ -5,6 +5,7 @@ import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './product
 import { ExercisesList, ExercisesCreate, ExercisesEdit, ExercisesShow } from './Exercises';
 import { UsersList, UserCreate, UserCreatee, userShow } from './users';
 import { DefinitionsList, DefinitionsCreate, DefinitionsEdit, DefinitionsShow } from './Definitions';
+import { SciencechallengeList, SciencechallengeCreate, SciencechallengeEdit, SciencechallengeShow } from './Sciencechallenge';
 import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
 import { CriticismsList } from './criticisms';
@@ -43,6 +44,7 @@ const App = () => (
         <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="Exercises" list={ExercisesList} create={ExercisesCreate} show={ExercisesShow} edit={ExercisesEdit} icon={CategoryIcon} />
         <Resource name="Definitions" list={DefinitionsList} create={DefinitionsCreate} show={DefinitionsShow} edit={DefinitionsEdit} icon={CategoryIcon} />
+        <Resource name="Sciencechallenge" list={SciencechallengeList} create={SciencechallengeCreate} show={SciencechallengeShow} edit={SciencechallengeEdit} icon={CategoryIcon} />
         <Resource name="Tags" create={TagCreate} edit={TagEdit} list={TagsList} icon={VideoLbabelIcon} />
         <Resource name="Shops" list={ShopsList} icon={ShoppingIcon} show={shopShow} />
         <Resource name="Criticisms" list={CriticismsList} icon={CommentIcon} />

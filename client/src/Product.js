@@ -38,7 +38,7 @@ class Product extends React.Component {
             userInteractionConfig : [
                 {
                     type:'qa',
-                    label:'پرسش و پاسخ',
+                    label:' از ماپرسش و پاسخ',
                     model:'definitions'
                 },
                 {

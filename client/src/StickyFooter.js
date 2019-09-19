@@ -7,6 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import './sticky-footer.css';
 
 class StickyFooter extends React.Component {
     constructor(props) {
@@ -65,76 +66,12 @@ class StickyFooter extends React.Component {
     }
 
     render() {
-        const classes = {
-
-            root: {
-              display: 'flex',
-              flexDirection: 'column',
-              minHeight: '100vh',
-            },
-          
-            container: {
-              width: '100%',
-              fontFamily: 'IranSans_Light',
-              backgroundColor: '#262626',
-              color: 'aliceblue'
-            },
-          
-            main: {
-              marginTop: '8',
-              marginBottom: '2',
-            },
-          
-            footer: {
-              padding: '2',
-              marginTop: 'auto',
-              backgroundColor: 'white',
-            },
-          
-            column: {
-              float: 'left',
-              width: '33.33%',
-              padding: '10px',
-              height: '300px'
-            },
-          
-            row: {
-              display: 'flex',
-            },
-          
-            ul: {
-                fontSize: '14px',
-                direction: 'rtl',
-                listStyleType: 'none',
-                paddingRight: '10px'
-            },
-          
-            columnHeader: {
-                direction: 'rtl',
-                color: '#e67e22',
-                fontSize: '14px'
-            },
-          
-            rowSingle: {
-                width: '150px',
-                display: 'inline-block'
-            },
-          
-            svgIcons: {
-              width: '35px',
-              display: 'inline-block',
-              height: '35px',
-              margin: '8px',
-              // backgroundColor: 'cadetblue',
-              // borderRadius: '50%',
-            }
-          
-          };
+        
   return (
-    <div className={classes.container}>
-        <div className={classes.row}>
+    <div className="container">
+        <div className="row">
             <div 
-                className={classes.column}
+                className="column"
                 style={{
                     width: '20%'
                 }}
@@ -150,7 +87,7 @@ class StickyFooter extends React.Component {
                 >رسالت ما تهیه و توزیع بهترین ویدیوهای آموزشی است که شما در هیچ کجای دیگر قادر به پیدا کردن آن نیستید</p>
             </div>
             <div 
-                className={classes.column} 
+                className="column" 
                 style={{
                     width: '20%'
                 }}>
@@ -172,21 +109,21 @@ class StickyFooter extends React.Component {
                 <Button 
                     variant="contained" 
                     color="primary" 
-                    className={classes.button}
+                    className="button"
                     >
                     ارسال
                 </Button>
             </div>
             <div 
-                className={classes.column}
+                className="column"
                 style={{
                     width: '60%',
                     direction: 'rtl'
                 }}
                 >
-                <div className={classes.rowSingle}>
-                    <div className={classes.columnHeader}>بخش های اصلی سایت</div>
-                    <ul className={classes.ul}>
+                <div className="rowSingle">
+                    <div className="columnHeader">بخش های اصلی سایت</div>
+                    <ul className="ul">
                         <li>
                         <Link component={RouterLink} to="/about">
                             درباره ی ما
@@ -240,9 +177,9 @@ class StickyFooter extends React.Component {
                     </ul>
                 </div>
 
-                <div className={classes.rowSingle}>
-                    <div className={classes.columnHeader}>آخرین ویدیو ها</div>
-                    <ul className={classes.ul}>
+                <div className="rowSingle">
+                    <div className="columnHeader">آخرین ویدیو ها</div>
+                    <ul className="ul">
                         {this.state.definitions.map(
                             (item, index) => 
                         <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
@@ -250,9 +187,9 @@ class StickyFooter extends React.Component {
                     </ul>
                 </div>
 
-                <div className={classes.rowSingle}>
-                    <div className={classes.columnHeader}>آخرین ویدیو ها</div>
-                    <ul className={classes.ul}>
+                <div className="rowSingle">
+                    <div className="columnHeader">آخرین ویدیو ها</div>
+                    <ul className="ul">
                         {this.state.products.map(
                             (item, index) => 
                         <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
@@ -269,63 +206,63 @@ class StickyFooter extends React.Component {
             }}
             >
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(gatsby.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(facebook.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(googlechrome.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(googleplay.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(googlepodcasts.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(linkedin.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(telegram.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(twitter.svg)"
                 }}
             >
             </span>
             <span
-                className={classes.svgIcons}
+                className="svgIcons"
                 style={{
                     backgroundImage:"url(Yekan.svg)"
                 }}
