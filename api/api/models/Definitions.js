@@ -42,7 +42,41 @@ module.exports = {
       type: 'json',
       columnType: 'array',
       required : false
-    }
+    },
+
+    category :{
+      type: 'json',
+      columnType: 'array',
+      required : false
+    },
+
+    isDeleted :{
+      type: 'boolean',
+      required : false
+    },
+    
+    thumbnail :{
+      type: 'string',
+      required : false
+    },
+    
+    likes :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
+    },
+    
+    disLikes :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
+    },
+    
+    views :{
+      type: 'number',
+      required : false,
+      defaultsTo: 0
+    },
     
   },
 

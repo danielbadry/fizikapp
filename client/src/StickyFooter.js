@@ -182,7 +182,7 @@ class StickyFooter extends React.Component {
                     <ul className="ul">
                         {this.state.definitions.map(
                             (item, index) => 
-                        <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
+                        <li key={index}><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
                         )}  
                     </ul>
                 </div>
@@ -192,7 +192,7 @@ class StickyFooter extends React.Component {
                     <ul className="ul">
                         {this.state.products.map(
                             (item, index) => 
-                        <li><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
+                        <li key={index}><Link component={RouterLink} to={`/product/${item.id}`}>{item.name}</Link></li>
                         )}  
                     </ul>
                 </div>

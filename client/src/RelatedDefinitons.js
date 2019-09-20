@@ -47,7 +47,7 @@ render() {
             <List>
         {this.state.relatedDefinitions.map(
                 (item, index) =>
-                <ListItem alignItems="flex-start">
+                <ListItem key={index} alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
         </ListItemAvatar>

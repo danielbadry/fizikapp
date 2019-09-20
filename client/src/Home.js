@@ -43,6 +43,22 @@ class Requests extends React.Component {
                         linkToShowMore='/products'
                         count='3'
                     />
+
+                    <SingleRow
+                        label="ادامه ی ویدیوهای قبلی"
+                        footer="مشاهده بیشتر ویدیو ها"
+                        model="products"
+                        linkToShowMore='/products'
+                        count='3'
+                    />
+                    
+                    <SingleRow
+                        label="چالش های علمی"
+                        footer="مشاهده بیشتر چالش ها"
+                        model="sciencechallenge"
+                        linkToShowMore='/sciencechallenge'
+                        count='3'
+                    />
                     
                     <SingleRow
                         label="تمرین ها"

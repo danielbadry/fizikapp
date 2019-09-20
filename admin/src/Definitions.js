@@ -30,9 +30,13 @@ export const DefinitionsCreate = (props) => (
             <TextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
+            <CategoryComponent source="category" label="category" />
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
+            <FileInput source="file" label="Related files" accept="video/mp4">
+                <FileField source="file" title="title" />
+            </FileInput>
         </SimpleForm>
     </Create>
 );

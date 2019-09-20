@@ -17,6 +17,8 @@ import Typography from '@material-ui/core/Typography';
 import ContentUserInteraction from "./ContentUserInteraction";
 import RelatedDefinitons from "./RelatedDefinitons";
 import StickyFooter from "./StickyFooter";
+import GmailTreeView from "./TreeView";
+import SimpleTreeView from "./SimpleTreeView";
 import Divider from '@material-ui/core/Divider';
 
 class Definition extends React.Component {
@@ -73,7 +75,7 @@ class Definition extends React.Component {
             <Grid container spacing={3}>
                         
                     <Grid item xs={12}>
-                        <MainHeader />
+                        {/* <MainHeader /> */}
                     </Grid>
 
                     <Grid item xs={10}>
@@ -92,51 +94,15 @@ class Definition extends React.Component {
 
                     <Grid item xs={3}>
                         <Paper>
-                            <RelatedDefinitons />
+                            {/* <RelatedDefinitons /> */}
+                            <SimpleTreeView />
                         </Paper>
                     </Grid>
 
                     <Grid item xs={9}>
                         <Paper>
-                            <h3
-                                style={{
-                                    fontFamily: "IranSans",
-                                    direction: 'rtl',
-                                    padding: '2% 2% 0% 1%'
-                                }}
-                                >{this.state.definition.name}
-                            </h3>  
-                            <Divider
-                                style={{
-                                    width:'90%',
-                                    border: '1px solid #eee',
-                                    direction: 'center'
-                                }}
-                            />
-                            <h5
-                                style={{
-                                    fontFamily: "IranSans",
-                                    direction: 'rtl',
-                                    padding: '2% 2% 0% 1%'
-                                }}
-                                >{this.state.definition.title}
-                            </h5>
-                            <p
-                                style={{
-                                    fontFamily: "IranSans",
-                                    textAlign:'justify',
-                                    direction:'rtl',
-                                    padding: '3% 3% 3% 3%'
-                                }}
-                                >
-                                {this.state.definition.description}
-                            </p>
-                        </Paper>
-                        <Paper>
-                        
-                        </Paper>
-                        <Paper>
-
+                            {/* <GmailTreeView /> */}
+                            {/* <SimpleTreeView /> */}
                         </Paper>
                     </Grid>
                     

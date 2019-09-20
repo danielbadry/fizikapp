@@ -52,16 +52,16 @@ function WindowCloseHanlder()
     startTime: '75'
   }
   fetch(`http://localhost:1337/watchedvideos/setuserwatchstatus`, {
-            method: 'POST', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            });
+    method: 'POST', 
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    redirect: 'follow',
+    referrer: 'no-referrer',
+  });
 }
 </script>

@@ -25,4 +25,5 @@ module.exports.routes = {
     'GET /requests/getuserrequests': 'RequestsController.getuserrequests',
     'GET /products/tamrins': 'ProductsController.tamrins',
     'GET /definitions/relateddefinitions': 'DefinitionsController.relateddefinitions',
+    'GET /definitions/treeviewbycategory': 'DefinitionsController.treeviewbycategory',
 };
