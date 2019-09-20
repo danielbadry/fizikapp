@@ -7,8 +7,10 @@ import NewRequest from './NewRequest';
 import SignUp from './SignUp';
 import Request from './Request';
 import Definition from './Definition';
+import Sciencechallenges from './Sciencechallenges';
 import Category from './Category';
 import Product from './Product';
+import Sciencechallenge from './Sciencechallenge';
 import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
 import Search from './Search';
@@ -61,54 +63,26 @@ function HandleProduct({ match }) {
             />
     );
 }
+
+function HandleSciencechallenge({ match }) {
+    return (
+        <Sciencechallenge 
+            sciencechallengeid={match.params.sciencechallengeid}
+            />
+    );
+}
   
 class Routs extends React.Component {
     render() {
         return (
             <Router>
-                {/* <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/requests">Requests</Link>
-                    </li>
-                    <li>
-                        <Link to="/shopping-plans">Shopping plans</Link>
-                    </li>
-                    <li>
-                        <Link to="/definitions">Definitions</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/newRequest">NewRequest</Link>
-                    </li>
-                    <li>
-                        <Link to="/signUp">SignUp</Link>
-                    </li>
-                    <li>
-                        <Link to="/request">Request</Link>
-                    </li>
-                    <li>
-                        <Link to="/product">Product</Link>
-                    </li>
-                    <li>
-                        <Link to="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <Link to="/search/a">Search</Link>
-                    </li>
-                    <li>
-                        <Link to="/Exercises">Exercises</Link>
-                    </li>
-                </ul> */}
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/definitions" component={Definitions} />
+                <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/definition/:definitionid" component={HandleDefinition} />
+                <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/about" component={About} />

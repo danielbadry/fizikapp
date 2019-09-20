@@ -1,3 +1,6 @@
+var moment = require('moment');
+var momentJalaali = require('moment-jalaali');
+
 module.exports = {
 
 
@@ -6,11 +9,25 @@ module.exports = {
 
   description: 'Find sciencechallenge.',
 
-
   inputs: {
 
-  },
+    limit: {
+      type: 'number'
+    },
+    
+    skip: {
+      type: 'number'
+    },
 
+    sort: {
+      type: 'string'
+    },
+    
+    where: {
+      type: 'string'
+    },
+    
+  },
 
   exits: {
 
@@ -22,13 +39,24 @@ module.exports = {
     let finalData = {};
     
     let dataLength = await Sciencechallenge.find();
-    let allSciencechallenge = await Sciencechallenge.find()
+    let allSciencechallenges = await Sciencechallenge.find()
     .limit(inputs.limit)
     .skip(inputs.skip)
     ;
 
+    for (let sciencechallenge of allSciencechallenges) {
+      sciencechallenge.thumbnail = "http://localhost:1337/files/sciencechallengeImage/" + sciencechallenge.thumbnail;
+      moment.locale('en');
+      sciencechallenge.jalaaliCreatedDate = momentJalaali(sciencechallenge.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      sciencechallenge.jalaaliUpdatedDate = momentJalaali(sciencechallenge.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      sciencechallenge.jalaaliUserFriendlyCreatedDate = moment(sciencechallenge.createdAt).fromNow();
+      sciencechallenge.jalaaliUserFriendlyUpdatedDate = moment(sciencechallenge.updatedAt).fromNow();
+      sciencechallenge.jalaaliFullUserFriendlyCreatedDate = sciencechallenge.jalaaliCreatedDate + ' ' + sciencechallenge.jalaaliUserFriendlyCreatedDate;
+    }
+
     finalData.dataLength = dataLength.length;
-    finalData.data = allSciencechallenge;
+    finalData.data = allSciencechallenges;
     return finalData;
 
   }
