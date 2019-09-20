@@ -15,23 +15,39 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ContentUserInteraction from "./ContentUserInteraction";
-import RelatedDefinitons from "./RelatedDefinitons";
 import StickyFooter from "./StickyFooter";
-import GmailTreeView from "./TreeView";
 import SimpleTreeView from "./SimpleTreeView";
 import Divider from '@material-ui/core/Divider';
+import {
+    Player,
+    ControlBar,
+    ReplayControl,
+    ForwardControl,
+    CurrentTimeDisplay,
+    TimeDivider,
+    PlaybackRateMenuButton,
+    VolumeMenuButton
+  } from 'video-react';
+import "../node_modules/video-react/dist/video-react.css"; // import css
 
 class Definition extends React.Component {
     
     constructor(props) {
         super(props);
-        console.info('props:', props);
         this.state = {
-            definition : {},
+            summary:{},
+            definitionQuestions: [],
+            definitionComments: [],
+            tags: [],
+            id: '',
+            isRender : false,
+            thumbnail: '',
+            definitionId: props.definitionid,
+            startTime: 8,
             userInteractionConfig : [
                 {
                     type:'qa',
-                    label:'پرسش و پاسخ',
+                    label:' از ماپرسش و پاسخ',
                     model:'definitions'
                 },
                 {
@@ -41,10 +57,6 @@ class Definition extends React.Component {
                 }
             ]
         }
-    }
-    
-    handleChange = () => {
-        console.info('hello');
     }
 
     componentDidMount() {
@@ -63,14 +75,33 @@ class Definition extends React.Component {
             })
             .then(response => response.json())
             .then(definition => {
-                this.setState((state, props) => {
-                return {definition: definition};
-                });
+                this.setState(function(state, props) {
+                    return {
+                        summary: JSON.parse(JSON.stringify(definition.summary)),
+                        definitionQuestions: JSON.parse(JSON.stringify(definition.definitionsQuestions)),
+                        definitionComments: JSON.parse(JSON.stringify(definition.definitionsComments)),
+                        tags: JSON.parse(JSON.stringify(definition.tags)),
+                        thumbnail: definition.thumbnail,
+                        id: definition.id,
+                        startTime : 30,
+                        isRender: true
+                    };
+                  }, () => {
+                    this.setState(function(state, props) {
+                        return {
+                            isRender: true
+                        }});
+                  });
             });
     }
 
     render () {
-        
+        if (!this.state.isRender) {
+            return(
+                <div>loading...</div>
+            )
+            
+        } else
         return (
             <Grid container spacing={3}>
                         
@@ -80,29 +111,39 @@ class Definition extends React.Component {
 
                     <Grid item xs={10}>
                         <Paper>
-                            <div
+                        <Player
+                                poster={this.thumbnail}
+                                startTime = {this.state.startTime}
                                 style={{
-                                    width: '100%',
-                                    height: '300px',
-                                    backgroundImage:"url(https://cdn.pixabay.com/photo/2015/09/21/14/45/banner-header-949928_960_720.jpg)"
+                                    height: '200px'
                                 }}
                                 >
+                                    
+                            <source 
+                                src={this.state.summary.videoAddress}
+                                />
 
-                            </div>
+                            <ControlBar>
+                                <ReplayControl seconds={10} order={1.1} />
+                                <ForwardControl seconds={10} order={1.2} />
+                                <CurrentTimeDisplay order={4.1} />
+                                <TimeDivider order={4.2} />
+                                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                                <VolumeMenuButton />
+                            </ControlBar>
+                            </Player>
                         </Paper>
                     </Grid>
 
                     <Grid item xs={3}>
                         <Paper>
-                            {/* <RelatedDefinitons /> */}
                             <SimpleTreeView />
                         </Paper>
                     </Grid>
 
                     <Grid item xs={9}>
                         <Paper>
-                            {/* <GmailTreeView /> */}
-                            {/* <SimpleTreeView /> */}
+
                         </Paper>
                     </Grid>
                     

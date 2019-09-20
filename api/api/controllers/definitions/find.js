@@ -72,6 +72,16 @@ module.exports = {
       ;
     }
 
+    // find video status for this user
+    let userVideoStatus = await Watchedvideos.findOne({
+      // userId : '5d73564134abe01014969d96',
+      modelId: inputs.id,
+    });
+
+    if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
+      summary.startTime = userVideoStatus.startTime;
+
+    summary.videoAddress = 'http://localhost:1337/files/definitionFiles/' + summary.mainFileSrc;
 
     // filter allRequest based on tags
     if (inputs.tags)
