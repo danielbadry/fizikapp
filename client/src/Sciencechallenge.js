@@ -23,7 +23,6 @@ class Sciencechallenge extends React.Component{
 
     constructor(props) {
         super(props);
-        console.info('propsesh:', props);
         this.state = {
             summary:{},
             scienceschallengeQuestions: [],
@@ -120,7 +119,7 @@ class Sciencechallenge extends React.Component{
                             <Typography
                             style={{ fontFamily: 'IranSans_Light' }}
                             >
-                                در کوییز شرکت کرده اید قبلا 
+                                قبلا پاسخ داده اید 
                             </Typography>
                             <Typography
                             style={{ fontFamily: 'IranSans_Light' }}

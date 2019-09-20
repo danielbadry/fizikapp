@@ -88,16 +88,8 @@ export const SciencechallengeShow = (props) => (
                 <ProductsQuestions />
             </Tab>
 
-            <Tab label="reports" path="report" >
-                <ProductReports />
-            </Tab>
-
             <Tab label="comments" path="comments">
-            <ProductsComments />
-            </Tab>
-
-            <Tab label="quiz" path="quiz">
-                <QuizManager />
+                <ProductsComments />
             </Tab>
 
         </TabbedShowLayout>
