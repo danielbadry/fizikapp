@@ -30,11 +30,29 @@ module.exports = {
       }
     });
     
+    let youLiked = await Likedislikeview.find({
+      where :{
+        model: inputs.model,
+        modelId: inputs.modelId,
+        type:'like',
+        userId: inputs.userId
+      }
+    });
+
     let allDisLikes = await Likedislikeview.find({
       where :{
         model: inputs.model,
         modelId: inputs.modelId,
         type:'dislike'
+      }
+    });
+
+    let youDisLiked = await Likedislikeview.find({
+      where :{
+        model: inputs.model,
+        modelId: inputs.modelId,
+        type:'dislike',
+        userId: inputs.userId
       }
     });
     
@@ -49,11 +67,13 @@ module.exports = {
     let result = {
       likes : {
         count : allLikes.length,
-        data : allLikes
+        data : allLikes,
+        youLike : (youLiked.length ? true : false)
       },
       disLikes : {
         count : allDisLikes.length,
-        data : allLikes
+        data : allLikes,
+        youDisLike : (youDisLiked.length ? true : false)
       },
       views : {
         count : allViews.length,

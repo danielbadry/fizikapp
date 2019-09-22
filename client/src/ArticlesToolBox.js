@@ -81,21 +81,45 @@ class ArticleToolBox extends React.Component {
     }
 
     render () {
+        let isLikeStyle, isDisLikeStyle;
+        
+        if (this.state.likes.youLike) {
+            isLikeStyle = <ThumbUp 
+                fontSize="small" 
+                style={{
+                    color : '#5365c7'
+                }}
+                />
+        } else {
+            isLikeStyle = <ThumbUp 
+                fontSize="small" 
+                />
+        }
+        
+        if (this.state.disLikes.youDisLike) {
+            isDisLikeStyle = <ThumbDown 
+                fontSize="small" 
+                style={{
+                    color : '#5365c7'
+                }}
+                />
+        } else {
+            isDisLikeStyle = <ThumbDown 
+                fontSize="small" 
+                />
+        }
+
         return (
             <React.Fragment>
                 <div>
+                    
                     <IconButton aria-label="delete" onClick={(e) => this.like(e, 'like')}>
-                        <ThumbUp 
-                            fontSize="small" 
-                            style={{
-                                color : '#5365c7'
-                            }}
-                            />
+                        {isLikeStyle}
                     </IconButton>
                     {this.state.likes.count}
                     /
                     <IconButton aria-label="delete" onClick={(e) => this.like(e, 'dislike')}>
-                        <ThumbDown fontSize="small" />
+                        {isDisLikeStyle}
                     </IconButton>
                     {this.state.disLikes.count}
                     /
