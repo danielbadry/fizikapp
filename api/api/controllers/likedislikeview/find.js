@@ -49,15 +49,15 @@ module.exports = {
     let result = {
       likes : {
         count : allLikes.length,
-        date : allLikes
+        data : allLikes
       },
       disLikes : {
         count : allDisLikes.length,
-        date : allLikes
+        data : allLikes
       },
       views : {
         count : allViews.length,
-        date : allLikes
+        data : allLikes
       }
     }
     

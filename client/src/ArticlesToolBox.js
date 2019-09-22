@@ -85,7 +85,12 @@ class ArticleToolBox extends React.Component {
             <React.Fragment>
                 <div>
                     <IconButton aria-label="delete" onClick={(e) => this.like(e, 'like')}>
-                        <ThumbUp fontSize="small" />
+                        <ThumbUp 
+                            fontSize="small" 
+                            style={{
+                                color : '#5365c7'
+                            }}
+                            />
                     </IconButton>
                     {this.state.likes.count}
                     /
@@ -95,7 +100,12 @@ class ArticleToolBox extends React.Component {
                     {this.state.disLikes.count}
                     /
                     <IconButton aria-label="delete">
-                        <Visibility fontSize="small" />
+                        <Visibility 
+                            fontSize="small" 
+                            style={{
+                                color : '#5365c7'
+                            }}
+                            />
                     </IconButton>
                     {this.state.views.count}
                 </div>
