@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import ContentUserInteraction from "./ContentUserInteraction";
 import StickyFooter from "./StickyFooter";
 import SimpleTreeView from "./SimpleTreeView";
+import ArticlesToolBox from "./ArticlesToolBox";
 import Divider from '@material-ui/core/Divider';
 import {
     Player,
@@ -111,7 +112,7 @@ class Definition extends React.Component {
 
                     <Grid item xs={10}>
                         <Paper>
-                        <Player
+                        {/* <Player
                                 poster={this.thumbnail}
                                 startTime = {this.state.startTime}
                                 style={{
@@ -132,6 +133,14 @@ class Definition extends React.Component {
                                 <VolumeMenuButton />
                             </ControlBar>
                             </Player>
+                            */}
+                        </Paper> 
+                        <Paper>
+                            <ArticlesToolBox
+                                model='definitions'
+                                modelid='5d8400c9ca6c93142462b030'
+                                userid='5d3c644a6d696a0dc4e6a448'
+                                />
                         </Paper>
                     </Grid>
 
