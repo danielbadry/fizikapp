@@ -27,8 +27,6 @@ class Product extends React.Component {
         super(props);
         this.state = {
             summary:{},
-            productsquestions: [],
-            productscomments: [],
             tags: [],
             id: '',
             isRender : false,
@@ -68,8 +66,6 @@ class Product extends React.Component {
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(product.summary)),
-                        productsquestions: JSON.parse(JSON.stringify(product.productsquestions)),
-                        productscomments: JSON.parse(JSON.stringify(product.productscomments)),
                         tags: JSON.parse(JSON.stringify(product.tags)),
                         thumbnail: product.thumbnail,
                         id: product.id,

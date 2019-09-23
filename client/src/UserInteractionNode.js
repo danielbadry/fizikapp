@@ -26,7 +26,7 @@ class UserInteractionNode extends React.Component {
       super(props);
       this.state = {
         open: false,
-        productsQuestions: []
+        interactionData: []
       }
       this.parentId = '';
 
@@ -34,23 +34,25 @@ class UserInteractionNode extends React.Component {
 
     componentDidMount () {
       fetch(`http://localhost:1337/userinteractions?model=${this.props.model}&type=${this.props.type}`, {
-            method: 'GET', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(productsquestions => {
-                console.info('ine:', productsquestions);
-                this.setState({
-                    productsQuestions: productsquestions
-                });
+        method: 'GET', 
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        })
+        .then(response => response.json())
+        .then(interactionData => {
+            console.info('ine:', interactionData);
+            this.setState({
+              interactionData: interactionData
+            }, function() {
+                console.info('here states set');
             });
+        });
     }
 
     sendReplyToQuestion = () => {
@@ -121,8 +123,8 @@ class UserInteractionNode extends React.Component {
       // First map the nodes of the array to an object -> create a hash table.
 
       {/*TODO: we must change the below code to a function!*/} 
-      for(var i = 0, len = this.state.productsQuestions.length; i < len; i++) {
-        arrElem = this.state.productsQuestions[i];
+      for(var i = 0, len = this.state.interactionData.length; i < len; i++) {
+        arrElem = this.state.interactionData[i];
         mappedArr[arrElem.id] = arrElem;
         mappedArr[arrElem.id]['children'] = [];
       }
@@ -147,7 +149,6 @@ class UserInteractionNode extends React.Component {
               <List>
                 {data.map((m,i) => {
                   return (
-                     
                     <ListItem key={i} alignItems="flex-start">
                       <ListItemAvatar>
                         <Avatar 
@@ -156,7 +157,15 @@ class UserInteractionNode extends React.Component {
                           src={m.userInfo.thumbnail} />
                       </ListItemAvatar>
                       <ListItemText
-                        primary={m.message}
+                        primary={<Typography 
+                          style={{ 
+                            fontFamily: 'IranSans_UltraLight',
+                            color:'black'
+                          }}
+                          >
+                          {m.message}
+                          </Typography>}
+                        
                         secondary={
                           <React.Fragment>
                             <Typography
@@ -164,13 +173,20 @@ class UserInteractionNode extends React.Component {
                               variant="body2"
                               color="textPrimary"
                             >
-                              <Link href={m.userInfo.url}>
+                              <Link 
+                                href={m.userInfo.url}
+                                style={{ fontFamily: 'IranSans_UltraLight' }}
+                                >
                                 {m.userInfo.firstName + ' ' + m.userInfo.lastName}
                               </Link>
                               
                             </Typography>
                             &nbsp;
-                            {m.jalaaliUserFriendlyCreatedDate} 
+                            <Typography
+                            style={{ fontFamily: 'IranSans_UltraLight' }}
+                            >
+                            {m.jalaaliUserFriendlyCreatedDate}
+                            </Typography> 
                             &nbsp;
                             {/* start */}
                             <React.Fragment>
@@ -178,8 +194,9 @@ class UserInteractionNode extends React.Component {
                                   component="button"
                                   variant="body2"
                                   onClick={() => this.handleClickOpen(m.id)}
+                                  style={{ fontFamily: 'IranSans_UltraLight' }}
                               >
-                                  reply
+                                  پاسخ
                               </Link>
                               {/* <div>milad</div> */}
                               <Dialog open={this.state.open} onClose={this.handleClose.bind(this)} aria-labelledby="form-dialog-title">

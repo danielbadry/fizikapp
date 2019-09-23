@@ -36,7 +36,7 @@ module.exports = {
         modelId: inputs.modelId
       }
     });
-    
+    // return (userinteractions);
     for (let userinteraction of userinteractions) {
       moment.locale('en');
       userinteraction.jalaaliCreatedDate = momentJalaali(userinteraction.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

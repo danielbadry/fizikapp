@@ -10,6 +10,7 @@ class ArticleToolBox extends React.Component {
     
     constructor(props) {
         super (props);
+        console.info('propi:', props);
         this.state = {
             likes : 0,
             disLikes : 0,
@@ -47,7 +48,7 @@ class ArticleToolBox extends React.Component {
     }
 
     fetchData = () => {
-        fetch(`http://localhost:1337/likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}`, {
+        fetch(`http://localhost:1337/likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.props.userid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

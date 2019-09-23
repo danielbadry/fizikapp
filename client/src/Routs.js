@@ -35,7 +35,7 @@ function HandleRequest({ match }) {
 function HandleDefinition({ match }) {
     return (
         <Definition 
-            requestid={match.params.definitionid}
+            definitionid={match.params.definitionid}
             />
     );
 }

@@ -62,24 +62,6 @@ module.exports = {
       type: 'string',
       required : false
     },
-    
-    likes :{
-      type: 'number',
-      required : false,
-      defaultsTo: 0
-    },
-    
-    disLikes :{
-      type: 'number',
-      required : false,
-      defaultsTo: 0
-    },
-    
-    views :{
-      type: 'number',
-      required : false,
-      defaultsTo: 0
-    },
 
   },
 

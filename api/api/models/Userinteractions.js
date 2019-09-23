@@ -21,6 +21,34 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    
+    type : {
+      type: 'string'
+    },
+
+    model : {
+      type: 'string'
+    },
+
+    modelId : {
+      type: 'string'
+    },
+
+    userId : {
+      type: 'string'
+    },
+
+    message : {
+      type: 'string'
+    },
+    
+    parentId : {
+      type: 'string'
+    },
+    
+    isDeleted : {
+      type: 'boolean'
+    },
 
   },
 

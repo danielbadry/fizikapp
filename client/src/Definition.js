@@ -19,26 +19,14 @@ import StickyFooter from "./StickyFooter";
 import SimpleTreeView from "./SimpleTreeView";
 import ArticlesToolBox from "./ArticlesToolBox";
 import Divider from '@material-ui/core/Divider';
-import {
-    Player,
-    ControlBar,
-    ReplayControl,
-    ForwardControl,
-    CurrentTimeDisplay,
-    TimeDivider,
-    PlaybackRateMenuButton,
-    VolumeMenuButton
-  } from 'video-react';
-import "../node_modules/video-react/dist/video-react.css"; // import css
 
 class Definition extends React.Component {
     
     constructor(props) {
         super(props);
+        console.info('all props:', props);
         this.state = {
             summary:{},
-            definitionQuestions: [],
-            definitionComments: [],
             tags: [],
             id: '',
             isRender : false,
@@ -48,7 +36,7 @@ class Definition extends React.Component {
             userInteractionConfig : [
                 {
                     type:'qa',
-                    label:' از ماپرسش و پاسخ',
+                    label:' پرسش و پاسخ',
                     model:'definitions'
                 },
                 {
@@ -61,7 +49,7 @@ class Definition extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:1337/definitions/${this.props.requestid}`, {
+        fetch(`http://localhost:1337/definitions/${this.props.definitionid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -79,8 +67,6 @@ class Definition extends React.Component {
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(definition.summary)),
-                        definitionQuestions: JSON.parse(JSON.stringify(definition.definitionsQuestions)),
-                        definitionComments: JSON.parse(JSON.stringify(definition.definitionsComments)),
                         tags: JSON.parse(JSON.stringify(definition.tags)),
                         thumbnail: definition.thumbnail,
                         id: definition.id,
@@ -97,6 +83,7 @@ class Definition extends React.Component {
     }
 
     render () {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
         if (!this.state.isRender) {
             return(
                 <div>loading...</div>
@@ -112,34 +99,13 @@ class Definition extends React.Component {
 
                     <Grid item xs={10}>
                         <Paper>
-                        {/* <Player
-                                poster={this.thumbnail}
-                                startTime = {this.state.startTime}
-                                style={{
-                                    height: '200px'
-                                }}
-                                >
-                                    
-                            <source 
-                                src={this.state.summary.videoAddress}
-                                />
-
-                            <ControlBar>
-                                <ReplayControl seconds={10} order={1.1} />
-                                <ForwardControl seconds={10} order={1.2} />
-                                <CurrentTimeDisplay order={4.1} />
-                                <TimeDivider order={4.2} />
-                                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
-                                <VolumeMenuButton />
-                            </ControlBar>
-                            </Player>
-                            */}
+                            thumbnail 
                         </Paper> 
                         <Paper>
                             <ArticlesToolBox
                                 model='definitions'
-                                modelid='5d87bbd504519c19aca80b5d'
-                                userid='5d3c644a6d696a0dc4e6a448'
+                                modelid={this.props.definitionid}
+                                userid={user.id}
                                 />
                         </Paper>
                     </Grid>
@@ -159,6 +125,9 @@ class Definition extends React.Component {
                     <Grid item xs={12}>
                         <ContentUserInteraction
                             config={this.state.userInteractionConfig}
+                            model='definitions'
+                            modelid={this.props.definitionid}
+                            userid={user.id}
                             />
                     </Grid>
 

@@ -25,32 +25,32 @@ module.exports = {
           })
           .fetch();
           
-          await req.file('thumbnail').upload({
-            dirname: require('path').resolve(sails.config.appPath, 'assets/files/definitionImage'),
-            saveAs : definition.id + '.jpg'
-          }, async function (err, uploadedFiles) {
-            await Definitions.updateOne({
-              id: definition.id
-            })
-            .set({
-              thumbnail: definition.id + '.jpg'
-            });
-            if (err) return res.serverError(err);
-          });
+          // await req.file('thumbnail').upload({
+          //   dirname: require('path').resolve(sails.config.appPath, 'assets/files/definitionImage'),
+          //   saveAs : definition.id + '.jpg'
+          // }, async function (err, uploadedFiles) {
+          //   await Definitions.updateOne({
+          //     id: definition.id
+          //   })
+          //   .set({
+          //     thumbnail: definition.id + '.jpg'
+          //   });
+          //   if (err) return res.serverError(err);
+          // });
     
-          await req.file('file').upload({
-            maxBytes: 1000000000,
-            dirname: require('path').resolve(sails.config.appPath, 'assets/files/definitionFiles'),
-            saveAs : definition.id + '.mp4'
-          },async function (err, uploadedFiles) {
-            await Definitions.updateOne({
-              id: definition.id 
-            })
-            .set({
-              mainFileSrc: definition.id + '.mp4'
-            });
-            if (err) return res.serverError(err);
-          });
+          // await req.file('file').upload({
+          //   maxBytes: 1000000000,
+          //   dirname: require('path').resolve(sails.config.appPath, 'assets/files/definitionFiles'),
+          //   saveAs : definition.id + '.mp4'
+          // },async function (err, uploadedFiles) {
+          //   await Definitions.updateOne({
+          //     id: definition.id 
+          //   })
+          //   .set({
+          //     mainFileSrc: definition.id + '.mp4'
+          //   });
+          //   if (err) return res.serverError(err);
+          // });
 
           let allp = await Definitions
           .find()
