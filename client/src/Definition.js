@@ -24,7 +24,6 @@ class Definition extends React.Component {
     
     constructor(props) {
         super(props);
-        console.info('all props:', props);
         this.state = {
             summary:{},
             tags: [],

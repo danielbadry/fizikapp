@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ContentUserInteraction(props) {
-  console.info('propsesh:', props);
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -106,6 +105,8 @@ export default function ContentUserInteraction(props) {
                 >
                 <UserInteractionNode
                   model={item.model}
+                  modelid={props.modelid}
+                  userid={props.userid}
                   type={item.type}
                   />
               </TabPanel>

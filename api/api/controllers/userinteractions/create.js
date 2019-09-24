@@ -4,10 +4,11 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create productsquestions.',
+  description: 'Create userinteraction',
 
 
   inputs: {
+
     message: {
       type: 'string'
     },
@@ -16,7 +17,19 @@ module.exports = {
       type: 'string'
     },
     
-    productId: {
+    modelId: {
+      type: 'string'
+    },
+    
+    model: {
+      type: 'string'
+    },
+    
+    userId: {
+      type: 'string'
+    },
+
+    type: {
       type: 'string'
     }
     
@@ -30,11 +43,13 @@ module.exports = {
 
   fn: async function (inputs) {
     
-    return await Productsquestions.create({
+    return await Userinteractions.create({
       message: inputs.message,
       parentId: inputs.parentId,
-      productId: inputs.productId,
-      userId: null,
+      modelId: inputs.modelId,
+      model: inputs.model,
+      type: inputs.type,
+      userId: inputs.userId,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse()
     }).fetch();
