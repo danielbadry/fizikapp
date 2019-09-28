@@ -1,0 +1,62 @@
+    .root {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  
+    .container {
+      width: 100% !important;
+      font-family: IranSans_Light;
+      background-color: #262626;
+      color: aliceblue
+    }
+  
+    .main {
+      margin-top: 8;
+      margin-bottom: 2;
+    };
+  
+    .footer {
+      padding: 2;
+      margin-top: auto;
+      background-color: white;
+    };
+  
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 10px;
+      height: 300px
+    };
+  
+    .row {
+      display: flex;
+    };
+  
+    .ul {
+        font-size: 14px;
+        direction: rtl;
+        list-style-type: none;
+        padding-right: 10px
+    };
+  
+    .columnHeader {
+        direction: rtl;
+        color: #e67e22;
+        font-size: 14px
+    };
+  
+    .rowSingle {
+        width: 150px;
+        display: inline-block
+    };
+  
+    .svgIcons {
+      width: 35px;
+      display: inline-block;
+      height: 35px;
+      margin: 8px;
+      background-color: cadetblue;
+      border-radius: 50%;
+    }
+  

@@ -31,8 +31,7 @@ class QuizComponent extends React.Component {
             quizes : [],
             userAnswers: [],
             step: 0,
-            user : JSON.parse(localStorage.getItem('userInfo')),
-            calculateButtonText : 'امتیاز من را محاسبه کن'
+            user : JSON.parse(localStorage.getItem('userInfo'))
         }
     }
 
@@ -98,7 +97,7 @@ class QuizComponent extends React.Component {
         });
     }
     
-    async calculateUserPointInQuiz = () => {
+    calculateUserPointInQuiz = () => {
         let tempObject = {};
         let score = 0;
         for (let q of this.state.quizes) {
@@ -122,30 +121,6 @@ class QuizComponent extends React.Component {
         }
         console.info('score:', score);
         this.changeHandler();
-        await saveUserScoreInDatabase();
-        this.state.calculateButtonText = 'امتیاز شما به چخ رفت';
-    }
-    
-    saveUserScoreInDatabase = () => {
-        fetch(`http://localhost:1337/requests`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
-            })
-            .then(response => response.json())
-            .then(request => {
-                this.setState((state, props) => {
-                    return ({title: '', message:''});
-                });
-            });    
     }
 
     changeHandler = () => {
@@ -289,7 +264,7 @@ class QuizComponent extends React.Component {
                         }}
                         variant="contained"
                         >
-                        {this.state.calculateButtonText}
+                        امتیاز من را محاسبه و ثبت کن
                     </Button>
                     </DialogActions>
                 </Dialog>
