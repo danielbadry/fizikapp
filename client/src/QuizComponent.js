@@ -120,9 +120,13 @@ class QuizComponent extends React.Component {
             
         }
         console.info('score:', score);
-        this.catchMeHere.bind(this);
+        this.changeHandler();
     }
-    
+
+    changeHandler = () => {
+        this.props.endFunc();
+    }
+
     checkAndGoBackStep = () => {
         this.setState({
             step: (this.state.step - 1)

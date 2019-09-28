@@ -48,10 +48,13 @@ class Product extends React.Component {
         }
     };
 
-    catchMeHere() {
-        console.info('eival');
+    catchMeHere = () => {
+        console.info('eival', this);
+        this.fetchProduct();
     }
-    componentDidMount(){
+
+    fetchProduct = () => {
+        console.info('umad');
         fetch(`http://localhost:1337/products/${this.state.productId}`, {
             method: 'GET', 
             mode: 'cors',
@@ -81,6 +84,10 @@ class Product extends React.Component {
                         }});
                   });
             });
+    }
+
+    componentDidMount(){
+        this.fetchProduct();  
     }
     
     render() {
