@@ -43,9 +43,8 @@ module.exports = {
       type: 'boolean',
     },
     
-    options :{
-      type: 'json',
-      columnType : 'array'
+    responseId :{
+      type: 'string',
     },
 
   },

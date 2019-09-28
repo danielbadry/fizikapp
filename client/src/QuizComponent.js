@@ -98,7 +98,8 @@ class QuizComponent extends React.Component {
         });
     }
     
-    async calculateUserPointInQuiz = () => {
+     calculateUserPointInQuiz = async () => {
+        console.info('this:', this);
         let tempObject = {};
         let score = 0;
         for (let q of this.state.quizes) {
@@ -122,12 +123,16 @@ class QuizComponent extends React.Component {
         }
         console.info('score:', score);
         this.changeHandler();
-        await saveUserScoreInDatabase();
+        await this.saveUserScoreInDatabase();
         this.state.calculateButtonText = 'امتیاز شما به چخ رفت';
     }
     
     saveUserScoreInDatabase = () => {
-        fetch(`http://localhost:1337/requests`, {
+        console.info('write in database');
+        let data = {
+            answers : JSON.stringify(this.state.userAnswers)
+        }
+        fetch(`http://localhost:1337/quizesanswer`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -141,10 +146,8 @@ class QuizComponent extends React.Component {
             body: JSON.stringify(data), // body data type must match "Content-Type" header
             })
             .then(response => response.json())
-            .then(request => {
-                this.setState((state, props) => {
-                    return ({title: '', message:''});
-                });
+            .then(result => {
+                console.info('after write in database:', result);
             });    
     }
 
