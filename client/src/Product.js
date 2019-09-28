@@ -48,7 +48,9 @@ class Product extends React.Component {
         }
     };
 
-    
+    catchMeHere() {
+        console.info('eival');
+    }
     componentDidMount(){
         fetch(`http://localhost:1337/products/${this.state.productId}`, {
             method: 'GET', 
@@ -135,7 +137,7 @@ class Product extends React.Component {
                                 5 دیسلایک
                             </Typography>
                             <QuizComponent
-                                // config={this.state.userInteractionConfig}
+                                endFunc={this.catchMeHere}
                                 model='products'
                                 modelid={this.props.productid}
                             />

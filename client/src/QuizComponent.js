@@ -120,6 +120,7 @@ class QuizComponent extends React.Component {
             
         }
         console.info('score:', score);
+        this.catchMeHere.bind(this);
     }
     
     checkAndGoBackStep = () => {
