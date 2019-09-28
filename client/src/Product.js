@@ -91,7 +91,7 @@ class Product extends React.Component {
         return (
             <div>
                 <Grid container spacing={3}>
-                <SocialShare />
+                {/* <SocialShare /> */}
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
@@ -134,14 +134,18 @@ class Product extends React.Component {
                             >
                                 5 دیسلایک
                             </Typography>
-                            <QuizComponent />
+                            <QuizComponent
+                                // config={this.state.userInteractionConfig}
+                                model='products'
+                                modelid={this.props.productid}
+                            />
                         </Paper>
                         
                     </Grid>
 
                     <Grid item xs={8}>
                         <Paper>
-                            <Player
+                            {/* <Player
                                 poster="/assets/poster.png"
                                 startTime = {this.state.startTime}
                                 style={{
@@ -161,7 +165,7 @@ class Product extends React.Component {
                                 <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
                                 <VolumeMenuButton />
                             </ControlBar>
-                            </Player>
+                            </Player> */}
                         </Paper>
                     </Grid>
 
@@ -220,13 +224,13 @@ class Product extends React.Component {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                    <ContentUserInteraction
+                    {/* <ContentUserInteraction
                             config={this.state.userInteractionConfig}
-                            />
+                            /> */}
                     </Grid>
                     </Grid>
                     
-                    <StickyFooter />
+                    {/* <StickyFooter /> */}
                 </Grid>
             </div>
 

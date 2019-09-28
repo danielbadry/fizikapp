@@ -19,7 +19,12 @@ module.exports = {
       required : false
     },
     
-    productId :{
+    modelId :{
+      type: 'string',
+      required : false
+    },
+    
+    model :{
       type: 'string',
       required : false
     },

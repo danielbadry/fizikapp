@@ -17,7 +17,11 @@ module.exports = {
       type : 'string'
     },
 
-    productId :{
+    modelId :{
+      type : 'string'
+    },
+    
+    model :{
       type : 'string'
     },
     
@@ -37,7 +41,8 @@ module.exports = {
 
     return await Quizes.create({
       question: inputs.question,
-      productId: inputs.productId,
+      modelId: inputs.productId,
+      model: inputs.model,
       options:[],
       createdAt : await sails.helpers.dateParse()
     }).fetch();

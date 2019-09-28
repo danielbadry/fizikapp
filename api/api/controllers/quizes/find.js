@@ -8,6 +8,14 @@ module.exports = {
 
 
   inputs: {
+    
+    model : {
+      type : 'string'
+    },
+    
+    modelId : {
+      type : 'string'
+    },
 
   },
 
@@ -20,7 +28,9 @@ module.exports = {
   fn: async function (inputs) {
 
     let quizes = await Quizes.find({
-      isDeleted: false
+      isDeleted: false,
+      model : inputs.model,
+      modelId : inputs.modelId
     });
 
     for (let quiz of quizes) {
