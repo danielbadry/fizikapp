@@ -124,7 +124,7 @@ class QuizComponent extends React.Component {
         console.info('score:', score);
         this.changeHandler();
         await this.saveUserScoreInDatabase();
-        this.state.calculateButtonText = 'امتیاز شما به چخ رفت';
+        this.state.calculateButtonText = `امتیاز شما ${score} است و در سایت ثبت شد`;
     }
     
     saveUserScoreInDatabase = () => {
