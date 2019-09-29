@@ -16,10 +16,15 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 700,
     fontFamily: 'IranSans_Light'
   },
   media: {
@@ -40,11 +45,35 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500],
     fontFamily: 'IranSans_Light'
   },
+  
+  firstDivStyle : {
+    width: '20%', 
+    float: 'left'
+  },
+  
+  secondDivStyle : {
+    width: '80%', 
+    float: 'right'
+  },
+
+  Dialog : {
+    width: '700px' 
+  }
 }));
 
 export default function RecipeReviewCard(props) {
+
   console.info('props:', props);
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Card className={classes.card}>
@@ -110,6 +139,7 @@ export default function RecipeReviewCard(props) {
           color="primary" 
           className={classes.button}
           style={{ fontFamily: 'IranSans_Light' }}
+          onClick={handleClickOpen}
           >
           خرید اشتراک 
         </Button>
@@ -122,6 +152,88 @@ export default function RecipeReviewCard(props) {
         
       </CardActions>
       
+      <Dialog
+        // fullWidth={fullWidth}
+        className={classes.Dialog}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="max-width-dialog-title"
+      >
+        <DialogTitle 
+          id="max-width-dialog-title"
+          >
+            <Typography
+              style={{ fontFamily: 'IranSans_Light' }}
+              >
+              خرید طرح
+            </Typography>
+            
+        </DialogTitle>
+        <DialogContent>
+         
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                خرید از طریق f-Coin
+              </Typography>
+              <Typography variant="h5" component="h2">
+                میزان f-Coin شما
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                مبلغ این طرح 30 f-Coin
+              </Typography>
+              <Typography variant="body2" component="p">
+                میزان f-Coin شما بعد از خرید این طرح 452
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button 
+                size="small"
+                variant="contained" 
+                color="primary"
+                style={{ fontFamily: 'IranSans_Light' }}
+                >پرداخت با f-Coin</Button>
+            </CardActions>
+          </Card>
+          
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                خرید از طریق درگاه پرداخت
+              </Typography>
+              <Typography variant="h5" component="h2">
+                مبلغ خرید 2500 تومان
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                نام درگاه پرداخت : سامان
+              </Typography>
+              <Typography variant="body2" component="p">
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button 
+                size="small"
+                variant="contained" 
+                color="primary"
+                style={{ fontFamily: 'IranSans_Light' }}
+                >پرداخت از طریق درگاه بانک سامان</Button>
+            </CardActions>
+          </Card>
+
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={handleClose} 
+            style={{ fontFamily: 'IranSans_Light' }}
+            variant="contained" 
+            color="secondary"
+            >
+            بستن
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </Card>
+
   );
 }

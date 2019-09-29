@@ -193,13 +193,13 @@ class QuizComponent extends React.Component {
                         id="simple-dialog-title"
                         >
                             <Typography
-                                        style={{ 
-                                            fontFamily: 'IranSans_Light',
-                                            fontSize: 12
-                                        }}
-                                        >
-                                        اسم این ویدیو ذکر شود
-                                    </Typography>
+                                style={{ 
+                                    fontFamily: 'IranSans_Light',
+                                    fontSize: 12
+                                }}
+                                >
+                                اسم این ویدیو ذکر شود
+                            </Typography>
                             
                     </DialogTitle>
                     <DialogContent>
@@ -251,7 +251,6 @@ class QuizComponent extends React.Component {
                                 key={index}
                                 ></div>
                                 )
-                            
                             
                         )}
                     </DialogContentText>
