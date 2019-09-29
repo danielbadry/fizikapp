@@ -1,5 +1,5 @@
 import React from 'react';
-import ShoppingplanCard from './ShoppingplanCard';
+import ShoppingPlanCard from './ShoppingplanCard';
 
 class Shoppingplans extends React.Component {
     
@@ -33,13 +33,21 @@ class Shoppingplans extends React.Component {
     }
 
     render() {
+        const divStyle = {
+            display: 'flex'
+          };
         return (
-            <React.Fragment>
-            {this.state.shoppingplans.map(
-                (item, index) =>
-                    <ShoppingplanCard />
-            )}
-            </React.Fragment>  
+            <div
+                style={divStyle}
+                >
+                {this.state.shoppingplans.map(
+                    (item, index) =>
+                        <ShoppingPlanCard
+                            key={index}
+                            {...item}
+                            />
+                )}
+            </div>
         );
     }
 
