@@ -2,7 +2,6 @@ import React from 'react';
 import MainHeader from "./MainHeader";
 import SocialShare from "./SocialShare";
 import RelatedProducts from "./RelatedProducts";
-import ProductAppBar from "./ProductAppBar";
 import Typography from '@material-ui/core/Typography';
 import {
     Player,
@@ -190,7 +189,7 @@ class Product extends React.Component {
                         </Grid>
                         <Grid item xs={7}>
                         <Paper>
-                            <ProductAppBar />
+                            {/* <ProductAppBar /> */}
                         </Paper>
                         </Grid>
                     <Grid item xs={7}>

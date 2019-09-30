@@ -17,9 +17,9 @@ import MainHeader from "./MainHeader";
 import SocialShare from "./SocialShare";
 import Grid from '@material-ui/core/Grid';
 import StickyFooter from "./StickyFooter";
-import ProductAppBar from "./ProductAppBar";
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import ArticlesToolBox from "./ArticlesToolBox";
 
 class Sciencechallenge extends React.Component{
 
@@ -27,7 +27,8 @@ class Sciencechallenge extends React.Component{
         super(props);
         this.state = {
             summary:{},
-            userAnswer : null,
+            userAnswerMessage : null,
+            isUserAnswered : false,
             tags: [],
             id: '',
             isRender : false,
@@ -52,7 +53,7 @@ class Sciencechallenge extends React.Component{
     sendRequest = () => {
         let user = JSON.parse(localStorage.getItem('userInfo'));
         let data = {
-            userAnswer: this.state.userAnswer,
+            userAnswerMessage: this.state.userAnswerMessage,
             userId: user.id,
             sciencechallengeId: this.props.sciencechallengeid,
         }
@@ -73,20 +74,21 @@ class Sciencechallenge extends React.Component{
             .then(response => response.json())
             .then(result => {
                 console.info('result:', result);
-                // this.setState((state, props) => {
-                //     return ({title: '', message:''});
-                // });
+                this.setState((state, props) => {
+                    return ({isUserAnswered: result});
+                });
             });
     }
 
     handleChange = () => event => {
         console.info('hello');
         // event.persist();
-        this.setState({userAnswer: event.target.value})
+        this.setState({userAnswerMessage: event.target.value})
     };
 
     componentDidMount(){
-        fetch(`http://localhost:1337/sciencechallenge/${this.props.sciencechallengeid}`, {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        fetch(`http://localhost:1337/sciencechallenge/${this.props.sciencechallengeid}?userId=${user.id}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -103,7 +105,7 @@ class Sciencechallenge extends React.Component{
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(result.summary)),
-                        // tags: JSON.parse(JSON.stringify(result.tags)),
+                        isUserAnswered: (typeof(result.isUserAnswered) === 'object') ? result.isUserAnswered : false,
                         thumbnail: result.thumbnail,
                         id: result.id,
                         startTime : 30,
@@ -118,7 +120,64 @@ class Sciencechallenge extends React.Component{
             });
     }
 
+    AnswerBox (props) {
+        if (typeof(this.state.isUserAnswered) === 'boolean') {
+            return (
+                <React.Fragment>
+                    
+                    <TextField
+                        id="standard-name"
+                        label="پاسخ"
+                        onChange={this.handleChange()}
+                        margin="normal"
+                        InputLabelProps={{
+                            style: {
+                                fontFamily: "IranSans"
+                            }
+                        }}
+                        InputProps={{
+                            style: {
+                                fontFamily: "IranSans"
+                            }
+                        }}
+                    />
+
+                    <Button 
+                        variant="contained" 
+                        color="primary"
+                        onClick={this.sendRequest}
+                        style={{
+                            fontFamily: "IranSans"
+                        }}
+                        >
+                        ارسال پاسخ به چالش علمی
+                    </Button>
+
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                   <div>
+                        شما قبلا پاسخ داده اید
+                    </div>
+                    <div>
+                        {this.state.isUserAnswered.userAnswerMessage}
+                    </div>
+                </React.Fragment>
+            );
+        }
+        
+    }
+      
+    AnsweredBox(props) {
+        return (
+          <React.Fragment>answeredBox</React.Fragment>
+        );
+    }
+
     render () {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
         if (!this.state.isRender) {
             return(
                 <div>loading...</div>
@@ -203,6 +262,16 @@ class Sciencechallenge extends React.Component{
                         </Paper>
                     </Grid>
 
+                    <Grid item xs={8}>
+                    <Paper>
+                        <ArticlesToolBox
+                            model='sciencechallenge'
+                            modelid={this.props.definitionid}
+                            userid={user.id}
+                            />
+                        </Paper>
+                    </Grid>
+
                     <Grid container>
                         <Grid item xs={4}>
                             <Paper
@@ -213,11 +282,7 @@ class Sciencechallenge extends React.Component{
                                 
                             </Paper>
                         </Grid>
-                        <Grid item xs={7}>
-                        <Paper>
-                            <ProductAppBar />
-                        </Paper>
-                        </Grid>
+                        
                     <Grid item xs={7}>
                         <Paper
                             style = {{
@@ -260,38 +325,8 @@ class Sciencechallenge extends React.Component{
                     </Grid>
                     
                     <Grid item xs={12}>
-                        <Paper
-                            // style={{
-                            //     margin: '6%'
-                            // }}
-                            >
-                            <TextField
-                                id="standard-name"
-                                label="پاسخ"
-                                // value={this.state.title}
-                                onChange={this.handleChange()}
-                                margin="normal"
-                                InputLabelProps={{
-                                    style: {
-                                        fontFamily: "IranSans"
-                                    }
-                                }}
-                                InputProps={{
-                                    style: {
-                                        fontFamily: "IranSans"
-                                    }
-                                }}
-                            />
-                            <Button 
-                                variant="contained" 
-                                color="primary"
-                                onClick={this.sendRequest}
-                                style={{
-                                    fontFamily: "IranSans"
-                                }}
-                                >
-                                ارسال پاسخ به چالش علمی
-                            </Button>
+                        <Paper>
+                            {this.AnswerBox()}
                         </Paper>
                     </Grid>
                     

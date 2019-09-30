@@ -11,6 +11,10 @@ module.exports = {
 
     id :{
       type: 'string'
+    }, 
+
+    userId :{
+      type: 'string'
     }
 
   },
@@ -25,6 +29,16 @@ module.exports = {
       id: inputs.id
     });
     
+    let isUserAnswered = await Sciencechallengeresponse.findOne({
+      sciencechallengeId : inputs.id,
+      userId: inputs.userId
+    });
+
+    if (typeof isUserAnswered === 'object' && isUserAnswered.constructor === Object) {
+      isUserAnswered = isUserAnswered;
+    } else {
+      isUserAnswered = false;
+    }
     // find video status for this user
     let userVideoStatus = await Watchedvideos.findOne({
       // userId : '5d73564134abe01014969d96',
@@ -44,7 +58,8 @@ module.exports = {
     return ({
       id: inputs.id,
       summary,
-      thumbnail: summary.thumbnail
+      thumbnail: summary.thumbnail,
+      isUserAnswered: isUserAnswered
     });
 
   }

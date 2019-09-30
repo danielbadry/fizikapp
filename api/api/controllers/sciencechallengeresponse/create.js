@@ -19,7 +19,7 @@ module.exports = {
       required : false
     },
 
-    userAnswer :{
+    userAnswerMessage :{
       type: 'string',
       required : false
     },
@@ -37,7 +37,7 @@ module.exports = {
     return await Sciencechallengeresponse.create({
       sciencechallengeId: inputs.sciencechallengeId,
       userId: inputs.userId,
-      userAnswer: inputs.userAnswer,
+      userAnswerMessage: inputs.userAnswerMessage,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
       

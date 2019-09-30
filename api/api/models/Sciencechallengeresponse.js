@@ -38,7 +38,7 @@ module.exports = {
       required : false
     },
     
-    userAnswer :{
+    userAnswerMessage :{
       type: 'string',
       required : false
     },
