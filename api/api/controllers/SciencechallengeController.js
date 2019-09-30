@@ -20,21 +20,18 @@ module.exports = {
             publishDate:req.param('publishDate'),
             createdAt : await sails.helpers.dateParse(),
             updatedAt : await sails.helpers.dateParse(),
-            likes : 0,
-            disLikes : 0,
-            views : 0
           })
           .fetch();
           
           await req.file('thumbnail').upload({
             dirname: require('path').resolve(sails.config.appPath, 'assets/files/sciencechallengeImage'),
-            saveAs : product.id + '.jpg'
+            saveAs : sciencechallenge.id + '.jpg'
           }, async function (err, uploadedFiles) {
-            await Products.updateOne({
-              id: product.id
+            await Sciencechallenge.updateOne({
+              id: sciencechallenge.id
             })
             .set({
-              thumbnail: product.id + '.jpg'
+              thumbnail: sciencechallenge.id + '.jpg'
             });
             if (err) return res.serverError(err);
           });
@@ -42,18 +39,18 @@ module.exports = {
           await req.file('file').upload({
             maxBytes: 1000000000,
             dirname: require('path').resolve(sails.config.appPath, 'assets/files/sciencechallengeFiles'),
-            saveAs : product.id + '.mp4'
+            saveAs : sciencechallenge.id + '.mp4'
           },async function (err, uploadedFiles) {
-            await Products.updateOne({
-              id: product.id 
+            await Sciencechallenge.updateOne({
+              id: sciencechallenge.id 
             })
             .set({
-              mainFileSrc: product.id + '.mp4'
+              mainFileSrc: sciencechallenge.id + '.mp4'
             });
             if (err) return res.serverError(err);
           });
     
-          let allp = await Products
+          let allp = await Sciencechallenge
           .find()
           .sort('createdAt DESC')
           .limit(1);

@@ -18,6 +18,8 @@ import SocialShare from "./SocialShare";
 import Grid from '@material-ui/core/Grid';
 import StickyFooter from "./StickyFooter";
 import ProductAppBar from "./ProductAppBar";
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 class Sciencechallenge extends React.Component{
 
@@ -25,8 +27,7 @@ class Sciencechallenge extends React.Component{
         super(props);
         this.state = {
             summary:{},
-            scienceschallengeQuestions: [],
-            scienceschallengeComments: [],
+            userAnswer : null,
             tags: [],
             id: '',
             isRender : false,
@@ -48,6 +49,42 @@ class Sciencechallenge extends React.Component{
         }
     }
 
+    sendRequest = () => {
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        let data = {
+            userAnswer: this.state.userAnswer,
+            userId: user.id,
+            sciencechallengeId: this.props.sciencechallengeid,
+        }
+        console.info('aa:', this.state);
+        fetch(`http://localhost:1337/sciencechallengeresponse`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.info('result:', result);
+                // this.setState((state, props) => {
+                //     return ({title: '', message:''});
+                // });
+            });
+    }
+
+    handleChange = () => event => {
+        console.info('hello');
+        // event.persist();
+        this.setState({userAnswer: event.target.value})
+    };
+
     componentDidMount(){
         fetch(`http://localhost:1337/sciencechallenge/${this.props.sciencechallengeid}`, {
             method: 'GET', 
@@ -61,15 +98,14 @@ class Sciencechallenge extends React.Component{
             referrer: 'no-referrer',
             })
             .then(response => response.json())
-            .then(product => {
+            .then(result => {
+                console.info('result:', result);
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(product.summary)),
-                        scienceschallengeQuestions: JSON.parse(JSON.stringify(product.scienceschallengeQuestions)),
-                        scienceschallengeComments: JSON.parse(JSON.stringify(product.scienceschallengeComments)),
-                        tags: JSON.parse(JSON.stringify(product.tags)),
-                        thumbnail: product.thumbnail,
-                        id: product.id,
+                        summary: JSON.parse(JSON.stringify(result.summary)),
+                        // tags: JSON.parse(JSON.stringify(result.tags)),
+                        thumbnail: result.thumbnail,
+                        id: result.id,
                         startTime : 30,
                         isRender: true
                     };
@@ -212,7 +248,8 @@ class Sciencechallenge extends React.Component{
                             </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={7}>
+                    
+                    <Grid item xs={12}>
                         <Paper
                             style={{
                                 margin: '6%'
@@ -221,6 +258,43 @@ class Sciencechallenge extends React.Component{
                             
                         </Paper>
                     </Grid>
+                    
+                    <Grid item xs={12}>
+                        <Paper
+                            // style={{
+                            //     margin: '6%'
+                            // }}
+                            >
+                            <TextField
+                                id="standard-name"
+                                label="پاسخ"
+                                // value={this.state.title}
+                                onChange={this.handleChange()}
+                                margin="normal"
+                                InputLabelProps={{
+                                    style: {
+                                        fontFamily: "IranSans"
+                                    }
+                                }}
+                                InputProps={{
+                                    style: {
+                                        fontFamily: "IranSans"
+                                    }
+                                }}
+                            />
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={this.sendRequest}
+                                style={{
+                                    fontFamily: "IranSans"
+                                }}
+                                >
+                                ارسال پاسخ به چالش علمی
+                            </Button>
+                        </Paper>
+                    </Grid>
+                    
                     <Grid item xs={12}>
                     <ContentUserInteraction
                             config={this.state.userInteractionConfig}
