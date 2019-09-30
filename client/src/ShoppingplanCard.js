@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -63,6 +64,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function RecipeReviewCard(props) {
 
+  useEffect(() => {
+    console.info('component happened here');
+  }, []);
+
+  const [redirectToResultPage, setRedirectToResultPage] = React.useState(false);
+
   console.info('props:', props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -75,7 +82,43 @@ export default function RecipeReviewCard(props) {
     setOpen(false);
   };
 
+  const payWithFcoin = ()=> {
+    console.info('payWithFcoin:', props);
+    let user = JSON.parse(localStorage.getItem('userInfo'));
+    let finalUserFcoin = user.fCoin - props.secondPrise;
+    console.info('final user fcoin:', finalUserFcoin);
+    let data = {
+      user : user,
+      fcoinPrice : props.secondPrise
+    }
+    fetch(`http://localhost:1337/shoppingplans/purchase`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(paymentResult => {
+        setRedirectToResultPage(true);
+      });
+  }
+
+  if (redirectToResultPage) {
+    return(
+      // <Redirect to={pathTo(params)} push={push} />
+      <Redirect to={`shop-result?res=ok`} />
+    )
+    
+} else
   return (
+    
     <Card className={classes.card}>
       <CardHeader
         avatar={
@@ -176,8 +219,14 @@ export default function RecipeReviewCard(props) {
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 خرید از طریق f-Coin
               </Typography>
-              <Typography variant="h5" component="h2">
-                میزان f-Coin شما
+              <Typography 
+                variant="h5" 
+                component="h2"
+                style={{
+                  direction : 'rtl'
+                }}
+                >
+                میزان f-Coin شما : 30
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 مبلغ این طرح 30 f-Coin
@@ -192,6 +241,8 @@ export default function RecipeReviewCard(props) {
                 variant="contained" 
                 color="primary"
                 style={{ fontFamily: 'IranSans_Light' }}
+                disabled = {false}
+                onClick = {payWithFcoin}
                 >پرداخت با f-Coin</Button>
             </CardActions>
           </Card>

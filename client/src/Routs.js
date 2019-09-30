@@ -5,6 +5,7 @@ import About from './About';
 import Home from './Home';
 import NewRequest from './NewRequest';
 import SignUp from './SignUp';
+import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
 import Sciencechallenges from './Sciencechallenges';
@@ -36,6 +37,13 @@ function HandleDefinition({ match }) {
     return (
         <Definition 
             definitionid={match.params.definitionid}
+            />
+    );
+}
+
+function HandleShopResult({ match }) {
+    return (
+        <ShopResult
             />
     );
 }
@@ -79,6 +87,7 @@ class Routs extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
+                <Route path="/shop-result" component={HandleShopResult} />
                 <Route path="/definitions" component={Definitions} />
                 <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/definition/:definitionid" component={HandleDefinition} />
