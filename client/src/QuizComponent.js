@@ -29,6 +29,7 @@ class QuizComponent extends React.Component {
         this.state = {
             isQuizDialogOpen: false,
             quizes : [],
+            mode : 'quiz',
             quizesResponse : [],
             isAttended : false,
             userAnswers: [],
@@ -121,18 +122,27 @@ class QuizComponent extends React.Component {
         this.setState({isQuizDialogOpen: !(this.state.isQuizDialogOpen)});
     }
     
+    handleDialogStatusForResponse = () => {
+        this.setState({isQuizDialogOpen: !(this.state.isQuizDialogOpen)});
+        this.setState({mode: 'showAnswers'});
+    }
+    
     handleChange = () => {
         console.info('hello');
     }
     
     itemHandleChange = (optionId, quizId) => {
-        console.info('quiz id:', quizId);
-        console.info('option id:', optionId);
-        // fill the state.answers array here
-        console.info('step:', this.state.quizes[this.state.step]);
-        this.state.userAnswers[this.state.step].responseId = optionId;
-       
-        console.info('final result:', this.state.userAnswers);
+        // if(false) {
+        //     return;
+        // } else {
+            console.info('quiz id:', quizId);
+            console.info('option id:', optionId);
+            // fill the state.answers array here
+            console.info('step:', this.state.quizes[this.state.step]);
+            this.state.userAnswers[this.state.step].responseId = optionId;
+            console.info('final result:', this.state.userAnswers);
+        // }
+        
     } 
 
     checkAndGoNextStep = () => {
@@ -198,6 +208,77 @@ class QuizComponent extends React.Component {
         this.props.endFunc();
     }
 
+    OptionsPad (quiz) { 
+        if (this.state.mode === 'quiz') {
+            return (
+            <div>
+                <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    // className={classes.group}
+                    // value={'03444'}
+                    onChange={this.handleChange}
+                    >
+                        {quiz.options.map(
+                            (option, ind) =>
+                        <FormControlLabel
+                            key={ind}
+                            disabled = {false}
+                            value={option.id}
+                            control={<Radio
+                            onChange={event => this.itemHandleChange(option.id, quiz.id)}
+                            style={{
+                                color : 'green'
+                            }}
+                            />}
+                        label={
+                        <Typography 
+                            style={{ 
+                                fontFamily: 'IranSans_Light',
+                                fontSize: 12
+                            }}
+                            >
+                            {option.title}
+                            </Typography>
+                            }
+                        />
+                    )}
+                </RadioGroup>
+            </div>
+            )
+        } else if (this.state.mode === 'showAnswers') {
+            return (
+                <div>
+                    {quiz.options.map(
+                        (option, ind) =>
+                            <FormControlLabel
+                                // key={ind}
+                                disabled = {false}
+                                checked = {false}
+                                // value={option.id}
+                                control={<Radio
+                                onChange={()=>{return false;}}
+                                style={{
+                                    color : 'green'
+                                }}
+                                />}
+                            label={
+                            <Typography 
+                                style={{ 
+                                    fontFamily: 'IranSans_Light',
+                                    fontSize: 12
+                                }}
+                                >
+                                {'gozine'}
+                                </Typography>
+                                }
+                            />
+                    )}
+                </div>
+            )
+        }
+    }
+
     checkAndGoBackStep = () => {
         this.setState({
             step: (this.state.step - 1)
@@ -240,6 +321,17 @@ class QuizComponent extends React.Component {
                     >
                     شروع کوییز
                 </Button>
+                
+                <Button 
+                    variant="contained" 
+                    color="secondary"
+                    onClick={this.handleDialogStatusForResponse}
+                    style={{
+                        fontFamily: "IranSans"
+                    }}
+                    >
+                    نمایش جواب هاو مقایسه با جواب های من
+                </Button>
 
                 <Dialog 
                     onClose={this.handleDialogStatus} 
@@ -276,36 +368,7 @@ class QuizComponent extends React.Component {
                                         >
                                         {quiz.question}
                                     </Typography>
-                                    <div>
-                                        <RadioGroup
-                                            aria-label="gender"
-                                            name="gender1"
-                                            // className={classes.group}
-                                            // value={value}
-                                            onChange={this.handleChange}
-                                            >
-                                                {quiz.options.map(
-                                                    (option, ind) =>
-                                                <FormControlLabel
-                                                    key={ind}
-                                                    value={option.id}
-                                                    control={<Radio
-                                                    onChange={event => this.itemHandleChange(option.id, quiz.id)}
-                                                    />}
-                                                label={
-                                                <Typography 
-                                                    style={{ 
-                                                        fontFamily: 'IranSans_Light',
-                                                        fontSize: 12
-                                                    }}
-                                                    >
-                                                    {option.title}
-                                                    </Typography>
-                                                    }
-                                                />
-                                            )}
-                                        </RadioGroup>
-                                    </div>
+                                    {this.OptionsPad(quiz)}
                                 </div>:
                                 <div
                                 key={index}
