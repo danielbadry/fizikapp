@@ -45,7 +45,7 @@ module.exports = {
         product.thumbnail = "http://localhost:1337/files/productImage/" + product.thumbnail;
         let quizs = await Quizes.find({
           where : {
-            productId: product.id
+            modelId: product.id
           }
         });
         product.hasQuiz = false;

@@ -29,14 +29,57 @@ class QuizComponent extends React.Component {
         this.state = {
             isQuizDialogOpen: false,
             quizes : [],
+            quizesResponse : [],
+            isAttended : false,
             userAnswers: [],
             step: 0,
             user : JSON.parse(localStorage.getItem('userInfo')),
             calculateButtonText : 'امتیاز من را محاسبه کن'
         }
     }
+    
+    getUserQuizResponse () {
+        fetch(`http://localhost:1337/quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.state.user.id}`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(response => {
+                console.info('ress:', response);
+                this.setState({
+                   quizesResponse: response.userQuizResponse,
+                   isAttended : response.isAttended
+                }, function() {
 
+                    console.info('state:', this.state);
+                    // console.info('props:', this.props);
+                    // // fill out answers array
+                    // for (let qa of quizes) {
+                        
+                    //     let tempObject = {
+                    //         userId : this.state.user.id,
+                    //         quizId: qa.id,
+                    //         responseId: null
+                    //     }
+
+                    //     this.state.userAnswers.push(tempObject);
+                    // }
+
+                    // console.info('answers:', this.state.userAnswers);
+                });
+                
+            });
+    }
+    
     componentDidMount() {
+        this.getUserQuizResponse();
         fetch(`http://localhost:1337/quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
@@ -98,7 +141,7 @@ class QuizComponent extends React.Component {
         });
     }
     
-     calculateUserPointInQuiz = async () => {
+    calculateUserPointInQuiz = async () => {
         console.info('this:', this);
         let tempObject = {};
         let score = 0;
@@ -161,6 +204,22 @@ class QuizComponent extends React.Component {
         });
     }
 
+    WarningForAttend () {
+        if (this.state.isAttended){
+            return (
+            <div
+                style={{
+                    color : 'orange'
+                }}
+            >شما قبلا در این کوییز شرکت کرده اید، اما می توانید دوباره شرکت کنید ولی امتیاز قبلی شما همچنان پابرجاست</div>
+        );
+        } else {
+            return (
+                <div>شرکت کن</div>
+            )
+        }
+    }
+
     render() {
         const classes = {
             radio : {
@@ -169,7 +228,8 @@ class QuizComponent extends React.Component {
         }
         return(
             <React.Fragment>
-
+                
+                <div>res:{this.WarningForAttend()}</div>
                 <Button 
                     variant="contained" 
                     color="primary"
