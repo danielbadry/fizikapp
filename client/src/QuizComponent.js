@@ -208,6 +208,21 @@ class QuizComponent extends React.Component {
         this.props.endFunc();
     }
 
+    checkForAnswer = (id) => {
+        // console.info('iddd:', id);
+        // console.info(this.state.quizes[this.state.step].options);
+        for (let oo of this.state.quizes[this.state.step].options) {
+            if(oo.id == id && oo.isAnswer)
+                return true;
+        }
+        console.info('quizesResponse:', this.state);
+        
+        for (let oo of this.state.quizesResponse) {
+            if(oo.responseId == id)
+                return true;
+        }
+    }
+
     OptionsPad (quiz) { 
         if (this.state.mode === 'quiz') {
             return (
@@ -252,12 +267,9 @@ class QuizComponent extends React.Component {
                     {quiz.options.map(
                         (option, ind) =>
                             <FormControlLabel
-                                // key={ind}
                                 disabled = {false}
-                                checked = {false}
-                                // value={option.id}
+                                checked = {this.checkForAnswer(option.id)}
                                 control={<Radio
-                                onChange={()=>{return false;}}
                                 style={{
                                     color : 'green'
                                 }}
@@ -269,7 +281,7 @@ class QuizComponent extends React.Component {
                                     fontSize: 12
                                 }}
                                 >
-                                {'gozine'}
+                                {option.title} - {option.id}
                                 </Typography>
                                 }
                             />

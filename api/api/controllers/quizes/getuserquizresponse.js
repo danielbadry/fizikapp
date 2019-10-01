@@ -44,7 +44,7 @@ module.exports = {
     let userQuizResponse = await Quizesanswer.find({
       where : {
         userId:inputs.userId,
-        quizId: { in: ['5d92e40633263b17bc5e1c84', '5d92e43d33263b17bc5e1c85', '5d92e47033263b17bc5e1c86'] }
+        quizId: { in: ['5d930323b48e1a237842b9a6', '5d930328b48e1a237842b9a7', '5d93032cb48e1a237842b9a8'] }
       }
     });
     
