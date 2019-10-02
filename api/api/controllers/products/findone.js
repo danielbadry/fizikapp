@@ -9,7 +9,15 @@ module.exports = {
 
   inputs: {
 
-    id :{
+    userId :{
+      type: 'string'
+    },
+
+    model :{
+      type: 'string'
+    },
+    
+    modelId :{
       type: 'string'
     }
 
@@ -27,9 +35,9 @@ module.exports = {
     
     // find video status for this user
     let userVideoStatus = await Watchedvideos.findOne({
-      // userId : '5d73564134abe01014969d96',
-      productId: inputs.id,
-      // id: inputs.id
+      userId : inputs.userId,
+      modelId: inputs.modelId,
+      model: inputs.model
     });
     
     if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
