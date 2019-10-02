@@ -50,7 +50,7 @@ module.exports = {
       }
     });
     
-    if(inputs.searchText == '')
+    if( (!inputs.searchText) || (inputs.searchText == '') )
     {
       let allRequests = await Requests.find({
         parentId: '',
@@ -62,7 +62,6 @@ module.exports = {
       ;
     }
     else {
-      // return '2';
       allRequests = await Requests.find({
         or : [
             {
@@ -82,7 +81,7 @@ module.exports = {
     // filter allRequest based on tags
     let tagIds = []; // list of comming tags id from the URL
     let inTags = [];
-    // return (JSON.parse(inputs.tags).length);
+    
     if(JSON.parse(inputs.tags).length === 0) {
       inTags = await Tags.find();
     } else {

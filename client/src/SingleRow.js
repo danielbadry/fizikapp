@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 class SingleRow extends React.Component{
     
     constructor(props) {
+        console.info('pfop:', props);
         super (props);
         this.state = {
             rows:[]
@@ -15,7 +16,7 @@ class SingleRow extends React.Component{
     }
     
     componentDidMount() {
-        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}`, {
+        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}&userid=${this.props.userid}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -62,10 +63,14 @@ class SingleRow extends React.Component{
                     {this.props.label}
                 </div>
 
-                <Grid container xs={12}>
+                <Grid container xs={12} item>
                     {this.state.rows.map(
                         (item, index) => 
-                        <Grid item xs={4}>
+                        <Grid 
+                            item 
+                            xs={4}
+                            key={index}
+                            >
                             <PostCard
                                 item = {item}
                                 />
