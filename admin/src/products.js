@@ -97,7 +97,9 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="quiz" path="quiz">
-                <QuizManager />
+                <QuizManager
+                    model="products"
+                 />
             </Tab>
 
         </TabbedShowLayout>

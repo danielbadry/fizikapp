@@ -41,7 +41,7 @@ module.exports = {
 
     return await Quizes.create({
       question: inputs.question,
-      modelId: inputs.productId,
+      modelId: inputs.modelId,
       model: inputs.model,
       options:[],
       createdAt : await sails.helpers.dateParse()

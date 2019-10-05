@@ -12,6 +12,10 @@ module.exports = {
     userId :{
       type: 'string'
     },
+    
+    id :{
+      type: 'string'
+    },
 
     model :{
       type: 'string'
@@ -33,16 +37,17 @@ module.exports = {
       id: inputs.id
     });
     
-    // find video status for this user
-    let userVideoStatus = await Watchedvideos.findOne({
-      userId : inputs.userId,
-      modelId: inputs.modelId,
-      model: inputs.model
-    });
-    
-    if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
-      summary.startTime = userVideoStatus.startTime;
-
+    if (inputs.userId) {
+      // find video status for this user
+      let userVideoStatus = await Watchedvideos.findOne({
+        userId : inputs.userId,
+        modelId: inputs.modelId,
+        model: inputs.model
+      });
+      
+      if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
+        summary.startTime = userVideoStatus.startTime;
+    }
     summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.mainFileSrc;
     moment.locale('en');
     summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

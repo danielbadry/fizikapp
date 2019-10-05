@@ -50,15 +50,17 @@ module.exports = {
     for (let product of allProducts) {
       
       // find video status for this user
-      let userVideoStatus = await Watchedvideos.findOne({
-        userId : inputs.userId,
-        modelId: inputs.modelId,
-        model: inputs.model
-      });
+      if (inputs.userId) {
+        let userVideoStatus = await Watchedvideos.findOne({
+          userId : inputs.userId,
+          modelId: product.id,
+          model: 'products'
+        });
+      
       
       if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
         summary.startTime = userVideoStatus.startTime;
-
+      }
         product.thumbnail = "http://localhost:1337/files/productImage/" + product.thumbnail;
         let quizs = await Quizes.find({
           where : {

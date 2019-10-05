@@ -81,7 +81,8 @@ class QuizManager extends React.Component {
     insertQuizItem = () => {
         const dataRecord = {
             question: this.state.text,
-            productId: this.props.record.id
+            modelId: this.props.record.id,
+            model: this.props.model
         }
         fetch('http://localhost:1337/quizes', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
         .then((response) => {
