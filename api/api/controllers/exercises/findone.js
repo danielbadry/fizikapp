@@ -57,8 +57,6 @@ module.exports = {
     return ({
       id: inputs.id,
       summary,
-      exercisesQuestions,
-      exercisesComments,
       tags: [],
       thumbnail: summary.thumbnail
     });

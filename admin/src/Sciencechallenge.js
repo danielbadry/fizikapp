@@ -16,6 +16,7 @@ import Thumbnail from './ThumbnailImage';
 import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
+import SciencechallengeUserAnswers from './SciencechallengeUserAnswers';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
@@ -92,6 +93,9 @@ export const SciencechallengeShow = (props) => (
                 <ProductsComments />
             </Tab>
 
+            <Tab label="answers" path="answers">
+                <SciencechallengeUserAnswers />
+            </Tab>
         </TabbedShowLayout>
     </Show>
 );
