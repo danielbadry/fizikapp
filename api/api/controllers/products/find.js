@@ -40,6 +40,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    // return 'ali';
     let finalData = {};
     let tagsArray = [];
     let dataLength = await Products.find();

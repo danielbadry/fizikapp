@@ -97,7 +97,7 @@ dataLength = au.length;
       user.numberOfInvitation = 3;
       user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
       user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
-      user.thumbnail = 'http://localhost:1337/files/usersImage/' + user.id + '.jpg';
+      user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + user.id + '.jpg';
 
       let lastShop = await Shops.find({
         where: {

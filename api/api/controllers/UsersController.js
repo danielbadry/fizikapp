@@ -1,3 +1,4 @@
+var bcrypt = require('bcryptjs');
 /**
  * UsersController
  *
@@ -8,12 +9,15 @@
 module.exports = {
   
     create: async function(req,res) {
+    // let pass = req.param('password');
+    var hash = bcrypt.hashSync('myPlaintextPassword', 10);
         let user = await Users
             .create({
                 firstName:req.param('firstName'),
                 lastName:req.param('lastName'),
                 email:req.param('email'),
-                userName:req.param('userName'),
+                userName:req.param('username'),
+                password:hash,
                 mobile:req.param('mobile'),
                 phone:req.param('phone'),
                 fCoin:req.param('fCoin'),

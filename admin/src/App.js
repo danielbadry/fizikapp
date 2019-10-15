@@ -1,6 +1,6 @@
 import React from 'react';
 import catReducer from './reducer';
-import { Admin, Resource } from 'react-admin';
+import { fetchUtils, Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
 import { ExercisesList, ExercisesCreate, ExercisesEdit, ExercisesShow } from './Exercises';
 import { UsersList, UserCreate, UserCreatee, userShow } from './users';
@@ -31,11 +31,19 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import MyLayout from './MyLayout';
 
 am4core.useTheme(am4themes_animated);
+const httpClient = (url, options = {}) => {
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: 'application/json' });
+    }
+    const token = localStorage.getItem('token');
+    options.headers.set('Authorization', `Bearer ${token}`);
+    return fetchUtils.fetchJson(url, options);
+}
 const App = () => (
     <Admin 
         customReducers={{ catReducer }} 
         dashboard={Dashboard} 
-        dataProvider={dataProvider('http://localhost:1337')} 
+        dataProvider={dataProvider('http://localhost:1337', httpClient)} //http://188.212.22.83/api
         authProvider={authProvider}
         appLayout={MyLayout}
         >

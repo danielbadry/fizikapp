@@ -1,3 +1,5 @@
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 module.exports = {
 
 
@@ -8,13 +10,15 @@ module.exports = {
 
 
   inputs: {
-    email: {
+
+    username: {
       type: 'string'
     },
 
     password: {
       type: 'string'
     },
+
   },
 
 
@@ -25,20 +29,34 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    au = await Users.find(
-      {
-        and : [
-          {
-            email:inputs.email
-          },
-          {
-            password:inputs.password
-          }
-        ]
+    let user = await Users.findOne({
+      where : {
+        userName : inputs.username
       }
-    );
-    return au[0];
-
+    });
+    // return user;
+    // var passwordIsValid = await bcrypt.compareSync('12', user.password);
+    // return (passwordIsValid);
+    if(bcrypt.compareSync(inputs.password, user.password)) {
+      return (true);
+     } else {
+      return (false);
+     }
+    // if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+    // return (Object(user));
+    user = Object(user);
+    if (Object.entries(user).length !== 0) {
+      // return({'user.id': user.id});
+      var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
+        expiresIn: 86400 // expires in 24 hours
+      });
+      return({ auth: true, token: token });
+    } else {
+      // return('khalie');
+      return({ auth: false, token: null });
+    }
+    
+    // return({ auth: false, token: null });
   }
 
 

@@ -20,4 +20,7 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
 
+  baseUrl : 'http://188.212.22.83',
+  apiUrl : 'http://188.212.22.83/api',
+  secret : 'c23aSfs',
 };
