@@ -9,8 +9,11 @@ var bcrypt = require('bcryptjs');
 module.exports = {
   
     create: async function(req,res) {
-    // let pass = req.param('password');
-    var hash = bcrypt.hashSync('myPlaintextPassword', 10);
+        var salt = bcrypt.genSaltSync(10);
+// Hash the password with the salt
+var hash = bcrypt.hashSync(req.param('password'), salt);
+       
+
         let user = await Users
             .create({
                 firstName:req.param('firstName'),

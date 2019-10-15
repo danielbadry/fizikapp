@@ -36,7 +36,7 @@ module.exports = {
     });
     // return user;
     // var passwordIsValid = await bcrypt.compareSync('12', user.password);
-    // return (passwordIsValid);
+    // return (user.password);
     if(bcrypt.compareSync(inputs.password, user.password)) {
       return (true);
      } else {
