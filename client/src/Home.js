@@ -21,17 +21,17 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        let token = JSON.parse(localStorage.getItem('token'));
-        this.setState({token: token}, () => {
-            this.setState(function(state, props) {
-                return {
-                    isRender: true
-                }});
-        });
+        // let token = JSON.parse(localStorage.getItem('token'));
+        // this.setState({token: token}, () => {
+        //     this.setState(function(state, props) {
+        //         return {
+        //             isRender: true
+        //         }});
+        // });
     }
 
     render() {
-        if (!this.state.isRender) {
+        if (false) {
             return(
                 <div>loading...</div>
             )

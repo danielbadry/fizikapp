@@ -33,9 +33,6 @@ class SignUp extends React.Component {
         this.setState({login:{...this.state.login, [pr]: event.target.value}})
     };
 
-    /*
-        TODO: i must use oAuth technik in login because we use REST endpoint
-    */
     authenticate = (event) => {
         event.preventDefault();
         let data = {
@@ -56,19 +53,15 @@ class SignUp extends React.Component {
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         .then(response => response.json())
-        .then(myJson => {
-            console.info('myJson:', myJson);
-            // localStorage.setItem("token", JSON.stringify(myJson));
-            /*
-                TODO: we must use redirect component from React-Router-Dom <Redirect>
-            */
-        //    window.location.href = "http://localhost:3000/profile";
-        })
-        ;
+        .then(result => {
+            if(result.auth){
+                localStorage.setItem("token", result.token);
+                this.setState({redirectToHome: true});
+            }
+        });
     }
 
     signUp = () => {
-        console.info(this.state);
         let data = {
             firstName : this.state.signup.firstName,
             lastName : this.state.signup.lastName,
@@ -89,25 +82,21 @@ class SignUp extends React.Component {
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         .then(response => response.json())
-        .then(myJson => {
-            console.info('myJson:', myJson);
-        })
-        ; // parses JSON response into native JavaScript objects 
+        .then(result => {
+            if(result.status.auth){
+                localStorage.setItem("token", result.status.token);
+                this.setState({redirectToHome: true});
+            }
+        });
     }
 
     switchButton = () => {
         console.info('hello');
         this.setState({active: !this.state.active});
-        // const login = document.getElementById('login');
-        // const signup = document.getElementById('signup');
-        // login.classList.toggle('hide-view');
-        // signup.classList.toggle('hide-view');
         // login.classList.contains('hide-view') ? changeSwitchText('signup') : changeSwitchText('login')
     }
 
     componentDidMount() {
-        
-
         // const showText = {
         // login : {
         //     header : 'هنوز عضو نشده اید؟',
@@ -126,7 +115,10 @@ class SignUp extends React.Component {
         // switchText.children[0].innerText = showText[el].header;
         // switchText.children[1].innerText = showText[el].byline;
         // switchButton.innerText = showText[el].buttonText;
-        // }
+        let token = localStorage.getItem("token");
+        if (token) {
+            this.setState({redirectToHome: true});
+        }
     }
 
     render () {
@@ -138,7 +130,6 @@ class SignUp extends React.Component {
             return (
                 <div className="main-page">
                 <div 
-                    // className="smooth login"
                     className={this.state.active ? 'hide-view': 'smooth login'} 
                     id="login"
                     >

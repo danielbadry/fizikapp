@@ -33,11 +33,10 @@ class NewRequest extends React.Component {
     };
 
     sendRequest = () => {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
+        let token = localStorage.getItem('token');
         let data = {
           title: this.state.title,
           message: this.state.message,
-          userId: user.id,
           tags: JSON.stringify(this.state.tags)
         }
 
@@ -48,7 +47,7 @@ class NewRequest extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client

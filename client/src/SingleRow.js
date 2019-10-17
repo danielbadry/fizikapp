@@ -8,7 +8,6 @@ import Link from '@material-ui/core/Link';
 class SingleRow extends React.Component{
     
     constructor(props) {
-        console.info('pfop:', props);
         super (props);
         this.state = {
             rows:[]
@@ -16,13 +15,15 @@ class SingleRow extends React.Component{
     }
     
     componentDidMount() {
-        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}&userid=${this.props.userid}`, {
+        const token = localStorage.getItem('token');
+        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',

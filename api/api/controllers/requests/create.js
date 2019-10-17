@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 module.exports = {
 
 
@@ -38,14 +39,17 @@ module.exports = {
 
 
   fn: async function (inputs) {
- 
+    let token = this.req.headers.authorization;
+    let TokenArray = token.split(" ");
+    let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
+    let userId = decodedToken.id;
       await Requests.create({
         createdAt : await sails.helpers.dateParse(),
         updatedAt : await sails.helpers.dateParse(),
         parentId : inputs.parentId,
         message : inputs.message,
         title : inputs.title,
-        userId : inputs.userId,
+        userId : userId,
         tags : inputs.tags,
         isDeleted : false,
 
