@@ -18,7 +18,8 @@ class SignUp extends React.Component {
                 password: ''
             },
 
-            redirectToHome : false
+            redirectToHome : false,
+            active: false
         }
     }
 
@@ -94,37 +95,38 @@ class SignUp extends React.Component {
         ; // parses JSON response into native JavaScript objects 
     }
 
+    switchButton = () => {
+        console.info('hello');
+        this.setState({active: !this.state.active});
+        // const login = document.getElementById('login');
+        // const signup = document.getElementById('signup');
+        // login.classList.toggle('hide-view');
+        // signup.classList.toggle('hide-view');
+        // login.classList.contains('hide-view') ? changeSwitchText('signup') : changeSwitchText('login')
+    }
+
     componentDidMount() {
-        const login = document.getElementById('login');
-        const signup = document.getElementById('signup');
-
-        const showText = {
-        login : {
-            header : 'هنوز عضو نشده اید؟',
-            byline : 'ثبت نام کنید و ببیند چه ویدیوهایی در این سایت می توانید مشاهده کنید',
-            buttonText: 'ورود'
-        },
         
-        signup : {
-            header : 'قبلا عضو بوده اید?',
-            byline : 'وارد شوید و ویدیوهای جدید را مشاهده کنید',
-            buttonText: 'ورود'    
-        }
-        }
-        const switchButton = document.getElementById('switch-button');
-        const switchText =  document.getElementById('switch-text');
 
-        switchButton.addEventListener('click', () => {
-        login.classList.toggle('hide-view');
-        signup.classList.toggle('hide-view');
-        login.classList.contains('hide-view') ? changeSwitchText('signup') : changeSwitchText('login')
-        })
-
-        function changeSwitchText(el){
-        switchText.children[0].innerText = showText[el].header;
-        switchText.children[1].innerText = showText[el].byline;
-        switchButton.innerText = showText[el].buttonText;
-        }
+        // const showText = {
+        // login : {
+        //     header : 'هنوز عضو نشده اید؟',
+        //     byline : 'ثبت نام کنید و ببیند چه ویدیوهایی در این سایت می توانید مشاهده کنید',
+        //     buttonText: 'ورود'
+        // },
+        
+        // signup : {
+        //     header : 'قبلا عضو بوده اید?',
+        //     byline : 'وارد شوید و ویدیوهای جدید را مشاهده کنید',
+        //     buttonText: 'ثبت نام'    
+        // }
+        // }
+        // const switchText =  document.getElementById('switch-text');
+        // function changeSwitchText(el){
+        // switchText.children[0].innerText = showText[el].header;
+        // switchText.children[1].innerText = showText[el].byline;
+        // switchButton.innerText = showText[el].buttonText;
+        // }
     }
 
     render () {
@@ -135,7 +137,11 @@ class SignUp extends React.Component {
         } else {
             return (
                 <div className="main-page">
-                <div className="smooth login" id="login">
+                <div 
+                    // className="smooth login"
+                    className={this.state.active ? 'hide-view': 'smooth login'} 
+                    id="login"
+                    >
                 <h1 
                     className="login__header header iranfont"
                     >
@@ -189,10 +195,17 @@ class SignUp extends React.Component {
                 <h1 className="switch__header header iranfont">هنوز عضو نیستید؟</h1>
                 <p className="iranfont">ثبت نام کنید و از آموزش به سبک جدید فیزیک لذت ببرید</p>
                 </div>
-                <button className="btn-white btn iranfont" id="switch-button">ثبت نام</button>
+                <button 
+                    className="btn-white btn iranfont" 
+                    id="switch-button"
+                    onClick={this.switchButton}
+                    >ثبت نام</button>
                 </div>
     
-                <div className="smooth signup hide-view" id="signup">
+                <div 
+                    id="signup"
+                    className={this.state.active ? 'smooth signup': 'smooth signup hide-view'} 
+                    >
                 <h1 className="signup__header header iranfont">یک اکانت جدید بسازید</h1>
                 <p className="signup__byline iranfont">برای ثبت نام از شبکه های اجتماعی هم می توانید استفاده کنید</p>
                 <div className="social-media__container">
