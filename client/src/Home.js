@@ -21,8 +21,8 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        this.setState({userid: user.id}, () => {
+        let token = JSON.parse(localStorage.getItem('token'));
+        this.setState({token: token}, () => {
             this.setState(function(state, props) {
                 return {
                     isRender: true

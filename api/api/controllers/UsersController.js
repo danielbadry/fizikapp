@@ -1,4 +1,5 @@
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 /**
  * UsersController
  *
@@ -10,10 +11,8 @@ module.exports = {
   
     create: async function(req,res) {
         var salt = bcrypt.genSaltSync(10);
-// Hash the password with the salt
-var hash = bcrypt.hashSync(req.param('password'), salt);
-       
-
+        // Hash the password with the salt
+        var hash = bcrypt.hashSync(req.param('password'), salt);
         let user = await Users
             .create({
                 firstName:req.param('firstName'),
@@ -23,8 +22,6 @@ var hash = bcrypt.hashSync(req.param('password'), salt);
                 password:hash,
                 mobile:req.param('mobile'),
                 phone:req.param('phone'),
-                fCoin:req.param('fCoin'),
-                gender:req.param('gender'),
                 grade:req.param('grade'),
                 createdAt : await sails.helpers.dateParse(),
                 updatedAt : await sails.helpers.dateParse(),
@@ -44,10 +41,18 @@ var hash = bcrypt.hashSync(req.param('password'), salt);
                 if (err) return res.serverError(err);
             }); 
 
-        let allUsers = await Users
-        .find()
-        .sort('createdAt DESC')
-        .limit(1);
-        return res.json(allUsers[0]);
-    },
+        let newUser = await Users.findOne({
+            id:user.id
+        });
+        
+        var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
+            expiresIn: 86400 // expires in 24 hours
+        });
+
+        let status = { auth: true, token: token };
+        status.errorMessage = null;
+        status.errorNumber = null;
+        let result = {userinfo:newUser,status :status};
+        return res.json(result);
+    }
 };

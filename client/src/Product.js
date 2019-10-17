@@ -53,7 +53,6 @@ class Product extends React.Component {
     }
 
     fetchProduct = () => {
-        console.info('umad');
         fetch(`http://localhost:1337/products/${this.state.productId}`, {
             method: 'GET', 
             mode: 'cors',
