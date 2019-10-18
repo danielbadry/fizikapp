@@ -16,7 +16,7 @@ class SingleRow extends React.Component{
     
     componentDidMount() {
         const token = localStorage.getItem('token');
-        fetch(`http://localhost:1337/${this.props.model}?limit=${this.props.count}`, {
+        fetch(process.env.REACT_APP_API_URL+`${this.props.model}?limit=${this.props.count}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -43,6 +43,7 @@ class SingleRow extends React.Component{
     render() {
         return (
             <React.Fragment>
+                <div>here:{process.env.NODE_ENV}</div>
                 <Paper
                 style={{
                     marginBottom: '2%'

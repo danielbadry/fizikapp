@@ -28,7 +28,7 @@ class Category extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:1337/categories?rowId=${this.props.categoryid}`, {
+        fetch(process.env.REACT_APP_API_URL+`categories?rowId=${this.props.categoryid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

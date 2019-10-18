@@ -50,7 +50,7 @@ class UserInteractionNode extends React.Component {
         type: this.props.type
       }
 
-      fetch('http://localhost:1337/userinteractions', {
+      fetch(process.env.REACT_APP_API_URL+'userinteractions', {
           method: 'POST', 
           body : JSON.stringify(dataRecord), 
           headers: {}
@@ -74,7 +74,7 @@ class UserInteractionNode extends React.Component {
     };
 
     fetchProductsQuestions = () => {
-      fetch(`http://localhost:1337/userinteractions?model=${this.props.model}&type=${this.props.type}`, {
+      fetch(process.env.REACT_APP_API_URL+`userinteractions?model=${this.props.model}&type=${this.props.type}`, {
         method: 'GET', 
         mode: 'cors',
         cache: 'no-cache',

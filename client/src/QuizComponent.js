@@ -40,7 +40,7 @@ class QuizComponent extends React.Component {
     }
     
     getUserQuizResponse () {
-        fetch(`http://localhost:1337/quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.state.user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.state.user.id}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -81,7 +81,7 @@ class QuizComponent extends React.Component {
     
     componentDidMount() {
         this.getUserQuizResponse();
-        fetch(`http://localhost:1337/quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
+        fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -185,7 +185,7 @@ class QuizComponent extends React.Component {
         let data = {
             answers : JSON.stringify(this.state.userAnswers)
         }
-        fetch(`http://localhost:1337/quizesanswer`, {
+        fetch(process.env.REACT_APP_API_URL+`quizesanswer`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

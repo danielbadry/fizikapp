@@ -30,7 +30,7 @@ class Requests extends React.Component {
     }
 
     fetchRequests = () => {
-        fetch(`http://localhost:1337/definitions?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}&searchText=${this.state.searchText}`, {
+        fetch(process.env.REACT_APP_API_URL+`definitions?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}&searchText=${this.state.searchText}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -53,7 +53,7 @@ class Requests extends React.Component {
 
     componentDidMount() {
         
-        fetch('http://localhost:1337/tags/', {
+        fetch(process.env.REACT_APP_API_URL+'tags/', {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

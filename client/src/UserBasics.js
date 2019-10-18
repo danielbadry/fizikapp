@@ -16,7 +16,7 @@ class UserBasics extends React.Component {
 
     componentDidMount() {
         let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(`http://localhost:1337/users/${user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`users/${user.id}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -47,7 +47,7 @@ class UserBasics extends React.Component {
     updateForm = (event) => {
         event.preventDefault();
         let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(`http://localhost:1337/users/${user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`users/${user.id}`, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

@@ -34,15 +34,28 @@ module.exports = {
         userName : inputs.username
       }
     });
-    // var passwordIsValid = await bcrypt.compareSync('12', user.password);
-    // return (user.password);
-    if(bcrypt.compareSync(inputs.password, user.password)) {
-      var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
-        expiresIn: 86400 // expires in 24 hours
-      });
-    return({ auth: true, token: token });
+
+    if ( typeof(user) !== 'undefined' && typeof(user) === 'object'){
+      if(bcrypt.compareSync(inputs.password, user.password)) {
+        var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
+          expiresIn: 86400 // expires in 24 hours
+        });
+      return({
+          auth: true,
+          token: token,
+          userinfo:{
+            firstName:user.firstName,
+            userName:user.userName,
+            lastName:user.lastName,
+            thumbnail:user.thumbnail,
+            isAdmin:user.isAdmin
+          }
+        });
+      } else {
+      return({ auth: false, token: null });
+      }
     } else {
-    return({ auth: false, token: null });
+      return({ auth: false, token: null, errorMessage:'not a user' });
     }
 
   }

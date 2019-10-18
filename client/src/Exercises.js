@@ -55,7 +55,7 @@ class Exercises extends React.Component {
     }
 
     fetchTamrins = () => {
-        fetch(`http://localhost:1337/tamrins?field=${this.state.field}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
+        fetch(process.env.REACT_APP_API_URL+`tamrins?field=${this.state.field}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',

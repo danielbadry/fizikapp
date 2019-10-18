@@ -53,7 +53,7 @@ class Product extends React.Component {
     }
 
     fetchProduct = () => {
-        fetch(`http://localhost:1337/products/${this.state.productId}`, {
+        fetch(process.env.REACT_APP_API_URL+`products/${this.state.productId}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',

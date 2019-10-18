@@ -13,7 +13,7 @@ class RequestTag extends React.Component {
     componentDidMount () {
         let finalList = [];
         let tempObj = {};
-        fetch('http://localhost:1337/tags', { method: 'GET', headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'tags', { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })

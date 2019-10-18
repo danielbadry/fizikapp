@@ -94,6 +94,12 @@ module.exports = {
       required : false,
       defaultsTo : false
     },
+
+    isAdmin :{
+      type: 'boolean',
+      required : false,
+      defaultsTo : false
+    },
     
     isOnline :{
       type: 'boolean',

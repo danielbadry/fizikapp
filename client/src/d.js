@@ -19,7 +19,7 @@ class Di extends React.Component {
         const dataRecord = {
           message:this.state.replyMessage
         }
-        fetch('http://localhost:1337/productsquestions', { 
+        fetch(process.env.REACT_APP_API_URL+'productsquestions', { 
             method: 'POST', 
             body : JSON.stringify(dataRecord), 
             headers: {}

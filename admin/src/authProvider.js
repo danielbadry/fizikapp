@@ -18,7 +18,7 @@ export default (type, params) => {
                 return response.json();
             })
             .then((result) => {
-            if (result.auth) {
+            if (result.auth && result.userinfo.isAdmin) {
                 localStorage.setItem('token', result.token);
                 Promise.resolve();
             } else {

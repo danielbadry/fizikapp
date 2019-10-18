@@ -58,7 +58,7 @@ class Sciencechallenge extends React.Component{
             sciencechallengeId: this.props.sciencechallengeid,
         }
         console.info('aa:', this.state);
-        fetch(`http://localhost:1337/sciencechallengeresponse`, {
+        fetch(process.env.REACT_APP_API_URL+`sciencechallengeresponse`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -88,7 +88,7 @@ class Sciencechallenge extends React.Component{
 
     componentDidMount(){
         let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(`http://localhost:1337/sciencechallenge/${this.props.sciencechallengeid}?userId=${user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`sciencechallenge/${this.props.sciencechallengeid}?userId=${user.id}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',

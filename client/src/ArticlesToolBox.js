@@ -28,7 +28,7 @@ class ArticleToolBox extends React.Component {
             modelId : this.props.modelid
         }
 
-        fetch(`http://localhost:1337/likedislikeview`, {
+        fetch(process.env.REACT_APP_API_URL+`likedislikeview`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -48,7 +48,7 @@ class ArticleToolBox extends React.Component {
     }
 
     fetchData = () => {
-        fetch(`http://localhost:1337/likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.props.userid}`, {
+        fetch(process.env.REACT_APP_API_URL+`likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.props.userid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

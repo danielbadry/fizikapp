@@ -39,7 +39,7 @@ class SignUp extends React.Component {
             username : this.state.login.username,
             password : this.state.login.password
         }
-        fetch('http://localhost:1337/users/authenticate', {
+        fetch(process.env.REACT_APP_API_URL+'users/authenticate', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -68,7 +68,7 @@ class SignUp extends React.Component {
             email : this.state.signup.email,
             password : this.state.signup.password
         }
-        fetch('http://localhost:1337/users', {
+        fetch(process.env.REACT_APP_API_URL+'users', {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -122,6 +122,7 @@ class SignUp extends React.Component {
     }
 
     render () {
+        
         if(this.state.redirectToHome) {
             return (
                 <Redirect to="/" />
