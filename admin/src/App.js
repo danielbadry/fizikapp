@@ -43,7 +43,7 @@ const App = () => (
     <Admin 
         customReducers={{ catReducer }} 
         dashboard={Dashboard} 
-        dataProvider={dataProvider('http://localhost:1337', httpClient)} //http://188.212.22.83/api
+        dataProvider={dataProvider(process.env.REACT_APP_API_URL, httpClient)} //http://188.212.22.83/api
         authProvider={authProvider}
         appLayout={MyLayout}
         >

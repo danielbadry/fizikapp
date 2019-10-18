@@ -43,7 +43,7 @@ class ProductsQuestions extends React.Component {
         productId: this.props.record.id
       }
 
-      fetch('http://localhost:1337/productsquestions', { 
+      fetch(process.env.REACT_APP_API_URL+'/productsquestions', { 
           method: 'POST', 
           body : JSON.stringify(dataRecord), 
           headers: {}
@@ -79,7 +79,7 @@ class ProductsQuestions extends React.Component {
     }
 
     fetchProductsQuestions = () => {
-      fetch('http://localhost:1337/productsquestions/', { method: 'GET', headers: {}})
+      fetch(process.env.REACT_APP_API_URL+'/productsquestions/', { method: 'GET', headers: {}})
       .then((response) => {
           return response.json();
       })

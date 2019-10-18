@@ -29,7 +29,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     increaseCatSize: (howMuch) => {
-        fetch('http://localhost:1337/criticisms/badgecount', { method: 'GET', headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/criticisms/badgecount', { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })

@@ -14,7 +14,7 @@ class CategoryComponent extends React.Component {
   componentDidMount () {
     let finalList = [];
     let tempObj = {};
-    fetch('http://localhost:1337/categories/allCategories', { method: 'GET', headers: {}})
+    fetch(process.env.REACT_APP_API_URL+'/categories/allCategories', { method: 'GET', headers: {}})
     .then((response) => {
         return response.json();
     })

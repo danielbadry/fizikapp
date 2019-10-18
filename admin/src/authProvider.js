@@ -5,7 +5,7 @@ export default (type, params) => {
 
     if (type === AUTH_LOGIN) {
         const { username, password } = params;
-        const request = new Request('http://localhost:1337/users/authenticate', {
+        const request = new Request(process.env.REACT_APP_API_URL+'/users/authenticate', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: new Headers({ 'Content-Type': 'application/json' }),

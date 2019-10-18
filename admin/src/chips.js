@@ -8,7 +8,7 @@ class Chips extends React.Component{
     this.state = {};
   }
 componentDidMount() {
-  axios.get('http://localhost:1337/tags/')
+  axios.get(process.env.REACT_APP_API_URL+'/tags/')
   .then(result => this.setState({
     hits: result.data
   }))

@@ -181,7 +181,7 @@ export default function EnhancedTable() {
             rowId: 0
         }
         if (firstTime) {
-            fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(0)}`, {
+            fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(0)}`, {
                 method: "GET",
                 headers: {},   
             })
@@ -243,7 +243,7 @@ export default function EnhancedTable() {
   
   function handleDoubleClick(event, row) {
     setCurrentDirectory(row);
-    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(row.id)}`, {
+    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(row.id)}`, {
         method: "GET",
         headers: {},   
     })
@@ -269,7 +269,7 @@ export default function EnhancedTable() {
   }
   
   function handleDblClickOnRow () {
-    fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(0)}`, {
+    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(0)}`, {
         method: "GET",
         headers: {},   
     })
@@ -298,14 +298,14 @@ export default function EnhancedTable() {
       itemsForDelete: itemToDelete,
     }
 
-    var url = 'http://localhost:1337/categories/deleteitems';
+    var url = process.env.REACT_APP_API_URL+'/categories/deleteitems';
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        return fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -348,7 +348,7 @@ export default function EnhancedTable() {
       parentId : currentDirectory.id
     }
     
-    fetch('http://localhost:1337/categories', { method: 'POST', 
+    fetch(process.env.REACT_APP_API_URL+'/categories', { method: 'POST', 
       body : JSON.stringify(dataRecord), 
       headers: {}
     })
@@ -356,7 +356,7 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-      fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
+      fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
           method: "GET",
           headers: {},   
       })
@@ -390,14 +390,14 @@ export default function EnhancedTable() {
   }
   
   function goUp () {
-    var url = `http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
+    var url = process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
     var result = fetch(url, {
         method: 'get',
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
         setRows(data.data);
-        return fetch(`http://localhost:1337/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -424,14 +424,14 @@ export default function EnhancedTable() {
       itemsForCopy: itemsForCopy,
       currentDirectory: currentDirectory
     }
-    var url = 'http://localhost:1337/categories/paste';
+    var url = process.env.REACT_APP_API_URL+'/categories/paste';
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        return fetch(`http://localhost:1337/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
         .then(function(resp){
           return resp.json();
         })

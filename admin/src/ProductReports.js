@@ -34,7 +34,7 @@ class ProductReports extends React.Component {
         const dataRecord = {
             isEnabled: !this.state.isEnabled
         }
-        fetch('http://localhost:1337/products/' + this.props.record.id , { 
+        fetch(process.env.REACT_APP_API_URL+'/products/' + this.props.record.id , { 
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}

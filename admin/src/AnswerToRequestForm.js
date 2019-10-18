@@ -31,7 +31,7 @@ class AnswerToRequestForm extends React.Component {
         // return;
         // const { dataProvider, dispatch, record } = this.props;
         const dataProvider = dataProvider
-        dataProvider('http://localhost:1337/requests', { method: 'POST', body: {name:'ali'} })
+        dataProvider(process.env.REACT_APP_API_URL+'/requests', { method: 'POST', body: {name:'ali'} })
             .then(() => {
                 // showNotification('Comment approved');
                 // push('/comments');

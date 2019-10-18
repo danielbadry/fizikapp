@@ -63,7 +63,7 @@ class QuizManager extends React.Component {
     }
 
     fetchQuizes = () => {
-        fetch('http://localhost:1337/quizes', { method: 'GET', headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/quizes', { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })
@@ -84,7 +84,7 @@ class QuizManager extends React.Component {
             modelId: this.props.record.id,
             model: this.props.model
         }
-        fetch('http://localhost:1337/quizes', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/quizes', { method: 'POST', body : JSON.stringify(dataRecord), headers: {}})
         .then((response) => {
             return response.json();
         })
@@ -100,7 +100,7 @@ class QuizManager extends React.Component {
         const dataRecord = {
             optionText: this.state.optionText
         }
-        fetch('http://localhost:1337/quizes/' + this.state.itemId , { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + this.state.itemId , { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
         .then((response) => {
             return response.json();
         })
@@ -117,7 +117,7 @@ class QuizManager extends React.Component {
         const dataRecord = {
             isOpen: false
         }
-        fetch('http://localhost:1337/quizes/' + itemId , { 
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + itemId , { 
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -138,7 +138,7 @@ class QuizManager extends React.Component {
         const dataRecord = {
             isOpen: true
         }
-        fetch('http://localhost:1337/quizes/' + itemId , { 
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + itemId , { 
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -158,7 +158,7 @@ class QuizManager extends React.Component {
         const dataRecord = {
             question: this.state.text
         }
-        fetch('http://localhost:1337/quizes', { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/quizes', { method: 'PUT', body : JSON.stringify(dataRecord), headers: {}})
         .then((response) => {
             return response.json();
         })
@@ -234,7 +234,7 @@ class QuizManager extends React.Component {
            value: value
         };
         
-        fetch('http://localhost:1337/quizes/' + quizItemId , {
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + quizItemId , {
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -257,7 +257,7 @@ class QuizManager extends React.Component {
            value: value 
         };
         
-        fetch('http://localhost:1337/quizes/' + quizItemId , {
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + quizItemId , {
             method: 'PUT', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -276,7 +276,7 @@ class QuizManager extends React.Component {
     deleteThisQuizItem = () => {
         console.info('ena:', this.state.itemId);
 
-        fetch('http://localhost:1337/quizes/' + this.state.itemId, {
+        fetch(process.env.REACT_APP_API_URL+'/quizes/' + this.state.itemId, {
             method: 'DELETE',
             headers: {}
         })

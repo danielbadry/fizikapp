@@ -43,7 +43,7 @@ class ProductsComments extends React.Component {
         productId: this.props.record.id
       }
 
-      fetch('http://localhost:1337/productscomments', { 
+      fetch(process.env.REACT_APP_API_URL+'/productscomments', { 
           method: 'POST', 
           body : JSON.stringify(dataRecord), 
           headers: {}
@@ -79,7 +79,7 @@ class ProductsComments extends React.Component {
     }
 
     fetchProductsComments = () => {
-      fetch('http://localhost:1337/productscomments/', { method: 'GET', headers: {}})
+      fetch(process.env.REACT_APP_API_URL+'/productscomments/', { method: 'GET', headers: {}})
       .then((response) => {
           return response.json();
       })

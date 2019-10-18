@@ -18,7 +18,7 @@ class SciencechallengeUserAnswers extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:1337/Sciencechallengeresponse?sciencechallengeid=${this.props.record.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`/Sciencechallengeresponse?sciencechallengeid=${this.props.record.id}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',

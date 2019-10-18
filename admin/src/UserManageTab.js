@@ -76,7 +76,7 @@ class UserManageTab extends React.Component {
             message: this.state.message
         }
 
-        fetch('http://localhost:1337/messages', { 
+        fetch(process.env.REACT_APP_API_URL+'/messages', { 
             method: 'POST', 
             body : JSON.stringify(dataRecord), 
             headers: {}
@@ -111,7 +111,7 @@ class UserManageTab extends React.Component {
             fCoin : this.state.fCoin,
             userId: this.props.record.id
         }
-        fetch('http://localhost:1337/users/sendfcoin', { 
+        fetch(process.env.REACT_APP_API_URL+'/users/sendfcoin', { 
             method: 'PUT',
             body : JSON.stringify(updatedRecord), 
             headers: {}
@@ -150,7 +150,7 @@ class UserManageTab extends React.Component {
           };
         return (
             <List >
-            
+                
                 <ListItem>
                     <ListItemIcon>
                     <VoiceOverOffIcon />
