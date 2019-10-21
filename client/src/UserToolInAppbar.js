@@ -5,6 +5,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import UserProfileMenu from './UserProfileMenu';
+import UserNotificationMenu from './UserNotificationMenu';
+import UserSystemMessageMenu from './UserSystemMessageMenu';
 
 class UserToolInAppbar extends React.Component {
     
@@ -37,7 +43,6 @@ class UserToolInAppbar extends React.Component {
                             userinfo: userinfo
                         }});
                 });
-            
 
         }
         
@@ -47,12 +52,7 @@ class UserToolInAppbar extends React.Component {
         if (this.state.userinfo)
             return(
                 <div>
-                    <Typography 
-                        variant="h6" 
-                        noWrap>
-                        {this.state.userinfo.firstName + ' ' + this.state.userinfo.lastName } خوش آمدید
-                    </Typography>
-                    <IconButton aria-label="show 4 new mails" color="inherit">
+                    {/* <IconButton aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <MailIcon />
                     </Badge>
@@ -61,19 +61,10 @@ class UserToolInAppbar extends React.Component {
                     <Badge badgeContent={17} color="secondary">
                         <NotificationsIcon />
                     </Badge>
-                    </IconButton>
-                    
-                    <IconButton
-                    edge="end"
-                    aria-label="account of current user"
-                    // aria-controls={menuId}
-                    aria-haspopup="true"
-                    // onClick={handleProfileMenuOpen}
-                    color="inherit"
-                    >
-                    <AccountCircle />
-                    </IconButton>
-
+                    </IconButton> */}
+                    <UserSystemMessageMenu />
+                    <UserNotificationMenu />
+                    <UserProfileMenu />
                 </div>
             )
         else 
