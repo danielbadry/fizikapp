@@ -12,7 +12,8 @@ module.exports = {
     create: async function(req,res) {
         var salt = bcrypt.genSaltSync(10);
         // Hash the password with the salt
-        var hash = bcrypt.hashSync(req.param('password'), salt);
+        
+        var hash = bcrypt.hashSync(req.param('passWord'), salt);
         // return hash;
         let user = await Users
             .create({

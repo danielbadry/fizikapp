@@ -15,19 +15,15 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userid : null,
-            isRender: false
+            token : null
         }
     }
 
     componentDidMount() {
-        // let token = JSON.parse(localStorage.getItem('token'));
-        // this.setState({token: token}, () => {
-        //     this.setState(function(state, props) {
-        //         return {
-        //             isRender: true
-        //         }});
-        // });
+        this.setState(function(state, props) {
+            return {
+                token: localStorage.getItem("token")
+            }});
     }
 
     render() {
@@ -68,13 +64,13 @@ class Home extends React.Component {
                         count='3'
                     />
 
-                   {(this.state.userid) ? <SingleRow
+                   {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='/products'
                         count='3'
-                        userid={this.state.userid}
+                        token={this.state.token}
                     /> : 
                     null
                     }

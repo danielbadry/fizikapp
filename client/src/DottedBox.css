@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-html {
+/* html {
   font-size: 62.5%;
 }
 
@@ -13,7 +13,7 @@ body {
   font-weight: 200;
   font-family: "Montserrat", sans-serif;
   min-height: 100vh;
-}
+} */
 
 .main-page {
   display: flex;
