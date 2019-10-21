@@ -65,7 +65,7 @@ module.exports = {
       required : false
     },
     
-    mainFileSrc :{
+    filesrc :{
       type: 'string',
       required : false
     },

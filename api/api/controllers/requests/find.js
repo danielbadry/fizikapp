@@ -42,6 +42,7 @@ module.exports = {
   },
   
   fn: async function (inputs) {
+    let allRequests = [];
     let finalData = {};
     let finalRequests = [];
     let dataLength = await Requests.find({
@@ -52,7 +53,7 @@ module.exports = {
     
     if( (!inputs.searchText) || (inputs.searchText == '') )
     {
-      let allRequests = await Requests.find({
+      allRequests = await Requests.find({
         parentId: '',
         isDeleted : false
       })
@@ -82,7 +83,7 @@ module.exports = {
     let tagIds = []; // list of comming tags id from the URL
     let inTags = [];
     
-    if(JSON.parse(inputs.tags).length === 0) {
+    if(typeof(inputs.tags)==='undefined' || JSON.parse(inputs.tags).length === 0) {
       inTags = await Tags.find();
     } else {
       inTags = JSON.parse(inputs.tags);

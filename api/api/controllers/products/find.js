@@ -62,7 +62,7 @@ module.exports = {
       if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
         summary.startTime = userVideoStatus.startTime;
       }
-        product.thumbnail = "http://localhost:1337/files/productImage/" + product.thumbnail;
+        product.thumbnail = sails.config.custom.apiUrl + "/files/productImage/" + product.thumbnail;
         let quizs = await Quizes.find({
           where : {
             modelId: product.id

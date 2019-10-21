@@ -24,18 +24,23 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    const path1 = sails.config.appPath + '/assets/files/productImage/' + inputs.id + '.jpg';
-    const path2 = sails.config.appPath + '/assets/files/productFiles/' + inputs.id + '.mp4';
-    try {
-      fs.unlinkSync(path1);
-      fs.unlinkSync(path2);
-      var destroyedRecords = await Products.destroy({
-        id: inputs.id
-      }).fetch();
-    } catch(err) {
-      console.error(err);
-    }
-
+    /*
+    TODO: we MUST DELETE image file and video file
+    */
+    // const path1 = sails.config.appPath + '/assets/files/productImage/' + inputs.id + '.jpg';
+    // const path2 = sails.config.appPath + '/assets/files/productFiles/' + inputs.id + '.mp4';
+    // try {
+    //   fs.unlinkSync(path1);
+    //   fs.unlinkSync(path2);
+    //   var destroyedRecords = await Products.destroy({
+    //     id: inputs.id
+    //   }).fetch();
+    // } catch(err) {
+    //   console.error(err);
+    // }
+    await Products.destroy({
+      id: inputs.id
+    }).fetch();
   }
 
 

@@ -43,7 +43,6 @@ class SingleRow extends React.Component{
     render() {
         return (
             <React.Fragment>
-                <div>here:{process.env.NODE_ENV}</div>
                 <Paper
                 style={{
                     marginBottom: '2%'

@@ -21,6 +21,6 @@ module.exports.custom = {
   // …
 
   baseUrl : 'http://188.212.22.83',
-  apiUrl : 'http://188.212.22.83/api',
+  apiUrl : 'http://localhost:1337',
   secret : 'c23aSfs',
 };
