@@ -63,6 +63,7 @@ module.exports = {
         summary.startTime = userVideoStatus.startTime;
       }
         product.thumbnail = sails.config.custom.apiUrl + "/files/productImage/" + product.thumbnail;
+        product.filesrc = sails.config.custom.apiUrl + "/files/productFiles/" + product.filesrc;
         let quizs = await Quizes.find({
           where : {
             modelId: product.id

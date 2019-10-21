@@ -14,7 +14,7 @@ class TagForm extends React.Component {
   componentDidMount () {
     let finalList = [];
     let tempObj = {};
-    fetch(process.env.REACT_APP_API_URL+'tags', { method: 'GET', headers: {}})
+    fetch(process.env.REACT_APP_API_URL+'/tags', { method: 'GET', headers: {}})
     .then((response) => {
         return response.json();
     })
