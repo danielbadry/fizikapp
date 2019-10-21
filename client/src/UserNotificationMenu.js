@@ -1,11 +1,8 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Badge from '@material-ui/core/Badge';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 export default function UserNotificationMenu() {
@@ -40,9 +37,9 @@ export default function UserNotificationMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>ناتیفیکیشن اول</MenuItem>
+        <MenuItem onClick={handleClose}>ناتیفیکیشن دوم</MenuItem>
+        <MenuItem onClick={handleClose}>ناتیفیکیشن سوم</MenuItem>
       </Menu>
     </React.Fragment>
   );
