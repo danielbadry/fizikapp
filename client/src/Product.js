@@ -38,13 +38,13 @@ class Product extends React.Component {
             userInteractionConfig : [
                 {
                     type:'qa',
-                    label:' از ماپرسش و پاسخ',
-                    model:'definitions'
+                    label:'پرسش و پاسخ',
+                    model:'products'
                 },
                 {
                     type:'comment',
                     label:'نظرات',
-                    model:'definitions'
+                    model:'products'
                 }
             ]
         }
@@ -218,11 +218,7 @@ class Product extends React.Component {
                                 <RelatedProducts />
                             </Paper>
                         </Grid>
-                        <Grid item xs={7}>
-                        <Paper>
-                            {/* <ProductAppBar /> */}
-                        </Paper>
-                        </Grid>
+                       
                     <Grid item xs={7}>
                         <Paper
                             style = {{
@@ -263,9 +259,10 @@ class Product extends React.Component {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                    {/* <ContentUserInteraction
-                            config={this.state.userInteractionConfig}
-                            /> */}
+                    <ContentUserInteraction
+                        config={this.state.userInteractionConfig}
+                        modelid={this.state.productId}
+                        />
                     </Grid>
                     </Grid>
                     

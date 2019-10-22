@@ -22,5 +22,6 @@ module.exports.custom = {
 
   baseUrl : 'http://188.212.22.83',
   apiUrl : 'http://localhost:1337',
+  siteUrl : 'https://fizik.app',
   secret : 'c23aSfs',
 };

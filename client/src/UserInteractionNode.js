@@ -46,27 +46,46 @@ class UserInteractionNode extends React.Component {
         parentId: (item != null) ? item.id : '',
         modelId: this.props.modelid,
         model: this.props.model,
-        userId: this.props.userid,
         type: this.props.type
       }
-
+      const token = localStorage.getItem('token');
       fetch(process.env.REACT_APP_API_URL+'userinteractions', {
-          method: 'POST', 
-          body : JSON.stringify(dataRecord), 
-          headers: {}
-        }
-      )
-      .then((response) => {
-        return response.json();
-      })
-      .then((myJson) => {
-        this.replyMessage = '';
-          this.fetchProductsQuestions();
+        method: 'POST', 
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        body : JSON.stringify(dataRecord), 
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        })
+        .then(response => response.json())
+        .then((myJson) => {
+          this.replyMessage = '';
+            this.fetchProductsQuestions();
+            
+        });
+
+      // fetch(process.env.REACT_APP_API_URL+'userinteractions', {
+      //     method: 'POST', 
+      //     body : JSON.stringify(dataRecord), 
+      //     headers: {}
+      //   }
+      // )
+      // .then((response) => {
+      //   return response.json();
+      // })
+      // .then((myJson) => {
+      //   this.replyMessage = '';
+      //     this.fetchProductsQuestions();
           
-      })
-      .catch((e) => {
-          // showNotification('Error: comment not approved', 'warning')
-      });
+      // })
+      // .catch((e) => {
+      //     // showNotification('Error: comment not approved', 'warning')
+      // });
     }
 
     setReplyMessage = (e) => {
@@ -74,7 +93,7 @@ class UserInteractionNode extends React.Component {
     };
 
     fetchProductsQuestions = () => {
-      fetch(process.env.REACT_APP_API_URL+`userinteractions?model=${this.props.model}&type=${this.props.type}`, {
+      fetch(process.env.REACT_APP_API_URL+`userinteractions?model=${this.props.model}&modelid=${this.props.modelid}&type=${this.props.type}`, {
         method: 'GET', 
         mode: 'cors',
         cache: 'no-cache',

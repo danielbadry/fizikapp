@@ -36,7 +36,7 @@ module.exports = {
         modelId: inputs.modelId
       }
     });
-    // return (userinteractions);
+
     for (let userinteraction of userinteractions) {
       moment.locale('en');
       userinteraction.jalaaliCreatedDate = momentJalaali(userinteraction.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -50,11 +50,11 @@ module.exports = {
           }
         });
         userinteraction.userInfo = user[0];
-        userinteraction.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + userinteraction.userInfo.thumbnail;
-        userinteraction.userInfo.url = 'http://localhost:3000/#/users/' + userinteraction.userInfo.id + '/show';
+        userinteraction.userInfo.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + userinteraction.userInfo.thumbnail;
+        userinteraction.userInfo.url = sails.config.custom.siteUrl + '/#/users/' + userinteraction.userInfo.id + '/show';
       } else {
         userinteraction.userInfo = {};
-        userinteraction.userInfo.thumbnail = 'http://localhost:1337/files/usersImage/' + 'IMG_20190804_103448_895.jpg';
+        userinteraction.userInfo.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + 'IMG_20190804_103448_895.jpg';
         userinteraction.userInfo.firstName = 'iman';
         userinteraction.userInfo.lastName = 'arghamy';
       }
