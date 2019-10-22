@@ -236,6 +236,7 @@ class UserInteractionNode extends React.Component {
 
         return (
           <React.Fragment>
+            {(localStorage.getItem('token')) ? 
             <div>
             <TextField
                 margin="dense"
@@ -269,6 +270,7 @@ class UserInteractionNode extends React.Component {
               ارسال پیام
             </Button>
             </div>
+            :<div>شما لاگین نیستید</div>}
             <Menu data={data} />
           </React.Fragment>
         )

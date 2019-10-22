@@ -32,19 +32,20 @@ class Sciencechallenge extends React.Component{
             tags: [],
             id: '',
             isRender : false,
+            userCanSeeVideo : false,
             thumbnail: '',
             scienceschallengeId: props.sciencechallengeid,
             startTime: 8,
             userInteractionConfig : [
                 {
                     type:'qa',
-                    label:' از ماپرسش و پاسخ',
-                    model:'definitions'
+                    label:'پرسش و پاسخ',
+                    model:'sciencechallenge'
                 },
                 {
                     type:'comment',
                     label:'نظرات',
-                    model:'definitions'
+                    model:'sciencechallenge'
                 }
             ]
         }
@@ -57,7 +58,6 @@ class Sciencechallenge extends React.Component{
             userId: user.id,
             sciencechallengeId: this.props.sciencechallengeid,
         }
-        console.info('aa:', this.state);
         fetch(process.env.REACT_APP_API_URL+`sciencechallengeresponse`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -73,7 +73,6 @@ class Sciencechallenge extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
-                console.info('result:', result);
                 this.setState((state, props) => {
                     return ({isUserAnswered: result});
                 });
@@ -81,27 +80,25 @@ class Sciencechallenge extends React.Component{
     }
 
     handleChange = () => event => {
-        console.info('hello');
-        // event.persist();
         this.setState({userAnswerMessage: event.target.value})
     };
 
     componentDidMount(){
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(process.env.REACT_APP_API_URL+`sciencechallenge/${this.props.sciencechallengeid}?userId=${user.id}`, {
+        const token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`sciencechallenge/${this.props.sciencechallengeid}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',
             })
             .then(response => response.json())
             .then(result => {
-                console.info('result:', result);
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(result.summary)),
@@ -238,6 +235,7 @@ class Sciencechallenge extends React.Component{
 
                     <Grid item xs={8}>
                         <Paper>
+                        {(localStorage.getItem('token') && this.state.userCanSeeVideo) ? 
                             <Player
                                 poster="/assets/poster.png"
                                 startTime = {this.state.startTime}
@@ -259,16 +257,26 @@ class Sciencechallenge extends React.Component{
                                 <VolumeMenuButton />
                             </ControlBar>
                             </Player>
+                            :null}
+                            {(localStorage.getItem('token') && !this.state.userCanSeeVideo) ?
+                            <React.Fragment>
+                            <div>کاربر گرامی به دلیل نداشتن شارژ مورد نیاز ویدیو مورد نظر را نمی توانید تماشا کنید</div>
+                            </React.Fragment>
+                            :null}
+                            {(!localStorage.getItem('token')) ? 
+                                <div>لطفا در سایت لاگین کنید</div>
+                            :null}
                         </Paper>
                     </Grid>
 
                     <Grid item xs={8}>
-                    <Paper>
+                        <Paper>
                         <ArticlesToolBox
                             model='sciencechallenge'
-                            modelid={this.props.definitionid}
-                            userid={user.id}
+                            modelid={this.props.sciencechallengeid}
+                            token={this.state.token}
                             />
+
                         </Paper>
                     </Grid>
 
