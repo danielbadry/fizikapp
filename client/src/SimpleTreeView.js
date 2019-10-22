@@ -58,6 +58,7 @@ class SimpleTreeView extends React.Component {
       }
 
     componentDidMount () {
+        const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`definitions/treeviewbycategory`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -65,7 +66,7 @@ class SimpleTreeView extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client

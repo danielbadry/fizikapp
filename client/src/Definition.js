@@ -82,33 +82,40 @@ class Definition extends React.Component {
     }
 
     render () {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        if (!this.state.isRender) {
-            return(
-                <div>loading...</div>
-            )
-            
-        } else
         return (
-            <Grid container spacing={3}>
-                        
+            <Grid container spacing={3}> 
                     <Grid item xs={12}>
                         {/* <MainHeader /> */}
                     </Grid>
 
                     <Grid item xs={10}>
                         <Paper>
-                            thumbnail 
+                            <img src={this.state.thumbnail} />
                         </Paper> 
+                    </Grid>
+                    
+                    <Grid item xs={3}>
+                        <Typography>
+                            {this.state.summary.name}
+                        </Typography>     
+                    </Grid>
+                    
+                    <Grid item xs={3}>
+                        <Typography>
+                            {this.state.summary.description}
+                        </Typography>     
+                    </Grid>
+                    
+                    <Grid item xs={3}>
                         <Paper>
                             <ArticlesToolBox
                                 model='definitions'
                                 modelid={this.props.definitionid}
-                                userid={user.id}
+                                token={this.state.token}
                                 />
-                        </Paper>
+                            </Paper>
                     </Grid>
-
+                    
                     <Grid item xs={3}>
                         <Paper>
                             <SimpleTreeView />
@@ -124,9 +131,7 @@ class Definition extends React.Component {
                     <Grid item xs={12}>
                         <ContentUserInteraction
                             config={this.state.userInteractionConfig}
-                            model='definitions'
-                            modelid={this.props.definitionid}
-                            userid={user.id}
+                            modelid={this.state.definitionid}
                             />
                     </Grid>
 
