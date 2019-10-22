@@ -15,17 +15,18 @@ import {
   } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ContentUserInteraction from "./ContentUserInteraction";
-import QuizComponent from './QuizComponent';
+// import QuizComponent from './QuizComponent';
 import Grid from '@material-ui/core/Grid';
 import StickyFooter from "./StickyFooter";
-
+import ArticlesToolBox from "./ArticlesToolBox";
 import Paper from '@material-ui/core/Paper';
 
 class Product extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            summary:{},
+            summary: {},
+            token: null,
             tags: [],
             id: '',
             isRender : false,
@@ -52,7 +53,7 @@ class Product extends React.Component {
         this.fetchProduct();
     }
 
-    fetchProduct = () => {
+    fetchProduct = (token) => {
         fetch(process.env.REACT_APP_API_URL+`products/${this.state.productId}`, {
             method: 'GET', 
             mode: 'cors',
@@ -60,6 +61,7 @@ class Product extends React.Component {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',
@@ -85,7 +87,12 @@ class Product extends React.Component {
     }
 
     componentDidMount(){
-        this.fetchProduct();  
+        const token = localStorage.getItem('token');
+        this.setState(function(state, props) {
+            return {
+                token: token
+            }});
+        this.fetchProduct(token);  
     }
     
     render() {
@@ -108,7 +115,7 @@ class Product extends React.Component {
                             style= {{
                                 direction: 'rtl'
                             }}
-                        >
+                            >
                             
                             <Typography
                             style={{ fontFamily: 'IranSans_Light' }}
@@ -131,29 +138,20 @@ class Product extends React.Component {
                             >
                                 3 امتیاز
                             </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                3 لایک
-                            </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                5 دیسلایک
-                            </Typography>
-                            <QuizComponent
+                            
+                            {/* <QuizComponent
                                 endFunc={this.catchMeHere}
                                 model='products'
                                 modelid={this.props.productid}
-                            />
+                            /> */}
                         </Paper>
                         
                     </Grid>
 
                     <Grid item xs={8}>
                         <Paper>
-                            {/* <Player
-                                poster="/assets/poster.png"
+                            <Player
+                                poster={this.state.thumbnail}
                                 startTime = {this.state.startTime}
                                 style={{
                                     height: '200px'
@@ -172,10 +170,18 @@ class Product extends React.Component {
                                 <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
                                 <VolumeMenuButton />
                             </ControlBar>
-                            </Player> */}
+                            </Player>
                         </Paper>
                     </Grid>
-
+                    
+                    <Grid item xs={8}>
+                    <ArticlesToolBox
+                        model='products'
+                        modelid={this.props.productid}
+                        token={this.state.token}
+                        />
+                    </Grid>
+                    
                     <Grid container>
                         <Grid item xs={4}>
                             <Paper

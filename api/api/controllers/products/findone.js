@@ -48,7 +48,7 @@ module.exports = {
       if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
         summary.startTime = userVideoStatus.startTime;
     }
-    summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.mainFileSrc;
+    summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.filesrc;
     moment.locale('en');
     summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
     moment.locale('fa');

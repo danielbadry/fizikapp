@@ -40,13 +40,14 @@ class QuizComponent extends React.Component {
     }
     
     getUserQuizResponse () {
-        fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.state.user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',

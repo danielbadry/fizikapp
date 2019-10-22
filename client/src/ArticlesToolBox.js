@@ -10,7 +10,6 @@ class ArticleToolBox extends React.Component {
     
     constructor(props) {
         super (props);
-        console.info('propi:', props);
         this.state = {
             likes : 0,
             disLikes : 0,
@@ -19,11 +18,10 @@ class ArticleToolBox extends React.Component {
     }
 
     like = (e, type) => {
-        console.info('you clicked on like button : ', type);
-        
+        // console.info('type:', type);
+        // return;
         let data = {
             type : type,
-            userId : this.props.userid,
             model : this.props.model,
             modelId : this.props.modelid
         }
@@ -35,7 +33,7 @@ class ArticleToolBox extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${this.state.token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -43,19 +41,19 @@ class ArticleToolBox extends React.Component {
             })
             .then(response => response.json())
             .then(result => {
-                this.fetchData();
+                this.fetchData(this.state.token);
             });
     }
 
-    fetchData = () => {
-        fetch(process.env.REACT_APP_API_URL+`likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}&userid=${this.props.userid}`, {
+    fetchData = (token) => {
+        fetch(process.env.REACT_APP_API_URL+`likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -78,7 +76,15 @@ class ArticleToolBox extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchData();
+        const token = localStorage.getItem('token');
+        this.setState(function(state, props) {
+            return {
+                token: token
+            }}, function() {
+                this.like('e','view');
+            });
+        this.fetchData(token);
+        // increase view of this entity
     }
 
     render () {
