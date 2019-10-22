@@ -48,12 +48,24 @@ module.exports = {
       if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
         summary.startTime = userVideoStatus.startTime;
     }
-    summary.videoAddress = 'http://localhost:1337/files/productFiles/' + summary.filesrc;
+
+    /*
+    TODO: check for user has charge
+    */
+
+    if (true) {
+      summary.videoAddress = sails.config.custom.apiUrl + '/files/productFiles/' + summary.filesrc;
+    }
+    else {
+      summary.filesrc = null;
+      summary.videoAddress = null;
+    }
+      
     moment.locale('en');
     summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
     moment.locale('fa');
     summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
-    summary.thumbnail = "http://localhost:1337/files/productImage/" + summary.thumbnail;
+    summary.thumbnail = sails.config.custom.apiUrl + "/files/productImage/" + summary.thumbnail;
     
     //  tidy up tags
     if (summary.tags) {

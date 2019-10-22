@@ -31,7 +31,8 @@ class Product extends React.Component {
             id: '',
             isRender : false,
             thumbnail: '',
-            userCanSeeQuiz: false,
+            userCanSeeQuiz: true,
+            userCanSeeVideo: true,
             productId: props.productid,
             startTime: 8,
             userInteractionConfig : [
@@ -162,7 +163,7 @@ class Product extends React.Component {
                     <Grid item xs={8}>
                         <Paper>
                             
-                        {(localStorage.getItem('token') && this.state.userCanSeeQuiz) ? 
+                        {(localStorage.getItem('token') && this.state.userCanSeeVideo) ? 
                                 <Player
                                 poster={this.state.thumbnail}
                                 startTime = {this.state.startTime}
@@ -186,7 +187,7 @@ class Product extends React.Component {
                             </Player>
                             :null}
 
-                                {(localStorage.getItem('token') && !this.state.userCanSeeQuiz) ? 
+                                {(localStorage.getItem('token') && !this.state.userCanSeeVideo) ? 
                                 <React.Fragment>
                                     <div>شارژ نداری</div>
                                 </React.Fragment>
