@@ -188,10 +188,11 @@ class UserInteractionNode extends React.Component {
                             >
                             {m.jalaaliUserFriendlyCreatedDate}
                             </Typography> 
+                            {(localStorage.getItem('token')) ? 
                             <div>
                             <TextField
                                 margin="dense"
-                                label="نظرتان را بنویسید"
+                                label="ضضنظرتان را بنویسید"
                                 type="text"
                                 onChange={this.setReplyMessage.bind()}
                                 fullWidth
@@ -220,6 +221,7 @@ class UserInteractionNode extends React.Component {
                               ارسال پیام
                             </Button>
                             </div>
+                            :null}
                             &nbsp;
                             {m.children && <Menu data={m.children} />}
                           </React.Fragment>
@@ -270,7 +272,7 @@ class UserInteractionNode extends React.Component {
               ارسال پیام
             </Button>
             </div>
-            :<div>شما لاگین نیستید</div>}
+            :null}
             <Menu data={data} />
           </React.Fragment>
         )

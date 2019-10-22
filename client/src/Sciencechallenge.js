@@ -31,8 +31,10 @@ class Sciencechallenge extends React.Component{
             isUserAnswered : false,
             tags: [],
             id: '',
+            token: null,
+            userCanAnswerToChallenge : false,
             isRender : false,
-            userCanSeeVideo : false,
+            userCanSeeVideo : true,
             thumbnail: '',
             scienceschallengeId: props.sciencechallengeid,
             startTime: 8,
@@ -52,10 +54,8 @@ class Sciencechallenge extends React.Component{
     }
 
     sendRequest = () => {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
         let data = {
             userAnswerMessage: this.state.userAnswerMessage,
-            userId: user.id,
             sciencechallengeId: this.props.sciencechallengeid,
         }
         fetch(process.env.REACT_APP_API_URL+`sciencechallengeresponse`, {
@@ -65,7 +65,7 @@ class Sciencechallenge extends React.Component{
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${this.state.token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -80,11 +80,12 @@ class Sciencechallenge extends React.Component{
     }
 
     handleChange = () => event => {
-        this.setState({userAnswerMessage: event.target.value})
+        this.setState({userAnswerMessage: event.target.value});
     };
 
-    componentDidMount(){
+    componentDidMount() {
         const token = localStorage.getItem('token');
+        this.setState({token: token});
         fetch(process.env.REACT_APP_API_URL+`sciencechallenge/${this.props.sciencechallengeid}`, {
             method: 'GET', 
             mode: 'cors',
@@ -118,7 +119,7 @@ class Sciencechallenge extends React.Component{
     }
 
     AnswerBox (props) {
-        if (typeof(this.state.isUserAnswered) === 'boolean') {
+        if (typeof(this.state.isUserAnswered) === 'boolean' && this.state.userCanAnswerToChallenge) {
             return (
                 <React.Fragment>
                     
@@ -152,14 +153,22 @@ class Sciencechallenge extends React.Component{
 
                 </React.Fragment>
             );
+        } else if (typeof(this.state.isUserAnswered) !== 'boolean') {
+            return (
+                <React.Fragment>
+                   <div>
+                        شما قبلا پاسخ داده اید. پاسخ شما :
+                    </div>
+                    <div>
+                        {this.state.isUserAnswered.userAnswerMessage}
+                    </div>
+                </React.Fragment>
+            );
         } else {
             return (
                 <React.Fragment>
                    <div>
-                        شما قبلا پاسخ داده اید
-                    </div>
-                    <div>
-                        {this.state.isUserAnswered.userAnswerMessage}
+                        لطفا برای پاسخ دهی به این سوال حساب خود را شارژ نمایید.
                     </div>
                 </React.Fragment>
             );
@@ -174,13 +183,7 @@ class Sciencechallenge extends React.Component{
     }
 
     render () {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        if (!this.state.isRender) {
-            return(
-                <div>loading...</div>
-            )
-            
-        } else
+        
         return (
             
             <div>
@@ -209,24 +212,14 @@ class Sciencechallenge extends React.Component{
                                 {this.state.summary.jalaaliUserFriendlyCreatedDate}
                             </Typography>
                             <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                قبلا پاسخ داده اید 
+                                style={{ fontFamily: 'IranSans_Light' }}
+                                >
+                                متن شماره یک درصورت نیاز
                             </Typography>
                             <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                3 امتیاز
-                            </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                3 لایک
-                            </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                5 دیسلایک
+                                style={{ fontFamily: 'IranSans_Light' }}
+                                >
+                                متن شماره دو در صورت نیاز
                             </Typography>
                             
                         </Paper>
@@ -334,7 +327,9 @@ class Sciencechallenge extends React.Component{
                     
                     <Grid item xs={12}>
                         <Paper>
-                            {this.AnswerBox()}
+                            {(localStorage.getItem('token')) ?
+                            this.AnswerBox()
+                            :<div>برای پاسخ دادن می بایست لاگین کنید</div>}
                         </Paper>
                     </Grid>
                     
