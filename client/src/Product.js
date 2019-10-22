@@ -31,6 +31,7 @@ class Product extends React.Component {
             id: '',
             isRender : false,
             thumbnail: '',
+            userCanSeeQuiz: false,
             productId: props.productid,
             startTime: 8,
             userInteractionConfig : [
@@ -93,6 +94,7 @@ class Product extends React.Component {
                 token: token
             }});
         this.fetchProduct(token);  
+
     }
     
     render() {
@@ -116,7 +118,6 @@ class Product extends React.Component {
                                 direction: 'rtl'
                             }}
                             >
-                            
                             <Typography
                             style={{ fontFamily: 'IranSans_Light' }}
                             >
@@ -129,11 +130,31 @@ class Product extends React.Component {
                                 {this.state.summary.jalaaliUserFriendlyCreatedDate}
                             </Typography>
                             
-                            <QuizComponent
+                            {(localStorage.getItem('token') && this.state.userCanSeeQuiz) ? 
+                                <QuizComponent
                                 endFunc={this.catchMeHere}
                                 model='products'
                                 modelid={this.props.productid}
+                                title={this.state.summary.name}
                             />
+                            :null}
+
+                                {(localStorage.getItem('token') && !this.state.userCanSeeQuiz) ? 
+                                <React.Fragment>
+                                    <div>شارژ نداری</div>
+                                    <QuizComponent
+                                        endFunc={this.catchMeHere}
+                                        model='products'
+                                        modelid={this.props.productid}
+                                        title={this.state.summary.name}
+                                        userCanSeeQuiz = {false}
+                                    />
+                                </React.Fragment>
+                                :null}
+
+                            {(!localStorage.getItem('token')) ? 
+                                <div>لاگین کنید</div>
+                            :null}
                         </Paper>
                         
                     </Grid>

@@ -55,7 +55,7 @@ class QuizComponent extends React.Component {
             })
             .then(response => response.json())
             .then(response => {
-                console.info('ress:', response);
+                
                 this.setState({
                    quizesResponse: response.userQuizResponse,
                    isAttended : response.isAttended
@@ -352,17 +352,20 @@ class QuizComponent extends React.Component {
         return(
             <React.Fragment>
                 
-                <div>res:{this.WarningForAttend()}</div>
+                <div>{this.WarningForAttend()}</div>
+                {(this.props.userCanSeeQuiz)?
                 <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={this.handleDialogStatus}
-                    style={{
-                        fontFamily: "IranSans"
-                    }}
-                    >
-                    شروع کوییز
-                </Button>
+                variant="contained" 
+                color="primary"
+                onClick={this.handleDialogStatus}
+                style={{
+                    fontFamily: "IranSans"
+                }}
+                >
+                شروع کوییز
+            </Button>
+            :null}
+                
                 
                 <Button 
                     variant="contained" 
@@ -392,7 +395,7 @@ class QuizComponent extends React.Component {
                                     fontSize: 12
                                 }}
                                 >
-                                اسم این ویدیو ذکر شود
+                                {this.props.title}
                             </Typography>
                             
                     </DialogTitle>
