@@ -18,13 +18,10 @@ module.exports = {
             or : [
                 {
                     userName:req.param('userName')
-                },
-                {
-                    email:req.param('email')
                 }
             ]
         });
-        
+        // return res.json(user);
         if(user.length > 0) {
             errorList.push({
                 errorNumber : 100,

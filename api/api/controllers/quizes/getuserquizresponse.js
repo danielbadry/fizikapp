@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 module.exports = {
 
 
@@ -30,6 +31,11 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    let token = this.req.headers.authorization;
+    let TokenArray = token.split(" ");
+    let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
+    let userId = decodedToken.id;
+
     let isAttended = false;
     let quizes = await Quizes.find({
       where :{
@@ -40,15 +46,19 @@ module.exports = {
     
     // create array of quizes id
 
-    // return quizes;
+    let quizesIds = [];
+    for (let q of quizes) {
+      quizesIds.push(q.id);
+    }
+    
     let userQuizResponse = await Quizesanswer.find({
       where : {
-        userId:inputs.userId,
-        quizId: { in: ['5d930323b48e1a237842b9a6', '5d930328b48e1a237842b9a7', '5d93032cb48e1a237842b9a8'] }
+        userId:userId,
+        quizId: { in: quizesIds }
       }
     });
     
-    if (typeof userQuizResponse === 'object') {
+    if (userQuizResponse.length) {
       isAttended = true;
     }
 
@@ -58,6 +68,5 @@ module.exports = {
     };
 
   }
-
 
 };

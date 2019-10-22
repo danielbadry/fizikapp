@@ -15,7 +15,7 @@ import {
   } from 'video-react';
 import "../node_modules/video-react/dist/video-react.css"; // import css
 import ContentUserInteraction from "./ContentUserInteraction";
-// import QuizComponent from './QuizComponent';
+import QuizComponent from './QuizComponent';
 import Grid from '@material-ui/core/Grid';
 import StickyFooter from "./StickyFooter";
 import ArticlesToolBox from "./ArticlesToolBox";
@@ -128,22 +128,12 @@ class Product extends React.Component {
                                 >
                                 {this.state.summary.jalaaliUserFriendlyCreatedDate}
                             </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                در کوییز شرکت کرده اید قبلا 
-                            </Typography>
-                            <Typography
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                                3 امتیاز
-                            </Typography>
                             
-                            {/* <QuizComponent
+                            <QuizComponent
                                 endFunc={this.catchMeHere}
                                 model='products'
                                 modelid={this.props.productid}
-                            /> */}
+                            />
                         </Paper>
                         
                     </Grid>

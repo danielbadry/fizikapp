@@ -34,12 +34,13 @@ class QuizComponent extends React.Component {
             isAttended : false,
             userAnswers: [],
             step: 0,
-            user : JSON.parse(localStorage.getItem('userInfo')),
+            token: null,
+            user:null,
             calculateButtonText : 'امتیاز من را محاسبه کن'
         }
     }
     
-    getUserQuizResponse () {
+    getUserQuizResponse (token) {
         fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
@@ -81,7 +82,36 @@ class QuizComponent extends React.Component {
     }
     
     componentDidMount() {
-        this.getUserQuizResponse();
+        const token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(userinfo => {
+                this.setState({
+                   user: userinfo 
+                }, function() {
+                    
+                });
+                
+            });
+
+        this.setState(function(state, props) {
+            return {
+                token: token
+            }}, function() {
+                
+            });
+        this.getUserQuizResponse(token);
         fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
@@ -89,6 +119,7 @@ class QuizComponent extends React.Component {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',
@@ -98,7 +129,6 @@ class QuizComponent extends React.Component {
                 this.setState({
                    quizes: quizes 
                 }, function() {
-
                     console.info('quizes:', this.state.quizes);
                     console.info('props:', this.props);
                     // fill out answers array
@@ -153,7 +183,6 @@ class QuizComponent extends React.Component {
     }
     
     calculateUserPointInQuiz = async () => {
-        console.info('this:', this);
         let tempObject = {};
         let score = 0;
         for (let q of this.state.quizes) {
