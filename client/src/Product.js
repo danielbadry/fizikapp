@@ -161,7 +161,9 @@ class Product extends React.Component {
 
                     <Grid item xs={8}>
                         <Paper>
-                            <Player
+                            
+                        {(localStorage.getItem('token') && this.state.userCanSeeQuiz) ? 
+                                <Player
                                 poster={this.state.thumbnail}
                                 startTime = {this.state.startTime}
                                 style={{
@@ -182,6 +184,18 @@ class Product extends React.Component {
                                 <VolumeMenuButton />
                             </ControlBar>
                             </Player>
+                            :null}
+
+                                {(localStorage.getItem('token') && !this.state.userCanSeeQuiz) ? 
+                                <React.Fragment>
+                                    <div>شارژ نداری</div>
+                                </React.Fragment>
+                                :null}
+
+                            {(!localStorage.getItem('token')) ? 
+                                <div>لاگین کنید</div>
+                            :null}
+
                         </Paper>
                     </Grid>
                     
