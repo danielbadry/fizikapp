@@ -16,7 +16,7 @@ class UserBasics extends React.Component {
 
     componentDidMount() {
         let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(process.env.REACT_APP_API_URL+`users/${user.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`users/`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

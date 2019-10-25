@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-class ImgMediaCard extends React.Component {
+class PostCard extends React.Component {
 
 constructor(props) {
   super (props);
@@ -30,41 +30,57 @@ render() {
           alt="Contemplative Reptile"
           height="140"
           image={this.props.item.thumbnail}
-          title="Contemplative Reptile"
+          title={this.props.item.name}
         />
         <CardContent>
+          
           <Typography 
             gutterBottom 
             variant="h5" 
             component="h2"
             style={{
               fontFamily: 'IranSans_Light',
-              direction: 'rtl'
+              direction: 'rtl',
+              fontSize: '14px',
+              fontWeight:'bold'
             }}
             >
             {this.props.item.name}
           </Typography>
-          <Typography 
+          
+          <Typography
             variant="body2" 
             color="textSecondary" 
             component="p"
             style={{
               fontFamily: 'IranSans_Light',
+              // minHeight:'140px',
               direction: 'rtl',
-              textAlign: 'justify'
+              textAlign: 'justify',
+              overflow: 'hidden',
             }}
             >
             {this.props.item.description}
           </Typography>
+
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
+
+        <Button 
+          variant="contained" 
+          href="#outlined-buttons"
+          size="small" 
+          color="primary"
+          style={{
+            fontFamily: 'IranSans_Light',
+            direction: 'rtl',
+            // textAlign: 'justify'
+          }}
+          >
+          ورود به چالش
         </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+
       </CardActions>
     </Card>
   );
@@ -72,4 +88,4 @@ render() {
   
 }
 
-export default ImgMediaCard;
+export default PostCard;

@@ -9,6 +9,7 @@ import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import PostCard from "./PostCard";
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 class Home extends React.Component {
 
@@ -27,82 +28,111 @@ class Home extends React.Component {
     }
 
     render() {
-        if (false) {
-            return(
-                <div>loading...</div>
-            )
-            
-        } else
+        
         return (
-            <div>
-                <Grid container spacing={3}>
-                        
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-                    
-                    <Grid item xs={12}>
-                    <Paper>
-                        <HeaderSlider />
-                        {/* <ReactTourGuideSlider /> */}
-                    </Paper>
-                    </Grid>
-                    
-                    <SingleRow
-                        label="تعریفی ها"
-                        footer="مشاهده بیشتر"
-                        model="definitions"
-                        linkToShowMore='/definitions'
-                        count='3'
-                    />
-
+            <Container>
+                {/* <Grid container spacing={3}> */}
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='/products'
-                        count='3'
-                    />
+                        count='4'
+                    /> 
 
-                   {(this.state.token) ? <SingleRow
+                    {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='/products'
-                        count='3'
+                        count='4'
                         token={this.state.token}
                     /> : 
                     null
                     }
-                    
-                    
+
                     <SingleRow
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
                         linkToShowMore='/sciencechallenge'
-                        count='3'
+                        count='4'
                     />
-                    
+
                     <SingleRow
-                        label="تمرین ها"
+                        label="تعریفی ها"
                         footer="مشاهده بیشتر"
-                        model="exercises"
-                        linkToShowMore='/exercises'
-                        count='3'
+                        model="definitions"
+                        linkToShowMore='/definitions'
+                        count='4'
                     />
-                    
+
                     <SingleRow
                         label="درخواست ها"
                         footer="مشاهده بیشتر"
                         model="requests"
                         linkToShowMore='/requests'
-                        count='3'
-                    />
+                        count='4'
+                    /> 
+
+                {/* </Grid> */}
+            </Container>
+                    // <Grid item xs={12}>
+                    //     <MainHeader />
+                    // </Grid>
                     
-                    <StickyFooter />
-                </Grid>
-            </div>
+                    //  <Grid item xs={12}>
+                    // <Paper>
+                    //     <HeaderSlider />
+                    //     <ReactTourGuideSlider />
+                    // </Paper>
+                    // </Grid> 
+                    
+                //     <SingleRow
+                //         label="تعریفی ها"
+                //         footer="مشاهده بیشتر"
+                //         model="definitions"
+                //         linkToShowMore='/definitions'
+                //         count='3'
+                //     />
+
+                //     <SingleRow
+                //         label="تازه های فیزیک اپ"
+                //         footer="مشاهده بیشتر"
+                //         model="products"
+                //         linkToShowMore='/products'
+                //         count='3'
+                //     /> 
+
+                //    {(this.state.token) ? <SingleRow
+                //         label="ادامه ی ویدیوهای قبلی"
+                //         footer="مشاهده بیشتر"
+                //         model="products"
+                //         linkToShowMore='/products'
+                //         count='3'
+                //         token={this.state.token}
+                //     /> : 
+                //     null
+                //     } 
+                    
+                // <SingleRow
+                //     label="تمرین ها"
+                //     footer="مشاهده بیشتر"
+                //     model="exercises"
+                //     linkToShowMore='/exercises'
+                //     count='3'
+                // /> 
+                
+                // <SingleRow
+                //     label="درخواست ها"
+                //     footer="مشاهده بیشتر"
+                //     model="requests"
+                //     linkToShowMore='/requests'
+                //     count='3'
+                // /> 
+                
+                // <StickyFooter /> 
+                
         );
     }
 }

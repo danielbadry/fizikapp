@@ -43,11 +43,11 @@ class SingleRow extends React.Component{
     render() {
         return (
             <React.Fragment>
-                <Paper
+                {/* <Paper
                 style={{
                     marginBottom: '2%'
                 }}
-                >
+                > */}
                 <div 
                     style={{
                         display: 'block',
@@ -64,14 +64,10 @@ class SingleRow extends React.Component{
                     {this.props.label}
                 </div>
 
-                <Grid container xs={12} item>
+                <Grid container spacing={3}>
                     {this.state.rows.map(
                         (item, index) => 
-                        <Grid 
-                            item 
-                            xs={4}
-                            key={index}
-                            >
+                        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                             <PostCard
                                 item = {item}
                                 />
@@ -86,7 +82,7 @@ class SingleRow extends React.Component{
                     >
                     {this.props.footer}
                 </Link>
-                </Paper>
+                {/* </Paper> */}
             </React.Fragment>
         )
     }

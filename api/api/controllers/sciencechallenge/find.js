@@ -53,6 +53,10 @@ module.exports = {
       sciencechallenge.jalaaliUserFriendlyCreatedDate = moment(sciencechallenge.createdAt).fromNow();
       sciencechallenge.jalaaliUserFriendlyUpdatedDate = moment(sciencechallenge.updatedAt).fromNow();
       sciencechallenge.jalaaliFullUserFriendlyCreatedDate = sciencechallenge.jalaaliCreatedDate + ' ' + sciencechallenge.jalaaliUserFriendlyCreatedDate;
+      let len = sciencechallenge.description.length;
+      sciencechallenge.description = sciencechallenge.description.substr(0, 230);
+      if (len > 230)
+        sciencechallenge.description += '...';
     }
 
     finalData.dataLength = dataLength.length;
