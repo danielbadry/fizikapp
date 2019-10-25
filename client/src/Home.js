@@ -32,7 +32,8 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-            {/* <Container>
+                <MainHeader />
+                <Container>
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
@@ -83,7 +84,7 @@ class Home extends React.Component {
                         linkToShowMore='/requests'
                         count='4'
                     />
-             </Container>  */}
+             </Container>
              <StickyFooter2 />
              {/* <StickyFooter /> */}
                     {/* // <Grid item xs={12}>

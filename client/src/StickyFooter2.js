@@ -17,10 +17,8 @@ class StickyFooter2 extends React.Component {
             <Grid container
                 style={{
                     backgroundColor:'#262626',
-                    paddingRight:'10px'
                 }}
                 >
-
                 <Grid item xs={12}>
                     <Grid container justify="center" spacing={0}>
                     
@@ -29,7 +27,11 @@ class StickyFooter2 extends React.Component {
                                 direction:'rtl'
                             }}
                             >
-                            <dl>
+                            <dl
+                            style={{
+                                marginRight:'15px'
+                            }}
+                            >
                             <dt
                                     style={{
                                         fontFamily: 'IranSans',
@@ -53,7 +55,11 @@ class StickyFooter2 extends React.Component {
                                 direction:'rtl'
                             }}
                             >
-                            <dl>
+                            <dl
+                                style={{
+                                    marginRight:'15px'
+                                }}
+                                >
                                 <dt
                                     style={{
                                         fontFamily: 'IranSans',
@@ -85,7 +91,11 @@ class StickyFooter2 extends React.Component {
                                 direction:'rtl'
                             }}
                             >
-                            <dl>
+                            <dl
+                                style={{
+                                    marginRight:'15px'
+                                }}
+                                >
                                 <dt
                                     style={{
                                         fontFamily: 'IranSans',
@@ -118,7 +128,11 @@ class StickyFooter2 extends React.Component {
                                 direction:'rtl'
                             }}
                             >
-                            <dl>
+                            <dl
+                                style={{
+                                    marginRight:'15px'
+                                }}
+                                >
                                 <dt
                                     style={{
                                         fontFamily: 'IranSans',
@@ -140,7 +154,7 @@ class StickyFooter2 extends React.Component {
                                         margin:'0',
                                         lineHeight:'2'
                                     }}
-                                    >تمرین شماره {value}</dd>
+                                    >سایت مپ {value}</dd>
                                 ))}
                             </dl>
                         </Grid>
@@ -155,14 +169,16 @@ class StickyFooter2 extends React.Component {
                             height: '40px',
                             fontSize: '13px',
                             fontFamily: 'IranSans',
-                            color: 'white'
+                            color: 'white',
+                            backgroundColor: '#333333'
                         }}
                         >
                         <span>1398</span>
                         <span 
                             style={{
                                 color:'red',
-                                margin: '0 6px'
+                                margin: '0 6px',
+                                lineHeight: '3'
                             }}
                         >
                             ❤
