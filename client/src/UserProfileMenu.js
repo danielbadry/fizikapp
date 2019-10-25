@@ -3,6 +3,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Divider from '@material-ui/core/Divider';
 
 export default function UserProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,16 +28,39 @@ export default function UserProfileMenu() {
             >
               <AccountCircle />
             </IconButton>
-      <Menu
+            <Menu
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{
+          direction:'rtl'
+        }}
       >
-        <MenuItem onClick={handleClose}>پروفایل</MenuItem>
-        <MenuItem onClick={handleClose}>آخرین طرح من</MenuItem>
-        <MenuItem onClick={handleClose}>خروج</MenuItem>
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>
+            <div>حساب کاربری</div>
+            </MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>خرید طرح</MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>خروج</MenuItem>
+        
       </Menu>
     </React.Fragment>
   );

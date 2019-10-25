@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import MailIcon from '@material-ui/icons/Mail';
 import Badge from '@material-ui/core/Badge';
+import Divider from '@material-ui/core/Divider';
 
 export default function UserSystemMessageMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,10 +37,46 @@ export default function UserSystemMessageMenu() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{
+          direction:'rtl'
+        }}
       >
-        <MenuItem onClick={handleClose}>پیام اول</MenuItem>
-        <MenuItem onClick={handleClose}>پیام دوم</MenuItem>
-        <MenuItem onClick={handleClose}>پیام سوم</MenuItem>
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>
+            <div>لطفا حساب کاربری خود را شارژ نمایید</div>
+            </MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>ویدیویی تحت عنوان انرژی منتشر گردید</MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>آیا می دانستید سرعت اتمی چیست</MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>یک شاتل فضایی چگونه کار می کند</MenuItem>
+        <Divider />
+        <MenuItem 
+          style={{
+            fontFamily:'IranSans_Light',
+            fontSize:'13px'
+          }}
+          onClick={handleClose}>در مورد سوخت جت چه چیزی می دانید</MenuItem>
       </Menu>
     </React.Fragment>
   );

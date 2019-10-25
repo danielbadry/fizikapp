@@ -43,16 +43,26 @@ class UserToolInAppbar extends React.Component {
     render() {
         if (this.state.userinfo)
             return(
-                <div>
-                    {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید
+                <React.Fragment>
+                    <Typography 
+                        color="textPrimary"
+                        style={{
+                            color:'white',
+                            fontFamily:'IranSans_Light',
+                            fontSize:'14px'
+                        }}
+                        >
+                        {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید
+                    </Typography>
+                    
                     <UserSystemMessageMenu />
                     <UserNotificationMenu />
                     <UserProfileMenu />
-                </div>
+                </React.Fragment>
             )
         else 
             return (
-                <div>sign up</div>
+                <div>ثبت نام یا ورود</div>
             )
     }
 }

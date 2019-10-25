@@ -195,11 +195,11 @@ if (isGoToSearchProcess) {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          {/* <Typography className={classes.title} variant="h6" noWrap>
             fizik app
-          </Typography>
+          </Typography> */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -215,7 +215,8 @@ if (isGoToSearchProcess) {
               inputProps={{ 
                 'aria-label': 'search',
                 style: {
-                  fontFamily: "IranSans_Light"
+                  fontFamily: "IranSans_Light",
+                  fontSize: '13px'
                 }
               }}
             />
