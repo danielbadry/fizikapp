@@ -9,6 +9,7 @@ import SingleRow from "./SingleRow";
 import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import PostCard from "./PostCard";
+import NiceCard2 from "./NiceCard2";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
@@ -34,6 +35,7 @@ class Home extends React.Component {
             <React.Fragment>
                 <MainHeader />
                 <Container>
+                    <NiceCard2 />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
