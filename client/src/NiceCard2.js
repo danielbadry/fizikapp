@@ -19,7 +19,7 @@ class NiceCard2 extends React.Component {
                     {
                         [1,2,3].map(
                             (item, index) => 
-                            <Grid item md={4}>
+                            <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
                             <div class="center">
                                 <div class="card green">
                                     <div class="additional">
