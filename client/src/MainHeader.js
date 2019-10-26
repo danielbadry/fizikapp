@@ -9,7 +9,8 @@ class MainHeader extends React.Component {
           <div>
             <Paper>
               <Button 
-                variant="contained"
+                variant="outlined"
+                href="exercises"
                 style={{
                   fontFamily: "IranSans"
                 }}
@@ -18,8 +19,7 @@ class MainHeader extends React.Component {
               </Button>
     
               <Button 
-                variant="contained" 
-                color="primary"
+                variant="outlined" 
                 href="exercises"
                 style={{
                   fontFamily: "IranSans"
@@ -29,8 +29,7 @@ class MainHeader extends React.Component {
               </Button>
     
               <Button 
-                variant="contained" 
-                color="secondary"
+                variant="outlined" 
                 href="/requests"
                 style={{
                   fontFamily: "IranSans"
@@ -40,8 +39,7 @@ class MainHeader extends React.Component {
               </Button>
 
               <Button 
-                variant="contained" 
-                color="secondary"
+                variant="outlined" 
                 href="/definitions"
                 style={{
                   fontFamily: "IranSans"
@@ -51,8 +49,7 @@ class MainHeader extends React.Component {
               </Button>
 
               <Button 
-                variant="contained" 
-                color="secondary"
+                variant="outlined" 
                 href="/shopping-plans"
                 style={{
                   fontFamily: "IranSans"

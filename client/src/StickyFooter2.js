@@ -2,6 +2,10 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import LocalPhone from '@material-ui/icons/LocalPhone';
 
 class StickyFooter2 extends React.Component {
     constructor(props) {
@@ -10,6 +14,50 @@ class StickyFooter2 extends React.Component {
             definitions: [],
             products: []
         }
+    }
+
+    componentDidMount() {
+
+        fetch(process.env.REACT_APP_API_URL+`definitions?limit=10`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            })
+            .then(response => response.json())
+            .then(definitions => {
+                this.setState((state, props) => {
+                return {
+                    definitions: definitions.data
+                    };
+                });
+            });
+
+        fetch(process.env.REACT_APP_API_URL+`products?limit=10`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            })
+            .then(response => response.json())
+            .then(products => {
+                this.setState((state, props) => {
+                return {
+                    products: products.data
+                    };
+                });
+            });    
     }
 
     render() {
@@ -42,11 +90,161 @@ class StickyFooter2 extends React.Component {
                                         marginBottom: '13px',
                                         width:'80%'
                                     }}>ارتباط با ما</dt>
-                                <dd>سلام</dd>
-                                <dd>سلام</dd>
-                                <dd>سلام</dd>
-                                <dd>سلام</dd>
-                                <dd>سلام</dd>
+                                <Grid container justify="center" spacing={0}
+                                    style={{
+                                        direction:'rtl',
+                                        marginBottom:'4%'
+                                    }}
+                                    >
+                                    <Grid item md={4}>
+                                        <LocalPhone
+                                        style={{
+                                            backgroundColor:'#333333',
+                                            padding:'20px',
+                                            borderRadius:'3px',
+                                            width:'3em',
+                                            height:'3em',
+                                            color:'rgb(38, 38, 38)'
+                                        }}
+                                        />
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            واحد فروش
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            واحد پشتیبانی
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            طراحی و توسعه
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            ٠٢١٢٨٣١١
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                        ٢٨٣١٢٠٢١
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                        ٢٨٣١٢٠٢١
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                
+                                <Grid container justify="center" spacing={0}
+                                    style={{
+                                        direction:'rtl'
+                                    }}
+                                    >
+                                    <Grid item md={4}>
+                                        <ShoppingCart
+                                        style={{
+                                            backgroundColor:'#333333',
+                                            padding:'20px',
+                                            borderRadius:'3px',
+                                            width:'3em',
+                                            height:'3em',
+                                            color:'rgb(38, 38, 38)'
+                                        }}
+                                        />
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            فروش
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                         پشتیبانی
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            مدیریت
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item md={4}>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                            ٠٢١٢٨٣١١
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                        ٢٨٣١٢٠٢١
+                                        </Grid>
+                                        <Grid style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2',
+                                                color:'white'
+                                            }}>
+                                        ٢٨٣١٢٠٢١
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
                             </dl>
                         </Grid>
 
@@ -70,18 +268,31 @@ class StickyFooter2 extends React.Component {
                                         marginBottom: '13px',
                                         width:'80%'
                                     }}
-                                    >آخرین تمرین ها</dt>
-                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
-                                <dd
-                                    key={value}
-                                    style={{
-                                        color:'white',
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2'
-                                    }}
-                                    >تمرین شماره {value}</dd>
+                                    >آخرین تعریفی ها</dt>
+                                {this.state.definitions.map(
+                                    (item, index) => (
+                                        <dd
+                                            key={item.id}
+                                            style={{
+                                                color:'white',
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2'
+                                            }}
+                                            >
+                                                <Link 
+                                                    color="inherit"
+                                                    style={{
+                                                        fontFamily: 'IranSans_Ultralight',
+                                                        fontSize: '13px',
+                                                        margin:'0',
+                                                        lineHeight:'2'
+                                                    }}
+                                                    component={RouterLink} 
+                                                    to={`/definitions/${item.id}`}>{item.name}
+                                                    </Link>
+                                        </dd>
                                 ))}
                             </dl>
                         </Grid>
@@ -107,18 +318,30 @@ class StickyFooter2 extends React.Component {
                                         width:'80%'
                                     }}
                                     >آخرین ویدیو ها</dt>
-                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
-                                <dd
-                                    key={value}
-                                    style={{
-                                        color:'white',
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2',
-                                        width:'80%'
-                                    }}
-                                    >ویدیو شماره {value}</dd>
+                                {this.state.products.map(
+                                    (item, index) => (
+                                        <dd
+                                            key={item.id}
+                                            style={{
+                                                color:'white',
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2'
+                                            }}
+                                            >
+                                                <Link 
+                                                    color="inherit"
+                                                    style={{
+                                                        fontFamily: 'IranSans_Ultralight',
+                                                        fontSize: '13px',
+                                                        margin:'0',
+                                                        lineHeight:'2'
+                                                    }}
+                                                    component={RouterLink} 
+                                                    to={`/product/${item.id}`}>{item.name}
+                                                    </Link>
+                                        </dd>
                                 ))}
                             </dl>
                         </Grid>
@@ -144,9 +367,8 @@ class StickyFooter2 extends React.Component {
                                         width:'80%'
                                     }}
                                     >سایت مپ</dt>
-                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(value => (
+                                
                                 <dd
-                                    key={value}
                                     style={{
                                         color:'white',
                                         fontFamily: 'IranSans_Ultralight',
@@ -154,8 +376,155 @@ class StickyFooter2 extends React.Component {
                                         margin:'0',
                                         lineHeight:'2'
                                     }}
-                                    >سایت مپ {value}</dd>
-                                ))}
+                                    >
+                                        <Link 
+                                            color="inherit"
+                                            style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2'
+                                            }}
+                                            component={RouterLink} 
+                                            to={`/product/`}>صفحه ی اصلی</Link>
+                                            </dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    >
+                                        <Link 
+                                            color="inherit"
+                                            style={{
+                                                fontFamily: 'IranSans_Ultralight',
+                                                fontSize: '13px',
+                                                margin:'0',
+                                                lineHeight:'2'
+                                            }}
+                                            component={RouterLink} 
+                                            to={`/product/`}>
+                                        درباره ی ما</Link>
+                                        </dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>ارتباط با ما</Link></dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>قوانین و مقررات</Link></dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>حریم شخصی</Link></dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>چگونه طرح بخرم</Link></dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>کوییز چیست</Link></dd>
+                                
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/product/`}>نحوه ی درامدزایی</Link></dd>
+                                
                             </dl>
                         </Grid>
                     
