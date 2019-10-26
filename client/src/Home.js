@@ -6,6 +6,7 @@ import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
 import StickyFooter2 from "./StickyFooter2";
 import SingleRow from "./SingleRow";
+import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import PostCard from "./PostCard";
@@ -79,13 +80,15 @@ class Home extends React.Component {
                         count='4'
                     />
 
-                    <SingleRow
+                    {/* <SingleRow
                         label="درخواست ها"
                         footer="مشاهده بیشتر"
                         model="requests"
                         linkToShowMore='/requests'
                         count='4'
-                    />
+                    /> */}
+
+                    <RequestCard />
              </Container>
              <StickyFooter2 />
              {/* <StickyFooter /> */}
