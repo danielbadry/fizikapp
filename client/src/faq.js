@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
+import StickyFooter2 from "./StickyFooter2";
 import HeaderSlider from "./HeaderSlider";
 
 class Faq extends React.Component {
@@ -14,27 +14,14 @@ class Faq extends React.Component {
                 <Grid container spacing={3}>
                         
                     <Grid item xs={12}>
-                        <MainHeader />
+                        {/* <MainHeader /> */}
                     </Grid>
                     
                     <Grid item xs={12}>
                     <Paper>
-                        <HeaderSlider />
+                        {/* <HeaderSlider /> */}
                         {/* <ReactTourGuideSlider /> */}
                     </Paper>
-                    </Grid>
-
-                    <Grid items xs={12}>
-                    <Paper>
-               <TextField
-                    id="standard-name"
-                    label="در میان سوالات بگردید"
-                    // className={classes.textField}
-                    // value={values.name}
-                    // onChange={handleChange('name')}
-                    margin="normal"
-                /> 
-            </Paper>
                     </Grid>
 
                     <Grid 
@@ -265,7 +252,7 @@ class Faq extends React.Component {
                         </Paper>
                     </Grid>
 
-                    <StickyFooter />
+                    <StickyFooter2 />
                 </Grid>
             </div>
             

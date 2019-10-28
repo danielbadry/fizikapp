@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
+import StickyFooter2 from "./StickyFooter2";
 import SingleRow from "./SingleRow";
 import HeaderSlider from "./HeaderSlider";
 
@@ -11,25 +11,55 @@ class TermsConditions extends React.Component {
         
         return (
             <div>
-                <Grid container spacing={3}>
+                <Grid container spacing={0}>
                         
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
                     
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                     <Paper>
                         <HeaderSlider />
-                        {/* <ReactTourGuideSlider /> */}
                     </Paper>
+                    </Grid> */}
+                    
+                    <Grid 
+                        item
+                        xs={12} 
+                        sm={12}
+                        md={12} 
+                        lg={12}
+                        xl={12}
+                        
+                        style={{
+                            backgroundImage: `url(https://cdn.kastatic.org/images/interns/intern-careers/math.png)`,
+                            backgroundSize: 'cover',
+                            height: '300px'
+                        }}
+                        >
+                        <h2
+                        style={{
+                            color: 'white',
+                            fontFamily:'IranSans',
+                            float: 'right',
+                            bottom: '0px',
+                            fontSize: '36px',
+                            top: '55%',
+                            position: 'relative',
+                            right: '4%',
+                        }}
+                        >
+                            قوانین و مقررات
+                        </h2>
                     </Grid>
-                    <Grid item xs={12}
+
+                    <Grid item lg={12}
                     style={{
                         direction: 'rtl',
                         fontFamily: 'IranSans_Light',
                     }}
                     >
-                    <Paper>
+                    
                         <ul>
                             <li>
                             <span
@@ -197,9 +227,9 @@ class TermsConditions extends React.Component {
                                 </ul>
                             </li>
                         </ul>
-                    </Paper>
+                    
                     </Grid>
-                    <StickyFooter />
+                    <StickyFooter2 />
                 </Grid>
             </div>
         );

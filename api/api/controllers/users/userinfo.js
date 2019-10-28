@@ -21,17 +21,19 @@ module.exports = {
   fn: async function (inputs) {
 
     let token = this.req.headers.authorization;
+    
     let TokenArray = token.split(" ");
     let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
+    // return this.res.json(decodedToken);
     let userId = decodedToken.id;
-
-    let user = Users.findOne({
+    // return this.res.json(userId);
+    let user = await Users.findOne({
       where : {
         id: userId
       }
     });
 
-    return user;
+    return this.res.json(user);
 
   }
 

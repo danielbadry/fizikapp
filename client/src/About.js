@@ -15,6 +15,10 @@ class About extends React.Component {
             <div>
                 <Grid container spacing={0}>
 
+                    <Grid item xs={12}>
+                        <MainHeader />
+                    </Grid>
+
                     <Grid 
                         item
                         lg={12}
@@ -23,8 +27,20 @@ class About extends React.Component {
                             height: '300px'
                         }}
                         >
-                        <h2>
-                            A growing body of research indicates the impact that Khan Academy’s personalized mastery learning has on driving learning outcomes.
+                        <h2
+                        style={{
+                            fontFamily: 'IranSans',
+                            color: 'white',
+                            width: '50%',
+                            direction: 'rtl',
+                            marginRight: '25%',
+                            position: 'relative',
+                            marginLeft: '25%',
+                            lineHeight: '3rem',
+                            marginTop: '7%'
+                        }}
+                        >
+                        مدتیست داغ شدن کنکور ارزش فراگیری عمیق دروس را کم کرده ، و باعث شده دانش آموزان فقط به زدن گزینه ی صحیح بسنده کنند .
                         </h2>
                     </Grid>
                     
@@ -32,7 +48,17 @@ class About extends React.Component {
                         <Grid container spacing={0}>
 
                             <Grid item lg={12}>
-                                Students who prepare using Official SAT Practice see substantial improvement in their SAT scores.
+                                <p
+                                    style={{
+                                        fontFamily: 'IranSans',
+                                        textAlign: 'right',
+                                        fontSize: 'x-large',
+                                        width: '50%',
+                                        float: 'right'
+                                    }}
+                                    >
+                                    پر واضح است که این روند میرود تا وضعیت تحصیلی و آموزشی و سواد جمعی را در کشور به خطر بیندازد
+                                </p>
                             </Grid>
 
                             <Grid item lg={4}>
@@ -43,13 +69,33 @@ class About extends React.Component {
                                 <Grid container spacing={0}>
                                     
                                     <Grid item lg={12}>
-                                        30 point increase, a 1.5x gain in SAT scores
+                                        <p
+                                        style={{
+                                            fontFamily: 'IranSans',
+                                            float: 'right',
+                                            direction: 'rtl',
+                                            fontWeight: '600'
+                                        }}
+                                        >
+                                            در بعضی از دروس احتمالا مسیر یافتن گزینه ی صحیح همان خوب یادگرفتن موضوع باشد و تاثیری بر کیفیت آموزش آن درس نداشته باشد.
+                                        </p>
                                     </Grid>
                                     <Grid item lg={12}>
-                                        In 2017, Khan Academy and the College Board, the maker of the SAT, analyzed gains between the PSAT/NMSQT and the SAT for approximately 250,000 students. Results indicated that studying 6-8 hours with Official SAT Practice on Khan Academy is associated with an average increase of 90-points from the PSAT/NMSQT to the SAT, compared to a 60-point increase for students not using it.
-                                    </Grid>
-                                    <Grid item lg={12}>
-                                        Full study 
+                                        <p
+                                            style={{
+                                                fontFamily:'IranSans',
+                                                direction: 'rtl',
+                                                fontSize: '14px',
+                                                textAlign: 'justify',
+                                                width: '79%',
+                                                float: 'right',
+                                                lineHeight: '1.9rem'
+                                            }}
+                                            >
+                                        ولی هر چه درس مفهومی تر ، تحلیلی تر و نیاز به کار و تمرین بیشتر داشته باشد، تمرکز کردن بر روی یافتن گزینه ی صحیح ، دانش آموز را از عمیق و با کیفیت یاد گرفتن مطلب دور میکند. سر دسته ی این دروس "فیزیک" است !!! 
+شاید باور اینکه درس " فیزیک " بر خلاف باور عموم از ریاضی هم در این خصوص پیشی‌ میگیرد، سخت باشد ؛ چرا که ریاضی علی رغم تکنیک و تحلیل بسیار زیادی که دارد ، نهایتا در دنیای دو بعدی کاغذ و دفتر خلاصه میشود ، در حالی که فیزیک را هر‌روز و همه وقت و همه جا در زندگیمان تجربه میکنیم و با آن سروکار داریم   میشه گفت بشر ریاضی را برای تحلیل قوانین طبیعت اختراع کرده ، به عبارتی ریاضیات  یک جعبه ابزار است در دست فردی مکانیک به اسم "فیزیک".
+                                        </p>
+
                                     </Grid>
 
                                 </Grid>
@@ -85,8 +131,24 @@ class About extends React.Component {
                                 </Grid>
                                 
                                 <Grid item lg={8}>
-                                “I love that Khan Academy shows you your errors. It really helped me in understanding words in context; it really broke it down for me. With the PSAT/NMSQT score I doubted myself, but my teachers showed me with Khan Academy I could do it. If it wasn’t for Khan Academy, I wouldn’t have access to SAT practice at all. It’s a godsend!”
-—TATIANA, A SENIOR AT OAK RIDGE HIGH SCHOOL IN ORLANDO, FLORIDA
+                                    <p
+                                    style={{
+                                        fontFamily: 'IranSans',
+                                        color: 'white',
+                                        width: '82%',
+                                        direction: 'rtl',
+                                        // marginRight: '25%',
+                                        position: 'relative',
+                                        float: 'right',
+                                        // lineHeight: '3rem',
+                                        // marginTop: '7%' 
+                                    }}
+                                    >
+                                        آموزش غیر مفهومی درس فیزیک نه تنها دانشمندان علوم پایه ، بلکه تمام مهندسان در تمامی‌گرایش ها  و حتی پزشکان را مورد تهدید قرار میدهد.
+                                        چرا که همانطور که گفته شد فیزیک را میتوان علم مادر در نظر گرفت 
+                                        هر چه درک شهودی ما از این علم غنی تر باشد ، در رشته ای که در آن تخصص داریم مهارت و کیفیت بیشتری خواهیم داشت .
+                                        این دغدغه ما را بر آن داشت که در راه هرچه گویا تر کردن مطالب بکوشیم ، نهایت تلاش را کرده ایم تا تکنیک ELI 5 را پیاده سازی کنیم 
+                                        </p>
                                 </Grid>
 
                             </Grid>
