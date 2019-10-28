@@ -157,7 +157,17 @@ class About extends React.Component {
 
                     <Grid item lg={12}>
                         <Grid item lg={12}>
-                            Khan Academy is the leading online learning resource used and trusted by US teachers and students.
+                            <p
+                                style={{
+                                    fontFamily: 'IranSans_UltraLight',
+                                    // fontSize: '14px',
+                                    textAlign: 'center',
+                                    // padding: '10px',
+                                    direction: 'rtl',
+                                }}
+                            >
+                                گفتنیست درست است که هدف اصلی و اولویت ما یادگیری عمیق و مفهومیست
+                            </p>
                         </Grid>
                         <Grid container spacing={0}>
                             <Grid item lg={4}>
@@ -167,7 +177,9 @@ class About extends React.Component {
                                             style={{
                                                 fontSize: '80px',
                                                 fontWeight: 'bold',
-                                                color: '#71B307'
+                                                color: '#71B307',
+                                                textAlign: 'center',
+                                                padding: '18px 25px'
                                             }}
                                             >
                                             90%
@@ -177,25 +189,91 @@ class About extends React.Component {
                                     <Grid item lg={12}>
                                     <Typography
                                             style={{
-                                                fontFamily: 'IranSans_UltraLight'
+                                                fontFamily: 'IranSans_UltraLight',
+                                                fontSize: '14px',
+                                                textAlign: 'justify',
+                                                padding: '10px',
+                                                direction: 'rtl',
+                                                lineHeight: '1.7rem'
                                             }}
                                             >
-                                            توضیحاتش
+                                            تا هر دانش‌آموزی که به هر دلیلی در سر کلاس خوب مطلب‌ را نگرفته و حتی کسانی که اصلا دانش آموز نیستند ، بتوانند با علاقه و از صفر به یادگیری بپردازند و فیزیک را در حد دبیرستان و کنکور به خوبی فرابگیرند ، در این راه از تصاویر و انیمیشن ها  استفاده کرده ایم که مقداری از آنها از منابع گوناگون تهییه شده است.
                                         </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item lg={4}>
-                                90%
+                                <Grid container spacing={0}>
+                                    <Grid item lg={12}>
+                                        <Typography
+                                            style={{
+                                                fontSize: '80px',
+                                                fontWeight: 'bold',
+                                                color: '#71B307',
+                                                textAlign: 'center',
+                                                padding: '18px 25px'
+                                            }}
+                                            >
+                                            90%
+                                        </Typography>
+                                        
+                                    </Grid>
+                                    <Grid item lg={12}>
+                                    <Typography
+                                            style={{
+                                                fontFamily: 'IranSans_UltraLight',
+                                                fontSize: '14px',
+                                                textAlign: 'justify',
+                                                padding: '10px',
+                                                direction: 'rtl',
+                                                lineHeight: '1.7rem'
+                                            }}
+                                            >
+                                            تا هر دانش‌آموزی که به هر دلیلی در سر کلاس خوب مطلب‌ را نگرفته و حتی کسانی که اصلا دانش آموز نیستند ، بتوانند با علاقه و از صفر به یادگیری بپردازند و فیزیک را در حد دبیرستان و کنکور به خوبی فرابگیرند ، در این راه از تصاویر و انیمیشن ها  استفاده کرده ایم که مقداری از آنها از منابع گوناگون تهییه شده است.
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                             <Grid item lg={4}>
-                                90%
+                                <Grid container spacing={0}>
+                                    <Grid item lg={12}>
+                                        <Typography
+                                            style={{
+                                                fontSize: '80px',
+                                                fontWeight: 'bold',
+                                                color: '#71B307',
+                                                textAlign: 'center',
+                                                padding: '18px 25px'
+                                            }}
+                                            >
+                                            90%
+                                        </Typography>
+                                        
+                                    </Grid>
+                                    <Grid item lg={12}>
+                                    <Typography
+                                            style={{
+                                                fontFamily: 'IranSans_UltraLight',
+                                                fontSize: '14px',
+                                                textAlign: 'justify',
+                                                padding: '10px',
+                                                direction: 'rtl',
+                                                lineHeight: '1.7rem'
+                                            }}
+                                            >
+                                            تا هر دانش‌آموزی که به هر دلیلی در سر کلاس خوب مطلب‌ را نگرفته و حتی کسانی که اصلا دانش آموز نیستند ، بتوانند با علاقه و از صفر به یادگیری بپردازند و فیزیک را در حد دبیرستان و کنکور به خوبی فرابگیرند ، در این راه از تصاویر و انیمیشن ها  استفاده کرده ایم که مقداری از آنها از منابع گوناگون تهییه شده است.
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                         <Grid item lg={12}>
                             <Typography
                                 style={{
-                                    fontFamily: 'IranSans_UltraLight'
+                                    fontFamily: 'IranSans_UltraLight',
+                                    textAlign: 'center',
+                                    fontWeight: '600',
+                                    padding: '8px 0px'
                                 }}
                                 >
                                 در این قسمت می توان متنی را در رابطه با این قسمت قرار داد
@@ -216,35 +294,51 @@ class About extends React.Component {
                                 direction="column"
                                 alignItems="center"
                                 justify="center"
-                                style={{ minHeight: '87vh' }}
+                                style={{ 
+                                    // minHeight: '87vh' 
+                                }}
                                 >
                                 <Grid item lg={3}>
                                     <Grid container spacing={0}>
 
                                         <Grid item lg={12}>
-                                            <div
+
+                                            <p
                                                 style={{
                                                     color:'white',
-                                                    fontFamily:'IranSans'
+                                                    fontFamily:'IranSans',
+                                                    textAlign: 'center',
+                                                    marginTop:'90px'
                                                 }}
-                                                >آیا هنوز در فیزیک اپ ثبت نام نکرده اید؟</div>
-                                            <div
-                                                style={{
-                                                    color:'white',
-                                                    fontFamily:'IranSans'
-                                                }}
-                                            >آیا هنوز در فیزیک اپ ثبت نام نکرده اید؟</div>
+                                            >آیا هنوز در فیزیک اپ ثبت نام نکرده اید؟</p>
+
                                         </Grid>
 
                                         <Grid item lg={12}>
-                                            <Button 
-                                                variant="outlined"
+                                            <p
                                                 style={{
-                                                    fontFamily:'IranSans'
+                                                    textAlign: 'center'
                                                 }}
                                                 >
+                                                    <Button 
+                                                        variant="contained"
+                                                        color="secondary"
+                                                        style={{
+                                                            // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                                                            border: 0,
+                                                            fontFamily:'IranSans',
+                                                            borderRadius: 3,
+                                                            // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+                                                            color: 'white',
+                                                            height: 48,
+                                                            width:250,
+                                                            padding: '0 30px',
+                                                        }}
+                                                        >
                                                 ثبت نام
                                             </Button>
+                                            </p>
+                                            
                                         </Grid>
 
                                     </Grid>
@@ -254,6 +348,7 @@ class About extends React.Component {
                     </Grid>
 
                 </Grid>
+                <StickyFooter2 />
             </div>
             
         );
