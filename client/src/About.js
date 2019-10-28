@@ -46,41 +46,51 @@ class About extends React.Component {
                     
                     <Grid item lg={12}>
                         <Grid container spacing={0}>
-
-                            <Grid item lg={12}>
+                        
+                            <Grid 
+                                item 
+                                xs={12} sm={12} md={12} lg={12} xl={12}
+                                >
                                 <p
                                     style={{
                                         fontFamily: 'IranSans',
                                         textAlign: 'right',
                                         fontSize: 'x-large',
-                                        width: '50%',
-                                        float: 'right'
+                                        float: 'right',
+                                        padding:'1px 25px'
                                     }}
                                     >
                                     پر واضح است که این روند میرود تا وضعیت تحصیلی و آموزشی و سواد جمعی را در کشور به خطر بیندازد
                                 </p>
                             </Grid>
-
-                            <Grid item lg={4}>
-                                <img alt="Cartoon of a multiple choice test with a book and pen." src="https://cdn.kastatic.org/images/sat/sat.svg"></img>
+                            <Grid item xs={12} sm={12} md={4} lg={4} xl={4} style={{
+                                textAlign: 'center'
+                            }}>
+                                <img 
+                                    style={{
+                                        padding: '31px 22px',
+                                    }}
+                                    alt="Cartoon of a multiple choice test with a book and pen." 
+                                    src="https://cdn.kastatic.org/images/sat/sat.svg"></img>
                             </Grid>
                             
-                            <Grid item lg={8}>
+                            <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                                 <Grid container spacing={0}>
                                     
-                                    <Grid item lg={12}>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                         <p
                                         style={{
                                             fontFamily: 'IranSans',
                                             float: 'right',
                                             direction: 'rtl',
-                                            fontWeight: '600'
+                                            fontWeight: '600',
+                                            padding:'1px 25px'
                                         }}
                                         >
                                             در بعضی از دروس احتمالا مسیر یافتن گزینه ی صحیح همان خوب یادگرفتن موضوع باشد و تاثیری بر کیفیت آموزش آن درس نداشته باشد.
                                         </p>
                                     </Grid>
-                                    <Grid item lg={12}>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                         <p
                                             style={{
                                                 fontFamily:'IranSans',
@@ -89,7 +99,8 @@ class About extends React.Component {
                                                 textAlign: 'justify',
                                                 width: '79%',
                                                 float: 'right',
-                                                lineHeight: '1.9rem'
+                                                lineHeight: '1.9rem',
+                                                padding:'1px 25px'
                                             }}
                                             >
                                         ولی هر چه درس مفهومی تر ، تحلیلی تر و نیاز به کار و تمرین بیشتر داشته باشد، تمرکز کردن بر روی یافتن گزینه ی صحیح ، دانش آموز را از عمیق و با کیفیت یاد گرفتن مطلب دور میکند. سر دسته ی این دروس "فیزیک" است !!! 
@@ -107,9 +118,14 @@ class About extends React.Component {
                     <Grid 
                         item
                         lg={12}
+                        md={12}
+                        sm={12}
+                        xl={12}
+                        xs={12}
                         style={{
                             backgroundImage: `url(https://cdn.kastatic.org/images/impact/featured.png)`,
                             height: '300px',
+                            backgroundPosition: 'center center',
                             backgroundSize: 'cover'
                         }}
                         >
@@ -117,31 +133,41 @@ class About extends React.Component {
 
                     <Grid 
                         item
-                        lg={12}
+                        xs={12} sm={12} md={12} lg={12} xl={12}
                         style={{
                             backgroundColor:'#0c7f99',
-                            height:'300px'
+                            textAlign: 'center'
                         }}
                         >
 
                             <Grid container spacing={0}>
                                 
-                                <Grid item lg={4}>
-                                    <img src="https://cdn.kastatic.org/images/impact/laptop.svg" />
+                                <Grid 
+                                    item 
+                                    xs={12} sm={12} md={4} lg={4} xl={4}
+                                    >
+                                    <img 
+                                        style={{
+                                            padding: '31px 22px',
+                                        }}
+                                        src="https://cdn.kastatic.org/images/impact/laptop.svg"
+                                        
+                                        />
                                 </Grid>
                                 
-                                <Grid item lg={8}>
+                                <Grid 
+                                    item xs={12} sm={12} md={8} lg={8} xl={8}>
                                     <p
                                     style={{
                                         fontFamily: 'IranSans',
                                         color: 'white',
                                         width: '82%',
-                                        direction: 'rtl',
-                                        // marginRight: '25%',
+                                        direction: 'rtl', 
                                         position: 'relative',
                                         float: 'right',
-                                        // lineHeight: '3rem',
-                                        // marginTop: '7%' 
+                                        padding: '31px 22px',
+                                        lineHeight: '2rem',
+                                        textAlign: 'right'
                                     }}
                                     >
                                         آموزش غیر مفهومی درس فیزیک نه تنها دانشمندان علوم پایه ، بلکه تمام مهندسان در تمامی‌گرایش ها  و حتی پزشکان را مورد تهدید قرار میدهد.
@@ -160,9 +186,8 @@ class About extends React.Component {
                             <p
                                 style={{
                                     fontFamily: 'IranSans_UltraLight',
-                                    // fontSize: '14px',
                                     textAlign: 'center',
-                                    // padding: '10px',
+                                    fontWeight: '600',
                                     direction: 'rtl',
                                 }}
                             >
@@ -170,9 +195,9 @@ class About extends React.Component {
                             </p>
                         </Grid>
                         <Grid container spacing={0}>
-                            <Grid item lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                 <Grid container spacing={0}>
-                                    <Grid item lg={12}>
+                                    <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                         <Typography
                                             style={{
                                                 fontSize: '80px',
@@ -202,9 +227,9 @@ class About extends React.Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                 <Grid container spacing={0}>
-                                    <Grid item lg={12}>
+                                    <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                         <Typography
                                             style={{
                                                 fontSize: '80px',
@@ -234,9 +259,9 @@ class About extends React.Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item lg={4}>
+                            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                 <Grid container spacing={0}>
-                                    <Grid item lg={12}>
+                                    <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                                         <Typography
                                             style={{
                                                 fontSize: '80px',
@@ -281,7 +306,7 @@ class About extends React.Component {
                         </Grid>
                     </Grid>
 
-                    <Grid item lg={12}
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                         style={{
                             height:'300px',
                             backgroundImage: `url(https://cdn.kastatic.org/images/impact/bg-cta.svg)`,
@@ -295,13 +320,12 @@ class About extends React.Component {
                                 alignItems="center"
                                 justify="center"
                                 style={{ 
-                                    // minHeight: '87vh' 
                                 }}
                                 >
-                                <Grid item lg={3}>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Grid container spacing={0}>
 
-                                        <Grid item lg={12}>
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 
                                             <p
                                                 style={{
@@ -314,13 +338,14 @@ class About extends React.Component {
 
                                         </Grid>
 
-                                        <Grid item lg={12}>
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                             <p
                                                 style={{
                                                     textAlign: 'center'
                                                 }}
                                                 >
                                                     <Button 
+                                                        href='/signup'
                                                         variant="contained"
                                                         color="secondary"
                                                         style={{

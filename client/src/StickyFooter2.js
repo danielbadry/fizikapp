@@ -386,7 +386,7 @@ class StickyFooter2 extends React.Component {
                                                 lineHeight:'2'
                                             }}
                                             component={RouterLink} 
-                                            to={`/product/`}>صفحه ی اصلی</Link>
+                                            to={`/`}>صفحه ی اصلی</Link>
                                             </dd>
                                 
                                 <dd
@@ -407,7 +407,7 @@ class StickyFooter2 extends React.Component {
                                                 lineHeight:'2'
                                             }}
                                             component={RouterLink} 
-                                            to={`/product/`}>
+                                            to={`/about`}>
                                         درباره ی ما</Link>
                                         </dd>
                                 
@@ -428,7 +428,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>ارتباط با ما</Link></dd>
+                                    to={`/contact-us`}>ارتباط با ما</Link></dd>
                                 
                                 <dd
                                     style={{
@@ -447,7 +447,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>قوانین و مقررات</Link></dd>
+                                    to={`/terms-conditions`}>قوانین و مقررات</Link></dd>
                                 
                                 <dd
                                     style={{
@@ -466,7 +466,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>حریم شخصی</Link></dd>
+                                    to={`/privacy-policy`}>حریم شخصی</Link></dd>
                                 
                                 <dd
                                     style={{
@@ -485,7 +485,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>چگونه طرح بخرم</Link></dd>
+                                    to={`/disclaimer`}>رفع مسئولیت</Link></dd>
                                 
                                 <dd
                                     style={{
@@ -504,7 +504,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>کوییز چیست</Link></dd>
+                                    to={`/faq`}>سوالات متداول</Link></dd>
                                 
                                 <dd
                                     style={{
@@ -523,7 +523,7 @@ class StickyFooter2 extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/`}>نحوه ی درامدزایی</Link></dd>
+                                    to={`/shopping-plans`}>طرح های خرید</Link></dd>
                                 
                             </dl>
                         </Grid>

@@ -11,19 +11,47 @@ class Faq extends React.Component {
         
         return (
             <div>
-                <Grid container spacing={3}>
-                        
-                    <Grid item xs={12}>
-                        {/* <MainHeader /> */}
-                    </Grid>
+                <Grid container spacing={0}>
                     
                     <Grid item xs={12}>
-                    <Paper>
-                        {/* <HeaderSlider /> */}
-                        {/* <ReactTourGuideSlider /> */}
-                    </Paper>
+                        <MainHeader />
                     </Grid>
-
+                    
+                    {/* <Grid item xs={12}>
+                    <Paper>
+                        <HeaderSlider />
+                        <ReactTourGuideSlider />
+                    </Paper>
+                    </Grid> */}
+                    <Grid 
+                        item
+                        xs={12} 
+                        sm={12}
+                        md={12} 
+                        lg={12}
+                        xl={12}
+                        
+                        style={{
+                            backgroundImage: `url(https://cdn.kastatic.org/images/interns/intern-careers/math.png)`,
+                            backgroundSize: 'cover',
+                            height: '300px'
+                        }}
+                        >
+                        <h2
+                        style={{
+                            color: 'white',
+                            fontFamily:'IranSans',
+                            float: 'right',
+                            bottom: '0px',
+                            fontSize: '36px',
+                            top: '55%',
+                            position: 'relative',
+                            right: '4%',
+                        }}
+                        >
+                            سوالات متداول
+                        </h2>
+                    </Grid>
                     <Grid 
                     items 
                     xs={12}
@@ -32,7 +60,7 @@ class Faq extends React.Component {
                         fontFamily: 'IranSans_Light',
                     }}
                     >
-                        <Paper>
+                        
                         <ul>
                             <li>
                                 <span
@@ -249,7 +277,7 @@ class Faq extends React.Component {
                             </li>
                             
                         </ul>
-                        </Paper>
+                        
                     </Grid>
 
                     <StickyFooter2 />
