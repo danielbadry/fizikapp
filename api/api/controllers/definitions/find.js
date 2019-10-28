@@ -105,7 +105,7 @@ module.exports = {
     }
     
     for (let definition of allRequests) {
-      definition.thumbnail = "http://localhost:1337/files/definitionImage/" + definition.thumbnail;
+      definition.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
       moment.locale('en');
       definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       definition.jalaaliUpdatedDate = momentJalaali(definition.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -116,6 +116,7 @@ module.exports = {
     }
     finalData.dataLength = allRequests.length;
     finalData.data = allRequests;
+    finalData.isAuthenticated = true;
     return finalData;
   }
 

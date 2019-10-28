@@ -69,6 +69,7 @@ module.exports = {
     
     finalData.dataLength = allShopsLength.length;
     finalData.data = allShops;
+    finalData.isAuthenticated = true;
     return finalData;
 
   }

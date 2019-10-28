@@ -41,7 +41,8 @@ class UserToolInAppbar extends React.Component {
     }
 
     render() {
-        if (this.state.userinfo)
+        // if (this.state.userinfo)
+        if (true)
             return(
                 <React.Fragment>
                     <Typography 
@@ -52,7 +53,8 @@ class UserToolInAppbar extends React.Component {
                             fontSize:'14px'
                         }}
                         >
-                        {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید
+                        {/* {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید */}
+                        ایمان ارقامی خوش آمدید
                     </Typography>
                     
                     <UserSystemMessageMenu />

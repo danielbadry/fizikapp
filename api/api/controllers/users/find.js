@@ -119,6 +119,7 @@ dataLength = au.length;
     }
     finalData.dataLength = dataLength;
     finalData.data = allUsers;
+    finalData.isAuthenticated = true;
     return finalData;
 
   }

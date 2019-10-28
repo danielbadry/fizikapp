@@ -40,7 +40,6 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // return 'ali';
     let finalData = {};
     let tagsArray = [];
     let dataLength = await Products.find();
@@ -99,6 +98,7 @@ module.exports = {
 
     finalData.dataLength = dataLength.length;
     finalData.data = allProducts;
+    finalData.isAuthenticated = true;
     return finalData;
 
   }

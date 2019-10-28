@@ -17,11 +17,11 @@ module.exports = {
         let user = await Users.find({
             or : [
                 {
-                    userName:req.param('userName')
+                    userName:req.param('username')
                 }
             ]
         });
-        // return res.json(user);
+        
         if(user.length > 0) {
             errorList.push({
                 errorNumber : 100,
@@ -37,13 +37,13 @@ module.exports = {
         }
 
         if (errorList.length === 0) {
-            var hash = bcrypt.hashSync(req.param('passWord'), salt);
+            var hash = bcrypt.hashSync(req.param('password'), salt);
             let user = await Users
                 .create({
                     firstName:req.param('firstName'),
                     lastName:req.param('lastName'),
                     email:req.param('email'),
-                    userName:req.param('userName'),
+                    userName:req.param('username'),
                     password:hash,
                     mobile:req.param('mobile'),
                     phone:req.param('phone'),

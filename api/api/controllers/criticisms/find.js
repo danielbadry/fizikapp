@@ -80,6 +80,7 @@ module.exports = {
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allCriticisms;
+    finalData.isAuthenticated = true;
     return finalData;
   }
 

@@ -45,7 +45,7 @@ module.exports = {
     ;
 
     for (let sciencechallenge of allSciencechallenges) {
-      sciencechallenge.thumbnail = "http://localhost:1337/files/sciencechallengeImage/" + sciencechallenge.thumbnail;
+      sciencechallenge.thumbnail = sails.config.custom.apiUrl + "/files/sciencechallengeImage/" + sciencechallenge.thumbnail;
       moment.locale('en');
       sciencechallenge.jalaaliCreatedDate = momentJalaali(sciencechallenge.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       sciencechallenge.jalaaliUpdatedDate = momentJalaali(sciencechallenge.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
@@ -61,6 +61,7 @@ module.exports = {
 
     finalData.dataLength = dataLength.length;
     finalData.data = allSciencechallenges;
+    finalData.isAuthenticated = true;
     return finalData;
 
   }

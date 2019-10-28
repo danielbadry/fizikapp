@@ -21,8 +21,10 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-
-    let token = this.req.headers.authorization;
+    // let token;
+    // return this.res.json(typeof(this.req.headers.authorization));
+    if(typeof(this.req.headers.authorization) !== 'undefined') {
+    token = this.req.headers.authorization;
     let TokenArray = token.split(" ");
     if (TokenArray[1] !== 'null')
     {
@@ -63,10 +65,11 @@ module.exports = {
           id: inputs.id,
           summary,
           thumbnail: summary.thumbnail,
-          isUserAnswered: isUserAnswered
+          isUserAnswered: isUserAnswered,
+          isAuthenticated: true
         });
 
-    } else {
+    }} else {
       let summary = await Sciencechallenge.findOne({
         id: inputs.id
       });
@@ -81,7 +84,8 @@ module.exports = {
         id: inputs.id,
         summary,
         thumbnail: summary.thumbnail,
-        isUserAnswered: false
+        isUserAnswered: false,
+        isAuthenticated: false
       });
 
     }

@@ -68,7 +68,7 @@ module.exports = {
       parentId: inputs.id,
       userId: null
     });
-
+    request.isAuthenticated= true;
     return request;
   }
 

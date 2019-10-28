@@ -88,7 +88,8 @@ module.exports = {
       id: inputs.id,
       summary,
       tags: [],
-      thumbnail: summary.thumbnail
+      thumbnail: summary.thumbnail,
+      isAuthenticated: true
     });
   }
 

@@ -50,6 +50,7 @@ module.exports = {
   }
   finalData.dataLength = dataLength.length;
   finalData.data = allTags;
+  finalData.isAuthenticated = true;
   return finalData;
   }
 
