@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import KeyboardArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 class Shoppingplans extends React.Component {
     
@@ -77,13 +78,15 @@ class Shoppingplans extends React.Component {
                         }}>
                             <Grid container spacing={0}>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
-                                    textAlign:'center'
+                                    textAlign:'center',
+                                    fontWeight: 'bold',
+                                    margin: '19px 0'
                                 }}>
-                                    خرید اشتراک فیلیمو
+                                    خرید اشتراک فیزیک اپ
                                 </Grid>
                                     {[1,2,3,4].map(
                                         (item, index) => 
-                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                        <Grid key={index} item xs={12} sm={12} md={12} lg={12} xl={12} style={{
                                             backgroundColor: '#fafafa',
                                             border: '1px solid #ededed',
                                             margin:'9px 10px',
@@ -141,7 +144,8 @@ class Shoppingplans extends React.Component {
                                             fontWeight:'500',
                                             direction:'rtl',
                                             textAlign:'right',
-                                            fontWeight: '700'
+                                            fontWeight: '700',
+                                            padding: '15px 13px'
                                         }}>
                                         %9 مالیات بر ارزش افزوده به همه انواع اشتراک‌ها اضافه می‌شود
                                     </Typography>
@@ -159,7 +163,7 @@ class Shoppingplans extends React.Component {
                                         <dl>
                                             <dt style={{
                                                 fontWeight: 'bold'
-                                            }}>شما با داشتن اشتراک فیلیمو به امکانات زیر دسترسی دارید:</dt>
+                                            }}>شما با داشتن اشتراک فیزیک اپ به امکانات زیر دسترسی دارید:</dt>
                                             <dd style={{
                                                 fontSize: '14px',
                                                 lineHeight: '2rem'
@@ -172,7 +176,26 @@ class Shoppingplans extends React.Component {
                                                 fontSize: '14px',
                                                 lineHeight: '2rem'
                                             }}>تماشای فیلم‌ها به صورت همزمان روی ۳ دستگاه (تلویزیون، کامپیوتر، گوشی یا تبلت)</dd>
+                                            <dd style={{
+                                                fontSize: '14px',
+                                                lineHeight: '2rem',
+                                                color:'#e09422'
+                                            }}>شرایط حجم اینترنت رایگان تماشا و دانلود فیلم‌های فیزیک اپ</dd>
                                         </dl>
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                    fontSize: '14px',
+                                    direction: 'rtl',
+                                    padding: '13px 14px'
+                                }}>
+                                    <img
+                                        style={{
+                                            width:'25px',
+                                            height:'25px',
+                                            margin:'0 8px'
+                                        }} 
+                                        src="https://www.filimo.com/_/assets/web/ui/img-nM32Gle1NLCorhcsZMAUTA/payments/invite-gift.png" />
+                                    با هر بار خرید اشتراک‌ ماهانه، شما یک کد تخفیف به دلخواه و انتخاب خودتان از سایت‌های (دیجی کالا، اسنپ فود، فیدیبو، پلاک، سینماتیکت، تیوال و...) هدیه می‌گیرید.
                                 </Grid>
                             </Grid>
                         </Paper>
