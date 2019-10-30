@@ -101,7 +101,8 @@ class Definition extends React.Component {
                                 float: 'right',
                                 marginTop: '16%',
                                 marginRight: '5%',
-                                fontSize: '22px'
+                                fontSize: '22px',
+                                borderBottom: 'solid'
                             }}
                         >
                             {this.state.summary.name}
@@ -118,15 +119,21 @@ class Definition extends React.Component {
                             </Paper>
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Grid container spacing={0}>
-                            <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                            overflow:'hidden'
+                        }}>
+                        <Grid container spacing={1} justify="center" 
+                            style={{
+                                margin:0
+                            }}
+                        >
+                            <Grid item xs={9} sm={4} md={4} lg={3} xl={3}>
                                 <Paper>
-                                    <SimpleTreeView />
+                                    {/* <SimpleTreeView /> */}a
                                 </Paper>
                             </Grid>
                             
-                            <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+                            <Grid item xs={11} sm={7} md={7} lg={8} xl={8}>
                                 <Paper
                                     style={{
                                         padding: '10px 37px'
