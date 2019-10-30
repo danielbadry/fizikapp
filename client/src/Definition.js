@@ -83,7 +83,7 @@ class Definition extends React.Component {
 
     render () {
         return (
-            <Grid container spacing={0}> 
+            <Grid container spacing={0} justify="center"> 
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
@@ -109,7 +109,7 @@ class Definition extends React.Component {
                         </Typography>
                     </Grid>
                     
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
                         <Paper>
                             <ArticlesToolBox
                                 model='definitions'
@@ -208,12 +208,14 @@ class Definition extends React.Component {
                             </p>
                                     </Typography>
                                 </Paper>
-                                <Paper style={{direction:'rtl', textAlign:'right'}}>
+
+                                <Paper style={{direction:'rtl', textAlign:'right', margin: '10px 0px', padding: '10px 6px'}}>
                                     <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="سرعت" component="a" href="#chip" clickable />
                                     <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="جنبش مولکولی" component="a" href="#chip" clickable />
                                     <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="انرژی" component="a" href="#chip" clickable />
                                     <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="قانون پایستگی" component="a" href="#chip" clickable />
                                 </Paper>
+
                             </Grid>
 
                         </Grid>
