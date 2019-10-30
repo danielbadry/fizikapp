@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import StickyFooter2 from "./StickyFooter2";
+import StickyFooter from "./StickyFooter";
 import HeaderSlider from "./HeaderSlider";
 import SocialShare from "./SocialShare";
 import Button from '@material-ui/core/Button';
@@ -373,7 +373,7 @@ class About extends React.Component {
                     </Grid>
 
                 </Grid>
-                <StickyFooter2 />
+                <StickyFooter />
             </div>
             
         );

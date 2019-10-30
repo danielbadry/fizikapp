@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import StickyFooter2 from "./StickyFooter2";
+import StickyFooter from "./StickyFooter";
 import HeaderSlider from "./HeaderSlider";
 
 class Faq extends React.Component {
@@ -280,7 +280,7 @@ class Faq extends React.Component {
                         
                     </Grid>
 
-                    <StickyFooter2 />
+                    <StickyFooter />
                 </Grid>
             </div>
             

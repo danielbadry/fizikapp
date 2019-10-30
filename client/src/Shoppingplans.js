@@ -2,7 +2,7 @@ import React from 'react';
 import ShoppingPlanCard from './ShoppingplanCard';
 import MainHeader from "./MainHeader";
 import Container from '@material-ui/core/Container';
-import StickyFooter2 from "./StickyFooter2";
+import StickyFooter from "./StickyFooter";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -202,7 +202,7 @@ class Shoppingplans extends React.Component {
                     </Grid>
 
                 </Grid>
-                <StickyFooter2 />
+                <StickyFooter />
             </div>
         );
     }

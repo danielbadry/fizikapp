@@ -187,8 +187,8 @@ class Sciencechallenge extends React.Component{
         return (
             
             <div>
-                <Grid container spacing={3}>
-                <SocialShare />
+                <Grid container spacing={0}>
+                {/* <SocialShare /> */}
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>

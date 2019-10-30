@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import StickyFooter2 from "./StickyFooter2";
+import StickyFooter from "./StickyFooter";
 import SingleRow from "./SingleRow";
 import HeaderSlider from "./HeaderSlider";
 
@@ -229,7 +229,7 @@ class TermsConditions extends React.Component {
                         </ul>
                     
                     </Grid>
-                    <StickyFooter2 />
+                    <StickyFooter />
                 </Grid>
             </div>
         );

@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
-import StickyFooter2 from "./StickyFooter2";
 import SingleRow from "./SingleRow";
 import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
@@ -90,7 +89,7 @@ class Home extends React.Component {
 
                     <RequestCard />
              </Container>
-             <StickyFooter2 />
+             <StickyFooter />
              {/* <StickyFooter /> */}
                     {/* // <Grid item xs={12}>
                     //     <MainHeader />
