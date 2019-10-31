@@ -135,7 +135,14 @@ class Product extends React.Component {
                         <Grid container spacing={2} justify="center" >
                             
                             <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
-                                <Paper>hello</Paper>
+                                <Paper
+                                    style={{
+                                        background:'rgba(82,82,82,.43)',
+                                        height: '400px'
+                                    }}
+                                    >
+                                    hello
+                                </Paper>
                             </Grid>
                             
                             <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
