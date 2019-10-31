@@ -306,7 +306,8 @@ class Product extends React.Component {
                             <Typography
                                 style = {{
                                     fontFamily: 'IranSans_Light',
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    
                                 }}
                                 >
                                 توضیحات :
@@ -316,7 +317,8 @@ class Product extends React.Component {
                                 gutterBottom
                                 style={{ 
                                     fontFamily: 'IranSans_Light',
-                                    fontSize: '14px'
+                                    fontSize: '14px',
+                                    lineHeight: '1.8rem'
                                 }}
                                 >
                                 {/* {this.state.summary.description} */}
