@@ -1,6 +1,5 @@
 import React from 'react';
 import MainHeader from "./MainHeader";
-import SocialShare from "./SocialShare";
 import RelatedProducts from "./RelatedProducts";
 import Typography from '@material-ui/core/Typography';
 import {
@@ -20,6 +19,9 @@ import Grid from '@material-ui/core/Grid';
 import StickyFooter from "./StickyFooter";
 import ArticlesToolBox from "./ArticlesToolBox";
 import Paper from '@material-ui/core/Paper';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Chip from '@material-ui/core/Chip';
 
 class Product extends React.Component {
     constructor(props){
@@ -51,7 +53,6 @@ class Product extends React.Component {
     };
 
     catchMeHere = () => {
-        console.info('eival', this);
         this.fetchProduct();
     }
 
@@ -106,13 +107,125 @@ class Product extends React.Component {
             
         } else
         return (
-            <div>
-                <Grid container spacing={3}>
-                {/* <SocialShare /> */}
+            
+                <Grid container spacing={0}>
+                    
                     <Grid item xs={12}>
                         <MainHeader />
                     </Grid>
+                    
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} 
+                    style={{
+                        backgroundImage: `url('https://www.filimo.com/public/public/user_data/movie_cover/cover_26503.jpg?8235')`,
+                        backgroundSize: 'cover',
+                        height: '520px',
+                        overflow: 'hidden'
+                    }}>
+                        <Grid container spacing={2} justify="center" >
+                            
+                            <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                                <Paper>hello</Paper>
+                            </Grid>
+                            
+                            <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+                                <Grid container spacing={0}>
+                                    
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                        <Grid container spacing={0}>
+                                            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                                                <Grid container spacing={0} style={{
+                                                    direction: 'rtl',
+                                                    fontFamily: 'IranSans'
+                                                }}>
 
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: '#fff',
+                                                        fontSize: '15px'
+                                                    }}>
+                                                        پرونده کولینی
+                                                    </Grid>
+
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: '#fff',
+                                                        fontSize: '13px'
+                                                    }}>
+                                                        The Collini Case
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                        IMDB
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: '#fdc13c',
+                                                        fontSize: '14px'
+                                                    }}>
+                                                        مناسب برای بالای 17 سال
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: 'white',
+                                                        fontSize: '14px'
+                                                    }}>
+                                                        کارگردان ایمان ارقامی
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: 'white',
+                                                        fontSize: '14px'
+                                                    }}>
+                                                        مدت زمان یک ساعت و چند دقیقه
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                                        color: 'white',
+                                                        fontSize: '14px'
+                                                    }}>
+                                                        زیر نویس دارد
+                                                    </Grid>
+                                                    
+                                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                        <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="سرعت" component="a" href="#chip" clickable />
+                                                        <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="جنبش مولکولی" component="a" href="#chip" clickable />
+                                                        <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="انرژی" component="a" href="#chip" clickable />
+                                                        <Chip style={{fontFamily:'IranSans',fontSize:'14px'}} label="قانون پایستگی" component="a" href="#chip" clickable />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                                                <img src="https://www.filimo.com/public/public/user_data/video_thumb_star/14/26503_26503-m.jpg?8235" />
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                                        margin: '16px 0px',
+                                        backgroundColor: 'blanchedalmond'
+                                    }}>
+                                        
+                                        <Fab variant="extended" aria-label="like" style={{
+                                                fontFamily: 'IranSans'
+                                            }}>
+                                            <NavigationIcon />
+                                            نمایش فیلم
+                                        </Fab>
+                                        
+                                        <Fab variant="extended" aria-label="like" style={{
+                                                fontFamily: 'IranSans'
+                                            }}>
+                                            <NavigationIcon />
+                                            نشان کردن
+                                        </Fab>
+
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+                    
                     <Grid item xs={4}>
                         <Paper
                             style= {{
@@ -133,10 +246,10 @@ class Product extends React.Component {
                             
                             {(localStorage.getItem('token') && this.state.userCanSeeQuiz) ? 
                                 <QuizComponent
-                                endFunc={this.catchMeHere}
-                                model='products'
-                                modelid={this.props.productid}
-                                title={this.state.summary.name}
+                                    endFunc={this.catchMeHere}
+                                    model='products'
+                                    modelid={this.props.productid}
+                                    title={this.state.summary.name}
                             />
                             :null}
 
@@ -266,9 +379,8 @@ class Product extends React.Component {
                     </Grid>
                     </Grid>
                     
-                    {/* <StickyFooter /> */}
+                    <StickyFooter />
                 </Grid>
-            </div>
 
         );
     }
