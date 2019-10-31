@@ -290,7 +290,7 @@ class StickyFooter extends React.Component {
                                                         lineHeight:'2'
                                                     }}
                                                     component={RouterLink} 
-                                                    to={`/definitions/${item.id}`}>{item.name}
+                                                    to={`/definition/${item.id}`}>{item.name}
                                                     </Link>
                                         </dd>
                                 ))}

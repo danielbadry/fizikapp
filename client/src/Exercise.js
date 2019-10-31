@@ -21,7 +21,7 @@ import ArticlesToolBox from "./ArticlesToolBox";
 import Divider from '@material-ui/core/Divider';
 import Tree2 from "./Tree2";
 
-class Definition extends React.Component {
+class Exercise extends React.Component {
     
     constructor(props) {
         super(props);
@@ -31,18 +31,18 @@ class Definition extends React.Component {
             id: '',
             isRender : false,
             thumbnail: '',
-            definitionId: props.definitionid,
+            exerciseId: props.exerciseid,
             startTime: 8,
             userInteractionConfig : [
                 {
                     type:'qa',
                     label:' پرسش و پاسخ',
-                    model:'definitions'
+                    model:'exercises'
                 },
                 {
                     type:'comment',
                     label:'نظرات',
-                    model:'definitions'
+                    model:'exercises'
                 }
             ]
         }
@@ -50,7 +50,8 @@ class Definition extends React.Component {
 
     componentDidMount() {
         const token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`definitions/${this.props.definitionid}`, {
+        
+        fetch(process.env.REACT_APP_API_URL+`exercises/${this.props.exerciseid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -63,13 +64,13 @@ class Definition extends React.Component {
             referrer: 'no-referrer', // no-referrer, *client
             })
             .then(response => response.json())
-            .then(definition => {
+            .then(exercise => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(definition.summary)),
-                        tags: JSON.parse(JSON.stringify(definition.tags)),
-                        thumbnail: definition.thumbnail,
-                        id: definition.id,
+                        summary: JSON.parse(JSON.stringify(exercise.summary)),
+                        tags: JSON.parse(JSON.stringify(exercise.tags)),
+                        thumbnail: exercise.thumbnail,
+                        id: exercise.id,
                         startTime : 30,
                         isRender: true
                     };
@@ -114,7 +115,7 @@ class Definition extends React.Component {
                         <Paper>
                             <ArticlesToolBox
                                 model='definitions'
-                                modelid={this.props.definitionid}
+                                modelid={this.props.exerciseid}
                                 token={this.state.token}
                                 />
                             </Paper>
@@ -236,4 +237,4 @@ class Definition extends React.Component {
         );
     }
 }
-export default Definition;
+export default Exercise;

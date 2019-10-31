@@ -16,6 +16,7 @@ import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
 import Search from './Search';
 import Exercises from './Exercises';
+import Exercise from './Exercise';
 import Definitions from './Definitions';
 import LearningPlayground from './LearningPlayground';
 import Faq from './faq';
@@ -37,6 +38,14 @@ function HandleDefinition({ match }) {
     return (
         <Definition 
             definitionid={match.params.definitionid}
+            />
+    );
+}
+
+function HandleExercise({ match }) {
+    return (
+        <Exercise 
+            exerciseid={match.params.exerciseid}
             />
     );
 }
@@ -89,8 +98,8 @@ class Routs extends React.Component {
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/shop-result" component={HandleShopResult} />
                 <Route path="/definitions" component={Definitions} />
-                <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/definition/:definitionid" component={HandleDefinition} />
+                <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/request/:requestid" component={HandleRequest} />
@@ -100,7 +109,8 @@ class Routs extends React.Component {
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
-                <Route path="/exercises" component={Exercises} />
+                <Route path="/exercises" component={HandleExercise} />
+                <Route path="/exercise/:exerciseid" component={Exercise} />
                 <Route path="/learning-playground" component={LearningPlayground} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contact-us" component={ContactUs} />
