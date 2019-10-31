@@ -35,6 +35,8 @@ class Product extends React.Component {
             thumbnail: '',
             userCanSeeQuiz: true,
             userCanSeeVideo: true,
+            videoInfoBoxDisplayType: 'flex',
+            videoPlayerDisplayType: 'none',
             productId: props.productid,
             startTime: 8,
             userInteractionConfig : [
@@ -54,6 +56,15 @@ class Product extends React.Component {
 
     catchMeHere = () => {
         this.fetchProduct();
+    }
+
+    switchBetweenVideo = () => {
+        this.setState(function(state, props) {
+            return {
+                videoInfoBoxDisplayType: 'none',
+                videoPlayerDisplayType: 'block',
+            };
+          });
     }
 
     fetchProduct = (token) => {
@@ -128,10 +139,35 @@ class Product extends React.Component {
                             </Grid>
                             
                             <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
-                                <Grid container spacing={0}>
+                                <Grid container spacing={0} >
                                     
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                        <Grid container spacing={0}>
+                                        <Grid container spacing={0} style={{display:`${this.state.videoPlayerDisplayType}`}}>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                            <Player
+                                                poster={this.state.thumbnail}
+                                                startTime = {this.state.startTime}
+                                                style={{
+                                                    height: '200px'
+                                                }}
+                                                >
+                                                    
+                                            <source 
+                                                src={this.state.summary.videoAddress}
+                                                />
+
+                                            <ControlBar>
+                                                <ReplayControl seconds={10} order={1.1} />
+                                                <ForwardControl seconds={10} order={1.2} />
+                                                <CurrentTimeDisplay order={4.1} />
+                                                <TimeDivider order={4.2} />
+                                                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                                                <VolumeMenuButton />
+                                            </ControlBar>
+                                            </Player>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={0} style={{display:`${this.state.videoInfoBoxDisplayType}`}}>
                                             <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                                 <Grid container spacing={0} style={{
                                                     direction: 'rtl',
@@ -206,7 +242,9 @@ class Product extends React.Component {
                                         
                                         <Fab variant="extended" aria-label="like" style={{
                                                 fontFamily: 'IranSans'
-                                            }}>
+                                            }}
+                                            onClick={this.switchBetweenVideo}
+                                            >
                                             <NavigationIcon />
                                             نمایش فیلم
                                         </Fab>
