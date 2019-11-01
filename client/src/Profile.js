@@ -13,8 +13,36 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import UserBasics from './UserBasics';
+import UserFinancialTab from './UserFinancialTab';
+import { func } from 'prop-types';
 
 class Profile extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPage : 'general'
+        }
+    }
+
+    switchComponents = (cp) => {
+        switch(cp) {
+            case 'general':
+                return <UserBasics />;
+            case 'financial':
+                return <UserFinancialTab />;
+        }
+    }
+
+    changeNestRout = function (rout) {
+        this.setState(function(state, props) {
+            return {
+                currentPage: rout
+            };
+        });
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -22,7 +50,9 @@ class Profile extends React.Component {
                 <MainHeader />
 
                 <Grid container spacing={2} justify="center">
-
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                        {this.switchComponents(this.state.currentPage)}
+                    </Grid>
                     <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
                         <Paper>
                             <Grid container spacing={2} justify="center" >
@@ -58,7 +88,7 @@ class Profile extends React.Component {
                             <Grid container spacing={0}>
                                 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <img src="https://www.goldenglobes.com/sites/default/files/styles/portrait_medium/public/gallery_images/17-tomcruiseag.jpg?itok=qNj0cQGV&c=c9a73b7bdf609d72214d226ab9ea015e" />
+                                    <img src="dhttps://www.goldenglobes.com/sites/default/files/styles/portrait_medium/public/gallery_images/17-tomcruiseag.jpg?itok=qNj0cQGV&c=c9a73b7bdf609d72214d226ab9ea015e" />
                                 </Grid>
                                 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -85,25 +115,37 @@ class Profile extends React.Component {
                                     <List component="nav" aria-label="main mailbox folders" style={{
                                         direction: 'rtl'
                                     }}>
-                                        <ListItem button>
-                                        <ListItemIcon>
-                                            <InboxIcon />
-                                        </ListItemIcon>
-                                        <ListItemText 
-                                            primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>عمومی</Typography>} />
+
+                                        <ListItem button onClick={()=>this.changeNestRout('dashboard')}>
+                                            <ListItemIcon>
+                                                <InboxIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                            دشبورد
+                                                         </Typography>} />
                                         </ListItem>
-                                        <ListItem button>
-                                        <ListItemIcon>
-                                            <DraftsIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>مالی</Typography>} />
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('general')}>
+                                            <ListItemIcon>
+                                                <InboxIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                            عمومی
+                                                         </Typography>} />
                                         </ListItem>
-                                        <ListItem button>
-                                        <ListItemIcon>
-                                            <DraftsIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>درخواست های من</Typography>} />
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('financial')}>
+                                            <ListItemIcon>
+                                                <DraftsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        مالی
+                                                        </Typography>} />
                                         </ListItem>
+                                        
                                     </List>
                                 </Grid>
 
