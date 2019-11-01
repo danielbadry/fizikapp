@@ -2,7 +2,6 @@ import React from 'react';
 import ProfileTabs from './ProfileTabs';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import ChartExample1 from "./ChartExample1";
 import StickyFooter from "./StickyFooter";
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
@@ -15,6 +14,12 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import UserBasics from './UserBasics';
 import UserFinancialTab from './UserFinancialTab';
+import Dashboard from './Dashboard';
+import Inbox from './Inbox';
+import WatchedVideosList from './WatchedVideosList';
+import FavoriteVideos from './FavoriteVideos';
+import UserRequests from './UserRequests';
+
 import { func } from 'prop-types';
 
 class Profile extends React.Component {
@@ -32,6 +37,16 @@ class Profile extends React.Component {
                 return <UserBasics />;
             case 'financial':
                 return <UserFinancialTab />;
+            case 'dashboard':
+                return <Dashboard />;
+            case 'inbox':
+                return <Inbox />;
+            case 'watchedvideoslist':
+                return <WatchedVideosList />;
+            case 'favoritevideos':
+                return <FavoriteVideos />;
+            case 'userrequests':
+                return <UserRequests />;
         }
     }
 
@@ -50,35 +65,13 @@ class Profile extends React.Component {
                 <MainHeader />
 
                 <Grid container spacing={2} justify="center">
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        {this.switchComponents(this.state.currentPage)}
-                    </Grid>
+
                     <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
                         <Paper>
                             <Grid container spacing={2} justify="center" >
-
-                               <Grid item xs={3} sm={3} md={3} lg={3} xl={3} >
-                                    <Paper>
-                                      B1 
-                                    </Paper> 
-                               </Grid>
-
-                               <Grid item xs={3} sm={3} md={3} lg={3} xl={3} >
-                                    <Paper>
-                                      B2 
-                                    </Paper>
-                               </Grid>
-
-                               <Grid item xs={3} sm={3} md={3} lg={3} xl={3} >
-                                    <Paper>
-                                      B3 
-                                    </Paper>
-                               </Grid>
-                               
-                               <Grid item xs={3} sm={3} md={3} lg={3} xl={3} >
-                                    <ChartExample1 />
-                               </Grid>
-
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    {this.switchComponents(this.state.currentPage)}
+                                </Grid>
                             </Grid>
                         </Paper>
                     </Grid>
@@ -143,6 +136,46 @@ class Profile extends React.Component {
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
                                                         مالی
+                                                        </Typography>} />
+                                        </ListItem>
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('inbox')}>
+                                            <ListItemIcon>
+                                                <DraftsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        صندوق پیام
+                                                        </Typography>} />
+                                        </ListItem>
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('watchedvideoslist')}>
+                                            <ListItemIcon>
+                                                <DraftsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        ویدیوهای دیده شده
+                                                        </Typography>} />
+                                        </ListItem>
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('favoritevideos')}>
+                                            <ListItemIcon>
+                                                <DraftsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        مورد علاقه ها
+                                                        </Typography>} />
+                                        </ListItem>
+                                        
+                                        <ListItem button onClick={()=>this.changeNestRout('userrequests')}>
+                                            <ListItemIcon>
+                                                <DraftsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        درخواست های من
                                                         </Typography>} />
                                         </ListItem>
                                         
