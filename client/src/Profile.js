@@ -10,6 +10,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import EditIcon from '@material-ui/icons/Edit';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import MessageIcon from '@material-ui/icons/Message';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import UserBasics from './UserBasics';
@@ -111,7 +118,7 @@ class Profile extends React.Component {
 
                                         <ListItem button onClick={()=>this.changeNestRout('dashboard')}>
                                             <ListItemIcon>
-                                                <InboxIcon />
+                                                <DashboardIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -121,7 +128,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('general')}>
                                             <ListItemIcon>
-                                                <InboxIcon />
+                                                <EditIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -131,7 +138,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('financial')}>
                                             <ListItemIcon>
-                                                <DraftsIcon />
+                                                <AttachMoneyIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -141,7 +148,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('inbox')}>
                                             <ListItemIcon>
-                                                <DraftsIcon />
+                                                <MessageIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -151,7 +158,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('watchedvideoslist')}>
                                             <ListItemIcon>
-                                                <DraftsIcon />
+                                                <VideocamIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -161,7 +168,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('favoritevideos')}>
                                             <ListItemIcon>
-                                                <DraftsIcon />
+                                                <FavoriteIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -171,7 +178,7 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('userrequests')}>
                                             <ListItemIcon>
-                                                <DraftsIcon />
+                                                <QuestionAnswerIcon />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
