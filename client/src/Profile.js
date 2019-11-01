@@ -118,7 +118,9 @@ class Profile extends React.Component {
 
                                         <ListItem button onClick={()=>this.changeNestRout('dashboard')}>
                                             <ListItemIcon>
-                                                <DashboardIcon />
+                                                <DashboardIcon style={{
+                                                    color: '#3f51b5'
+                                                }} />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -128,7 +130,9 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('general')}>
                                             <ListItemIcon>
-                                                <EditIcon />
+                                                <EditIcon style={{
+                                                    color: 'salmon'
+                                                }} />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -138,7 +142,9 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('financial')}>
                                             <ListItemIcon>
-                                                <AttachMoneyIcon />
+                                                <AttachMoneyIcon style={{
+                                                    color: 'gold'
+                                                }}/>
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -148,7 +154,9 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('inbox')}>
                                             <ListItemIcon>
-                                                <MessageIcon />
+                                                <MessageIcon style={{
+                                                    color: 'turquoise'
+                                                }} />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -168,7 +176,9 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('favoritevideos')}>
                                             <ListItemIcon>
-                                                <FavoriteIcon />
+                                                <FavoriteIcon style={{
+                                                    color: '#f50057'
+                                                }}/>
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
@@ -178,7 +188,9 @@ class Profile extends React.Component {
                                         
                                         <ListItem button onClick={()=>this.changeNestRout('userrequests')}>
                                             <ListItemIcon>
-                                                <QuestionAnswerIcon />
+                                                <QuestionAnswerIcon style={{
+                                                    color: 'yellowgreen'
+                                                }} />
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
