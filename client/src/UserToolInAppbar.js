@@ -3,6 +3,7 @@ import UserProfileMenu from './UserProfileMenu';
 import UserNotificationMenu from './UserNotificationMenu';
 import UserSystemMessageMenu from './UserSystemMessageMenu';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class UserToolInAppbar extends React.Component {
     
@@ -41,8 +42,7 @@ class UserToolInAppbar extends React.Component {
     }
 
     render() {
-        // if (this.state.userinfo)
-        if (true)
+        if (this.state.userinfo)
             return(
                 <React.Fragment>
                     <Typography 
@@ -53,8 +53,7 @@ class UserToolInAppbar extends React.Component {
                             fontSize:'14px'
                         }}
                         >
-                        {/* {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید */}
-                        ایمان ارقامی خوش آمدید
+                        {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید
                     </Typography>
                     
                     <UserSystemMessageMenu />
@@ -64,7 +63,18 @@ class UserToolInAppbar extends React.Component {
             )
         else 
             return (
-                <div>ثبت نام یا ورود</div>
+                <React.Fragment>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        href="/signup"
+                        style={{
+                            fontFamily: 'IranSans'
+                        }}
+                        >
+                        ثبت نام یا ورود
+                    </Button>
+                </React.Fragment>
             )
     }
 }

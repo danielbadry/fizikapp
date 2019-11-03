@@ -428,25 +428,6 @@ class StickyFooter extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/contact-us`}>ارتباط با ما</Link></dd>
-                                
-                                <dd
-                                    style={{
-                                        color:'white',
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2'
-                                    }}
-                                    ><Link 
-                                    color="inherit"
-                                    style={{
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2'
-                                    }}
-                                    component={RouterLink} 
                                     to={`/terms-conditions`}>قوانین و مقررات</Link></dd>
                                 
                                 <dd
@@ -524,6 +505,25 @@ class StickyFooter extends React.Component {
                                     }}
                                     component={RouterLink} 
                                     to={`/shopping-plans`}>طرح های خرید</Link></dd>
+
+                                <dd
+                                    style={{
+                                        color:'white',
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    ><Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/signup`}>ثبت نام</Link></dd>    
                                 
                             </dl>
                         </Grid>

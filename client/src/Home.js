@@ -71,14 +71,6 @@ class Home extends React.Component {
                         count='4'
                     />
 
-                    <SingleRow
-                        label="تمرین ها"
-                        footer="مشاهده بیشتر"
-                        model="exercises"
-                        linkToShowMore='/exercises'
-                        count='4'
-                    />
-
                     {/* <SingleRow
                         label="درخواست ها"
                         footer="مشاهده بیشتر"

@@ -64,7 +64,7 @@ class SingleRow extends React.Component{
                     {this.props.label}
                 </div>
 
-                <Grid container spacing={3}>
+                <Grid container spacing={1}>
                     {this.state.rows.map(
                         (item, index) => 
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
