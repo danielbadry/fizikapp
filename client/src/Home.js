@@ -2,8 +2,10 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
+import MiniDrawer from "./MainContainer";
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
+import OwlCarouselSample from "./OwlCarousel";
 import SingleRow from "./SingleRow";
 import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
@@ -33,8 +35,10 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-                <MainHeader />
-                <Container>
+                <OwlCarouselSample />
+                {/* <MainHeader /> */}
+                    {/* <MiniDrawer /> */}
+                {/* <Container>
                     <NiceCard2 />
                     <SingleRow
                         label="تازه های فیزیک اپ"
@@ -71,17 +75,8 @@ class Home extends React.Component {
                         count='4'
                     />
 
-                    {/* <SingleRow
-                        label="درخواست ها"
-                        footer="مشاهده بیشتر"
-                        model="requests"
-                        linkToShowMore='/requests'
-                        count='4'
-                    /> */}
-
                     <RequestCard />
-             </Container>
-             <StickyFooter />
+             </Container> */}
              {/* <StickyFooter /> */}
                     {/* // <Grid item xs={12}>
                     //     <MainHeader />

@@ -55,8 +55,8 @@ class SingleRow extends React.Component{
                         float: 'right',
                         width: '100%',
                         direction: 'rtl',
-                        marginRight: '4%',
-                        fontSize: '23px',
+                        marginRight: '0',
+                        fontSize: '18px',
                         marginBottom: '2%',
                         marginTop: '2%'
                     }}
