@@ -22,6 +22,7 @@ import Container from '@material-ui/core/Container';
 import RequestCard from "./RequestCard";
 import NiceCard2 from "./NiceCard2";
 import StickyFooter from "./StickyFooter";
+import ItemsCarousel from 'react-items-carousel';
 
 const drawerWidth = 240;
 

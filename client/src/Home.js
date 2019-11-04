@@ -5,7 +5,6 @@ import MainHeader from "./MainHeader";
 import MiniDrawer from "./MainContainer";
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
-import OwlCarouselSample from "./OwlCarousel";
 import SingleRow from "./SingleRow";
 import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
@@ -35,20 +34,19 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-                <OwlCarouselSample />
-                {/* <MainHeader /> */}
-                    {/* <MiniDrawer /> */}
-                {/* <Container>
-                    <NiceCard2 />
+                <MainHeader />
+                    <MiniDrawer />
+                 <Container>
+                    {/* <NiceCard2 />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='/products'
                         count='4'
-                    /> 
+                    />  */}
 
-                    {(this.state.token) ? <SingleRow
+                    {/* {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
                         footer="مشاهده بیشتر"
                         model="products"
@@ -57,9 +55,9 @@ class Home extends React.Component {
                         token={this.state.token}
                     /> : 
                     null
-                    }
+                    } */}
 
-                    <SingleRow
+                    {/* <SingleRow
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
@@ -73,10 +71,10 @@ class Home extends React.Component {
                         model="definitions"
                         linkToShowMore='/definitions'
                         count='4'
-                    />
+                    /> */}
 
-                    <RequestCard />
-             </Container> */}
+                    {/* <RequestCard /> */}
+             </Container>
              {/* <StickyFooter /> */}
                     {/* // <Grid item xs={12}>
                     //     <MainHeader />
