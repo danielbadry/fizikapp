@@ -23,6 +23,7 @@ import RequestCard from "./RequestCard";
 import NiceCard2 from "./NiceCard2";
 import StickyFooter from "./StickyFooter";
 import ItemsCarousel from 'react-items-carousel';
+import Routs from './Routs';
 
 const drawerWidth = 240;
 
@@ -166,46 +167,8 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Container>
-            {/* <NiceCard2 /> */}
-            <SingleRow
-                label="تازه های فیزیک اپ"
-                footer="مشاهده بیشتر"
-                model="products"
-                linkToShowMore='/products'
-                count='4'
-            /> 
-
-            {/* {(this.state.token) ? <SingleRow
-                label="ادامه ی ویدیوهای قبلی"
-                footer="مشاهده بیشتر"
-                model="products"
-                linkToShowMore='/products'
-                count='4'
-                token={this.state.token}
-            /> : 
-            null
-            } */}
-
-            <SingleRow
-                label="چالش های علمی"
-                footer="مشاهده بیشتر"
-                model="sciencechallenge"
-                linkToShowMore='/sciencechallenge'
-                count='4'
-            />
-
-            <SingleRow
-                label="تعریفی ها"
-                footer="مشاهده بیشتر"
-                model="definitions"
-                linkToShowMore='/definitions'
-                count='4'
-            />
-
-            <RequestCard />
-            </Container>
-            <StickyFooter />
+            <Routs />
+            {/* <StickyFooter /> */}
       </main>
     </div>
   );

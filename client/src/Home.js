@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import MiniDrawer from "./MainContainer";
+
 import MainFooter from "./MainFooter";
 import StickyFooter from "./StickyFooter";
 import SingleRow from "./SingleRow";
@@ -34,17 +34,17 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-                <MainHeader />
-                    <MiniDrawer />
+                {/* <MainHeader /> */}
+                
                  <Container>
-                    {/* <NiceCard2 />
+                    <NiceCard2 />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='/products'
                         count='4'
-                    />  */}
+                    />
 
                     {/* {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
@@ -57,7 +57,7 @@ class Home extends React.Component {
                     null
                     } */}
 
-                    {/* <SingleRow
+                    <SingleRow
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
@@ -71,11 +71,11 @@ class Home extends React.Component {
                         model="definitions"
                         linkToShowMore='/definitions'
                         count='4'
-                    /> */}
+                    />
 
-                    {/* <RequestCard /> */}
+                    <RequestCard />
              </Container>
-             {/* <StickyFooter /> */}
+             <StickyFooter />
                     {/* // <Grid item xs={12}>
                     //     <MainHeader />
                     // </Grid>
