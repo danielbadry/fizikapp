@@ -20,9 +20,19 @@ import MailIcon from '@material-ui/icons/Mail';
 import SingleRow from "./SingleRow";
 import Container from '@material-ui/core/Container';
 import RequestCard from "./RequestCard";
-import NiceCard2 from "./NiceCard2";
+import NiceCard2 from "./NiceCard";
 import StickyFooter from "./StickyFooter";
 import ItemsCarousel from 'react-items-carousel';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import UserToolInAppbar from './UserToolInAppbar';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
 import Routs from './Routs';
 
 const drawerWidth = 240;
@@ -88,10 +98,35 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
 export default function MiniDrawer() {
+  const [isGoToSearchProcess, setIsGoToSearchProcess] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  
+  function setSearchContent(e) {
+    setSearchValue(e.target.value);
+    console.info(e.target.value);
+  }
+
+  function redirectToSearchPage (e) {
+    console.info(e.keyCode);
+    switch (e.keyCode) {
+      case 13 :
+          setIsGoToSearchProcess(true);
+    }
+  }
+
+  function redirectToSearchPage (e) {
+    console.info(e.keyCode);
+    switch (e.keyCode) {
+      case 13 :
+          setIsGoToSearchProcess(true);
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,6 +135,10 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  if (isGoToSearchProcess) {
+    return <Redirect to={`/search/${searchValue}`}/>;
+  } else 
 
   return (
     <div className={classes.root}>
@@ -122,9 +161,29 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              onChange={ (e) => setSearchContent(e) }
+              onKeyDown={ (e) => redirectToSearchPage(e) }
+              placeholder="جستجو کنید"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 
+                'aria-label': 'search',
+                style: {
+                  fontFamily: "IranSans_Light",
+                  fontSize: '13px'
+                }
+              }}
+            />
+          </div>
+
+          <UserToolInAppbar />
         </Toolbar>
       </AppBar>
       <Drawer

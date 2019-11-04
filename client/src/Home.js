@@ -10,7 +10,7 @@ import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import PostCard from "./PostCard";
-import NiceCard2 from "./NiceCard2";
+import NiceCard from "./NiceCard";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
@@ -37,7 +37,7 @@ class Home extends React.Component {
                 {/* <MainHeader /> */}
                 
                  <Container>
-                    <NiceCard2 />
+                    <NiceCard />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"

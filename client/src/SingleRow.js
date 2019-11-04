@@ -4,6 +4,7 @@ import PostCard from "./PostCard";
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import ItemsCarousel from 'react-items-carousel';
+import ProductCard from './ProductCard';
 
 export default (props) => {
 
@@ -31,6 +32,24 @@ export default (props) => {
             });
         }, []);
 
+    function SelectCorrectCard (props) {
+        console.info('modelType:', props.modelType);
+        switch (props.modelType) {
+            case 'products':
+                return(<ProductCard />);
+                break;
+            case 'sciencechallenge':
+                return(<SciencechallengeCard />);
+                break;
+            case 'products':
+                return(<DefinitionsCard />);
+                break;
+            case 'products':
+                return(<RequestCard />);
+                break;
+        }
+        return <div>hichi</div>;
+    }
     return (
         <React.Fragment>
             <div 
@@ -87,9 +106,7 @@ export default (props) => {
                         {rows.map(
                             (item, index) => 
                             // <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
-                                <PostCard
-                                    item = {item}
-                                    />
+                            <SelectCorrectCard modelType={props.model} />
                             // </Grid>
                         )}
                         
