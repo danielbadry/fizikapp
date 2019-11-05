@@ -97,6 +97,7 @@ class SignUp extends React.Component {
     }
 
     componentDidMount() {
+
         // const showText = {
         // login : {
         //     header : 'هنوز عضو نشده اید؟',
@@ -130,6 +131,21 @@ class SignUp extends React.Component {
         } else {
             return (
                 <div className="main-page">
+                    <video 
+                        id="bgVideo" 
+                        controls 
+                        muted
+                        preload="true" 
+                        autoplay ="true"
+                        style={{
+                            position:'absolute',
+                            width:'100%',
+                            height:'100%',
+                            zIndex:'-1',
+                        }}
+                        >
+                        <source src="background.mp4" type="video/mp4" /> 
+                    </video>
                 <div 
                     className={this.state.active ? 'hide-view': 'smooth login'} 
                     id="login"
