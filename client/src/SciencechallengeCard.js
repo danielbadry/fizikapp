@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-class ProductCard extends React.Component {
+class SciencechallengeCard extends React.Component {
 
 constructor(props) {
   super (props);
@@ -95,4 +95,4 @@ render() {
   
 }
 
-export default ProductCard;
+export default SciencechallengeCard;

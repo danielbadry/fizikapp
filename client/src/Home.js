@@ -72,8 +72,16 @@ class Home extends React.Component {
                         linkToShowMore='/definitions'
                         count='4'
                     />
+                    
+                    <SingleRow
+                        label="درخواست ها"
+                        footer="شمشاهده بیشتر"
+                        model="requests"
+                        linkToShowMore='/requests'
+                        count='3'
+                    />
 
-                    <RequestCard />
+                    {/* <RequestCard /> */}
              </Container>
              <StickyFooter />
                     {/* // <Grid item xs={12}>

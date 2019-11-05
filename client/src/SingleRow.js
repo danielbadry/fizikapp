@@ -5,6 +5,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import ItemsCarousel from 'react-items-carousel';
 import ProductCard from './ProductCard';
+import SciencechallengeCard from './SciencechallengeCard';
+import DefinitionCard from './DefinitionCard';
+import RequestCard from './RequestCard';
 
 export default (props) => {
 
@@ -36,16 +39,16 @@ export default (props) => {
         console.info('modelType:', props.modelType);
         switch (props.modelType) {
             case 'products':
-                return(<ProductCard />);
+                return(<ProductCard item={props} />);
                 break;
             case 'sciencechallenge':
-                return(<SciencechallengeCard />);
+                return(<SciencechallengeCard item={props} />);
                 break;
-            case 'products':
-                return(<DefinitionsCard />);
+            case 'definitions':
+                return(<DefinitionCard item={props} />);
                 break;
-            case 'products':
-                return(<RequestCard />);
+            case 'requests':
+                return(<RequestCard item={props} />);
                 break;
         }
         return <div>hichi</div>;

@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RequestCars() {
+export default function RequestCars(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -108,11 +108,6 @@ export default function RequestCars() {
                           چند لحظه پیش
                         </Typography>}
                     />
-                    {/* <CardMedia
-                        className={classes.media}
-                        image="/static/images/cards/paella.jpg"
-                        title="Paella dish"
-                    /> */}
                     
                     <CardContent>
                         
