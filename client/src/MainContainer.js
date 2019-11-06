@@ -27,6 +27,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import UserToolInAppbar from './UserToolInAppbar';
 import {
+  HashRouter,
   BrowserRouter as Router,
   Route,
   Link,
@@ -208,7 +209,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {[{'text':'صفحه ی اصلی','link':'/'}, {'text':'آموزش','link':'/products'}, {'text':'حل تمرین و تست','link':'excersice'}, {'text':'درخواست ها','link':'/requests'}].map((text, index) => (
-            <ListItem button key={text} component="a" href={text.link}>
+            <ListItem button key={index} component="a" href={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{
                 fontFamily: 'IranSans',
@@ -220,7 +221,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {[{'text':'تعریفی ها', 'link':'/definitions'}, {'text':'طرح خرید', 'link':'/shopping-plan'}, {'text':'درباره ما', 'link':'/about'}].map((text, index) => (
-            <ListItem button key={text} component="a" href={text.link}>
+            <ListItem button key={index} component="a" href={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{
                 fontFamily: 'IranSans',

@@ -5,6 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,15 +27,46 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['ایمیل را وارد کنید', 'اطلاعات فردی'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Step 1: Select campaign settings...';
+      return (
+        <React.Fragment>
+          <TextField
+            id="standard-basic"
+            // className={classes.textField}
+            label="ایمیل"
+            margin="normal"
+          />
+        </React.Fragment>
+      );
     case 1:
-      return 'Step 2: What is an ad group anyways?';
+      return (
+        <React.Fragment>
+          
+          <TextField
+            id="standard-firstname"
+            label="نام"
+            margin="normal"
+          />
+          
+          <TextField
+            id="standard-lastname"
+            label="نام خانوادگی"
+            margin="normal"
+          />
+          
+          <TextField
+            id="standard-grade"
+            label="مقطع"
+            margin="normal"
+          />
+
+        </React.Fragment>
+      );
     case 2:
       return 'Step 3: This is the bit I really care about!';
     default:
@@ -54,7 +86,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   };
 
   const isStepOptional = step => {
-    return step === 1;
+    return step === 10;
   };
 
   const handleSkip = () => {
@@ -174,7 +206,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+                مرحله قبل
               </Button>
               <Button
                 variant="contained"
@@ -182,7 +214,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                 onClick={handleNext}
                 className={classes.button}
               >
-                Next
+                مرحله ی بعد 
               </Button>
               {isStepOptional(activeStep) && !completed.has(activeStep) && (
                 <Button

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Requests from './Requests';
 import About from './About';
 import Home from './Home';
@@ -7,6 +7,7 @@ import Home from './Home';
 import NewRequest from './NewRequest';
 // import SignUp from './SignUp';
 import SignUp from './SignUp2';
+import SignIn from './SignIn';
 import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
@@ -94,7 +95,7 @@ function HandleSciencechallenge({ match }) {
 class Routs extends React.Component {
     render() {
         return (
-            <Router>
+            <HashRouter>
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
@@ -108,6 +109,7 @@ class Routs extends React.Component {
                 <Route path="/about" component={About} />
                 <Route path="/new-request" component={NewRequest} />
                 <Route path="/signup" component={SignUp} />
+                <Route path="/signin" component={SignIn} />
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
@@ -120,7 +122,7 @@ class Routs extends React.Component {
                 <Route path="/disclaimer" component={Disclaimer} />
                 <Route path="/careers" component={Careers} />
                 <Route path="/terms-conditions" component={TermsConditions} />
-            </Router>
+            </HashRouter>
         );
     }
 }

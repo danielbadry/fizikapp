@@ -404,11 +404,13 @@ class StickyFooter extends React.Component {
                                                 fontFamily: 'IranSans_Ultralight',
                                                 fontSize: '13px',
                                                 margin:'0',
-                                                lineHeight:'2'
+                                                lineHeight:'2',
+                                                cursor:'pointer'
                                             }}
                                             component={RouterLink} 
                                             to={`/about`}>
                                         درباره ی ما</Link>
+
                                         </dd>
                                 
                                 <dd
@@ -514,7 +516,8 @@ class StickyFooter extends React.Component {
                                         margin:'0',
                                         lineHeight:'2'
                                     }}
-                                    ><Link 
+                                    >
+                                        <Link 
                                     color="inherit"
                                     style={{
                                         fontFamily: 'IranSans_Ultralight',
@@ -523,7 +526,9 @@ class StickyFooter extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/signup`}>ثبت نام</Link></dd>    
+                                    to={`/signup`}>ثبت نام</Link>
+                                    <a href="/signup">sign up</a>
+                                    </dd>    
                                 
                             </dl>
                         </Grid>

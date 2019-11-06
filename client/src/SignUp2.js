@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import SignUpStepper from './SignUpStepper';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 class SignUp extends React.Component{
     constructor(props) {
@@ -65,6 +66,8 @@ class SignUp extends React.Component{
                                             margin:'0',
                                             lineHeight:'2'
                                         }}
+                                        to={`/signin`}
+                                        component={RouterLink} 
                                         >
                                         حساب کاربری دارید؟ وارد شوید
                                     </Link>

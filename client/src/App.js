@@ -6,14 +6,14 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import MiniDrawer from "./MainContainer";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import SignUp from './SignUp2';
-
 am4core.useTheme(am4themes_animated);
 export default function App() {
 
   return (
-    <BrowserRouter>
-      <Route path="/" exact component={MiniDrawer} />
-      <Route path="/signup" component={SignUp} />
-    </BrowserRouter>
+    <MiniDrawer />
+    // <BrowserRouter>
+      // <Route path="/" exact component={MiniDrawer} />
+      // <Route path="/signup" component={SignUp} />
+    // </BrowserRouter>
   );
 }
