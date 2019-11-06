@@ -6,6 +6,11 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['ایمیل را وارد کنید', 'اطلاعات فردی'];
+  return ['ایمیل را وارد کنید', 'تایید کد', 'اطلاعات فردی'];
 }
 
 function getStepContent(step) {
@@ -59,10 +64,32 @@ function getStepContent(step) {
             margin="normal"
           />
           
+          <FormControl>
+            <InputLabel id="demo-simple-select-label">مقطع تحصیلی</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              // value={age}
+              // onChange={handleChange}
+            >
+              <MenuItem value={10}>دهم</MenuItem>
+              <MenuItem value={11}>یازدهم</MenuItem>
+              <MenuItem value={12}>دوازدهم</MenuItem>
+            </Select>
+          </FormControl>
+          
           <TextField
-            id="standard-grade"
-            label="مقطع"
+            id="standard-password"
+            label="رمز عبور"
             margin="normal"
+            type="password"
+          />
+          
+          <TextField
+            id="standard-confirmpassword"
+            label="تکرار رمز عبور"
+            margin="normal"
+            type="password"
           />
 
         </React.Fragment>
