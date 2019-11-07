@@ -115,8 +115,8 @@ class Routs extends React.Component {
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
-                <Route path="/exercises" component={HandleExercise} />
-                <Route path="/exercise/:exerciseid" component={Exercise} />
+                <Route path="/exercises" component={Exercises} />
+                <Route path="/exercise/:exerciseid" component={HandleExercise} />
                 <Route path="/learning-playground" component={LearningPlayground} />
                 <Route path="/faq" component={Faq} />
                 <Route path="/contact-us" component={ContactUs} />

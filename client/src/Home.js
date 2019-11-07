@@ -42,7 +42,7 @@ class Home extends React.Component {
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
                         model="products"
-                        linkToShowMore='/products'
+                        linkToShowMore='products'
                         count='4'
                     />
 
@@ -61,7 +61,7 @@ class Home extends React.Component {
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
-                        linkToShowMore='/sciencechallenge'
+                        linkToShowMore='sciencechallenges'
                         count='4'
                     />
 
@@ -69,7 +69,7 @@ class Home extends React.Component {
                         label="تعریفی ها"
                         footer="مشاهده بیشتر"
                         model="definitions"
-                        linkToShowMore='/definitions'
+                        linkToShowMore='definitions'
                         count='4'
                     />
                     
@@ -77,7 +77,7 @@ class Home extends React.Component {
                         label="درخواست ها"
                         footer="شمشاهده بیشتر"
                         model="requests"
-                        linkToShowMore='/requests'
+                        linkToShowMore='requests'
                         count='3'
                     />
 

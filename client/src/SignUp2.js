@@ -18,7 +18,7 @@ class SignUp extends React.Component{
     render() {
         return(
             <React.Fragment>
-                {/* <video 
+                <video 
                         id="bgVideo" 
                         controls = {false}
                         muted
@@ -32,7 +32,7 @@ class SignUp extends React.Component{
                         }}
                         >
                         <source src="background.mp4" type="video/mp4" /> 
-                    </video> */}
+                    </video>
             
                 <Grid 
                     container 
