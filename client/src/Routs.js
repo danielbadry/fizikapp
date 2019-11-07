@@ -8,6 +8,7 @@ import NewRequest from './NewRequest';
 // import SignUp from './SignUp';
 import SignUp from './SignUp2';
 import SignIn from './SignIn';
+import ForgetPassword from './ForgetPassword';
 import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
@@ -110,6 +111,7 @@ class Routs extends React.Component {
                 <Route path="/new-request" component={NewRequest} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
+                <Route path="/forget-password" component={ForgetPassword} />
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />

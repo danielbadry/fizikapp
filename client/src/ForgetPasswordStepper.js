@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['شماره تلفن را وارد کنید', 'کد تایید', 'اطلاعات فردی'];
+  return ['شماره تلفن را وارد کنید', 'کد تایید', 'انتخاب کلمه عبور جدید'];
 }
 
 function getStepContent(step) {
@@ -74,43 +74,7 @@ function getStepContent(step) {
     case 2:
       return (
         <React.Fragment>
-          <TextField
-            id="standard-firstname"
-            label="نام"
-            margin="normal"
-            style={{
-              fontFamily: "IranSans"
-            }}
-            InputProps={{
-              style: {
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              },
-            }}
-            InputLabelProps={{
-              style:{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }
-            }}
-          />
-          <TextField
-            id="standard-lastname"
-            label="نام خانوادگی"
-            margin="normal"
-            InputProps={{
-              style: {
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              },
-            }}
-            InputLabelProps={{
-              style:{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }
-            }}
-          />
+          
           <TextField
             id="standard-lastname"
             label="کلمه ی عبور"
@@ -129,6 +93,7 @@ function getStepContent(step) {
             }}
             type="password"
           />
+
           <TextField
             id="standard-lastname"
             label="تکرار کلمه ی عبور"
@@ -147,40 +112,7 @@ function getStepContent(step) {
             }}
             type="password"
           />
-          <FormControl>
-            <InputLabel 
-              
-              style={{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }}
-              id="demo-simple-select-label">مقطع</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              // value={age}
-              // onChange={handleChange}
-            >
-              <MenuItem
-              style={{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }}
-               value={10}>دهم</MenuItem>
-              <MenuItem 
-              style={{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }}
-              value={11}>یازدهم</MenuItem>
-              <MenuItem 
-              style={{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }}
-              value={12}>دوازدهم</MenuItem>
-            </Select>
-          </FormControl>
+          
         </React.Fragment>
       );
     default:
@@ -325,7 +257,7 @@ export default function HorizontalLinearStepper() {
                   onClick={sendVerificationCodeToEmail}
                   className={classes.button}
                 >
-                ثبت نام
+                کلمه عبور جدید را جایگزین کن
               </Button>
               : null}
             </div>
