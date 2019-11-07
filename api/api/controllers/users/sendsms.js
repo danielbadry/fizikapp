@@ -37,14 +37,10 @@ module.exports = {
         };
 
         client.addHttpHeader('Authorization', "Basic " + Buffer.from('miladkhan' + ':' + '789654').toString('base64'));
-        // client.send(requestArgs);
         client.send(requestArgs, function(err, result) {
           if (err) {
             console.log(err.message);
           }
-    
-          // console.log('i found ' + result);
-          // response.send(result);
         });
       }
     });
