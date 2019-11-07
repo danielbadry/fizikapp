@@ -23,6 +23,7 @@ module.exports.routes = {
     'POST /shoppingplans/purchase': 'ShoppingplansController.purchase',
     'GET /search/search': 'SearchController.search',
     'POST /users/authenticate': 'UsersController.authenticate',
+    'POST /users/sendsms': 'UsersController.sendsms',
     'POST /watchedvideos/setuserwatchstatus': 'Watchedvideos.setuserwatchstatus',
     'GET /requests/getuserrequests': 'RequestsController.getuserrequests',
     'GET /users/userinfo': 'UsersController.userinfo',
