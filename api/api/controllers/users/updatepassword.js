@@ -35,7 +35,7 @@ module.exports = {
       mobile: inputs.mobile
     });
 
-    await request.patch({url:'http://localhost:1337/Users/' + user[0].id, form},
+    await request.patch({url:sails.config.custom.apiUrl + '/Users/' + user[0].id, form},
       function(err,httpResponse,body){ 
         return(body);
       });

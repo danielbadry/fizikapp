@@ -11,10 +11,6 @@ module.exports = {
 
   inputs: {
 
-    username: {
-      type: 'string'
-    },
-    
     mobile: {
       type: 'string'
     },

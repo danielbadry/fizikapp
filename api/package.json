@@ -16,8 +16,7 @@
     "sails-hook-sockets": "^1.5.5",
     "sails-mongo": "^1.0.1",
     "skipper": "^0.8.7",
-    "soap": "^0.30.0",
-    "strong-soap": "^1.21.0"
+    "soap": "^0.30.0"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3",

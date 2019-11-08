@@ -17,7 +17,7 @@ module.exports = {
         let user = await Users.find({
             or : [
                 {
-                    userName:req.param('username')
+                    mobile:req.param('mobile')
                 }
             ]
         });
