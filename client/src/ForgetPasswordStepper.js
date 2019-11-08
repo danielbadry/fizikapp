@@ -26,103 +26,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['شماره تلفن را وارد کنید', 'کد تایید', 'انتخاب کلمه عبور جدید'];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return (
-        <TextField
-          id="standard-phone"
-          label="شماره تلفن"
-          margin="normal"
-          InputProps={{
-            style: {
-              fontFamily: 'IranSans',
-              fontSize: '14px'
-            },
-          }}
-          InputLabelProps={{
-            style:{
-              fontFamily: 'IranSans',
-              fontSize: '14px'
-            }
-          }}
-        />
-      );
-    case 1:
-      return (
-        <TextField
-          id="standard-verifycode"
-          label="کد تایید"
-          margin="normal"
-          InputProps={{
-              style: {
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              },
-            }}
-            InputLabelProps={{
-              style:{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }
-            }}
-        />
-      );
-    case 2:
-      return (
-        <React.Fragment>
-          
-          <TextField
-            id="standard-lastname"
-            label="کلمه ی عبور"
-            margin="normal"
-            InputProps={{
-              style: {
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              },
-            }}
-            InputLabelProps={{
-              style:{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }
-            }}
-            type="password"
-          />
-
-          <TextField
-            id="standard-lastname"
-            label="تکرار کلمه ی عبور"
-            margin="normal"
-            InputProps={{
-              style: {
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              },
-            }}
-            InputLabelProps={{
-              style:{
-                fontFamily: 'IranSans',
-                fontSize: '14px'
-              }
-            }}
-            type="password"
-          />
-          
-        </React.Fragment>
-      );
-    default:
-      return 'Unknown step';
-  }
+  return ['شماره تلفن را وارد کنید', 'کد تایید', 'انتخاب کلمه عبور'];
 }
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [mobileNumber, setMobileNumber] = React.useState(null);
+  const [userEnteredCode, setUserEnteredCode] = React.useState(null);
+  const [validVerifyCode, setValidVerifyCode] = React.useState(null);
+  const [password, setPassword] = React.useState(null);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
@@ -130,19 +43,80 @@ export default function HorizontalLinearStepper() {
     return step === 10;
   };
 
+  const saveMobileNumber = (e) => {
+    setMobileNumber(e.target.value);
+  }
+
+  const saveUserEnteredCode = (e) => {
+    setUserEnteredCode(e.target.value);
+  }
+  
+  const saveUserPassword = (e) => {
+    setPassword(e.target.value);
+  }
+  
   const isStepSkipped = step => {
     return skipped.has(step);
   };
 
   const sendVerificationCodeToEmail = () => {
-    console.info('sendVerificationCodeToEmail');
+    let verify = Math.floor((Math.random() * 99999) + 10000);
+    
+    setValidVerifyCode(verify);
+
+    let data = {
+      verifyCode : verify,
+      mobileNumber: mobileNumber
+    }
+    
+    fetch(process.env.REACT_APP_API_URL+`users/sendsms`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(request => {
+          this.setState((state, props) => {
+              return ({title: '', message:''});
+          });
+      });
     setActiveStep(prevActiveStep => prevActiveStep + 1);
 
   }
   
   const verifySMSCode = () => {
-    console.info('verifySMSCode');
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    if(userEnteredCode == validVerifyCode)
+      setActiveStep(prevActiveStep => prevActiveStep + 1);
+  }
+
+  const updateNewPassword = () => {
+    let newUserData = {
+      password:password,
+      mobile:mobileNumber
+    }
+    fetch(process.env.REACT_APP_API_URL + `users/updatepassword`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(newUserData), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(request => {
+          
+      });
   }
 
   const handleNext = () => {
@@ -217,7 +191,91 @@ export default function HorizontalLinearStepper() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
+            {activeStep === 0 ? 
+              <Typography className={classes.instructions}>
+                <TextField
+                  id="standard-phone"
+                  label="شماره تلفن"
+                  margin="normal"
+                  onChange={saveMobileNumber}
+                  InputProps={{
+                    style: {
+                      fontFamily: 'IranSans',
+                      fontSize: '14px'
+                    },
+                  }}
+                  InputLabelProps={{
+                    style:{
+                      fontFamily: 'IranSans',
+                      fontSize: '14px'
+                    }
+                  }}
+                />
+              </Typography> : null}
+            {activeStep === 1 ? 
+              <Typography className={classes.instructions}>
+                <TextField
+                  id="standard-verifycode"
+                  label="کد تایید"
+                  margin="normal"
+                  onChange={saveUserEnteredCode}
+                  InputProps={{
+                      style: {
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      },
+                    }}
+                    InputLabelProps={{
+                      style:{
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      }
+                    }}
+                />
+              </Typography> : null}
+            {activeStep === 2 ? 
+              <React.Fragment>
+              
+              <TextField
+                id="standard-lastname"
+                label="کلمه ی عبور"
+                margin="normal"
+                onChange={saveUserPassword}
+                InputProps={{
+                  style: {
+                    fontFamily: 'IranSans',
+                    fontSize: '14px'
+                  },
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily: 'IranSans',
+                    fontSize: '14px'
+                  }
+                }}
+                type="password"
+              />
+              <TextField
+                id="standard-lastname"
+                label="تکرار کلمه ی عبور"
+                margin="normal"
+                InputProps={{
+                  style: {
+                    fontFamily: 'IranSans',
+                    fontSize: '14px'
+                  },
+                }}
+                InputLabelProps={{
+                  style:{
+                    fontFamily: 'IranSans',
+                    fontSize: '14px'
+                  }
+                }}
+                type="password"
+              />
+              
+            </React.Fragment> : null}
             <div>
               {activeStep === 1 ? 
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
@@ -254,10 +312,10 @@ export default function HorizontalLinearStepper() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={sendVerificationCodeToEmail}
+                  onClick={updateNewPassword}
                   className={classes.button}
                 >
-                کلمه عبور جدید را جایگزین کن
+                ثبت کلمه عبور جدید
               </Button>
               : null}
             </div>

@@ -50,10 +50,12 @@ class SignIn extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
-                window.localStorage.setItem('token', result.token);
-                this.setState({
-                    isUserLoggedIn : true
-                });
+                if(result.auth) {
+                    window.localStorage.setItem('token', result.token);
+                    this.setState({
+                        isUserLoggedIn : true
+                    });
+                }
             });
     }
 
