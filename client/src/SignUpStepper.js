@@ -110,11 +110,31 @@ export default function HorizontalLinearStepper() {
     if(userEnteredCode == validVerifyCode)
       setActiveStep(prevActiveStep => prevActiveStep + 1);
   }
+
   const signUpNewUser = () => {
-    console.info('firstName:', firstName);
-    console.info('lastName:', lastName);
-    console.info('grade:', grade);
-    console.info('password:', password);
+    let newUserData = {
+      firstName:firstName,
+      lastName:lastName,
+      grade:grade,
+      password:password,
+      mobile:mobileNumber
+    }
+    fetch(process.env.REACT_APP_API_URL + `users`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(newUserData), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(request => {
+          
+      });
   }
 
   const handleNext = () => {

@@ -14,6 +14,10 @@ module.exports = {
     username: {
       type: 'string'
     },
+    
+    mobile: {
+      type: 'string'
+    },
 
     password: {
       type: 'string'
@@ -31,7 +35,7 @@ module.exports = {
 
     let user = await Users.findOne({
       where : {
-        userName : inputs.username
+        mobile : inputs.mobile
       }
     });
 
