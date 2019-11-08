@@ -18,21 +18,21 @@ class SignUp extends React.Component{
     render() {
         return(
             <React.Fragment>
-                <video 
-                        id="bgVideo" 
-                        controls = {false}
-                        muted
-                        preload="true" 
-                        autoPlay = {true}
-                        style={{
-                            position:'absolute',
-                            width:'100%',
-                            height:'100%',
-                            zIndex:'-1',
-                        }}
-                        >
-                        <source src="background.mp4" type="video/mp4" /> 
-                    </video>
+                {/* <video 
+                    id="bgVideo" 
+                    controls = {false}
+                    muted
+                    preload="true" 
+                    autoPlay = {true}
+                    style={{
+                        position:'absolute',
+                        width:'100%',
+                        height:'100%',
+                        zIndex:'-1',
+                    }}
+                    >
+                    <source src="background.mp4" type="video/mp4" /> 
+                </video> */}
             
                 <Grid 
                     container 

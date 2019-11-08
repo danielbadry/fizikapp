@@ -9,6 +9,14 @@ module.exports = {
 
 
   inputs: {
+    
+    verifyCode : {
+      type: 'string'
+    },
+    
+    mobileNumber : {
+      type: 'string'
+    }
 
   },
 
@@ -32,8 +40,8 @@ module.exports = {
         response.status(401).end();
       } else {
         var requestArgs = {
-          to:'09380331526',
-          msg:'سلام'
+          to : inputs.mobileNumber,
+          msg : 'فیزیک اپ' + '\r\n' + 'کد تایید' + '\r\n' + inputs.verifyCode
         };
 
         client.addHttpHeader('Authorization', "Basic " + Buffer.from('miladkhan' + ':' + '789654').toString('base64'));
