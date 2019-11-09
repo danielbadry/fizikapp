@@ -20,8 +20,8 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
 
-  baseUrl : 'http://188.212.22.83',
-  apiUrl : 'http://localhost:1337',
+  baseUrl : 'http://fizik.app',
+  apiUrl : 'http://fizik.app/api',
   siteUrl : 'https://fizik.app',
   secret : 'c23aSfs',
 };

@@ -43,7 +43,7 @@ class Home extends React.Component {
                         footer="مشاهده بیشتر"
                         model="products"
                         linkToShowMore='products'
-                        count='4'
+                        count='10'
                     />
 
                     {/* {(this.state.token) ? <SingleRow
@@ -62,7 +62,7 @@ class Home extends React.Component {
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
                         linkToShowMore='sciencechallenges'
-                        count='4'
+                        count='10'
                     />
 
                     <SingleRow
@@ -70,7 +70,7 @@ class Home extends React.Component {
                         footer="مشاهده بیشتر"
                         model="definitions"
                         linkToShowMore='definitions'
-                        count='4'
+                        count='10'
                     />
                     
                     <SingleRow
@@ -78,7 +78,7 @@ class Home extends React.Component {
                         footer="شمشاهده بیشتر"
                         model="requests"
                         linkToShowMore='requests'
-                        count='3'
+                        count='10'
                     />
 
                     {/* <RequestCard /> */}

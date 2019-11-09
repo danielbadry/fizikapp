@@ -36,19 +36,18 @@ export default (props) => {
         }, []);
 
     function SelectCorrectCard (props) {
-        console.info('modelType:', props.modelType);
         switch (props.modelType) {
             case 'products':
-                return(<ProductCard item={props} />);
+                return(<ProductCard item={props.item} />);
                 break;
             case 'sciencechallenge':
-                return(<SciencechallengeCard item={props} />);
+                return(<SciencechallengeCard item={props.item} />);
                 break;
             case 'definitions':
-                return(<DefinitionCard item={props} />);
+                return(<DefinitionCard item={props.item} />);
                 break;
             case 'requests':
-                return(<RequestCard item={props} />);
+                return(<RequestCard item={props.item} />);
                 break;
         }
         return <div>hichi</div>;
@@ -109,7 +108,7 @@ export default (props) => {
                         {rows.map(
                             (item, index) => 
                             // <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
-                            <SelectCorrectCard modelType={props.model} />
+                            <SelectCorrectCard modelType={props.model} item={item} />
                             // </Grid>
                         )}
                         

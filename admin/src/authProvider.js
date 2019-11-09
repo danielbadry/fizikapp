@@ -4,10 +4,14 @@ export default (type, params) => {
     // called when the user attempts to log in
 
     if (type === AUTH_LOGIN) {
-        const { username, password } = params;
+        const { password, username } = params;
+        let data = {
+            mobile : username,
+            password : password
+        }
         const request = new Request(process.env.REACT_APP_API_URL+'/users/authenticate', {
             method: 'POST',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify(data),
             headers: new Headers({ 'Content-Type': 'application/json' }),
         });
         return fetch(request)

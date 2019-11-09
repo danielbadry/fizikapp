@@ -230,7 +230,6 @@ function HorizontalLinearStepper(props) {
             window.localStorage.setItem('token', response.status.token);
             props.enqueueSnackbar(
               <React.Fragment>
-
                 <Typography style={{
                   fontFamily: 'IranSans',
                   fontSize: '14px',
@@ -238,7 +237,6 @@ function HorizontalLinearStepper(props) {
                 }}>
                 شما با موفقیت در سیستم ثبت شدید
                 </Typography>
-                
               </React.Fragment>, { 
               variant: 'success'
             });

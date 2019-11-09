@@ -22,7 +22,7 @@ class ProductCard extends React.Component {
 
 constructor(props) {
   super (props);
-  console.info('props:', props);
+  console.info('props product:', props);
 }
 
 render() {
