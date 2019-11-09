@@ -25,6 +25,7 @@ module.exports.routes = {
     'POST /users/authenticate': 'UsersController.authenticate',
     'POST /users/updatepassword': 'UsersController.updatepassword',
     'POST /users/sendsms': 'UsersController.sendsms',
+    'POST /users/checkformobilerepetition': 'UsersController.checkformobilerepetition',
     'POST /watchedvideos/setuserwatchstatus': 'Watchedvideos.setuserwatchstatus',
     'GET /requests/getuserrequests': 'RequestsController.getuserrequests',
     'GET /users/userinfo': 'UsersController.userinfo',

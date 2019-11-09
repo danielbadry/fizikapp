@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { withSnackbar } from 'notistack';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +30,7 @@ function getSteps() {
   return ['شماره تلفن را وارد کنید', 'کد تایید', 'اطلاعات فردی'];
 }
 
-export default function HorizontalLinearStepper() {
+function HorizontalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [mobileNumber, setMobileNumber] = React.useState(null);
@@ -74,17 +75,9 @@ export default function HorizontalLinearStepper() {
     return skipped.has(step);
   };
 
-  const sendVerificationCodeToEmail = () => {
-    let verify = Math.floor((Math.random() * 99999) + 10000);
+  const sendVerificationCodeViaSMS = () => {
     
-    setValidVerifyCode(verify);
-
-    let data = {
-      verifyCode : verify,
-      mobileNumber: mobileNumber
-    }
-    
-    fetch(process.env.REACT_APP_API_URL+`users/sendsms`, {
+    fetch(process.env.REACT_APP_API_URL + `users/checkformobilerepetition`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -94,15 +87,74 @@ export default function HorizontalLinearStepper() {
       },
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      body: JSON.stringify({mobileNumber:mobileNumber}), // body data type must match "Content-Type" header
       })
       .then(response => response.json())
-      .then(request => {
-          this.setState((state, props) => {
-              return ({title: '', message:''});
-          });
+      .then(response => {
+          if (response.numberExists) {
+            const action = key => (
+              <React.Fragment>
+                  <Button 
+                      // onClick={() => { alert(`I belong to snackbar with key ${key}`); }}
+                      style={{
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      }}
+                      href="#/signin"
+                      >
+                      ورود
+                  </Button>
+                  {/* <Button onClick={() => { this.props.closeSnackbar(key) }}>
+                      Dismiss
+                  </Button> */}
+              </React.Fragment>
+          );
+            props.enqueueSnackbar(
+              <React.Fragment>
+
+                <Typography style={{
+                  fontFamily: 'IranSans',
+                  fontSize: '14px',
+                  direction: 'rtl'
+                }}>
+                کاربری با این شماره تلفن در سیستم موجود است
+                </Typography>
+                
+              </React.Fragment>, { 
+              variant: 'warning',
+              action,
+            });
+          }
+          else {
+            let verify = Math.floor((Math.random() * 99999) + 10000);
+            setValidVerifyCode(verify);
+
+            let data = {
+              verifyCode : verify,
+              mobileNumber: mobileNumber
+            }
+            
+            fetch(process.env.REACT_APP_API_URL + `users/sendsms`, {
+              method: 'POST', // *GET, POST, PUT, DELETE, etc.
+              mode: 'cors', // no-cors, cors, *same-origin
+              cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+              credentials: 'same-origin', // include, *same-origin, omit
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              redirect: 'follow', // manual, *follow, error
+              referrer: 'no-referrer', // no-referrer, *client
+              body: JSON.stringify(data), // body data type must match "Content-Type" header
+              })
+              .then(response => response.json())
+              .then(request => {
+                  this.setState((state, props) => {
+                      return ({title: '', message:''});
+                  });
+              });
+            setActiveStep(prevActiveStep => prevActiveStep + 1);
+          }
       });
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
 
   }
   
@@ -378,7 +430,7 @@ export default function HorizontalLinearStepper() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={sendVerificationCodeToEmail}
+                  onClick={sendVerificationCodeViaSMS}
                   className={classes.button}
 
                 >
@@ -414,3 +466,4 @@ export default function HorizontalLinearStepper() {
     </div>
   );
 }
+export default withSnackbar(HorizontalLinearStepper);
