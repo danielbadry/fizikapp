@@ -11,6 +11,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { withSnackbar } from 'notistack';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +38,7 @@ function getSteps() {
 function HorizontalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isSignupSuccess, setisSignupSuccess] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState(null);
   const [userEnteredCode, setUserEnteredCode] = React.useState(null);
   const [validVerifyCode, setValidVerifyCode] = React.useState(null);
@@ -161,6 +167,41 @@ function HorizontalLinearStepper(props) {
   const verifySMSCode = () => {
     if(userEnteredCode == validVerifyCode)
       setActiveStep(prevActiveStep => prevActiveStep + 1);
+    else {
+      const action = key => (
+        <React.Fragment>
+            {/* <Button 
+                onClick={() => { alert(`I belong to snackbar with key ${key}`); }}
+                style={{
+                  fontFamily: 'IranSans',
+                  fontSize: '14px'
+                }}
+                href="#/signin"
+                >
+                ورود
+            </Button> */}
+            {/* <Button onClick={() => { this.props.closeSnackbar(key) }}>
+                Dismiss
+            </Button> */}
+        </React.Fragment>
+      );
+      props.enqueueSnackbar(
+        <React.Fragment>
+
+          <Typography style={{
+            fontFamily: 'IranSans',
+            fontSize: '14px',
+            direction: 'rtl'
+          }}>
+          کد تایید را درست وارد نکردید
+          </Typography>
+          
+        </React.Fragment>, { 
+        variant: 'error',
+        action,
+      });
+    }
+    
   }
 
   const signUpNewUser = () => {
@@ -184,8 +225,48 @@ function HorizontalLinearStepper(props) {
       body: JSON.stringify(newUserData), // body data type must match "Content-Type" header
       })
       .then(response => response.json())
-      .then(request => {
-          
+      .then(response => {
+          if (response.status.auth) {
+            window.localStorage.setItem('token', response.status.token);
+            props.enqueueSnackbar(
+              <React.Fragment>
+
+                <Typography style={{
+                  fontFamily: 'IranSans',
+                  fontSize: '14px',
+                  direction: 'rtl'
+                }}>
+                شما با موفقیت در سیستم ثبت شدید
+                </Typography>
+                
+              </React.Fragment>, { 
+              variant: 'success'
+            });
+            
+            setTimeout(function()
+            { 
+              props.enqueueSnackbar(
+                <React.Fragment>
+  
+                  <Typography style={{
+                    fontFamily: 'IranSans',
+                    fontSize: '14px',
+                    direction: 'rtl'
+                  }}>
+                  بعد از 5 ثانیه به طور خودکار وارد برنامه می شوید
+                  </Typography>
+                  
+                </React.Fragment>, { 
+                variant: 'info',
+                autoHideDuration: 3000,
+              });
+            }, 1000);
+
+            setTimeout(function()
+            { 
+              setisSignupSuccess(true);
+            }, 5000);
+          }
       });
   }
 
@@ -222,7 +303,11 @@ function HorizontalLinearStepper(props) {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+if(isSignupSuccess) {
+  return (
+    <Redirect to="/" />
+  )
+} else
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep}>
@@ -268,6 +353,8 @@ function HorizontalLinearStepper(props) {
                   id="standard-phone"
                   label="شماره تلفن"
                   margin="normal"
+                  placeholder="09xxxxxxxxx"
+                  type="number"
                   onChange={saveMobileNumber}
                   InputProps={{
                     style: {
@@ -305,28 +392,35 @@ function HorizontalLinearStepper(props) {
                 />
               </Typography> : null}
             {activeStep === 2 ? 
-              <React.Fragment>
-              <TextField
-                id="standard-firstname"
-                label="نام"
-                margin="normal"
-                onChange={saveUserFirstName}
+              <React.Fragment
                 style={{
-                  fontFamily: "IranSans"
-                }}
-                InputProps={{
-                  style: {
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
-                  },
-                }}
-                InputLabelProps={{
-                  style:{
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
-                  }
-                }}
-              />
+                  direction:'rtl'
+                }}  
+                >
+                <div>
+                  <TextField
+                    id="standard-firstname"
+                    label="نام"
+                    margin="normal"
+                    onChange={saveUserFirstName}
+                    style={{
+                      fontFamily: "IranSans"
+                    }}
+                    InputProps={{
+                      style: {
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      },
+                    }}
+                    InputLabelProps={{
+                      style:{
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      }
+                    }}
+                  />
+                </div>
+                <div>
               <TextField
                 id="standard-lastname"
                 label="نام خانوادگی"
@@ -345,6 +439,8 @@ function HorizontalLinearStepper(props) {
                   }
                 }}
               />
+              </div>
+              <div>
               <TextField
                 id="standard-lastname"
                 label="کلمه ی عبور"
@@ -364,6 +460,8 @@ function HorizontalLinearStepper(props) {
                 }}
                 type="password"
               />
+              </div>
+              <div>
               <TextField
                 id="standard-lastname"
                 label="تکرار کلمه ی عبور"
@@ -382,40 +480,47 @@ function HorizontalLinearStepper(props) {
                 }}
                 type="password"
               />
-              <FormControl>
-                <InputLabel 
-                  
+              </div>
+              <div>
+              <FormControl component="fieldset">
+                <FormLabel 
+                  component="legend"
                   style={{
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
+                    fontFamily:'IranSans',
+                    fontSize:'14px'
                   }}
-                  id="demo-simple-select-label">مقطع</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={grade}
-                  onChange={saveUserGrade}
-                >
-                  <MenuItem
-                  style={{
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
-                  }}
-                   value={10}>دهم</MenuItem>
-                  <MenuItem 
-                  style={{
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
-                  }}
-                  value={11}>یازدهم</MenuItem>
-                  <MenuItem 
-                  style={{
-                    fontFamily: 'IranSans',
-                    fontSize: '14px'
-                  }}
-                  value={12}>دوازدهم</MenuItem>
-                </Select>
+                >مقطع تحصیلی</FormLabel>
+                <RadioGroup aria-label="position" name="position" value={grade} onChange={saveUserGrade} row>
+                  <FormControlLabel
+                    value="10"
+                    control={<Radio color="primary" style={{
+                      fontFamily:'IranSans',
+                      fontSize:'14px'
+                    }} />}
+                    label="دهم"
+                    labelPlacement="دهم"
+                  />
+                  <FormControlLabel
+                    value="11"
+                    control={<Radio color="primary" style={{
+                      fontFamily:'IranSans',
+                      fontSize:'14px'
+                    }} />}
+                    label="یازدهم"
+                    labelPlacement="یازدهم"
+                  />
+                  <FormControlLabel
+                    value="12"
+                    control={<Radio color="primary" style={{
+                      fontFamily:'IranSans',
+                      fontSize:'14px'
+                    }} />}
+                    label="دوازدهم"
+                    labelPlacement="دوازدهم"
+                  />
+                </RadioGroup>
               </FormControl>
+              </div>
             </React.Fragment> : null}
             <div>
               {activeStep === 1 ? 
