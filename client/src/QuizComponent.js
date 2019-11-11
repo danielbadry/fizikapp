@@ -158,6 +158,7 @@ class QuizComponent extends React.Component {
     handleDialogStatusForResponse = () => {
         this.setState({isQuizDialogOpen: !(this.state.isQuizDialogOpen)});
         this.setState({mode: 'showAnswers'});
+        this.setState({quizResultText: 'امتیاز شما از این کوییز 2 است'});
     }
     
     handleChange = () => {
@@ -465,7 +466,7 @@ class QuizComponent extends React.Component {
                                 سوال بعدی
                             </Button> 
                             
-                            {(!this.state.quizResultText) ? 
+                            {((!this.state.quizResultText) && (this.state.mode == 'quiz')) ? 
                                 <Button 
                                     disabled = {Boolean(Number(this.state.quizes.length - 1) !== Number(this.state.step))}
                                     color="secondary"
@@ -477,16 +478,18 @@ class QuizComponent extends React.Component {
                                     >
                                     {this.state.calculateButtonText}
                                 </Button>    
-                                :
-                                <Button 
-                                    onClick={this.handleDialogStatus}
-                                    style={{
-                                        fontFamily: "IranSans"
-                                    }}
-                                    variant="contained">
-                                        بستن
-                                </Button> 
-                            }
+                                : null}
+
+                                {((!this.state.quizResultText) || (this.state.mode == 'showAnswers')) ? 
+                                    <Button 
+                                        onClick={this.handleDialogStatus}
+                                        style={{
+                                            fontFamily: "IranSans"
+                                        }}
+                                        variant="contained">
+                                            بستن
+                                    </Button> : null
+                                }
 
                             </DialogActions>
                         </Dialog>
