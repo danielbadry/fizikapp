@@ -7,6 +7,9 @@ import ProductCard from './ProductCard';
 import SciencechallengeCard from './SciencechallengeCard';
 import DefinitionCard from './DefinitionCard';
 import RequestCard from './RequestCard';
+import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import RightIcon from '@material-ui/icons/KeyboardArrowRight';
+import IconButton from '@material-ui/core/IconButton';
 
 export default (props) => {
 
@@ -97,8 +100,8 @@ export default (props) => {
                         activeItemIndex={activeItemIndex}
                         numberOfCards={4}
                         gutter={10}
-                        leftChevron={<button>{'<'}</button>}
-                        rightChevron={<button>{'>'}</button>}
+                        leftChevron={<IconButton aria-label="delete"><LeftIcon /></IconButton>}
+                        rightChevron={<IconButton aria-label="delete"><RightIcon /></IconButton>}
                         outsideChevron
                         chevronWidth={chevronWidth}
                     >
