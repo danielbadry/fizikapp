@@ -137,7 +137,11 @@ class Product extends React.Component {
                                         height: '400px'
                                     }}
                                     >
-                                    hello
+                                    <QuizComponent
+                                        endFunc={this.catchMeHere}
+                                        model='products'
+                                        modelid={this.props.productid}
+                                    />
                                 </Paper>
                             </Grid>
                             
@@ -351,55 +355,7 @@ class Product extends React.Component {
                             </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Grid container spacing={0}>
-                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                <Paper
-                                    style= {{
-                                        direction: 'rtl'
-                                    }}
-                                    >
-                                    <Typography
-                                    style={{ fontFamily: 'IranSans_Light' }}
-                                    >
-                                        {this.state.summary.title}
-                                    </Typography>
-                                    <Typography 
-                                        gutterBottom
-                                        style={{ fontFamily: 'IranSans_Light' }}
-                                        >
-                                        {this.state.summary.jalaaliUserFriendlyCreatedDate}
-                                    </Typography>
-                                    
-                                    {(localStorage.getItem('token') && this.state.userCanSeeQuiz) ? 
-                                        <QuizComponent
-                                            endFunc={this.catchMeHere}
-                                            model='products'
-                                            modelid={this.props.productid}
-                                            title={this.state.summary.name}
-                                    />
-                                    :null}
-
-                                        {(localStorage.getItem('token') && !this.state.userCanSeeQuiz) ? 
-                                        <React.Fragment>
-                                            <div>شارژ نداری</div>
-                                            <QuizComponent
-                                                endFunc={this.catchMeHere}
-                                                model='products'
-                                                modelid={this.props.productid}
-                                                title={this.state.summary.name}
-                                                userCanSeeQuiz = {false}
-                                            />
-                                        </React.Fragment>
-                                        :null}
-
-                                    {(!localStorage.getItem('token')) ? 
-                                        <div>لاگین کنید</div>
-                                    :null}
-                                </Paper>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    
                     <Grid item xs={12}>
                     <ContentUserInteraction
                         config={this.state.userInteractionConfig}

@@ -28,15 +28,17 @@ class QuizComponent extends React.Component {
 
         this.state = {
             isQuizDialogOpen: false,
+            userHasCharge: true,
             quizes : [],
             mode : 'quiz',
             quizesResponse : [],
-            isAttended : false,
+            isAttended : null,
             userAnswers: [],
             step: 0,
             token: null,
             user:null,
-            calculateButtonText : 'امتیاز من را محاسبه کن'
+            calculateButtonText : 'امتیاز من را محاسبه کن',
+            quizResultText:null
         }
     }
     
@@ -207,7 +209,8 @@ class QuizComponent extends React.Component {
         console.info('score:', score);
         this.changeHandler();
         await this.saveUserScoreInDatabase();
-        this.state.calculateButtonText = `امتیاز شما ${score} است و در سایت ثبت شد`;
+        this.state.quizResultText = `امتیاز شما ${score} است و در سایت ثبت شد`; 
+        
     }
     
     saveUserScoreInDatabase = () => {
@@ -351,59 +354,47 @@ class QuizComponent extends React.Component {
         }
         return(
             <React.Fragment>
+                {(this.state.token && this.state.quizes.length)? 
                 
-                <div>{this.WarningForAttend()}</div>
-                {(this.props.userCanSeeQuiz)?
-                <Button 
-                variant="contained" 
-                color="primary"
-                onClick={this.handleDialogStatus}
-                style={{
-                    fontFamily: "IranSans"
-                }}
-                >
-                شروع کوییز
-            </Button>
-            :null}
-                
-                
-                <Button 
-                    variant="contained" 
-                    color="secondary"
-                    onClick={this.handleDialogStatusForResponse}
-                    style={{
-                        fontFamily: "IranSans"
-                    }}
-                    >
-                    نمایش جواب هاو مقایسه با جواب های من
-                </Button>
+                    <React.Fragment>
 
-                <Dialog 
-                    onClose={this.handleDialogStatus} 
-                    aria-labelledby="simple-dialog-title" 
-                    open={this.state.isQuizDialogOpen}
-                    style={{ 
-                        direction: 'rtl',
-                    }}
-                    >
-                    <DialogTitle 
-                        id="simple-dialog-title"
-                        >
-                            <Typography
-                                style={{ 
-                                    fontFamily: 'IranSans_Light',
-                                    fontSize: 12
+                        {((this.state.userHasCharge) && (!this.state.isAttended))?
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={this.handleDialogStatus}
+                                style={{
+                                    fontFamily: "IranSans"
                                 }}
                                 >
-                                {this.props.title}
-                            </Typography>
-                            
-                    </DialogTitle>
-                    <DialogContent>
-                    <DialogContentText>
-                        {this.state.quizes.map((quiz, index) => 
-                            (index==this.state.step?<div
-                                key={index}
+                                شروع کوییز
+                            </Button>
+                        :null}
+                        {(this.state.isAttended) ?
+                            <Button 
+                                variant="contained" 
+                                color="secondary"
+                                onClick={this.handleDialogStatusForResponse}
+                                style={{
+                                    fontFamily: "IranSans"
+                                }}
+                                >
+                                نمایش جواب هاو مقایسه با جواب های من
+                            </Button> :
+                            null
+                        }
+                        
+
+                        <Dialog 
+                            onClose={this.handleDialogStatus} 
+                            aria-labelledby="simple-dialog-title" 
+                            open={this.state.isQuizDialogOpen}
+                            style={{ 
+                                direction: 'rtl',
+                            }}
+                            >
+                            <DialogTitle 
+                                id="simple-dialog-title"
                                 >
                                     <Typography
                                         style={{ 
@@ -411,59 +402,107 @@ class QuizComponent extends React.Component {
                                             fontSize: 12
                                         }}
                                         >
-                                        {quiz.question}
+                                        {this.props.title}
                                     </Typography>
-                                    {this.OptionsPad(quiz)}
-                                </div>:
-                                <div
-                                key={index}
-                                ></div>
-                                )
+                                    
+                            </DialogTitle>
+                            <DialogContent>
+                            <DialogContentText>
+                                {this.state.quizes.map((quiz, index) => 
+                                    (index==this.state.step?<div
+                                        key={index}
+                                        >
+                                            <Typography
+                                                style={{ 
+                                                    fontFamily: 'IranSans_Light',
+                                                    fontSize: 12
+                                                }}
+                                                >
+                                                {quiz.question}
+                                            </Typography>
+                                            {this.OptionsPad(quiz)}
+                                        </div>:
+                                        <div
+                                        key={index}
+                                        ></div>
+                                        )
+                                    
+                                )}
+                                <Typography
+                                    style={{
+                                        fontFamily: 'IranSans',
+                                        fontSize: '14px'
+                                    }}
+                                    >
+                                   {this.state.quizResultText}
+                                </Typography>
+                            </DialogContentText>
                             
-                        )}
-                    </DialogContentText>
-                    
-                    </DialogContent>
-                    <DialogActions>
-                    
-                   <Button 
-                        disabled = {this.state.step == 0}
-                        color="primary"
-                        onClick={this.checkAndGoBackStep}
-                        style={{
-                            fontFamily: "IranSans"
-                        }}
-                        variant="contained"
-                        >
-                        سوال قبلی
-                    </Button>
+                            </DialogContent>
+                            <DialogActions>
+                            
+                        <Button 
+                                disabled = {this.state.step == 0}
+                                color="primary"
+                                onClick={this.checkAndGoBackStep}
+                                style={{
+                                    fontFamily: "IranSans"
+                                }}
+                                variant="contained"
+                                >
+                                سوال قبلی
+                            </Button>
 
-                    <Button 
-                        disabled = {this.state.step == this.state.quizes.length - 1}
-                        color="primary"
-                        onClick={this.checkAndGoNextStep}
-                        style={{
-                            fontFamily: "IranSans"
-                        }}
-                        variant="contained"
-                        >
-                        سوال بعدی
-                    </Button> 
-                    
-                    <Button 
-                        disabled = {Boolean(Number(this.state.quizes.length - 1) !== Number(this.state.step))}
-                        color="secondary"
-                        onClick={this.calculateUserPointInQuiz}
-                        style={{
-                            fontFamily: "IranSans"
-                        }}
-                        variant="contained"
-                        >
-                        {this.state.calculateButtonText}
-                    </Button>
-                    </DialogActions>
-                </Dialog>
+                            <Button 
+                                disabled = {this.state.step == this.state.quizes.length - 1}
+                                color="primary"
+                                onClick={this.checkAndGoNextStep}
+                                style={{
+                                    fontFamily: "IranSans"
+                                }}
+                                variant="contained"
+                                >
+                                سوال بعدی
+                            </Button> 
+                            
+                            {(!this.state.quizResultText) ? 
+                                <Button 
+                                    disabled = {Boolean(Number(this.state.quizes.length - 1) !== Number(this.state.step))}
+                                    color="secondary"
+                                    onClick={this.calculateUserPointInQuiz}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                    }}
+                                    variant="contained"
+                                    >
+                                    {this.state.calculateButtonText}
+                                </Button>    
+                                :
+                                <Button 
+                                    onClick={this.handleDialogStatus}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                    }}
+                                    variant="contained">
+                                        بستن
+                                </Button> 
+                            }
 
+                            </DialogActions>
+                        </Dialog>
+                    </React.Fragment>
+                : null    
+                } 
+
+                {((this.state.token) && (this.state.quizes.length == 0)) ?
+                    <div>کوییزی موجود نیست</div> :
+                    null
+                }
+
+                {(!this.state.token) ?
+                    <div>شما لاگین نیستید</div>:
+                    null
+                }
             </React.Fragment>
         );
     }
