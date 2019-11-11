@@ -66,7 +66,7 @@ render() {
           position: 'absolute',
           backgroundColor:'#0000004d',
           width: '100%',
-          borderRadius: '7px'
+          // borderRadius: '7px'
         }}>
           
           <ThumbUp 

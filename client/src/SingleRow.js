@@ -1,6 +1,5 @@
 import React , { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import PostCard from "./PostCard";
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import ItemsCarousel from 'react-items-carousel';
@@ -92,7 +91,6 @@ export default (props) => {
                 </ItemsCarousel>
             </div> */}
 
-            {/* <Grid container spacing={1}> */}
                 <div style={{ padding: `0 ${chevronWidth}px` }}>
                     <ItemsCarousel
                         requestToChangeActive={setActiveItemIndex}
@@ -107,14 +105,11 @@ export default (props) => {
 
                         {rows.map(
                             (item, index) => 
-                            // <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
-                            <SelectCorrectCard modelType={props.model} item={item} />
-                            // </Grid>
+                                <SelectCorrectCard modelType={props.model} item={item} key={index} />
                         )}
                         
                     </ItemsCarousel>
                 </div>
-            {/* </Grid> */}
 
             <Link 
                 component={RouterLink} 

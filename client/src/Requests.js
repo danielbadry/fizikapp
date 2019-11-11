@@ -144,7 +144,7 @@ class Requests extends React.Component {
                     </Grid>
                     <Grid item xs={12}>
                     <Button 
-                        href="/new-request"
+                        href="#/new-request"
                         variant="contained"
                         style={{
                             fontFamily: "IranSans"

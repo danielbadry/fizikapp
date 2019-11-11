@@ -22,10 +22,6 @@ module.exports = {
       type: 'string'
     },
     
-    userId : {
-      type: 'string'
-    },
-    
     tags : {
       type: 'string'
     }

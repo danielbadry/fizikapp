@@ -10,7 +10,6 @@ import SingleRow from "./SingleRow";
 import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
-import PostCard from "./PostCard";
 import NiceCard from "./NiceCard";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -85,13 +84,12 @@ class Home extends React.Component {
 
                     <SingleRow
                         label="درخواست ها"
-                        footer="شمشاهده بیشتر"
+                        footer="مشاهده بیشتر"
                         model="requests"
                         linkToShowMore='requests'
                         count='10'
                     />
 
-                    {/* <RequestCard /> */}
              </Container>
              <StickyFooter />
                     {/* // <Grid item xs={12}>
