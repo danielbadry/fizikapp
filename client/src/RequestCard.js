@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -53,7 +55,9 @@ export default function RequestCars(props) {
 
   return (
       <React.Fragment>
-          
+           <Link
+        component={RouterLink} 
+        to={`request/${props.item.id}`}>
           <Card className={classes.card} 
           style={{
             cursor:'pointer'
@@ -128,7 +132,7 @@ export default function RequestCars(props) {
           </CardActions>
           
           </Card>
-
+          </Link>
     </React.Fragment>
   );
 }

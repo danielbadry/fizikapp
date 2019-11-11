@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import Visibility from '@material-ui/icons/Visibility';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles({
   card: {
@@ -22,18 +24,19 @@ class SciencechallengeCard extends React.Component {
 
 constructor(props) {
   super (props);
-  console.info('props:', props);
 }
 
 render() {
   return (
     <React.Fragment>
+      <Link
+        component={RouterLink} 
+        to={`sciencechallenge/${this.props.item.id}`}>
       <Paper
         style={{
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,
           height:'142px',
           width: '253px',
-          cursor: 'pointer',
           position: 'relative',
           borderRadius:0
         }}
@@ -89,6 +92,7 @@ render() {
         </div>
 
       </Paper>
+      </Link>
     </React.Fragment>
     
   );
