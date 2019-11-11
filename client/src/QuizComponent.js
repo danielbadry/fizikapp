@@ -20,6 +20,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Typography from '@material-ui/core/Typography';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 class QuizComponent extends React.Component {
     
@@ -63,7 +65,6 @@ class QuizComponent extends React.Component {
                    isAttended : response.isAttended
                 }, function() {
 
-                    console.info('state:', this.state);
                     // console.info('props:', this.props);
                     // // fill out answers array
                     // for (let qa of quizes) {
@@ -85,70 +86,70 @@ class QuizComponent extends React.Component {
     
     componentDidMount() {
         const token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
-            method: 'GET', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(userinfo => {
-                this.setState({
-                   user: userinfo 
-                }, function() {
+
+        if (token) {
+            fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+                method: 'GET', 
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow',
+                referrer: 'no-referrer',
+                })
+                .then(response => response.json())
+                .then(userinfo => {
+                    this.setState({
+                    user: userinfo 
+                    }, function() {
+                        
+                    });
                     
                 });
-                
-            });
 
-        this.setState(function(state, props) {
-            return {
-                token: token
-            }}, function() {
-                
-            });
-        this.getUserQuizResponse(token);
-        fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
-            method: 'GET', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(quizes => {
-                this.setState({
-                   quizes: quizes 
-                }, function() {
-                    console.info('quizes:', this.state.quizes);
-                    console.info('props:', this.props);
-                    // fill out answers array
-                    for (let qa of quizes) {
-                        
-                        let tempObject = {
-                            userId : this.state.user.id,
-                            quizId: qa.id,
-                            responseId: null
+            this.setState(function(state, props) {
+                return {
+                    token: token
+                }}, function() {
+                    
+                });
+            this.getUserQuizResponse(token);
+            fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
+                method: 'GET', 
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow',
+                referrer: 'no-referrer',
+                })
+                .then(response => response.json())
+                .then(quizes => {
+                    this.setState({
+                    quizes: quizes 
+                    }, function() {
+                        // fill out answers array
+                        for (let qa of quizes) {
+                            
+                            let tempObject = {
+                                userId : this.state.user.id,
+                                quizId: qa.id,
+                                responseId: null
+                            }
+
+                            this.state.userAnswers.push(tempObject);
                         }
 
-                        this.state.userAnswers.push(tempObject);
-                    }
-
-                    console.info('answers:', this.state.userAnswers);
+                    });
+                    
                 });
-                
-            });
+            } 
     }
 
     handleDialogStatus = () => {
@@ -166,17 +167,7 @@ class QuizComponent extends React.Component {
     }
     
     itemHandleChange = (optionId, quizId) => {
-        // if(false) {
-        //     return;
-        // } else {
-            console.info('quiz id:', quizId);
-            console.info('option id:', optionId);
-            // fill the state.answers array here
-            console.info('step:', this.state.quizes[this.state.step]);
-            this.state.userAnswers[this.state.step].responseId = optionId;
-            console.info('final result:', this.state.userAnswers);
-        // }
-        
+        this.state.userAnswers[this.state.step].responseId = optionId;
     } 
 
     checkAndGoNextStep = () => {
@@ -207,7 +198,6 @@ class QuizComponent extends React.Component {
             }
             
         }
-        console.info('score:', score);
         this.changeHandler();
         await this.saveUserScoreInDatabase();
         this.state.quizResultText = `امتیاز شما ${score} است و در سایت ثبت شد`; 
@@ -215,7 +205,6 @@ class QuizComponent extends React.Component {
     }
     
     saveUserScoreInDatabase = () => {
-        console.info('write in database');
         let data = {
             answers : JSON.stringify(this.state.userAnswers)
         }
@@ -243,13 +232,10 @@ class QuizComponent extends React.Component {
     }
 
     checkForAnswer = (id) => {
-        // console.info('iddd:', id);
-        // console.info(this.state.quizes[this.state.step].options);
         for (let oo of this.state.quizes[this.state.step].options) {
             if(oo.id == id && oo.isAnswer)
                 return true;
         }
-        console.info('quizesResponse:', this.state);
         
         for (let oo of this.state.quizesResponse) {
             if(oo.responseId == id)
@@ -503,7 +489,16 @@ class QuizComponent extends React.Component {
                 }
 
                 {(!this.state.token) ?
-                    <div>شما لاگین نیستید</div>:
+                    <Fab 
+                        href='#/signin'
+                        variant="extended" 
+                        aria-label="like" 
+                        style={{
+                            fontFamily: 'IranSans'
+                        }}>
+                        <NavigationIcon />
+                        لطفا لاگین کنید
+                    </Fab>:
                     null
                 }
             </React.Fragment>
