@@ -160,6 +160,7 @@ class SignIn extends React.Component{
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                             <Button
+                                href="#signup"
                                 variant="outlined"
                                 color="primary"
                                 // onClick={sendVerificationCodeToEmail}

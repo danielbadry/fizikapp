@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
 
 import MainFooter from "./MainFooter";
+import AdsPanel from "./AdsPanel";
 import StickyFooter from "./StickyFooter";
 import SingleRow from "./SingleRow";
 import RequestCard from "./RequestCard";
@@ -38,6 +39,7 @@ class Home extends React.Component {
                 
                  <Container>
                     <NiceCard />
+                    <AdsPanel />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
@@ -73,6 +75,14 @@ class Home extends React.Component {
                         count='10'
                     />
                     
+                    <SingleRow
+                        label="فراتر از فیزیک"
+                        footer="مشاهده بیشتر"
+                        model="products"
+                        linkToShowMore='products'
+                        count='10'
+                    />
+
                     <SingleRow
                         label="درخواست ها"
                         footer="شمشاهده بیشتر"

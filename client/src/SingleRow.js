@@ -97,8 +97,8 @@ export default (props) => {
                     <ItemsCarousel
                         requestToChangeActive={setActiveItemIndex}
                         activeItemIndex={activeItemIndex}
-                        numberOfCards={3}
-                        gutter={20}
+                        numberOfCards={4}
+                        gutter={10}
                         leftChevron={<button>{'<'}</button>}
                         rightChevron={<button>{'>'}</button>}
                         outsideChevron
