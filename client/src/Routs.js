@@ -40,17 +40,13 @@ function HandleRequest({ match }) {
 
 function HandleDefinition({ match }) {
     return (
-        <Definition 
-            definitionid={match.params.definitionid}
-            />
+        <Definition match={match} />
     );
 }
 
 function HandleExercise({ match }) {
     return (
-        <Exercise 
-            exerciseid={match.params.exerciseid}
-            />
+        <Exercise match={match} />
     );
 }
 
@@ -79,17 +75,13 @@ function HandleSearch({ match }) {
   
 function HandleProduct({ match }) {
     return (
-        <Product 
-            productid={match.params.productid}
-            />
+        <Product match={match} />
     );
 }
 
 function HandleSciencechallenge({ match }) {
     return (
-        <Sciencechallenge 
-            sciencechallengeid={match.params.sciencechallengeid}
-            />
+        <Sciencechallenge match={match} />
     );
 }
   
