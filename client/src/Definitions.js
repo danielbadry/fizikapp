@@ -117,11 +117,7 @@ class Requests extends React.Component {
         
         return (
             <Grid container spacing={3}>
-                        
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-                    
+                  
                     <Grid item xs={12}>
                         <TextField
                             id="standard-message"
