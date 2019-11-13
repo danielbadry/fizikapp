@@ -11,17 +11,7 @@ class PrivacyPolicy extends React.Component {
         return (
             <div>
                 <Grid container spacing={0}>
-                        
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-                    
-                    {/* <Grid item xs={12}>
-                    <Paper>
-                        <HeaderSlider />
-                        <ReactTourGuideSlider />
-                    </Paper>
-                    </Grid> */}
+                   
                     <Grid 
                         item
                         xs={12} 

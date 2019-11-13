@@ -50,7 +50,7 @@ class Shoppingplans extends React.Component {
                 background: 'url(https://www.filimo.com/_/assets/web/ui/img-nM32Gle1NLCorhcsZMAUTA/payments/bg.jpg) no-repeat fixed center/cover'
             }}
             >
-                <MainHeader />
+                
                 <Grid 
                     container 
                     alignItems="center"

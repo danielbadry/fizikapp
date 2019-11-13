@@ -196,7 +196,7 @@ class SingleDefinition extends React.Component{
                                                     <Chip 
                                                         key={index}
                                                         style={{fontFamily:'IranSans',fontSize:'14px'}} 
-                                                        label="سرعت" 
+                                                        label={item.name} 
                                                         component="a" 
                                                         clickable 
                                                         />

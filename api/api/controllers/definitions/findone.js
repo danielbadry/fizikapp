@@ -36,7 +36,7 @@ module.exports = {
     moment.locale('fa');
     summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
     
-    summary.thumbnail = "http://localhost:1337/files/definitionImage/" + summary.thumbnail;
+    summary.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + summary.thumbnail;
     
     //  tidy up tags
     if (summary.tags) {

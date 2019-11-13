@@ -151,27 +151,31 @@ class SingleProduct extends React.Component {
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                         <Grid container spacing={0} style={{display:`${this.state.videoPlayerDisplayType}`}}>
                                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                            <Player
-                                                poster={this.state.thumbnail}
-                                                startTime = {this.state.startTime}
-                                                style={{
-                                                    height: '200px'
-                                                }}
-                                                >
-                                                    
-                                            <source 
-                                                src={this.state.summary.videoAddress}
-                                                />
+                                            {(this.state.isRender) ?
+                                                <Player
+                                                    poster={this.state.thumbnail}
+                                                    startTime = {this.state.startTime}
+                                                    style={{
+                                                        height: '200px'
+                                                    }}
+                                                    >
+                                                        
+                                                <source 
+                                                    src={this.state.summary.videoAddress}
+                                                    />
 
-                                            <ControlBar>
-                                                <ReplayControl seconds={10} order={1.1} />
-                                                <ForwardControl seconds={10} order={1.2} />
-                                                <CurrentTimeDisplay order={4.1} />
-                                                <TimeDivider order={4.2} />
-                                                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
-                                                <VolumeMenuButton />
-                                            </ControlBar>
-                                            </Player>
+                                                <ControlBar>
+                                                    <ReplayControl seconds={10} order={1.1} />
+                                                    <ForwardControl seconds={10} order={1.2} />
+                                                    <CurrentTimeDisplay order={4.1} />
+                                                    <TimeDivider order={4.2} />
+                                                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                                                    <VolumeMenuButton />
+                                                </ControlBar>
+                                                </Player>
+                                             : 
+                                            null
+                                        }
                                             </Grid>
                                         </Grid>
                                         <Grid container spacing={0} style={{display:`${this.state.videoInfoBoxDisplayType}`}}>

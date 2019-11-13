@@ -15,10 +15,6 @@ class About extends React.Component {
             <div>
                 <Grid container spacing={0}>
 
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-
                     <Grid 
                         item
                         lg={12}
@@ -345,7 +341,7 @@ class About extends React.Component {
                                                 }}
                                                 >
                                                     <Button 
-                                                        href='/signup'
+                                                        href='#/signup'
                                                         variant="contained"
                                                         color="secondary"
                                                         style={{
