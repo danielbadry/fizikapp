@@ -21,11 +21,13 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    // return(this.req.headers.authorization);
     // let token;
     // return this.res.json(typeof(this.req.headers.authorization));
     if(typeof(this.req.headers.authorization) !== 'undefined') {
     token = this.req.headers.authorization;
     let TokenArray = token.split(" ");
+    
     if (TokenArray[1] !== 'null')
     {
       let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
@@ -41,9 +43,15 @@ module.exports = {
       });
 
       if (typeof isUserAnswered === 'object' && isUserAnswered.constructor === Object) {
-        isUserAnswered = isUserAnswered;
+        isUserAnswered = {
+          data:isUserAnswered,
+          isUserAnswered:true
+        }
       } else {
-        isUserAnswered = false;
+        isUserAnswered = {
+          data:{},
+          isUserAnswered:false
+        }
       }
       
       // find video status for this user
@@ -69,7 +77,30 @@ module.exports = {
           isAuthenticated: true
         });
 
-    }} else {
+    } else {
+      let summary = await Sciencechallenge.findOne({
+        id: inputs.id
+      });
+        
+      moment.locale('en');
+      summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
+      summary.thumbnail = sails.config.custom.apiUrl + "/files/sciencechallengeImage/" + summary.thumbnail;
+      return ({
+        id: inputs.id,
+        summary,
+        thumbnail: summary.thumbnail,
+        isUserAnswered: {
+          data:{},
+          isUserAnswered:false
+        },
+        isAuthenticated: false
+      });
+    }
+  
+    } else {
+      
       let summary = await Sciencechallenge.findOne({
         id: inputs.id
       });
@@ -84,7 +115,10 @@ module.exports = {
         id: inputs.id,
         summary,
         thumbnail: summary.thumbnail,
-        isUserAnswered: false,
+        isUserAnswered: {
+          data:{},
+          isUserAnswered:false
+        },
         isAuthenticated: false
       });
 

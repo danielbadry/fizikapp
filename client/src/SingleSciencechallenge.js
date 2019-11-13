@@ -28,11 +28,11 @@ class SingleSciencechallenge extends React.Component{
         this.state = {
             summary:{},
             userAnswerMessage : null,
-            isUserAnswered : false,
+            isUserAnswered : null,
             tags: [],
             id: '',
             token: null,
-            userCanAnswerToChallenge : false,
+            userHasCharge : false,
             isRender : false,
             userCanSeeVideo : true,
             thumbnail: '',
@@ -53,10 +53,10 @@ class SingleSciencechallenge extends React.Component{
         }
     }
 
-    sendRequest = () => {
+    sendMyAnswer = () => {
         let data = {
             userAnswerMessage: this.state.userAnswerMessage,
-            sciencechallengeId: this.props.sciencechallengeid,
+            sciencechallengeId: this.props.match.path.split('/')[2],
         }
         fetch(process.env.REACT_APP_API_URL+`sciencechallengeresponse`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -86,7 +86,7 @@ class SingleSciencechallenge extends React.Component{
     componentDidMount() {
         const token = localStorage.getItem('token');
         this.setState({token: token});
-        fetch(process.env.REACT_APP_API_URL+`sciencechallenge/${this.props.match.path.split('/')[2]}`, {
+        fetch(process.env.REACT_APP_API_URL + `sciencechallenge/${this.props.match.path.split('/')[2]}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -103,17 +103,12 @@ class SingleSciencechallenge extends React.Component{
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(result.summary)),
-                        isUserAnswered: (typeof(result.isUserAnswered) === 'object') ? result.isUserAnswered : false,
+                        isUserAnswered: result.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
                         startTime : 30,
                         isRender: true
                     };
-                  }, () => {
-                    this.setState(function(state, props) {
-                        return {
-                            isRender: true
-                        }});
                   });
             });
     }
@@ -138,7 +133,7 @@ class SingleSciencechallenge extends React.Component{
                 this.setState(function(state, props) {
                     return {
                         summary: JSON.parse(JSON.stringify(result.summary)),
-                        isUserAnswered: (typeof(result.isUserAnswered) === 'object') ? result.isUserAnswered : false,
+                        isUserAnswered: result.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
                         startTime : 30,
@@ -156,7 +151,8 @@ class SingleSciencechallenge extends React.Component{
     }
 
     AnswerBox (props) {
-        if (typeof(this.state.isUserAnswered) === 'boolean' && this.state.userCanAnswerToChallenge) {
+
+        if (this.state.token && !(this.state.isUserAnswered.isUserAnswered) && this.state.userHasCharge) {
             return (
                 <React.Fragment>
                     
@@ -180,7 +176,7 @@ class SingleSciencechallenge extends React.Component{
                     <Button 
                         variant="contained" 
                         color="primary"
-                        onClick={this.sendRequest}
+                        onClick={this.sendMyAnswer}
                         style={{
                             fontFamily: "IranSans"
                         }}
@@ -190,18 +186,18 @@ class SingleSciencechallenge extends React.Component{
 
                 </React.Fragment>
             );
-        } else if (typeof(this.state.isUserAnswered) !== 'boolean') {
+        } else if (this.state.token && this.state.isUserAnswered.isUserAnswered === true) {
             return (
                 <React.Fragment>
                    <div>
                         شما قبلا پاسخ داده اید. پاسخ شما :
                     </div>
                     <div>
-                        {this.state.isUserAnswered.userAnswerMessage}
+                        {this.state.isUserAnswered.data.userAnswerMessage}
                     </div>
                 </React.Fragment>
             );
-        } else {
+        } else if (this.state.token &&!this.state.userHasCharge) {
             return (
                 <React.Fragment>
                    <div>
@@ -209,20 +205,20 @@ class SingleSciencechallenge extends React.Component{
                     </div>
                 </React.Fragment>
             );
+        } else if (!this.state.token) {
+            return (
+                <React.Fragment>
+                   <div>
+                        لطفا لاگین کنید
+                    </div>
+                </React.Fragment>
+            )
         }
         
     }
-      
-    AnsweredBox(props) {
-        return (
-          <React.Fragment>answeredBox</React.Fragment>
-        );
-    }
 
     render () {
-        
         return (
-            
             <div>
                 <Grid container spacing={0}>
                     <Grid item xs={4}>
@@ -260,7 +256,7 @@ class SingleSciencechallenge extends React.Component{
 
                     <Grid item xs={8}>
                         <Paper>
-                        {(localStorage.getItem('token') && this.state.userCanSeeVideo) ? 
+                         
                             <Player
                                 poster="/assets/poster.png"
                                 startTime = {this.state.startTime}
@@ -282,15 +278,14 @@ class SingleSciencechallenge extends React.Component{
                                 <VolumeMenuButton />
                             </ControlBar>
                             </Player>
-                            :null}
-                            {(localStorage.getItem('token') && !this.state.userCanSeeVideo) ?
+                            
+                           
                             <React.Fragment>
                             <div>کاربر گرامی به دلیل نداشتن شارژ مورد نیاز ویدیو مورد نظر را نمی توانید تماشا کنید</div>
                             </React.Fragment>
-                            :null}
-                            {(!localStorage.getItem('token')) ? 
+                           
                                 <div>لطفا در سایت لاگین کنید</div>
-                            :null}
+                            
                         </Paper>
                     </Grid>
 
@@ -359,9 +354,11 @@ class SingleSciencechallenge extends React.Component{
                     
                     <Grid item xs={12}>
                         <Paper>
-                            {(localStorage.getItem('token')) ?
-                            this.AnswerBox()
-                            :<div>برای پاسخ دادن می بایست لاگین کنید</div>}
+                            {
+                                (this.state.isRender) ?
+                                    this.AnswerBox() : 
+                                        null
+                            }
                         </Paper>
                     </Grid>
                     
