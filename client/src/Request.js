@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
+import StickyFooter from "./StickyFooter";
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
@@ -20,9 +20,10 @@ class Request extends React.Component {
     
     constructor(props) {
         super(props);
-        console.info('props:', props);
         this.state = {
-            request : {}
+            request : {},
+            answer:null,
+            usersAnswers:[]
         }
     }
     
@@ -31,6 +32,7 @@ class Request extends React.Component {
     }
 
     componentDidMount() {
+        const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`requests/${this.props.requestid}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -38,7 +40,7 @@ class Request extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -47,8 +49,55 @@ class Request extends React.Component {
             .then(response => response.json())
             .then(request => {
                 this.setState((state, props) => {
-                return {request: request};
+                return {request: request, usersAnswers:request.usersAnswers};
                 });
+            });
+    }
+
+    handleChange = () => event => {
+        this.setState({answer: event.target.value});
+    };
+
+    sendMyAnswer = () => {
+        let data = {
+            message: this.state.answer,
+            parentId: this.props.requestid,
+        }
+        const token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`requests`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(request => {
+                fetch(process.env.REACT_APP_API_URL+`requests/${this.props.requestid}`, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, cors, *same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${token}`,
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrer: 'no-referrer', // no-referrer, *client
+                    // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                    })
+                    .then(response => response.json())
+                    .then(request => {
+                        this.setState((state, props) => {
+                        return {request: request, usersAnswers:request.usersAnswers};
+                        });
+                    });
             });
     }
 
@@ -57,42 +106,44 @@ class Request extends React.Component {
         return (
             <Grid container spacing={3}>
                         
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-                    
+                   
                     <Grid item xs={12}>
                         <Paper>
                             <h3>{this.state.request.title}</h3>  
                             <h5>{this.state.request.jalaaliCreatedDate}</h5>
                             <p>{this.state.request.message}</p>
                         </Paper>
+
                         <Paper>
-                        <List>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        
-                                        color="textPrimary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                           
+                            <List>
+                                {this.state.usersAnswers.map(
+                                    (item, index) => 
+                                        <ListItem alignItems="flex-start">
+                                            <ListItemAvatar>
+                                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                            </ListItemAvatar>
+                                            <ListItemText
+                                                primary={item.userInfo.firstName + item.userInfo.lastName}
+                                                secondary={
+                                                    <React.Fragment>
+                                                    <Typography
+                                                        component="span"
+                                                        variant="body2"
+                                                        
+                                                        color="textPrimary"
+                                                    >
+                                                        {item.message}
+                                                    </Typography>
+                                                    {item.createdAt}
+                                                    </React.Fragment>
+                                                }
+                                            />
+                                        </ListItem>
+                                )}
+                                
                             </List>
                         </Paper>
+
                         <Paper>
 
                         </Paper>
@@ -101,6 +152,7 @@ class Request extends React.Component {
                     <Grid item xs={12}>
                         <Paper>
                             <TextField
+                                onChange={this.handleChange()}
                                 id="standard-full-width"
                                 label="Label"
                                 style={{ margin: 8 }}
@@ -112,13 +164,17 @@ class Request extends React.Component {
                                     shrink: true,
                                 }}
                             />
-                            <Button variant="contained" color="primary">
-                                send solution
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={this.sendMyAnswer}
+                                >
+                                ارسال پاسخ
                             </Button>
                         </Paper>
                     </Grid>
 
-                    <MainFooter />
+                    <StickyFooter />
 
             </Grid>
         );
