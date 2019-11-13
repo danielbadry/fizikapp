@@ -69,8 +69,6 @@ class Profile extends React.Component {
         return (
             <React.Fragment>
 
-                <MainHeader />
-
                 <Grid container spacing={2} justify="center">
 
                     <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
