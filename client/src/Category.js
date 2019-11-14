@@ -16,7 +16,6 @@ class Category extends React.Component{
     }
 
     componentDidMount() {
-        // console.info('propi:', this.props.match.params.categoryid);
         const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`categories/?rowId=${this.props.match.params.categoryid}`, {
             method: 'GET', 
@@ -41,10 +40,7 @@ class Category extends React.Component{
     }
     
     componentDidUpdate(prevProps, prevState) {
-        console.info('prevProps:', prevProps);
-        console.info('this.props.match.params.categoryid:', this.props.match.params.categoryid);
         if(prevProps.match.params.categoryid != this.props.match.params.categoryid) {
-        // console.info('componentDidUpdate:', this.props.match.params.categoryid);
         const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`categories/?rowId=${this.props.match.params.categoryid}`, {
             method: 'GET', 

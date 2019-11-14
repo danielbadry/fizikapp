@@ -32,7 +32,7 @@ class SingleSciencechallenge extends React.Component{
             tags: [],
             id: '',
             token: null,
-            userHasCharge : false,
+            userHasCharge : true,
             isRender : false,
             userCanSeeVideo : true,
             thumbnail: '',
@@ -73,9 +73,32 @@ class SingleSciencechallenge extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
-                this.setState((state, props) => {
-                    return ({isUserAnswered: result});
-                });
+                const token = localStorage.getItem('token');
+                fetch(process.env.REACT_APP_API_URL + `sciencechallenge/${this.props.match.path.split('/')[2]}`, {
+                    method: 'GET', 
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${token}`,
+                    },
+                    redirect: 'follow',
+                    referrer: 'no-referrer',
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState(function(state, props) {
+                            return {
+                                summary: JSON.parse(JSON.stringify(result.summary)),
+                                isUserAnswered: result.isUserAnswered,
+                                thumbnail: result.thumbnail,
+                                id: result.id,
+                                startTime : 30,
+                                isRender: true
+                            };
+                          });
+                    });
             });
     }
 
@@ -256,36 +279,41 @@ class SingleSciencechallenge extends React.Component{
 
                     <Grid item xs={8}>
                         <Paper>
-                         
-                            <Player
-                                poster="/assets/poster.png"
-                                startTime = {this.state.startTime}
-                                style={{
-                                    height: '200px'
-                                }}
-                                >
-                                    
-                            <source 
-                                src={this.state.summary.videoAddress}
-                                />
 
-                            <ControlBar>
-                                <ReplayControl seconds={10} order={1.1} />
-                                <ForwardControl seconds={10} order={1.2} />
-                                <CurrentTimeDisplay order={4.1} />
-                                <TimeDivider order={4.2} />
-                                <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
-                                <VolumeMenuButton />
-                            </ControlBar>
-                            </Player>
+                            {(this.state.isRender && this.state.userHasCharge && this.state.token) ?
+                                <Player
+                                    poster="/assets/poster.png"
+                                    startTime = {this.state.startTime}
+                                    style={{
+                                        height: '200px'
+                                    }}
+                                    >
+                                        
+                                <source 
+                                    src={this.state.summary.videoAddress}
+                                    />
+
+                                <ControlBar>
+                                    <ReplayControl seconds={10} order={1.1} />
+                                    <ForwardControl seconds={10} order={1.2} />
+                                    <CurrentTimeDisplay order={4.1} />
+                                    <TimeDivider order={4.2} />
+                                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                                    <VolumeMenuButton />
+                                </ControlBar>
+                                </Player>:null
+                            }
+
+                            {(this.state.isRender && !this.state.userHasCharge && this.state.token) ?
+                                    <React.Fragment>
+                                        <div>کاربر گرامی به دلیل نداشتن شارژ مورد نیاز ویدیو مورد نظر را نمی توانید تماشا کنید</div>
+                                    </React.Fragment> : null
+                            }
                             
-                           
-                            <React.Fragment>
-                            <div>کاربر گرامی به دلیل نداشتن شارژ مورد نیاز ویدیو مورد نظر را نمی توانید تماشا کنید</div>
-                            </React.Fragment>
-                           
-                                <div>لطفا در سایت لاگین کنید</div>
-                            
+                            {(!this.state.token) ? 
+                                <div>لطفا در سایت لاگین کنید</div> : null
+                            }
+
                         </Paper>
                     </Grid>
 
