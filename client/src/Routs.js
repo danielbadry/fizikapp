@@ -97,13 +97,13 @@ class Routs extends React.Component {
                 <Route path="/definition/:definitionid" component={HandleDefinition} />
                 <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
-                <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/about" component={About} />
                 <Route path="/new-request" component={NewRequest} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
                 <Route path="/forget-password" component={ForgetPassword} />
+                <Route path="/category" component={Category} />
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />

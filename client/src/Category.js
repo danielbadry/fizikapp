@@ -1,137 +1,153 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
+import StickyFooter from "./StickyFooter";
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import { Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
-class Category extends React.Component {
-    constructor (props) {
-        super (props);
+class Products extends React.Component{
+    
+    constructor(props) {
+        super(props);
         this.state = {
-            rowList: []
+            category : []
         }
-        console.info('prpsesh:', props);
     }
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL+`categories?rowId=${this.props.categoryid}`, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+        fetch(process.env.REACT_APP_API_URL+`categories/`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                // 'authorization': `Bearer ${token}`,
             },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            // data: JSON.stringify({name:'milad'}), // body data type must match "Content-Type" header
+            redirect: 'follow',
+            referrer: 'no-referrer',
             })
             .then(response => response.json())
-            .then(rowList => {
-                this.setState((state, props) => {
-                    return {rowList: rowList.data};
-                });
-        });    
-    }
-    
-    render() {
-        
-        return (
-            <Grid container spacing={3}>
-                        
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Paper elevation={0} >
-                            <Breadcrumbs separator="›" aria-label="breadcrumb">
-                                <Link color="inherit" href="/">
-                                    Material-UI
-                                </Link>
-                                <Link color="inherit" href="/getting-started/installation/">
-                                    Core
-                                </Link>
-                            <Typography color="textPrimary">Breadcrumb</Typography>
-                            </Breadcrumbs>
-                        </Paper>
-                    </Grid>
+            .then(category => {
+                // console.info('category:', category);
+                this.setState(function(state, props) {
+                    return {
+                        category: category
+                        }
+                  }, () => {
                     
-                    <Grid item xs={12}>
-                        <Paper>
-                        <List>    
-                            {this.state.rowList.map(
-                            (row, index) => 
-                            <ListItem 
-                                alignItems="flex-start"
-                                key={index}
-                                >
-                                <ListItemAvatar>
-                                <Avatar 
-                                    alt="Cindy Baker" 
-                                    src={row.thumbnail} 
-                                    />
-                                </ListItemAvatar>
-                                
-                                <ListItemText
-                                    primary={
-                                        <Link 
-                                            component={RouterLink} 
-                                            to={
-                                                (row.itemType == 'product') ?
-                                                    `/product/${row.id}` :
-                                                        `/category/${row.id}`
-                                            }
-                                            style={{ fontFamily: 'IranSans_Light' }}
-                                            >
-                                            {row.name}
-                                        </Link>}
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                    >
-                                        <div
-                                            style={{ fontFamily: 'IranSans_Light' }}
-                                            >
-                                            {row.title}
-                                        </div>
-                                    </Typography>
-                                    <div
-                                        style={{ fontFamily: 'IranSans_Light' }}
-                                        >
-                                        {row.description}
-                                    </div>
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            )}
-                            </List>
-                        </Paper>
-                    </Grid>
+                  });
+            });
+    }
 
-                    <MainFooter />
-            </Grid>
-        );
+    render() {
+        return(
+            <React.Fragment>
+                {this.state.category.map(
+                    (item, index) => 
+                        <Paper
+                            key={index}
+                            style={{
+                                direction: 'rtl',
+                                fontFamily:'IranSans'
+                            }}
+                            >
+            
+                            <Grid container spacing={0}>
+                                
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Typography 
+                                        style={{
+                                            fontFamily:'IranSans'
+                                        }}
+                                        >
+                                        {item.name}
+                                    </Typography>
+                                </Grid>
+
+                                {item.allSubCategories.map(
+                                    (category, cIndex) => 
+                                        <Grid key={cIndex} item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                            <Grid container spacing={0}>
+                                                <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+                                                    <Grid container spacing={0}>
+                                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                            <Link 
+                                                                color="inherit"
+                                                                style={{
+                                                                    fontFamily: 'IranSans_Ultralight',
+                                                                    fontSize: '13px',
+                                                                    margin:'0',
+                                                                    lineHeight:'2'
+                                                                }}
+                                                                component={RouterLink} 
+                                                                to={`/category/xxx`}>
+                                                                   {category.name}
+                                                            </Link>
+                                                        </Grid>
+                                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                            {category.description}
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+                                                    <img 
+                                                        style={{
+                                                            width:'50px'
+                                                        }}
+                                                        src={category.thumbnail} 
+                                                        />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                )}
+
+                                {item.Products.map(
+                                    (product, pIndex) => 
+                                        <Grid key={pIndex} item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                            <Grid container spacing={0}>
+                                                <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+                                                    <Grid container spacing={0}>
+                                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                            <Link 
+                                                                color="inherit"
+                                                                style={{
+                                                                    fontFamily: 'IranSans_Ultralight',
+                                                                    fontSize: '13px',
+                                                                    margin:'0',
+                                                                    lineHeight:'2'
+                                                                }}
+                                                                component={RouterLink} 
+                                                                to={`/product/${product.id}`}>
+                                                                   {product.name}
+                                                            </Link>
+                                                        </Grid>
+                                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                            {product.description}
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+                                                    <img 
+                                                        style={{
+                                                            width:'50px'
+                                                        }}
+                                                        src={product.thumbnail} 
+                                                        />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                )}
+                                
+                                
+                            </Grid>
+            
+                        </Paper>
+                )}
+            
+            </React.Fragment>
+        )
     }
 }
-
-export default Category;
+export default Products;
