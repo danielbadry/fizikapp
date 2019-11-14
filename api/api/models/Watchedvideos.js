@@ -23,11 +23,6 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     
-    userId :{
-      type: 'string',
-      required : false
-    },
-    
     model :{
       type: 'string',
       required : false

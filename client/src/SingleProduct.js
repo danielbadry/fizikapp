@@ -24,8 +24,8 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Chip from '@material-ui/core/Chip';
 
 class SingleProduct extends React.Component {
-    constructor(props){
-        super(props);
+    constructor(props, context){
+        super(props, context);
         this.state = {
             summary: {},
             token: null,
@@ -38,7 +38,7 @@ class SingleProduct extends React.Component {
             videoInfoBoxDisplayType: 'flex',
             videoPlayerDisplayType: 'none',
             productId: props.productid,
-            startTime: 8,
+            startTime: 0,
             userInteractionConfig : [
                 {
                     type:'qa',
@@ -52,6 +52,7 @@ class SingleProduct extends React.Component {
                 }
             ]
         }
+        // this.play = this.play.bind(this);
     };
 
     catchMeHere = () => {
@@ -88,7 +89,6 @@ class SingleProduct extends React.Component {
                         tags: JSON.parse(JSON.stringify(product.tags)),
                         thumbnail: product.thumbnail,
                         id: product.id,
-                        startTime : 30,
                         isRender: true
                     };
                   }, () => {
@@ -99,6 +99,38 @@ class SingleProduct extends React.Component {
                   });
             });
     }
+    
+    showAttr =() => {
+        const { player } = this.player.getState();
+        console.log(player.currentTime); // print current time
+    }
+    
+    componentWillUnmount() {
+        const { player } = this.player.getState();
+        const token = localStorage.getItem('token');
+        let data = {
+            modelId: this.props.match.path.split('/')[2],
+            startTime: player.currentTime,
+            model:'products'
+        }
+        fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                
+            });
+    }
 
     componentDidMount(){
         const token = localStorage.getItem('token');
@@ -107,7 +139,6 @@ class SingleProduct extends React.Component {
                 token: token
             }});
         this.fetchProduct(token);  
-
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -153,8 +184,12 @@ class SingleProduct extends React.Component {
                                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                             {(this.state.isRender) ?
                                                 <Player
+                                                ref={player => {
+                                                    this.player = player;
+                                                  }}
+                                                  autoPlay
                                                     poster={this.state.thumbnail}
-                                                    startTime = {this.state.startTime}
+                                                    startTime = {this.state.summary.startTime}
                                                     style={{
                                                         height: '200px'
                                                     }}
@@ -172,11 +207,16 @@ class SingleProduct extends React.Component {
                                                     <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
                                                     <VolumeMenuButton />
                                                 </ControlBar>
+                                                
                                                 </Player>
-                                             : 
+                                              : 
                                             null
-                                        }
+                                        } 
                                             </Grid>
+                                            <Fab onClick={this.showAttr} className="mr-3">
+                                                مشخصات
+                                            </Fab>
+                                            
                                         </Grid>
                                         <Grid container spacing={0} style={{display:`${this.state.videoInfoBoxDisplayType}`}}>
                                             <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
@@ -269,7 +309,7 @@ class SingleProduct extends React.Component {
                                                 </Fab> :
                                                 null
                                                 }
-
+                                                
                                                 {
                                                     (this.state.token && this.state.userCanSeeVideo) ? 
                                                         <Fab variant="extended" aria-label="like" style={{

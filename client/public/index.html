@@ -42,26 +42,45 @@
   </body>
 </html>
 <script>
-window.onbeforeunload = WindowCloseHanlder;
-function WindowCloseHanlder()
-{
-  let user = JSON.parse(localStorage.getItem('userInfo'));
-  let data = {
-    userId: user.id,
-    productId: '5d60cdf3072e9b266c306108',
-    startTime: '75'
-  }
-  fetch(`http://localhost:1337/watchedvideos/setuserwatchstatus`, {
-    method: 'POST', 
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    redirect: 'follow',
-    referrer: 'no-referrer',
-  });
-}
+//   window.onload = window.onunload = function analytics(event) {
+//   if (!navigator.sendBeacon) return;
+
+//   var url = "http://localhost:1337/watchedvideos/setuserwatchstatus";
+//   // Create the data to send
+//   let data = {
+//       productId: '5dcc113f437eb003dc729307',
+//       startTime: '75'
+//     }
+//   // Send the beacon
+//   var status = navigator.sendBeacon(url, data);
+
+//   // Log the data and result
+//   console.log("sendBeacon: URL = ", url, "; data = ", data, "; status = ", status);
+// };
+// window.addEventListener("beforeunload", function (e) {
+//   const request = async () => {
+//     let token = JSON.parse(localStorage.getItem('token'));
+//     let data = {
+//       productId: '5dcc113f437eb003dc729307',
+//       startTime: '75'
+//     }
+//     fetch(`http://localhost:1337/watchedvideos/setuserwatchstatus`, {
+//       method: 'POST', 
+//       mode: 'cors',
+//       cache: 'no-cache',
+//       credentials: 'same-origin',
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'authorization': `Bearer ${token}`,
+//       },
+//       body: JSON.stringify(data),
+//       redirect: 'follow',
+//       referrer: 'no-referrer',
+//     });
+// }
+
+// request();
+ 
+// });
+
 </script>
