@@ -34,8 +34,7 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-                {/* <MainHeader /> */}
-                
+               
                  <Container>
                     <NiceCard />
                     <AdsPanel />

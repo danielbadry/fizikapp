@@ -4,6 +4,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Divider from '@material-ui/core/Divider';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 export default function UserProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,39 +31,41 @@ export default function UserProfileMenu() {
               <AccountCircle />
             </IconButton>
             <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        style={{
-          direction:'rtl'
-        }}
-      >
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>
-            <div>حساب کاربری</div>
-            </MenuItem>
-        <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>خرید طرح</MenuItem>
-        <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>خروج</MenuItem>
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              style={{
+                direction:'rtl'
+              }}
+            >
+              <MenuItem 
+              component={Link}
+              href="#/profile"
+                style={{
+                  fontFamily:'IranSans_Light',
+                  fontSize:'13px'
+                }}
+                onClick={handleClose}>
+                  <div>حساب کاربری</div>
+                  </MenuItem>
+              <Divider />
+              <MenuItem 
+                style={{
+                  fontFamily:'IranSans_Light',
+                  fontSize:'13px'
+                }}
+                onClick={handleClose}>خرید طرح</MenuItem>
+              <Divider />
+              <MenuItem 
+                style={{
+                  fontFamily:'IranSans_Light',
+                  fontSize:'13px'
+                }}
+                onClick={handleClose}>خروج</MenuItem>
         
-      </Menu>
+            </Menu>
     </React.Fragment>
   );
 }
