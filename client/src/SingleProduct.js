@@ -38,7 +38,6 @@ class SingleProduct extends React.Component {
             videoInfoBoxDisplayType: 'flex',
             videoPlayerDisplayType: 'none',
             productId: props.productid,
-            startTime: 0,
             userInteractionConfig : [
                 {
                     type:'qa',
@@ -52,7 +51,7 @@ class SingleProduct extends React.Component {
                 }
             ]
         }
-        // this.play = this.play.bind(this);
+
     };
 
     catchMeHere = () => {
@@ -99,12 +98,7 @@ class SingleProduct extends React.Component {
                   });
             });
     }
-    
-    showAttr =() => {
-        const { player } = this.player.getState();
-        console.log(player.currentTime); // print current time
-    }
-    
+
     componentWillUnmount() {
         const { player } = this.player.getState();
         const token = localStorage.getItem('token');
@@ -187,7 +181,6 @@ class SingleProduct extends React.Component {
                                                 ref={player => {
                                                     this.player = player;
                                                   }}
-                                                  autoPlay
                                                     poster={this.state.thumbnail}
                                                     startTime = {this.state.summary.startTime}
                                                     style={{
@@ -213,9 +206,6 @@ class SingleProduct extends React.Component {
                                             null
                                         } 
                                             </Grid>
-                                            <Fab onClick={this.showAttr} className="mr-3">
-                                                مشخصات
-                                            </Fab>
                                             
                                         </Grid>
                                         <Grid container spacing={0} style={{display:`${this.state.videoInfoBoxDisplayType}`}}>
