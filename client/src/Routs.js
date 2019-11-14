@@ -13,6 +13,7 @@ import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
 import Sciencechallenges from './Sciencechallenges';
+import Categories from './Categories';
 import Category from './Category';
 import Product from './Product';
 import Sciencechallenge from './Sciencechallenge';
@@ -59,9 +60,7 @@ function HandleShopResult({ match }) {
 
 function HandleCategory({ match }) {
     return (
-        <Category
-            categoryid={match.params.categoryid}
-            />
+        <Category match={match} />
     );
 }
 
@@ -103,7 +102,8 @@ class Routs extends React.Component {
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
                 <Route path="/forget-password" component={ForgetPassword} />
-                <Route path="/category" component={Category} />
+                <Route path="/categories" component={Categories} />
+                <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/product/:productid" component={HandleProduct} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />

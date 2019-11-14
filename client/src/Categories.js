@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-class Category extends React.Component{
+class Categories extends React.Component{
     
     constructor(props) {
         super(props);
@@ -16,57 +16,29 @@ class Category extends React.Component{
     }
 
     componentDidMount() {
-        // console.info('propi:', this.props.match.params.categoryid);
-        const token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`categories/?rowId=${this.props.match.params.categoryid}`, {
+        fetch(process.env.REACT_APP_API_URL+`categories/`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
+                // 'authorization': `Bearer ${token}`,
             },
             redirect: 'follow',
             referrer: 'no-referrer',
             })
             .then(response => response.json())
             .then(category => {
+                // console.info('category:', category);
                 this.setState(function(state, props) {
                     return {
                         category: category
                         }
+                  }, () => {
+                    
                   });
             });
-    }
-    
-    componentDidUpdate(prevProps, prevState) {
-        console.info('prevProps:', prevProps);
-        console.info('this.props.match.params.categoryid:', this.props.match.params.categoryid);
-        if(prevProps.match.params.categoryid != this.props.match.params.categoryid) {
-        // console.info('componentDidUpdate:', this.props.match.params.categoryid);
-        const token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`categories/?rowId=${this.props.match.params.categoryid}`, {
-            method: 'GET', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(category => {
-                this.setState(function(state, props) {
-                    return {
-                        category: category
-                        }
-                  });
-            });
-        }
     }
 
     render() {
@@ -181,4 +153,4 @@ class Category extends React.Component{
         )
     }
 }
-export default Category;
+export default Categories;
