@@ -73,32 +73,35 @@
                 
             });
   }
+  if(urlData.length === 3 && urlData[1] === 'sciencechallenge' && urlData[2].length === 24) {
+    const token = localStorage.getItem('token');
+    var url = "http://localhost:1337/watchedvideos/setuserwatchstatus";
+
+    // Create the data to send
+    let data = {
+          modelId: urlData[2],
+          startTime: window.localStorage.getItem("currentTime"),
+          model:'sciencechallenges'
+      }
+      fetch(url, {
+          method: 'POST', 
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${token}`,
+          },
+          redirect: 'follow',
+          referrer: 'no-referrer',
+          body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(result => {
+              
+          });
+  }
   
 };
-// window.addEventListener("beforeunload", function (e) {
-//   const request = async () => {
-//     let token = JSON.parse(localStorage.getItem('token'));
-//     let data = {
-//       productId: '5dcc113f437eb003dc729307',
-//       startTime: '75'
-//     }
-//     fetch(`http://localhost:1337/watchedvideos/setuserwatchstatus`, {
-//       method: 'POST', 
-//       mode: 'cors',
-//       cache: 'no-cache',
-//       credentials: 'same-origin',
-//       headers: {
-//           'Content-Type': 'application/json',
-//           'authorization': `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(data),
-//       redirect: 'follow',
-//       referrer: 'no-referrer',
-//     });
-// }
-
-// request();
- 
-// });
 
 </script>

@@ -129,11 +129,54 @@ class SingleSciencechallenge extends React.Component{
                         isUserAnswered: result.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
-                        startTime : 30,
                         isRender: true
                     };
+                  }, () => {
+                    this.setState(function(state, props) {
+                        return {
+                            isRender: true
+                        }});
+                        this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
+    }
+
+    componentWillUnmount() {
+        const { player } = this.player.getState();
+        const token = localStorage.getItem('token');
+        let data = {
+            modelId: this.props.match.path.split('/')[2],
+            startTime: player.currentTime,
+            model:'sciencechallenges'
+        }
+        fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                
+            });
+    }
+
+    handleStateChange(state, prevState) {
+        // copy player state to this component's state
+        this.setState({
+          player: state,
+          currentTime: state.currentTime
+        });
+        window.localStorage.setItem('model', 'scienecechallenges');
+        window.localStorage.setItem('modelId', this.props.match.path.split('/')[2]);
+        window.localStorage.setItem('currentTime', this.state.currentTime);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -159,7 +202,6 @@ class SingleSciencechallenge extends React.Component{
                         isUserAnswered: result.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
-                        startTime : 30,
                         isRender: true
                     };
                   }, () => {
@@ -167,6 +209,7 @@ class SingleSciencechallenge extends React.Component{
                         return {
                             isRender: true
                         }});
+                    this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
         }
@@ -282,8 +325,11 @@ class SingleSciencechallenge extends React.Component{
 
                             {(this.state.isRender && this.state.userHasCharge && this.state.token) ?
                                 <Player
-                                    poster="/assets/poster.png"
-                                    startTime = {this.state.startTime}
+                                    ref={player => {
+                                        this.player = player;
+                                    }}
+                                    poster={this.state.thumbnail}
+                                    startTime = {this.state.summary.startTime}
                                     style={{
                                         height: '200px'
                                     }}

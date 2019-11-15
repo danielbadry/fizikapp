@@ -95,7 +95,7 @@ class SingleProduct extends React.Component {
                         return {
                             isRender: true
                         }});
-                        this.player.subscribeToStateChange(this.handleStateChange.bind(this));
+                    this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
     }
