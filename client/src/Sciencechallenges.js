@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import StickyFooter from "./StickyFooter";
 
 class Sciencechallenges extends React.Component {
     
@@ -125,6 +126,7 @@ class Sciencechallenges extends React.Component {
                    
             
             </Grid>
+            <StickyFooter />
             </React.Fragment>
         )
     }

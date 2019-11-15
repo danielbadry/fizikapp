@@ -1,186 +1,105 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import ExerciseCard from './ExerciseCard';
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib1
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import Switch from '@material-ui/core/Switch';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import StickyFooter from "./StickyFooter";
 
-import {
-    DatePicker,
-    TimePicker,
-    DateTimePicker,
-    MuiPickersUtilsProvider,
-  } from "@material-ui/pickers";
-import TextField from '@material-ui/core/TextField';
-
-class Exercises extends React.Component {
-    constructor (props) {
-        super(props);
+class Exercises extends React.Component{
+    constructor(props) {
+        super (props);
         this.state = {
-            startedDate : 1390,
-            endDate : 1398,
-            tamrins: [],
-            field : 'riazi'
+            products : []
         }
     }
 
-    handleCheckbox = field => (event) => {
-        event.persist();
-        this.setState({
-            [field]: !this.state[field]
-        }, function() {
-            this.fetchTamrins();        
-        });
+    componentDidMount() {
+        let token = localStorage.getItem('token');
 
-    }
-
-    handleField = field => (event) => {
-        event.persist();
-        console.info('field:', event.target.value);
-        this.setState({
-            [field]: event.target.value
-        }, function() {
-            this.fetchTamrins();        
-        });
-
-    }
-
-    fetchTamrins = () => {
-        fetch(process.env.REACT_APP_API_URL+`tamrins?field=${this.state.field}&startedDate=${this.state.startedDate}&endDate=${this.state.endDate}`, {
-            method: 'GET', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
+        fetch(process.env.REACT_APP_API_URL+`exercises`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
             },
-            redirect: 'follow',
-            referrer: 'no-referrer',
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
             })
             .then(response => response.json())
-            .then(tamrins => {
-                this.setState({
-                   tamrins: tamrins.data
+            .then(request => {
+                this.setState((state, props) => {
+                    return ({products: request.data});
                 });
-                console.info('tamrins:', tamrins);
             });
     }
 
-    componentDidMount() {
-        this.fetchTamrins();
-    }
-
-    yee = () => {
-        console.info('state:', this.state);
-    }
-
-    render() {
+    render () {
         return (
-            <Grid container spacing={0}>
-                <Grid item xs={9}>
-                    <Paper>
-                        {
-                            this.state.tamrins.map(
-                                (tamrin, index) => 
-                                    <ExerciseCard 
-                                        information={tamrin}
-                                        key= {index}
-                                    />
-                            )
-                        }  
-
-                    </Paper>
-                </Grid>
-                <Grid item xs={3}>
-                    <Paper>
-                        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker 
-                            minDate={Date("2010-01-01")}
-                            maxDate={Date("2030-01-01")}
-                            views={["year"]}
-                            value={this.startedDate} 
-                            onChange={this.filterResult}
-                        />
-                        </MuiPickersUtilsProvider>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker 
-                            minDate={Date("2015-01-01")}
-                            maxDate={Date("2022-01-01")}
-                            views={["year"]}
-                            value={this.endDate} 
-                            onChange={this.filterResult}
-                        />
-                        </MuiPickersUtilsProvider> */}
-                        
-                        <TextField
-                            id="standard-name"
-                            label="Name"
-                            value={this.state.startedDate}
-                            onChange={this.handleField('startedDate')}
-                            margin="normal"
-                        />
-                        
-                        <TextField
-                            id="standard-name"
-                            label="Name"
-                            value={this.state.endDate}
-                            onChange={this.handleField('endDate')}
-                            margin="normal"
-                        />
-
-                        <Typography component="div">
-                            <Grid component="label" container alignItems="center" spacing={1}>
-                                
-                            <FormLabel component="legend">field</FormLabel>
-                            <RadioGroup
-                                aria-label="gender"
-                                name="field"
-                                // className={classes.group}
-                                value={this.state.field}
-                                onChange={this.handleField('field')}
+            <React.Fragment>
+            <List>
+                {this.state.products.map(
+                    (item , index) => 
+                        <ListItem key={index} alignItems="flex-start">
+                            <ListItemAvatar>
+                            <Avatar alt="Cindy Baker" src={item.thumbnail} />
+                            </ListItemAvatar>
+                            <ListItemText
+                            primary={
+                                <Link 
+                                    color="inherit"
+                                    style={{
+                                        fontFamily: 'IranSans_Ultralight',
+                                        fontSize: '13px',
+                                        margin:'0',
+                                        lineHeight:'2'
+                                    }}
+                                    component={RouterLink} 
+                                    to={`/exercise/${item.id}`}>
+                                        {item.name}
+                                </Link>
+                            }
+                            secondary={
+                                <React.Fragment>
+                                <Typography
+                                    component="div"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    style={{
+                                        fontFamily: 'IranSans'
+                                    }}
                                 >
-                                    <FormControlLabel value="riazi" control={<Radio />} label="riazi" />
-                                    <FormControlLabel value="tajrobi" control={<Radio />} label="tajrobi" />
-                            </RadioGroup>
-                                
-                                
-                            </Grid>
-                        </Typography>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">subjects</FormLabel>
-                            <FormGroup>
-                            <FormControlLabel
-                                control={<Checkbox checked={true} value="gilad" />}
-                                label="Gilad Gray"
+                                    {item.title}
+                                </Typography>
+                                <Typography
+                                    component="div"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    style={{
+                                        fontFamily: 'IranSans'
+                                    }}
+                                >
+                                    {item.jalaaliUserFriendlyCreatedDate}
+                                </Typography>
+                                </React.Fragment>
+                            }
                             />
-                            <FormControlLabel
-                                control={<Checkbox checked={true} value="jason" />}
-                                label="Jason Killian"
-                            />
-                            <FormControlLabel
-                                control={
-                                <Checkbox checked={true} value="antoine" />
-                                }
-                                label="Antoine Llorca"
-                            />
-                            </FormGroup>
-                            <FormHelperText>Be careful</FormHelperText>
-                        </FormControl>
-                    </Paper>
-                </Grid>
-            </Grid>
+                        </ListItem>
+                        // <Divider variant="inset" component="li" />
+                )}
+                
+            </List>
+            <StickyFooter />
+            </React.Fragment>
         );
     }
-  
 }
-
 export default Exercises;

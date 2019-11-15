@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
+import StickyFooter from "./StickyFooter";
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
@@ -118,10 +118,7 @@ class Requests extends React.Component {
         
         return (
             <Grid container spacing={3}>
-                        
-                    <Grid item xs={12}>
-                        <MainHeader />
-                    </Grid>
+                  
                     <Grid item xs={12}>
                         <TextField
                             id="standard-message"
@@ -218,7 +215,7 @@ class Requests extends React.Component {
                         </Paper>
                     </Grid>
 
-                    <MainFooter />
+                    <StickyFooter />
             </Grid>
         );
     }

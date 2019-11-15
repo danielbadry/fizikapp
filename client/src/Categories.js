@@ -148,7 +148,7 @@ class Categories extends React.Component{
             
                         </Paper>
                 )}
-            
+            <StickyFooter />
             </React.Fragment>
         )
     }
