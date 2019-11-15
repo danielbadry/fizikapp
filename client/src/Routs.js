@@ -16,6 +16,7 @@ import Sciencechallenges from './Sciencechallenges';
 import Categories from './Categories';
 import Category from './Category';
 import Product from './Product';
+import Products from './Products';
 import Sciencechallenge from './Sciencechallenge';
 import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
@@ -105,6 +106,7 @@ class Routs extends React.Component {
                 <Route path="/categories" component={Categories} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/product/:productid" component={HandleProduct} />
+                <Route path="/products" component={Products} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/exercises" component={Exercises} />
