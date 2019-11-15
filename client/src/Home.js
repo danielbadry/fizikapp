@@ -34,10 +34,9 @@ class Home extends React.Component {
         
         return (
             <React.Fragment>
-               
                  <Container>
-                    <NiceCard />
                     <AdsPanel />
+                    <NiceCard />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer="مشاهده بیشتر"
