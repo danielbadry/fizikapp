@@ -95,6 +95,7 @@ class SingleProduct extends React.Component {
                         return {
                             isRender: true
                         }});
+                        this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
     }
@@ -125,6 +126,17 @@ class SingleProduct extends React.Component {
                 
             });
     }
+
+    handleStateChange(state, prevState) {
+        // copy player state to this component's state
+        this.setState({
+          player: state,
+          currentTime: state.currentTime
+        });
+        window.localStorage.setItem('model', 'products');
+        window.localStorage.setItem('modelId', this.props.match.path.split('/')[2]);
+        window.localStorage.setItem('currentTime', this.state.currentTime);
+      }
 
     componentDidMount(){
         const token = localStorage.getItem('token');

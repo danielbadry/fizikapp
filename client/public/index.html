@@ -42,21 +42,39 @@
   </body>
 </html>
 <script>
-//   window.onload = window.onunload = function analytics(event) {
-//   if (!navigator.sendBeacon) return;
+  window.onload = window.onunload = function analytics(event) {
+  if (!navigator.sendBeacon) return;
+  let urlData = window.location.hash.split('/');
+  if(urlData.length === 3 && urlData[1] === 'product' && urlData[2].length === 24) {
+    const token = localStorage.getItem('token');
+    var url = "http://localhost:1337/watchedvideos/setuserwatchstatus";
 
-//   var url = "http://localhost:1337/watchedvideos/setuserwatchstatus";
-//   // Create the data to send
-//   let data = {
-//       productId: '5dcc113f437eb003dc729307',
-//       startTime: '75'
-//     }
-//   // Send the beacon
-//   var status = navigator.sendBeacon(url, data);
-
-//   // Log the data and result
-//   console.log("sendBeacon: URL = ", url, "; data = ", data, "; status = ", status);
-// };
+    // Create the data to send
+      let data = {
+            modelId: urlData[2],
+            startTime: window.localStorage.getItem("currentTime"),
+            model:'products'
+        }
+        fetch(url, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                
+            });
+  }
+  
+};
 // window.addEventListener("beforeunload", function (e) {
 //   const request = async () => {
 //     let token = JSON.parse(localStorage.getItem('token'));
