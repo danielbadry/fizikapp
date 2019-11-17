@@ -3,16 +3,17 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton,
+        DateInput ,ReferenceInput } from 'react-admin';
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
-import SubjectComponent from './SubjectComponent';
 import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
+import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
 import Fab from '@material-ui/core/Fab';
@@ -21,53 +22,41 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
-import { RadioButtonGroupInput } from 'react-admin';
 
-export const ExercisesCreate = (props) => (
+export const BeyondthebookCreate = (props) => (
     <Create {...props} >
+        
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
+            {/*
+            TODO: add richTextInput here
+            */}
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            <SubjectComponent source="subjects" label="subjects" />
             
-            <RadioButtonGroupInput source="field" choices={[
-                { id: 'riazi', name: 'riazi' },
-                { id: 'tajrobi', name: 'tajrobi' }
-            ]} />
-
-            <SelectInput source="year" choices={[
-                { id: '1381', name: '1381' },
-                { id: '1382', name: '1382' },
-                { id: '1383', name: '1383' },
-                { id: '1384', name: '1384' },
-                { id: '1385', name: '1385' },
-                { id: '1386', name: '1386' },
-                { id: '1387', name: '1387' },
-                { id: '1388', name: '1388' },
-                { id: '1389', name: '1389' },
-                { id: '1390', name: '1390' },
-                { id: '1391', name: '1391' },
-                { id: '1392', name: '1392' },
-                { id: '1393', name: '1393' },
-                { id: '1394', name: '1394' },
-                { id: '1395', name: '1395' },
-                { id: '1396', name: '1396' },
-                { id: '1397', name: '1397' },
-                { id: '1398', name: '1398' },
-                { id: '1399', name: '1399' },
-            ]} />
-
+            <CategoryComponent source="category" label="category" />
+             
+            {/* <NumberInput source="price" label="price" /> */}
+            {/*
+            TODO: add boolean field here
+            */}
+            
+            {/* <Mycheckbox label="categories" />   */}
+            
             <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
                 <ImageField source="thumbnail" title="title" />
             </ImageInput>
-
+            
+            <FileInput source="file" label="Related files" accept="video/mp4">
+                <FileField source="file" title="title" />
+            </FileInput>
+            {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
         </SimpleForm>
     </Create>
 );
 
-export const ExercisesEdit = (props) => (
+export const BeyondthebookEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
             <TextInput source="name" label="name" />
@@ -77,42 +66,61 @@ export const ExercisesEdit = (props) => (
     </Edit>
 );
 
-export const ExercisesShow = (props) => (
+export const BeyondthebookShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
-            
+
             <Tab label="information">
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
+                <TextField source="summary.name" label="name" />
+                <VideoPlayerField />
+                <TextField source="summary.description" label="description" />
+                <ArrayField source="summary.tagsArray" label="tags">
+                    <SingleFieldList>
+                        <ChipField source="name" />
+                    </SingleFieldList>
+                </ArrayField>
             </Tab>
 
             <Tab label="qa" path="qa">
                 <ProductsQuestions />
             </Tab>
 
+            <Tab label="reports" path="report" >
+                <ProductReports />
+            </Tab>
+
             <Tab label="comments" path="comments">
-                <ProductsComments />
+            <ProductsComments />
+            </Tab>
+
+            <Tab label="quiz" path="quiz">
+                <QuizManager
+                    model="products"
+                 />
             </Tab>
 
         </TabbedShowLayout>
     </Show>
 );
+const ProductPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
-const ExercisesPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
-
-export const ExercisesList = props => (
+export const BeyondthebookList = props => (
     
-    <List {...props} pagination={<ExercisesPagination />}>
+    <List {...props} pagination={<ProductPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />
-            <TextField source="title" label="Title" />
-            <TextField source="description" label="Description" />
-            <TextField source="year" label="year" />
-            <BooleanField source="isRiazi" label="riazi" />
-            <BooleanField source="isTajrobi" label="tajrobi" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
+            <ArrayField source="tagsArray">
+                <SingleFieldList>
+                    <ChipField source="name" />
+                </SingleFieldList>
+            </ArrayField>
+            <BooleanField source="isEnabled" label="Enable" />
+            <BooleanField source="hasQuiz" label="hasQuiz" />
+            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
             <ShowButton />
             <DeleteButton />

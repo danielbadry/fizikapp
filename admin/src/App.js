@@ -2,12 +2,14 @@ import React from 'react';
 import catReducer from './reducer';
 import { fetchUtils, Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
+import { BeyondthebookList, BeyondthebookCreate, BeyondthebookEdit, BeyondthebookShow } from './Beyondthebook';
 import { ExercisesList, ExercisesCreate, ExercisesEdit, ExercisesShow } from './Exercises';
 import { UsersList, UserCreate, UserCreatee, userShow } from './users';
 import { DefinitionsList, DefinitionsCreate, DefinitionsEdit, DefinitionsShow } from './Definitions';
 import { SciencechallengeList, SciencechallengeCreate, SciencechallengeEdit, SciencechallengeShow } from './Sciencechallenge';
 import { ShopsList, shopShow } from './shops';
 import { TagsList, TagCreate, TagEdit } from './tags';
+import { SubjectsList, SubjectsCreate, SubjectsEdit } from './Subjects';
 import { CriticismsList } from './criticisms';
 import { ShoppingplansList, ShoppingplansCreate, ShoppingplansEdit, ShoppingplansShow } from './shoppingplans';
 import { RequestList, RequestShow } from './Requests';
@@ -48,8 +50,10 @@ const App = () => (
         appLayout={MyLayout}
         >
         <Resource name="Products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
+        <Resource name="Beyondthebook" create={BeyondthebookCreate} list={BeyondthebookList} icon={VideoCallIcon} show={BeyondthebookShow} />
         <Resource name="Users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />
+        <Resource name="Subjects" list={SubjectsList} create={SubjectsCreate} edit={SubjectsEdit} icon={CategoryIcon} />
         <Resource name="Exercises" list={ExercisesList} create={ExercisesCreate} show={ExercisesShow} edit={ExercisesEdit} icon={CategoryIcon} />
         <Resource name="Definitions" list={DefinitionsList} create={DefinitionsCreate} show={DefinitionsShow} edit={DefinitionsEdit} icon={CategoryIcon} />
         <Resource name="Sciencechallenge" list={SciencechallengeList} create={SciencechallengeCreate} show={SciencechallengeShow} edit={SciencechallengeEdit} icon={CategoryIcon} />

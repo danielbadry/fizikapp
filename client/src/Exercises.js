@@ -28,7 +28,10 @@ class Exercises extends React.Component{
     constructor(props) {
         super (props);
         this.state = {
-            exercises : []
+            exercises : [],
+            fromYear:1380,
+            toYear:1399,
+            field:'tajrobi'
         }
     }
 
@@ -54,6 +57,18 @@ class Exercises extends React.Component{
                     return ({exercises: request.data});
                 });
             });
+    }
+
+    handleFromYear = (e) => {
+        this.setState({fromYear:e.target.value});
+    }
+    
+    handleToYear = (e) => {
+        this.setState({toYear:e.target.value});
+    }
+
+    searchInExercises = () => {
+        console.info('hello')
     }
 
     render () {
@@ -87,7 +102,10 @@ class Exercises extends React.Component{
                             <Divider />
                             {this.state.exercises.map(
                                 (item, index) =>
-                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <Grid 
+                                    key={index}
+                                    item 
+                                    xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <Card
                                         key={index}
                                         style={{
@@ -181,7 +199,8 @@ class Exercises extends React.Component{
                                         id="standard-phone"
                                         margin="normal"
                                         type="number"
-                                        // onChange={saveMobileNumber}
+                                        value={this.state.fromYear}
+                                        onChange={this.handleFromYear}
                                         InputProps={{
                                             style: {
                                             fontFamily: 'IranSans',
@@ -207,7 +226,8 @@ class Exercises extends React.Component{
                                         id="standard-phone"
                                         margin="normal"
                                         type="number"
-                                        // onChange={saveMobileNumber}
+                                        value={this.state.toYear}
+                                        onChange={this.handleToYear}
                                         InputProps={{
                                             style: {
                                             fontFamily: 'IranSans',
@@ -237,10 +257,10 @@ class Exercises extends React.Component{
                                         <RadioGroup 
                                             aria-label="gender" 
                                             name="gender1" 
-                                            // value={value} 
+                                            value={this.state.field} 
                                             // onChange={handleChange} 
                                             >
-                                            <FormControlLabel value="rizazi" control={<Radio />} label={<Typography style={{
+                                            <FormControlLabel value="riazi" control={<Radio />} label={<Typography style={{
                                                 fontFamily:'IranSans',
                                                 fontSize:'14px'
                                                 }}>
@@ -276,6 +296,7 @@ class Exercises extends React.Component{
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Button
                                         variant="contained"
+                                        onClick={this.searchInExercises}
                                         color="secondary"
                                         style={{
                                             border: 0,
