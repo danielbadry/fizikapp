@@ -1,6 +1,4 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -9,12 +7,28 @@ import Typography from '@material-ui/core/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import StickyFooter from "./StickyFooter";
+import Grid from '@material-ui/core/Grid';
+import { Paper } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
 
 class Exercises extends React.Component{
     constructor(props) {
         super (props);
         this.state = {
-            products : []
+            exercises : []
         }
     }
 
@@ -37,7 +51,7 @@ class Exercises extends React.Component{
             .then(response => response.json())
             .then(request => {
                 this.setState((state, props) => {
-                    return ({products: request.data});
+                    return ({exercises: request.data});
                 });
             });
     }
@@ -45,59 +59,242 @@ class Exercises extends React.Component{
     render () {
         return (
             <React.Fragment>
-            <List>
-                {this.state.products.map(
-                    (item , index) => 
-                        <ListItem key={index} alignItems="flex-start">
-                            <ListItemAvatar>
-                            <Avatar alt="Cindy Baker" src={item.thumbnail} />
-                            </ListItemAvatar>
-                            <ListItemText
-                            primary={
-                                <Link 
-                                    color="inherit"
-                                    style={{
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2'
-                                    }}
-                                    component={RouterLink} 
-                                    to={`/exercise/${item.id}`}>
-                                        {item.name}
-                                </Link>
-                            }
-                            secondary={
-                                <React.Fragment>
+                <Grid 
+                    container 
+                    spacing={1} 
+                    alignItems="center"
+                    justify="center">
+
+                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+                    <Paper>
+                        <Grid 
+                            container 
+                            spacing={1}
+                            alignItems="center"
+                            justify="center"
+                            >
+                        
+                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                 <Typography
-                                    component="div"
-                                    variant="body2"
-                                    color="textPrimary"
                                     style={{
-                                        fontFamily: 'IranSans'
+                                        fontFamily:'IranSans',
+                                        direction:'rtl'
                                     }}
-                                >
-                                    {item.title}
+                                    >
+                                    تعداد {this.state.exercises.length} تست پیدا شد
                                 </Typography>
-                                <Typography
-                                    component="div"
-                                    variant="body2"
-                                    color="textPrimary"
-                                    style={{
-                                        fontFamily: 'IranSans'
-                                    }}
+                            </Grid>
+                            <Divider />
+                            {this.state.exercises.map(
+                                (item, index) =>
+                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                                    <Card
+                                        key={index}
+                                        style={{
+                                            direction:'rtl'
+                                        }}
+                                        >
+                                        <CardActionArea>
+                                            <CardMedia
+                                                image={item.thumbnail}
+                                                title="Contemplative Reptile"
+                                                style={{
+                                                    height:'120px'
+                                                }}
+                                                />
+                                            <CardContent>
+                                            <Typography 
+                                                gutterBottom 
+                                                variant="h6" 
+                                                component="h2"
+                                                style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                }}
+                                                >
+                                                {item.name}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {item.title}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {item.year}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {item.field}
+                                            </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        {/* <CardActions>
+                                            
+                                        </CardActions> */}
+                                    </Card>
+                                </Grid>
+                            )}
+                        
+                            </Grid>
+                        </Paper>
+                    </Grid> 
+                    
+                    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                        <Paper>
+                            <Grid 
+                                container 
+                                spacing={0} 
+                                alignItems='center'
+                                justify="center"
+                                style={{
+                                    direction:'rtl'
+                                }}
                                 >
-                                    {item.jalaaliUserFriendlyCreatedDate}
-                                </Typography>
-                                </React.Fragment>
-                            }
-                            />
-                        </ListItem>
-                        // <Divider variant="inset" component="li" />
-                )}
-                
-            </List>
-            <StickyFooter />
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Typography
+                                        style={{
+                                            fontFamily:'IranSans'
+                                        }}
+                                        >
+                                        از سال
+                                    </Typography>
+                                    
+                                    <TextField
+                                        id="standard-phone"
+                                        margin="normal"
+                                        type="number"
+                                        // onChange={saveMobileNumber}
+                                        InputProps={{
+                                            style: {
+                                            fontFamily: 'IranSans',
+                                            fontSize: '14px'
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style:{
+                                            fontFamily: 'IranSans',
+                                            fontSize: '14px'
+                                            }
+                                        }}
+                                        />
+                                    <Typography
+                                        style={{
+                                            fontFamily:'IranSans'
+                                        }}
+                                        >
+                                        تا سال
+                                    </Typography>
+                                    
+                                    <TextField
+                                        id="standard-phone"
+                                        margin="normal"
+                                        type="number"
+                                        // onChange={saveMobileNumber}
+                                        InputProps={{
+                                            style: {
+                                            fontFamily: 'IranSans',
+                                            fontSize: '14px'
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style:{
+                                            fontFamily: 'IranSans',
+                                            fontSize: '14px'
+                                            }
+                                        }}
+                                        />
+                                    
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Typography
+                                        style={{
+                                            fontFamily:'IranSans'
+                                        }}>
+                                        رشته
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <FormControl component="fieldset">
+                                        {/* <FormLabel component="legend">Gender</FormLabel> */}
+                                        <RadioGroup 
+                                            aria-label="gender" 
+                                            name="gender1" 
+                                            // value={value} 
+                                            // onChange={handleChange} 
+                                            >
+                                            <FormControlLabel value="rizazi" control={<Radio />} label={<Typography style={{
+                                                fontFamily:'IranSans',
+                                                fontSize:'14px'
+                                                }}>
+                                                    ریاضی
+                                                </Typography>} />
+                                            <FormControlLabel value="tajrobi" control={<Radio />} label={<Typography style={{
+                                                fontFamily:'IranSans',
+                                                fontSize:'14px'
+                                                }}>
+                                                    تجربی
+                                                </Typography>} />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Grid>
+                                
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Typography 
+                                        style={{
+                                        fontFamily:'IranSans',
+                                        fontSize:'14px'
+                                    }}>
+                                        موضوعات
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Chip 
+                                        style={{fontFamily:'IranSans',fontSize:'14px'}} 
+                                        label="سرعت" 
+                                        component="a" 
+                                        clickable 
+                                        />
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        style={{
+                                            border: 0,
+                                            fontFamily:'IranSans',
+                                            borderRadius: 3,
+                                            color: 'white',
+                                            height: 48,
+                                            width:250,
+                                            padding: '0 30px',
+                                        }}
+                                        >
+                                        جستجو
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid> 
+                </Grid>
+                <StickyFooter />
             </React.Fragment>
         );
     }

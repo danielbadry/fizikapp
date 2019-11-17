@@ -338,7 +338,11 @@ class SingleProduct extends React.Component {
                                                     }
                                                 {
                                                     (this.state.token && !this.state.userCanSeeVideo) ?     
-                                                        <Fab variant="extended" aria-label="like" style={{
+                                                        <Fab 
+                                                            variant="extended" 
+                                                            aria-label="like" 
+                                                            href='#/shopping-plans'
+                                                            style={{
                                                                 fontFamily: 'IranSans'
                                                             }}>
                                                             <NavigationIcon />

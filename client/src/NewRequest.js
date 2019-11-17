@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
+import StickyFooter from "./StickyFooter";
 
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -70,11 +70,7 @@ class NewRequest extends React.Component {
           };
         return (
             <Grid container spacing={3}>
-                        
-                <Grid item xs={12}>
-                    <MainHeader />
-                </Grid>
-                
+               
                 <Grid item xs={12}>
                     <Paper>
                     <form noValidate autoComplete="off">
@@ -133,12 +129,12 @@ class NewRequest extends React.Component {
                     </form>    
                     </Paper>
                 </Grid>
-                
+            
                 <Grid item xs={12}>
                     <Paper></Paper>
                 </Grid>
 
-                <MainFooter />
+                <StickyFooter />
 
             </Grid>
         );
