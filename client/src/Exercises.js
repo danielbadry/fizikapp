@@ -31,14 +31,39 @@ class Exercises extends React.Component{
             exercises : [],
             fromYear:1380,
             toYear:1399,
-            field:'tajrobi'
+            field:'tajrobi',
+            subjects:[]
         }
     }
 
     componentDidMount() {
+        this.fetchExercises();
+        let token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`subjects`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(response => {
+                this.setState((state, props) => {
+                    return ({subjects: response.data});
+                });
+            });
+    }
+
+    fetchExercises = () => {
         let token = localStorage.getItem('token');
 
-        fetch(process.env.REACT_APP_API_URL+`exercises`, {
+        fetch(process.env.REACT_APP_API_URL+`exercises?fromYear=${this.state.fromYear}&toYear=${this.state.toYear}&field=${this.state.field}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -66,9 +91,13 @@ class Exercises extends React.Component{
     handleToYear = (e) => {
         this.setState({toYear:e.target.value});
     }
+    
+    changeField = (e) => {
+        this.setState({field:e.target.value});
+    }
 
     searchInExercises = () => {
-        console.info('hello')
+        this.fetchExercises();
     }
 
     render () {
@@ -258,18 +287,27 @@ class Exercises extends React.Component{
                                             aria-label="gender" 
                                             name="gender1" 
                                             value={this.state.field} 
-                                            // onChange={handleChange} 
+                                            onChange={this.changeField} 
                                             >
-                                            <FormControlLabel value="riazi" control={<Radio />} label={<Typography style={{
-                                                fontFamily:'IranSans',
-                                                fontSize:'14px'
-                                                }}>
+                                            <FormControlLabel 
+                                                value="riazi" 
+                                                control={<Radio />} 
+                                                label={<Typography 
+                                                    style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                    }}
+                                                    >
                                                     ریاضی
                                                 </Typography>} />
-                                            <FormControlLabel value="tajrobi" control={<Radio />} label={<Typography style={{
-                                                fontFamily:'IranSans',
-                                                fontSize:'14px'
-                                                }}>
+                                            <FormControlLabel 
+                                                value="tajrobi" 
+                                                control={<Radio />} 
+                                                label={<Typography 
+                                                    style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                    }}>
                                                     تجربی
                                                 </Typography>} />
                                         </RadioGroup>
@@ -286,12 +324,16 @@ class Exercises extends React.Component{
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <Chip 
-                                        style={{fontFamily:'IranSans',fontSize:'14px'}} 
-                                        label="سرعت" 
-                                        component="a" 
-                                        clickable 
-                                        />
+                                    {this.state.subjects.map(
+                                        (item, index) => 
+                                            <Chip 
+                                                key={index}
+                                                style={{fontFamily:'IranSans',fontSize:'14px'}} 
+                                                label={item.name}
+                                                component="a" 
+                                                clickable 
+                                                />
+                                    )}
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Button

@@ -11,11 +11,15 @@ module.exports = {
 
   inputs: {
     
-    startedDate :{
+    fromYear :{
       type: 'string'
     },
     
-    endDate :{
+    field :{
+      type: 'string'
+    },
+    
+    toYear :{
       type: 'string'
     },
     
@@ -47,14 +51,13 @@ module.exports = {
       return ans;
     }
     let finalData = {};
-    let dataLength = await Exercises.find();
     let exercises = await Exercises.find(
-    //{
-    //   where : {
-    //     field: inputs.field,
-    //     year: {'in': r(inputs.startedDate, inputs.endDate)}
-    //   }
-    // }
+    {
+      where : {
+        field: inputs.field,
+        year: {'in': r(inputs.fromYear, inputs.toYear)}
+      }
+    }
     )
     .limit(inputs.limit)
     .skip(inputs.skip)  
@@ -76,7 +79,7 @@ module.exports = {
       exercise.isTajrobi = true;
 
     }
-    finalData.dataLength = dataLength.length;
+    finalData.dataLength = exercises.length;
     finalData.data = exercises;
     return finalData;
 
