@@ -136,6 +136,8 @@ class Exercises extends React.Component{
                                     item 
                                     xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <Card
+                                        // component="a"
+                                        // href={`/2121211z`}
                                         key={index}
                                         style={{
                                             direction:'rtl'

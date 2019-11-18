@@ -209,7 +209,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {[{'text':'صفحه ی اصلی','link':'/'}, {'text':'آموزش','link':'/categories'}, {'text':'درخواست ها','link':'/requests'}, {'text':'چالش های علمی','link':'/sciencechallenges'}, {'text':'حل تمرین و تست','link':'/exercises'}].map((text, index) => (
+          {[{'text':'صفحه اصلی آموزش','link':'/'}, {'text':'حل تست و تمرین','link':'/exercises'}, {'text':'تازه های فیزیک اپ','link':'/products'}, {'text':'تعریفی ها', 'link':'/definitions'}, {'text':'فراتر از کتاب','link':'/beyondthebook'}, {'text':'چالش های علمی','link':'/sciencechallenges'}, {'text':'درخواست ها','link':'/requests'},].map((text, index) => (
             <ListItem button key={index} component={Link} to={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{
@@ -221,7 +221,7 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {[{'text':'تعریفی ها', 'link':'/definitions'}, {'text':'طرح خرید', 'link':'/shopping-plans'}, {'text':'درباره ما', 'link':'/about'}].map((text, index) => (
+          {[, {'text':'خرید اشتراک', 'link':'/shopping-plans'}, {'text':'هدف ما', 'link':'/about'}].map((text, index) => (
             <ListItem button key={index} component={Link} to={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{

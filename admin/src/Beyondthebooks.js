@@ -23,7 +23,7 @@ import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
 
-export const BeyondthebookCreate = (props) => (
+export const BeyondthebooksCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm redirect="list">
@@ -56,7 +56,7 @@ export const BeyondthebookCreate = (props) => (
     </Create>
 );
 
-export const BeyondthebookEdit = (props) => (
+export const BeyondthebooksEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
             <TextInput source="name" label="name" />
@@ -66,7 +66,7 @@ export const BeyondthebookEdit = (props) => (
     </Edit>
 );
 
-export const BeyondthebookShow = (props) => (
+export const BeyondthebooksShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
 
@@ -105,11 +105,11 @@ export const BeyondthebookShow = (props) => (
         </TabbedShowLayout>
     </Show>
 );
-const ProductPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+const BeyondthebookPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
-export const BeyondthebookList = props => (
+export const BeyondthebooksList = props => (
     
-    <List {...props} pagination={<ProductPagination />}>
+    <List {...props} pagination={<BeyondthebookPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
             <TextField source="name" label="Name" />

@@ -39,7 +39,7 @@ class Home extends React.Component {
                     <NiceCard />
                     <SingleRow
                         label="تازه های فیزیک اپ"
-                        footer="مشاهده بیشتر"
+                        footer=""
                         model="products"
                         linkToShowMore='products'
                         count='10'
@@ -73,10 +73,10 @@ class Home extends React.Component {
                     />
                     
                     <SingleRow
-                        label="فراتر از فیزیک"
+                        label="فراتر از کتاب"
                         footer="مشاهده بیشتر"
-                        model="products"
-                        linkToShowMore='products'
+                        model="beyondthebooks"
+                        linkToShowMore='beyondthebooks'
                         count='10'
                     />
 
@@ -90,16 +90,8 @@ class Home extends React.Component {
 
              </Container>
              <StickyFooter />
-                    {/* // <Grid item xs={12}>
-                    //     <MainHeader />
-                    // </Grid>
-                    
-                    //  <Grid item xs={12}>
-                    // <Paper>
-                    //     <HeaderSlider />
-                    //     <ReactTourGuideSlider />
-                    // </Paper>
-                    // </Grid> */}
+                
+                    {/* <ReactTourGuideSlider /> */}
                     </React.Fragment>     
         );
     }

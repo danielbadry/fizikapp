@@ -21,7 +21,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
 
         <MenuItemLink key='dahsboard' to="/" primaryText="Dashboard" onClick={onMenuClick}  leftIcon={React.createElement(DashboardIcon)}/>  
         <MenuItemLink key={resources[0].name} to="/products" primaryText={resources[0].options && resources[0].options.label || resources[0].name} onClick={onMenuClick} leftIcon={React.createElement(resources[0].icon)} />
-        <MenuItemLink key={resources[1].name} to="/beyondthebook" primaryText={resources[1].options && resources[1].options.label || resources[1].name} onClick={onMenuClick} leftIcon={React.createElement(resources[1].icon)} />
+        <MenuItemLink key={resources[1].name} to="/beyondthebooks" primaryText={resources[1].options && resources[1].options.label || resources[1].name} onClick={onMenuClick} leftIcon={React.createElement(resources[1].icon)} />
         <MenuItemLink key={resources[2].name} to="/users" primaryText={resources[2].options && resources[2].options.label || resources[2].name} onClick={onMenuClick} leftIcon={React.createElement(resources[2].icon)} />
         <MenuItemLink key={resources[3].name} to="/categories" primaryText={resources[3].options && resources[3].options.label || resources[3].name} onClick={onMenuClick} leftIcon={React.createElement(resources[3].icon)} />
         <MenuItemLink key={resources[4].name} to="/subjects" primaryText={resources[4].options && resources[4].options.label || resources[4].name} onClick={onMenuClick} leftIcon={React.createElement(resources[4].icon)} />

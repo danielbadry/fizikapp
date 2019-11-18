@@ -6,7 +6,7 @@ module.exports = {
   friendlyName: 'Find',
 
 
-  description: 'Find beyondthebook.',
+  description: 'Find beyondthebooks.',
 
 
   inputs: {
@@ -42,12 +42,12 @@ module.exports = {
   fn: async function (inputs) {
     let finalData = {};
     let tagsArray = [];
-    let dataLength = await Beyondthebook.find();
-    let allBeyondthebook = await Beyondthebook.find()
+    let dataLength = await Beyondthebooks.find();
+    let allBeyondthebooks = await Beyondthebooks.find()
     .limit(inputs.limit)
     .skip(inputs.skip)
     ;
-    for (let beyondthebook of allBeyondthebook) {
+    for (let beyondthebook of allBeyondthebooks) {
       
       // find video status for this user
       if (inputs.userId) {
@@ -61,8 +61,8 @@ module.exports = {
       if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
         summary.startTime = userVideoStatus.startTime;
       }
-        beyondthebook.thumbnail = sails.config.custom.apiUrl + "/files/beyondthebookImage/" + beyondthebook.thumbnail;
-        beyondthebook.filesrc = sails.config.custom.apiUrl + "/files/beyondthebookFiles/" + beyondthebook.filesrc;
+        beyondthebook.thumbnail = sails.config.custom.apiUrl + "/files/beyondthebooksImage/" + beyondthebook.thumbnail;
+        beyondthebook.filesrc = sails.config.custom.apiUrl + "/files/beyondthebooksFiles/" + beyondthebook.filesrc;
         let quizs = await Quizes.find({
           where : {
             modelId: beyondthebook.id
@@ -97,7 +97,7 @@ module.exports = {
     }
 
     finalData.dataLength = dataLength.length;
-    finalData.data = allBeyondthebook;
+    finalData.data = allBeyondthebooks;
     finalData.isAuthenticated = true;
     return finalData;
 

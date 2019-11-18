@@ -23,7 +23,7 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Chip from '@material-ui/core/Chip';
 
-class SingleProduct extends React.Component {
+class SingleBeyondthebook extends React.Component {
     constructor(props, context){
         super(props, context);
         this.state = {
@@ -68,7 +68,7 @@ class SingleProduct extends React.Component {
     }
 
     fetchProduct = (token) => {
-        fetch(process.env.REACT_APP_API_URL+`products/${this.props.match.path.split('/')[2]}`, {
+        fetch(process.env.REACT_APP_API_URL+`beyondthebooks/${this.props.match.path.split('/')[2]}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -133,7 +133,7 @@ class SingleProduct extends React.Component {
           player: state,
           currentTime: state.currentTime
         });
-        window.localStorage.setItem('model', 'products');
+        window.localStorage.setItem('model', 'beyondthebooks');
         window.localStorage.setItem('modelId', this.props.match.path.split('/')[2]);
         window.localStorage.setItem('currentTime', this.state.currentTime);
       }
@@ -432,4 +432,4 @@ class SingleProduct extends React.Component {
         );
     }
 }
-export default SingleProduct;
+export default SingleBeyondthebook;

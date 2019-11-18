@@ -16,7 +16,9 @@ import Sciencechallenges from './Sciencechallenges';
 import Categories from './Categories';
 import Category from './Category';
 import Product from './Product';
+import Beyondthebook from './Beyondthebook';
 import Products from './Products';
+import Beyondthebooks from './Beyondthebooks';
 import Sciencechallenge from './Sciencechallenge';
 import Profile from './Profile';
 import Shoppingplans from './Shoppingplans';
@@ -79,6 +81,12 @@ function HandleProduct({ match }) {
     );
 }
 
+function HandleBeyondthebook({ match }) {
+    return (
+        <Beyondthebook match={match} />
+    );
+}
+
 function HandleSciencechallenge({ match }) {
     return (
         <Sciencechallenge match={match} />
@@ -106,7 +114,9 @@ class Routs extends React.Component {
                 <Route path="/categories" component={Categories} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/product/:productid" component={HandleProduct} />
+                <Route path="/beyondthebook/:beyondthebookid" component={HandleBeyondthebook} />
                 <Route path="/products" component={Products} />
+                <Route path="/beyondthebooks" component={Beyondthebooks} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/exercises" component={Exercises} />

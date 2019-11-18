@@ -38,7 +38,7 @@ module.exports = {
     // } catch(err) {
     //   console.error(err);
     // }
-    await Beyondthebook.destroy({
+    await Beyondthebooks.destroy({
       id: inputs.id
     }).fetch();
   }

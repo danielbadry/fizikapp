@@ -35,7 +35,7 @@ module.exports = {
     let userId = decodedToken.id;
 
     let tagsArray = [];
-    let summary = await Beyondthebook.findOne({
+    let summary = await Beyondthebooks.findOne({
       id: inputs.id
     });
     

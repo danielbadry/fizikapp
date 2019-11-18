@@ -1,5 +1,5 @@
 /**
- * BeyondthebookController
+ * BeyondthebooksController
  *
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
@@ -8,7 +8,7 @@
 module.exports = {
     create: async function(req,res) {
     
-        let beyondthebook = await Beyondthebook
+        let beyondthebook = await Beyondthebooks
           .create({
             name:req.param('name'),
             description:req.param('description'),
@@ -19,17 +19,14 @@ module.exports = {
             publishDate:req.param('publishDate'),
             createdAt : await sails.helpers.dateParse(),
             updatedAt : await sails.helpers.dateParse(),
-            likes : 0,
-            disLikes : 0,
-            views : 0
           })
           .fetch();
           
           await req.file('thumbnail').upload({
-            dirname: require('path').resolve(sails.config.appPath, 'assets/files/beyondthebookImage'),
+            dirname: require('path').resolve(sails.config.appPath, 'assets/files/beyondthebooksImage'),
             saveAs : beyondthebook.id + '.jpg'
           }, async function (err, uploadedFiles) {
-            await Beyondthebook.updateOne({
+            await Beyondthebooks.updateOne({
               id: beyondthebook.id
             })
             .set({
@@ -40,7 +37,7 @@ module.exports = {
           
           await req.file('file').upload({
             maxBytes: 1000000000,
-            dirname: require('path').resolve(sails.config.appPath, 'assets/files/beyondthebookFiles'),
+            dirname: require('path').resolve(sails.config.appPath, 'assets/files/beyondthebooksFiles'),
             saveAs : beyondthebook.id + '.mp4'
           },async function (err, uploadedFiles) {
             await Beyondthebook.updateOne({
@@ -52,7 +49,7 @@ module.exports = {
             if (err) return res.serverError(err);
           });
     
-          let allp = await Beyondthebook
+          let allp = await Beyondthebooks
           .find()
           .sort('createdAt DESC')
           .limit(1);

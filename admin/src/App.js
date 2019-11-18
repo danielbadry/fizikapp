@@ -2,7 +2,7 @@ import React from 'react';
 import catReducer from './reducer';
 import { fetchUtils, Admin, Resource } from 'react-admin';
 import { ProductsList, ProductCreate, ProductEdit, ProductShow } from './products';
-import { BeyondthebookList, BeyondthebookCreate, BeyondthebookEdit, BeyondthebookShow } from './Beyondthebook';
+import { BeyondthebooksList, BeyondthebooksCreate, BeyondthebooksEdit, BeyondthebooksShow } from './Beyondthebooks';
 import { ExercisesList, ExercisesCreate, ExercisesEdit, ExercisesShow } from './Exercises';
 import { UsersList, UserCreate, UserCreatee, userShow } from './users';
 import { DefinitionsList, DefinitionsCreate, DefinitionsEdit, DefinitionsShow } from './Definitions';
@@ -50,7 +50,7 @@ const App = () => (
         appLayout={MyLayout}
         >
         <Resource name="Products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
-        <Resource name="Beyondthebook" create={BeyondthebookCreate} list={BeyondthebookList} icon={VideoCallIcon} show={BeyondthebookShow} />
+        <Resource name="Beyondthebooks" create={BeyondthebooksCreate} list={BeyondthebooksList} icon={VideoCallIcon} show={BeyondthebooksShow} />
         <Resource name="Users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />
         <Resource name="Subjects" list={SubjectsList} create={SubjectsCreate} edit={SubjectsEdit} icon={CategoryIcon} />
