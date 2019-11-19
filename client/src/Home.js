@@ -45,16 +45,16 @@ class Home extends React.Component {
                         count='10'
                     />
 
-                    {/* {(this.state.token) ? <SingleRow
+                    {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
-                        footer="مشاهده بیشتر"
-                        model="products"
+                        footer=""
+                        model="watchedvideos"
                         linkToShowMore='/products'
                         count='4'
                         token={this.state.token}
                     /> : 
                     null
-                    } */}
+                    }
 
                     <SingleRow
                         label="چالش های علمی"

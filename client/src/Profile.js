@@ -150,6 +150,18 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
+                                        <ListItem button onClick={()=>this.changeNestRout('financial')}>
+                                            <ListItemIcon>
+                                                <AttachMoneyIcon style={{
+                                                    color: 'gold'
+                                                }}/>
+                                            </ListItemIcon>
+                                            <ListItemText 
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                        امنیت
+                                                        </Typography>} />
+                                        </ListItem>
+                                        
                                         <ListItem button onClick={()=>this.changeNestRout('inbox')}>
                                             <ListItemIcon>
                                                 <MessageIcon style={{

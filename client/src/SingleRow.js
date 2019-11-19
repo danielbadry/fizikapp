@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import ItemsCarousel from 'react-items-carousel';
 import ProductCard from './ProductCard';
+import WatchedvideosCard from './WatchedvideosCard';
 import BeyondthebookCard from './BeyondthebookCard';
 import SciencechallengeCard from './SciencechallengeCard';
 import DefinitionCard from './DefinitionCard';
@@ -42,6 +43,9 @@ export default (props) => {
         switch (props.modelType) {
             case 'products':
                 return(<ProductCard item={props.item} />);
+                break;
+            case 'watchedvideos':
+                return(<WatchedvideosCard item={props.item} />);
                 break;
             case 'sciencechallenge':
                 return(<SciencechallengeCard item={props.item} />);
