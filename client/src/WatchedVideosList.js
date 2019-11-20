@@ -19,14 +19,15 @@ class WatchedVideosList extends React.Component {
   }
 
   componentDidMount () {
-    fetch(process.env.REACT_APP_API_URL+'watchedvideos/userwatched', {
+    let token = localStorage.getItem('token');
+    fetch(process.env.REACT_APP_API_URL+'watchedvideos/', {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
           'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'authorization': `Bearer ${token}`,
       },
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
@@ -35,7 +36,7 @@ class WatchedVideosList extends React.Component {
     .then(response => response.json())
     .then(watchedVideosList => {
         this.setState((state, props) => {
-          return {watchedVideosList: watchedVideosList};
+          return {watchedVideosList: watchedVideosList.data};
         });
     });
   }
@@ -53,12 +54,12 @@ class WatchedVideosList extends React.Component {
               primary={
                 <Link 
                     component={RouterLink} 
-                    to={`/product/${uw.productInfo.id}`}
+                    to={`/product/${uw.recordData.id}`}
                     style={{ fontFamily: 'IranSans_Light' }}
                     >
-                  {uw.productInfo.name}
+                  {uw.recordData.name}
                 </Link>}
-                // primary={uw.productInfo.name}
+                // primary={uw.recordData.name}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -74,7 +75,7 @@ class WatchedVideosList extends React.Component {
                     </Typography>
                     <div
                       style={{ fontFamily: 'IranSans_Light' }}
-                      >{uw.productInfo.description}</div>
+                      >{uw.recordData.description}</div>
                   </React.Fragment>
                 }
               />

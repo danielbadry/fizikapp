@@ -4,6 +4,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
 class UserBasics extends React.Component {
     
@@ -15,19 +16,18 @@ class UserBasics extends React.Component {
     }
 
     componentDidMount() {
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(process.env.REACT_APP_API_URL+`users/`, {
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         .then(response => response.json())
         .then(userInfo => {
@@ -123,18 +123,7 @@ class UserBasics extends React.Component {
                     onChange={this.handleChange('userName')}
                     margin="normal"
                 />
-                <TextField
-                    id="standard-name"
-                    label="کلمه عبور"
-                    value={this.state.userBasicInfo.password}
-                    InputLabelProps={{
-                        style: {
-                            fontFamily: "IranSans"
-                        }
-                    }}
-                    onChange={this.handleChange('password')}
-                    margin="normal"
-                />
+                
                 <TextField
                     id="standard-name"
                     label="ایمیل"

@@ -10,32 +10,33 @@ import Typography from '@material-ui/core/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-class WatchedVideosList extends React.Component {
+class FavoritesList extends React.Component {
   constructor(props) {
     super (props);
     this.state = {
-      watchedVideosList : []
+      favoritesList : []
     }
   }
 
   componentDidMount () {
-    fetch(process.env.REACT_APP_API_URL+'watchedvideos/userwatched', {
+    let token = localStorage.getItem('token');
+    fetch(process.env.REACT_APP_API_URL+'favorites/', {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
           'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          'authorization': `Bearer ${token}`,
       },
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
       // body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
     .then(response => response.json())
-    .then(watchedVideosList => {
+    .then(favoritesList => {
         this.setState((state, props) => {
-          return {watchedVideosList: watchedVideosList};
+          return {favoritesList: favoritesList.data};
         });
     });
   }
@@ -43,8 +44,8 @@ class WatchedVideosList extends React.Component {
   render() {
     return (
       <List>
-        {this.state.watchedVideosList.map(
-          (uw, index) => 
+        {this.state.favoritesList.map(
+          (favorite, index) => 
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
@@ -53,12 +54,12 @@ class WatchedVideosList extends React.Component {
               primary={
                 <Link 
                     component={RouterLink} 
-                    to={`/product/${uw.productInfo.id}`}
+                    to={`/product/${favorite.recordData.id}`}
                     style={{ fontFamily: 'IranSans_Light' }}
                     >
-                  {uw.productInfo.name}
+                  {favorite.recordData.name}
                 </Link>}
-                // primary={uw.productInfo.name}
+                // primary={favorite.recordData.name}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -69,12 +70,12 @@ class WatchedVideosList extends React.Component {
                       <div
                         style={{ fontFamily: 'IranSans_Light' }}
                         >
-                        {uw.jalaaliUserFriendlyCreatedDate}
+                        {favorite.jalaaliUserFriendlyCreatedDate}
                       </div>
                     </Typography>
                     <div
                       style={{ fontFamily: 'IranSans_Light' }}
-                      >{uw.productInfo.description}</div>
+                      >{favorite.recordData.description}</div>
                   </React.Fragment>
                 }
               />
@@ -84,4 +85,4 @@ class WatchedVideosList extends React.Component {
     )
   };
 }
-export default WatchedVideosList;
+export default FavoritesList;

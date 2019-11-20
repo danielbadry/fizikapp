@@ -19,6 +19,7 @@ class Inbox extends React.Component {
   }
 
   componentDidMount() {
+    let token = localStorage.getItem('token');
     fetch(process.env.REACT_APP_API_URL+'messages', {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -26,7 +27,7 @@ class Inbox extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client

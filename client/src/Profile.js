@@ -164,7 +164,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                             دشبورد
                                                          </Typography>} />
                                         </ListItem>
@@ -180,7 +180,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                             عمومی
                                                          </Typography>} />
                                         </ListItem>
@@ -196,7 +196,7 @@ class Profile extends React.Component {
                                                 }}/>
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         مالی
                                                         </Typography>} />
                                         </ListItem>
@@ -212,7 +212,7 @@ class Profile extends React.Component {
                                                 }}/>
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         امنیت
                                                         </Typography>} />
                                         </ListItem>
@@ -228,7 +228,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         صندوق پیام
                                                         </Typography>} />
                                         </ListItem>
@@ -242,7 +242,7 @@ class Profile extends React.Component {
                                                 <VideocamIcon />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         ویدیوهای دیده شده
                                                         </Typography>} />
                                         </ListItem>
@@ -258,7 +258,7 @@ class Profile extends React.Component {
                                                 }}/>
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         مورد علاقه ها
                                                         </Typography>} />
                                         </ListItem>
@@ -274,7 +274,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         درخواست های من
                                                         </Typography>} />
                                         </ListItem>
@@ -290,8 +290,8 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'14px' }}>
-                                                        چالش های علمی که شرکت کردم
+                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
+                                                        چالش های علمی
                                                         </Typography>} />
                                         </ListItem>
                                         
