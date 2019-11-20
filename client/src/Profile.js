@@ -1,7 +1,6 @@
 import React from 'react';
 import ProfileTabs from './ProfileTabs';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
 import StickyFooter from "./StickyFooter";
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
@@ -20,49 +19,79 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import UserBasics from './UserBasics';
+import UserSecurity from './UserSecurity';
 import UserFinancialTab from './UserFinancialTab';
+import UserSciencechallenges from './UserSciencechallenges';
 import Dashboard from './Dashboard';
 import Inbox from './Inbox';
 import WatchedVideosList from './WatchedVideosList';
 import FavoriteVideos from './FavoriteVideos';
 import UserRequests from './UserRequests';
-
+import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { func } from 'prop-types';
 
 class Profile extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            currentPage : 'general'
-        }
     }
 
-    switchComponents = (cp) => {
-        switch(cp) {
-            case 'general':
-                return <UserBasics />;
-            case 'financial':
-                return <UserFinancialTab />;
-            case 'dashboard':
-                return <Dashboard />;
-            case 'inbox':
-                return <Inbox />;
-            case 'watchedvideoslist':
-                return <WatchedVideosList />;
-            case 'favoritevideos':
-                return <FavoriteVideos />;
-            case 'userrequests':
-                return <UserRequests />;
-        }
+    HandleDashboard = ({ match }) => {
+        return (
+            <Dashboard />
+        );
+    }
+    
+    HandleFinancial = ({ match }) => {
+        return (
+            <UserFinancialTab />
+        );
+    }
+    
+    HandleGeneral = ({ match }) => {
+        return (
+            <UserBasics />
+        );
+    }
+    
+    HandleSecurity = ({ match }) => {
+        return (
+            <UserSecurity />
+        );
+    }
+    
+    HandleInbox = ({ match }) => {
+        return (
+            <Inbox />
+        );
+    }
+    
+    HandleWatchedvideos = ({ match }) => {
+        return (
+            <WatchedVideosList />
+        );
+    }
+    
+    HandleFavorites = ({ match }) => {
+        return (
+            <FavoriteVideos />
+        );
+    }
+    
+    HandleRequests = ({ match }) => {
+        return (
+            <UserRequests />
+        );
+    }
+    
+    HandleSciencechallenges = ({ match }) => {
+        return (
+            <UserSciencechallenges />
+        );
     }
 
-    changeNestRout = function (rout) {
-        this.setState(function(state, props) {
-            return {
-                currentPage: rout
-            };
-        });
+    componentDidMount() {
+
     }
 
     render() {
@@ -75,7 +104,17 @@ class Profile extends React.Component {
                         <Paper>
                             <Grid container spacing={2} justify="center" >
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    {this.switchComponents(this.state.currentPage)}
+                                    <HashRouter>
+                                        <Route exact path="/profile" component={this.HandleDashboard} />
+                                        <Route exact path="/profile/financial" component={this.HandleFinancial} />
+                                        <Route exact path="/profile/general" component={this.HandleGeneral} />
+                                        <Route exact path="/profile/security" component={this.HandleSecurity} />
+                                        <Route exact path="/profile/inbox" component={this.HandleInbox} />
+                                        <Route exact path="/profile/watchedvideos" component={this.HandleWatchedvideos} />
+                                        <Route exact path="/profile/myfavorites" component={this.HandleFavorites} />
+                                        <Route exact path="/profile/myrequests" component={this.HandleRequests} />
+                                        <Route exact path="/profile/mysciencechallenges" component={this.HandleSciencechallenges} />
+                                    </HashRouter>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -114,7 +153,11 @@ class Profile extends React.Component {
                                         direction: 'rtl'
                                     }}>
 
-                                        <ListItem button onClick={()=>this.changeNestRout('dashboard')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile"
+                                            >
                                             <ListItemIcon>
                                                 <DashboardIcon style={{
                                                     color: '#3f51b5'
@@ -126,7 +169,11 @@ class Profile extends React.Component {
                                                          </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('general')}>
+                                        <ListItem 
+                                            button 
+                                            component="a"
+                                            href="#/profile/general"
+                                            >
                                             <ListItemIcon>
                                                 <EditIcon style={{
                                                     color: 'salmon'
@@ -138,7 +185,11 @@ class Profile extends React.Component {
                                                          </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('financial')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile/financial"
+                                            >
                                             <ListItemIcon>
                                                 <AttachMoneyIcon style={{
                                                     color: 'gold'
@@ -150,7 +201,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('financial')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile/security"
+                                            >
                                             <ListItemIcon>
                                                 <AttachMoneyIcon style={{
                                                     color: 'gold'
@@ -162,7 +217,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('inbox')}>
+                                        <ListItem 
+                                            button 
+                                            component="a"
+                                            href="#/profile/inbox"
+                                            >
                                             <ListItemIcon>
                                                 <MessageIcon style={{
                                                     color: 'turquoise'
@@ -174,7 +233,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('watchedvideoslist')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile/watchedvideos"
+                                            >
                                             <ListItemIcon>
                                                 <VideocamIcon />
                                             </ListItemIcon>
@@ -184,7 +247,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('favoritevideos')}>
+                                        <ListItem 
+                                            button 
+                                            component="a"
+                                            href="#/profile/myfavorites"
+                                            >
                                             <ListItemIcon>
                                                 <FavoriteIcon style={{
                                                     color: '#f50057'
@@ -196,7 +263,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('userrequests')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile/myrequests"
+                                            >
                                             <ListItemIcon>
                                                 <QuestionAnswerIcon style={{
                                                     color: 'yellowgreen'
@@ -208,7 +279,11 @@ class Profile extends React.Component {
                                                         </Typography>} />
                                         </ListItem>
                                         
-                                        <ListItem button onClick={()=>this.changeNestRout('userrequests')}>
+                                        <ListItem 
+                                            button
+                                            component="a"
+                                            href="#/profile/mysciencechallenges"
+                                            >
                                             <ListItemIcon>
                                                 <QuestionAnswerIcon style={{
                                                     color: 'yellowgreen'
