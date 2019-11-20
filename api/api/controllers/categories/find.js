@@ -22,9 +22,6 @@ module.exports = {
   fn: async function (inputs) {
     let finalData = {};
     let rowId = inputs.rowId || '0';
-    // return (rowId);
-    // let dataLength = await Categories.find();
-    
     let allCategories = await Categories.find({
       isDeleted: false,
       parentId:rowId
@@ -49,21 +46,24 @@ module.exports = {
         category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
       }
       category.allSubCategories = allSubCategories;
-
-      let allProducts = await Products.find({
-        where : {
-          isDeleted: false,
-          category: category.id
-        }
-      });
-
-      for (let product of allProducts) {
-        product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
-      }
-      category.Products = allProducts;
     }
 
-    return allCategories;
+    let allProducts = await Products.find({
+      where : {
+        isDeleted: false,
+        category: rowId
+      }
+    });
+
+    for (let product of allProducts) {
+      product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
+    }
+    
+    finalData.Categories = allCategories;
+    finalData.Products = allProducts; 
+
+    return finalData;
+    // return allCategories;
     // if (allProducts.length > 0)
     // for (let product of allProducts) {
     //   let p = JSON.parse(product.category);
