@@ -29,7 +29,7 @@ class NiceCard extends React.Component {
                 // console.info('category:', category);
                 this.setState(function(state, props) {
                     return {
-                        categories: category
+                        categories: category.Categories
                         }
                   }, () => {
                     
