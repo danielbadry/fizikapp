@@ -55,6 +55,7 @@ class SignIn extends React.Component{
                     this.setState({
                         isUserLoggedIn : true
                     });
+                    window.location.reload();
                 }
             });
     }

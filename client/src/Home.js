@@ -36,7 +36,7 @@ class Home extends React.Component {
             <React.Fragment>
                  <Container>
                     <AdsPanel />
-                    <NiceCard />
+                    {/* <NiceCard /> */}
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer=""
@@ -45,7 +45,7 @@ class Home extends React.Component {
                         count='10'
                     />
 
-                    {(this.state.token) ? <SingleRow
+                    {/* {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
                         footer=""
                         model="watchedvideos"
@@ -54,7 +54,7 @@ class Home extends React.Component {
                         token={this.state.token}
                     /> : 
                     null
-                    }
+                    } */}
 
                     <SingleRow
                         label="چالش های علمی"
@@ -72,13 +72,13 @@ class Home extends React.Component {
                         count='10'
                     />
                     
-                    <SingleRow
+                    {/* <SingleRow
                         label="فراتر از کتاب"
                         footer="مشاهده بیشتر"
-                        model="beyondthebooks"
-                        linkToShowMore='beyondthebooks'
+                        model="beyondthebook"
+                        linkToShowMore='beyondthebook'
                         count='10'
-                    />
+                    /> */}
 
                     <SingleRow
                         label="درخواست ها"

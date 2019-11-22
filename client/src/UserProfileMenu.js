@@ -18,6 +18,15 @@ export default function UserProfileMenu() {
     setAnchorEl(null);
   };
 
+  const logOut = () => {
+    window.localStorage.removeItem('token');
+    setAnchorEl(null);
+    window.location.reload();
+  }
+
+  // switch (anchorEl) {
+    
+  // }
   return (
     <React.Fragment>
       <IconButton
@@ -63,8 +72,7 @@ export default function UserProfileMenu() {
                   fontFamily:'IranSans_Light',
                   fontSize:'13px'
                 }}
-                onClick={handleClose}>خروج</MenuItem>
-        
+                onClick={logOut} value="kh">خروج</MenuItem>
             </Menu>
     </React.Fragment>
   );
