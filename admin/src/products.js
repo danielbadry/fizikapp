@@ -22,7 +22,22 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
+import { FormDataConsumer } from 'react-admin';
 
+let formElementValues = {};
+const formInformationHolder = (formData) => {
+    formElementValues = formData;
+}
+const uploadThumb = () => {
+    console.info(formElementValues.thumbnail);
+    var formData = new FormData();
+    formData.append("file", formElementValues.thumbnail.rawFile, 'test.pdf');
+    // form.append("blob",blob, filename)
+    var xhr = new XMLHttpRequest();
+    // Add any event handlers here...
+    xhr.open('POST', 'test.php', true);
+    xhr.send(formData);
+}
 export const ProductCreate = (props) => (
     <Create {...props} >
         
@@ -44,13 +59,31 @@ export const ProductCreate = (props) => (
             
             {/* <Mycheckbox label="categories" />   */}
             
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
+            <ImageInput 
+                source="thumbnail" 
+                label="thumbnail image" 
+                accept="image/*">
+                <ImageField  source="thumbnail" title="title" />
             </ImageInput>
-            
-            <FileInput source="file" label="Related files" accept="video/mp4">
+            <FormDataConsumer>
+                {({ formData, ...rest }) =>
+                    {formInformationHolder(formData)}
+                }
+            </FormDataConsumer>
+            <Button
+                onClick={uploadThumb}
+                >
+                upload thumbnail
+            </Button>
+            <FileInput 
+                source="file" 
+                label="Related files" 
+                accept="video/mp4"
+                
+                >
                 <FileField source="file" title="title" />
             </FileInput>
+            
             {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
         </SimpleForm>
     </Create>
