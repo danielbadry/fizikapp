@@ -107,10 +107,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                         formData.append(item, params.data[item]);
                     
                     if (item == "thumbnail")
-                        formData.append("thumbnail", document.getElementById("thumbnail").files[0]);
+                        formData.append("thumbnail", document.getElementById("thumbnail").files[0].name);
 
                     if (item == "file")
-                        formData.append("file", document.getElementById("file").files[0]);
+                        formData.append("file", document.getElementById("file").files[0].name);
 
                     if (item == "tags")
                         formData.append("tags", JSON.stringify(params.data[item]));

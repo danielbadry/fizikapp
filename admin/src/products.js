@@ -25,39 +25,49 @@ import RichTextInput from 'aor-rich-text-input';
 import { FormDataConsumer } from 'react-admin';
 
 let formElementValues = {};
+
 const formInformationHolder = (formData) => {
     formElementValues = formData;
 }
-const uploadThumb = () => {
-    console.info(formElementValues.thumbnail);
+
+const uploadThumbnail = () => {
     var formData = new FormData();
-    formData.append("file", formElementValues.thumbnail.rawFile, 'test.pdf');
-    // form.append("blob",blob, filename)
+    formData.append("thumbnail", formElementValues.thumbnail.rawFile);
     var xhr = new XMLHttpRequest();
-    // Add any event handlers here...
-    xhr.open('POST', 'test.php', true);
+    xhr.onprogress = function(evt) {
+        var percentComplete = (evt.loaded / evt.total) * 100; 
+    } 
+    xhr.open('POST', 'http://localhost:80/test.php', true);
     xhr.send(formData);
 }
+
+const uploadFile = () => {
+    var xhr = new XMLHttpRequest();
+    
+    xhr.addEventListener('progress', function(e){
+        console.info(e);
+    });
+
+    var formData = new FormData();
+    formData.append("file", formElementValues.file.rawFile);
+    
+    // xhr.onprogress = function(evt) {
+    //     // var percentComplete = (evt.loaded / evt.total) * 100; 
+    //     console.info(evt);
+    // } 
+    xhr.open('POST', 'http://localhost:80/upload/test.php', true);
+    xhr.send(formData);
+}
+
 export const ProductCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            {/*
-            TODO: add richTextInput here
-            */}
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            
             <CategoryComponent source="category" label="category" />
-             
-            {/* <NumberInput source="price" label="price" /> */}
-            {/*
-            TODO: add boolean field here
-            */}
-            
-            {/* <Mycheckbox label="categories" />   */}
             
             <ImageInput 
                 source="thumbnail" 
@@ -70,22 +80,21 @@ export const ProductCreate = (props) => (
                     {formInformationHolder(formData)}
                 }
             </FormDataConsumer>
-            <Button
-                onClick={uploadThumb}
-                >
-                upload thumbnail
+            <Button onClick={uploadThumbnail}>
+                آپلود تصویر
             </Button>
             <FileInput 
                 source="file" 
                 label="Related files" 
                 accept="video/mp4"
-                
                 >
                 <FileField source="file" title="title" />
             </FileInput>
-            
-            {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
+            <Button onClick={uploadFile}>
+                آپلود فایل
+            </Button>
         </SimpleForm>
+
     </Create>
 );
 

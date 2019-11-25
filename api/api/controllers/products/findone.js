@@ -56,10 +56,10 @@ module.exports = {
     */
 
     if (true) {
-      summary.videoAddress = sails.config.custom.apiUrl + '/files/productFiles/' + summary.filesrc;
+      summary.videoAddress = sails.config.custom.apiUrl + '/files/productFiles/' + summary.file;
     }
     else {
-      summary.filesrc = null;
+      summary.file = null;
       summary.videoAddress = null;
     }
       

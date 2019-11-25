@@ -65,7 +65,7 @@ module.exports = {
       required : false
     },
     
-    filesrc :{
+    file :{
       type: 'string',
       required : false
     }
