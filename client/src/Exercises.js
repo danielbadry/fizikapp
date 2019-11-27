@@ -32,14 +32,15 @@ class Exercises extends React.Component{
             fromYear:1380,
             toYear:1399,
             field:'tajrobi',
-            subjects:[]
+            subjects:[],
+            isRender:false
         }
     }
 
     componentDidMount() {
         this.fetchExercises();
         let token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`subjects`, {
+        fetch(process.env.REACT_APP_API_URL+`categories/allcategories`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -54,9 +55,58 @@ class Exercises extends React.Component{
             })
             .then(response => response.json())
             .then(response => {
+
                 this.setState((state, props) => {
-                    return ({subjects: response.data});
+                    return ({subjects: response});
+                }, () => {
+                    this.setState({isRender:true})
                 });
+                
+                // this.setState((state, props) => {
+                //     return ({subjects: response.data});
+                // });
+                // console.info('categories:', response);
+               
+                // function unflatten(arr) {
+                //   var tree = [],
+                //       mappedArr = {},
+                //       arrElem,
+                //       mappedElem;
+            
+                //   // First map the nodes of the array to an object -> create a hash table.
+                // for(var i = 0, len = arr.length; i < len; i++) {
+                //     arrElem = arr[i];
+                //     mappedArr[arrElem.id] = arrElem;
+                //     mappedArr[arrElem.id]['children'] = [];
+                // }
+            
+                // for (var id in mappedArr) {
+                //     if (mappedArr.hasOwnProperty(id)) {
+                //       mappedElem = mappedArr[id];
+                //       // If the element is not at the root level, add it to its parent array of children.
+                      
+                //       if(mappedElem.parentId != '0')
+                //       {
+                //         mappedArr[mappedElem['parentId']]['children'].push(mappedElem);
+                //       }
+                //       // If the element is at the root level, add it to first level elements array.
+                //       else {
+                //         tree.push(mappedElem);
+                //       }
+                //     }
+                //   }
+                //   return tree;
+                // }
+            
+            // var tree = unflatten(response);
+            // this.setState((state, props) => {
+            //     return ({subjects: tree});
+            // }, () => {
+            //     this.setState({isRender:true})
+            // });
+
+            // console.log('content:',this.state.subjects);
+            // console.log('tree:',unflatten(arr));
             });
     }
 
@@ -98,6 +148,25 @@ class Exercises extends React.Component{
 
     searchInExercises = () => {
         this.fetchExercises();
+    }
+
+    getMenu = ( parentID ) => {
+        let data = this.state.subjects;
+        console.info('inje', data);
+        return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
+            var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
+            var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
+            return '<li><input type=checkbox />'+node.name +  subMenu + '</li>' ;
+        });
+    }
+
+    Subjects (props) {
+        var initLevel = 0;
+        var endMenu = this.getMenu("0");
+        let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
+        return(
+            <div className="Container" dangerouslySetInnerHTML={{__html: someHtml}}></div>
+        )
     }
 
     render () {
@@ -325,17 +394,12 @@ class Exercises extends React.Component{
                                         موضوعات
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    {this.state.subjects.map(
-                                        (item, index) => 
-                                            <Chip 
-                                                key={index}
-                                                style={{fontFamily:'IranSans',fontSize:'14px'}} 
-                                                label={item.name}
-                                                component="a" 
-                                                clickable 
-                                                />
-                                    )}
+                                <Grid>
+                                    {
+                                        (this.state.isRender)?
+                                            this.Subjects():
+                                                null
+                                    }
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Button
