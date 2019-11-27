@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
@@ -8,6 +8,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
+import Book from './Book';
 import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
@@ -22,7 +23,8 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
-import { FormDataConsumer } from 'react-admin';
+import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
+import { change } from 'redux-form';
 
 let formElementValues = {};
 
@@ -59,6 +61,23 @@ const uploadFile = () => {
     xhr.send(formData);
 }
 
+const GetCategory = () => {
+    let res = [];
+    fetch(process.env.REACT_APP_API_URL+'/categories/allCategories', { method: 'GET', headers: {}})
+    .then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        console.info('inja', myJson);
+        res = [{'id':'1','name':'a'}];
+        // return res;
+    })
+    .catch((e) => {
+        // showNotification('Error: comment not approved', 'warning')
+    });
+    return res;
+}
+
 export const ProductCreate = (props) => (
     <Create {...props} >
         
@@ -68,7 +87,43 @@ export const ProductCreate = (props) => (
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
             <CategoryComponent source="category" label="category" />
-            
+            <Book 
+                {...props}
+                />
+            {/* <FormDataConsumer>
+                {({ formData, dispatch, ...rest }) => (
+                    <Fragment>
+                        <SelectInput
+                            source="category"
+                            label="book"
+                            choices={GetCategory()}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'season', null)
+                            )}
+                            {...rest}
+                        /> */}
+                        {/* <SelectInput
+                            // source="season"
+                            label="season"
+                            choices={GetProvincesFor(formData.country)}
+                            onChange={value => dispatch(
+                                change(REDUX_FORM_NAME, 'city', null)
+                            )}
+                            {...rest}
+
+                        />
+                        <SelectInput
+                            // source="city"
+                            label="city"
+                            choices={GetCitiesFor(formData.province)}
+                            {...rest}
+
+                        /> */}
+                    {/* </Fragment>
+                )}
+            </FormDataConsumer> */}
+
+
             <ImageInput 
                 source="thumbnail" 
                 label="thumbnail image" 
