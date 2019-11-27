@@ -177,7 +177,7 @@ export default function EnhancedTable() {
     const [rowId, setrowId] = useState(0);
 
     useEffect(() => {
-        const dataRecord = {
+      const dataRecord = {
             rowId: 0
         }
         if (firstTime) {
@@ -189,7 +189,7 @@ export default function EnhancedTable() {
                 return response.json();
             })
             .then((myJson) => {
-                setRows(myJson.data);
+                setRows(myJson.Categories);
                 setFirstTime(false);
             })
             .catch((e) => {
@@ -251,8 +251,8 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-        setRows(myJson.data);
-        // setFirstTime(false);
+      let primes = myJson.Categories.concat(myJson.Products);
+        setRows(primes);
     })
     .catch((e) => {
         
@@ -268,8 +268,8 @@ export default function EnhancedTable() {
     setPage(0);
   }
   
-  function handleDblClickOnRow () {
-    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(0)}`, {
+  function handleGoHome () {
+    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=0`, {
         method: "GET",
         headers: {},   
     })
@@ -277,7 +277,8 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-        setRows(myJson.data);
+        let primes = myJson.Categories.concat(myJson.Products);
+        setRows(primes);
     })
     .catch((e) => {
         
@@ -364,7 +365,8 @@ export default function EnhancedTable() {
           return response.json();
       })
       .then((myJson) => {
-          setRows(myJson.data);
+          let primes = myJson.Categories.concat(myJson.Products);
+          setRows(primes);
 
       })
       .catch((e) => {
@@ -396,7 +398,9 @@ export default function EnhancedTable() {
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        setRows(data.data);
+        let primes = data.Categories.concat(data.Products);
+        console.info('inja:', primes);
+        setRows(primes);
         return fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
         .then(function(resp){
           return resp.json();
@@ -513,7 +517,7 @@ export default function EnhancedTable() {
               <FilterListIcon />
             </IconButton>
         </Tooltip> */}
-        <Tooltip title="up">
+        {/* <Tooltip title="up">
             <IconButton onClick={() => goUp()}>
                 <ExpandLess />
             </IconButton>
@@ -522,18 +526,18 @@ export default function EnhancedTable() {
         <IconButton onClick={() => paste()}>
             <CloudDoneIcon />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
       <Tooltip title="home">
-        <IconButton onClick={() => handleDblClickOnRow()} color="primary">
+        <IconButton onClick={() => handleGoHome()} color="primary">
             <Home />
         </IconButton>
       </Tooltip>
       
-      <Tooltip title="cut">
+      {/* <Tooltip title="cut">
         <IconButton color="primary" onClick={() => copySelected()}>
             <FileCopy />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
       
       <Tooltip title="new">
         <IconButton 

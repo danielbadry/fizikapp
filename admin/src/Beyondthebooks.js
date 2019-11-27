@@ -9,6 +9,7 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
 import CategoryComponent from './CategoryComponent';
+import Book from './Book';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
@@ -36,7 +37,9 @@ export const BeyondthebooksCreate = (props) => (
             <TagComponent source="tags" label="tags" />
             
             <CategoryComponent source="category" label="category" />
-             
+            <Book 
+                {...props}
+                />
             {/* <NumberInput source="price" label="price" /> */}
             {/*
             TODO: add boolean field here
