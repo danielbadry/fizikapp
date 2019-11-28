@@ -45,7 +45,7 @@ class Home extends React.Component {
                         count='10'
                     />
 
-                    {/* {(this.state.token) ? <SingleRow
+                    {(this.state.token) ? <SingleRow
                         label="ادامه ی ویدیوهای قبلی"
                         footer=""
                         model="watchedvideos"
@@ -54,7 +54,7 @@ class Home extends React.Component {
                         token={this.state.token}
                     /> : 
                     null
-                    } */}
+                    }
 
                     <SingleRow
                         label="چالش های علمی"
