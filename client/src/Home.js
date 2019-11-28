@@ -36,7 +36,7 @@ class Home extends React.Component {
             <React.Fragment>
                  <Container>
                     <AdsPanel />
-                    {/* <NiceCard /> */}
+                    <NiceCard />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer=""

@@ -8,160 +8,69 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-
-  inline: {
-    display: 'inline',
-  },
-
-  listItemText: {
-    fontFamily: 'IranSans_Light'
+class RelatedProducts extends React.Component{
+  constructor(props) {
+    super (props);
+    this.state = {
+      categories: [],
+      isRender: false
+    }
   }
-}));
+  
+  componentDidMount() {
+    const token = window.localStorage.getItem('token');
+    fetch(process.env.REACT_APP_API_URL+`categories/allcategories`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`,
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      // body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      .then(response => response.json())
+      .then(response => {
+          this.setState((state, props) => {
+              return ({categories: response});
+          }, () => {
+              this.setState({isRender:true})
+          });
+      });
+  }
 
-export default function AlignItemsList() {
-  const classes = useStyles();
+  getMenu = ( parentID ) => {
+    let data = this.state.categories;
+    console.info('inje', data);
+    return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
+        var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
+        var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
+        return '<li>'+node.name +  subMenu + '</li>' ;
+    });
+  }
 
-  return (
-    <List className={classes.root}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-            classes={{primary:classes.listItemText}}
-            primary="سرعت چیست؟"
-            secondary={
-                <React.Fragment>
-                    <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                        style={{ fontFamily: 'IranSans_Light' }}
-                    >
-                        در علم سینماتیک به مفهوم بزرگی سرعت برداری
-                    </Typography>
-                   
-                    </React.Fragment>
-                }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="https://material-ui.com/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="در مورد انرژی چه میدانید؟"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="https://material-ui.com/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="انرژی جنبشی چیست؟"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="https://material-ui.com/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="حرکت کاتوره ای چیست؟"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="https://material-ui.com/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="دو قطبی یعنی چه؟"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="https://material-ui.com/static/images/avatar/3.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="ولتاژ به زبان ساده"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Sandra Adams
-              </Typography>
-              
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-    </List>
-  );
+  Subjects (props) {
+      var initLevel = 0;
+      var endMenu = this.getMenu("0");
+      let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
+      return(
+          <div style={{
+            direction:'rtl'
+          }} className="Container" dangerouslySetInnerHTML={{__html: someHtml}}></div>
+      )
+  }
+
+  render() {
+    return(
+      <React.Fragment>
+        {this.Subjects()}
+      </React.Fragment>
+    )
+  }
+
 }
+
+export default RelatedProducts;
