@@ -46,7 +46,7 @@ export default class UploadComponent extends React.Component {
           files={this.state.files}
           allowMultiple={true}
           maxFiles={3}
-          server="/api"
+          server="../test.php"
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {
             // Set currently active file objects to this.state
