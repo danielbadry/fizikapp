@@ -10,6 +10,7 @@ import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
 import Book from './Book';
 import CategoryComponent from './CategoryComponent';
+import UploadComponent from './UploadComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
@@ -90,6 +91,7 @@ export const ProductCreate = (props) => (
             <Book 
                 {...props}
                 />
+            <UploadComponent />
             {/* <FormDataConsumer>
                 {({ formData, dispatch, ...rest }) => (
                     <Fragment>

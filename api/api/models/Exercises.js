@@ -47,6 +47,11 @@ module.exports = {
       required : false
     },
     
+    location :{
+      type: 'string',
+      required : false
+    },
+    
     tags :{
       type: 'json',
       columnType: 'array',

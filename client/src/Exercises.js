@@ -383,6 +383,47 @@ class Exercises extends React.Component{
                                         </RadioGroup>
                                     </FormControl>
                                 </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <Typography
+                                        style={{
+                                            fontFamily:'IranSans'
+                                        }}>
+                                        لوکیشن
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                    <FormControl component="fieldset">
+                                        {/* <FormLabel component="legend">Gender</FormLabel> */}
+                                        <RadioGroup 
+                                            aria-label="gender" 
+                                            name="gender1" 
+                                            value={this.state.field} 
+                                            onChange={this.changeField} 
+                                            >
+                                            <FormControlLabel 
+                                                value="riazi" 
+                                                control={<Radio />} 
+                                                label={<Typography 
+                                                    style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                    }}
+                                                    >
+                                                    داخل
+                                                </Typography>} />
+                                            <FormControlLabel 
+                                                value="tajrobi" 
+                                                control={<Radio />} 
+                                                label={<Typography 
+                                                    style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                    }}>
+                                                    خارج
+                                                </Typography>} />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Grid>
                                 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Typography 

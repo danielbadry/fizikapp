@@ -10,6 +10,7 @@ import TagComponent from './TagComponent';
 import SubjectComponent from './SubjectComponent';
 import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
+import InsertSubject from './InsertSubject';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
@@ -31,10 +32,15 @@ export const ExercisesCreate = (props) => (
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
             <SubjectComponent source="subjects" label="subjects" />
-            
+            <InsertSubject />
             <RadioButtonGroupInput source="field" choices={[
                 { id: 'riazi', name: 'riazi' },
                 { id: 'tajrobi', name: 'tajrobi' }
+            ]} />
+            
+            <RadioButtonGroupInput source="location" choices={[
+                { id: 'in', name: 'in' },
+                { id: 'out', name: 'out' }
             ]} />
 
             <SelectInput source="year" choices={[

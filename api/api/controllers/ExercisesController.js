@@ -14,10 +14,12 @@ module.exports = {
             description:req.param('description'),
             title:req.param('title'),
             tags:req.param('tags'),
+            subjects:req.param('subjects'),
             isEnable:req.param('isEnable'),
             likes:req.param('isEnable'),
             year:req.param('year'),
             field:req.param('field'),
+            location:req.param('location'),
             disLikes:req.param('isEnable'),
             views:req.param('isEnable'),
             createdAt : await sails.helpers.dateParse(),
@@ -46,4 +48,3 @@ module.exports = {
       }
 
 };
-
