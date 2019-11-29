@@ -10,7 +10,11 @@ module.exports = {
   inputs: {
     name :{
       type : 'string'
-    }
+    },
+    parentId : {
+      type: 'string',
+      defaultsTo: '0'
+    },
   },
 
 
@@ -23,9 +27,9 @@ module.exports = {
 
     return await Subjects.create({
       name: inputs.name,
+      parentId: inputs.parentId,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
-      count: Math.floor(Math.random() * 10) + 1
     }).fetch();
   }
 

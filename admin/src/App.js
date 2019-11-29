@@ -53,7 +53,7 @@ const App = () => (
         <Resource name="Beyondthebooks" create={BeyondthebooksCreate} list={BeyondthebooksList} icon={VideoCallIcon} show={BeyondthebooksShow} />
         <Resource name="Users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />
-        <Resource name="Subjects" list={SubjectsList} create={SubjectsCreate} edit={SubjectsEdit} icon={CategoryIcon} />
+        <Resource name="Subjects" list={SubjectsList} icon={CategoryIcon} />
         <Resource name="Exercises" list={ExercisesList} create={ExercisesCreate} show={ExercisesShow} edit={ExercisesEdit} icon={CategoryIcon} />
         <Resource name="Definitions" list={DefinitionsList} create={DefinitionsCreate} show={DefinitionsShow} edit={DefinitionsEdit} icon={CategoryIcon} />
         <Resource name="Sciencechallenge" list={SciencechallengeList} create={SciencechallengeCreate} show={SciencechallengeShow} edit={SciencechallengeEdit} icon={CategoryIcon} />

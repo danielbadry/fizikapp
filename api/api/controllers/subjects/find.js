@@ -1,60 +1,69 @@
 var moment = require('moment');
 var momentJalaali = require('moment-jalaali');
-
 module.exports = {
-
 
   friendlyName: 'Find',
 
-
-  description: 'Find subjects.',
-
+  description: 'Find categories.',
 
   inputs: {
-    limit: {
-      type: 'number'
-    },
-    
-    skip: {
-      type: 'number'
+
+    rowId: {
+      type: 'string',
+      required: false
     },
 
-    sort: {
-      type: 'string'
-    },
-    
-    where: {
-      type: 'string'
-    }
   },
-
 
   exits: {
 
   },
 
-
   fn: async function (inputs) {
-
     let finalData = {};
-    let dataLength = await Subjects.find();
+    let rowId = inputs.rowId || '0';
+    let allCategories = await Subjects.find({
+      isDeleted: false,
+      parentId:rowId
+    });
 
-    let allSubjects = await Subjects.find()
-    .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
-    for (let tag of allSubjects) {
+    for (let category of allCategories) {
       moment.locale('en');
-      tag.jalaaliCreatedDate = momentJalaali(tag.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      category.jalaaliCreatedDate = momentJalaali(category.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
-      tag.jalaaliUserFriendlyCreatedDate = moment(tag.createdAt).fromNow();
-  }
-  finalData.dataLength = dataLength.length;
-  finalData.data = allSubjects;
-  finalData.isAuthenticated = true;
-  return finalData;
+      category.jalaaliUserFriendlyCreatedDate = moment(category.createdAt).fromNow();
+      category.fullJalaali = category.jalaaliCreatedDate + ' ' + category.jalaaliUserFriendlyCreatedDate;
+      category.itemType = 'folder';
+      category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
+    
+      let allSubCategories = await Subjects.find({
+        where : {
+          isDeleted: false,
+          parentId: category.id
+        }
+      });
+      for (let category of allSubCategories) {
+        category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
+      }
+      category.allSubCategories = allSubCategories;
+    }
+
+    let allProducts = await Products.find({
+      where : {
+        isDeleted: false,
+        category: rowId
+      }
+    });
+
+    for (let product of allProducts) {
+      product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
+    }
+    
+    finalData.Categories = allCategories;
+    finalData.Products = allProducts; 
+
+    return finalData;
 
   }
-
 
 };

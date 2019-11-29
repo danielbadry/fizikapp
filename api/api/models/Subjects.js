@@ -6,17 +6,17 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
-    // schema: true,
+    
     name :{
       type: 'string',
       required : false
     },
     
-    count :{
-      type: 'number',
-      required : false
+    parentId : {
+      type: 'string',
+      defaultsTo: '0'
     },
     
     isDeleted : {

@@ -1,35 +1,104 @@
-import React from 'react';
-import { List, Create, Edit, SimpleForm, DisabledInput,
-         TextInput,Datagrid, TextField, EditButton
-        }
-         from 'react-admin';
-import { Pagination } from 'react-admin';
+import React, {Fragment} from 'react';
+import { List, Datagrid, TextField, BooleanInput, BulkDeleteButton, Create, SimpleForm, TextInput } from 'react-admin';
 
-export const SubjectsCreate = (props) => (
-    <Create {...props}>
-        <SimpleForm redirect="list">
-            <TextInput source="name" />
-        </SimpleForm>
-    </Create>
+import { CardActions, Filter } from 'react-admin';
+
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/ExpandLess';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import Home from '@material-ui/icons/Home';
+import CreateNewFolder from '@material-ui/icons/ExpandLess';
+import Tooltip from '@material-ui/core/Tooltip'
+import TextInputJadid from './TextInputJadid';
+import MyList2 from './MyList2';
+
+const PostBulkActionButtons = props => (
+    <Fragment>
+        <BulkDeleteButton {...props} />
+        <div>Hi</div>
+    </Fragment>
 );
 
-export const SubjectsEdit = (props) => (
-    <Edit title="tag edit" {...props}>
-        <SimpleForm>
-            <TextInput source="name" />
-        </SimpleForm>
-    </Edit>
+// const postRowClick = (id, basePath, record) => record.editable ? 'edit' : 'show';
+const postRowClick = (id, basePath, record) => {
+    // console.info('id:', id);
+    // console.info('basePath:', basePath);
+    // console.info('record:', record);
+};
+
+const PostPanel = ({ id, record, resource }) => (
+   <span>hello</span>
 );
 
-const TagPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
+const showstate = e => {
+    
+}
+
+const PostActions = ({
+    bulkActions,
+    basePath,
+    currentSort,
+    displayedFilters,
+    exporter,
+    filters,
+    filterValues,
+    onUnselectItems,
+    resource,
+    selectedIds,
+    showFilter,
+    total
+}) => (
+    <CardActions>
+        {bulkActions && React.cloneElement(bulkActions, {
+            basePath,
+            filterValues,
+            resource,
+            selectedIds,
+            onUnselectItems,
+        })}
+        {filters && React.cloneElement(filters, {
+            resource,
+            showFilter,
+            displayedFilters,
+            filterValues,
+            context: 'button',
+        })}
+        
+        <Tooltip title="Up">
+            <IconButton color="secondary">
+                <ExpandLess />
+            </IconButton>
+        </Tooltip>
+        
+        <Tooltip title="Home">
+            <IconButton color="secondary" onClick={showstate}>
+                <Home />
+            </IconButton>
+        </Tooltip>
+        
+        <Tooltip title="New">
+            <IconButton color="secondary">
+                <CreateNewFolder />
+            </IconButton>
+        </Tooltip>
+
+        <Tooltip title="Delete">
+            <IconButton color="secondary">
+                <DeleteIcon />
+            </IconButton>
+        </Tooltip>
+        
+    </CardActions>
+);
+
+const PostFilter = (props) => (
+    <Filter {...props}>
+        <TextInputJadid status="alwaysOn" source="name" />
+    </Filter>
+);
+
 export const SubjectsList = props => (
-    <List {...props} pagination={<TagPagination />}>
-        <Datagrid>
-            <TextField source="name" label="Name" />
-            <TextField source="count" label="Count" />
-            {/* <TextField source="jalaaliCreatedDate" label="Jalaali date" />
-            <TextField source="jalaaliUserFriendlyCreatedDate" label="Jalaali user friendly date" /> */}
-            <EditButton />
-        </Datagrid>
-    </List>
+    <div>
+        <MyList2 />  
+    </div>
 );
