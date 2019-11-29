@@ -40,7 +40,7 @@ class Exercises extends React.Component{
     componentDidMount() {
         this.fetchExercises();
         let token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`categories/allcategories`, {
+        fetch(process.env.REACT_APP_API_URL+`subjects/allsubjects`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -55,11 +55,10 @@ class Exercises extends React.Component{
             })
             .then(response => response.json())
             .then(response => {
-
                 this.setState((state, props) => {
                     return ({subjects: response});
                 }, () => {
-                    this.setState({isRender:true})
+                    this.setState({isRender:true});
                 });
                 
                 // this.setState((state, props) => {
