@@ -14,7 +14,8 @@ import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
-import UploadComponent from './UploadComponent';
+import ThumbnailUploadComponent from './ThumbnailUploadComponent';
+import FileUploadComponent from './FileUploadComponent';
 import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
@@ -31,35 +32,6 @@ let formElementValues = {};
 
 const formInformationHolder = (formData) => {
     formElementValues = formData;
-}
-
-const uploadThumbnail = () => {
-    var formData = new FormData();
-    formData.append("thumbnail", formElementValues.thumbnail.rawFile);
-    var xhr = new XMLHttpRequest();
-    xhr.onprogress = function(evt) {
-        var percentComplete = (evt.loaded / evt.total) * 100; 
-    } 
-    xhr.open('POST', 'http://localhost:80/test.php', true);
-    xhr.send(formData);
-}
-
-const uploadFile = () => {
-    var xhr = new XMLHttpRequest();
-    
-    xhr.addEventListener('progress', function(e){
-        console.info(e);
-    });
-
-    var formData = new FormData();
-    formData.append("file", formElementValues.file.rawFile);
-    
-    // xhr.onprogress = function(evt) {
-    //     // var percentComplete = (evt.loaded / evt.total) * 100; 
-    //     console.info(evt);
-    // } 
-    xhr.open('POST', 'http://localhost:80/upload/test.php', true);
-    xhr.send(formData);
 }
 
 const GetCategory = () => {
@@ -87,11 +59,12 @@ export const ProductCreate = (props) => (
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            <CategoryComponent source="category" label="category" />
+            {/* <CategoryComponent source="category" label="category" /> */}
             <Book 
                 {...props}
                 />
-            <UploadComponent />
+            <ThumbnailUploadComponent />
+            <FileUploadComponent />
             {/* <FormDataConsumer>
                 {({ formData, dispatch, ...rest }) => (
                     <Fragment>
@@ -126,30 +99,7 @@ export const ProductCreate = (props) => (
             </FormDataConsumer> */}
 
 
-            <ImageInput 
-                source="thumbnail" 
-                label="thumbnail image" 
-                accept="image/*">
-                <ImageField  source="thumbnail" title="title" />
-            </ImageInput>
-            <FormDataConsumer>
-                {({ formData, ...rest }) =>
-                    {formInformationHolder(formData)}
-                }
-            </FormDataConsumer>
-            <Button onClick={uploadThumbnail}>
-                آپلود تصویر
-            </Button>
-            <FileInput 
-                source="file" 
-                label="Related files" 
-                accept="video/mp4"
-                >
-                <FileField source="file" title="title" />
-            </FileInput>
-            <Button onClick={uploadFile}>
-                آپلود فایل
-            </Button>
+            
         </SimpleForm>
 
     </Create>

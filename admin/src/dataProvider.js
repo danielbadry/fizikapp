@@ -106,11 +106,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                     if(item != "thumbnail" && item != "file" && item != "tags" && item != "category")
                         formData.append(item, params.data[item]);
                     
-                    if (item == "thumbnail")
-                        formData.append("thumbnail", document.getElementById("thumbnail").files[0].name);
-
-                    if (item == "file")
-                        formData.append("file", document.getElementById("file").files[0].name);
+                    if (window.localStorage.getItem('thumbnail')) {
+                        formData.append("thumbnail", window.localStorage.getItem('thumbnail'));
+                        window.localStorage.removeItem('thumbnail');
+                    }
+                    
+                    if (window.localStorage.getItem('file')) {
+                        formData.append("file", window.localStorage.getItem('file'));
+                        window.localStorage.removeItem('file');
+                    }
 
                     if (item == "tags")
                         formData.append("tags", JSON.stringify(params.data[item]));

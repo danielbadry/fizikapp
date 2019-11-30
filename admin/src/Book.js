@@ -12,7 +12,8 @@ class Book extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            categories:[]
+            categories:[],
+            isRender: false
         }
     }
     componentDidMount() {
@@ -21,7 +22,9 @@ class Book extends React.Component{
             return response.json();
         })
         .then((myJson) => {
-            this.setState({categories:myJson})
+            this.setState({categories:myJson},() => {
+                this.setState({isRender:true})
+            })
         })
         .catch((e) => {
             // showNotification('Error: comment not approved', 'warning')
@@ -37,8 +40,19 @@ class Book extends React.Component{
         return seasons;
     }
 
+    retVal(obj) {
+        let st ='';
+        for (let key in obj){
+            if(obj.hasOwnProperty(key) && (typeof (obj[key]) != 'function')){
+                st += obj[key];
+            }
+        }
+        return st;
+    }
+
     render() {
         return(
+            this.state.isRender ?
             <React.Fragment>
                 <FormDataConsumer>
                     {({ formData, dispatch, ...rest }) => (
@@ -47,36 +61,49 @@ class Book extends React.Component{
                                 source="book"
                                 label="book"
                                 choices={this.state.categories}
-                                onChange={value => dispatch(
-                                    change(REDUX_FORM_NAME, 'season', null)
-                                )}
+                                onChange={
+                                    (value) => {
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                        )
+                                    }
+                                }
                                 {...rest}
                             />
 
                             <SelectInput
                                 source="season"
                                 label="season"
-                                choices={this.GetSeasons(formData.book)}
+                                choices={(formData)?this.GetSeasons(formData.book):null}
+                                onChange={value => dispatch(
+                                    change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                )}
                                 {...rest}
                             />
                             
                             <SelectInput
                                 source="section"
                                 label="section"
-                                choices={this.GetSeasons(formData.season)}
+                                choices={(formData)?this.GetSeasons(formData.season):null}
+                                onChange={value => dispatch(
+                                    change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                )}
                                 {...rest}
                             />
                             
                             <SelectInput
                                 source="part"
                                 label="part"
-                                choices={this.GetSeasons(formData.section)}
+                                choices={(formData)?this.GetSeasons(formData.section):null}
+                                onChange={value => dispatch(
+                                    change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                )}
                                 {...rest}
                             />
                         </Fragment>
                     )}
                 </FormDataConsumer>
-            </React.Fragment>
+            </React.Fragment> : null 
         )
     }
 }

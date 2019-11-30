@@ -15,21 +15,14 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 // Our app
-export default class UploadComponent extends React.Component {
+export default class ThumbnailUploadComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       // Set initial files, type 'local' means this is a file
       // that has already been uploaded to the server (see docs)
-      files: [
-        {
-          source: "index.html",
-          options: {
-            type: "local"
-          }
-        }
-      ]
+      files: []
     };
   }
 
@@ -45,8 +38,11 @@ export default class UploadComponent extends React.Component {
           ref={ref => (this.pond = ref)}
           files={this.state.files}
           allowMultiple={true}
-          maxFiles={3}
-          server="../test.php"
+          maxFiles={1}
+          server="http://localhost/upload/upload.php"
+          onprocessfile={fileItem => {
+            window.localStorage.setItem("thumbnail",this.state.files[0].name);
+          }}
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {
             // Set currently active file objects to this.state
