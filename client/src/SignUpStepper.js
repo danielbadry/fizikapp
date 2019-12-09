@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['شماره تلفن را وارد کنید', 'کد تایید', 'اطلاعات فردی'];
+  return ['اطلاعات فردی'];
 }
 
 function HorizontalLinearStepper(props) {
@@ -345,7 +345,7 @@ if(isSignupSuccess) {
         ) : (
           <div>
             {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
-            {activeStep === 0 ? 
+            {/* {activeStep === 0 ? 
               <Typography className={classes.instructions}>
                 <TextField
                   id="standard-phone"
@@ -388,8 +388,8 @@ if(isSignupSuccess) {
                       }
                     }}
                 />
-              </Typography> : null}
-            {activeStep === 2 ? 
+              </Typography> : null} */}
+            {activeStep === 0 ? 
               <React.Fragment
                 style={{
                   direction:'rtl'
@@ -461,8 +461,9 @@ if(isSignupSuccess) {
               </div>
               <div>
               <TextField
-                id="standard-lastname"
-                label="تکرار کلمه ی عبور"
+                id="standard-mobile"
+                onChange={saveMobileNumber}
+                label="موبایل"
                 margin="normal"
                 InputProps={{
                   style: {
@@ -476,7 +477,7 @@ if(isSignupSuccess) {
                     fontSize: '14px'
                   }
                 }}
-                type="password"
+                type="number"
               />
               </div>
               <div>
@@ -529,7 +530,7 @@ if(isSignupSuccess) {
               null  
             }
               
-              {activeStep === 0 ? 
+              {/* {activeStep === 0 ? 
                 <Button
                   variant="contained"
                   color="primary"
@@ -550,9 +551,9 @@ if(isSignupSuccess) {
                 >
                   تایید کد و مرحله ی بعد
                 </Button>
-              : null}
+              : null} */}
 
-              {activeStep === 2 ? 
+              {activeStep === 0 ? 
                 <Button
                   variant="contained"
                   color="primary"

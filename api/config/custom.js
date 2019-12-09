@@ -20,8 +20,8 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
 
-  baseUrl : 'https://localhost:1337',
-  apiUrl : 'https://localhost:1337',
-  siteUrl : 'https://localhost:1337',
+  baseUrl : 'http://localhost:1337',
+  apiUrl : 'http://localhost:1337',
+  siteUrl : 'http://localhost:1337',
   secret : 'c23aSfs',
 };

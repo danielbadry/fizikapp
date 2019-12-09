@@ -9,22 +9,34 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
     import { change } from 'redux-form'
 
 class Book extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
             categories:[],
+            root:[],
             isRender: false
         }
     }
+
     componentDidMount() {
+        let roots = [];
         fetch(process.env.REACT_APP_API_URL+'/categories/allCategories', { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })
         .then((myJson) => {
-            this.setState({categories:myJson},() => {
+            
+            for(let cat in myJson) {
+                if(myJson[cat].parentId === '0') {
+                    roots.push(myJson[cat]);
+                }
+            }
+
+            this.setState({categories:myJson,root:roots},() => {
                 this.setState({isRender:true})
-            })
+            });
+
         })
         .catch((e) => {
             // showNotification('Error: comment not approved', 'warning')
@@ -60,7 +72,7 @@ class Book extends React.Component{
                             <SelectInput
                                 source="book"
                                 label="book"
-                                choices={this.state.categories}
+                                choices={this.state.root}
                                 onChange={
                                     (value) => {
                                         dispatch(

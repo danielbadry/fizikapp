@@ -42,12 +42,12 @@ class SingleBeyondthebook extends React.Component {
                 {
                     type:'qa',
                     label:'پرسش و پاسخ',
-                    model:'products'
+                    model:'beyondthebook'
                 },
                 {
                     type:'comment',
                     label:'نظرات',
-                    model:'products'
+                    model:'beyondthebook'
                 }
             ]
         }

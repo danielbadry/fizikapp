@@ -38,6 +38,11 @@ module.exports = {
       required : false
     },
     
+    isCorrect :{
+      type: 'boolean',
+      required : false
+    },
+    
     userAnswerMessage :{
       type: 'string',
       required : false

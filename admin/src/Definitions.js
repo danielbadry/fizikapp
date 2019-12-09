@@ -7,8 +7,6 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         DateInput ,ReferenceInput } from 'react-admin';
 
 import { Pagination } from 'react-admin';
-import TagComponent from './TagComponent';
-import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
@@ -21,6 +19,10 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
+import Book from './Book';
+import UploadComponent from './UploadComponent';
+import MyEditor  from './TextEditor';
+import ContentUserInteraction from "./ContentUserInteraction";
 
 export const DefinitionsCreate = (props) => (
     <Create {...props} >
@@ -29,11 +31,14 @@ export const DefinitionsCreate = (props) => (
             <TextInput source="name" label="name" />
             <TextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
-            <TagComponent source="tags" label="tags" />
-            <CategoryComponent source="category" label="category" />
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
-            </ImageInput>
+            <Book 
+                {...props}
+                />
+            <MyEditor />
+            <UploadComponent 
+                type="thumbnail"
+                model="definitions"
+                />
         </SimpleForm>
     </Create>
 );
@@ -46,6 +51,22 @@ export const DefinitionsEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
+
+const qaConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'definitions'
+    },
+]
+
+const cmConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'definitions'
+    },
+]
 
 export const DefinitionsShow = (props) => (
     <Show {...props}>
@@ -65,11 +86,17 @@ export const DefinitionsShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions />
+            <ContentUserInteraction 
+                config={qaConfig}
+                modelid={props.id}
+                />
             </Tab>
 
             <Tab label="comments" path="comments">
-                <ProductsComments />
+            <ContentUserInteraction 
+                config={cmConfig}
+                modelid={props.id}
+                />
             </Tab>
 
         </TabbedShowLayout>
@@ -86,7 +113,6 @@ export const DefinitionsList = props => (
             <TextField source="title" label="title" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
-            <ShowButton />
             <DeleteButton />
         </Datagrid>
     </List>

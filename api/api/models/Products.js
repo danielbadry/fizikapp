@@ -44,15 +44,14 @@ module.exports = {
     },
     
     category :{
-      type: 'json',
-      columnType: 'array',
+      type: 'string',
       required : false
     },
-    
-    isEnabled :{
+ 
+    isMedal :{
       type: 'boolean',
       required : false,
-      defaultsTo: true
+      defaultsTo: false
     },
     
     isDeleted :{

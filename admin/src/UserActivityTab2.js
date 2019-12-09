@@ -20,7 +20,53 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link as RouterLink } from 'react-router-dom';
+
 class AlignItemsList extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            listofuserquizes : [],
+            isRender: false,
+            shoppinglevel : 0
+        }
+    }
+
+    componentDidMount() {
+
+            fetch(process.env.REACT_APP_API_URL+`/users/listofuserquizes?userId=${this.props.record.id}`, { method: 'GET', headers: {}})
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+
+                this.setState({listofuserquizes:myJson.data},() => {
+                    // this.setState({isRender:true})
+                });
+
+            })
+            .catch((e) => {
+                // showNotification('Error: comment not approved', 'warning')
+            });
+
+            fetch(process.env.REACT_APP_API_URL+`/users/shoppinglevel?userId=${this.props.record.id}`, { 
+                method: 'GET',
+                headers: {}
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+
+                this.setState({shoppinglevel:myJson},() => {
+                    // this.setState({isRender:true})
+                });
+
+            })
+            .catch((e) => {
+                // showNotification('Error: comment not approved', 'warning')
+            });
+    }
 
     render() {
         return (
@@ -43,7 +89,7 @@ class AlignItemsList extends React.Component {
                     </React.Fragment>
                 }
                 />
-                <NumberOfWatchedVideosChart />
+                <NumberOfWatchedVideosChart userid={this.props.record.id} />
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">
@@ -81,18 +127,18 @@ class AlignItemsList extends React.Component {
                 primary="Number of passed quizes"
                 secondary={
                     <React.Fragment>
-                    <Typography
-                        component="span"
-                        variant="body2"
                         
-                        color="textPrimary"
-                    >
-                        <Link component={RouterLink} to="/">quiz1</Link>
-                        &nbsp;-&nbsp;
-                        <Link component={RouterLink} to="/">quiz2</Link>
-                        &nbsp;-&nbsp;
-                        <Link component={RouterLink} to="/">quiz3</Link>
-                    </Typography>
+                        <Typography
+                                component="span"
+                                variant="body2"
+                                color="textPrimary"
+                            > 
+                            {this.state.listofuserquizes.map(
+                                (item, index) => 
+                                    <Link component={RouterLink} to="/">{item}</Link>
+                            )}
+                        </Typography> 
+
                     </React.Fragment>
                 }
                 />
@@ -111,7 +157,7 @@ class AlignItemsList extends React.Component {
                         
                         color="textPrimary"
                     >
-                        + 100 $
+                        + {this.state.shoppinglevel} $
                     </Typography>
                     
                     </React.Fragment>

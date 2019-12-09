@@ -25,12 +25,23 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    return await Subjects.create({
+    let subject = await Subjects.find({
+      name: inputs.name
+    });
+
+    if(subject.length === 0)
+    {
+      return await Subjects.create({
       name: inputs.name,
       parentId: inputs.parentId,
       createdAt : await sails.helpers.dateParse(),
       updatedAt : await sails.helpers.dateParse(),
     }).fetch();
+    } else {
+      return({
+        status : 'repetitive'
+      });
+    }
   }
 
 

@@ -19,7 +19,11 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    let allSubjects = Subjects.find();
+    let allSubjects = await Subjects.find();
+    for (let subject of allSubjects) {
+      subject.label = subject.name;
+      subject.value = subject.id;
+    }
     return allSubjects;
 
   }

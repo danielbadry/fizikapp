@@ -3,6 +3,7 @@ import { List,NumberInput, Create, Edit, SimpleForm,
         DisabledInput, TextInput, DateInput, LongTextInput, Datagrid, 
         TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab } from 'react-admin';
 import { Pagination } from 'react-admin';
+import UploadComponent from './UploadComponent';
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
@@ -11,6 +12,10 @@ export const ShoppingplansCreate = (props) => (
             <NumberInput source="duration" label="duration" />
             <NumberInput source="firstPrise" label="first Prise" />
             <NumberInput source="secondPrise" label="second Prise" />
+            <UploadComponent 
+                type="thumbnail"
+                model="shoppingplans"
+                />
         </SimpleForm>
     </Create>
 );
@@ -54,7 +59,6 @@ export const ShoppingplansList = props => (
                 <TextField source="duration" label="duration" />
                 <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="update date" />
                 <EditButton />
-                <ShowButton />
             </Datagrid>
         </List>
         

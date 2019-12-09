@@ -27,6 +27,11 @@ module.exports = {
       required : false
     },
     
+    thumbnail :{
+      type: 'string',
+      required : false
+    },
+    
     duration :{
       type: 'number',
       required : false

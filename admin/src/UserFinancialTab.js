@@ -9,22 +9,38 @@ import Paper from '@material-ui/core/Paper';
 
 class UserFinancialGrid extends React.Component {
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = {
+          financehistory : []
+        }
     }
     
+    componentDidMount() {
+
+      fetch(process.env.REACT_APP_API_URL+`/users/financehistory?userId=${this.props.record.id}`, { 
+        method: 'GET',
+        headers: {}
+      })
+      .then((response) => {
+          return response.json();
+      })
+      .then((myJson) => {
+
+          this.setState({financehistory:myJson});
+
+      })
+      .catch((e) => {
+          // showNotification('Error: comment not approved', 'warning')
+      });
+      
+    }
+
     createData(name, calories, fat, carbs, protein) {
         return { name, calories, fat, carbs, protein };
       }
 
 render () {
-    const rows = [
-        this.createData('A', 159, 25030, 24, '6104-3372-5107-1500'),
-        this.createData('G', 237, 98000, 37, '6104-3372-5107-1500'),
-        this.createData('F', 262, 13100, 24, '6104-3372-5107-1500'),
-        this.createData('B', 305, 36900, 67, '6104-3372-5107-1500'),
-        this.createData('C', 356, 78200, 49, '6104-3372-5107-1500'),
-      ];
       
     return (
         
@@ -32,22 +48,16 @@ render () {
             <TableHead>
               <TableRow>
                 <TableCell>Type</TableCell>
-                <TableCell align="right">Date</TableCell>
-                <TableCell align="right">Price</TableCell>
-                <TableCell align="right">Transaction</TableCell>
-                <TableCell align="right">Cart Number</TableCell>
+                <TableCell align="right">firts Price</TableCell>
+                <TableCell align="right">second Price</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
+              {this.state.financehistory.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">{row.shoppingPlanName}</TableCell>
+                  <TableCell align="right">{row.shoppingPlanFirstPrise}</TableCell>
+                  <TableCell align="right">{row.shoppingPlanSecondPrise}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

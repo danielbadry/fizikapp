@@ -5,17 +5,16 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton,
         DateInput ,ReferenceInput } from 'react-admin';
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
 import Book from './Book';
-import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
-import ThumbnailUploadComponent from './ThumbnailUploadComponent';
-import FileUploadComponent from './FileUploadComponent';
+import UploadComponent from './UploadComponent';
 import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
@@ -27,6 +26,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RichTextInput from 'aor-rich-text-input';
 import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form';
+import ContentUserInteraction from "./ContentUserInteraction";
 
 let formElementValues = {};
 
@@ -59,47 +59,21 @@ export const ProductCreate = (props) => (
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            {/* <CategoryComponent source="category" label="category" /> */}
+            <BooleanInput label="is medal" source="isMedal" />
+
             <Book 
                 {...props}
                 />
-            <ThumbnailUploadComponent />
-            <FileUploadComponent />
-            {/* <FormDataConsumer>
-                {({ formData, dispatch, ...rest }) => (
-                    <Fragment>
-                        <SelectInput
-                            source="category"
-                            label="book"
-                            choices={GetCategory()}
-                            onChange={value => dispatch(
-                                change(REDUX_FORM_NAME, 'season', null)
-                            )}
-                            {...rest}
-                        /> */}
-                        {/* <SelectInput
-                            // source="season"
-                            label="season"
-                            choices={GetProvincesFor(formData.country)}
-                            onChange={value => dispatch(
-                                change(REDUX_FORM_NAME, 'city', null)
-                            )}
-                            {...rest}
-
-                        />
-                        <SelectInput
-                            // source="city"
-                            label="city"
-                            choices={GetCitiesFor(formData.province)}
-                            {...rest}
-
-                        /> */}
-                    {/* </Fragment>
-                )}
-            </FormDataConsumer> */}
-
-
+            <UploadComponent 
+                type="thumbnail"
+                model="products"
+                />
             
+            <UploadComponent 
+                type="file"
+                model="products"
+                />
+
         </SimpleForm>
 
     </Create>
@@ -114,6 +88,22 @@ export const ProductEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
+
+const qaConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'products'
+    },
+]
+
+const cmConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'products'
+    },
+]
 
 export const ProductShow = (props) => (
     <Show {...props}>
@@ -134,7 +124,12 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions />
+            <Tab label="qa" path="qa">
+                <ContentUserInteraction 
+                    config={qaConfig}
+                    modelid={props.id}
+                    />
+            </Tab>
             </Tab>
 
             <Tab label="reports" path="report" >
@@ -142,7 +137,10 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="comments" path="comments">
-            <ProductsComments />
+            <ContentUserInteraction 
+                    config={cmConfig}
+                    modelid={props.id}
+                    />
             </Tab>
 
             <Tab label="quiz" path="quiz">
@@ -167,11 +165,10 @@ export const ProductsList = props => (
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <BooleanField source="isEnabled" label="Enable" />
+            <BooleanField source="isMedal" label="isMedal" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
-            <ShowButton />
             <DeleteButton />
         </Datagrid>
     </List>

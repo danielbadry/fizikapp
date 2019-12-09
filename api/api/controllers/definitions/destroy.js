@@ -24,15 +24,7 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    const path = sails.config.appPath + '/assets/files/definitionImage/' + inputs.id + '.jpg';
-    try {
-      fs.unlinkSync(path);
-      var destroyedRecords = await Definitions.destroy({
-        id: inputs.id
-      }).fetch();
-    } catch(err) {
-      console.error(err);
-    }
+    await Definitions.destroyOne({id: inputs.id});
 
   }
 

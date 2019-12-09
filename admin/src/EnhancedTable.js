@@ -399,9 +399,8 @@ export default function EnhancedTable() {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
         let primes = data.Categories.concat(data.Products);
-        console.info('inja:', primes);
         setRows(primes);
-        return fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
+        fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -517,12 +516,12 @@ export default function EnhancedTable() {
               <FilterListIcon />
             </IconButton>
         </Tooltip> */}
-        {/* <Tooltip title="up">
+        <Tooltip title="up">
             <IconButton onClick={() => goUp()}>
                 <ExpandLess />
             </IconButton>
         </Tooltip>
-        <Tooltip title="paste">
+        {/* <Tooltip title="paste">
         <IconButton onClick={() => paste()}>
             <CloudDoneIcon />
         </IconButton>
@@ -639,27 +638,7 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-       {/* <Dialog open={true} aria-labelledby="form-dialog-title">
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="directory name"
-            type="text"
-            fullWidth
-            // onChange={}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary">
-            cancel
-          </Button>
-          <Button color="primary">
-            create
-          </Button>
-        </DialogActions>
-      </Dialog>  */}
+      
     </div>
   );
 }

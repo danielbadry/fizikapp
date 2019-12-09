@@ -18,48 +18,8 @@ class SciencechallengeUserAnswers extends React.Component {
         }
     }
 
-    changeStatus = (elm) => {
-        console.info(elm.target.id);
-        // fetch(`http://localhost:1337/sciencechallengeresponse/${this.props.record.id}?isCorrect=${elm.target.checked}`, {
-        fetch(process.env.REACT_APP_API_URL+`/sciencechallengeresponse/${elm.target.id}?isCorrect=${elm.target.checked}`, {
-            method: 'PUT',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            })
-            .then(response => response.json())
-            .then(sciencechallengeresponse => {
-                fetch(process.env.REACT_APP_API_URL+`/Sciencechallengeresponse?sciencechallengeid=${this.props.record.id}`, {
-                    method: 'GET', 
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    redirect: 'follow',
-                    referrer: 'no-referrer',
-                    })
-                    .then(response => response.json())
-                    .then(sciencechallengeresponse => {
-                        this.setState(function(state, props) {
-                            return {
-                                sciencechallengeresponse: JSON.parse(JSON.stringify(sciencechallengeresponse.data)),
-                            };
-                          }, () => {
-                            console.info('after set');
-                          });
-                    });
-            });
-    }
-
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL+`/Sciencechallengeresponse?sciencechallengeid=${this.props.record.id}`, {
+        fetch(process.env.REACT_APP_API_URL+`/Sciencechallengeresponse?sciencechallengeId=${this.props.record.id}&isCorrect=true`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -109,13 +69,7 @@ class SciencechallengeUserAnswers extends React.Component {
                                     </React.Fragment>
                                 }
                             />
-                            <Switch
-                                checked={item.isCorrect}
-                                id={item.id}
-                                onChange={this.changeStatus.bind(this)}
-                                value="right"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
+                            
                         </ListItem>
                 )}
             </List>

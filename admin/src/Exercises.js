@@ -8,7 +8,6 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
 import SubjectComponent from './SubjectComponent';
-import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import InsertSubject from './InsertSubject';
 import ProductReports from './ProductReports';
@@ -23,6 +22,8 @@ import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
 import { RadioButtonGroupInput } from 'react-admin';
+import UploadComponent from './UploadComponent';
+import ContentUserInteraction from "./ContentUserInteraction";
 
 export const ExercisesCreate = (props) => (
     <Create {...props} >
@@ -30,15 +31,13 @@ export const ExercisesCreate = (props) => (
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
-            <TagComponent source="tags" label="tags" />
-            <SubjectComponent source="subjects" label="subjects" />
             <InsertSubject />
             <RadioButtonGroupInput source="field" choices={[
                 { id: 'riazi', name: 'riazi' },
                 { id: 'tajrobi', name: 'tajrobi' }
             ]} />
             
-            <RadioButtonGroupInput source="location" choices={[
+            <RadioButtonGroupInput source="reference" choices={[
                 { id: 'in', name: 'in' },
                 { id: 'out', name: 'out' }
             ]} />
@@ -65,9 +64,14 @@ export const ExercisesCreate = (props) => (
                 { id: '1399', name: '1399' },
             ]} />
 
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
-            </ImageInput>
+            <UploadComponent 
+                type="thumbnail"
+                model="exercises"
+                />
+            <UploadComponent 
+                type="file"
+                model="exercises"
+                />
 
         </SimpleForm>
     </Create>
@@ -83,6 +87,22 @@ export const ExercisesEdit = (props) => (
     </Edit>
 );
 
+const qaConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'exercises'
+    },
+]
+
+const cmConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'exercises'
+    },
+]
+
 export const ExercisesShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
@@ -94,11 +114,17 @@ export const ExercisesShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions />
+                <ContentUserInteraction 
+                    config={qaConfig}
+                    modelid={props.id}
+                    />
             </Tab>
 
             <Tab label="comments" path="comments">
-                <ProductsComments />
+            <ContentUserInteraction 
+                    config={cmConfig}
+                    modelid={props.id}
+                    />
             </Tab>
 
         </TabbedShowLayout>
@@ -120,7 +146,6 @@ export const ExercisesList = props => (
             <BooleanField source="isTajrobi" label="tajrobi" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
             <EditButton />
-            <ShowButton />
             <DeleteButton />
         </Datagrid>
     </List>

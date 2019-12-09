@@ -5,7 +5,7 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create products.',
+  description: 'Create beyondthebook.',
 
 
   inputs: {
@@ -31,17 +31,6 @@ module.exports = {
       required : false
     },
     
-    category :{
-      type: 'string',
-      required : false
-    },
- 
-    isMedal :{
-      type: 'boolean',
-      required : false,
-      defaultsTo: false
-    },
-
     thumbnail :{
       type: 'string',
       required : false
@@ -75,22 +64,21 @@ module.exports = {
         });
 
         if(user.isAdmin) {
-          let cat = inputs.category.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
-        
-          return await Products.create({
+          return await Beyondthebook.create({
               name: inputs.name,
               description:inputs.description,
               title:inputs.title,
               tags:inputs.tags,
-              category:cat,
               thumbnail:inputs.thumbnail,
               file:inputs.file,
-              isMedal:inputs.isMedal,
               createdAt : await sails.helpers.dateParse(),
               updatedAt : await sails.helpers.dateParse()
             }).fetch();
           }
       }
     }
+
   }
-}
+
+
+};

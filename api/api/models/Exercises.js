@@ -47,20 +47,13 @@ module.exports = {
       required : false
     },
     
-    location :{
+    reference :{
       type: 'string',
       required : false
     },
     
-    tags :{
-      type: 'json',
-      columnType: 'array',
-      required : false
-    },
-    
     subjects :{
-      type: 'json',
-      columnType: 'array',
+      type: 'string',
       required : false
     },
 
@@ -70,6 +63,11 @@ module.exports = {
     },
     
     thumbnail :{
+      type: 'string',
+      required : false
+    },
+    
+    file :{
       type: 'string',
       required : false
     },

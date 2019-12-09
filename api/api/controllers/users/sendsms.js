@@ -27,7 +27,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    var url = 'http://sms.hostiran.net/webservice/?WSDL';
+    var url = 'http://smspanel.hostiran.net/post/send.asmx';
     var httpOptions = {
       wsdl_headers: {
         'Authorization': 'Basic ' + Buffer.from('miladkhan' + ':' + '789654').toString('base64')

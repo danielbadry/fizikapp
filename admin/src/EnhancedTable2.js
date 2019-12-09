@@ -357,7 +357,8 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-      fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
+      if(myJson.status !== 'repetitive') {
+        fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
           method: "GET",
           headers: {},   
       })
@@ -372,6 +373,9 @@ export default function EnhancedTable() {
       .catch((e) => {
           
       });
+      } else {
+        window.alert('نام تکراری است');
+      }
         
     })
     .catch((e) => {
@@ -399,9 +403,8 @@ export default function EnhancedTable() {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
         let primes = data.Categories.concat(data.Products);
-        console.info('inja:', primes);
         setRows(primes);
-        return fetch(process.env.REACT_APP_API_URL+`/subjects/findparentdirectoryid/?rowId=${encodeURIComponent(data.data[0].parentId)}`)
+        fetch(process.env.REACT_APP_API_URL+`/subjects/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -517,12 +520,12 @@ export default function EnhancedTable() {
               <FilterListIcon />
             </IconButton>
         </Tooltip> */}
-        {/* <Tooltip title="up">
+        <Tooltip title="up">
             <IconButton onClick={() => goUp()}>
                 <ExpandLess />
             </IconButton>
         </Tooltip>
-        <Tooltip title="paste">
+        {/*<Tooltip title="paste">
         <IconButton onClick={() => paste()}>
             <CloudDoneIcon />
         </IconButton>
@@ -541,7 +544,7 @@ export default function EnhancedTable() {
       
       <Tooltip title="new">
         <IconButton 
-            onClick={()=> createNewFolderr()} color="primary">
+            onClick={()=>createNewFolderr()} color="primary">
             <CreateNewFolder />
         </IconButton>
       </Tooltip>

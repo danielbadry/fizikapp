@@ -10,9 +10,16 @@ module.exports = {
 
 
   inputs: {
+
     sciencechallengeid  :{
       type : 'string'
-    }
+    },
+
+    isCorrect :{
+      type: 'boolean',
+      required : false
+    },
+
   },
 
 
@@ -28,7 +35,8 @@ module.exports = {
 
     let allSciencechallengeresponse = await Sciencechallengeresponse.find({
       where : {
-        sciencechallengeId : inputs.sciencechallengeid
+        sciencechallengeId : inputs.sciencechallengeid,
+        isCorrect : inputs.isCorrect
       }
     })
     .limit(inputs.limit)

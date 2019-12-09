@@ -13,6 +13,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    thumbnail: {
+      type: 'string',
+      required : false
+    },
 
     duration :{
       type: 'number',
@@ -44,6 +49,7 @@ module.exports = {
       duration : inputs.duration,
       firstPrise : inputs.firstPrise,
       secondPrise : inputs.secondPrise,
+      thumbnail : inputs.thumbnail,
       type : inputs.type
     }).fetch();
 

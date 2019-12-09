@@ -43,46 +43,46 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    var r = (start, end) => {
-      let ans = [];
-      for (let i = start ; i <= end ; i++) {
-        ans.push(i);
-      }
-      return ans;
-    }
+    // var r = (start, end) => {
+    //   let ans = [];
+    //   for (let i = start ; i <= end ; i++) {
+    //     ans.push(i);
+    //   }
+    //   return ans;
+    // }
+    // let finalData = {};
+    // let exercises = await Exercises.find(
+    // {
+    //   where : {
+    //     field: inputs.field,
+    //     year: {'in': r(inputs.fromYear, inputs.toYear)}
+    //   }
+    // }
+    // )
+    // .limit(inputs.limit)
+    // .skip(inputs.skip)  
+    // ;
+
+    // for (let exercise of exercises) {
+    //   exercise.isRiazi = false;
+    //   exercise.isTajrobi = false;
+    //   exercise.thumbnail = sails.config.custom.apiUrl + "/files/exerciseImage/" + exercise.thumbnail;
+    //   moment.locale('en');
+    //   exercise.jalaaliCreatedDate = momentJalaali(exercise.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+    //   moment.locale('fa');
+    //   exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();   
+    //   exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();
+    //   exercise.jalaaliFullUserFriendlyCreatedDate = exercise.jalaaliCreatedDate + ' ' + exercise.jalaaliUserFriendlyCreatedDate;
+    //   if (exercise.field == 'riazi')
+    //     exercise.isRiazi = true;
+    //   if (exercise.field == 'tajrobi')
+    //   exercise.isTajrobi = true;
+
+    // }
     let finalData = {};
-    let exercises = await Exercises.find(
-    {
-      where : {
-        field: inputs.field,
-        year: {'in': r(inputs.fromYear, inputs.toYear)}
-      }
-    }
-    )
-    .limit(inputs.limit)
-    .skip(inputs.skip)  
-    ;
-
-    for (let exercise of exercises) {
-      exercise.isRiazi = false;
-      exercise.isTajrobi = false;
-      exercise.thumbnail = sails.config.custom.apiUrl + "/files/exerciseImage/" + exercise.thumbnail;
-      moment.locale('en');
-      exercise.jalaaliCreatedDate = momentJalaali(exercise.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-      moment.locale('fa');
-      exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();   
-      exercise.jalaaliUserFriendlyCreatedDate = moment(exercise.createdAt).fromNow();
-      exercise.jalaaliFullUserFriendlyCreatedDate = exercise.jalaaliCreatedDate + ' ' + exercise.jalaaliUserFriendlyCreatedDate;
-      if (exercise.field == 'riazi')
-        exercise.isRiazi = true;
-      if (exercise.field == 'tajrobi')
-      exercise.isTajrobi = true;
-
-    }
-    finalData.dataLength = exercises.length;
-    finalData.data = exercises;
+    finalData.data = await Exercises.find();
+    finalData.dataLength = finalData.data.length;
     return finalData;
-
   }
 
 

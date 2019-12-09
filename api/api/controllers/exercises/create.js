@@ -5,7 +5,7 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create products.',
+  description: 'Create exercises.',
 
 
   inputs: {
@@ -24,22 +24,15 @@ module.exports = {
       type: 'string',
       required : false
     },
-    
-    tags :{
-      type: 'json',
-      columnType: 'array',
-      required : false
-    },
-    
-    category :{
+
+    year :{
       type: 'string',
       required : false
     },
- 
-    isMedal :{
-      type: 'boolean',
-      required : false,
-      defaultsTo: false
+
+    file :{
+      type: 'string',
+      required : false
     },
 
     thumbnail :{
@@ -47,10 +40,20 @@ module.exports = {
       required : false
     },
     
-    file :{
+    field :{
       type: 'string',
       required : false
-    }
+    },
+    
+    subjects :{
+      type: 'string',
+      required : false
+    },
+    
+    reference :{
+      type: 'string',
+      required : false
+    },
 
   },
 
@@ -75,22 +78,23 @@ module.exports = {
         });
 
         if(user.isAdmin) {
-          let cat = inputs.category.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
-        
-          return await Products.create({
+          return await Exercises.create({
               name: inputs.name,
               description:inputs.description,
               title:inputs.title,
-              tags:inputs.tags,
-              category:cat,
               thumbnail:inputs.thumbnail,
               file:inputs.file,
-              isMedal:inputs.isMedal,
+              field:inputs.field,
+              year:inputs.year,
+              subjects:inputs.subjects,
+              reference:inputs.reference,
               createdAt : await sails.helpers.dateParse(),
               updatedAt : await sails.helpers.dateParse()
             }).fetch();
           }
       }
     }
+
   }
-}
+
+};

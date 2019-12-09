@@ -8,7 +8,6 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
-import CategoryComponent from './CategoryComponent';
 import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
@@ -17,12 +16,14 @@ import VideoPlayerField from './VideoPlayerField';
 import ProductsQuestions from './ProductsQuestions';
 import ProductsComments from './ProductsComments';
 import SciencechallengeUserAnswers from './SciencechallengeUserAnswers';
+import SciencechallengeUserCorrectAnswers from './SciencechallengeUserCorrectAnswers';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-// import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
+import UploadComponent from './UploadComponent';
+import ContentUserInteraction from "./ContentUserInteraction";
 
 export const SciencechallengeCreate = (props) => (
     <Create {...props} >
@@ -30,29 +31,16 @@ export const SciencechallengeCreate = (props) => (
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            {/*
-            TODO: add richTextInput here
-            */}
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            
-            <CategoryComponent source="category" label="category" />
-             
-            {/* <NumberInput source="price" label="price" /> */}
-            {/*
-            TODO: add boolean field here
-            */}
-            
-            {/* <Mycheckbox label="categories" />   */}
-            
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
-            </ImageInput>
-            
-            <FileInput source="file" label="Related files" accept="video/mp4">
-                <FileField source="file" title="title" />
-            </FileInput>
-            {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
+            <UploadComponent 
+                type="thumbnail"
+                model="sciencechallenge"
+                />
+            <UploadComponent 
+                type="file"
+                model="sciencechallenge"
+                />
         </SimpleForm>
     </Create>
 );
@@ -66,6 +54,22 @@ export const SciencechallengeEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
+
+const qaConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'sciencechallenge'
+    },
+]
+
+const cmConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'sciencechallenge'
+    },
+]
 
 export const SciencechallengeShow = (props) => (
     <Show {...props}>
@@ -86,15 +90,25 @@ export const SciencechallengeShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions />
+            <ContentUserInteraction 
+                config={qaConfig}
+                modelid={props.id}
+                />
             </Tab>
 
             <Tab label="comments" path="comments">
-                <ProductsComments />
+            <ContentUserInteraction 
+                config={cmConfig}
+                modelid={props.id}
+                />
             </Tab>
 
             <Tab label="answers" path="answers">
                 <SciencechallengeUserAnswers />
+            </Tab>
+
+            <Tab label="correct answers" path="correct-answers">
+            <SciencechallengeUserCorrectAnswers />
             </Tab>
         </TabbedShowLayout>
     </Show>
@@ -113,10 +127,8 @@ export const SciencechallengeList = props => (
                 </SingleFieldList>
             </ArrayField>
             <BooleanField source="isEnabled" label="Enable" />
-            <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
-            <ShowButton />
             <DeleteButton />
         </Datagrid>
     </List>
