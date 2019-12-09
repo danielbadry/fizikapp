@@ -12,8 +12,7 @@ class Inbox extends React.Component {
   
   constructor (props) {
     super (props);
-    this.state = 
-    {
+    this.state = {
       messages : []
     }
   }
@@ -52,21 +51,21 @@ class Inbox extends React.Component {
             alignItems="flex-start"
             key = {index}
             >
-            <ListItemAvatar>
+            {/* <ListItemAvatar>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
+            </ListItemAvatar> */}
             <ListItemText
               primary={message.message}
               secondary={
                 <React.Fragment>
-                  <Typography
+                  {/* <Typography
                     component="span"
                     variant="body2"
                     color="textPrimary"
                   >
                     Iman Arghamy
-                  </Typography>
-                  {" — how are you …"}
+                  </Typography> */}
+                  {/* {"how are you …"} */}
                 </React.Fragment>
               }
             />

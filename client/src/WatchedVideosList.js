@@ -51,14 +51,15 @@ class WatchedVideosList extends React.Component {
                 <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
               </ListItemAvatar>
               <ListItemText
-              primary={
-                <Link 
-                    component={RouterLink} 
-                    to={`/product/${uw.recordData.id}`}
-                    style={{ fontFamily: 'IranSans_Light' }}
-                    >
-                  {uw.recordData.name}
-                </Link>}
+              // primary={
+                // <Link 
+                //     component={RouterLink} 
+                //     to={`/product/${uw.recordData.id}`}
+                //     style={{ fontFamily: 'IranSans_Light' }}
+                //     >
+                //   {uw.recordData.name}
+                // </Link>
+              // }
                 // primary={uw.recordData.name}
                 secondary={
                   <React.Fragment>
@@ -75,7 +76,7 @@ class WatchedVideosList extends React.Component {
                     </Typography>
                     <div
                       style={{ fontFamily: 'IranSans_Light' }}
-                      >{uw.recordData.description}</div>
+                      >{uw.description}</div>
                   </React.Fragment>
                 }
               />

@@ -31,26 +31,25 @@ module.exports = {
     });
 
     for (let watchedvideo of watchedvideos) {
-
-      let model = (eval(watchedvideo.model));
-      let rec = await model.find({
-        id:watchedvideo.modelId
+      let model = eval(watchedvideo.model[0].toUpperCase() + watchedvideo.model.slice(1));
+      switch (watchedvideo.model[0].toUpperCase() + watchedvideo.model.slice(1)) {
+        case 'Products' :
+          url = "/files/productImage/";
+          break;
+        case 'Sciencechallenge' :
+          url = "/files/sciencechallengeImage/";
+          break;
+        case 'Beyondthebooks' :
+          url = "/files/beyondthebooksImage/";
+          break;
+      }
+      let info = await model.findOne({
+        id: watchedvideo.modelId
       });
-      
-      // switch (rec.model) {
-      //   case 'Products' :
-      //     url = "/files/productImage/";
-      //     break;
-      //   case 'Sciencechallenge' :
-      //     url = "/files/sciencechallengeImage/";
-      //     break;
-      //   case 'Beyondthebooks' :
-      //     url = "/files/beyondthebooksImage/";
-      //     break;
-      // }
-      rec.m = 'aaa';
-      rec['thumbnail'] = null;//sails.config.custom.apiUrl + url + rec.thumbnail;
-      watchedvideo.recordData = rec;
+      watchedvideo.name = info.name;
+      watchedvideo.title = info.title;
+      watchedvideo.description = info.description;
+      watchedvideo.thumbnail = sails.config.custom.apiUrl + url + watchedvideo.thumbnail;
     }
 
     finalData.dataLength = watchedvideos.length;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,6 +7,30 @@ import Badge from '@material-ui/core/Badge';
 import Divider from '@material-ui/core/Divider';
 
 export default function UserSystemMessageMenu() {
+  let [messages, setMessages] = React.useState(null);
+
+  // useEffect(() => {
+    let token = window.localStorage.getItem('token');
+    // fetch(process.env.REACT_APP_API_URL+`messages`, {
+    //   method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    //   mode: 'cors', // no-cors, cors, *same-origin
+    //   cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //   credentials: 'same-origin', // include, *same-origin, omit
+    //   headers: {
+    //       'Content-Type': 'application/json',
+    //       'authorization': `Bearer ${token}`,
+    //   },
+    //   redirect: 'follow', // manual, *follow, error
+    //   referrer: 'no-referrer', // no-referrer, *client
+    //   // body: JSON.stringify(data), // body data type must match "Content-Type" header
+    //   })
+    //   .then(response => response.json())
+    //   .then(result => {
+    //     setMessages(result);
+    //     console.info(messages);
+    //   });
+  // }, []);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -41,7 +65,9 @@ export default function UserSystemMessageMenu() {
           direction:'rtl'
         }}
       >
-        <MenuItem 
+        
+          <React.Fragment>
+            <MenuItem 
           style={{
             fontFamily:'IranSans_Light',
             fontSize:'13px'
@@ -50,33 +76,10 @@ export default function UserSystemMessageMenu() {
             <div>لطفا حساب کاربری خود را شارژ نمایید</div>
             </MenuItem>
         <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>ویدیویی تحت عنوان انرژی منتشر گردید</MenuItem>
-        <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>آیا می دانستید سرعت اتمی چیست</MenuItem>
-        <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>یک شاتل فضایی چگونه کار می کند</MenuItem>
-        <Divider />
-        <MenuItem 
-          style={{
-            fontFamily:'IranSans_Light',
-            fontSize:'13px'
-          }}
-          onClick={handleClose}>در مورد سوخت جت چه چیزی می دانید</MenuItem>
+          </React.Fragment>
+       
+        
+        
       </Menu>
     </React.Fragment>
   );

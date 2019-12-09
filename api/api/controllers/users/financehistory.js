@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 module.exports = {
 
 
@@ -19,8 +20,17 @@ module.exports = {
 
   fn: async function (inputs) {
 
+    let indx = inputs.userId;
+    if (!inputs.userId) {
+      let token = this.req.headers.authorization;
+      let TokenArray = token.split(" ");
+      let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
+      let userId = decodedToken.id;
+      indx = userId;
+    }
+
     let shops = await Shops.find({
-      userId : inputs.userId
+      userId : indx
     });
 
     let shoppingplans = await Shoppingplans.find();
