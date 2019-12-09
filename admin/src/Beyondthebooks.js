@@ -8,9 +8,6 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
-import CategoryComponent from './CategoryComponent';
-import Book from './Book';
-import QuizManager from './QuizManager';
 import ProductReports from './ProductReports';
 import Mycheckbox from './MyNewField2';
 import Thumbnail from './ThumbnailImage';
@@ -23,6 +20,8 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 // import RichTextInput from 'ra-input-rich-text';
 import RichTextInput from 'aor-rich-text-input';
+import UploadComponent from './UploadComponent';
+import ContentUserInteraction from "./ContentUserInteraction";
 
 export const BeyondthebooksCreate = (props) => (
     <Create {...props} >
@@ -30,31 +29,16 @@ export const BeyondthebooksCreate = (props) => (
         <SimpleForm redirect="list">
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            {/*
-            TODO: add richTextInput here
-            */}
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
-            
-            <CategoryComponent source="category" label="category" />
-            <Book 
-                {...props}
+            <UploadComponent 
+                type="thumbnail"
+                model="beyondthebooks"
                 />
-            {/* <NumberInput source="price" label="price" /> */}
-            {/*
-            TODO: add boolean field here
-            */}
-            
-            {/* <Mycheckbox label="categories" />   */}
-            
-            <ImageInput source="thumbnail" label="thumbnail image" accept="image/*">
-                <ImageField source="thumbnail" title="title" />
-            </ImageInput>
-            
-            <FileInput source="file" label="Related files" accept="video/mp4">
-                <FileField source="file" title="title" />
-            </FileInput>
-            {/*TODO: use DateTimeInput instead because we want to publish a video on a certain time!*/}
+            <UploadComponent 
+                type="file"
+                model="beyondthebooks"
+                />
         </SimpleForm>
     </Create>
 );
@@ -68,6 +52,22 @@ export const BeyondthebooksEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
+
+const qaConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'beyondthebook'
+    },
+]
+
+const cmConfig = [
+    {
+        type:'qa',
+        label:'پرسش و پاسخ',
+        model:'beyondthebook'
+    },
+]
 
 export const BeyondthebooksShow = (props) => (
     <Show {...props}>
@@ -88,7 +88,10 @@ export const BeyondthebooksShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-                <ProductsQuestions />
+            <ContentUserInteraction 
+                config={qaConfig}
+                modelid={props.id}
+                />
             </Tab>
 
             <Tab label="reports" path="report" >
@@ -96,13 +99,10 @@ export const BeyondthebooksShow = (props) => (
             </Tab>
 
             <Tab label="comments" path="comments">
-            <ProductsComments />
-            </Tab>
-
-            <Tab label="quiz" path="quiz">
-                <QuizManager
-                    model="products"
-                 />
+            <ContentUserInteraction 
+                config={cmConfig}
+                modelid={props.id}
+                />
             </Tab>
 
         </TabbedShowLayout>
@@ -121,11 +121,8 @@ export const BeyondthebooksList = props => (
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <BooleanField source="isEnabled" label="Enable" />
-            <BooleanField source="hasQuiz" label="hasQuiz" />
             <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
             <EditButton />
-            <ShowButton />
             <DeleteButton />
         </Datagrid>
     </List>
