@@ -14,6 +14,11 @@ module.exports = {
       required : false
     },
     
+    type :{
+      type: 'number',
+      required : false
+    },
+    
     mobile :{
       type: 'string',
       required : false

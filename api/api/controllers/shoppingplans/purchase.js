@@ -1,3 +1,4 @@
+var jwt = require('jsonwebtoken');
 module.exports = {
 
 
@@ -9,6 +10,10 @@ module.exports = {
 
   inputs: {
 
+    price :{
+      type: 'number',
+    },
+
   },
 
 
@@ -19,10 +24,23 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    // All done.
-    return {
-      result : 'done'
-    };
+    let token = this.req.headers.authorization;
+    let TokenArray = token.split(" ");
+    let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
+    let userId = decodedToken.id;
+
+    let user = await Users.findOne({
+      id: userId
+    });
+
+    let fCoin = parseInt(user.fCoin) - parseInt(inputs.price);
+
+    await Users.updateOne({
+      id: userId
+    })
+    .set({
+      fCoin : fCoin
+    });
 
   }
 

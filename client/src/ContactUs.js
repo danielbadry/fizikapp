@@ -18,7 +18,9 @@ class ContactUs extends React.Component {
             fullName : '',
             mobile : '',
             email : '',
-            existingUser: false
+            existingUser: false,
+            message: '',
+            userId: null
         }
     }
 
@@ -45,18 +47,29 @@ class ContactUs extends React.Component {
                         lastName: user.lastName,
                         mobile: user.mobile,
                         email: user.email,
+                        userId: user.id,
                     });
                 }
                 
             });
     }
     
+    handleChange = pr => event => {
+      console.info(event.target.value);
+      event.persist();
+      this.setState((state, props) => {
+          return {[pr]: event.target.value};
+      });
+  };
+
     insertCritisism = () => {
+      console.info('state:', this.state);
         let data;
         if (this.state.existingUser) {
             data = {
                 userId : this.state.userId,
-                message: this.state.message
+                message: this.state.message,
+                type: this.state.type
             }
         } else {
             data = {
@@ -64,6 +77,7 @@ class ContactUs extends React.Component {
                 message: this.state.message,
                 email: this.state.email,
                 mobile: this.state.mobile,
+                type: this.state.type
             }
         }
         
@@ -93,10 +107,10 @@ class ContactUs extends React.Component {
                 <TextField
                     id="standard-fullname"
                     label="نام و نام خانوادگی"
-                    value={this.state.firstName + ' ' + this.state.lastName}
+                    // value={this.state.firstName + ' ' + this.state.lastName}
                     margin="normal"
-                    disabled = {()=>this.state.user.id ? true : false}
-                    // onChange={saveUserFirstName}
+                    disabled = {this.state.existingUser ? true : false}
+                    onChange={this.handleChange('fullName')}
                     style={{
                       fontFamily: "IranSans"
                     }}
@@ -117,10 +131,10 @@ class ContactUs extends React.Component {
                 <TextField
                     id="standard-mobile"
                     label="شماره تلفن همراه"
-                    disabled = {()=>this.state.user.id ? true : false}
+                    disabled = {this.state.existingUser ? true : false}
                     value={this.state.mobile}
                     margin="normal"
-                    // onChange={saveUserFirstName}
+                    onChange={this.handleChange('mobile')}
                     style={{
                       fontFamily: "IranSans"
                     }}
@@ -143,8 +157,8 @@ class ContactUs extends React.Component {
                     label="ایمیل"
                     margin="normal"
                     value={this.state.email}
-                    disabled = {()=>this.state.user.id ? true : false}
-                    // onChange={saveUserFirstName}
+                    disabled = {this.state.existingUser ? true : false}
+                    onChange={this.handleChange('email')}
                     style={{
                       fontFamily: "IranSans"
                     }}
@@ -167,8 +181,8 @@ class ContactUs extends React.Component {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        // value={age}
-                        // onChange={handleChange}
+                        value={1}
+                        onChange={this.handleChange('type')}
                         >
                         <MenuItem value={1}>خرید یا فعال سازی اشتراک</MenuItem>
                         <MenuItem value={2}>مشکلات حساب کاربری</MenuItem>
@@ -185,13 +199,14 @@ class ContactUs extends React.Component {
                     label="Multiline"
                     multiline
                     rows="4"
-                    defaultValue="پیامتان را اینجا بنویسید"
+                    defaultValue=""
+                    onChange={this.handleChange('message')}
                     />
 
                 <Button 
                     variant="contained" 
                     color="secondary"
-                    onClick={()=>this.insertCritisism}
+                    onClick={this.insertCritisism}
                     >
                     ثبت نظر
                 </Button>

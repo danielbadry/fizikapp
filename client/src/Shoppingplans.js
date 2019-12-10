@@ -20,7 +20,8 @@ class Shoppingplans extends React.Component {
         this.state = {
             shoppingplans: [],
             fCoin:0,
-            isRender : false
+            isRender : false,
+            userId : null
         }
     }
 
@@ -43,13 +44,10 @@ class Shoppingplans extends React.Component {
                 if (user.id) {
                     this.setState(function(state, props) {
                         return {
-                            fCoin: user.fCoin
+                            fCoin: user.fCoin,
+                            userId : user.id
                             }
-                        }, () => {
-                        this.setState({
-                            isRender : true
                         });
-                    });
                 }
             });
 
@@ -71,6 +69,31 @@ class Shoppingplans extends React.Component {
                 this.setState((state, props) => {
                     return {shoppingplans: shoppingplans.data};
                 });
+            });
+    }
+
+    purchaseShoppingplan = (price) => {
+        let data = {
+            price : price,
+        }
+
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`shoppingplans/purchase`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.info('result:', result);
             });
     }
 
@@ -171,16 +194,24 @@ class Shoppingplans extends React.Component {
                                                         <Grid container spacing={0}>
                                                             <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                                                 <Typography>میزان اف کوین شما {this.state.fCoin} است</Typography>
-                                                                {this.state.isRender ? 
-                                                                <Button 
+                                                               {this.state.userId ? <Button 
                                                                     variant="contained" 
                                                                     color="secondary"
                                                                     // disabled = {()=>(parseInt(this.state.fCoin) > parseInt(item.secondPrise)) ? false : true}
-                                                                    // onClick={}
+                                                                    onClick={()=>this.purchaseShoppingplan(item.secondPrise)}
                                                                     >
                                                                 خرید طرح
-                                                                </Button>  : null   
+                                                                </Button>
+                                                            :
+                                                            <Button 
+                                                                variant="contained" 
+                                                                color="secondary"
+                                                                href="#signup"
+                                                                >
+                                                                ورود به سایت
+                                                            </Button>   
                                                             }
+                                                                 
                                                                 
                                                             </Grid>
                                                             <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
