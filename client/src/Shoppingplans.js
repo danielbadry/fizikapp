@@ -10,18 +10,49 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import KeyboardArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class Shoppingplans extends React.Component {
     
     constructor (props) {
         super(props);
         this.state = {
-            shoppingplans: []
+            shoppingplans: [],
+            fCoin:0,
+            isRender : false
         }
     }
 
     componentDidMount() {
         const token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(user => {
+                if (user.id) {
+                    this.setState(function(state, props) {
+                        return {
+                            fCoin: user.fCoin
+                            }
+                        }, () => {
+                        this.setState({
+                            isRender : true
+                        });
+                    });
+                }
+            });
+
         fetch(process.env.REACT_APP_API_URL+`shoppingplans`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -117,7 +148,7 @@ class Shoppingplans extends React.Component {
                                                             fontSize: '14px',
                                                             fontWeight: '600'
                                                         }}>
-                                                            اشتراک یک ماهه
+                                                            اشتراک {item.duration} روزه
                                                         </Grid>
                                                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
                                                             display:'inline',
@@ -125,12 +156,37 @@ class Shoppingplans extends React.Component {
                                                             color:'#19ab56',
                                                             fontSize:'14px'
                                                         }}>
-                                                            25000 تومان
+                                                            {item.secondPrise} تومان
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
                                                 <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
-                                                    عکس
+                                                    <img
+                                                        style={{
+                                                            width:'70px'
+                                                        }}
+                                                        src={item.thumbnail} />
+                                                </Grid>
+                                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                                        <Grid container spacing={0}>
+                                                            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                                                                <Typography>میزان اف کوین شما {this.state.fCoin} است</Typography>
+                                                                {this.state.isRender ? 
+                                                                <Button 
+                                                                    variant="contained" 
+                                                                    color="secondary"
+                                                                    // disabled = {()=>(parseInt(this.state.fCoin) > parseInt(item.secondPrise)) ? false : true}
+                                                                    // onClick={}
+                                                                    >
+                                                                خرید طرح
+                                                                </Button>  : null   
+                                                            }
+                                                                
+                                                            </Grid>
+                                                            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                                                                
+                                                            </Grid>
+                                                        </Grid>
                                                 </Grid>
                                             </Grid>
                                         </Grid>

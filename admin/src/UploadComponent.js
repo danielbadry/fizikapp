@@ -31,7 +31,7 @@ export default class UploadComponent extends React.Component {
   }
 
   render() {
-    let uploadUrl = `/upload.php?model=${this.props.model}&type=${this.props.type}`
+    let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}`
     return (
       <div className="App">
         {/* Pass FilePond properties as attributes */}

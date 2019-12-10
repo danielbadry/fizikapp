@@ -24,9 +24,7 @@ module.exports = {
     
     let TokenArray = token.split(" ");
     let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
-    // return this.res.json(decodedToken);
     let userId = decodedToken.id;
-    // return this.res.json(userId);
     let user = await Users.findOne({
       where : {
         id: userId

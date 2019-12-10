@@ -14,6 +14,21 @@ module.exports = {
       required : false
     },
     
+    mobile :{
+      type: 'string',
+      required : false
+    },
+    
+    fullName :{
+      type: 'string',
+      required : false
+    },
+    
+    email :{
+      type: 'string',
+      required : false
+    },
+    
     message :{
       type: 'string',
       required : false

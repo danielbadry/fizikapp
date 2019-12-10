@@ -9,8 +9,8 @@ module.exports = {
 
   description: 'Find sciencechallenge.',
 
-  inputs: {
 
+  inputs: {
     limit: {
       type: 'number'
     },
@@ -27,44 +27,138 @@ module.exports = {
       type: 'string'
     },
     
+    tags: {
+      type: 'string'
+    },
+
+    searchText: {
+      type: 'string'
+    }
   },
+
 
   exits: {
 
   },
-
-
+  
   fn: async function (inputs) {
-
+    let allRequests = [];
     let finalData = {};
-    
+    let finalRequests = [];
     let dataLength = await Sciencechallenge.find();
-    let allSciencechallenges = await Sciencechallenge.find()
-    .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
-
-    for (let sciencechallenge of allSciencechallenges) {
-      sciencechallenge.thumbnail = sails.config.custom.apiUrl + "/files/sciencechallengeImage/" + sciencechallenge.thumbnail;
-      moment.locale('en');
-      sciencechallenge.jalaaliCreatedDate = momentJalaali(sciencechallenge.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-      sciencechallenge.jalaaliUpdatedDate = momentJalaali(sciencechallenge.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-      moment.locale('fa');
-      sciencechallenge.jalaaliUserFriendlyCreatedDate = moment(sciencechallenge.createdAt).fromNow();
-      sciencechallenge.jalaaliUserFriendlyUpdatedDate = moment(sciencechallenge.updatedAt).fromNow();
-      sciencechallenge.jalaaliFullUserFriendlyCreatedDate = sciencechallenge.jalaaliCreatedDate + ' ' + sciencechallenge.jalaaliUserFriendlyCreatedDate;
-      let len = sciencechallenge.description.length;
-      sciencechallenge.description = sciencechallenge.description.substr(0, 230);
-      if (len > 230)
-        sciencechallenge.description += '...';
+    
+    if( (!inputs.searchText) || (inputs.searchText == '') )
+    {
+      allRequests = await Sciencechallenge.find({
+        isDeleted : false
+      })
+      .limit(inputs.limit)
+      .skip(inputs.skip)
+      .sort([{updatedAt :'DESC'}])
+      ;
+    }
+    else {
+      allRequests = await Sciencechallenge.find({
+        or : [
+            {
+              title:{contains: inputs.searchText}
+            },
+            {
+              description:{contains: inputs.searchText}
+            }
+          ]
+      })
+      .limit(inputs.limit)
+      .skip(inputs.skip)
+      .sort([{updatedAt :'DESC'}])
+      ;
     }
 
-    finalData.dataLength = dataLength.length;
-    finalData.data = allSciencechallenges;
-    finalData.isAuthenticated = true;
-    return finalData;
+    // filter allRequest based on tags
+    let tagIds = []; // list of comming tags id from the URL
+    let inTags = [];
+    
+    if(typeof(inputs.tags)==='undefined' || JSON.parse(inputs.tags).length === 0) {
+      inTags = await Tags.find();
+    } else {
+      inTags = JSON.parse(inputs.tags);
+    }
+    
+    for(let inTag of inTags) {
+      tagIds.push(inTag.id);
+    }
+    for (let request of allRequests) {
+      let aa = [];
+      requestTags = JSON.parse(request.tags);
+      for (let requestTag of requestTags) {
+        aa.push(requestTag.id);
+      }
 
+      for (let a of aa) {
+        if (tagIds.includes(a)) {
+          if (await sails.helpers.requesthelper(request, finalRequests))
+            finalRequests.push(request);
+        }
+      }
+    }
+
+    // iterate final Requests to make sure it has not repetitive element
+
+    // return (finalRequests);
+    allRequests = finalRequests;
+    // sort array based on their admin response status
+    let requestWithNoResponse = [];
+    let requestWithResponse = [];
+    for (let request of allRequests) {
+      if (request.adminAnswer == '')
+        requestWithNoResponse.push(request);
+      else 
+        requestWithResponse.push(request);
+    }
+    allRequests = requestWithNoResponse.concat(requestWithResponse);
+    // return allRequests;
+      for (let request of allRequests) {
+        let user = await Users.find ({
+          where : {
+            id : request.userId
+          }
+        });
+        request.userInfo = user[0];
+        request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
+        request.thumbnail = "http://localhost:1337/files/usersImage/" + request.userInfo.thumbnail;
+          
+        moment.locale('en');
+        request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+        request.jalaaliUpdatedDate = momentJalaali(request.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+        moment.locale('fa');
+        request.jalaaliUserFriendlyCreatedDate = moment(request.createdAt).fromNow();
+        request.jalaaliUserFriendlyUpdatedDate = moment(request.updatedAt).fromNow();
+        request.jalaaliFullUserFriendlyUpdatedDate = request.jalaaliUpdatedDate + ' ' + request.jalaaliUserFriendlyUpdatedDate;
+    
+        // fetch users answers
+        request.usersAnswers = await Sciencechallenge.find({
+          isDeleted: false,
+          parentId: request.id,
+          userId: {'!=' : null}
+        });
+
+        for (let requestUserAnswer of request.usersAnswers) {
+          let userAnswerUser = await Users.find ({
+            where : {
+              id : requestUserAnswer.userId
+            }
+          });
+          requestUserAnswer.userInfo = userAnswerUser[0];
+          requestUserAnswer.userInfo.fullName = requestUserAnswer.userInfo.firstName + ' ' + requestUserAnswer.userInfo.lastName;
+          requestUserAnswer.thumbnail = "http://localhost:1337/uploads/" + requestUserAnswer.userInfo.thumbnail;
+        }
+        
+        (request.adminAnswer === '') ? request.isResponsed = false  : request.isResponsed = true;
+      }
+      finalData.dataLength = allRequests.length;
+      finalData.data = allRequests;
+      finalData.isAuthenticated = true;
+      return finalData;
   }
-
 
 };

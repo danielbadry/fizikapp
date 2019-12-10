@@ -46,6 +46,7 @@ module.exports = {
       moment.locale('fa');
       sp.jalaaliUserFriendlyUpdatedDate = moment(sp.updatedAt).fromNow();
       sp.jalaaliFullUserFriendlyUpdatedDate = sp.jalaaliUpdatedDate + ' ' + moment(sp.updatedAt).fromNow();
+      sp.thumbnail = sails.config.custom.apiUrl + '/files/shoppingplansImage/' + sp.thumbnail;
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allShoppingPlans;

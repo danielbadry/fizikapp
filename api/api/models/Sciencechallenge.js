@@ -48,6 +48,11 @@ module.exports = {
       required : false
     },
     
+    file :{
+      type: 'string',
+      required : false
+    },
+    
   },
 
 };
