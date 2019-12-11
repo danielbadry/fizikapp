@@ -19,7 +19,7 @@ module.exports = {
 
     let products = await Products.find();
     for (product of products) {
-
+      product.thumbnail = sails.config.custom.apiUrl + "/files/productImage/" + product.thumbnail;
       let views = await Likedislikeview.find({
         modelId: product.id,
         type: 'view'

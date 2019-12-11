@@ -20,7 +20,14 @@ export default () => (
                 <UserSignupSensitiveLocation name="CodeSandbox" />
             </CardContent>
         </Card>
-            <ProductAnalytics />
+        <br />
+        <Card>
+            <CardHeader title="Products Analytics" />
+            <CardContent>
+                <ProductAnalytics />
+            </CardContent>
+        </Card>
+        <br />
         <Card>
             <CardHeader title="Sales Chart and Signup Chart" />
             <CardContent>

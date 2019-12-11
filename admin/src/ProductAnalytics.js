@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 class ProductAnalytics extends React.Component {
     
@@ -41,15 +42,11 @@ render () {
       
     return (
         <React.Fragment>
-          <Typography
-            variant="h5"
-            component="h2"
-          >
-            Products Analytics
-          </Typography>
+          
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell>Thumbnail</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell align="right">Views</TableCell>
                 <TableCell align="right">Likes</TableCell>
@@ -59,7 +56,10 @@ render () {
             <TableBody>
               {this.state.productanalytics.map(row => (
                 <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">{row.name}</TableCell>
+                  <TableCell scope="row">
+                    <Avatar alt="Remy Sharp" src={row.thumbnail} />
+                  </TableCell>
+                  <TableCell scope="row">{row.name}</TableCell>
                   <TableCell align="right">{row.views}</TableCell>
                   <TableCell align="right">{row.likes}</TableCell>
                   <TableCell align="right">{row.dislikes}</TableCell>
@@ -67,6 +67,7 @@ render () {
               ))}
             </TableBody>
           </Table>
+          
         </React.Fragment>
       );
     }
