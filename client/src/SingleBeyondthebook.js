@@ -346,14 +346,14 @@ class SingleBeyondthebook extends React.Component {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <QuizComponent
+                        {/* <QuizComponent
                             endFunc={this.catchMeHere}
                             model='products'
                             modelid={this.props.productid}
-                        />
+                        /> */}
                         <ArticlesToolBox
-                            model='products'
-                            modelid={this.props.productid}
+                            model='beyondthebooks'
+                            modelid={this.props}
                             token={this.state.token}
                             />
                     </Grid>

@@ -367,7 +367,7 @@ class SingleSciencechallenge extends React.Component{
                         <Paper>
                         <ArticlesToolBox
                             model='sciencechallenge'
-                            modelid={this.props.sciencechallengeid}
+                            modelid={this.props}
                             token={this.state.token}
                             />
 

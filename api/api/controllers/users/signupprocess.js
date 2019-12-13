@@ -20,51 +20,39 @@ module.exports = {
 TODO: i must update below algorithm
 */
   fn: async function (inputs) {
+
     let finalData = {};
-    let dataLength = await Users.find()
-    .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
-
-    let infoFromUsers = await Users.find({
-      select:['id','createdAt']
-    });
-    
+    simpleDate = (date) => {
+      let nd = date.split('T');
+      return nd[0];
+    };
     let dateList = [];
-
-    for (let d of infoFromUsers) {
-      if (!dateList.includes(d.createdAt))
-        dateList.push(d.createdAt);
-    }
-
-    uniq = [...new Set(dateList)];
-    uniq.sort(function(a,b){
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(a) - new Date(b);
-    });
-
-    dateList = [];
-    for (let d of uniq) {
-      let tempObject = {
-        date : d,
-        value : 0,
-        id:0
-      };
-      dateList.push(tempObject);
-    }
-
-    for (let i = 0 ; i < infoFromUsers.length ; i ++) {
-      for (let j = 0 ; j < dateList.length ; j ++) {
-        if ( dateList[j].date == infoFromUsers[i].createdAt) {
-          dateList[j].value ++;
-          dateList[j].id ++;
-        }
+    let allUsers = await Users.find();
+    for (user of allUsers) {
+      if (!dateList.includes(simpleDate(user.createdAt))) {
+        dateList.push(simpleDate(user.createdAt));
       }
     }
 
-    finalData.dataLength = dataLength.length;
-    finalData.data = dateList;
+    let baseArray = [];
+    for (dl of dateList) {
+      let temp = {
+        date: dl,
+        value: 0,
+        id: 0
+      }
+      baseArray.push(temp);
+    }
+
+    for (user of allUsers) {
+      for (ba of baseArray) {
+        if (simpleDate(user.createdAt) === ba.date) {
+          ba.value ++;
+        }
+      }
+    }
+    finalData.dataLength = baseArray.length;
+    finalData.data = baseArray;
     return finalData;
 
   }

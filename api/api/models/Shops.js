@@ -19,6 +19,11 @@ module.exports = {
       required : false
     },
     
+    source :{
+      type: 'string',
+      required : false
+    },
+    
     isDeleted :{
       type: 'boolean',
       required : false

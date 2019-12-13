@@ -353,7 +353,7 @@ class SingleProduct extends React.Component {
                         />
                         <ArticlesToolBox
                             model='products'
-                            modelid={this.props.productid}
+                            modelid={this.props}
                             token={this.state.token}
                             />
                     </Grid>

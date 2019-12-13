@@ -48,7 +48,25 @@ module.exports = {
     .skip(inputs.skip)
     ;
     for (let beyondthebook of allBeyondthebooks) {
-      
+      let allViews = 0;
+      let allLikes = 0;
+      let allDislikes = 0;
+      let likedislikeviews = await Likedislikeview.find({
+        modelId: beyondthebook.id,
+        model: 'beyondthebooks'
+      });
+      for (let ldv of likedislikeviews) {
+        if (ldv.type === 'view') {
+          allViews ++;
+        } else if (ldv.type === 'like') {
+          allLikes ++;
+        } else if (ldv.type === 'dislike') {
+          allDislikes ++;
+        }
+      }
+      beyondthebook.views = allViews;
+      beyondthebook.likes = allLikes;
+      beyondthebook.dislikes = allDislikes;
       // find video status for this user
       if (inputs.userId) {
         let userVideoStatus = await Watchedvideos.findOne({

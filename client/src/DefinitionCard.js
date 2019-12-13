@@ -89,7 +89,7 @@ render() {
                 marginLeft: '2px',
                 paddingTop: '5px',
                 position: 'absolute'
-            }}>4.4K</span>  
+            }}>{this.props.item.likes}</span>  
         </div>
 
         </Paper>

@@ -48,7 +48,7 @@ module.exports = {
         description : inputs.description,
         title : inputs.title,
         name : inputs.name,
-        tags : inputs.tags,
+        tags : inputs.tags || '[]',
         thumbnail : inputs.thumbnail,
         file : inputs.file,
         isDeleted : false,

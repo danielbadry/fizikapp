@@ -136,7 +136,7 @@ class SingleDefinition extends React.Component{
                         <Paper>
                             <ArticlesToolBox
                                 model='definitions'
-                                modelid={this.props.definitionid}
+                                modelid={this.props}
                                 token={this.state.token}
                                 />
                             </Paper>
@@ -153,7 +153,7 @@ class SingleDefinition extends React.Component{
                             <Grid item xs={9} sm={4} md={4} lg={3} xl={3}>
                                 <Paper>
                                     {/* <SimpleTreeView /> */}
-                                    <Tree2 />
+                                    {/* <Tree2 /> */}
                                 </Paper>
                             </Grid>
                             

@@ -13,6 +13,7 @@ import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form'
 import {GetProvincesFor, GetCitiesFor, countries} from './GetCitiesFor';
 import { Pagination } from 'react-admin';
+import UploadComponent from './UploadComponent';
 
 export const userShow = (props) => (
     <Show {...props}>
@@ -92,7 +93,7 @@ export const UserCreate = (props) => (
             <TextInput source="lastName" label="last name" />
             <TextInput source="email" label="email" />
             <TextInput source="userName" label="username" />
-            <TextInput source="passWord" label="password" />
+            <TextInput source="password" label="password" />
             <TextInput source="mobile" label="mobile" />
             <TextInput source="phone" label="phone" />
             <NumberInput source="fCoin" label="default f-coin" />
@@ -139,9 +140,10 @@ export const UserCreate = (props) => (
                     </Fragment>
                 )}
             </FormDataConsumer>
-            <ImageInput source="thumbnail" label="Related pictures" accept="image/*">
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <UploadComponent 
+                type="thumbnail"
+                model="users"
+                />
             
         </SimpleForm>
     </Create>

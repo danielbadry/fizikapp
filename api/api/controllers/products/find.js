@@ -47,8 +47,27 @@ module.exports = {
     .limit(inputs.limit)
     .skip(inputs.skip)
     ;
+    
     for (let product of allProducts) {
-      
+      let allViews = 0;
+      let allLikes = 0;
+      let allDislikes = 0;
+      let likedislikeviews = await Likedislikeview.find({
+        modelId: product.id,
+        model: 'products'
+      });
+      for (let ldv of likedislikeviews) {
+        if (ldv.type === 'view') {
+          allViews ++;
+        } else if (ldv.type === 'like') {
+          allLikes ++;
+        } else if (ldv.type === 'dislike') {
+          allDislikes ++;
+        }
+      }
+      product.views = allViews;
+      product.likes = allLikes;
+      product.dislikes = allDislikes;
       // find video status for this user
       if (inputs.userId) {
         let userVideoStatus = await Watchedvideos.findOne({

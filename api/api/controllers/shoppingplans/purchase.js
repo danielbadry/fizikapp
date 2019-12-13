@@ -13,6 +13,10 @@ module.exports = {
     price :{
       type: 'number',
     },
+    
+    shoppingplanId :{
+      type: 'string',
+    },
 
   },
 
@@ -41,6 +45,14 @@ module.exports = {
     .set({
       fCoin : fCoin
     });
+
+    await Shops.create({
+      createdAt : await sails.helpers.dateParse(),
+      updatedAt : await sails.helpers.dateParse(),
+      userId: userId,
+      shoppingPlanId : inputs.shoppingPlanId,
+      source : 'fCoin'
+    }).fetch();
 
   }
 

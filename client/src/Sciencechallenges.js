@@ -73,7 +73,7 @@ class Sciencechallenges extends React.Component {
                     tag.isSelected = false;
                 }
                 this.setState((state, props) => {
-                    return {tags: tags.data, activeTags:tags.data};
+                    return {tags: tags.data, activeTags:[]};
                 }, function() {
                     this.fetchRequests();
                 });
@@ -119,7 +119,7 @@ class Sciencechallenges extends React.Component {
         return (
             <Grid container spacing={3}>
                   
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <TextField
                             id="standard-message"
                             label="فیلتر"
@@ -138,7 +138,7 @@ class Sciencechallenges extends React.Component {
                                 }
                             }}
                         />
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                     <Button 
                         href="#/new-request"

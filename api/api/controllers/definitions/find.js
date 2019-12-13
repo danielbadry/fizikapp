@@ -105,6 +105,25 @@ module.exports = {
     }
     
     for (let definition of allRequests) {
+      let allViews = 0;
+      let allLikes = 0;
+      let allDislikes = 0;
+      let likedislikeviews = await Likedislikeview.find({
+        modelId: definition.id,
+        model: 'definitions'
+      });
+      for (let ldv of likedislikeviews) {
+        if (ldv.type === 'view') {
+          allViews ++;
+        } else if (ldv.type === 'like') {
+          allLikes ++;
+        } else if (ldv.type === 'dislike') {
+          allDislikes ++;
+        }
+      }
+      definition.views = allViews;
+      definition.likes = allLikes;
+      definition.dislikes = allDislikes;
       definition.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
       moment.locale('en');
       definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

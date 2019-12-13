@@ -84,29 +84,28 @@ module.exports = {
     let inTags = [];
     
     if(typeof(inputs.tags)==='undefined' || JSON.parse(inputs.tags).length === 0) {
-      inTags = await Tags.find();
+      finalRequests = allRequests;
     } else {
       inTags = JSON.parse(inputs.tags);
-    }
-    
-    for(let inTag of inTags) {
-      tagIds.push(inTag.id);
-    }
-    for (let request of allRequests) {
-      let aa = [];
-      requestTags = JSON.parse(request.tags);
-      for (let requestTag of requestTags) {
-        aa.push(requestTag.id);
+      for(let inTag of inTags) {
+        tagIds.push(inTag.id);
       }
+      for (let request of allRequests) {
+        let aa = [];
+        requestTags = JSON.parse(request.tags);
+        for (let requestTag of requestTags) {
+          aa.push(requestTag.id);
+        }
 
-      for (let a of aa) {
-        if (tagIds.includes(a)) {
-          if (await sails.helpers.requesthelper(request, finalRequests))
-            finalRequests.push(request);
+        for (let a of aa) {
+          if (tagIds.includes(a)) {
+            if (await sails.helpers.requesthelper(request, finalRequests))
+              finalRequests.push(request);
+          }
         }
       }
     }
-
+    // return finalRequests;
     // iterate final Requests to make sure it has not repetitive element
 
     // return (finalRequests);

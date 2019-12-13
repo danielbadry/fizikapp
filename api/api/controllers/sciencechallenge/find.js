@@ -79,29 +79,27 @@ module.exports = {
     let inTags = [];
     
     if(typeof(inputs.tags)==='undefined' || JSON.parse(inputs.tags).length === 0) {
-      inTags = await Tags.find();
+      finalRequests = allRequests;
     } else {
       inTags = JSON.parse(inputs.tags);
-    }
-    
-    for(let inTag of inTags) {
-      tagIds.push(inTag.id);
-    }
-    for (let request of allRequests) {
-      let aa = [];
-      requestTags = JSON.parse(request.tags);
-      for (let requestTag of requestTags) {
-        aa.push(requestTag.id);
+      for(let inTag of inTags) {
+        tagIds.push(inTag.id);
       }
+      for (let request of allRequests) {
+        let aa = [];
+        requestTags = JSON.parse(request.tags);
+        for (let requestTag of requestTags) {
+          aa.push(requestTag.id);
+        }
 
-      for (let a of aa) {
-        if (tagIds.includes(a)) {
-          if (await sails.helpers.requesthelper(request, finalRequests))
-            finalRequests.push(request);
+        for (let a of aa) {
+          if (tagIds.includes(a)) {
+            if (await sails.helpers.requesthelper(request, finalRequests))
+              finalRequests.push(request);
+          }
         }
       }
     }
-
     // iterate final Requests to make sure it has not repetitive element
 
     // return (finalRequests);
@@ -110,7 +108,7 @@ module.exports = {
     let requestWithNoResponse = [];
     let requestWithResponse = [];
     for (let request of allRequests) {
-      if (request.adminAnswer == '')
+      if (request.adminAnswer === '')
         requestWithNoResponse.push(request);
       else 
         requestWithResponse.push(request);
@@ -118,6 +116,25 @@ module.exports = {
     allRequests = requestWithNoResponse.concat(requestWithResponse);
     // return allRequests;
       for (let request of allRequests) {
+        let allViews = 0;
+        let allLikes = 0;
+        let allDislikes = 0;
+        let likedislikeviews = await Likedislikeview.find({
+          modelId: request.id,
+          model: 'sciencechallenge'
+        });
+        for (let ldv of likedislikeviews) {
+          if (ldv.type === 'view') {
+            allViews ++;
+          } else if (ldv.type === 'like') {
+            allLikes ++;
+          } else if (ldv.type === 'dislike') {
+            allDislikes ++;
+          }
+        }
+        request.views = allViews;
+        request.likes = allLikes;
+        request.dislikes = allDislikes;
         let user = await Users.find ({
           where : {
             id : request.userId

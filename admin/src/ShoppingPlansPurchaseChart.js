@@ -14,35 +14,49 @@ class ShoppingPlansPurchaseChart extends React.Component {
   }
 
   componentDidMount() {
+
+    const { dataProvider } = this.props;
+    dataProvider(GET_LIST, 'shoppingplans/shoppingplanspurchasevelocity', {
+      pagination: { page: 1, perPage: 10 },
+      sort: { field: 'id', order: 'DESC' }
+    })
+    .then((res) => {
+      console.info('res:', res.data);
+      chart.data = res.data;
+    })
+    .catch((e) => {
+        console.info('Error: comment not approved', 'warning')
+    });
+
     var chart = am4core.create("ShoppingPlansPurchaseChart", am4charts.PieChart);
 chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-chart.data = [
-  {
-    country: "دانش آموزان برتر",
-    value: 260
-  },
-  {
-    country: "سی روزه",
-    value: 230
-  },
-  {
-    country: "شگفت انگیز",
-    value: 200
-  },
-  {
-    country: "عیدانه",
-    value: 165
-  },
-  {
-    country: "نوابغ",
-    value: 139
-  },
-  {
-    country: "طرح خفن ها",
-    value: 128
-  }
-];
+// chart.data = [
+//   {
+//     country: "دانش آموزان برتر",
+//     value: 260
+//   },
+//   {
+//     country: "سی روزه",
+//     value: 230
+//   },
+//   {
+//     country: "شگفت انگیز",
+//     value: 200
+//   },
+//   {
+//     country: "عیدانه",
+//     value: 165
+//   },
+//   {
+//     country: "نوابغ",
+//     value: 139
+//   },
+//   {
+//     country: "طرح خفن ها",
+//     value: 128
+//   }
+// ];
 
 var series = chart.series.push(new am4charts.PieSeries());
 series.dataFields.value = "value";

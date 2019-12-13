@@ -18,49 +18,41 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
-    let allShops = await Shops.find();
+    simpleDate = (date) => {
+      let nd = date.split('T');
+      return nd[0];
+    };
     let dateList = [];
-
-    for (let d of allShops) {
-      let shoppingPlanInfo = await Shoppingplans.find({
-        where : {
-          id: d.shoppingPlanId
-        }
+    let allShops = await Shops.find();
+    for (shop of allShops) {
+      if (!dateList.includes(simpleDate(shop.createdAt))) {
+        dateList.push(simpleDate(shop.createdAt));
+      }
+      let sp = await Shoppingplans.findOne({
+        id : shop.shoppingPlanId
       });
-      shoppingPlanInfo = shoppingPlanInfo[0];
-      d.totalPrice = shoppingPlanInfo.secondPrise;
-      if (!dateList.includes(d.createdAt))
-        dateList.push(d.createdAt);
+      shop.value = sp.secondPrise;
     }
 
-    uniq = [...new Set(dateList)];
-    uniq.sort(function(a,b){
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(a) - new Date(b);
-    });
-
-    dateList = [];
-    for (let d of uniq) {
-      let tempObject = {
-        date : d,
-        value : 0,
-        id:0
-      };
-      dateList.push(tempObject);
+    let baseArray = [];
+    for (dl of dateList) {
+      let temp = {
+        date: dl,
+        value: 0,
+        id: 0
+      }
+      baseArray.push(temp);
     }
 
-    for (let i = 0 ; i < allShops.length ; i ++) {
-      for (let j = 0 ; j < dateList.length ; j ++) {
-        if ( dateList[j].date == allShops[i].createdAt) {
-          dateList[j].value = Number(dateList[j].value) + Number(allShops[i].totalPrice);
-          dateList[j].id ++;
+    for (shop of allShops) {
+      for (ba of baseArray) {
+        if (simpleDate(shop.createdAt) === ba.date) {
+          ba.value = parseInt(ba.value) + shop.value;
         }
       }
     }
-
-    finalData.dataLength = allShops.length;
-    finalData.data = dateList;
+    finalData.dataLength = baseArray.length;
+    finalData.data = baseArray;
     return finalData;
   }
 

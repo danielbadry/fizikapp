@@ -72,9 +72,10 @@ class Shoppingplans extends React.Component {
             });
     }
 
-    purchaseShoppingplan = (price) => {
+    purchaseShoppingplan = (price, shoppingplanId) => {
         let data = {
             price : price,
+            shoppingplanId : shoppingplanId,
         }
 
         let token = window.localStorage.getItem('token');
@@ -198,7 +199,7 @@ class Shoppingplans extends React.Component {
                                                                     variant="contained" 
                                                                     color="secondary"
                                                                     // disabled = {()=>(parseInt(this.state.fCoin) > parseInt(item.secondPrise)) ? false : true}
-                                                                    onClick={()=>this.purchaseShoppingplan(item.secondPrise)}
+                                                                    onClick={()=>this.purchaseShoppingplan(item.secondPrise, item.id)}
                                                                     >
                                                                 خرید طرح
                                                                 </Button>

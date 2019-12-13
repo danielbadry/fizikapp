@@ -18,12 +18,11 @@ class ArticleToolBox extends React.Component {
     }
 
     like = (e, type) => {
-        // console.info('type:', type);
-        // return;
+        let arr = this.props.modelid.match.path.split('/');
         let data = {
             type : type,
             model : this.props.model,
-            modelId : this.props.modelid
+            modelId : arr[arr.length - 1]
         }
 
         fetch(process.env.REACT_APP_API_URL+`likedislikeview`, {
@@ -46,7 +45,8 @@ class ArticleToolBox extends React.Component {
     }
 
     fetchData = (token) => {
-        fetch(process.env.REACT_APP_API_URL+`likedislikeview?model=${this.props.model}&modelid=${this.props.modelid}`, {
+        let arr = this.props.modelid.match.path.split('/');
+        fetch(process.env.REACT_APP_API_URL+`likedislikeview?model=${this.props.model}&modelid=${arr[arr.length - 1]}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

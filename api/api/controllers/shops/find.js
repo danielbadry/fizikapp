@@ -52,10 +52,9 @@ module.exports = {
       shop.userInfo = user[0];
       shop.userInfo.fullName = shop.userInfo.firstName + ' ' + shop.userInfo.lastName;
       shop.thumbnail = "http://localhost:1337/uploads/" + shop.userInfo.thumbnail;
-      let shoppingPlanName = await Shoppingplans.find({
+      let shoppingPlanName = await Shoppingplans.findOne({
         id : shop.shoppingPlanId
       });
-      shoppingPlanName = shoppingPlanName[0];
       shop.type = shoppingPlanName.type;
       shop.price = shoppingPlanName.secondPrise;
       moment.locale('en');
