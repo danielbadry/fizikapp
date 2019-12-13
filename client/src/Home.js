@@ -61,7 +61,7 @@ class Home extends React.Component {
                  <Container>
                     <AdsPanel />
                     <NiceCard />
-                    {/* <SingleRow
+                    <SingleRow
                         label="تازه های فیزیک اپ"
                         footer=""
                         model="products"
@@ -86,23 +86,23 @@ class Home extends React.Component {
                         model="sciencechallenge"
                         linkToShowMore='sciencechallenges'
                         count='10'
-                    /> */}
-
-                    {/* <SingleRow
+                    /> 
+                    
+                    <SingleRow
                         label="تعریفی ها"
                         footer="مشاهده بیشتر"
                         model="definitions"
                         linkToShowMore='definitions'
                         count='10'
-                    /> */}
+                    />
                     
-                    {/* <SingleRow
+                    <SingleRow
                         label="فراتر از کتاب"
                         footer="مشاهده بیشتر"
                         model="beyondthebooks"
                         linkToShowMore='beyondthebook'
                         count='10'
-                    /> */}
+                    />
 
                     <SingleRow
                         label="درخواست ها"

@@ -69,6 +69,8 @@ module.exports = {
       watchedvideo.name = info.name;
       watchedvideo.title = info.title;
       watchedvideo.description = info.description;
+      watchedvideo.duration = info.duration;
+      watchedvideo.percent = ((parseInt(watchedvideo.startTime)) * 100) / (parseInt(info.duration));
       watchedvideo.thumbnail = sails.config.custom.apiUrl + url + watchedvideo.thumbnail;
     }
 

@@ -103,7 +103,23 @@ render() {
                 position: 'absolute'
             }}>{this.props.item.likes}</span>  
         </div>
-
+        <div
+          style={{
+            position: 'absolute',
+            backgroundColor:'#0000004d',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              backgroundColor:'red',
+              width: `${this.props.item.percent}%`,
+            }}
+          >
+          percent
+        </div>
+        </div>
       </Paper>
       </Link>
     </React.Fragment>

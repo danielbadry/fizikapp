@@ -67,6 +67,11 @@ module.exports = {
     file :{
       type: 'string',
       required : false
+    },
+    
+    duration :{
+      type: 'string',
+      required : false
     }
     
   },

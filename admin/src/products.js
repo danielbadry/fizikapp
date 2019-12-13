@@ -60,15 +60,18 @@ export const ProductCreate = (props) => (
             <LongTextInput source="description" label="description" />
             <TagComponent source="tags" label="tags" />
             <BooleanInput label="is medal" source="isMedal" />
-
+            
             <Book 
                 {...props}
                 />
+                
             <UploadComponent 
                 type="thumbnail"
                 model="products"
                 />
-            
+
+            <TextInput source="duration" label="duration in seconds" type="number" />
+
             <UploadComponent 
                 type="file"
                 model="products"

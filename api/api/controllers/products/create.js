@@ -50,6 +50,11 @@ module.exports = {
     file :{
       type: 'string',
       required : false
+    },
+
+    duration :{
+      type: 'string',
+      required : false
     }
 
   },
@@ -86,6 +91,7 @@ module.exports = {
               thumbnail:inputs.thumbnail,
               file:inputs.file,
               isMedal:inputs.isMedal,
+              duration:inputs.duration,
               createdAt : await sails.helpers.dateParse(),
               updatedAt : await sails.helpers.dateParse()
             }).fetch();
