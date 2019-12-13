@@ -23,6 +23,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
+import InsertSubject from './InsertSubject';
 
 class Exercises extends React.Component{
     constructor(props) {
@@ -31,10 +32,15 @@ class Exercises extends React.Component{
             exercises : [],
             fromYear:1380,
             toYear:1399,
-            field:'tajrobi',
+            field:'',
+            reference:'',
             subjects:[],
             isRender:false
         }
+    }
+
+    someMethod = (checked) => {
+        this.setState({subjects: checked});
     }
 
     componentDidMount() {
@@ -112,7 +118,7 @@ class Exercises extends React.Component{
     fetchExercises = () => {
         let token = localStorage.getItem('token');
 
-        fetch(process.env.REACT_APP_API_URL+`exercises?fromYear=${this.state.fromYear}&toYear=${this.state.toYear}&field=${this.state.field}`, {
+        fetch(process.env.REACT_APP_API_URL+`exercises?fromYear=${this.state.fromYear}&toYear=${this.state.toYear}&field=${this.state.field}&reference=${this.state.reference}&subjects=${this.state.subjects}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -143,6 +149,10 @@ class Exercises extends React.Component{
     
     changeField = (e) => {
         this.setState({field:e.target.value});
+    }
+    
+    changeReference = (e) => {
+        this.setState({reference:e.target.value});
     }
 
     searchInExercises = () => {
@@ -203,6 +213,7 @@ class Exercises extends React.Component{
                                     key={index}
                                     item 
                                     xs={4} sm={4} md={4} lg={4} xl={4}>
+                                        <Link href={`#/exercise/${item.id}`}>
                                     <Card
                                         // component="a"
                                         // href={`/2121211z`}
@@ -267,6 +278,7 @@ class Exercises extends React.Component{
                                             
                                         </CardActions> */}
                                     </Card>
+                                    </Link>
                                 </Grid>
                             )}
                         
@@ -354,8 +366,8 @@ class Exercises extends React.Component{
                                     <FormControl component="fieldset">
                                         {/* <FormLabel component="legend">Gender</FormLabel> */}
                                         <RadioGroup 
-                                            aria-label="gender" 
-                                            name="gender1" 
+                                            aria-label="field" 
+                                            name="field" 
                                             value={this.state.field} 
                                             onChange={this.changeField} 
                                             >
@@ -395,13 +407,13 @@ class Exercises extends React.Component{
                                     <FormControl component="fieldset">
                                         {/* <FormLabel component="legend">Gender</FormLabel> */}
                                         <RadioGroup 
-                                            aria-label="gender" 
-                                            name="gender1" 
-                                            value={this.state.field} 
-                                            onChange={this.changeField} 
+                                            aria-label="reference" 
+                                            name="reference" 
+                                            value={this.state.reference} 
+                                            onChange={this.changeReference} 
                                             >
                                             <FormControlLabel 
-                                                value="riazi" 
+                                                value="in" 
                                                 control={<Radio />} 
                                                 label={<Typography 
                                                     style={{
@@ -412,7 +424,7 @@ class Exercises extends React.Component{
                                                     داخل
                                                 </Typography>} />
                                             <FormControlLabel 
-                                                value="tajrobi" 
+                                                value="out" 
                                                 control={<Radio />} 
                                                 label={<Typography 
                                                     style={{
@@ -437,7 +449,9 @@ class Exercises extends React.Component{
                                 <Grid>
                                     {
                                         (this.state.isRender)?
-                                            this.Subjects():
+                                        <InsertSubject 
+                                            parentMethod={this.someMethod}
+                                            />:
                                                 null
                                     }
                                 </Grid>
