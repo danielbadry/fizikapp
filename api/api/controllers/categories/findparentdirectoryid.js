@@ -23,16 +23,32 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
-    let allItems = await Categories.find({
-      where: {
-        id:inputs.rowId,
-        isDeleted: false
-      }
+    let definition = await Definitions.findOne({
+      id: inputs.rowId
     });
 
-    return allItems[0];
+    let allCategories = await Categories.find();
 
+    let pIds = [];
+    let currentCat = definition.category;
+
+    for (let i = 0; i < 10; i++) {
+      for (let c of allCategories) {
+        if (c.id === currentCat) {
+          currentCat = c.parentId;
+          let temp = {
+            id: c.id,
+            name: c.name
+          }
+          pIds.push(temp);
+        }
+      }
+    }
+    let finalData = {};
+    finalData.data = [{
+      p : pIds[2]
+    }];
+    return finalData;
   }
 
 };

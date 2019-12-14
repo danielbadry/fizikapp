@@ -8,7 +8,11 @@
 module.exports = {
   schema: true,
   attributes: {
-    
+    id :{
+      type: 'number',
+      autoIncrement: true
+
+    },
     shoppingPlanId :{
       type: 'string',
       required : false

@@ -8,11 +8,15 @@
 module.exports = {
   schema: true,
   attributes: {
+    id :{
+      type: 'number',
+      autoIncrement: true
+
+    },
     name :{
       type: 'string',
       required : false
     },
-    
     count :{
       type: 'number',
       required : false

@@ -1,219 +1,219 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
+import StickyFooter from "./StickyFooter";
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import MainFooter from "./MainFooter";
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import StickyFooter from "./StickyFooter";
+import Tree2 from "./Tree2";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-class Requests extends React.Component {
-    constructor (props) {
-        super (props);
+class Category extends React.Component{
+    
+    constructor(props) {
+        super(props);
         this.state = {
-            requests : [],
-            tags: [],
-            activeTags: [],
-            searchText: ''
+            categories : [],
+            innerCategories:[],
+            products:[],
+            isRender: false,
+            cats:[],
+            baseCatId : null,
+            baseCatName : null,
+            expanded : '0'
         }
     }
 
-    fetchRequests = () => {
-        fetch(process.env.REACT_APP_API_URL+`definitions?tags=${encodeURIComponent(JSON.stringify(this.state.activeTags))}&searchText=${this.state.searchText}`, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            data: JSON.stringify({name:'milad'}), // body data type must match "Content-Type" header
-            })
-            .then(response => response.json())
-            .then(requests => {
-                this.setState((state, props) => {
-                    return {requests: requests.data};
+    componentDidMount() {
+        let token = localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`categories`, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+        .then(response => response.json())
+        .then(result => {
+            this.setState((state, props) => {
+                return ({
+                    categories: result.Categories,
+                    baseCatId: result.Categories[0].allSubCategories[0].id,
+                    baseCatName: result.Categories[0].allSubCategories[0].name
                 });
+            }, () => {
+                console.info('categories:', this.state.categories)
+                this.setState({isRender: true})
             });
+
+            fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${this.state.baseCatId}`, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, cors, *same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrer: 'no-referrer', // no-referrer, *client
+                // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                })
+                .then(response => response.json())
+                .then(result => {
+                    this.setState((state, props) => {
+                        return ({cats: result});
+                    }, () => {
+                        console.info('categories:', this.state.categories)
+                        this.setState({isRender: true})
+                    });
+                });
+        });
+
+        
     }
 
-    componentDidMount() {
-        
-        fetch(process.env.REACT_APP_API_URL+'tags/', {
+    getContent = (rowId) => {
+        console.info('rowId:', rowId);
+        fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                // 'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
             // body: JSON.stringify(data), // body data type must match "Content-Type" header
             })
             .then(response => response.json())
-            .then(tags => {
-                for(let tag of tags.data) {
-                    tag.color = "default";
-                    tag.isSelected = false;
-                }
+            .then(result => {
+                console.info('ressss:', result);
                 this.setState((state, props) => {
-                    return {tags: tags.data, activeTags:tags.data};
-                }, function() {
-                    this.fetchRequests();
+                    return ({
+                        cats: result,
+                        baseCatId: result[0].id,
+                        baseCatName: result[0].name
+                    });
+                }, () => {
+                    console.info('categories:', this.state.categories)
+                    this.setState({isRender: true})
                 });
-            });   
+            });
     }
 
-    tagClicked = id => (event) => {
-        let listOfTags = this.state.tags;
-        for(let tag of listOfTags) {
-            if (tag.id === id) {
-                tag.isSelected = !tag.isSelected;
-                if(tag.isSelected) {
-                    tag.color = 'primary';
-                } else {
-                    tag.color = 'default';
-                }
-            }
-        }
-        //  separate active tags
-        let at = [];
-        for(let tag of listOfTags) {
-            if(tag.isSelected) {
-                at.push(tag);                
-            }
-        }
-        this.setState((state, props) => {
-            return {tags: listOfTags, activeTags:at};
-        }, function() {
-            this.fetchRequests();
+    getMenu = ( parentID ) => {
+        let data = this.state.cats;
+        console.info('inje', data);
+        return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
+            var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
+            var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
+            return '<li>'+node.name +  subMenu + '</li>' ;
         });
-
     }
     
-    handleChange = () => event => {
-        this.setState({searchText: event.target.value }, function() {
-            this.fetchRequests();
-        });
+    Subjects (initLevel) {
+        var endMenu = this.getMenu(initLevel);
+        let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
+        return(
+            <div style={{
+                direction:'rtl'
+                }} className="Container" dangerouslySetInnerHTML={{__html: someHtml}}>
+            </div>
+        )
+    }
+
+    handleChange = panel => (event, newExpanded) => {
+        if (panel == this.state.expanded) {
+            this.setState({expanded:null});
+        } else
+            this.setState({expanded:panel});
     };
 
     render() {
-        
-        return (
-            <Grid container spacing={3}>
-                  
-                    <Grid item xs={12}>
-                        <TextField
-                            id="standard-message"
-                            label="فیلتر"
-                            // className={classes.textField}
-                            // value={this.state.message}
-                            onChange={this.handleChange('message')}
-                            margin="normal"
-                            InputLabelProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                            InputProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
+        return(
+            <React.Fragment>
+                <Grid container justify="center" spacing={1}>
+                    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                         <Paper>
-
-                        {this.state.tags.map(
-                            (tag, index) =>
-                                <Chip
-                                    key={index}
-                                    // icon={<FaceIcon />}
-                                    label={tag.name}
-                                    clickable
-                                    counter={tag.id}
-                                    color={tag.color}
-                                    onClick={this.tagClicked(tag.id)}
-                                    deleteIcon={<DoneIcon />}
-                                    style={{
-                                        fontFamily: "IranSans"
-                                      }}
-                                    />
-                        )}
-                        
-                        </Paper>
-                    </Grid>
-                    
-                    <Grid item xs={12}>
-                        <Paper>
-                        <List>    
-                            {this.state.requests.map(
-                            (request, index) => 
-                            <ListItem 
-                                alignItems="flex-start"
-                                key={index}
-                                >
-                                <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={
-                                        <Link 
-                                            component={RouterLink} 
-                                            to={`/definition/${request.id}`}
-                                            style={{ fontFamily: 'IranSans_Light' }}
-                                            >
-                                    {request.name}
-                                </Link>}
-                                secondary={
+                            <div>
+                                {this.state.categories.map(
+                                    (item, index) => 
                                     <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                    >
-                                        <div
-                                            style={{ fontFamily: 'IranSans_Light' }}
+                                        <ExpansionPanel 
+                                            key={index} 
+                                            expanded={this.state.expanded == index} 
+                                            onChange={this.handleChange(index)}
                                             >
-                                            {request.title}
-                                        </div>
-                                    </Typography>
-                                    <div
-                                        style={{ fontFamily: 'IranSans_Light' }}
-                                        >
-                                        {request.description}
-                                    </div>
+                                            <ExpansionPanelSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1a-content"
+                                            id="panel1a-header"
+                                            >
+                                            <Typography
+                                                style={{
+                                                fontFamily:'IranSans',
+                                                fontSize:'14px'
+                                                }}
+                                                >{item.name}</Typography>
+                                            </ExpansionPanelSummary>
+                                            <ExpansionPanelDetails>
+                                                <ul>
+                                                {item.allSubCategories.map(
+                                                    (i, ind) =>
+                                                    <li
+                                                        key={ind}
+                                                        onClick={()=>this.getContent(i.id)}
+                                                        >
+                                                        <Typography
+                                                        component="div"
+                                                        style={{
+                                                            fontFamily:'IranSans',
+                                                            fontSize:'14px',
+                                                        }}
+                                                        >
+                                                        {i.name}
+                                                        </Typography>
+                                                    </li>
+                                                )}
+                                                </ul>
+                                            </ExpansionPanelDetails>
+                                        </ExpansionPanel>
                                     </React.Fragment>
-                                }
-                                />
-                            </ListItem>
-                            )}
-                            </List>
+                                )}
+
+                            </div>
+                            
                         </Paper>
                     </Grid>
-
-                    <StickyFooter />
-            </Grid>
-        );
+                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+                        <Paper
+                            style={{
+                                fontFamily:'IranSans'
+                            }}
+                            >
+                               {this.state.baseCatName} 
+                            {
+                                (this.state.isRender) ? 
+                                    this.Subjects(this.state.baseCatId)
+                                        : null
+                            }
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </React.Fragment>
+        )
     }
 }
-
-export default Requests;
+export default Category;

@@ -15,8 +15,11 @@ class SingleDefinition extends React.Component{
         super(props);
         this.state = {
             summary:{},
+            cats:[],
             tags: [],
             id: '',
+            targetCatId:null,
+            targetCatName:null,
             isRender : false,
             thumbnail: '',
             definitionId: props.definitionid,
@@ -36,7 +39,72 @@ class SingleDefinition extends React.Component{
         }
     }
 
+    getMenu = ( parentID ) => {
+        let data = this.state.cats;
+        return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
+            var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
+            var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
+            return '<li>'+node.name +  subMenu + '</li>' ;
+        });
+    }
+    
+    Subjects (initLevel) {
+        var endMenu = this.getMenu(initLevel);
+        let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
+        return(
+            <div style={{
+                direction:'rtl'
+                }} className="Container" dangerouslySetInnerHTML={{__html: someHtml}}>
+            </div>
+        )
+    }
+
     componentDidMount() {
+        fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                var category = result.data[0].p;
+                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}`, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, cors, *same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'authorization': `Bearer ${token}`,
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrer: 'no-referrer', // no-referrer, *client
+                    // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState((state, props) => {
+                            return ({
+                                cats: result,
+                                targetCatId: category.id,
+                                targetCatName: category.name,
+                            });
+                        }, () => {
+                            this.setState({isRender: true})
+                        });
+                    });
+            });
+
+        
+
         const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`definitions/${this.props.match.path.split('/')[2]}`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -59,13 +127,7 @@ class SingleDefinition extends React.Component{
                         thumbnail: definition.thumbnail,
                         id: definition.id,
                         startTime : 30,
-                        isRender: true
                     };
-                  }, () => {
-                    this.setState(function(state, props) {
-                        return {
-                            isRender: true
-                        }});
                   });
             });
     }
@@ -94,13 +156,7 @@ class SingleDefinition extends React.Component{
                             thumbnail: definition.thumbnail,
                             id: definition.id,
                             startTime : 30,
-                            isRender: true
                         };
-                    }, () => {
-                        this.setState(function(state, props) {
-                            return {
-                                isRender: true
-                            }});
                     });
                 });
         }
@@ -152,8 +208,12 @@ class SingleDefinition extends React.Component{
                         >
                             <Grid item xs={9} sm={4} md={4} lg={3} xl={3}>
                                 <Paper>
-                                    {/* <SimpleTreeView /> */}
-                                    {/* <Tree2 /> */}
+                                <div>{this.state.targetCatName}</div>
+                                {
+                                (this.state.isRender) ? 
+                                    this.Subjects(this.state.targetCatId)
+                                        : null
+                                }
                                 </Paper>
                             </Grid>
                             
@@ -188,7 +248,7 @@ class SingleDefinition extends React.Component{
                                     </Typography>
                                 </Paper>
 
-                                <Paper style={{direction:'rtl', textAlign:'right', margin: '10px 0px', padding: '10px 6px'}}>
+                                {/* <Paper style={{direction:'rtl', textAlign:'right', margin: '10px 0px', padding: '10px 6px'}}>
                                     {
                                         this.state.isRender ? 
                                             this.state.summary.tagsArray.map(
@@ -202,7 +262,7 @@ class SingleDefinition extends React.Component{
                                                         />
                                                 ) : null
                                     }
-                                </Paper>
+                                </Paper> */}
 
                             </Grid>
 

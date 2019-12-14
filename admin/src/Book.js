@@ -21,7 +21,7 @@ class Book extends React.Component{
 
     componentDidMount() {
         let roots = [];
-        fetch(process.env.REACT_APP_API_URL+'/categories/allCategories', { method: 'GET', headers: {}})
+        fetch(process.env.REACT_APP_API_URL+'/categories/allCategories?rowId=0', { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })
