@@ -225,7 +225,7 @@ class SingleExercise extends React.Component {
                     <Grid item xs={12}>
                         <ContentUserInteraction
                             config={this.state.userInteractionConfig}
-                            modelid={this.state.definitionid}
+                            modelid={this.props.match.path.split('/')[2]}
                             />
                     </Grid>
 

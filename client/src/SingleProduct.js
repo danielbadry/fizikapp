@@ -25,6 +25,7 @@ import Chip from '@material-ui/core/Chip';
 
 class SingleProduct extends React.Component {
     constructor(props, context){
+        
         super(props, context);
         this.state = {
             summary: {},
@@ -139,6 +140,8 @@ class SingleProduct extends React.Component {
       }
 
     componentDidMount(){
+        
+        console.info('pri:', this.props);
         const token = localStorage.getItem('token');
         this.setState(function(state, props) {
             return {
@@ -422,7 +425,7 @@ class SingleProduct extends React.Component {
                     <Grid item xs={12}>
                     <ContentUserInteraction
                         config={this.state.userInteractionConfig}
-                        modelid={this.state.productId}
+                        modelid={this.props.match.path.split('/')[2]}
                         />
                     </Grid>
                     </Grid>

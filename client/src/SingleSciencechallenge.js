@@ -136,36 +136,40 @@ class SingleSciencechallenge extends React.Component{
                         return {
                             isRender: true
                         }});
-                        this.player.subscribeToStateChange(this.handleStateChange.bind(this));
+                        if (this.player)
+                            this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
     }
 
     componentWillUnmount() {
-        const { player } = this.player.getState();
-        const token = localStorage.getItem('token');
-        let data = {
-            modelId: this.props.match.path.split('/')[2],
-            startTime: player.currentTime,
-            model:'sciencechallenges'
+        if (this.player) {
+            const { player } = this.player.getState();
+            const token = localStorage.getItem('token');
+            let data = {
+                modelId: this.props.match.path.split('/')[2],
+                startTime: player.currentTime,
+                model:'sciencechallenges'
+            }
+            fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
+                method: 'POST', 
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow',
+                referrer: 'no-referrer',
+                body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(result => {
+                    
+                });
         }
-        fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
-            method: 'POST', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(result => {
-                
-            });
+        
     }
 
     handleStateChange(state, prevState) {
@@ -209,7 +213,8 @@ class SingleSciencechallenge extends React.Component{
                         return {
                             isRender: true
                         }});
-                    this.player.subscribeToStateChange(this.handleStateChange.bind(this));
+                        if (this.player)
+                            this.player.subscribeToStateChange(this.handleStateChange.bind(this));
                   });
             });
         }
@@ -439,6 +444,7 @@ class SingleSciencechallenge extends React.Component{
                     <Grid item xs={12}>
                     <ContentUserInteraction
                             config={this.state.userInteractionConfig}
+                            modelid={this.props.match.path.split('/')[2]}
                             />
                     </Grid>
                     </Grid>

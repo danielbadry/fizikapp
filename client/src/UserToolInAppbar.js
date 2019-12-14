@@ -57,7 +57,7 @@ class UserToolInAppbar extends React.Component {
                     </Typography>
                     
                     <UserSystemMessageMenu />
-                    <UserNotificationMenu />
+                    {/* <UserNotificationMenu /> */}
                     <UserProfileMenu />
                 </React.Fragment>
             )

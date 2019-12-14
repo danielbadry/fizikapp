@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ContentUserInteraction(props) {
+  console.info('props:', props);
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
