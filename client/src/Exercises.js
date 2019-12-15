@@ -161,7 +161,6 @@ class Exercises extends React.Component{
 
     getMenu = ( parentID ) => {
         let data = this.state.subjects;
-        console.info('inje', data);
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";

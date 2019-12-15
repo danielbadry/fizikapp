@@ -45,39 +45,45 @@ class Category extends React.Component{
         .then(response => response.json())
         .then(result => {
             this.setState((state, props) => {
-                return ({categories: result.Categories});
+                return ({
+                    categories: result.Categories,
+                    baseCatId: result.Categories[0].id
+                });
             }, () => {
-                console.info('categories:', this.state.categories)
                 this.setState({isRender: true})
             });
+
+            fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${this.state.baseCatId}&model=products`, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, cors, *same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrer: 'no-referrer', // no-referrer, *client
+                // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                })
+                .then(response => response.json())
+                .then(result => {
+                    this.setState((state, props) => {
+                        return ({
+                            cats: result,
+                            baseCatId: result[0].id,
+                            baseCatName: result[0].name
+                        });
+                    }, () => {
+                        this.setState({isRender: true})
+                    });
+                });
         });
 
-        fetch(process.env.REACT_APP_API_URL+`categories/allcategories`, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
-            })
-            .then(response => response.json())
-            .then(result => {
-                this.setState((state, props) => {
-                    return ({cats: result});
-                }, () => {
-                    console.info('categories:', this.state.categories)
-                    this.setState({isRender: true})
-                });
-            });
+        
     }
 
     getContent = (rowId) => {
-        console.info('rowId:', rowId);
         fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}&model=products`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -93,7 +99,6 @@ class Category extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
-                console.info('ressss:', result);
                 this.setState((state, props) => {
                     return ({
                         cats: result,
@@ -101,24 +106,28 @@ class Category extends React.Component{
                         baseCatName: result[0].name
                     });
                 }, () => {
-                    console.info('categories:', this.state.categories)
                     this.setState({isRender: true})
                 });
             });
     }
+
     getMenu = ( parentID ) => {
+        let finalStr;
         let data = this.state.cats;
-        console.info('inje', data);
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
-            return '<li>'+node.name +  subMenu + '</li>' ;
+            if(node.url){
+                finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
+            } else {
+                finalStr = '<li>'+node.name +  subMenu + '</li>' ;
+            }
+            return finalStr;
         });
     }
     
-    Subjects (props) {
-        var initLevel = 0;
-        var endMenu = this.getMenu("0");
+    Subjects (initLevel) {
+        var endMenu = this.getMenu(initLevel);
         let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
         return(
             <div style={{
@@ -195,14 +204,8 @@ class Category extends React.Component{
                                 fontFamily:'IranSans'
                             }}
                             >
-                               {this.state.baseCatName} 
-                            {
-                                (this.state.isRender) ? 
-                                    this.Subjects(this.state.baseCatId)
-                                        : null
-                            }
-
-                        
+                                {this.state.baseCatName}
+                                {this.Subjects(this.state.baseCatId)}
                         </Paper>
                     </Grid>
                 </Grid>

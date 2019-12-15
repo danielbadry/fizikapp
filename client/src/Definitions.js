@@ -51,7 +51,6 @@ class Category extends React.Component{
                     baseCatName: result.Categories[0].allSubCategories[0].name
                 });
             }, () => {
-                console.info('categories:', this.state.categories)
                 this.setState({isRender: true})
             });
 
@@ -73,7 +72,6 @@ class Category extends React.Component{
                     this.setState((state, props) => {
                         return ({cats: result});
                     }, () => {
-                        console.info('categories:', this.state.categories)
                         this.setState({isRender: true})
                     });
                 });
@@ -83,7 +81,6 @@ class Category extends React.Component{
     }
 
     getContent = (rowId) => {
-        console.info('rowId:', rowId);
         fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}&model=definitions`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -99,7 +96,6 @@ class Category extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
-                console.info('ressss:', result);
                 this.setState((state, props) => {
                     return ({
                         cats: result,
@@ -107,7 +103,6 @@ class Category extends React.Component{
                         baseCatName: result[0].name
                     });
                 }, () => {
-                    console.info('categories:', this.state.categories)
                     this.setState({isRender: true})
                 });
             });
@@ -116,7 +111,6 @@ class Category extends React.Component{
     getMenu = ( parentID ) => {
         let finalStr;
         let data = this.state.cats;
-        console.info('inje', data);
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
