@@ -210,9 +210,9 @@ class SingleProduct extends React.Component {
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
-            // if(node.url){
-            //     finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
-            // } else 
+            if(node.url){
+                finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
+            } else 
             {
                 finalStr = '<li>'+node.name +  subMenu + '</li>' ;
             }
