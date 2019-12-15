@@ -23,7 +23,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
-// import InsertSubject from './InsertSubject';
+import InsertSubject from './InsertSubject';
 
 class Exercises extends React.Component{
     constructor(props) {
@@ -447,13 +447,13 @@ class Exercises extends React.Component{
                                     </Typography>
                                 </Grid>
                                 <Grid>
-                                    {/* {
+                                    {
                                         (this.state.isRender)?
                                         <InsertSubject 
                                             parentMethod={this.someMethod}
                                             />:
                                                 null
-                                    } */}
+                                    }
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Button

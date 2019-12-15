@@ -20,7 +20,10 @@ class Category extends React.Component{
             innerCategories:[],
             products:[],
             isRender: false,
-            cats:[]
+            cats:[],
+            baseCatId : null,
+            baseCatName : null,
+            expanded : '0'
         }
     }
 
@@ -72,35 +75,37 @@ class Category extends React.Component{
                 });
             });
     }
-    
-    // showSubCategoryContent = (id) => {
-    //     console.info('id:', id);
-    //     let token = localStorage.getItem('token');
-    //     fetch(process.env.REACT_APP_API_URL+`categories?rowId=${id}`, {
-    //         method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    //         mode: 'cors', // no-cors, cors, *same-origin
-    //         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //         credentials: 'same-origin', // include, *same-origin, omit
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'authorization': `Bearer ${token}`,
-    //         },
-    //         redirect: 'follow', // manual, *follow, error
-    //         referrer: 'no-referrer', // no-referrer, *client
-    //         // body: JSON.stringify(data), // body data type must match "Content-Type" header
-    //     })
-    //     .then(response => response.json())
-    //     .then(result => {
-    //         this.setState((state, props) => {
-    //             console.info('content:', result);
-    //             return ({
-    //                 products:result.Products,
-    //                 innerCategories:result.Categories
-    //             });
-    //         });
-    //     });
-    // }
 
+    getContent = (rowId) => {
+        console.info('rowId:', rowId);
+        fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}&model=products`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.info('ressss:', result);
+                this.setState((state, props) => {
+                    return ({
+                        cats: result,
+                        baseCatId: result[0].id,
+                        baseCatName: result[0].name
+                    });
+                }, () => {
+                    console.info('categories:', this.state.categories)
+                    this.setState({isRender: true})
+                });
+            });
+    }
     getMenu = ( parentID ) => {
         let data = this.state.cats;
         console.info('inje', data);
@@ -123,6 +128,13 @@ class Category extends React.Component{
         )
     }
 
+    handleChange = panel => (event, newExpanded) => {
+        if (panel == this.state.expanded) {
+            this.setState({expanded:null});
+        } else
+            this.setState({expanded:panel});
+    };
+
     render() {
         return(
             <React.Fragment>
@@ -133,7 +145,11 @@ class Category extends React.Component{
                             <div>
                                 {this.state.categories.map(
                                     (item, index) => 
-                                    <ExpansionPanel key={index}>
+                                    <ExpansionPanel 
+                                        key={index} 
+                                        expanded={this.state.expanded == index} 
+                                        onChange={this.handleChange(index)}
+                                    >
                                         <ExpansionPanelSummary
                                         expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1a-content"
@@ -152,7 +168,7 @@ class Category extends React.Component{
                                                 (i, ind) =>
                                                 <li
                                                     key={ind}
-                                                    // onClick={()=>this.showSubCategoryContent(i.id)}
+                                                    onClick={()=>this.getContent(i.id)}
                                                     >
                                                     <Typography
                                                     component="div"
@@ -174,16 +190,19 @@ class Category extends React.Component{
                         </Paper>
                     </Grid>
                     <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
-                        <Paper
+                    <Paper
                             style={{
                                 fontFamily:'IranSans'
                             }}
                             >
+                               {this.state.baseCatName} 
                             {
                                 (this.state.isRender) ? 
-                                    this.Subjects()
+                                    this.Subjects(this.state.baseCatId)
                                         : null
                             }
+
+                        
                         </Paper>
                     </Grid>
                 </Grid>
