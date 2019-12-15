@@ -6,6 +6,8 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import MiniDrawer from "./MainContainer";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import SignUp from './SignUp2';
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+
 am4core.useTheme(am4themes_animated);
 export default function App() {
 

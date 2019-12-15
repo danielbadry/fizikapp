@@ -55,7 +55,7 @@ class Category extends React.Component{
                 this.setState({isRender: true})
             });
 
-            fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${this.state.baseCatId}`, {
+            fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${this.state.baseCatId}&model=definitions`, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, cors, *same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -84,7 +84,7 @@ class Category extends React.Component{
 
     getContent = (rowId) => {
         console.info('rowId:', rowId);
-        fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}`, {
+        fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${rowId}&model=definitions`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -114,12 +114,18 @@ class Category extends React.Component{
     }
 
     getMenu = ( parentID ) => {
+        let finalStr;
         let data = this.state.cats;
         console.info('inje', data);
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
-            return '<li>'+node.name +  subMenu + '</li>' ;
+            if(node.url){
+                finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
+            } else {
+                finalStr = '<li>'+node.name +  subMenu + '</li>' ;
+            }
+            return finalStr;
         });
     }
     
@@ -209,6 +215,8 @@ class Category extends React.Component{
                                     this.Subjects(this.state.baseCatId)
                                         : null
                             }
+
+                        
                         </Paper>
                     </Grid>
                 </Grid>

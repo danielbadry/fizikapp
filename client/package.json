@@ -17,7 +17,7 @@
     "material-auto-rotating-carousel": "^3.0.2",
     "notistack": "^0.9.5",
     "react": "^16.9.0",
-    "react-checkbox-tree": "^1.6.0",
+    "react-checkbox-tree": "^1.5.1",
     "react-dom": "^16.9.0",
     "react-items-carousel": "^2.8.0",
     "react-router-dom": "^5.0.1",

@@ -30,8 +30,11 @@ class SingleProduct extends React.Component {
         this.state = {
             summary: {},
             token: null,
+            cats:[],
             tags: [],
             id: '',
+            targetCatId:null,
+            targetCatName:null,
             isRender : false,
             thumbnail: '',
             userCanSeeQuiz: true,
@@ -140,7 +143,51 @@ class SingleProduct extends React.Component {
       }
 
     componentDidMount(){
-        
+        fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}&model=products`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                // 'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.info('resd:', result);
+                var category = result.data[0].p;
+                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}&model=products`, {
+                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, cors, *same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'authorization': `Bearer ${token}`,
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrer: 'no-referrer', // no-referrer, *client
+                    // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState((state, props) => {
+                            return ({
+                                cats: result,
+                                targetCatId: category.id,
+                                targetCatName: category.name,
+                            });
+                        }, () => {
+                            this.setState({isRender: true})
+                        });
+                    });
+            });
+
+
         console.info('pri:', this.props);
         const token = localStorage.getItem('token');
         this.setState(function(state, props) {
@@ -156,6 +203,32 @@ class SingleProduct extends React.Component {
             this.fetchProduct(token);
         }
         // window.scroll(0,0);
+    }
+    getMenu = ( parentID ) => {
+        let finalStr;
+        let data = this.state.cats;
+        return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
+            var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
+            var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
+            // if(node.url){
+            //     finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
+            // } else 
+            {
+                finalStr = '<li>'+node.name +  subMenu + '</li>' ;
+            }
+            return finalStr;
+        });
+    }
+    
+    Subjects (initLevel) {
+        var endMenu = this.getMenu(initLevel);
+        let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
+        return(
+            <div style={{
+                direction:'rtl'
+                }} className="Container" dangerouslySetInnerHTML={{__html: someHtml}}>
+            </div>
+        )
     }
 
     render() {
@@ -364,7 +437,12 @@ class SingleProduct extends React.Component {
                     <Grid container spacing={1} justify="center">
                         <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                             <Paper>
-                                <RelatedProducts />
+                                <div>{this.state.targetCatName}</div>
+                                {
+                                (this.state.isRender) ? 
+                                    this.Subjects(this.state.targetCatId)
+                                        : null
+                                }
                             </Paper>
                         </Grid>
                        

@@ -40,11 +40,17 @@ class SingleDefinition extends React.Component{
     }
 
     getMenu = ( parentID ) => {
+        let finalStr;
         let data = this.state.cats;
         return data.filter(function(node){ return ( node.parentId === parentID ) ; }).map((node)=>{
             var exists = data.some(function(childNode){  return childNode.parentId === node.id; });
             var subMenu = (exists) ? '<ul>'+ this.getMenu(node.id).join('') + '</ul>' : "";
-            return '<li>'+node.name +  subMenu + '</li>' ;
+            if(node.url){
+                finalStr = `<li><a href=#/${node.url}><img src=${node.thumbnail} style='width:40px' />` + node.name + `</a>` +  subMenu + `</li>` ;
+            } else {
+                finalStr = '<li>'+node.name +  subMenu + '</li>' ;
+            }
+            return finalStr;
         });
     }
     
@@ -60,7 +66,7 @@ class SingleDefinition extends React.Component{
     }
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}`, {
+        fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}&model=definitions`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -75,8 +81,9 @@ class SingleDefinition extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
+                console.info('resd:', result);
                 var category = result.data[0].p;
-                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}`, {
+                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}&model=definitions`, {
                     method: 'GET', // *GET, POST, PUT, DELETE, etc.
                     mode: 'cors', // no-cors, cors, *same-origin
                     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -214,6 +221,7 @@ class SingleDefinition extends React.Component{
                                     this.Subjects(this.state.targetCatId)
                                         : null
                                 }
+
                                 </Paper>
                             </Grid>
                             

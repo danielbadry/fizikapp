@@ -8,9 +8,16 @@ module.exports = {
 
 
   inputs: {
+    
     rowId: {
       type: 'string'
+    },
+
+    model: {
+      type: 'string',
+      required: false
     }
+
   },
 
 
@@ -57,7 +64,43 @@ module.exports = {
       }
     }
 
-    return finalArray;
+    let allEntities = [];
+    allEntities = await Products.find();
+    switch (inputs.model) {
+      case 'products':
+        allEntities = await Products.find();
+      break;
+      case 'definitions' :
+        allEntities = await Definitions.find();
+      break;
+    }
+    let urlModel = null;
+    let thumbnailAddress = null;
+    let finalDefinitions = [];
+    for (let fi of finalArray) {
+      for (let df of allEntities) {
+        if (df.category === fi.id) {
+          df.parentId = df.category;
+          switch (inputs.model) {
+            case 'definitions':
+              urlModel = 'definition/';
+              thumbnailAddress = "/files/definitionImage/";
+            break;
+            case 'products':
+              urlModel = 'product/';
+              thumbnailAddress = "/files/productImage/";
+            break;
+          }
+  
+          df.url = urlModel + df.id;
+          df.thumbnail = sails.config.custom.apiUrl + thumbnailAddress + df.thumbnail;
+          finalDefinitions.push(df);
+        }
+      }
+    }
+
+    var children = finalArray.concat(finalDefinitions);
+    return children;
 
   }
 
