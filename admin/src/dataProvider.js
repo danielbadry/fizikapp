@@ -103,18 +103,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 var formData = new FormData();
                 
                 Object.keys(params.data).forEach(function (item) {
-                    if(item != "thumbnail" && item != "file" && item != "tags" && item != "category")
+                    if(item != "tags" && item != "category")
                         formData.append(item, params.data[item]);
-                    
-                    if (window.localStorage.getItem('thumbnail')) {
-                        formData.append("thumbnail", window.localStorage.getItem('thumbnail'));
-                        window.localStorage.removeItem('thumbnail');
-                    }
-                    
-                    if (window.localStorage.getItem('file')) {
-                        formData.append("file", window.localStorage.getItem('file'));
-                        window.localStorage.removeItem('file');
-                    }
 
                     if (item == "tags")
                         formData.append("tags", JSON.stringify(params.data[item]));

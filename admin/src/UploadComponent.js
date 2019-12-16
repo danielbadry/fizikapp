@@ -1,6 +1,8 @@
 // Import React FilePond
 import React, { Fragment } from 'react';
 import { FilePond, registerPlugin } from "react-filepond";
+import { change } from 'redux-form';
+import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
@@ -29,12 +31,20 @@ export default class UploadComponent extends React.Component {
   handleInit() {
     console.log("FilePond instance has initialised", this.pond);
   }
-
+  
+  uuidv4() {
+    return 'xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+  
   render() {
-    let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}`
+    let randomName = this.uuidv4();
+    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${randomName}`
     return (
-      <div className="App">
-        {/* Pass FilePond properties as attributes */}
+      <FormDataConsumer>
+      {({ formData, dispatch, ...rest }) => (
         <FilePond
           ref={ref => (this.pond = ref)}
           files={this.state.files}
@@ -42,17 +52,23 @@ export default class UploadComponent extends React.Component {
           maxFiles={1}
           server={uploadUrl}
           onprocessfile={fileItem => {
-            window.localStorage.setItem(this.props.type, this.state.files[0].name);
-          }}
+            let fileNameInfo = this.state.files[0].name.split('.');
+            dispatch(
+              change(REDUX_FORM_NAME, this.props.type, randomName + '.' + fileNameInfo[1])
+            )}}
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {
             // Set currently active file objects to this.state
             this.setState({
               files: fileItems.map(fileItem => fileItem.file)
+            }, () => {
+              console.info('inja set shod');
             });
           }}
         />
-      </div>
+        )}
+        </FormDataConsumer>
     );
   }
+
 }

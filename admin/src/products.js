@@ -2,9 +2,17 @@ import React, { Fragment } from 'react';
 import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
-        Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton,
-        DateInput ,ReferenceInput } from 'react-admin';
+        Edit, SimpleForm, TextInput, LongTextInput, ReferenceManyField, Datagrid,
+        TextField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton,
+        DateInput ,ReferenceInput ,required,
+        minLength,
+        maxLength,
+        minValue,
+        maxValue,
+        number,
+        regex,
+        email,
+        choices} from 'react-admin';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Pagination } from 'react-admin';
@@ -22,11 +30,10 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-// import RichTextInput from 'ra-input-rich-text';
-import RichTextInput from 'aor-rich-text-input';
 import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form';
 import ContentUserInteraction from "./ContentUserInteraction";
+import MyEditor  from './TextEditor';
 
 let formElementValues = {};
 
@@ -41,9 +48,7 @@ const GetCategory = () => {
         return response.json();
     })
     .then((myJson) => {
-        console.info('inja', myJson);
         res = [{'id':'1','name':'a'}];
-        // return res;
     })
     .catch((e) => {
         // showNotification('Error: comment not approved', 'warning')
@@ -51,15 +56,29 @@ const GetCategory = () => {
     return res;
 }
 
+const validateProductName = [required(), minLength(5), maxLength(30)];
+const validateProductTitle = [required(), minLength(10), maxLength(100)];
+const validateProductDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
+const validateProductCreation = (values) => {
+    const errors = {};
+    if (!values.thumbnail){
+        errors.thumbnail = 'The thmbnail is required';
+    }
+    console.info(errors);
+    return errors
+};
+
 export const ProductCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm redirect="list">
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
-            <TagComponent source="tags" label="tags" />
+            
+            <TextInput source="name" label="name" validate={validateProductName} />
+            <LongTextInput source="title" label="title" validate={validateProductTitle} />
+            <MyEditor label="description" />
+            {/* <LongTextInput source="description" label="description" validate={validateProductDescription} /> */}
             <BooleanInput label="is medal" source="isMedal" />
+            <TagComponent source="tags" label="select tags (optional)" />
             
             <Book 
                 {...props}
@@ -70,7 +89,7 @@ export const ProductCreate = (props) => (
                 model="products"
                 />
 
-            <TextInput source="duration" label="duration in seconds" type="number" />
+            <TextInput source="duration" label="duration in seconds" type="number" validate={validateProductDuration} />
 
             <UploadComponent 
                 type="file"
@@ -85,9 +104,9 @@ export const ProductCreate = (props) => (
 export const ProductEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
+            <TextInput source="summary.name" label="name" />
+            <TextInput source="summary.title" label="title" />
+            <TextInput source="summary.duration" label="duration in seconds" type="number" validate={validateProductDuration} />
         </SimpleForm>
     </Edit>
 );

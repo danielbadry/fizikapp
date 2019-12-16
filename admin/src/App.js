@@ -49,7 +49,7 @@ const App = () => (
         authProvider={authProvider}
         appLayout={MyLayout}
         >
-        <Resource name="Products" create={ProductCreate} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
+        <Resource name="Products" create={ProductCreate} edit={ProductEdit} list={ProductsList} icon={VideoCallIcon} show={ProductShow} />
         <Resource name="Beyondthebooks" create={BeyondthebooksCreate} list={BeyondthebooksList} icon={VideoCallIcon} show={BeyondthebooksShow} />
         <Resource name="Users" list={UsersList} icon={UserIcon} create={UserCreate} show={userShow} />
         <Resource name="Categories" list={CategoriesList} icon={CategoryIcon} />

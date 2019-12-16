@@ -41,12 +41,21 @@ class TagForm extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <Field 
-        name="tags" 
-        onChange={handleSubmit} 
-        component={ReduxFormSelect} 
-        options={this.state.tags}
-        />
+      <React.Fragment>
+        <div
+          style={{
+            color: 'rgba(0, 0, 0, 0.54)',
+            padding: '35px 9px 7px 0px'
+          }}
+          >{this.props.label}</div>
+        <Field 
+          name="tags" 
+          label={this.props.label}
+          onChange={handleSubmit} 
+          component={ReduxFormSelect} 
+          options={this.state.tags}
+          />
+      </React.Fragment>
     );
 
   }

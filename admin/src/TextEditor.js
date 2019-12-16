@@ -29,6 +29,13 @@ export default class MyEditor extends Component {
             direction:'rtl'
           }}
           >
+          <div
+            style={{
+              direction: 'ltr',
+              color: 'rgba(0, 0, 0, 0.54)',
+              padding: '35px 9px 7px 0px'
+            }}
+            >{this.props.label}</div>
         <Editor
           editorState={this.state.editorState}
           onChange={this.onChange}

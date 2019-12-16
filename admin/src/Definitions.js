@@ -17,8 +17,6 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-// import RichTextInput from 'ra-input-rich-text';
-import RichTextInput from 'aor-rich-text-input';
 import Book from './Book';
 import UploadComponent from './UploadComponent';
 import MyEditor  from './TextEditor';
