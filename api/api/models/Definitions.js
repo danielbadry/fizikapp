@@ -6,13 +6,8 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
-    id :{
-      type: 'number',
-      autoIncrement: true
-
-    },
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

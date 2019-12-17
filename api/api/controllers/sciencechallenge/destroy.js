@@ -9,6 +9,10 @@ module.exports = {
 
   inputs: {
 
+    id:{
+      type: 'string'
+    }
+    
   },
 
 
@@ -19,8 +23,9 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    // All done.
-    return;
+    await Sciencechallenge.destroy({
+      id: inputs.id
+    }).fetch();
 
   }
 
