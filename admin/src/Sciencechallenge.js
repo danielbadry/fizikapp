@@ -4,7 +4,15 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
         TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton,
-        DateInput ,ReferenceInput } from 'react-admin';
+        DateInput ,ReferenceInput, required,
+        minLength,
+        maxLength,
+        minValue,
+        maxValue,
+        number,
+        regex,
+        email,
+        choices } from 'react-admin';
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
@@ -23,15 +31,21 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import UploadComponent from './UploadComponent';
 import ContentUserInteraction from "./ContentUserInteraction";
+import MyEditor  from './TextEditor';
+
+const validateScienceChallengeName = [required(), minLength(5), maxLength(30)];
+const validateScienceChallengeTitle = [required(), minLength(5), maxLength(30)];
 
 export const SciencechallengeCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm redirect="list">
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
-            <TagComponent source="tags" label="tags" />
+            <TextInput source="name" label="name" validate={validateScienceChallengeName} />
+            <LongTextInput source="title" label="title" validate={validateScienceChallengeTitle} />
+            {/* <LongTextInput source="description" label="description" /> */}
+            <MyEditor />
+            <TagComponent source="tags" label="select tags (optional)" />
+            
             <UploadComponent 
                 type="thumbnail"
                 model="sciencechallenge"

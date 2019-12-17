@@ -3,7 +3,15 @@ import {Show, RichTextField, TabbedShowLayout, Tab, NumberField,BooleanField,
         ChipField, FileField ,FileInput,
         ImageField, ImageInput, NumberInput, BooleanInput, List, Create,
         Edit, SimpleForm, DisabledInput, TextInput, LongTextInput, ReferenceManyField, Datagrid,
-        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton, DateInput ,ReferenceInput } from 'react-admin';
+        TextField, DateField,ArrayField,SingleFieldList, SelectInput, ShowButton, EditButton, DeleteButton, DateInput ,ReferenceInput, required,
+        minLength,
+        maxLength,
+        minValue,
+        maxValue,
+        number,
+        regex,
+        email,
+        choices } from 'react-admin';
 
 import { Pagination } from 'react-admin';
 import TagComponent from './TagComponent';
@@ -22,25 +30,41 @@ import AddIcon from '@material-ui/icons/Add';
 import { RadioButtonGroupInput } from 'react-admin';
 import UploadComponent from './UploadComponent';
 import ContentUserInteraction from "./ContentUserInteraction";
+import MyEditor  from './TextEditor';
+
+const validateExercisesName = [required(), minLength(5), maxLength(30)];
+const validateExercisesTitle = [required(), minLength(10), maxLength(100)];
+const validateExercisesField = [required()];
+const validateExercisesReference = [required()];
+const validateExercisesYear = [required()];
 
 export const ExercisesCreate = (props) => (
     <Create {...props} >
         <SimpleForm redirect="list">
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
+            <TextInput source="name" label="name" validate={validateExercisesName} />
+            <LongTextInput source="title" label="title" validate={validateExercisesTitle} />
+            <MyEditor label="description" />
+            {/* <LongTextInput source="description" label="description" /> */}
             <InsertSubject />
-            <RadioButtonGroupInput source="field" choices={[
-                { id: 'riazi', name: 'riazi' },
-                { id: 'tajrobi', name: 'tajrobi' }
-            ]} />
+            <RadioButtonGroupInput 
+                validate={validateExercisesField}
+                source="field" 
+                choices={[
+                    { id: 'riazi', name: 'riazi' },
+                    { id: 'tajrobi', name: 'tajrobi' }
+                ]} />
             
-            <RadioButtonGroupInput source="reference" choices={[
+            <RadioButtonGroupInput 
+                validate={validateExercisesReference}
+                source="reference" choices={[
                 { id: 'in', name: 'in' },
                 { id: 'out', name: 'out' }
             ]} />
 
-            <SelectInput source="year" choices={[
+            <SelectInput 
+                validate={validateExercisesYear}
+                source="year" 
+                choices={[
                 { id: '1381', name: '1381' },
                 { id: '1382', name: '1382' },
                 { id: '1383', name: '1383' },

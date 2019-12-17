@@ -1,17 +1,30 @@
 import React from 'react';
 import { List,NumberInput, Create, Edit, SimpleForm, 
         DisabledInput, TextInput, DateInput, LongTextInput, Datagrid, 
-        TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab } from 'react-admin';
+        TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab, required,
+        minLength,
+        maxLength,
+        minValue,
+        maxValue,
+        number,
+        regex,
+        email,
+        choices } from 'react-admin';
 import { Pagination } from 'react-admin';
 import UploadComponent from './UploadComponent';
+
+const validateShoppingPlanType = [required(), minLength(5), maxLength(30)];
+const validateShoppingPlanDuration = [required(), minValue(1)];
+const validateShoppingPlanFirstPrice = [required(), minValue(1)];
+const validateShoppingPlanSecondPrice = [required(), minValue(1)];
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
         <SimpleForm redirect="list">
-            <TextInput source="type" label="type" />
-            <NumberInput source="duration" label="duration" />
-            <NumberInput source="firstPrise" label="first Prise" />
-            <NumberInput source="secondPrise" label="second Prise" />
+            <TextInput source="type" label="type" validate={validateShoppingPlanType} />
+            <NumberInput source="duration" label="duration" validate={validateShoppingPlanDuration} />
+            <NumberInput source="firstPrise" label="first Prise" validate={validateShoppingPlanFirstPrice} />
+            <NumberInput source="secondPrise" label="second Prise" validate={validateShoppingPlanSecondPrice} />
             <UploadComponent 
                 type="thumbnail"
                 model="shoppingplans"

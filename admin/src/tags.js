@@ -1,14 +1,24 @@
 import React from 'react';
 import { List, Create, Edit, SimpleForm, DisabledInput,
-         TextInput,Datagrid, TextField, EditButton
+         TextInput,Datagrid, TextField, EditButton, required,
+         minLength,
+         maxLength,
+         minValue,
+         maxValue,
+         number,
+         regex,
+         email,
+         choices
         }
          from 'react-admin';
 import { Pagination } from 'react-admin';
 
+const validateTagName = [required(), minLength(5), maxLength(30)];
+
 export const TagCreate = (props) => (
     <Create {...props}>
         <SimpleForm redirect="list">
-            <TextInput source="name" />
+            <TextInput source="name" validate={validateTagName} />
         </SimpleForm>
     </Create>
 );
