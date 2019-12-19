@@ -124,7 +124,7 @@ module.exports = {
       definition.views = allViews;
       definition.likes = allLikes;
       definition.dislikes = allDislikes;
-      definition.thumbnail = sails.apconfig.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
+      definition.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
       moment.locale('en');
       definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       definition.jalaaliUpdatedDate = momentJalaali(definition.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

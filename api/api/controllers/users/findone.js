@@ -12,7 +12,9 @@ module.exports = {
 
 
   inputs: {
-    
+    mobile :{
+      type: 'string'
+    }
   },
 
 
@@ -24,6 +26,7 @@ module.exports = {
   fn: async function (inputs) {
 
     let token = this.req.headers.authorization;
+    return token;
     let TokenArray = token.split(" ");
     let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
     let userId = decodedToken.id;

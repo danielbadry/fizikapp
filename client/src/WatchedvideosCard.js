@@ -34,7 +34,7 @@ render() {
     <React.Fragment>
       <Link
         component={RouterLink} 
-        to={`${this.props.item.model}/${this.props.item.id}`}>
+        to={`product/${this.props.item.modelId}`}>
       <Paper
         style={{
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,

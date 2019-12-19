@@ -34,11 +34,11 @@ module.exports = {
         mobile : inputs.mobile
       }
     });
-
+    
     if ( typeof(user) !== 'undefined' && typeof(user) === 'object'){
       if(bcrypt.compareSync(inputs.password, user.password)) {
         var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
-          expiresIn: 86400 // expires in 24 hours
+          expiresIn: 259200 // expires in 72 hours
         });
       return({
           auth: true,

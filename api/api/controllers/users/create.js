@@ -103,7 +103,6 @@ module.exports = {
         }
 
         if (errorList.length === 0) {
-          // return 'inputs.password';
             var hash = bcrypt.hashSync(inputs.password, salt);
             let user = await Users
                 .create({
@@ -121,7 +120,7 @@ module.exports = {
                     updatedAt : await sails.helpers.dateParse(),
                 }).fetch();
                 var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
-                    expiresIn: 86400 // expires in 24 hours
+                    expiresIn: 259200 // expires in 72 hours
                 });
                 let status = { auth: true, token: token };
                 status.errorMessage = null;

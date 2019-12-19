@@ -33,6 +33,7 @@ module.exports.routes = {
     'GET /users/listofuserquizes': 'UsersController.listofuserquizes',
     'GET /users/numberofwatchedvideos': 'UsersController.numberofwatchedvideos',
     'GET /users/shoppinglevel': 'UsersController.shoppinglevel',
+    'GET /users/findbymobile': 'UsersController.findbymobile',
     'GET /users/financehistory': 'UsersController.financehistory',
     'GET /users/listofonlines': 'UsersController.listofonlines',
     'POST /watchedvideos/setuserwatchstatus': 'Watchedvideos.setuserwatchstatus',

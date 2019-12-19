@@ -85,17 +85,24 @@ module.exports = {
       searchConfig.reference = inputs.reference;
     }
 
-    searchConfig.year = {'in': r(inputs.fromYear, inputs.toYear)};
+    if (inputs.fromYear && inputs.toYear) {
+      searchConfig.year = {'in': r(inputs.fromYear, inputs.toYear)};
+    }
 
+    // return searchConfig;
     let exercises = await Exercises.find(
     searchConfig
     )
     .limit(inputs.limit)
     .skip(inputs.skip);
-
+    
     let allEx = [];
     for (let exercise of exercises) {
-      if (isExistsAtListOne(inputs.subjects, exercise.subjects)) {
+      if (inputs.subjects) {
+        if (isExistsAtListOne(inputs.subjects, exercise.subjects)) {
+          allEx.push(exercise);
+        }
+      } else {
         allEx.push(exercise);
       }
     }

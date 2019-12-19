@@ -34,8 +34,8 @@ class Exercises extends React.Component{
             toYear:1399,
             field:'',
             reference:'',
-            subjects:[],
-            isRender:false
+            subjects:'',
+            isRender:true
         }
     }
 
@@ -45,74 +45,6 @@ class Exercises extends React.Component{
 
     componentDidMount() {
         this.fetchExercises();
-        let token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+`subjects/allsubjects`, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
-            })
-            .then(response => response.json())
-            .then(response => {
-                this.setState((state, props) => {
-                    return ({subjects: response});
-                }, () => {
-                    this.setState({isRender:true});
-                });
-                
-                // this.setState((state, props) => {
-                //     return ({subjects: response.data});
-                // });
-                // console.info('categories:', response);
-               
-                // function unflatten(arr) {
-                //   var tree = [],
-                //       mappedArr = {},
-                //       arrElem,
-                //       mappedElem;
-            
-                //   // First map the nodes of the array to an object -> create a hash table.
-                // for(var i = 0, len = arr.length; i < len; i++) {
-                //     arrElem = arr[i];
-                //     mappedArr[arrElem.id] = arrElem;
-                //     mappedArr[arrElem.id]['children'] = [];
-                // }
-            
-                // for (var id in mappedArr) {
-                //     if (mappedArr.hasOwnProperty(id)) {
-                //       mappedElem = mappedArr[id];
-                //       // If the element is not at the root level, add it to its parent array of children.
-                      
-                //       if(mappedElem.parentId != '0')
-                //       {
-                //         mappedArr[mappedElem['parentId']]['children'].push(mappedElem);
-                //       }
-                //       // If the element is at the root level, add it to first level elements array.
-                //       else {
-                //         tree.push(mappedElem);
-                //       }
-                //     }
-                //   }
-                //   return tree;
-                // }
-            
-            // var tree = unflatten(response);
-            // this.setState((state, props) => {
-            //     return ({subjects: tree});
-            // }, () => {
-            //     this.setState({isRender:true})
-            // });
-
-            // console.log('content:',this.state.subjects);
-            // console.log('tree:',unflatten(arr));
-            });
     }
 
     fetchExercises = () => {

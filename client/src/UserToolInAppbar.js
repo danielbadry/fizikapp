@@ -16,29 +16,29 @@ class UserToolInAppbar extends React.Component {
 
     componentDidMount(){
         let token = localStorage.getItem("token");
-        if (token) {
-            fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
-                method: 'GET', 
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': `Bearer ${token}`
-                },
-                redirect: 'follow',
-                referrer: 'no-referrer',
-                })
-                .then(response => response.json())
-                .then(userinfo => {
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+            method: 'GET', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(userinfo => {
+                if (!userinfo.auth) {
+                    window.localStorage.removeItem('token');
+                } else {
                     this.setState(function(state, props) {
                         return {
-                            userinfo: userinfo
+                            userinfo: userinfo.userinfo
                         }});
-                });
-
-        }
-        
+                }
+            });
     }
 
     render() {
@@ -67,7 +67,7 @@ class UserToolInAppbar extends React.Component {
                     <Button 
                         variant="contained" 
                         color="primary" 
-                        href="/signup"
+                        href="#/signup"
                         style={{
                             fontFamily: 'IranSans'
                         }}

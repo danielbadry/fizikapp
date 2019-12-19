@@ -35,6 +35,7 @@ class InsertSubject extends React.Component {
     }
     
     componentDidMount() {
+        console.info('inam umda');
         fetch(process.env.REACT_APP_API_URL+`subjects/allsubjects`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
@@ -68,6 +69,7 @@ class InsertSubject extends React.Component {
                     checked={this.state.checked}
                     expanded={this.state.expanded}
                     onCheck={ (checked) => {
+                        console.info('ejra shod k');
                         this.setState({ checked }, () => {
                             this.click(checked);
                         });
