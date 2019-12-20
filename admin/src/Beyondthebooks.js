@@ -33,6 +33,7 @@ import MyEditor  from './TextEditor';
 
 const validateBeyondTheBookName = [required(), minLength(5), maxLength(30)];
 const validateBeyondTheBookTitle = [required(), minLength(10), maxLength(100)];
+const validateBeyondTheBookDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 
 export const BeyondthebooksCreate = (props) => (
     <Create {...props} >
@@ -47,6 +48,8 @@ export const BeyondthebooksCreate = (props) => (
                 type="thumbnail"
                 model="beyondthebooks"
                 />
+            <TextInput source="duration" label="duration in seconds" type="number" validate={validateBeyondTheBookDuration} />
+
             <UploadComponent 
                 type="file"
                 model="beyondthebooks"

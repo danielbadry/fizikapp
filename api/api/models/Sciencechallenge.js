@@ -53,6 +53,11 @@ module.exports = {
       required : false
     },
     
+    duration :{
+      type: 'string',
+      required : false
+    }
+    
   },
 
 };

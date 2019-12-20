@@ -209,7 +209,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {[{'text':'صفحه اصلی آموزش','link':'/'}, {'text':'حل تست و تمرین','link':'/exercises'}, {'text':'تعریفی ها', 'link':'/definitions'}, {'text':'فراتر از کتاب','link':'/beyondthebook'}, {'text':'چالش های علمی','link':'/sciencechallenges'}, {'text':'درخواست ها','link':'/requests'},].map((text, index) => (
+          {[{'text':'صفحه اصلی آموزش','link':'/'}, {'text':'حل تست و تمرین','link':'/exercises'}, {'text':'تعریفی ها', 'link':'/definitions'}, {'text':'فراتر از کتاب','link':'/beyondthebooks'}, {'text':'چالش های علمی','link':'/sciencechallenges'}, {'text':'درخواست ها','link':'/requests'},].map((text, index) => (
             <ListItem button key={index} component={Link} to={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{

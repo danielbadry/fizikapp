@@ -35,7 +35,7 @@ import MyEditor  from './TextEditor';
 
 const validateScienceChallengeName = [required(), minLength(5), maxLength(30)];
 const validateScienceChallengeTitle = [required(), minLength(5), maxLength(30)];
-
+const validateScienceChallengeDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 export const SciencechallengeCreate = (props) => (
     <Create {...props} >
         
@@ -50,6 +50,8 @@ export const SciencechallengeCreate = (props) => (
                 type="thumbnail"
                 model="sciencechallenge"
                 />
+            <TextInput source="duration" label="duration in seconds" type="number" validate={validateScienceChallengeDuration} />
+
             <UploadComponent 
                 type="file"
                 model="sciencechallenge"

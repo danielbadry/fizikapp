@@ -106,7 +106,7 @@ class SingleBeyondthebook extends React.Component {
         let data = {
             modelId: this.props.match.path.split('/')[2],
             startTime: player.currentTime,
-            model:'products'
+            model:'beyondthebooks'
         }
         fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
             method: 'POST', 

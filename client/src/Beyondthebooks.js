@@ -20,7 +20,7 @@ class Beyondthebooks extends React.Component{
     componentDidMount() {
         let token = localStorage.getItem('token');
 
-        fetch(process.env.REACT_APP_API_URL+`beyondthebook`, {
+        fetch(process.env.REACT_APP_API_URL+`beyondthebooks`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -44,7 +44,7 @@ class Beyondthebooks extends React.Component{
     render () {
         return (
             <List>
-                {this.state.products.map(
+                {this.state.beyondthebooks.map(
                     (item , index) => 
                         <ListItem key={index} alignItems="flex-start">
                             <ListItemAvatar>
@@ -61,7 +61,7 @@ class Beyondthebooks extends React.Component{
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/product/${item.id}`}>
+                                    to={`/beyondthebook/${item.id}`}>
                                         {item.name}
                                 </Link>
                             }

@@ -24,17 +24,36 @@ class WatchedvideosCard extends React.Component {
 
 constructor(props) {
   super (props);
+  this.state = {
+    targetUrl : null
+  }
 }
 
 componentDidMount() {
-  console.info('pr:', this.props);
+  // console.info('pr:', this.props);
+  let targetUrl = null;
+  switch (this.props.item.model) {
+    case 'sciencechallenge':
+      targetUrl = 'sciencechallenge';
+      break;
+    
+    case 'products':
+      targetUrl = 'product';
+      break;
+    
+      case 'beyondthebooks':
+      targetUrl = 'beyondthebook';
+      break;
+  }
+
+  this.setState({targetUrl: targetUrl});
 }
 render() {
   return (
     <React.Fragment>
       <Link
         component={RouterLink} 
-        to={`product/${this.props.item.modelId}`}>
+        to={`${this.state.targetUrl}/${this.props.item.modelId}`}>
       <Paper
         style={{
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,

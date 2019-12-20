@@ -33,6 +33,10 @@ module.exports = {
       type: 'string'
     },
 
+    duration :{
+      type: 'string',
+      required : false
+    }
   },
 
 
@@ -51,6 +55,7 @@ module.exports = {
         tags : inputs.tags || '[]',
         thumbnail : inputs.thumbnail,
         file : inputs.file,
+        duration:inputs.duration,
         isDeleted : false,
 
     });

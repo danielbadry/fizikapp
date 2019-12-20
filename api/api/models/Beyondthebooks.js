@@ -8,11 +8,7 @@
 module.exports = {
   schema: true,
   attributes: {
-    id :{
-      type: 'number',
-      autoIncrement: true
-
-    },
+    
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
@@ -61,6 +57,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    duration :{
+      type: 'string',
+      required : false
+    }
    
   },
 
