@@ -88,13 +88,13 @@ class Home extends React.Component {
                         count='10'
                     /> 
                     
-                    <SingleRow
+                    {/* <SingleRow
                         label="تعریفی ها"
                         footer="مشاهده بیشتر"
                         model="definitions"
                         linkToShowMore='definitions'
                         count='10'
-                    />
+                    /> */}
                     
                     <SingleRow
                         label="فراتر از کتاب"

@@ -118,39 +118,6 @@ class Sciencechallenges extends React.Component {
         
         return (
             <Grid container spacing={3}>
-                  
-                    {/* <Grid item xs={12}>
-                        <TextField
-                            id="standard-message"
-                            label="فیلتر"
-                            // className={classes.textField}
-                            // value={this.state.message}
-                            onChange={this.handleChange('message')}
-                            margin="normal"
-                            InputLabelProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                            InputProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                        />
-                    </Grid> */}
-                    <Grid item xs={12}>
-                    <Button 
-                        href="#/new-request"
-                        variant="contained"
-                        style={{
-                            fontFamily: "IranSans"
-                          }}
-                        >
-                        ارسال درخواست
-                    </Button>
-                    </Grid>
-                    
                     <Grid item xs={12}>
                         <Paper>
 
@@ -184,7 +151,7 @@ class Sciencechallenges extends React.Component {
                                 key={index}
                                 >
                                 <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                                <Avatar alt="Cindy Baker" src={request.thumbnail} />
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={
@@ -201,11 +168,11 @@ class Sciencechallenges extends React.Component {
                                         variant="body2"
                                         color="textPrimary"
                                     >
-                                        <Link component={RouterLink} to={'https://google.com'}>
-                                            {request.userInfo.fullName}
-                                        </Link>
+                                        {/* <Link>
+                                            ali
+                                        </Link> */}
                                     </Typography>
-                                    {' — Do you have Paris recommendations? Have you ever…'}
+                                    {request.description}
                                     </React.Fragment>
                                 }
                                 />

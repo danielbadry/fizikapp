@@ -149,7 +149,7 @@ class SingleSciencechallenge extends React.Component{
             let data = {
                 modelId: this.props.match.path.split('/')[2],
                 startTime: player.currentTime,
-                model:'sciencechallenges'
+                model:'sciencechallenge'
             }
             fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
                 method: 'POST', 
@@ -218,7 +218,7 @@ class SingleSciencechallenge extends React.Component{
                   });
             });
         }
-        window.scroll(0,0);
+        // window.scroll(0,0);
     }
 
     AnswerBox (props) {

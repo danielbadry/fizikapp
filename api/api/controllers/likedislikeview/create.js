@@ -13,15 +13,15 @@ module.exports = {
     model : {
       type: 'string'
     },
-    
+
     modelId : {
       type: 'string'
     },
-    
+
     type : {
       type: 'string'
     },
-    
+
     userId : {
       type: 'string'
     },
@@ -33,40 +33,67 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-    let token = this.req.headers.authorization;
-    let TokenArray = token.split(" ");
-    let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
-    let userId = decodedToken.id;
+    if (this.req.headers.authorization) {
+      let token = this.req.headers.authorization;
+      let TokenArray = token.split(' ');
 
-    let check = await Likedislikeview.find({
-      where : {
-        model : inputs.model,
-        modelId : inputs.modelId,
-        type : inputs.type,
-        userId : userId
-      }
-    });
+      return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
+        if (err) {
+          if(inputs.type === 'view')
+          {return await Likedislikeview.create({
+            model: inputs.model,
+            modelId: inputs.modelId,
+            type: inputs.type,
+            userId: null,
+            createdAt : await sails.helpers.dateParse(),
+            updatedAt : await sails.helpers.dateParse()
+          }).fetch();}
+        } else {
+          let userId = decoded.id;
 
-    if (check.length && inputs.type !== 'view') {
-      await Likedislikeview.destroyOne({
-        where : {
-          model : inputs.model,
-          modelId : inputs.modelId,
-          type : inputs.type,
-          userId : userId
+          let check = await Likedislikeview.find({
+            where : {
+              model : inputs.model,
+              modelId : inputs.modelId,
+              type : inputs.type,
+              userId : userId
+            }
+          });
+
+          if (check.length && inputs.type !== 'view') {
+            await Likedislikeview.destroyOne({
+              where : {
+                model : inputs.model,
+                modelId : inputs.modelId,
+                type : inputs.type,
+                userId : userId
+              }
+            });
+            return {};
+          } else {
+            return await Likedislikeview.create({
+              model: inputs.model,
+              modelId: inputs.modelId,
+              type: inputs.type,
+              userId: userId,
+              createdAt : await sails.helpers.dateParse(),
+              updatedAt : await sails.helpers.dateParse()
+            }).fetch();
+          }
         }
       });
-      return {};
+
     } else {
-      return await Likedislikeview.create({
+      if (inputs.type === 'view')
+      {return await Likedislikeview.create({
         model: inputs.model,
         modelId: inputs.modelId,
         type: inputs.type,
-        userId: userId,
+        userId: null,
         createdAt : await sails.helpers.dateParse(),
         updatedAt : await sails.helpers.dateParse()
-      }).fetch();
+      }).fetch();}
     }
-  }
 
+  }
 };
