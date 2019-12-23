@@ -20,6 +20,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Home from '@material-ui/icons/Home';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import FileCopy from '@material-ui/icons/FileCopy';
@@ -54,6 +56,7 @@ function getSorting(order, orderBy) {
 const headRows = [
   { id: 'avatar', numeric: false, disablePadding: true, label: 'avatar' },
   { id: 'name', numeric: false, disablePadding: true, label: 'name' },
+  { id: 'action', numeric: false, disablePadding: true, label: 'action' },
   { id: 'fullJalaali', numeric: true, disablePadding: false, label: 'date' }
 ];
 
@@ -252,7 +255,7 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
       let primes = myJson.Categories.concat(myJson.Products);
-        setRows(primes);
+        setRows(myJson.data);
     })
     .catch((e) => {
         
@@ -391,6 +394,20 @@ export default function EnhancedTable() {
     setItemsForCopy(itemToCopyIDs);
   }
   
+  function sortDown (row) {
+    var url = process.env.REACT_APP_API_URL+`/categories/categorize`;
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(row),
+    }).then(function(response) {
+      return response.json(); // pass the data as promise to next then block
+    }).then(function(data) {
+      console.info('tahesh:', data);
+    })
+    .catch(function(error) {
+    })
+  }
+
   function goUp () {
     var url = process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
     var result = fetch(url, {
@@ -605,6 +622,23 @@ export default function EnhancedTable() {
                         
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <Tooltip title="up">
+                        <IconButton 
+                          // onClick={() => goUp()}
+                          >
+                          {/* <ExpandLess /> */}
+                          <KeyboardArrowUp />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="down">
+                        <IconButton 
+                          onClick={() => sortDown(row)}
+                          >
+                          <KeyboardArrowDown />
+                        </IconButton>
+                      </Tooltip>
+                      </TableCell>
                       <TableCell align="right">{row.fullJalaali}</TableCell>
         
                     </TableRow>

@@ -58,6 +58,11 @@ module.exports = {
       type: 'boolean',
       required : false
     },
+
+    priority :{
+      type: 'string',
+      required : false
+    },
     
     thumbnail :{
       type: 'string',

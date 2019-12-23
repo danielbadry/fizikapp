@@ -13,6 +13,7 @@ module.exports.routes = {
     'GET /quizes/getuserquizresponse': 'QuizesController.getuserquizresponse',
     'GET /shops/shopsprocess': 'ShopsController.shopsprocess',
     'GET /categories/allcategories': 'CategoriesController.allcategories',
+    'POST /categories/categorize': 'CategoriesController.categorize',
     'GET /subjects/allsubjects': 'SubjectsController.allsubjects',
     'GET /subjects/findparentdirectoryid': 'SubjectsController.findparentdirectoryid',
     'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess',
