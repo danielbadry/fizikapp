@@ -28,6 +28,7 @@ class Category extends React.Component{
     }
 
     componentDidMount() {
+        console.info('inje propeshe:', this.props);
         let token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`categories?rowId=${this.props.match.params.categoryid}`, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -47,10 +48,13 @@ class Category extends React.Component{
             this.setState((state, props) => {
                 return ({
                     categories: result.Categories,
-                    baseCatId: result.Categories[0].id
+                    baseCatId: result.Categories[0].id,
+                    baseCatName: result.Categories[0].name,
                 });
             }, () => {
-                this.setState({isRender: true})
+                this.setState({isRender: true}, () => {
+                    console.info('base cat id : ', this.state.baseCatId);
+                })
             });
 
             fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${this.state.baseCatId}&model=products`, {
@@ -68,11 +72,12 @@ class Category extends React.Component{
                 })
                 .then(response => response.json())
                 .then(result => {
+                    console.info('catss:', result);
                     this.setState((state, props) => {
                         return ({
                             cats: result,
-                            baseCatId: result[0].id,
-                            baseCatName: result[0].name
+                            // baseCatId: result[0].id,
+                            // baseCatName: result[0].name,
                         });
                     }, () => {
                         this.setState({isRender: true})
@@ -99,6 +104,7 @@ class Category extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
+                console.info('catss:', result);
                 this.setState((state, props) => {
                     return ({
                         cats: result,
@@ -127,6 +133,7 @@ class Category extends React.Component{
     }
     
     Subjects (initLevel) {
+        console.info('intLevel:', this.state.finalBaseCatId);
         var endMenu = this.getMenu(initLevel);
         let someHtml = '<ul>'+endMenu.join('')+ '</ul>';
         return(

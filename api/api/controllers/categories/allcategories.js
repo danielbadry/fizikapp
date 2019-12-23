@@ -100,6 +100,7 @@ module.exports = {
     }
 
     var children = finalArray.concat(finalDefinitions);
+    children.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);
     return children;
 
   }

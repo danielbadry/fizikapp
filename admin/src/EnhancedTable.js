@@ -255,6 +255,7 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
       let primes = myJson.Categories.concat(myJson.Products);
+        console.info('ena inje:', myJson.data);
         setRows(myJson.data);
     })
     .catch((e) => {
@@ -394,7 +395,8 @@ export default function EnhancedTable() {
     setItemsForCopy(itemToCopyIDs);
   }
   
-  function sortDown (row) {
+  function sortDown (row, mode) {
+    row.mode = mode;
     var url = process.env.REACT_APP_API_URL+`/categories/categorize`;
     fetch(url, {
       method: 'POST',
@@ -402,7 +404,8 @@ export default function EnhancedTable() {
     }).then(function(response) {
       return response.json(); // pass the data as promise to next then block
     }).then(function(data) {
-      console.info('tahesh:', data);
+      setRows(data.data);
+      console.info('tahesh:', data.data);
     })
     .catch(function(error) {
     })
@@ -625,7 +628,7 @@ export default function EnhancedTable() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                       <Tooltip title="up">
                         <IconButton 
-                          // onClick={() => goUp()}
+                          onClick={() => sortDown(row,'up')}
                           >
                           {/* <ExpandLess /> */}
                           <KeyboardArrowUp />
@@ -633,7 +636,7 @@ export default function EnhancedTable() {
                       </Tooltip>
                       <Tooltip title="down">
                         <IconButton 
-                          onClick={() => sortDown(row)}
+                          onClick={() => sortDown(row,'down')}
                           >
                           <KeyboardArrowDown />
                         </IconButton>

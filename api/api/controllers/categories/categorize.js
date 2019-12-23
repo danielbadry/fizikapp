@@ -1,3 +1,5 @@
+var moment = require('moment');
+var momentJalaali = require('moment-jalaali');
 module.exports = {
 
 
@@ -15,6 +17,11 @@ module.exports = {
     },
 
     itemType: {
+      type: 'string',
+      required: false
+    },
+
+    mode: {
       type: 'string',
       required: false
     },
@@ -44,12 +51,11 @@ module.exports = {
 
   fn: async function (inputs) {
     var priority;
-    let mode = 'down';
     var targetCategoryId;
 
     if (inputs.itemType === 'product') {
       targetCategoryId = inputs.category;
-    } else {
+    } else if(inputs.itemType === 'folder') {
       targetCategoryId = inputs.parentId;
     }
 
@@ -65,50 +71,52 @@ module.exports = {
     children.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);
 
     var container;
-    var touchedRecord;
 
-    if (mode === 'down') {
+    if (inputs.mode === 'down') {
       for (i = 0; i< children.length; i++) {
         if (children[i].id === inputs.id) {
           container = children[i].priority;
           priority = children[i + 1].priority;
-          touchedRecord = children[i + 1];
           children[i].priority = children[i + 1].priority;
           children[i + 1].priority = container;
         }
       }
-    } else if (mode === 'up') {
+    } else if (inputs.mode === 'up') {
       for (i = 0; i< children.length; i++) {
         if (children[i].id === inputs.id) {
           container = children[i].priority;
           priority = children[i - 1].priority;
-          touchedRecord = children[i - 1];
           children[i].priority = children[i - 1].priority;
           children[i - 1].priority = container;
         }
       }
     }
 
-    if (touchedRecord.parentId) {
-      await Products.updateOne({
-        id: inputs.id
-      })
-      .set({
-        priority: priority
-      });
-    } else {
-
+    for(ch of children) {
+      if (ch.category) {
+        await Products.updateOne({
+          id: ch.id
+        })
+        .set({
+          priority: ch.priority
+        });
+      } else {
+        await Categories.updateOne({
+          id: ch.id
+        })
+        .set({
+          priority: ch.priority
+        });
+      }
     }
 
-    if (touchedRecord.itemType === 'folder') {
-      await Category.updateOne({
-        id: inputs.id
-      })
-      .set({
-        priority: priority
-      });
-    } else {
-
+    for (let ch of children) {
+      moment.locale('en');
+      ch.jalaaliCreatedDate = momentJalaali(ch.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      ch.jalaaliUserFriendlyCreatedDate = moment(ch.createdAt).fromNow();
+      ch.fullJalaali = ch.jalaaliCreatedDate + ' ' + ch.jalaaliUserFriendlyCreatedDate;
+      ch.itemType = (ch.category?'product':'folder');
     }
 
     children.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);
@@ -118,6 +126,5 @@ module.exports = {
     return finalData;
 
   }
-
 
 };
