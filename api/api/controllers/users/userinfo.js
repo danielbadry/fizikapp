@@ -19,10 +19,10 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    
+
     let token = this.req.headers.authorization;
-    let TokenArray = token.split(" ");
-    return jwt.verify(TokenArray[1], sails.config.custom.secret, async function(err, decoded) {
+    let TokenArray = token.split(' ');
+    return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
       if (err) {
         return({ auth: false, token: null, errorMessage:'not a user', err:err });
       } else {
@@ -33,7 +33,7 @@ module.exports = {
             id: userId
           }
         });
-        return ({ auth: true, errorMessage:null, userinfo : user });
+        return ({ auth: true, errorMessage:null, userinfo : user, data:user });
       }
     });
   }

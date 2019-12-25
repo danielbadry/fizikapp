@@ -31,8 +31,9 @@ class UserBasics extends React.Component {
         })
         .then(response => response.json())
         .then(userInfo => {
+            console.info('user basics:', userInfo);
             this.setState((state, props) => {
-                return {userBasicInfo: userInfo};
+                return {userBasicInfo: userInfo.data};
             });
         })
         ; // parses JSON response into native JavaScript objects     
@@ -41,20 +42,19 @@ class UserBasics extends React.Component {
     handleChange = pr => event => {
         event.persist();
         this.setState({userBasicInfo:{...this.state.userBasicInfo, [pr]: event.target.value}});
-        console.info(this.state);
     };
 
     updateForm = (event) => {
         event.preventDefault();
-        let user = JSON.parse(localStorage.getItem('userInfo'));
-        fetch(process.env.REACT_APP_API_URL+`users/${user.id}`, {
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/updateuserinfo`, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -63,7 +63,7 @@ class UserBasics extends React.Component {
         .then(response => response.json())
         .then(userInfo => {
             this.setState((state, props) => {
-                return {userBasicInfo: userInfo};
+                return {userBasicInfo: userInfo.data};
             });
         })
         ;
@@ -72,6 +72,7 @@ class UserBasics extends React.Component {
     render() {
     
         return(
+            <React.Fragment>
             <form 
                 noValidate 
                 autoComplete="off"
@@ -196,8 +197,8 @@ class UserBasics extends React.Component {
                 >
                     ذخیره
                 </Button>
-
             </form>
+            </React.Fragment>
         );
     }
 }
