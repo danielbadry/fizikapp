@@ -20,7 +20,7 @@ class UserSciencechallenges extends React.Component{
 
     componentDidMount() {
         let token = localStorage.getItem('token');
-        fetch(process.env.REACT_APP_API_URL+'sciencechallenge/', {
+        fetch(process.env.REACT_APP_API_URL+'sciencechallenge/showmysciencechallenge', {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -35,6 +35,7 @@ class UserSciencechallenges extends React.Component{
         })
         .then(response => response.json())
         .then(sciencechallenges => {
+            console.info('my science challenge:', sciencechallenges);
             this.setState((state, props) => {
             return {sciencechallenges: sciencechallenges.data};
             });
@@ -45,7 +46,7 @@ class UserSciencechallenges extends React.Component{
         return (
             <List>
                 {this.state.sciencechallenges.map(
-                (favorite, index) => 
+                (item, index) => 
                     <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
@@ -54,12 +55,12 @@ class UserSciencechallenges extends React.Component{
                     primary={
                         <Link 
                             component={RouterLink} 
-                            to={`/product/${favorite.recordData.id}`}
+                            to={`/sciencechallenge/${item.id}`}
                             style={{ fontFamily: 'IranSans_Light' }}
                             >
-                        {favorite.recordData.name}
+                        name
                         </Link>}
-                        // primary={favorite.recordData.name}
+                        // primary={item.recordData.name}
                         secondary={
                         <React.Fragment>
                             <Typography
@@ -70,12 +71,14 @@ class UserSciencechallenges extends React.Component{
                             <div
                                 style={{ fontFamily: 'IranSans_Light' }}
                                 >
-                                {favorite.jalaaliUserFriendlyCreatedDate}
+                                {item.jalaaliUserFriendlyCreatedDate}
                             </div>
                             </Typography>
                             <div
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >{favorite.recordData.description}</div>
+                                style={{ fontFamily: 'IranSans_Light' }}
+                                >
+                                {item.description}
+                            </div>
                         </React.Fragment>
                         }
                     />

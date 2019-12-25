@@ -19,6 +19,7 @@ module.exports.routes = {
     'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess',
     'GET /criticisms/badgecount': 'CriticismsController.badgecount',
     'GET /categories/findparentdirectoryid': 'CategoriesController.findparentdirectoryid',
+    'GET /sciencechallenge/showmysciencechallenge': 'SciencechallengeController.showmysciencechallenge',
     'POST /categories/paste': 'CategoriesController.paste',
     'POST /categories/deleteitems': 'CategoriesController.deleteitems',
     'PUT /users/sendfcoin': 'UsersController.sendfcoin',
