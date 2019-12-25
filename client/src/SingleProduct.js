@@ -71,6 +71,32 @@ class SingleProduct extends React.Component {
           });
     }
 
+    addToFavorites = () => {
+        console.info(this.props);
+        const token = localStorage.getItem('token');
+        let data = {
+            id : this.props.match.path.split('/')[2],
+            model: 'products'
+        }
+        fetch(process.env.REACT_APP_API_URL+`favorites`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                
+            });
+    }
+
     fetchProduct = (token) => {
         fetch(process.env.REACT_APP_API_URL+`products/${this.props.match.path.split('/')[2]}`, {
             method: 'GET', 
@@ -379,7 +405,9 @@ class SingleProduct extends React.Component {
                                                     (this.state.token && this.state.userCanSeeVideo) ? 
                                                         <Fab variant="extended" aria-label="like" style={{
                                                                 fontFamily: 'IranSans'
-                                                            }}>
+                                                            }}
+                                                            onClick={this.addToFavorites}
+                                                            >
                                                             <NavigationIcon />
                                                             نشان کردن
                                                         </Fab>:

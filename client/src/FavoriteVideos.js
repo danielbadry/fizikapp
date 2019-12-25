@@ -54,12 +54,12 @@ class FavoritesList extends React.Component {
               primary={
                 <Link 
                     component={RouterLink} 
-                    to={`/product/${favorite.recordData.id}`}
+                    to={`/product/${favorite.id}`}
                     style={{ fontFamily: 'IranSans_Light' }}
                     >
-                  {favorite.recordData.name}
+                  {favorite.name}
                 </Link>}
-                // primary={favorite.recordData.name}
+                // primary={favorite.name}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -75,7 +75,7 @@ class FavoritesList extends React.Component {
                     </Typography>
                     <div
                       style={{ fontFamily: 'IranSans_Light' }}
-                      >{favorite.recordData.description}</div>
+                      >{favorite.description}</div>
                   </React.Fragment>
                 }
               />
