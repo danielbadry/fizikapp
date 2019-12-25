@@ -23,6 +23,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    thumbnail :{
+      type: 'string',
+      required : false
+    },
   },
 
 
@@ -45,7 +50,8 @@ module.exports = {
           .set ({
             firstName : inputs.firstName,
             lastName : inputs.lastName,
-            email : inputs.email
+            email : inputs.email,
+            thumbnail : inputs.thumbnail
           });
         }
       });

@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import UploadComponent from './UploadComponent';
 
 class UserBasics extends React.Component {
     
@@ -73,6 +74,44 @@ class UserBasics extends React.Component {
     
         return(
             <React.Fragment>
+            <UploadComponent 
+                type="thumbnail"
+                model="users"
+                />
+            <Button
+                    type="submit"
+                    variant="contained"
+                    component="button"
+                    style={{ fontFamily: 'IranSans' }}
+                    onClick={()=>{
+                        let token = window.localStorage.getItem('token');
+                        let data = {
+                            thumbnail: window.localStorage.getItem('userThumbnail')
+                        }
+                        fetch(process.env.REACT_APP_API_URL+`users/updateuserinfo`, {
+                            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+                            mode: 'cors', // no-cors, cors, *same-origin
+                            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                            credentials: 'same-origin', // include, *same-origin, omit
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'authorization': `Bearer ${token}`,
+                            },
+                            redirect: 'follow', // manual, *follow, error
+                            referrer: 'no-referrer', // no-referrer, *client
+                            body: JSON.stringify(data), // body data type must match "Content-Type" header
+                        })
+                        .then(response => response.json())
+                        .then(userInfo => {
+                            // this.setState((state, props) => {
+                            //     return {userBasicInfo: userInfo.data};
+                            // });
+                        })
+                        ;
+                    }}
+                >
+                    ثبت تصویر جدید
+                </Button>    
             <form 
                 noValidate 
                 autoComplete="off"
