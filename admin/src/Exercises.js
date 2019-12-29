@@ -40,7 +40,7 @@ const validateExercisesYear = [required()];
 
 export const ExercisesCreate = (props) => (
     <Create {...props} >
-        <SimpleForm redirect="list">
+        <SimpleForm redirect="list" submitOnEnter={true}>
             <TextInput source="name" label="name" validate={validateExercisesName} />
             <LongTextInput source="title" label="title" validate={validateExercisesTitle} />
             <MyEditor label="description" />
@@ -48,7 +48,7 @@ export const ExercisesCreate = (props) => (
             <InsertSubject />
             <RadioButtonGroupInput 
                 validate={validateExercisesField}
-                source="field" 
+                source="field"
                 choices={[
                     { id: 'riazi', name: 'riazi' },
                     { id: 'tajrobi', name: 'tajrobi' }
@@ -160,13 +160,83 @@ export const ExercisesList = props => (
     <List {...props} pagination={<ExercisesPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="Name" />
-            <TextField source="title" label="Title" />
-            <TextField source="description" label="Description" />
-            <TextField source="year" label="year" />
-            <BooleanField source="isRiazi" label="riazi" />
-            <BooleanField source="isTajrobi" label="tajrobi" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
+            <TextField 
+                source="name" 
+                label="Name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="title" 
+                label="Title" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="description" 
+                label="Description" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="year" 
+                label="year" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <BooleanField 
+                source="isRiazi" 
+                label="riazi" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <BooleanField 
+                source="isTajrobi" 
+                label="tajrobi" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <EditButton />
             <DeleteButton />
         </Datagrid>

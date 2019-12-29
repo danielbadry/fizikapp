@@ -608,8 +608,29 @@ export default function EnhancedTable() {
                         </ListItemAvatar>
                         
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
-                      <TableCell align="right">{row.fullJalaali}</TableCell>
+                      <TableCell 
+                        component="th" 
+                        id={labelId} 
+                        scope="row" 
+                        padding="none"
+                        style={{ 
+                          fontFamily: 'Far_Kamran' ,
+                          fontSize: '19px',
+                          fontWeight : 'bold',
+                          color: 'black',
+                          direction: 'rtl'
+                        }}
+                        >{row.name}</TableCell>
+                      <TableCell 
+                        align="right"
+                        style={{ 
+                          fontFamily: 'Far_Kamran' ,
+                          fontSize: '19px',
+                          fontWeight : 'bold',
+                          color: 'black',
+                          direction: 'rtl'
+                        }}
+                        >{row.fullJalaali}</TableCell>
         
                     </TableRow>
                   );

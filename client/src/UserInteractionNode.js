@@ -91,7 +91,12 @@ class UserInteractionNode extends React.Component {
     setReplyMessage = (e) => {
       this.replyMessage = e.target.value;
     };
-
+    sendByEnter = (event, item) => {
+        if (event.charCode == '13') {
+          console.info('umad');
+          this.sendReplyToQuestion(item);
+          }
+    }
     fetchProductsQuestions = () => {
       fetch(process.env.REACT_APP_API_URL+`userinteractions?model=${this.props.model}&modelid=${this.props.modelid}&type=${this.props.type}`, {
         method: 'GET', 
@@ -191,8 +196,9 @@ class UserInteractionNode extends React.Component {
                             {(localStorage.getItem('token')) ? 
                             <div>
                             <TextField
+                                onKeyPress={(event)=>this.sendByEnter(event,m)}
                                 margin="dense"
-                                label="ضضنظرتان را بنویسید"
+                                label="  بنویسید"
                                 type="text"
                                 onChange={this.setReplyMessage.bind()}
                                 fullWidth
@@ -241,6 +247,7 @@ class UserInteractionNode extends React.Component {
             {(localStorage.getItem('token')) ? 
             <div>
             <TextField
+                onKeyPress={(event)=>this.sendByEnter(event)}
                 margin="dense"
                 label="نظرتان را بنویسید"
                 type="text"

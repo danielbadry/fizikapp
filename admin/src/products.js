@@ -71,7 +71,7 @@ const validateProductCreation = (values) => {
 export const ProductCreate = (props) => (
     <Create {...props} >
         
-        <SimpleForm redirect="list">
+        <SimpleForm redirect="list" submitOnEnter={true}>
             
             <TextInput source="name" label="name" validate={validateProductName} />
             <LongTextInput source="title" label="title" validate={validateProductTitle} />
@@ -87,6 +87,7 @@ export const ProductCreate = (props) => (
             <UploadComponent 
                 type="thumbnail"
                 model="products"
+                
                 />
 
             <TextInput source="duration" label="duration in seconds" type="number" validate={validateProductDuration} />
@@ -121,7 +122,7 @@ const qaConfig = [
 
 const cmConfig = [
     {
-        type:'qa',
+        type:'comment',
         label:'پرسش و پاسخ',
         model:'products'
     },
@@ -135,7 +136,11 @@ export const ProductShow = (props) => (
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
-                <TextField source="summary.name" label="name" />
+                <TextField 
+                    source="summary.name" 
+                    label="name" 
+                    
+                    />
                 <VideoPlayerField />
                 <TextField source="summary.description" label="description" />
                 <ArrayField source="summary.tagsArray" label="tags">
@@ -146,12 +151,10 @@ export const ProductShow = (props) => (
             </Tab>
 
             <Tab label="qa" path="qa">
-            <Tab label="qa" path="qa">
                 <ContentUserInteraction 
                     config={qaConfig}
                     modelid={props.id}
                     />
-            </Tab>
             </Tab>
 
             <Tab label="reports" path="report" >
@@ -181,7 +184,17 @@ export const ProductsList = props => (
     <List {...props} pagination={<ProductPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="Name" />
+            <TextField 
+                source="name" 
+                label="name"
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                />
             <ArrayField source="tagsArray">
                 <SingleFieldList>
                     <ChipField source="name" />
@@ -189,7 +202,16 @@ export const ProductsList = props => (
             </ArrayField>
             <BooleanField source="isMedal" label="isMedal" />
             <BooleanField source="hasQuiz" label="hasQuiz" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran',
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
             <EditButton />
             <DeleteButton />
         </Datagrid>

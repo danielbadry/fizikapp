@@ -331,7 +331,7 @@ class Exercises extends React.Component{
                                         style={{
                                             fontFamily:'IranSans'
                                         }}>
-                                        لوکیشن
+                                        منبع
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

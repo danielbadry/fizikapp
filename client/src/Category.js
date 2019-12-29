@@ -144,11 +144,42 @@ class Category extends React.Component{
         )
     }
 
-    handleChange = panel => (event, newExpanded) => {
+    handleChange = (panel, item) => (event, newExpanded) => {
+        console.info('panelll:', item);
+        
         if (panel == this.state.expanded) {
             this.setState({expanded:null});
         } else
             this.setState({expanded:panel});
+
+        // get this category content
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${item.id}&model=products`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.info('catss:', result);
+                this.setState((state, props) => {
+                    return ({
+                        cats: result,
+                        baseCatId: item.id,
+                        baseCatName: item.name,
+                    });
+                }, () => {
+                    this.setState({isRender: true})
+                });
+            });
     };
 
     render() {
@@ -164,7 +195,7 @@ class Category extends React.Component{
                                     <ExpansionPanel 
                                         key={index} 
                                         expanded={this.state.expanded == index} 
-                                        onChange={this.handleChange(index)}
+                                        onChange={this.handleChange(index, item)}
                                     >
                                         <ExpansionPanelSummary
                                         expandIcon={<ExpandMoreIcon />}
@@ -184,7 +215,7 @@ class Category extends React.Component{
                                                 (i, ind) =>
                                                 <li
                                                     key={ind}
-                                                    onClick={()=>this.getContent(i.id)}
+                                                    // onClick={()=>this.getContent(i.id)}
                                                     >
                                                     <Typography
                                                     component="div"

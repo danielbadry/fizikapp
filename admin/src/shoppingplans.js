@@ -66,11 +66,61 @@ export const ShoppingplansList = props => (
     <React.Fragment>
         <List {...props} pagination={<ShoppingplanPagination />}>
             <Datagrid>
-                <TextField source="type" label="type" />
-                <TextField source="firstPrise" label="first prise" />
-                <TextField source="secondPrise" label="second prise" />
-                <TextField source="duration" label="duration" />
-                <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="update date" />
+                <TextField 
+                    source="type" 
+                    label="type" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
+                <TextField 
+                    source="firstPrise" 
+                    label="first prise" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
+                <TextField 
+                    source="secondPrise" 
+                    label="second prise" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
+                <TextField 
+                    source="duration" 
+                    label="duration" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
+                <TextField 
+                    source="jalaaliFullUserFriendlyUpdatedDate" 
+                    label="update date" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
                 <EditButton />
             </Datagrid>
         </List>

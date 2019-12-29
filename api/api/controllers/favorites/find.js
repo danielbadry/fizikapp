@@ -23,7 +23,7 @@ module.exports = {
       let TokenArray = token.split(' ');
       return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
         if (err) {
-
+          return ({ auth: false, errorMessage:null, data: null });
         } else {
           let myFavorites = await Favorites.find({
             userId : decoded.id
@@ -39,6 +39,8 @@ module.exports = {
         }
       });
 
+    } else {
+      return ({ auth: false, errorMessage:null, data: null });
     }
   }
 

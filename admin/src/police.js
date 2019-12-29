@@ -11,9 +11,39 @@ export const PoliceList = props => (
         <Datagrid>
             <Thumbnail source="thumbnail" label="thumbnail" />
             <MyUrlField label="userInfo.username"/>
-            <TextField source="userInfo.fullName" label="name" />
-            <TextField source="message" label="warning" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="date" />
+            <TextField 
+                source="userInfo.fullName" 
+                label="name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="message" 
+                label="warning" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
         </Datagrid>
     </List>
 );

@@ -22,12 +22,18 @@ module.exports = {
     
     priority :{
       type: 'string',
-      required : false
+      required : false,
+      defaultsTo: '0'
     },
     
     parentId : {
       type: 'string',
       defaultsTo: '0'
+    },
+    
+    thumbnail : {
+      type: 'string',
+      defaultsTo: ''
     },
 
     isDeleted : {

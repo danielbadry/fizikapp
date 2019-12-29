@@ -35,7 +35,7 @@ class UserToolInAppbar extends React.Component {
                 } else {
                     this.setState(function(state, props) {
                         return {
-                            userinfo: userinfo.userinfo
+                            userinfo: userinfo.data
                         }});
                 }
             });
@@ -58,7 +58,9 @@ class UserToolInAppbar extends React.Component {
                     
                     <UserSystemMessageMenu />
                     {/* <UserNotificationMenu /> */}
-                    <UserProfileMenu />
+                    <UserProfileMenu 
+                        userinfo = {this.state.userinfo}
+                    />
                 </React.Fragment>
             )
         else 

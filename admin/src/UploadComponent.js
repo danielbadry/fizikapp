@@ -53,6 +53,7 @@ export default class UploadComponent extends React.Component {
           server={uploadUrl}
           onprocessfile={fileItem => {
             let fileNameInfo = this.state.files[0].name.split('.');
+            // this.props.onFinish(randomName + '.' + fileNameInfo[1]);
             dispatch(
               change(REDUX_FORM_NAME, this.props.type, randomName + '.' + fileNameInfo[1])
             )}}

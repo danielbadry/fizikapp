@@ -39,7 +39,7 @@ const validateScienceChallengeDuration = [required(), minLength(1), maxLength(20
 export const SciencechallengeCreate = (props) => (
     <Create {...props} >
         
-        <SimpleForm redirect="list">
+        <SimpleForm redirect="list" submitOnEnter={true}>
             <TextInput source="name" label="name" validate={validateScienceChallengeName} />
             <LongTextInput source="title" label="title" validate={validateScienceChallengeTitle} />
             {/* <LongTextInput source="description" label="description" /> */}
@@ -135,14 +135,34 @@ export const SciencechallengeList = props => (
     <List {...props} pagination={<SciencechallengePagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="Name" />
+            <TextField 
+                source="name" 
+                label="Name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <ArrayField source="tagsArray">
                 <SingleFieldList>
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
             <BooleanField source="isEnabled" label="Enable" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <EditButton />
             <DeleteButton />
         </Datagrid>

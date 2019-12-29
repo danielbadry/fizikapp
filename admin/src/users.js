@@ -88,7 +88,7 @@ export const UserCreatee = (props) => (
 
 export const UserCreate = (props) => (
     <Create {...props}>
-        <SimpleForm >
+        <SimpleForm submitOnEnter={true}>
             <TextInput source="firstName" label="first name" />
             <TextInput source="lastName" label="last name" />
             <TextInput source="email" label="email" />
@@ -163,12 +163,61 @@ export const UsersList = props => (
     <List {...props} pagination={<UserPagination />} filters={<PostFilter />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="userName" label="username" />
-            <TextField source="fullName" label="full name" />
-            <TextField source="jalaaliRegisterDate" label="last login" />
-            <TextField source="totalPurchase" label="total purchase" />
-            <TextField source="fCoin" label="f coin" />
-            <TextField source="numberOfInvitation" label="invitations" />
+            <TextField 
+                source="userName" 
+                label="username" 
+                />
+            <TextField 
+                source="fullName" 
+                label="full name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
+            <TextField 
+                source="jalaaliRegisterDate" 
+                label="last login" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
+            <TextField 
+                source="totalPurchase" 
+                label="total purchase" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
+            <TextField 
+                source="fCoin" 
+                label="f coin" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                />
+            <TextField 
+                source="numberOfInvitation" 
+                label="invitations" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
             <TextField source="subType" label="sub type" />
         </Datagrid>
         

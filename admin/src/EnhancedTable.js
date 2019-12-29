@@ -28,6 +28,12 @@ import FileCopy from '@material-ui/icons/FileCopy';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import UploadComponent from './UploadComponent';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -178,6 +184,7 @@ export default function EnhancedTable() {
     const [currentDirectory, setCurrentDirectory] = useState({id:0});
     const [firstTime, setFirstTime] = useState(true);
     const [rowId, setrowId] = useState(0);
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     useEffect(() => {
       const dataRecord = {
@@ -207,6 +214,7 @@ export default function EnhancedTable() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
+  const [thumbnail, setThumbnail] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   function handleRequestSort(event, property) {
@@ -348,9 +356,11 @@ export default function EnhancedTable() {
   }
 
   function createNewFolderr () {
+    setDialogOpen(false);
     const dataRecord = {
       name:values.name,
-      parentId : currentDirectory.id
+      parentId : currentDirectory.id,
+      thumbnail: thumbnail
     }
     
     fetch(process.env.REACT_APP_API_URL+'/categories', { method: 'POST', 
@@ -369,9 +379,8 @@ export default function EnhancedTable() {
           return response.json();
       })
       .then((myJson) => {
-          let primes = myJson.Categories.concat(myJson.Products);
+          let primes = myJson.data;
           setRows(primes);
-
       })
       .catch((e) => {
           
@@ -481,6 +490,11 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   }
 
+  function onFinish(dirThumbName) {
+    console.info('inje resid:', dirThumbName);
+    setThumbnail(dirThumbName);
+  }
+
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -498,13 +512,13 @@ export default function EnhancedTable() {
         
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
 {/* start */}
-  <TextField
+  {/* <TextField
         id="standard-name"
         label="Name"
         value={values.name}
         onChange={handleChange('name')}
         margin="normal"
-      />
+      /> */}
     <Toolbar
       className={clsx(classes1.root, {
         [classes1.highlight]: numSelected > 0,
@@ -531,41 +545,78 @@ export default function EnhancedTable() {
           </Tooltip>
         ) : (
         <div>
-        {/* <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-        </Tooltip> */}
+       
         <Tooltip title="up">
             <IconButton onClick={() => goUp()}>
                 <ExpandLess />
             </IconButton>
         </Tooltip>
-        {/* <Tooltip title="paste">
-        <IconButton onClick={() => paste()}>
-            <CloudDoneIcon />
-        </IconButton>
-      </Tooltip> */}
+        
       <Tooltip title="home">
         <IconButton onClick={() => handleGoHome()} color="primary">
             <Home />
         </IconButton>
       </Tooltip>
       
-      {/* <Tooltip title="cut">
-        <IconButton color="primary" onClick={() => copySelected()}>
-            <FileCopy />
-        </IconButton>
-      </Tooltip> */}
-      
-      <Tooltip title="new">
+      {/* <Tooltip title="new">
         <IconButton 
             onClick={()=> createNewFolderr()} color="primary">
             <CreateNewFolder />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
       
-      <Tooltip title="new">
+      <Tooltip title="create new folder">
+        <IconButton 
+            onClick={()=> setDialogOpen(true)} 
+            color="primary"
+            >
+            <CreateNewFolder />
+        </IconButton>
+      </Tooltip>
+      <Dialog 
+        open={dialogOpen} 
+        onClose={()=>setDialogOpen(false)} 
+        aria-labelledby="form-dialog-title"
+        >
+        <DialogTitle id="form-dialog-title">Create New Directory</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            
+          </DialogContentText>
+          <TextField
+            value={values.name}
+            onChange={handleChange('name')}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            type="text"
+            fullWidth
+          />
+
+          <UploadComponent 
+            type="thumbnail"
+            model="categories"
+            onFinish={onFinish}
+            />
+
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={()=>setDialogOpen(false)} 
+            color="primary"
+            >
+            Cancel
+          </Button>
+          <Button 
+            onClick={() => createNewFolderr()}
+            color="primary"
+            >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Tooltip title="delete">
         <IconButton 
             onClick={()=> deleteRows()} color="primary">
             <DeleteIcon />
@@ -624,7 +675,18 @@ export default function EnhancedTable() {
                         </ListItemAvatar>
                         
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
+                      <TableCell 
+                        component="th" 
+                        id={labelId} 
+                        scope="row" 
+                        padding="none"
+                        style={{ 
+                          fontFamily: 'Far_Kamran' ,
+                          fontSize: '19px',
+                          fontWeight : 'bold',
+                          color: 'black'
+                        }}
+                        >{row.name}</TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                       <Tooltip title="up">
                         <IconButton 
@@ -641,8 +703,24 @@ export default function EnhancedTable() {
                           <KeyboardArrowDown />
                         </IconButton>
                       </Tooltip>
+                      <Tooltip title="delete">
+                        <IconButton 
+                          onClick={() => {}}
+                          >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
                       </TableCell>
-                      <TableCell align="right">{row.fullJalaali}</TableCell>
+                      <TableCell 
+                        align="right"
+                        style={{ 
+                          fontFamily: 'Far_Kamran' ,
+                          fontSize: '19px',
+                          fontWeight : 'bold',
+                          color: 'black',
+                          direction: 'rtl'
+                        }}
+                        >{row.fullJalaali}</TableCell>
         
                     </TableRow>
                   );

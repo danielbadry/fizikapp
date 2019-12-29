@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-export default function UserProfileMenu() {
+export default function UserProfileMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -21,12 +21,10 @@ export default function UserProfileMenu() {
   const logOut = () => {
     window.localStorage.removeItem('token');
     setAnchorEl(null);
-    window.location.reload();
+    // window.location.reload();
+    window.location.replace("/");
   }
 
-  // switch (anchorEl) {
-    
-  // }
   return (
     <React.Fragment>
       <IconButton
@@ -37,7 +35,14 @@ export default function UserProfileMenu() {
               onClick={handleClick}
               color="inherit"
             >
-              <AccountCircle />
+              {/* <AccountCircle /> */}
+              <img 
+                src={props.userinfo.thumbnail}
+                style={{
+                  borderRadius: '50%',
+                  width: '34px'
+                }}
+                />
             </IconButton>
             <Menu
               id="simple-menu"

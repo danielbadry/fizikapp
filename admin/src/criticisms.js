@@ -35,12 +35,42 @@ export const CriticismsList = props => (
         <Datagrid expand={<CriticismsPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
             <MyUrlField label="username"/>
-            <TextField source="userInfo.fullName" label="name" />
-            <TextField source="title" label="title" />
+            <TextField 
+                source="userInfo.fullName" 
+                label="name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="title" 
+                label="title" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <BooleanField source="isResponsed" label="isResponsed" />
             {/* <TextField source="jalaaliCreatedDate" label="jalaali Created Date" />
             <TextField source="jalaaliUserFriendlyCreatedDate" label="User Friendly Date" /> */}
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
         </Datagrid>
     </List>
 );

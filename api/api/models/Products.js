@@ -61,7 +61,8 @@ module.exports = {
 
     priority :{
       type: 'string',
-      required : false
+      required : false,
+      defaultsTo: '0'
     },
     
     thumbnail :{

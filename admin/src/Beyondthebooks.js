@@ -38,7 +38,7 @@ const validateBeyondTheBookDuration = [required(), minLength(1), maxLength(2000)
 export const BeyondthebooksCreate = (props) => (
     <Create {...props} >
         
-        <SimpleForm redirect="list">
+        <SimpleForm redirect="list" submitOnEnter={true}>
             <TextInput source="name" label="name" validate={validateBeyondTheBookName} />
             <LongTextInput source="title" label="title" validate={validateBeyondTheBookTitle} />
             <MyEditor label="description" />
@@ -130,13 +130,32 @@ export const BeyondthebooksList = props => (
     <List {...props} pagination={<BeyondthebookPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="Name" />
+            <TextField 
+                source="name" 
+                label="Name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black'
+                }}
+                />
             <ArrayField source="tagsArray">
                 <SingleFieldList>
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                />
             <EditButton />
             <DeleteButton />
         </Datagrid>

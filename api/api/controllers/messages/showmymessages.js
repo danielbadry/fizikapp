@@ -2,10 +2,10 @@ var jwt = require('jsonwebtoken');
 module.exports = {
 
 
-  friendlyName: 'Userinfo',
+  friendlyName: 'Showmymessages',
 
 
-  description: 'Userinfo users.',
+  description: 'Showmymessages messages.',
 
 
   inputs: {
@@ -17,26 +17,25 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs) {
 
     let token = this.req.headers.authorization;
     let TokenArray = token.split(' ');
     return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
       if (err) {
-        return({ auth: false, token: null, errorMessage:'not a user', err:err });
+        return({ auth: false, token: null, errorMessage:'error in messages', err:err });
       } else {
         let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
         let userId = decodedToken.id;
-        let user = await Users.findOne({
+        let messages = await Messages.find({
           where : {
-            id: userId
+            userId: userId
           }
         });
-        user.thumbnail = sails.config.custom.apiUrl + "/files/usersImage/" + user.thumbnail;
-        return ({ auth: true, errorMessage:null, userinfo : user, data:user });
+        return ({ auth: true, errorMessage:null, data:messages });
       }
     });
+
   }
 
 };

@@ -52,11 +52,41 @@ export const RequestList = props => (
     <List {...props} pagination={<RequestPagination />}>
         <Datagrid rowClick="show" expand={<RequestPanel />}>
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="userInfo.fullName" label="name" />
+            <TextField 
+                source="userInfo.fullName" 
+                label="name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <MyUrlField label="username"/>
             <TextField source="userInfo.userName" label="user name" />
-            <TextField source="title" label="title" />
-            <TextField source="jalaaliFullUserFriendlyUpdatedDate" label="Date" />
+            <TextField 
+                source="title" 
+                label="title" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="jalaaliFullUserFriendlyUpdatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <BooleanField source="isResponsed" label="isResponsed" label="isResponsed" />
         </Datagrid>
     </List>

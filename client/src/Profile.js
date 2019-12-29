@@ -34,6 +34,9 @@ class Profile extends React.Component {
     
     constructor(props) {
         super(props);
+        this.state = {
+            user : {}
+        }
     }
 
     HandleDashboard = ({ match }) => {
@@ -91,7 +94,27 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json())
+            .then(user => {
+                this.setState({
+                    user : user.data
+                }, () => {
+                    console.info(this.state.user.data);
+                });
+            });
     }
 
     render() {
@@ -125,7 +148,10 @@ class Profile extends React.Component {
                             <Grid container spacing={0}>
                                 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <img src="dhttps://www.goldenglobes.com/sites/default/files/styles/portrait_medium/public/gallery_images/17-tomcruiseag.jpg?itok=qNj0cQGV&c=c9a73b7bdf609d72214d226ab9ea015e" />
+                                    <img
+                                        width="100px"
+                                        src={this.state.user.thumbnail} 
+                                        />
                                 </Grid>
                                 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -134,13 +160,7 @@ class Profile extends React.Component {
                                             fontFamily:'IranSans'
                                         }}
                                         >
-                                        ایمان ارقامی 
-                                    </Typography>
-                                    <Typography 
-                                        style={{
-                                            fontFamily:'IranSans'
-                                        }}>
-                                        مدیر سیستم
+                                        {this.state.user.firstName + ' ' + this.state.user.lastName} 
                                     </Typography>
                                 </Grid>
                                 
@@ -291,7 +311,7 @@ class Profile extends React.Component {
                                             </ListItemIcon>
                                             <ListItemText 
                                                 primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
-                                                        چالش های علمی
+                                                        چالش های علمی من
                                                         </Typography>} />
                                         </ListItem>
                                         

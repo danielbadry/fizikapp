@@ -36,7 +36,7 @@ const validateDefinitionTitle = [required(), minLength(5), maxLength(30)];
 export const DefinitionsCreate = (props) => (
     <Create {...props} >
         
-        <SimpleForm redirect="list">
+        <SimpleForm redirect="list" submitOnEnter={true}>
             <TextInput source="name" label="name" validate={validateDefinitionName} />
             <TextInput source="title" label="title" validate={validateDefinitionTitle} />
             <Book 
@@ -117,9 +117,39 @@ export const DefinitionsList = props => (
     <List {...props} pagination={<DefinitionsPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail source="thumbnail" label="thumbnail" />
-            <TextField source="name" label="Name" />
-            <TextField source="title" label="title" />
-            <TextField source="jalaaliFullUserFriendlyCreatedDate" label="Date" />
+            <TextField 
+                source="name" 
+                label="Name" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="title" 
+                label="title" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
+            <TextField 
+                source="jalaaliFullUserFriendlyCreatedDate" 
+                label="Date" 
+                style={{ 
+                    fontFamily: 'Far_Kamran' ,
+                    fontSize: '19px',
+                    fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                  }}
+                />
             <EditButton />
             <DeleteButton />
         </Datagrid>

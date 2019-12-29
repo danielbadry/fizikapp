@@ -5,17 +5,30 @@ import SignUpStepper from './SignUpStepper';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 class SignUp extends React.Component{
     constructor(props) {
         super(props);
+        this.state = {
+            isUserLoggedIn : false
+        }
     }
 
     componentDidMount() {
-
+        let token = window.localStorage.getItem('token');
+        if (token)
+            this.setState({
+                isUserLoggedIn : true
+            })
     }
 
     render() {
+        if(this.state.isUserLoggedIn) {
+            return (
+                <Redirect to="/" />
+            )
+        } else
         return(
             <React.Fragment>
                 {/* <video 
