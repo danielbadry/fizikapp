@@ -481,6 +481,7 @@ if(isSignupSuccess) {
               />
               </div>
               <div>
+                <br /><br />
               <FormControl component="fieldset">
                 <FormLabel 
                   component="legend"
@@ -496,7 +497,12 @@ if(isSignupSuccess) {
                       fontFamily:'IranSans',
                       fontSize:'14px'
                     }} />}
-                    label="دهم"
+                    label={<Typography
+                      style={{
+                        fontFamily:'IranSans',
+                        fontSize:'14px'
+                      }}
+                      >دهم</Typography>}
                     labelPlacement="دهم"
                   />
                   <FormControlLabel
@@ -505,7 +511,12 @@ if(isSignupSuccess) {
                       fontFamily:'IranSans',
                       fontSize:'14px'
                     }} />}
-                    label="یازدهم"
+                    label={<Typography
+                      style={{
+                        fontFamily:'IranSans',
+                        fontSize:'14px'
+                      }}
+                      >یازدهم</Typography>}
                     labelPlacement="یازدهم"
                   />
                   <FormControlLabel
@@ -514,8 +525,27 @@ if(isSignupSuccess) {
                       fontFamily:'IranSans',
                       fontSize:'14px'
                     }} />}
-                    label="دوازدهم"
+                    label={<Typography
+                      style={{
+                        fontFamily:'IranSans',
+                        fontSize:'14px'
+                      }}
+                      >دوازدهم</Typography>}
                     labelPlacement="دوازدهم"
+                  />
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio color="primary" style={{
+                      fontFamily:'IranSans',
+                      fontSize:'14px'
+                    }} />}
+                    label={<Typography
+                      style={{
+                        fontFamily:'IranSans',
+                        fontSize:'14px'
+                      }}
+                      >فارغ التحصیل</Typography>}
+                    labelPlacement="فارغ التحصیل"
                   />
                 </RadioGroup>
               </FormControl>

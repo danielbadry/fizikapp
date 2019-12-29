@@ -12,7 +12,10 @@ class UserBasics extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userBasicInfo : {}
+            firstName : '',
+            lastName: '',
+            email:'',
+            mobile:''
         };
     }
 
@@ -32,9 +35,13 @@ class UserBasics extends React.Component {
         })
         .then(response => response.json())
         .then(userInfo => {
-            console.info('user basics:', userInfo);
             this.setState((state, props) => {
-                return {userBasicInfo: userInfo.data};
+                return {
+                    firstName: userInfo.data.firstName,
+                    lastName: userInfo.data.lastName,
+                    mobile: userInfo.data.mobile,
+                    email: userInfo.data.email,
+                };
             });
         })
         ; // parses JSON response into native JavaScript objects     
@@ -42,11 +49,16 @@ class UserBasics extends React.Component {
 
     handleChange = pr => event => {
         event.persist();
-        this.setState({userBasicInfo:{...this.state.userBasicInfo, [pr]: event.target.value}});
+        this.setState({[pr]: event.target.value});
     };
 
-    updateForm = (event) => {
-        event.preventDefault();
+    updateForm = () => {
+        let data = {
+            firstName : this.state.firstName,
+            lastName : this.state.lastName,
+            mobile : this.state.mobile,
+            email : this.state.email
+        }
         let token = window.localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`users/updateuserinfo`, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -59,15 +71,21 @@ class UserBasics extends React.Component {
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
-            body: JSON.stringify(this.state.userBasicInfo), // body data type must match "Content-Type" header
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
         })
         .then(response => response.json())
-        .then(userInfo => {
+        .then(data => {
             this.setState((state, props) => {
-                return {userBasicInfo: userInfo.data};
+                return {
+                    firstName: data.data.firstName,
+                    lastName: data.data.lastName,
+                    email: data.data.email,
+                    mobile: data.data.mobile
+                }
+            }, () => {
+                window.location.reload();
             });
-        })
-        ;
+        });
     }
     
     render() {
@@ -103,6 +121,7 @@ class UserBasics extends React.Component {
                         })
                         .then(response => response.json())
                         .then(userInfo => {
+                            window.location.reload();
                             // this.setState((state, props) => {
                             //     return {userBasicInfo: userInfo.data};
                             // });
@@ -111,16 +130,17 @@ class UserBasics extends React.Component {
                     }}
                 >
                     ثبت تصویر جدید
-                </Button>    
-            <form 
+                </Button> 
+                <br />   
+            {/* <form 
                 noValidate 
                 autoComplete="off"
                 onSubmit={this.updateForm}
-                >
+                > */}
                 <TextField
                     id="standard-name"
                     label="نام"
-                    value={this.state.userBasicInfo.firstName}
+                    value={this.state.firstName}
                     onChange={this.handleChange('firstName')}
                     margin="normal"
                     InputLabelProps={{
@@ -134,10 +154,11 @@ class UserBasics extends React.Component {
                         }
                     }}
                 />
+                <br />
                 <TextField
                     id="standard-name"
                     label="نام خانوادگی"
-                    value={this.state.userBasicInfo.lastName}
+                    value={this.state.lastName}
                     onChange={this.handleChange('lastName')}
                     margin="normal"
                     InputLabelProps={{
@@ -151,7 +172,8 @@ class UserBasics extends React.Component {
                         }
                     }}
                 />
-                <TextField
+                <br />
+                {/* <TextField
                     id="standard-name"
                     label="نام کاربری"
                     InputLabelProps={{
@@ -159,10 +181,10 @@ class UserBasics extends React.Component {
                             fontFamily: "IranSans"
                         }
                     }}
-                    value={this.state.userBasicInfo.userName}
+                    value={this.state.userName}
                     onChange={this.handleChange('userName')}
                     margin="normal"
-                />
+                /> */}
                 
                 <TextField
                     id="standard-name"
@@ -172,11 +194,12 @@ class UserBasics extends React.Component {
                             fontFamily: "IranSans"
                         }
                     }}
-                    value={this.state.userBasicInfo.email}
+                    value={this.state.email}
                     onChange={this.handleChange('email')}
                     margin="normal"
                 />
-                <TextField
+                <br />
+                {/* <TextField
                     id="standard-name"
                     label="تلفن ثابت"
                     InputLabelProps={{
@@ -184,10 +207,10 @@ class UserBasics extends React.Component {
                             fontFamily: "IranSans"
                         }
                     }}
-                    value={this.state.userBasicInfo.phone}
+                    value={this.state.phone}
                     onChange={this.handleChange('phone')}
                     margin="normal"
-                />
+                /> */}
                 <TextField
                     id="standard-name"
                     label="موبایل"
@@ -196,12 +219,12 @@ class UserBasics extends React.Component {
                             fontFamily: "IranSans"
                         }
                     }}
-                    value={this.state.userBasicInfo.mobile}
+                    value={this.state.mobile}
                     onChange={this.handleChange('mobile')}
                     margin="normal"
                 />
 
-                <Select
+                {/* <Select
                     // value={values.age}
                     // onChange={handleChange}
                     inputProps={{
@@ -212,8 +235,8 @@ class UserBasics extends React.Component {
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-                
+                </Select> */}
+                <br />
                 <Select
                     // value={values.age}
                     // onChange={handleChange}
@@ -226,17 +249,18 @@ class UserBasics extends React.Component {
                     <MenuItem value={20}>یازدهم</MenuItem>
                     <MenuItem value={30}>دوازدهم</MenuItem>
                 </Select>
-
+                <br />
                 <Button
                     type="submit"
                     variant="contained"
                     component="button"
                     style={{ fontFamily: 'IranSans' }}
+                    onClick={this.updateForm}
                     // disabled={this.haveErrors(errors)}
                 >
-                    ذخیره
+                    آپدیت اطلاعات
                 </Button>
-            </form>
+            {/* </form> */}
             </React.Fragment>
         );
     }

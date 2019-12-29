@@ -9,6 +9,39 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 class About extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userid : null
+        }
+    }
+
+    componentDidMount() {
+        let token = window.localStorage.getItem('token');
+        fetch(process.env.REACT_APP_API_URL+`users/userinfo`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+        })
+        .then(response => response.json())
+        .then(userInfo => {
+            if(userInfo.data)
+                this.setState((state, props) => {
+                    return {
+                        userid: userInfo.data.id,
+                    };
+                });
+        })
+        ;
+    }
+
     render() {
         
         return (
@@ -321,9 +354,17 @@ class About extends React.Component {
                                 >
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Grid container spacing={0}>
-
                                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-
+                                            {(this.state.userid ? 
+                                            <p
+                                            style={{
+                                                color:'white',
+                                                fontFamily:'IranSans',
+                                                textAlign: 'center',
+                                                marginTop:'90px'
+                                            }}
+                                        >ما را از نظرات مفیدتان بهره مند کنید</p>
+                                            :
                                             <p
                                                 style={{
                                                     color:'white',
@@ -332,6 +373,8 @@ class About extends React.Component {
                                                     marginTop:'90px'
                                                 }}
                                             >آیا هنوز در فیزیک اپ ثبت نام نکرده اید؟</p>
+                                            )}
+                                            
 
                                         </Grid>
 
@@ -341,16 +384,32 @@ class About extends React.Component {
                                                     textAlign: 'center'
                                                 }}
                                                 >
+                                                    {(this.state.userid ?
+
                                                     <Button 
+                                                        href='#/contact-us'
+                                                        variant="contained"
+                                                        color="secondary"
+                                                        style={{
+                                                            border: 0,
+                                                            fontFamily:'IranSans',
+                                                            borderRadius: 3,
+                                                            color: 'white',
+                                                            height: 48,
+                                                            width:250,
+                                                            padding: '0 30px',
+                                                        }}
+                                                        >
+                                                ار تباط با ما
+                                            </Button> :
+                                            <Button 
                                                         href='#/signup'
                                                         variant="contained"
                                                         color="secondary"
                                                         style={{
-                                                            // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
                                                             border: 0,
                                                             fontFamily:'IranSans',
                                                             borderRadius: 3,
-                                                            // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
                                                             color: 'white',
                                                             height: 48,
                                                             width:250,
@@ -359,6 +418,7 @@ class About extends React.Component {
                                                         >
                                                 ثبت نام
                                             </Button>
+                                            )}
                                             </p>
                                             
                                         </Grid>

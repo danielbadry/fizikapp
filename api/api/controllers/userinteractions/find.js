@@ -16,7 +16,7 @@ module.exports = {
     modelid:{
       type:'string'
     },
-    
+
     type:{
       type:'string'
     }
@@ -29,13 +29,14 @@ module.exports = {
 
   fn: async function (inputs) {
     let userinteractions = await Userinteractions.find({
-      where : {
-        type: inputs.type,
-        model: inputs.model,
-        isDeleted : false,
-        modelId: inputs.modelid
-      }
-    });
+      type: inputs.type,
+      model: inputs.model,
+      isDeleted : false,
+      modelId: inputs.modelid
+    })
+    .sort([
+      { createdAt: 'DESC' },
+    ]);
     // return userinteractions;
     for (let userinteraction of userinteractions) {
       moment.locale('en');
@@ -58,7 +59,7 @@ module.exports = {
         userinteraction.userInfo.firstName = 'iman';
         userinteraction.userInfo.lastName = 'arghamy';
       }
-      
+
     }
     return userinteractions;
   }

@@ -9,6 +9,7 @@ module.exports = {
 
 
   inputs: {
+
     firstName :{
       type: 'string',
       required : false
@@ -28,6 +29,7 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
   },
 
 
