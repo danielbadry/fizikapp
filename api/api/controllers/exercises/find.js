@@ -128,6 +128,7 @@ module.exports = {
     }
     finalData.data = exercises;
     finalData.dataLength = exercises.length;
+    finalData.auth = true;
     return finalData;
   }
 

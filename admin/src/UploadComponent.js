@@ -24,7 +24,8 @@ export default class UploadComponent extends React.Component {
     this.state = {
       // Set initial files, type 'local' means this is a file
       // that has already been uploaded to the server (see docs)
-      files: []
+      files: [],
+      randomName : this.uuidv4()
     };
   }
 
@@ -32,7 +33,7 @@ export default class UploadComponent extends React.Component {
     console.log("FilePond instance has initialised", this.pond);
   }
   
-  uuidv4() {
+  uuidv4 = () => {
     return 'xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
@@ -40,8 +41,10 @@ export default class UploadComponent extends React.Component {
   }
   
   render() {
-    let randomName = this.uuidv4();
-    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${randomName}`
+    // let randomName = this.uuidv4();
+    // window.localStorage.setItem("randomName",this.uuidv4());
+    // let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
     return (
       <FormDataConsumer>
       {({ formData, dispatch, ...rest }) => (
@@ -55,7 +58,7 @@ export default class UploadComponent extends React.Component {
             let fileNameInfo = this.state.files[0].name.split('.');
             // this.props.onFinish(randomName + '.' + fileNameInfo[1]);
             dispatch(
-              change(REDUX_FORM_NAME, this.props.type, randomName + '.' + fileNameInfo[1])
+              change(REDUX_FORM_NAME, this.props.type, this.state.randomName + '.' + fileNameInfo[1])
             )}}
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {

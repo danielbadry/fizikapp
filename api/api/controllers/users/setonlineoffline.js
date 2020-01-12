@@ -35,16 +35,21 @@ module.exports = {
     var yyyy = today.getFullYear();
     today = mm + '/' + dd + '/' + yyyy;
 
-    let rec = await Onlineoffline.findOrCreate({
-      userId: userId,
-      createdAt : today,
-    }, {
+    let rec = await Onlineoffline.findOne({
       userId: userId,
       createdAt : today,
     });
 
+    if (typeof(rec) === 'undefined') {
+      rec = await Onlineoffline.create({
+        userId: userId,
+        createdAt : today,
+      });
+    }
+
     await Onlineoffline.updateOne({
-      id: rec.id
+      id: rec.id,
+      userId: userId
     }).set({
       seconds : rec.seconds + 1
     });

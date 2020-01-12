@@ -248,6 +248,7 @@ class UserBasics extends React.Component {
                     <MenuItem value={10}>دهم</MenuItem>
                     <MenuItem value={20}>یازدهم</MenuItem>
                     <MenuItem value={30}>دوازدهم</MenuItem>
+                    <MenuItem value={40}>فارغ التحصیل</MenuItem>
                 </Select>
                 <br />
                 <Button

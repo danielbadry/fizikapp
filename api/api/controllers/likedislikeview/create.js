@@ -40,14 +40,24 @@ module.exports = {
       return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
         if (err) {
           if(inputs.type === 'view')
-          {return await Likedislikeview.create({
-            model: inputs.model,
-            modelId: inputs.modelId,
-            type: inputs.type,
-            userId: null,
-            createdAt : await sails.helpers.dateParse(),
-            updatedAt : await sails.helpers.dateParse()
-          }).fetch();}
+          {
+            let check = await Likedislikeview.find({
+              model: inputs.model,
+              modelId: inputs.modelId,
+              type: inputs.type,
+              userId: null,
+            });
+            if(check.length === 0) {
+              return await Likedislikeview.create({
+                model: inputs.model,
+                modelId: inputs.modelId,
+                type: inputs.type,
+                userId: null,
+                createdAt : await sails.helpers.dateParse(),
+                updatedAt : await sails.helpers.dateParse()
+              }).fetch();
+            }
+          }
         } else {
           let userId = decoded.id;
 
@@ -71,28 +81,39 @@ module.exports = {
             });
             return {};
           } else {
-            return await Likedislikeview.create({
+            let check = await Likedislikeview.find({
               model: inputs.model,
               modelId: inputs.modelId,
               type: inputs.type,
               userId: userId,
-              createdAt : await sails.helpers.dateParse(),
-              updatedAt : await sails.helpers.dateParse()
-            }).fetch();
+            });
+            // return {res:check.length};
+            if(check.length === 0) {
+              return await Likedislikeview.create({
+                model: inputs.model,
+                modelId: inputs.modelId,
+                type: inputs.type,
+                userId: userId,
+                createdAt : await sails.helpers.dateParse(),
+                updatedAt : await sails.helpers.dateParse()
+              }).fetch();
+            }
           }
         }
       });
 
     } else {
       if (inputs.type === 'view')
-      {return await Likedislikeview.create({
-        model: inputs.model,
-        modelId: inputs.modelId,
-        type: inputs.type,
-        userId: null,
-        createdAt : await sails.helpers.dateParse(),
-        updatedAt : await sails.helpers.dateParse()
-      }).fetch();}
+      {
+        return await Likedislikeview.create({
+          model: inputs.model,
+          modelId: inputs.modelId,
+          type: inputs.type,
+          userId: null,
+          createdAt : await sails.helpers.dateParse(),
+          updatedAt : await sails.helpers.dateParse()
+        }).fetch();
+      }
     }
 
   }

@@ -36,7 +36,7 @@ class Inbox extends React.Component {
         .then(messages => {
             console.info('messages:', messages);
             this.setState((state, props) => {
-              return {messages: messages};
+              return {messages: messages.data};
             });
         });
   }

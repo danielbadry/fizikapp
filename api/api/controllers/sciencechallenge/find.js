@@ -141,7 +141,7 @@ module.exports = {
     }
     finalData.dataLength = allRequests.length;
     finalData.data = allRequests;
-    finalData.isAuthenticated = true;
+    finalData.auth = true;
     return finalData;
   }
 

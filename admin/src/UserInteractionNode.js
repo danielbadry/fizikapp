@@ -107,9 +107,9 @@ class UserInteractionNode extends React.Component {
         .then(response => response.json())
         .then(interactionData => {
             this.setState({
-              interactionData: interactionData
+              interactionData: interactionData.data
             }, function() {
-                
+                console.info('interactionData:', this.state.interactionData);
             });
         });
     }
@@ -192,7 +192,7 @@ class UserInteractionNode extends React.Component {
                             <div>
                             <TextField
                                 margin="dense"
-                                label="ضضنظرتان را بنویسید"
+                                label="نظرتان را بنویسید"
                                 type="text"
                                 onChange={this.setReplyMessage.bind()}
                                 fullWidth

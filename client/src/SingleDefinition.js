@@ -252,7 +252,8 @@ class SingleDefinition extends React.Component{
                                             fontSize: '14px'
                                         }}
                                     >
-                                        {this.state.summary.description}
+                                        <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
+                                        {/* {this.state.summary.description} */}
                                     </Typography>
                                 </Paper>
 

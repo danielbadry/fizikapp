@@ -29,6 +29,7 @@ import Book from './Book';
 import UploadComponent from './UploadComponent';
 import MyEditor  from './TextEditor';
 import ContentUserInteraction from "./ContentUserInteraction";
+import Tiny  from './Tiny';
 
 const validateDefinitionName = [required(), minLength(5), maxLength(30)];
 const validateDefinitionTitle = [required(), minLength(5), maxLength(30)];
@@ -42,7 +43,8 @@ export const DefinitionsCreate = (props) => (
             <Book 
                 {...props}
                 />
-            <MyEditor />
+            {/* <MyEditor /> */}
+            <Tiny />
             <UploadComponent 
                 type="thumbnail"
                 model="definitions"
@@ -56,6 +58,15 @@ export const DefinitionsEdit = (props) => (
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
+            <Book 
+                {...props}
+                />
+            {/* <MyEditor /> */}
+            <Tiny />
+            <UploadComponent 
+                type="thumbnail"
+                model="definitions"
+                />
         </SimpleForm>
     </Edit>
 );

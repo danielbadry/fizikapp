@@ -63,9 +63,9 @@ class ArticleToolBox extends React.Component {
             .then(result => {
                 this.setState(function(state, props) {
                     return {
-                        likes: result.likes,
-                        disLikes: result.disLikes,
-                        views: result.views
+                        likes: result.data.likes,
+                        disLikes: result.data.disLikes,
+                        views: result.data.views
                     };
                   }, () => {
                     this.setState(function(state, props) {
@@ -81,7 +81,7 @@ class ArticleToolBox extends React.Component {
             return {
                 token: token
             }}, function() {
-                this.like('e','view');
+                // this.like('e','view');
             });
         this.fetchData(token);
         // increase view of this entity

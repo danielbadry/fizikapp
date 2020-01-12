@@ -39,6 +39,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    let finalData = {};
     if (this.req.headers.authorization) {
       let token = this.req.headers.authorization;
       let TokenArray = token.split(' ');
@@ -46,7 +47,7 @@ module.exports = {
         if (err) {
 
         } else {
-          await Users.updateOne({
+          let updatedUser = await Users.updateOne({
             id: decoded.id
           })
           .set ({
@@ -55,12 +56,16 @@ module.exports = {
             email : inputs.email,
             thumbnail : inputs.thumbnail
           });
+          // return updatedUser;
+          finalData.dataLength = 1;
+          finalData.data = updatedUser;
+          finalData.auth = true;
+          finalData.errorMessage = null;
+          return finalData;
         }
       });
 
     }
 
   }
-
-
 };

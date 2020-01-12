@@ -25,18 +25,28 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    let subject = await Subjects.find({
-      name: inputs.name
+    let allSubjects = await Subjects.find({
+      parentId : inputs.parentId
     });
 
-    if(subject.length === 0)
+    max = 0;
+
+    for (c of allSubjects) {
+      if (parseInt(c.priority) > max) {
+        max = parseInt(c.priority);
+      }
+    }
+
+    // if(subject.length === 0)
+    if(true)
     {
       return await Subjects.create({
-      name: inputs.name,
-      parentId: inputs.parentId,
-      createdAt : await sails.helpers.dateParse(),
-      updatedAt : await sails.helpers.dateParse(),
-    }).fetch();
+        name: inputs.name,
+        parentId: inputs.parentId,
+        priority: max + 1,
+        createdAt : await sails.helpers.dateParse(),
+        updatedAt : await sails.helpers.dateParse(),
+      }).fetch();
     } else {
       return({
         status : 'repetitive'

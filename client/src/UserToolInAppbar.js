@@ -69,12 +69,12 @@ class UserToolInAppbar extends React.Component {
                     <Button 
                         variant="contained" 
                         color="primary" 
-                        href="#/signup"
+                        href="#/signin"
                         style={{
                             fontFamily: 'IranSans'
                         }}
                         >
-                        ثبت نام یا ورود
+                        ورود
                     </Button>
                 </React.Fragment>
             )

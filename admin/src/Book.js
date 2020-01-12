@@ -63,6 +63,10 @@ class Book extends React.Component{
     }
 
     render() {
+        const book = this.props.record.data.summary.book;
+        const season = this.props.record.data.summary.season;
+        const section = this.props.record.data.summary.section;
+        const part = this.props.record.data.summary.part;
         return(
             this.state.isRender ?
             <React.Fragment>
@@ -72,6 +76,7 @@ class Book extends React.Component{
                             <SelectInput
                                 source="book"
                                 label="book"
+                                defaultValue = {book}
                                 choices={this.state.root}
                                 onChange={
                                     (value) => {
@@ -87,6 +92,7 @@ class Book extends React.Component{
                                 source="season"
                                 label="season"
                                 choices={(formData)?this.GetSeasons(formData.book):null}
+                                defaultValue = {season}
                                 onChange={value => dispatch(
                                     change(REDUX_FORM_NAME, 'category', this.retVal(value))
                                 )}
@@ -96,6 +102,7 @@ class Book extends React.Component{
                             <SelectInput
                                 source="section"
                                 label="section"
+                                defaultValue = {section}
                                 choices={(formData)?this.GetSeasons(formData.season):null}
                                 onChange={value => dispatch(
                                     change(REDUX_FORM_NAME, 'category', this.retVal(value))
@@ -106,6 +113,7 @@ class Book extends React.Component{
                             <SelectInput
                                 source="part"
                                 label="part"
+                                defaultValue = {part}
                                 choices={(formData)?this.GetSeasons(formData.section):null}
                                 onChange={value => dispatch(
                                     change(REDUX_FORM_NAME, 'category', this.retVal(value))

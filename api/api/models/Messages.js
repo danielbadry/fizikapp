@@ -34,6 +34,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    isRead :{
+      type: 'boolean',
+      required : false
+    },
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

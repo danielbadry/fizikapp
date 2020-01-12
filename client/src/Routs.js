@@ -33,6 +33,7 @@ import PrivacyPolicy from './PrivacyPolicy';
 import Disclaimer from './Disclaimer';
 import Careers from './Careers';
 import TermsConditions from './TermsConditions';
+import PurchasefromMobile from './PurchasefromMobile';
 
 function HandleRequest({ match }) {
     return (
@@ -51,6 +52,12 @@ function HandleDefinition({ match }) {
 function HandleExercise({ match }) {
     return (
         <Exercise match={match} />
+    );
+}
+
+function HandlePurchasefromMobile({ match }) {
+    return (
+        <PurchasefromMobile match={match} />
     );
 }
 
@@ -100,6 +107,7 @@ class Routs extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
+                <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
                 <Route path="/shop-result" component={HandleShopResult} />
                 <Route path="/definitions" component={Definitions} />
                 <Route path="/definition/:definitionid" component={HandleDefinition} />

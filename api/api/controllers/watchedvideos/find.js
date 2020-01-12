@@ -76,6 +76,8 @@ module.exports = {
 
     finalData.dataLength = watchedvideos.length;
     finalData.data = watchedvideos;
+    finalData.auth= true;
+    finalData.errorMessage = null;
     return finalData;
 
   }

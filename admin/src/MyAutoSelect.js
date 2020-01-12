@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import makeAnimated from 'react-select/animated';
 import Creatable from 'react-select/creatable';
 
 const ReduxFormSelect = props => {
   const { input, options } = props;
+  const pishfarz = props.pishfarz;
   const animatedComponents = makeAnimated();
   return (
     <Creatable
@@ -13,6 +14,7 @@ const ReduxFormSelect = props => {
       onChange={value => input.onChange(value)} 
       onBlur={() => input.onBlur(input.value)} 
       options={options}
+      value={JSON.parse(pishfarz)}
       components={animatedComponents}
     />
   )

@@ -14,7 +14,7 @@ module.exports = {
     limit: {
       type: 'number'
     },
-    
+
     skip: {
       type: 'number'
     },
@@ -22,7 +22,7 @@ module.exports = {
     sort: {
       type: 'string'
     },
-    
+
     where: {
       type: 'string'
     }
@@ -38,18 +38,19 @@ module.exports = {
     let dataLength = await Shoppingplans.find();
     let allShoppingPlans = await Shoppingplans.find()
     .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
-    for (let sp of allShoppingPlans) { 
+    .skip(inputs.skip);
+    for (let sp of allShoppingPlans) {
       moment.locale('en');
       sp.jalaaliUpdatedDate = momentJalaali(sp.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
       sp.jalaaliUserFriendlyUpdatedDate = moment(sp.updatedAt).fromNow();
       sp.jalaaliFullUserFriendlyUpdatedDate = sp.jalaaliUpdatedDate + ' ' + moment(sp.updatedAt).fromNow();
       sp.thumbnail = sails.config.custom.apiUrl + '/files/shoppingplansImage/' + sp.thumbnail;
+      sp.purchaseLink = sails.config.custom.baseUrl + '/#/shoppingplans/purchasefrommobile/' + sp.id;
     }
     finalData.dataLength = dataLength.length;
     finalData.data = allShoppingPlans;
+    finalData.auth = true;
     return finalData;
   }
 

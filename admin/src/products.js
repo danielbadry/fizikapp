@@ -34,6 +34,8 @@ import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
 import { change } from 'redux-form';
 import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
+import Tiny  from './Tiny';
+import Typography from '@material-ui/core/Typography';
 
 let formElementValues = {};
 
@@ -56,8 +58,8 @@ const GetCategory = () => {
     return res;
 }
 
-const validateProductName = [required(), minLength(5), maxLength(30)];
-const validateProductTitle = [required(), minLength(10), maxLength(100)];
+const validateProductName = [required(), minLength(3), maxLength(30)];
+const validateProductTitle = [required(), minLength(5), maxLength(100)];
 const validateProductDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 const validateProductCreation = (values) => {
     const errors = {};
@@ -75,10 +77,11 @@ export const ProductCreate = (props) => (
             
             <TextInput source="name" label="name" validate={validateProductName} />
             <LongTextInput source="title" label="title" validate={validateProductTitle} />
-            <MyEditor label="description" />
+            {/* <Tiny /> */}
+            {/* <MyEditor label="description" /> */}
             {/* <LongTextInput source="description" label="description" validate={validateProductDescription} /> */}
             <BooleanInput label="is medal" source="isMedal" />
-            <TagComponent source="tags" label="select tags (optional)" />
+            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
             
             <Book 
                 {...props}
@@ -105,9 +108,42 @@ export const ProductCreate = (props) => (
 export const ProductEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
-            <TextInput source="summary.name" label="name" />
-            <TextInput source="summary.title" label="title" />
-            <TextInput source="summary.duration" label="duration in seconds" type="number" validate={validateProductDuration} />
+            <TextInput 
+                source="data.summary.name" 
+                label="name" 
+                />
+            <TextInput 
+                source="data.summary.title" 
+                label="title" 
+                />
+            {/* <Tiny 
+                
+                /> */}
+            <BooleanInput 
+                label="is medal" 
+                source="data.summary.isMedal" 
+                />
+            {/* <TagComponent 
+                default="data.summary.tags"
+                label="select tags (optional)"
+                /> */}
+            <Book 
+                {...props}
+                />
+                <UploadComponent 
+                    type="thumbnail"
+                    model="products"
+                />
+            <TextInput 
+                source="data.summary.duration" 
+                label="duration in seconds" 
+                type="number" 
+                validate={validateProductDuration} 
+                />
+            <UploadComponent 
+                type="file"
+                model="products"
+                />
         </SimpleForm>
     </Edit>
 );
@@ -132,43 +168,148 @@ export const ProductShow = (props) => (
     <Show {...props}>
         <TabbedShowLayout>
 
-            <Tab label="information">
-                <TextField source="id" label="Id" />
-                <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="summary.title" label="title" />
+            <Tab label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    // fontWeight : 'bold',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                اطلاعات
+            </Typography>}>
+                <TextField source="data.id" label="Id" />
+                <Thumbnail source="data.thumbnail" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                تصویر
+            </Typography>} />
                 <TextField 
-                    source="summary.name" 
-                    label="name" 
-                    
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                source="data.summary.title" 
+                label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" 
+                variant="subtitle1">
+                عنوان
+            </Typography>} />
+                <TextField 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                    source="data.summary.name" 
+                    label={<Typography 
+                        style={{ 
+                            fontFamily: 'IranSans' ,
+                            fontSize: '13px',
+                            color: 'black',
+                            direction: 'rtl'
+                        }}
+                        color="inherit" variant="subtitle1">
+                        نام
+                    </Typography>}
                     />
                 <VideoPlayerField />
-                <TextField source="summary.description" label="description" />
-                <ArrayField source="summary.tagsArray" label="tags">
+                <TextField source="data.summary.description" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                توضیحات
+            </Typography>} />
+                <ArrayField source="data.summary.tagsArray" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                برچسب ها
+            </Typography>}>
                     <SingleFieldList>
                         <ChipField source="name" />
                     </SingleFieldList>
                 </ArrayField>
             </Tab>
 
-            <Tab label="qa" path="qa">
+            <Tab label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                پرسش پاسخ
+            </Typography>} path="qa">
                 <ContentUserInteraction 
                     config={qaConfig}
                     modelid={props.id}
                     />
             </Tab>
 
-            <Tab label="reports" path="report" >
+            <Tab label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                گزارشات
+            </Typography>} path="report" >
                 <ProductReports />
             </Tab>
 
-            <Tab label="comments" path="comments">
+            <Tab label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                کامنت
+            </Typography>} path="comments">
             <ContentUserInteraction 
                     config={cmConfig}
                     modelid={props.id}
                     />
             </Tab>
 
-            <Tab label="quiz" path="quiz">
+            <Tab label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                کوییز
+            </Typography>} path="quiz">
                 <QuizManager
                     model="products"
                  />
@@ -183,10 +324,28 @@ export const ProductsList = props => (
     
     <List {...props} pagination={<ProductPagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <Thumbnail source="thumbnail" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                تصویر
+            </Typography>} />
             <TextField 
                 source="name" 
-                label="name"
+                label={<Typography 
+                    style={{ 
+                        fontFamily: 'IranSans' ,
+                        fontSize: '13px',
+                        color: 'black',
+                        direction: 'rtl'
+                    }}
+                    color="inherit" variant="subtitle1">
+                    نام
+                </Typography>}
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
                     fontSize: '19px',
@@ -195,16 +354,52 @@ export const ProductsList = props => (
                     direction: 'rtl'
                 }}
                 />
-            <ArrayField source="tagsArray">
+            <ArrayField source="tagsArray" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                برچسب
+            </Typography>}>
                 <SingleFieldList>
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <BooleanField source="isMedal" label="isMedal" />
-            <BooleanField source="hasQuiz" label="hasQuiz" />
+            <BooleanField source="isMedal" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                مدالیون
+            </Typography>} />
+            <BooleanField source="hasQuiz" label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                کوییز
+            </Typography>} />
             <TextField 
                 source="jalaaliFullUserFriendlyCreatedDate" 
-                label="Date" 
+                label={<Typography 
+                    style={{ 
+                        fontFamily: 'IranSans' ,
+                        fontSize: '13px',
+                        color: 'black',
+                        direction: 'rtl'
+                    }}
+                    color="inherit" variant="subtitle1">
+                    تاریخ ایجاد
+                </Typography>} 
                 style={{ 
                     fontFamily: 'Far_Kamran',
                     fontSize: '19px',
@@ -212,8 +407,26 @@ export const ProductsList = props => (
                     color: 'black'
                 }}
                 />
-            <EditButton />
-            <DeleteButton />
+            <EditButton label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                ویرایش
+            </Typography>}/>
+            <DeleteButton label={<Typography 
+                style={{ 
+                    fontFamily: 'IranSans' ,
+                    fontSize: '13px',
+                    color: 'black',
+                    direction: 'rtl'
+                }}
+                color="inherit" variant="subtitle1">
+                حذف
+            </Typography>}/>
         </Datagrid>
     </List>
 );

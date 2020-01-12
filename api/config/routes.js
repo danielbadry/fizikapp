@@ -10,11 +10,15 @@
 
 module.exports.routes = {
   'GET /users/signupprocess': 'UsersController.signupprocess',
+  'GET /users/aboutuscontent': 'UsersController.aboutuscontent',
+  'GET /users/getcurrentuserplan': 'UsersController.getcurrentuserplan',
+  'GET /users/myonlinechart': 'UsersController.myonlinechart',
   'PUT /users/updateuserinfo': 'UsersController.updateuserinfo',
   'GET /quizes/getuserquizresponse': 'QuizesController.getuserquizresponse',
   'GET /shops/shopsprocess': 'ShopsController.shopsprocess',
   'GET /categories/allcategories': 'CategoriesController.allcategories',
   'POST /categories/categorize': 'CategoriesController.categorize',
+  'POST /subjects/categorize': 'SubjectsController.categorize',
   'GET /subjects/allsubjects': 'SubjectsController.allsubjects',
   'GET /subjects/findparentdirectoryid': 'SubjectsController.findparentdirectoryid',
   'GET /invitation/userinvitationprocess': 'InvitationController.userinvitationprocess',

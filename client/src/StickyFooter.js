@@ -526,7 +526,7 @@ class StickyFooter extends React.Component {
                                         lineHeight:'2'
                                     }}
                                     component={RouterLink} 
-                                    to={`/signup`}>ثبت نام</Link>
+                                    to={`/signin`}>ورود</Link>
                                     </dd>    
                                 
                                 <dd

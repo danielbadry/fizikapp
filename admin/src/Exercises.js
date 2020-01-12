@@ -31,7 +31,7 @@ import { RadioButtonGroupInput } from 'react-admin';
 import UploadComponent from './UploadComponent';
 import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
-
+import Tiny  from './Tiny';
 const validateExercisesName = [required(), minLength(5), maxLength(30)];
 const validateExercisesTitle = [required(), minLength(10), maxLength(100)];
 const validateExercisesField = [required()];
@@ -43,7 +43,8 @@ export const ExercisesCreate = (props) => (
         <SimpleForm redirect="list" submitOnEnter={true}>
             <TextInput source="name" label="name" validate={validateExercisesName} />
             <LongTextInput source="title" label="title" validate={validateExercisesTitle} />
-            <MyEditor label="description" />
+            {/* <MyEditor label="description" /> */}
+            <Tiny />
             {/* <LongTextInput source="description" label="description" /> */}
             <InsertSubject />
             <RadioButtonGroupInput 
@@ -104,7 +105,57 @@ export const ExercisesEdit = (props) => (
         <SimpleForm>
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
+            <Tiny />
+            <InsertSubject />
+            <RadioButtonGroupInput 
+                validate={validateExercisesField}
+                source="field"
+                choices={[
+                    { id: 'riazi', name: 'riazi' },
+                    { id: 'tajrobi', name: 'tajrobi' }
+                ]} />
+            
+            <RadioButtonGroupInput 
+                validate={validateExercisesReference}
+                source="reference" choices={[
+                { id: 'in', name: 'in' },
+                { id: 'out', name: 'out' }
+            ]} />
+
+            <SelectInput 
+                validate={validateExercisesYear}
+                source="year" 
+                choices={[
+                { id: '1381', name: '1381' },
+                { id: '1382', name: '1382' },
+                { id: '1383', name: '1383' },
+                { id: '1384', name: '1384' },
+                { id: '1385', name: '1385' },
+                { id: '1386', name: '1386' },
+                { id: '1387', name: '1387' },
+                { id: '1388', name: '1388' },
+                { id: '1389', name: '1389' },
+                { id: '1390', name: '1390' },
+                { id: '1391', name: '1391' },
+                { id: '1392', name: '1392' },
+                { id: '1393', name: '1393' },
+                { id: '1394', name: '1394' },
+                { id: '1395', name: '1395' },
+                { id: '1396', name: '1396' },
+                { id: '1397', name: '1397' },
+                { id: '1398', name: '1398' },
+                { id: '1399', name: '1399' },
+            ]} />
+
+            <UploadComponent 
+                type="thumbnail"
+                model="exercises"
+                />
+            <UploadComponent 
+                type="file"
+                model="exercises"
+                />
+            {/* <LongTextInput source="description" label="description" /> */}
         </SimpleForm>
     </Edit>
 );

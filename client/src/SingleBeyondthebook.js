@@ -84,10 +84,10 @@ class SingleBeyondthebook extends React.Component {
             .then(product => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(product.summary)),
-                        tags: JSON.parse(JSON.stringify(product.tags)),
-                        thumbnail: product.thumbnail,
-                        id: product.id,
+                        summary: JSON.parse(JSON.stringify(product.data.summary)),
+                        tags: JSON.parse(JSON.stringify(product.data.tags)),
+                        thumbnail: product.data.thumbnail,
+                        id: product.data.id,
                         isRender: true
                     };
                   }, () => {
@@ -182,9 +182,8 @@ class SingleBeyondthebook extends React.Component {
                                                   }}
                                                     poster={this.state.thumbnail}
                                                     startTime = {this.state.summary.startTime}
-                                                    style={{
-                                                        // height: '200px'
-                                                    }}
+                                                    fluid = {false}
+                                                    width={900}
                                                     >
                                                         
                                                 <source 
@@ -414,7 +413,8 @@ class SingleBeyondthebook extends React.Component {
                                     lineHeight: '1.8rem'
                                 }}
                                 >
-                                {this.state.summary.description}
+                                    <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
+                                {/* {this.state.summary.description} */}
                             </Typography>
                         </Paper>
                     </Grid>

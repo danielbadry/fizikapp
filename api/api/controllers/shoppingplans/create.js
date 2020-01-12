@@ -29,6 +29,11 @@ module.exports = {
       required : false
     },
     
+    fPointPrice :{
+      type: 'string',
+      required : false
+    },
+    
     secondPrise :{
       type: 'number',
       required : false
@@ -49,6 +54,7 @@ module.exports = {
       duration : inputs.duration,
       firstPrise : inputs.firstPrise,
       secondPrise : inputs.secondPrise,
+      fPointPrice : inputs.fPointPrice,
       thumbnail : inputs.thumbnail,
       type : inputs.type
     }).fetch();

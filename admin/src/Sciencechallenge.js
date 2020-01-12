@@ -32,6 +32,7 @@ import AddIcon from '@material-ui/icons/Add';
 import UploadComponent from './UploadComponent';
 import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
+import Tiny  from './Tiny';
 
 const validateScienceChallengeName = [required(), minLength(5), maxLength(30)];
 const validateScienceChallengeTitle = [required(), minLength(5), maxLength(30)];
@@ -43,7 +44,8 @@ export const SciencechallengeCreate = (props) => (
             <TextInput source="name" label="name" validate={validateScienceChallengeName} />
             <LongTextInput source="title" label="title" validate={validateScienceChallengeTitle} />
             {/* <LongTextInput source="description" label="description" /> */}
-            <MyEditor />
+            {/* <MyEditor /> */}
+            <Tiny />
             <TagComponent source="tags" label="select tags (optional)" />
             
             <UploadComponent 
@@ -66,6 +68,19 @@ export const SciencechallengeEdit = (props) => (
             <TextInput source="name" label="name" />
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
+            <Tiny />
+            <TagComponent source="tags" label="select tags (optional)" />
+            
+            <UploadComponent 
+                type="thumbnail"
+                model="sciencechallenge"
+                />
+            <TextInput source="duration" label="duration in seconds" type="number" validate={validateScienceChallengeDuration} />
+
+            <UploadComponent 
+                type="file"
+                model="sciencechallenge"
+                />
         </SimpleForm>
     </Edit>
 );

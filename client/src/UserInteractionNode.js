@@ -28,7 +28,8 @@ class UserInteractionNode extends React.Component {
     constructor (props) {
       super(props);
       this.state = {
-        interactionData: []
+        interactionData: [],
+        replyMessage : 'hello'
       }
     }
 
@@ -42,7 +43,7 @@ class UserInteractionNode extends React.Component {
 
     sendReplyToQuestion (item) {
       const dataRecord = {
-        message:this.replyMessage,
+        message:this.state.replyMessage,
         parentId: (item != null) ? item.id : '',
         modelId: this.props.modelid,
         model: this.props.model,
@@ -64,40 +65,52 @@ class UserInteractionNode extends React.Component {
         })
         .then(response => response.json())
         .then((myJson) => {
-          this.replyMessage = '';
+          if (myJson.errorMessage !== '') {
+            window.alert(myJson.errorMessage);
+          } else {
+            this.setState({
+              replyMessage: ''
+            });
             this.fetchProductsQuestions();
-            
+          }
         });
-
-      // fetch(process.env.REACT_APP_API_URL+'userinteractions', {
-      //     method: 'POST', 
-      //     body : JSON.stringify(dataRecord), 
-      //     headers: {}
-      //   }
-      // )
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((myJson) => {
-      //   this.replyMessage = '';
-      //     this.fetchProductsQuestions();
-          
-      // })
-      // .catch((e) => {
-      //     // showNotification('Error: comment not approved', 'warning')
-      // });
     }
 
     setReplyMessage = (e) => {
-      this.replyMessage = e.target.value;
+      console.info('enaaaa');
+      this.setState({
+        replyMessage: e.target.value
+      });
     };
     sendByEnter = (event, item) => {
         if (event.charCode == '13') {
-          console.info('umad');
           this.sendReplyToQuestion(item);
           }
     }
+
+    deleteComment = (comment) => {
+      console.info('comment ID:', comment.id);
+      fetch(process.env.REACT_APP_API_URL+`userinteractions/${comment.id}`, {
+        method: 'DELETE', 
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        })
+        // .then(response => response.json())
+        .then(interactionData => {
+          this.fetchProductsQuestions();
+        });
+    }
+
     fetchProductsQuestions = () => {
+      this.setState({
+        replyMessage: null
+      });
       fetch(process.env.REACT_APP_API_URL+`userinteractions?model=${this.props.model}&modelid=${this.props.modelid}&type=${this.props.type}`, {
         method: 'GET', 
         mode: 'cors',
@@ -112,7 +125,7 @@ class UserInteractionNode extends React.Component {
         .then(response => response.json())
         .then(interactionData => {
             this.setState({
-              interactionData: interactionData
+              interactionData: interactionData.data
             }, function() {
                 
             });
@@ -193,14 +206,26 @@ class UserInteractionNode extends React.Component {
                             >
                             {m.jalaaliUserFriendlyCreatedDate}
                             </Typography> 
+                            <Typography
+                            style={{ fontFamily: 'IranSans_UltraLight' }}
+                            >
+                              {m.userInfo.isAdmin ? 
+                                <div
+                                onClick={()=>this.deleteComment(m)}
+                                >X</div> : null  
+                              }
+                            </Typography>
                             {(localStorage.getItem('token')) ? 
                             <div>
                             <TextField
-                                onKeyPress={(event)=>this.sendByEnter(event,m)}
+                                // onKeyPress={(event)=>this.sendByEnter(event,m)}
+                                onKeyPress={(event)=>this.sendByEnter(event)}
                                 margin="dense"
-                                label="  بنویسید"
+                                label="بنویسید"
                                 type="text"
-                                onChange={this.setReplyMessage.bind()}
+                                value={this.state.replyMessage}
+                                onChange={(e) => this.setReplyMessage(e)}
+                                // onChange={this.setReplyMessage.bind()}
                                 fullWidth
                                 InputLabelProps={{
                                   style: {
@@ -251,8 +276,8 @@ class UserInteractionNode extends React.Component {
                 margin="dense"
                 label="نظرتان را بنویسید"
                 type="text"
-                // value={this.showReplyMessage.bind()}
-                onChange={this.setReplyMessage.bind()}
+                value={this.state.replyMessage}
+                onChange={(e) => this.setReplyMessage(e)}
                 fullWidth
                 InputLabelProps={{
                   style: {

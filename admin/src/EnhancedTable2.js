@@ -20,12 +20,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Home from '@material-ui/icons/Home';
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder';
 import FileCopy from '@material-ui/icons/FileCopy';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import UploadComponent from './UploadComponent';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -54,6 +62,7 @@ function getSorting(order, orderBy) {
 const headRows = [
   { id: 'avatar', numeric: false, disablePadding: true, label: 'avatar' },
   { id: 'name', numeric: false, disablePadding: true, label: 'name' },
+  { id: 'action', numeric: false, disablePadding: true, label: 'action' },
   { id: 'fullJalaali', numeric: true, disablePadding: false, label: 'date' }
 ];
 
@@ -175,13 +184,14 @@ export default function EnhancedTable() {
     const [currentDirectory, setCurrentDirectory] = useState({id:0});
     const [firstTime, setFirstTime] = useState(true);
     const [rowId, setrowId] = useState(0);
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     useEffect(() => {
       const dataRecord = {
             rowId: 0
         }
         if (firstTime) {
-            fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(0)}`, {
+            fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(0)}`, {
                 method: "GET",
                 headers: {},   
             })
@@ -204,6 +214,7 @@ export default function EnhancedTable() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
+  const [thumbnail, setThumbnail] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   function handleRequestSort(event, property) {
@@ -243,7 +254,7 @@ export default function EnhancedTable() {
   
   function handleDoubleClick(event, row) {
     setCurrentDirectory(row);
-    fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(row.id)}`, {
+    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(row.id)}`, {
         method: "GET",
         headers: {},   
     })
@@ -252,7 +263,8 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
       let primes = myJson.Categories.concat(myJson.Products);
-        setRows(primes);
+        console.info('ena inje:', myJson.data);
+        setRows(myJson.data);
     })
     .catch((e) => {
         
@@ -269,7 +281,7 @@ export default function EnhancedTable() {
   }
   
   function handleGoHome () {
-    fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=0`, {
+    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=0`, {
         method: "GET",
         headers: {},   
     })
@@ -299,14 +311,14 @@ export default function EnhancedTable() {
       itemsForDelete: itemToDelete,
     }
 
-    var url = process.env.REACT_APP_API_URL+'/subjects/deleteitems';
+    var url = process.env.REACT_APP_API_URL+'/categories/deleteitems';
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        return fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -344,12 +356,14 @@ export default function EnhancedTable() {
   }
 
   function createNewFolderr () {
+    setDialogOpen(false);
     const dataRecord = {
       name:values.name,
-      parentId : currentDirectory.id
+      parentId : currentDirectory.id,
+      thumbnail: thumbnail
     }
     
-    fetch(process.env.REACT_APP_API_URL+'/subjects', { method: 'POST', 
+    fetch(process.env.REACT_APP_API_URL+'/categories', { method: 'POST', 
       body : JSON.stringify(dataRecord), 
       headers: {}
     })
@@ -357,8 +371,7 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-      if(myJson.status !== 'repetitive') {
-        fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
+      fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
           method: "GET",
           headers: {},   
       })
@@ -366,16 +379,12 @@ export default function EnhancedTable() {
           return response.json();
       })
       .then((myJson) => {
-          let primes = myJson.Categories.concat(myJson.Products);
+          let primes = myJson.data;
           setRows(primes);
-
       })
       .catch((e) => {
           
       });
-      } else {
-        window.alert('نام تکراری است');
-      }
         
     })
     .catch((e) => {
@@ -395,8 +404,24 @@ export default function EnhancedTable() {
     setItemsForCopy(itemToCopyIDs);
   }
   
+  function sortDown (row, mode) {
+    row.mode = mode;
+    var url = process.env.REACT_APP_API_URL+`/categories/categorize`;
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(row),
+    }).then(function(response) {
+      return response.json(); // pass the data as promise to next then block
+    }).then(function(data) {
+      setRows(data.data);
+      console.info('tahesh:', data.data);
+    })
+    .catch(function(error) {
+    })
+  }
+
   function goUp () {
-    var url = process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
+    var url = process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
     var result = fetch(url, {
         method: 'get',
       }).then(function(response) {
@@ -404,7 +429,7 @@ export default function EnhancedTable() {
       }).then(function(data) {
         let primes = data.Categories.concat(data.Products);
         setRows(primes);
-        fetch(process.env.REACT_APP_API_URL+`/subjects/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
+        fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -431,14 +456,14 @@ export default function EnhancedTable() {
       itemsForCopy: itemsForCopy,
       currentDirectory: currentDirectory
     }
-    var url = process.env.REACT_APP_API_URL+'/subjects/paste';
+    var url = process.env.REACT_APP_API_URL+'/categories/paste';
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        return fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -465,6 +490,11 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   }
 
+  function onFinish(dirThumbName) {
+    console.info('inje resid:', dirThumbName);
+    setThumbnail(dirThumbName);
+  }
+
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -482,13 +512,13 @@ export default function EnhancedTable() {
         
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
 {/* start */}
-  <TextField
+  {/* <TextField
         id="standard-name"
         label="Name"
         value={values.name}
         onChange={handleChange('name')}
         margin="normal"
-      />
+      /> */}
     <Toolbar
       className={clsx(classes1.root, {
         [classes1.highlight]: numSelected > 0,
@@ -515,41 +545,78 @@ export default function EnhancedTable() {
           </Tooltip>
         ) : (
         <div>
-        {/* <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-        </Tooltip> */}
+       
         <Tooltip title="up">
             <IconButton onClick={() => goUp()}>
                 <ExpandLess />
             </IconButton>
         </Tooltip>
-        {/*<Tooltip title="paste">
-        <IconButton onClick={() => paste()}>
-            <CloudDoneIcon />
-        </IconButton>
-      </Tooltip> */}
+        
       <Tooltip title="home">
         <IconButton onClick={() => handleGoHome()} color="primary">
             <Home />
         </IconButton>
       </Tooltip>
       
-      {/* <Tooltip title="cut">
-        <IconButton color="primary" onClick={() => copySelected()}>
-            <FileCopy />
+      {/* <Tooltip title="new">
+        <IconButton 
+            onClick={()=> createNewFolderr()} color="primary">
+            <CreateNewFolder />
         </IconButton>
       </Tooltip> */}
       
-      <Tooltip title="new">
+      <Tooltip title="create new folder">
         <IconButton 
-            onClick={()=>createNewFolderr()} color="primary">
+            onClick={()=> setDialogOpen(true)} 
+            color="primary"
+            >
             <CreateNewFolder />
         </IconButton>
       </Tooltip>
-      
-      <Tooltip title="new">
+      <Dialog 
+        open={dialogOpen} 
+        onClose={()=>setDialogOpen(false)} 
+        aria-labelledby="form-dialog-title"
+        >
+        <DialogTitle id="form-dialog-title">Create New Directory</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            
+          </DialogContentText>
+          <TextField
+            value={values.name}
+            onChange={handleChange('name')}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            type="text"
+            fullWidth
+          />
+
+          <UploadComponent 
+            type="thumbnail"
+            model="categories"
+            onFinish={onFinish}
+            />
+
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={()=>setDialogOpen(false)} 
+            color="primary"
+            >
+            Cancel
+          </Button>
+          <Button 
+            onClick={() => createNewFolderr()}
+            color="primary"
+            >
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Tooltip title="delete">
         <IconButton 
             onClick={()=> deleteRows()} color="primary">
             <DeleteIcon />
@@ -617,10 +684,33 @@ export default function EnhancedTable() {
                           fontFamily: 'Far_Kamran' ,
                           fontSize: '19px',
                           fontWeight : 'bold',
-                          color: 'black',
-                          direction: 'rtl'
+                          color: 'black'
                         }}
                         >{row.name}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <Tooltip title="up">
+                        <IconButton 
+                          onClick={() => sortDown(row,'up')}
+                          >
+                          {/* <ExpandLess /> */}
+                          <KeyboardArrowUp />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="down">
+                        <IconButton 
+                          onClick={() => sortDown(row,'down')}
+                          >
+                          <KeyboardArrowDown />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="delete">
+                        <IconButton 
+                          onClick={() => {}}
+                          >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                      </TableCell>
                       <TableCell 
                         align="right"
                         style={{ 
@@ -663,27 +753,7 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-       {/* <Dialog open={true} aria-labelledby="form-dialog-title">
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="directory name"
-            type="text"
-            fullWidth
-            // onChange={}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary">
-            cancel
-          </Button>
-          <Button color="primary">
-            create
-          </Button>
-        </DialogActions>
-      </Dialog>  */}
+      
     </div>
   );
 }

@@ -9,11 +9,11 @@ module.exports = {
 
 
   inputs: {
-    
+
     verifyCode : {
       type: 'string'
     },
-    
+
     mobileNumber : {
       type: 'string'
     }
@@ -27,27 +27,32 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    var url = 'http://smspanel.hostiran.net/post/send.asmx';
+    var url = 'http://sms.hostiran.net/webservice/?WSDL';
     var httpOptions = {
       wsdl_headers: {
         'Authorization': 'Basic ' + Buffer.from('miladkhan' + ':' + '789654').toString('base64')
       }
     };
-    
 
-    soap.createClient(url, httpOptions, function(err, client) {
+
+    soap.createClient(url, httpOptions, (err, client) => {
       if (err) {
         response.status(401).end();
+        console.info('error');
       } else {
+        console.info('okkk');
         var requestArgs = {
-          to : inputs.mobileNumber,
-          msg : 'فیزیک اپ' + '\r\n' + 'کد تایید' + '\r\n' + inputs.verifyCode
+          to : '09380331526',
+          msg : 'hello'
         };
 
-        client.addHttpHeader('Authorization', "Basic " + Buffer.from('miladkhan' + ':' + '789654').toString('base64'));
-        client.send(requestArgs, function(err, result) {
+        client.addHttpHeader('Authorization', 'Basic ' + Buffer.from('miladkhan' + ':' + '789654').toString('base64'));
+        client.send(requestArgs, (err, result) => {
           if (err) {
-            console.log(err.message);
+            console.log('error:', err);
+            // return res.json(err);
+          } else {
+            console.log('successfully ', result);
           }
         });
       }

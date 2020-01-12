@@ -61,7 +61,12 @@ module.exports = {
       }
 
     }
-    return userinteractions;
+    let finalData = {};
+    finalData.dataLength = userinteractions.length;
+    finalData.data = userinteractions;
+    finalData.errorMessage = null;
+    finalData.auth= true;
+    return finalData;
   }
 
 };

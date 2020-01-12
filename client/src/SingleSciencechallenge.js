@@ -335,9 +335,8 @@ class SingleSciencechallenge extends React.Component{
                                     }}
                                     poster={this.state.thumbnail}
                                     startTime = {this.state.summary.startTime}
-                                    style={{
-                                        height: '200px'
-                                    }}
+                                    fluid = {false}
+                                    width={900}
                                     >
                                         
                                 <source 
@@ -416,7 +415,8 @@ class SingleSciencechallenge extends React.Component{
                                     fontSize: '14px'
                                 }}
                                 >
-                                {this.state.summary.description}
+                                <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
+                                {/* {this.state.summary.description} */}
                             </Typography>
                         </Paper>
                     </Grid>

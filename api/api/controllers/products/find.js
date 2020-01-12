@@ -117,7 +117,8 @@ module.exports = {
 
     finalData.dataLength = dataLength.length;
     finalData.data = allProducts;
-    finalData.isAuthenticated = true;
+    finalData.errorMessage = null;
+    finalData.auth= true;
     return finalData;
 
   }

@@ -14,7 +14,7 @@ module.exports = {
     limit: {
       type: 'number'
     },
-    
+
     skip: {
       type: 'number'
     },
@@ -22,11 +22,11 @@ module.exports = {
     sort: {
       type: 'string'
     },
-    
+
     where: {
       type: 'string'
     },
-    
+
     userId: {
       type: 'string'
     }
@@ -45,8 +45,7 @@ module.exports = {
     let dataLength = await Beyondthebooks.find();
     let allBeyondthebooks = await Beyondthebooks.find()
     .limit(inputs.limit)
-    .skip(inputs.skip)
-    ;
+    .skip(inputs.skip);
     for (let beyondthebook of allBeyondthebooks) {
       let allViews = 0;
       let allLikes = 0;
@@ -74,49 +73,49 @@ module.exports = {
           modelId: beyondthebook.id,
           model: 'beyondthebooks'
         });
-      
-      
-      if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
-        summary.startTime = userVideoStatus.startTime;
+
+
+        if (userVideoStatus && typeof userVideoStatus === 'object' && userVideoStatus.constructor === Object)
+        {summary.startTime = userVideoStatus.startTime;}
       }
-        beyondthebook.thumbnail = sails.config.custom.apiUrl + "/files/beyondthebooksImage/" + beyondthebook.thumbnail;
-        beyondthebook.filesrc = sails.config.custom.apiUrl + "/files/beyondthebooksFiles/" + beyondthebook.filesrc;
-        let quizs = await Quizes.find({
-          where : {
-            modelId: beyondthebook.id
-          }
-        });
-        beyondthebook.hasQuiz = false;
-        if (quizs.length)
-          beyondthebook.hasQuiz = true;
-        
-        moment.locale('en');
-        beyondthebook.jalaaliCreatedDate = momentJalaali(beyondthebook.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-        moment.locale('fa');
-        beyondthebook.jalaaliUserFriendlyCreatedDate = moment(beyondthebook.createdAt).fromNow();   
-        beyondthebook.jalaaliUserFriendlyCreatedDate = moment(beyondthebook.createdAt).fromNow();
-        beyondthebook.jalaaliFullUserFriendlyCreatedDate = beyondthebook.jalaaliCreatedDate + ' ' + beyondthebook.jalaaliUserFriendlyCreatedDate;
-        
-        //  tidy up tags
-        if (beyondthebook.tags) {
-          let tags = JSON.parse(beyondthebook.tags);
-          tagsArray = [];
-        
-          for (let tag of tags) {
-            let tagElement = await Tags.findOne({
-              id: tag.id
-            });
-            tagsArray.push(tagElement);
-          }
-          beyondthebook.tagsArray = tagsArray;
+      beyondthebook.thumbnail = sails.config.custom.apiUrl + '/files/beyondthebooksImage/' + beyondthebook.thumbnail;
+      beyondthebook.filesrc = sails.config.custom.apiUrl + '/files/beyondthebooksFiles/' + beyondthebook.filesrc;
+      let quizs = await Quizes.find({
+        where : {
+          modelId: beyondthebook.id
         }
-        else
-        beyondthebook.tagsArray = [];
+      });
+      beyondthebook.hasQuiz = false;
+      if (quizs.length)
+      {beyondthebook.hasQuiz = true;}
+
+      moment.locale('en');
+      beyondthebook.jalaaliCreatedDate = momentJalaali(beyondthebook.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      beyondthebook.jalaaliUserFriendlyCreatedDate = moment(beyondthebook.createdAt).fromNow();
+      beyondthebook.jalaaliUserFriendlyCreatedDate = moment(beyondthebook.createdAt).fromNow();
+      beyondthebook.jalaaliFullUserFriendlyCreatedDate = beyondthebook.jalaaliCreatedDate + ' ' + beyondthebook.jalaaliUserFriendlyCreatedDate;
+
+      //  tidy up tags
+      if (beyondthebook.tags) {
+        let tags = JSON.parse(beyondthebook.tags);
+        tagsArray = [];
+
+        for (let tag of tags) {
+          let tagElement = await Tags.findOne({
+            id: tag.id
+          });
+          tagsArray.push(tagElement);
+        }
+        beyondthebook.tagsArray = tagsArray;
+      }
+      else
+      {beyondthebook.tagsArray = [];}
     }
 
     finalData.dataLength = dataLength.length;
     finalData.data = allBeyondthebooks;
-    finalData.isAuthenticated = true;
+    finalData.auth = true;
     return finalData;
 
   }

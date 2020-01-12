@@ -22,6 +22,18 @@ import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Chip from '@material-ui/core/Chip';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 class SingleProduct extends React.Component {
     constructor(props, context){
@@ -38,7 +50,6 @@ class SingleProduct extends React.Component {
             isRender : false,
             thumbnail: '',
             userCanSeeQuiz: true,
-            userCanSeeVideo: true,
             videoInfoBoxDisplayType: 'flex',
             videoPlayerDisplayType: 'none',
             productId: props.productid,
@@ -53,7 +64,9 @@ class SingleProduct extends React.Component {
                     label:'نظرات',
                     model:'products'
                 }
-            ]
+            ],
+            reportDialog : false,
+            reportValue : null
         }
 
     };
@@ -69,8 +82,60 @@ class SingleProduct extends React.Component {
                 videoPlayerDisplayType: 'block',
             };
           });
-    }
+        this.player.play();
+        let modelId = this.props.match.path.split('/')[2];
+        console.info('injast:', this.props);
+        console.info('arr:', modelId);
+        let data = {
+            type : 'view',
+            model : 'products',
+            modelId : modelId
+        }
 
+        fetch(process.env.REACT_APP_API_URL+`likedislikeview`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${this.state.token}`,
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+            .then(response => response.json())
+            .then(result => {
+                // this.fetchData(this.state.token);
+            });
+    }
+    
+    openReportDialog = () => {
+        this.setState(function(state, props) {
+            return {
+                reportDialog: true,
+            };
+        });
+    }
+    
+    handleClose = () => {
+        this.setState(function(state, props) {
+            return {
+                reportDialog: false,
+            };
+        });
+    }
+    
+    reportUse = (event) => {
+        // console.info('event:', event);
+        // this.setState(function(state, props) {
+        //     return {
+        //         reportValue: event.target.value,
+        //     };
+        // });
+    }
+    
     addToFavorites = () => {
         console.info(this.props);
         const token = localStorage.getItem('token');
@@ -114,10 +179,10 @@ class SingleProduct extends React.Component {
             .then(product => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(product.summary)),
-                        tags: JSON.parse(JSON.stringify(product.tags)),
-                        thumbnail: product.thumbnail,
-                        id: product.id,
+                        summary: JSON.parse(JSON.stringify(product.data.summary)),
+                        tags: JSON.parse(JSON.stringify(product.data.tags)),
+                        thumbnail: product.data.thumbnail,
+                        id: product.data.id,
                         isRender: true
                     };
                   }, () => {
@@ -169,50 +234,49 @@ class SingleProduct extends React.Component {
       }
 
     componentDidMount(){
-        fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}&model=products`, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                // 'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.info('resd:', result);
-                var category = result.data[0].p;
-                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}&model=products`, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    mode: 'cors', // no-cors, cors, *same-origin
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'authorization': `Bearer ${token}`,
-                    },
-                    redirect: 'follow', // manual, *follow, error
-                    referrer: 'no-referrer', // no-referrer, *client
-                    // body: JSON.stringify(data), // body data type must match "Content-Type" header
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        this.setState((state, props) => {
-                            return ({
-                                cats: result,
-                                targetCatId: category.id,
-                                targetCatName: category.name,
-                            });
-                        }, () => {
-                            this.setState({isRender: true})
-                        });
-                    });
-            });
-
+        // fetch(process.env.REACT_APP_API_URL+`categories/findparentdirectoryid?rowId=${this.props.match.path.split('/')[2]}&model=products`, {
+        //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        //     mode: 'cors', // no-cors, cors, *same-origin
+        //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        //     credentials: 'same-origin', // include, *same-origin, omit
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         // 'authorization': `Bearer ${token}`,
+        //     },
+        //     redirect: 'follow', // manual, *follow, error
+        //     referrer: 'no-referrer', // no-referrer, *client
+        //     // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        //     })
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         console.info('resd:', result);
+        //         var category = result.data[0].p;
+        //         fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}&model=products`, {
+        //             method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        //             mode: 'cors', // no-cors, cors, *same-origin
+        //             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        //             credentials: 'same-origin', // include, *same-origin, omit
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 // 'authorization': `Bearer ${token}`,
+        //             },
+        //             redirect: 'follow', // manual, *follow, error
+        //             referrer: 'no-referrer', // no-referrer, *client
+        //             // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        //             })
+        //             .then(response => response.json())
+        //             .then(result => {
+        //                 this.setState((state, props) => {
+        //                     return ({
+        //                         cats: result,
+        //                         targetCatId: category.id,
+        //                         targetCatName: category.name,
+        //                     });
+        //                 }, () => {
+        //                     this.setState({isRender: true})
+        //                 });
+        //             });
+        //     });
 
         console.info('pri:', this.props);
         const token = localStorage.getItem('token');
@@ -282,6 +346,8 @@ class SingleProduct extends React.Component {
                                                 ref={player => {
                                                     this.player = player;
                                                   }}
+                                                    fluid = {false}
+                                                    width={900}
                                                     poster={this.state.thumbnail}
                                                     startTime = {this.state.summary.startTime}
                                                     style={{
@@ -389,7 +455,7 @@ class SingleProduct extends React.Component {
                                     }}>
                                         
                                         {
-                                            (this.state.token && this.state.userCanSeeVideo) ? 
+                                            (this.state.token && this.state.summary.userCanSeeVideo) ? 
                                                 <Fab variant="extended" aria-label="like" style={{
                                                         fontFamily: 'IranSans'
                                                     }}
@@ -402,15 +468,128 @@ class SingleProduct extends React.Component {
                                                 }
                                                 
                                                 {
-                                                    (this.state.token && this.state.userCanSeeVideo) ? 
-                                                        <Fab variant="extended" aria-label="like" style={{
-                                                                fontFamily: 'IranSans'
-                                                            }}
-                                                            onClick={this.addToFavorites}
+                                                    (this.state.token && this.state.summary.userCanSeeVideo) ? 
+                                                        <React.Fragment>
+                                                            <Fab variant="extended" aria-label="like" style={{
+                                                                    fontFamily: 'IranSans'
+                                                                }}
+                                                                onClick={this.addToFavorites}
+                                                                >
+                                                                <NavigationIcon />
+                                                                نشان کردن
+                                                            </Fab>
+                                                            <Fab 
+                                                                variant="extended" 
+                                                                aria-label="like" 
+                                                                style={{
+                                                                    fontFamily: 'IranSans'
+                                                                }}
+                                                                onClick={this.openReportDialog}
+                                                                >
+                                                                <NavigationIcon />
+                                                                ریپورت
+                                                            </Fab>
+                                                            <Dialog
+                                                                open={this.state.reportDialog}
+                                                                onClose={this.handleClose}
+                                                                aria-labelledby="alert-dialog-title"
+                                                                aria-describedby="alert-dialog-description"
+                                                                style={{
+                                                                    direction: 'rtl'
+                                                                }}
                                                             >
-                                                            <NavigationIcon />
-                                                            نشان کردن
-                                                        </Fab>:
+                                                                <DialogTitle id="alert-dialog-title">
+                                                                <Typography
+                                                                    style = {{
+                                                                        fontFamily: 'IranSans_Light',
+                                                                        // fontWeight: 'bold',
+                                                                    }}
+                                                                    >
+                                                                    این ویدیو چه مشکلی دارد :
+                                                                </Typography>
+                                                                </DialogTitle>
+                                                                <DialogContent>
+                                                                <DialogContentText id="alert-dialog-description">
+                                                                <FormControl 
+                                                                    component="fieldset" 
+                                                                    // className={classes.formControl}
+                                                                    >
+                                                                    {/* <FormLabel component="legend">Gender</FormLabel> */}
+                                                                    <RadioGroup 
+                                                                        aria-label="gender" 
+                                                                        name="gender1" 
+                                                                        value={this.state.reportValue} 
+                                                                        onChange={(event) => this.reportUse(event)}
+                                                                        >
+                                                                    <FormControlLabel 
+                                                                        value="r1" 
+                                                                        control={<Radio />} 
+                                                                        label={<Typography
+                                                                            style = {{
+                                                                                fontFamily: 'IranSans_Light',
+                                                                                fontSize: '14px',
+                                                                                color: 'black'
+                                                                            }}
+                                                                            >
+                                                                            ویدیو خراب است
+                                                                        </Typography>} 
+                                                                        />
+                                                                    <FormControlLabel 
+                                                                        value="r2" 
+                                                                        control={<Radio />} 
+                                                                        label={<Typography
+                                                                            style = {{
+                                                                                fontFamily: 'IranSans_Light',
+                                                                                fontSize: '14px',
+                                                                                color: 'black'
+                                                                            }}
+                                                                            >
+                                                                            کیفیت بسیار پایینی دارد
+                                                                        </Typography>} 
+                                                                        />
+                                                                    <FormControlLabel 
+                                                                        value="r3" 
+                                                                        control={<Radio />} 
+                                                                        label={<Typography
+                                                                            style = {{
+                                                                                fontFamily: 'IranSans_Light',
+                                                                                fontSize: '14px',
+                                                                                color: 'black'
+                                                                            }}
+                                                                            >
+                                                                            سایر
+                                                                        </Typography>}
+                                                                        />
+                                                                    </RadioGroup>
+                                                                </FormControl>
+                                                                </DialogContentText>
+                                                                </DialogContent>
+                                                                <DialogActions>
+                                                                <Button 
+                                                                    onClick={this.handleClose} 
+                                                                    color="primary"
+                                                                    style = {{
+                                                                        fontFamily: 'IranSans_Light',
+                                                                        // fontWeight: 'bold',
+                                                                    }}
+                                                                    >
+                                                                    لغو
+                                                                </Button>
+                                                                <Button 
+                                                                    onClick={this.handleClose} 
+                                                                    color="primary" 
+                                                                    autoFocus
+                                                                    style = {{
+                                                                        fontFamily: 'IranSans_Light',
+                                                                        // fontWeight: 'bold',
+                                                                    }}
+                                                                    >
+                                                                    ارسال
+                                                                </Button>
+                                                                </DialogActions>
+                                                            </Dialog>
+                                                        </React.Fragment>
+                                                        :
                                                         null
                                                     }
                                                 {
@@ -428,7 +607,7 @@ class SingleProduct extends React.Component {
                                                         null
                                                     }
                                                 {
-                                                    (this.state.token && !this.state.userCanSeeVideo) ?     
+                                                    (this.state.token && !this.state.summary.userCanSeeVideo) ?     
                                                         <Fab 
                                                             variant="extended" 
                                                             aria-label="like" 
@@ -450,11 +629,11 @@ class SingleProduct extends React.Component {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <QuizComponent
+                        {/* <QuizComponent
                             endFunc={this.catchMeHere}
                             model='products'
                             modelid={this.props.productid}
-                        />
+                        /> */}
                         <ArticlesToolBox
                             model='products'
                             modelid={this.props}
@@ -523,7 +702,7 @@ class SingleProduct extends React.Component {
                                     lineHeight: '1.8rem'
                                 }}
                                 >
-                                {this.state.summary.description}
+                                <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
                             </Typography>
                         </Paper>
                     </Grid>

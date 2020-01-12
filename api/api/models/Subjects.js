@@ -17,6 +17,12 @@ module.exports = {
       type: 'string',
       required : false
     },
+
+    priority :{
+      type: 'string',
+      required : false,
+      defaultsTo: '0'
+    },
     
     parentId : {
       type: 'string',

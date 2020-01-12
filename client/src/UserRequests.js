@@ -86,13 +86,13 @@ class Requests extends React.Component {
                             >
                             {request.jalaaliUserFriendlyCreatedDate}
                         </div>
-                          <Link 
+                          {/* <Link 
                             component={RouterLink} 
                             to={'https://google.com'}
                             style={{ fontFamily: 'IranSans_Light' }}
                             >
                               {request.userInfo.fullName}
-                          </Link>
+                          </Link> */}
                       </Typography>
                         <div
                         style={{ fontFamily: 'IranSans_Light' }}

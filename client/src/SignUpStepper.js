@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
+  // return ['شماره تلفن','تایید کد','اطلاعات فردی'];
   return ['اطلاعات فردی'];
 }
 
@@ -83,8 +84,8 @@ function HorizontalLinearStepper(props) {
 
   const sendVerificationCodeViaSMS = () => {
     
-    fetch(process.env.REACT_APP_API_URL + `users/checkformobilerepetition`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    fetch(`http://localhost/test/sms.php?mobileNumber=${mobileNumber}`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
@@ -93,7 +94,7 @@ function HorizontalLinearStepper(props) {
       },
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify({mobileNumber:mobileNumber}), // body data type must match "Content-Type" header
+      // body: JSON.stringify({mobileNumber:mobileNumber}), // body data type must match "Content-Type" header
       })
       .then(response => response.json())
       .then(response => {
@@ -367,8 +368,8 @@ if(isSignupSuccess) {
                     }
                   }}
                 />
-              </Typography> : null}
-            {activeStep === 1 ? 
+              </Typography> : null} */}
+            {/* {activeStep === 0 ? 
               <Typography className={classes.instructions}>
                 <TextField
                   id="standard-verifycode"
@@ -560,7 +561,7 @@ if(isSignupSuccess) {
               null  
             }
               
-              {/* {activeStep === 0 ? 
+               {/* {activeStep === 0 ? 
                 <Button
                   variant="contained"
                   color="primary"
@@ -570,9 +571,9 @@ if(isSignupSuccess) {
                 >
                 ارسال کد تایید
               </Button>
-              : null}
+              : null} */}
 
-              {activeStep === 1 ? 
+              {/* {activeStep === 1 ? 
                 <Button
                   variant="contained"
                   color="primary"
@@ -581,8 +582,8 @@ if(isSignupSuccess) {
                 >
                   تایید کد و مرحله ی بعد
                 </Button>
-              : null} */}
-
+              : null}
+*/}
               {activeStep === 0 ? 
                 <Button
                   variant="contained"
@@ -592,7 +593,7 @@ if(isSignupSuccess) {
                 >
                 ثبت نام
               </Button>
-              : null}
+              : null} 
             </div>
           </div>
         )}

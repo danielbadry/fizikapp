@@ -45,6 +45,11 @@ module.exports = {
       type: 'number',
       required : false
     },
+
+    fPointPrice :{
+      type: 'string',
+      required : false
+    },
     
     secondPrise :{
       type: 'number',

@@ -1,4 +1,6 @@
 var jwt = require('jsonwebtoken');
+var moment = require('moment');
+var momentJalaali = require('moment-jalaali');
 module.exports = {
 
 
@@ -41,6 +43,13 @@ module.exports = {
           let allRequests = await Requests.find({
             id: { in: requestsIds }
           });
+          for (request of allRequests) {
+            moment.locale('en');
+            request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+            moment.locale('fa');
+            request.jalaaliUserFriendlyCreatedDate = moment(request.createdAt).fromNow();
+            request.jalaaliFullUserFriendlyCreatedDate = request.jalaaliCreatedDate + ' ' + request.jalaaliUserFriendlyCreatedDate;
+          }
           return ({ auth: true, errorMessage:null, data: allRequests });
         }
       });

@@ -39,36 +39,57 @@ class NiceCard extends React.Component {
 
     render() {
         return(
-            <React.Fragment>
+            <div
+                style={{
+                    marginLeft: '10%',
+                    width: '90%',
+                }}
+                >
                 {this.state.categories.map(
                     (item, index) =>
+                    <div
+                        style={{
+                            display: 'inline-block',
+                            textAlign: 'center',
+                            width: '25%',
+                            padding: '1px 15px',
+                            margin: '1px 30px'
+                        }}
+                        >
                         <div
                             key={index}
                                 style={{
                                     border:'1px solid gray',
                                     borderRadius:'50%',
-                                    height:'100px',
-                                    width:'100px',
+                                    height:'200px',
+                                    width:'200px',
                                     textAlign: 'center',
                                     lineHeight: '90px',
-                                    fontFamily:'IranSans'
+                                    fontFamily:'IranSans',
+                                    backgroundImage: `url(${item.thumbnail})`,
+                                    backgroundPosition: 'center',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundSize: 'cover'
                                 }}
                             >
-                            <Link 
-                                    color="inherit"
-                                    style={{
-                                        fontFamily: 'IranSans_Ultralight',
-                                        fontSize: '13px',
-                                        margin:'0',
-                                        lineHeight:'2'
-                                    }}
-                                    component={RouterLink} 
-                                    to={`/category/${item.id}`}>{item.name}
-                                </Link>
+                            
+                        </div>
+                        <Link 
+                            color="inherit"
+                            style={{
+                                fontFamily: 'IranSans_Ultralight',
+                                fontSize: '20px',
+                                margin:'0',
+                                lineHeight:'2',
+                                fontWeight: 'bold'
+                            }}
+                            component={RouterLink} 
+                            to={`/category/${item.id}`}>{item.name}
+                        </Link>
                         </div>
                 )}
                
-            </React.Fragment>
+            </div>
         )
     }
 }

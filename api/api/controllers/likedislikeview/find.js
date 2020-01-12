@@ -68,8 +68,12 @@ module.exports = {
               data : allLikes
             }
           };
-  
-          return (result);
+          let finalData = {};
+          finalData.dataLength = 3;
+          finalData.data = result;
+          finalData.errorMessage = null;
+          finalData.auth= true;
+          return (finalData);
         } else {
           let userId = decoded.id;
   
@@ -131,8 +135,13 @@ module.exports = {
               data : allLikes
             }
           };
+          let finalData = {};
+          finalData.dataLength = 3;
+          finalData.data = result;
+          finalData.errorMessage = null;
+          finalData.auth= true;
 
-          return (result);
+          return (finalData);
         }
       });
     } else {
@@ -176,8 +185,12 @@ module.exports = {
           data : allLikes
         }
       };
-
-      return (result);
+      let finalData = {};
+      finalData.dataLength = 3;
+      finalData.data = result;
+      finalData.errorMessage = null;
+      finalData.auth= true;
+      return (finalData);
     }
   }
 

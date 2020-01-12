@@ -1,62 +1,33 @@
-import React, { Component } from 'react'
-import { EditorState, convertToRaw } from 'draft-js'
-import Editor from 'draft-js-plugins-editor'
-import createMathjaxPlugin from 'draft-js-mathjax-plugin'
-import { FormDataConsumer, REDUX_FORM_NAME } from 'react-admin';
-import { change } from 'redux-form';
+import React, { Component } from 'react';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const mathjaxPlugin = createMathjaxPlugin(/* optional configuration object */)
-
-const plugins = [
-  mathjaxPlugin,
-]
-
-export default class MyEditor extends Component {
-
-  state = {
-    editorState: EditorState.createEmpty(),
-  }
-
-  retVal = (editorState) => {
-    const contentState = editorState.getCurrentContent();
-    this.setState({
-      editorState,
-    });
-    return convertToRaw(contentState).blocks[0].text;
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <FormDataConsumer>
-                    {({ formData, dispatch, ...rest }) => (
-        <div
-          style={{
-            direction:'rtl'
-          }}
-          >
-          <div
-            style={{
-              direction: 'ltr',
-              color: 'rgba(0, 0, 0, 0.54)',
-              padding: '35px 9px 7px 0px'
-            }}
-            >{this.props.label}</div>
-
-        <Editor
-          editorState={this.state.editorState}
-          onChange={value => dispatch(
-            change(REDUX_FORM_NAME, 'description', this.retVal(value))
-          )}
-          plugins={plugins}
-          textAlignment = 'right'
-          placeholder = 'زیر این نوشته کلیک کنید و شروع به نوشتن متن و فرمول کنید'
-        />
-
-        </div>
-        )}
-        </FormDataConsumer>
-      </React.Fragment>
-    )
-  }
+class MyEditor extends Component {
+    render() {
+        return (
+            <div className="App">
+                <h2>Using CKEditor 5 build in React</h2>
+                <CKEditor
+                    editor={ ClassicEditor }
+                    data="<p>Hello from CKEditor 5!</p>"
+                    onInit={ editor => {
+                        // You can store the "editor" and use when it is needed.
+                        console.log( 'Editor is ready to use!', editor );
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        console.log( { event, editor, data } );
+                    } }
+                    onBlur={ ( event, editor ) => {
+                        console.log( 'Blur.', editor );
+                    } }
+                    onFocus={ ( event, editor ) => {
+                        console.log( 'Focus.', editor );
+                    } }
+                />
+            </div>
+        );
+    }
 }
+
+export default MyEditor;

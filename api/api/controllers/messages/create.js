@@ -8,12 +8,15 @@ module.exports = {
 
 
   inputs: {
+
     message : {
       type: 'string'
     },
+
     userId : {
       type: 'string'
     },
+
   },
 
 
@@ -29,6 +32,7 @@ module.exports = {
       updatedAt : await sails.helpers.dateParse(),
       userId : inputs.userId,
       message : inputs.message,
+      isRead : false,
       isDeleted : false
     });
     return await Requests.find();

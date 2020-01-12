@@ -107,6 +107,7 @@ export const UserCreate = (props) => (
                 { id: '10', name: 'دهم' },
                 { id: '11', name: 'یازدهم' },
                 { id: '12', name: 'دوازدهم' },
+                { id: '13', name: 'فارغ التحصیل' },
             ]} />
             <FormDataConsumer>
                 {({ formData, dispatch, ...rest }) => (

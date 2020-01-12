@@ -11,6 +11,7 @@ import RequestCard from "./RequestCard";
 import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import NiceCard from "./NiceCard";
+import Gerdali from "./Gerdali";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
@@ -60,7 +61,9 @@ class Home extends React.Component {
             <React.Fragment>
                  <Container>
                     <AdsPanel />
-                    <NiceCard />
+                    {/* <NiceCard /> */}
+                    <Gerdali />
+                    <br />
                     <SingleRow
                         label="تازه های فیزیک اپ"
                         footer=""

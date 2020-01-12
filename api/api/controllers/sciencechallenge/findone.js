@@ -29,13 +29,14 @@ module.exports = {
           let summary = await Sciencechallenge.findOne({
             id: inputs.id
           });
-    
+
           moment.locale('en');
           summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
           moment.locale('fa');
           summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
           summary.thumbnail = sails.config.custom.apiUrl + '/files/sciencechallengeImage/' + summary.thumbnail;
-    
+          summary.videoAddress = sails.config.custom.apiUrl + '/files/sciencechallengeFiles/' + summary.file;
+
           return ({
             id: inputs.id,
             summary,
@@ -83,7 +84,7 @@ module.exports = {
           moment.locale('fa');
           summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
           summary.thumbnail = sails.config.custom.apiUrl + '/files/sciencechallengeImage/' + summary.thumbnail;
-
+          summary.videoAddress = sails.config.custom.apiUrl + '/files/sciencechallengeFiles/' + summary.file;
           return ({
             id: inputs.id,
             summary,
@@ -103,7 +104,7 @@ module.exports = {
       moment.locale('fa');
       summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
       summary.thumbnail = sails.config.custom.apiUrl + '/files/sciencechallengeImage/' + summary.thumbnail;
-
+      summary.videoAddress = sails.config.custom.apiUrl + '/files/sciencechallengeFiles/' + summary.file;
       return ({
         id: inputs.id,
         summary,

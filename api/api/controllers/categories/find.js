@@ -34,7 +34,7 @@ module.exports = {
       category.jalaaliUserFriendlyCreatedDate = moment(category.createdAt).fromNow();
       category.fullJalaali = category.jalaaliCreatedDate + ' ' + category.jalaaliUserFriendlyCreatedDate;
       category.itemType = 'folder';
-      category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
+      category.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + category.thumbnail;
 
       let allSubCategories = await Categories.find({
         where : {
@@ -43,7 +43,7 @@ module.exports = {
         }
       });
       for (let category of allSubCategories) {
-        category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
+        category.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + category.thumbnail;
       }
       category.allSubCategories = allSubCategories;
     }

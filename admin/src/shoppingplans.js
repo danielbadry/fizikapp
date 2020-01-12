@@ -2,7 +2,7 @@ import React from 'react';
 import { List,NumberInput, Create, Edit, SimpleForm, 
         DisabledInput, TextInput, DateInput, LongTextInput, Datagrid, 
         TextField, ShowButton, EditButton, TabbedShowLayout, Show, Tab, required,
-        minLength,
+        minLength,DeleteButton,
         maxLength,
         minValue,
         maxValue,
@@ -17,6 +17,7 @@ const validateShoppingPlanType = [required(), minLength(5), maxLength(30)];
 const validateShoppingPlanDuration = [required(), minValue(1)];
 const validateShoppingPlanFirstPrice = [required(), minValue(1)];
 const validateShoppingPlanSecondPrice = [required(), minValue(1)];
+const validateFPointPrice = [required(), minValue(1)];
 
 export const ShoppingplansCreate = (props) => (
     <Create {...props}>
@@ -25,6 +26,7 @@ export const ShoppingplansCreate = (props) => (
             <NumberInput source="duration" label="duration" validate={validateShoppingPlanDuration} />
             <NumberInput source="firstPrise" label="first Prise" validate={validateShoppingPlanFirstPrice} />
             <NumberInput source="secondPrise" label="second Prise" validate={validateShoppingPlanSecondPrice} />
+            <NumberInput source="fPointPrice" label="fpoint Prise" validate={validateFPointPrice} />
             <UploadComponent 
                 type="thumbnail"
                 model="shoppingplans"
@@ -40,6 +42,11 @@ export const ShoppingplansEdit = (props) => (
             <NumberInput source="duration" label="duration" />
             <NumberInput source="firstPrise" label="first prise" />
             <NumberInput source="secondPrise" label="second prise" />
+            <NumberInput source="fPointPrice" label="fpoint Prise" validate={validateFPointPrice} />
+            <UploadComponent 
+                type="thumbnail"
+                model="shoppingplans"
+                />
         </SimpleForm>
     </Edit>
 );
@@ -100,6 +107,17 @@ export const ShoppingplansList = props => (
                       }}
                     />
                 <TextField 
+                    source="fPointPrice" 
+                    label="second prise" 
+                    style={{ 
+                        fontFamily: 'Far_Kamran' ,
+                        fontSize: '19px',
+                        fontWeight : 'bold',
+                        color: 'black',
+                        direction: 'rtl'
+                      }}
+                    />
+                <TextField 
                     source="duration" 
                     label="duration" 
                     style={{ 
@@ -122,6 +140,7 @@ export const ShoppingplansList = props => (
                       }}
                     />
                 <EditButton />
+                <DeleteButton />
             </Datagrid>
         </List>
         
