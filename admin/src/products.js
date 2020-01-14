@@ -234,7 +234,7 @@ export const ProductShow = (props) => (
                         نام
                     </Typography>}
                     />
-                <VideoPlayerField />
+                {/* <VideoPlayerField /> */}
                 <TextField source="data.summary.description" label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
@@ -256,7 +256,15 @@ export const ProductShow = (props) => (
                 برچسب ها
             </Typography>}>
                     <SingleFieldList>
-                        <ChipField source="name" />
+                        <ChipField 
+                            source="name" 
+                            style={{ 
+                                fontFamily: 'Far_Kamran' ,
+                                fontSize: '13px',
+                                color: 'black',
+                                direction: 'rtl'
+                            }}
+                            />
                     </SingleFieldList>
                 </ArrayField>
             </Tab>
@@ -341,7 +349,7 @@ export const ProductsList = props => (
                 تصویر
             </Typography>} />
             <TextField 
-                source="summary.name" 
+                source="data.summary.name" 
                 label={<Typography 
                     style={{ 
                         fontFamily: 'IranSans' ,
@@ -360,7 +368,9 @@ export const ProductsList = props => (
                     direction: 'rtl'
                 }}
                 />
-            <ArrayField source="tagsArray" label={<Typography 
+            <ArrayField 
+                source="data.summary.tagsArray" 
+                label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',
@@ -371,10 +381,18 @@ export const ProductsList = props => (
                 برچسب
             </Typography>}>
                 <SingleFieldList>
-                    <ChipField source="name" />
+                    <ChipField 
+                        source="name" 
+                        style={{ 
+                            fontFamily: 'Far_Kamran' ,
+                            fontSize: '13px',
+                            color: 'black',
+                            direction: 'rtl'
+                        }}
+                        />
                 </SingleFieldList>
             </ArrayField>
-            <BooleanField source="isMedal" label={<Typography 
+            <BooleanField source="data.summary.isMedal" label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',
@@ -384,7 +402,7 @@ export const ProductsList = props => (
                 color="inherit" variant="subtitle1">
                 مدالیون
             </Typography>} />
-            <BooleanField source="hasQuiz" label={<Typography 
+            <BooleanField source="data.summary.hasQuiz" label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',
@@ -395,7 +413,7 @@ export const ProductsList = props => (
                 کوییز
             </Typography>} />
             <TextField 
-                source="jalaaliFullUserFriendlyCreatedDate" 
+                source="data.summary.jalaaliFullUserFriendlyCreatedDate" 
                 label={<Typography 
                     style={{ 
                         fontFamily: 'IranSans' ,

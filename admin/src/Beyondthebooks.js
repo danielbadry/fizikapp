@@ -46,7 +46,7 @@ export const BeyondthebooksCreate = (props) => (
             {/* <MyEditor label="description" /> */}
             <Tiny />
             {/* <LongTextInput source="description" label="description" /> */}
-            <TagComponent source="tags" label="select tags (optional)" />
+            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
             <UploadComponent
                 type="thumbnail"
                 model="beyondthebooks"
@@ -64,16 +64,30 @@ export const BeyondthebooksCreate = (props) => (
 export const BeyondthebooksEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
+            <TextInput 
+                source="data.summary.name" 
+                label="name" 
+                />
+            <LongTextInput 
+                source="data.summary.title" 
+                label="title" 
+                />
             <Tiny />
             {/* <LongTextInput source="description" label="description" /> */}
-            <TagComponent source="tags" label="select tags (optional)" />
+            {/* <TagComponent 
+                source="data.summary.tags" 
+                label="select tags (optional)" 
+                /> */}
             <UploadComponent
                 type="thumbnail"
                 model="beyondthebooks"
                 />
-            <TextInput source="duration" label="duration in seconds" type="number" validate={validateBeyondTheBookDuration} />
+            <TextInput 
+                source="data.summary.duration" 
+                label="duration in seconds" 
+                type="number" 
+                validate={validateBeyondTheBookDuration} 
+                />
 
             <UploadComponent 
                 type="file"
@@ -116,11 +130,11 @@ export const BeyondthebooksShow = (props) => (
             </Typography>}>
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
-                <TextField source="summary.title" label="title" />
-                <TextField source="summary.name" label="name" />
+                <TextField source="data.summary.title" label="title" />
+                <TextField source="data.summary.name" label="name" />
                 <VideoPlayerField />
-                <TextField source="summary.description" label="description" />
-                <ArrayField source="summary.tagsArray" label="tags">
+                <TextField source="data.summary.description" label="description" />
+                <ArrayField source="data.summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />
                     </SingleFieldList>
@@ -196,7 +210,7 @@ export const BeyondthebooksList = props => (
                 تصویر
             </Typography>} />
             <TextField 
-                source="name" 
+                source="data.summary.name" 
                 label={<Typography 
                     style={{ 
                         fontFamily: 'IranSans' ,
@@ -215,7 +229,8 @@ export const BeyondthebooksList = props => (
                     color: 'black'
                 }}
                 />
-            <ArrayField source="tagsArray" 
+            <ArrayField 
+                source="data.summary.tagsArray" 
                 label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
@@ -232,7 +247,7 @@ export const BeyondthebooksList = props => (
                 </SingleFieldList>
             </ArrayField>
             <TextField 
-                source="jalaaliFullUserFriendlyCreatedDate" 
+                source="data.summary.jalaaliFullUserFriendlyCreatedDate" 
                 label={<Typography 
                     style={{ 
                         fontFamily: 'IranSans' ,

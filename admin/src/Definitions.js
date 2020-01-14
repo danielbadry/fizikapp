@@ -56,8 +56,14 @@ export const DefinitionsCreate = (props) => (
 export const DefinitionsEdit = (props) => (
     <Edit title="Definitions edit" {...props}>
         <SimpleForm>
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
+            <TextInput 
+                source="data.summary.name" 
+                label="name" 
+                />
+            <LongTextInput 
+                source="data.summary.title" 
+                label="title" 
+                />
             <Book 
                 {...props}
                 />
@@ -127,9 +133,12 @@ export const DefinitionsList = props => (
     
     <List {...props} pagination={<DefinitionsPagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <Thumbnail 
+                source="data.summary.thumbnail" 
+                label="thumbnail" 
+                />
             <TextField 
-                source="name" 
+                source="data.summary.name" 
                 label="Name" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -140,7 +149,7 @@ export const DefinitionsList = props => (
                   }}
                 />
             <TextField 
-                source="title" 
+                source="data.summary.title" 
                 label="title" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -151,7 +160,7 @@ export const DefinitionsList = props => (
                   }}
                 />
             <TextField 
-                source="jalaaliFullUserFriendlyCreatedDate" 
+                source="data.summary.jalaaliFullUserFriendlyCreatedDate" 
                 label="Date" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,

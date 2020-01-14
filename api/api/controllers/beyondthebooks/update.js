@@ -41,7 +41,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    return await Products.updateOne({
+    return await Beyondthebooks.updateOne({
       id:inputs.id
     })
     .set({

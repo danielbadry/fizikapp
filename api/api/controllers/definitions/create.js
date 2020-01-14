@@ -48,6 +48,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    return inputs;
     return await Definitions
       .create({
         createdAt : await sails.helpers.dateParse(),

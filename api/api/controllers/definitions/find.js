@@ -103,38 +103,83 @@ module.exports = {
       }
       allRequests = finalRequests;
     }
-    
-    for (let definition of allRequests) {
-      let allViews = 0;
-      let allLikes = 0;
-      let allDislikes = 0;
-      let likedislikeviews = await Likedislikeview.find({
-        modelId: definition.id,
-        model: 'definitions'
-      });
-      for (let ldv of likedislikeviews) {
-        if (ldv.type === 'view') {
-          allViews ++;
-        } else if (ldv.type === 'like') {
-          allLikes ++;
-        } else if (ldv.type === 'dislike') {
-          allDislikes ++;
-        }
-      }
-      definition.views = allViews;
-      definition.likes = allLikes;
-      definition.dislikes = allDislikes;
-      definition.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
+    let finalProducts = [];
+    for(i = 0; i < allRequests.length; i++) {
+      let tempObj = {};
+      let tempObj2 = {};
+      tempObj.name = allRequests[0].name;
+      tempObj.createdAt = allRequests[0].createdAt;
+      tempObj.updatedAt = allRequests[0].updatedAt;
+      tempObj.isDeleted = allRequests[0].isDeleted;
+      tempObj.id = allRequests[0].id;
+      tempObj.title = allRequests[0].title;
+      tempObj.description = allRequests[0].description;
+      tempObj.thumbnail = allRequests[0].thumbnail;
+      tempObj.jalaaliCreatedDate = allRequests[0].jalaaliCreatedDate;
       moment.locale('en');
-      definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
-      definition.jalaaliUpdatedDate = momentJalaali(definition.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
-      definition.jalaaliUserFriendlyCreatedDate = moment(definition.createdAt).fromNow();
-      definition.jalaaliUserFriendlyUpdatedDate = moment(definition.updatedAt).fromNow();
-      definition.jalaaliFullUserFriendlyCreatedDate = definition.jalaaliCreatedDate + ' ' + definition.jalaaliUserFriendlyCreatedDate;
+      tempObj.jalaaliUserFriendlyCreatedDate = moment(tempObj.createdAt).fromNow();
+      tempObj.jalaaliUserFriendlyCreatedDate = moment(tempObj.createdAt).fromNow();
+      tempObj.jalaaliFullUserFriendlyCreatedDate = tempObj.jalaaliCreatedDate + ' ' + tempObj.jalaaliUserFriendlyCreatedDate;
+      if (allRequests[i].tags) {
+        let tags = JSON.parse(allRequests[i].tags);
+        tagsArray = [];
+
+        for (let tag of tags) {
+          let tagElement = await Tags.findOne({
+            id: tag.id
+          });
+          tagsArray.push(tagElement);
+        }
+        tempObj.tagsArray = tagsArray;
+      }
+      else
+      {tempObj.tagsArray = [];}
+      let quizs = await Quizes.find({
+        where : {
+          modelId: tempObj.id
+        }
+      });
+      tempObj.hasQuiz = false;
+      if (quizs.length)
+      {tempObj.hasQuiz = true;}
+      tempObj2.id = allRequests[0].id;
+      tempObj2.data = {};
+      tempObj2.data.summary = tempObj;
+      finalProducts.push(tempObj2);
     }
+    // for (let definition of allRequests) {
+    //   let allViews = 0;
+    //   let allLikes = 0;
+    //   let allDislikes = 0;
+    //   let likedislikeviews = await Likedislikeview.find({
+    //     modelId: definition.id,
+    //     model: 'definitions'
+    //   });
+    //   for (let ldv of likedislikeviews) {
+    //     if (ldv.type === 'view') {
+    //       allViews ++;
+    //     } else if (ldv.type === 'like') {
+    //       allLikes ++;
+    //     } else if (ldv.type === 'dislike') {
+    //       allDislikes ++;
+    //     }
+    //   }
+    //   definition.views = allViews;
+    //   definition.likes = allLikes;
+    //   definition.dislikes = allDislikes;
+    //   definition.thumbnail = sails.config.custom.apiUrl + "/files/definitionImage/" + definition.thumbnail;
+    //   moment.locale('en');
+    //   definition.jalaaliCreatedDate = momentJalaali(definition.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+    //   definition.jalaaliUpdatedDate = momentJalaali(definition.updatedAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+    //   moment.locale('fa');
+    //   definition.jalaaliUserFriendlyCreatedDate = moment(definition.createdAt).fromNow();
+    //   definition.jalaaliUserFriendlyUpdatedDate = moment(definition.updatedAt).fromNow();
+    //   definition.jalaaliFullUserFriendlyCreatedDate = definition.jalaaliCreatedDate + ' ' + definition.jalaaliUserFriendlyCreatedDate;
+    // }
     finalData.dataLength = allRequests.length;
-    finalData.data = allRequests;
+    finalData.data = finalProducts;
     finalData.errorMessage = null;
     finalData.auth= true;
     return finalData;

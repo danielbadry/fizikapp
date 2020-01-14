@@ -46,7 +46,7 @@ export const SciencechallengeCreate = (props) => (
             {/* <LongTextInput source="description" label="description" /> */}
             {/* <MyEditor /> */}
             <Tiny />
-            <TagComponent source="tags" label="select tags (optional)" />
+            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
             
             <UploadComponent 
                 type="thumbnail"
@@ -69,7 +69,7 @@ export const SciencechallengeEdit = (props) => (
             <LongTextInput source="title" label="title" />
             <LongTextInput source="description" label="description" />
             <Tiny />
-            <TagComponent source="tags" label="select tags (optional)" />
+            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
             
             <UploadComponent 
                 type="thumbnail"
@@ -149,9 +149,12 @@ export const SciencechallengeList = props => (
     
     <List {...props} pagination={<SciencechallengePagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <Thumbnail 
+                source="data.summary.thumbnail" 
+                label="thumbnail" 
+                />
             <TextField 
-                source="name" 
+                source="data.summary.name" 
                 label="Name" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -161,14 +164,20 @@ export const SciencechallengeList = props => (
                     direction: 'rtl'
                   }}
                 />
-            <ArrayField source="tagsArray">
+            <ArrayField 
+                source="data.summary.tagsArray"
+                label="tags"
+                >
                 <SingleFieldList>
                     <ChipField source="name" />
                 </SingleFieldList>
             </ArrayField>
-            <BooleanField source="isEnabled" label="Enable" />
+            <BooleanField 
+                source="data.summary.isEnabled" 
+                label="Enable" 
+                />
             <TextField 
-                source="jalaaliFullUserFriendlyCreatedDate" 
+                source="data.summary.jalaaliFullUserFriendlyCreatedDate" 
                 label="Date" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,

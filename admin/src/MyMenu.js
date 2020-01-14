@@ -32,7 +32,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                داشبورد
+                Dashboard
             </Typography>} 
             onClick={onMenuClick}  
             leftIcon={React.createElement(DashboardIcon)}
@@ -49,7 +49,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                محصولات
+                Products
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[0].icon)} 
@@ -66,7 +66,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                فراتر از کتاب
+                Beyond the book
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[1].icon)} 
@@ -83,7 +83,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                کاربران
+                Users
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[2].icon)} 
@@ -100,7 +100,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                دسته بندی
+                Categories
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[3].icon)} 
@@ -117,7 +117,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                موضوعات
+                Subjects
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[4].icon)} 
@@ -134,7 +134,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                حل تمرین و تست
+                Exercises
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[5].icon)} 
@@ -151,7 +151,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                تعریفی
+                Definitions
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[6].icon)} 
@@ -168,7 +168,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                چالش علمی
+                Science challenges
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[7].icon)} 
@@ -185,7 +185,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                برچسب
+                Tags
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[8].icon)} 
@@ -202,7 +202,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                خریدها
+                Shops
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[9].icon)} 
@@ -220,7 +220,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                انتقادات
+                Criticisms
             </Typography> </Badge>} 
             onClick={onMenuClick} leftIcon={React.createElement(resources[10].icon)} 
             />
@@ -236,7 +236,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                طرح های خرید
+                Shopping plans
             </Typography>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[11].icon)} 
@@ -253,7 +253,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                پلیس
+                Police
             </Typography></Badge>} onClick={onMenuClick} leftIcon={React.createElement(resources[12].icon)} />
         <MenuItemLink 
             key={resources[13].name} 
@@ -267,7 +267,7 @@ const MyMenu = ({ resources, onMenuClick, logout, criticismsBadgeCount, requests
                     direction: 'rtl'
                 }}
                 color="inherit" variant="subtitle1">
-                درخواست ها
+                Requests
             </Typography>  </Badge>} 
             onClick={onMenuClick} 
             leftIcon={React.createElement(resources[13].icon)} 

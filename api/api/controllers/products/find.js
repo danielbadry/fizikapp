@@ -66,6 +66,34 @@ module.exports = {
       tempObj.videoAddress = allProducts[0].videoAddress;
       tempObj.userCanSeeVideo = allProducts[0].userCanSeeVideo;
       tempObj.jalaaliCreatedDate = allProducts[0].jalaaliCreatedDate;
+      moment.locale('en');
+      tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
+      moment.locale('fa');
+      tempObj.jalaaliUserFriendlyCreatedDate = moment(tempObj.createdAt).fromNow();
+      tempObj.jalaaliUserFriendlyCreatedDate = moment(tempObj.createdAt).fromNow();
+      tempObj.jalaaliFullUserFriendlyCreatedDate = tempObj.jalaaliCreatedDate + ' ' + tempObj.jalaaliUserFriendlyCreatedDate;
+      if (allProducts[i].tags) {
+        let tags = JSON.parse(allProducts[i].tags);
+        tagsArray = [];
+
+        for (let tag of tags) {
+          let tagElement = await Tags.findOne({
+            id: tag.id
+          });
+          tagsArray.push(tagElement);
+        }
+        tempObj.tagsArray = tagsArray;
+      }
+      else
+      {tempObj.tagsArray = [];}
+      let quizs = await Quizes.find({
+        where : {
+          modelId: tempObj.id
+        }
+      });
+      tempObj.hasQuiz = false;
+      if (quizs.length)
+      {tempObj.hasQuiz = true;}
       tempObj2.id = allProducts[0].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;

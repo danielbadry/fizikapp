@@ -41,8 +41,16 @@ const validateExercisesYear = [required()];
 export const ExercisesCreate = (props) => (
     <Create {...props} >
         <SimpleForm redirect="list" submitOnEnter={true}>
-            <TextInput source="name" label="name" validate={validateExercisesName} />
-            <LongTextInput source="title" label="title" validate={validateExercisesTitle} />
+            <TextInput 
+                source="name" 
+                label="name" 
+                validate={validateExercisesName} 
+                />
+            <LongTextInput 
+                source="title" 
+                label="title" 
+                validate={validateExercisesTitle} 
+                />
             {/* <MyEditor label="description" /> */}
             <Tiny />
             {/* <LongTextInput source="description" label="description" /> */}
@@ -210,9 +218,12 @@ export const ExercisesList = props => (
     
     <List {...props} pagination={<ExercisesPagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <Thumbnail 
+                source="data.summary.thumbnail" 
+                label="thumbnail" 
+                />
             <TextField 
-                source="name" 
+                source="data.summary.name" 
                 label="Name" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -223,7 +234,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <TextField 
-                source="title" 
+                source="data.summary.title" 
                 label="Title" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -234,7 +245,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <TextField 
-                source="description" 
+                source="data.summary.description" 
                 label="Description" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -245,7 +256,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <TextField 
-                source="year" 
+                source="data.summary.year" 
                 label="year" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -256,7 +267,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <BooleanField 
-                source="isRiazi" 
+                source="data.summary.isRiazi" 
                 label="riazi" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -267,7 +278,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <BooleanField 
-                source="isTajrobi" 
+                source="data.summary.isTajrobi" 
                 label="tajrobi" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,
@@ -278,7 +289,7 @@ export const ExercisesList = props => (
                   }}
                 />
             <TextField 
-                source="jalaaliFullUserFriendlyCreatedDate" 
+                source="data.summary.jalaaliFullUserFriendlyCreatedDate" 
                 label="date" 
                 style={{ 
                     fontFamily: 'Far_Kamran' ,

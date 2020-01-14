@@ -60,8 +60,8 @@ export default class UploadComponent extends React.Component {
   render() {
     // let randomName = this.uuidv4();
     // window.localStorage.setItem("randomName",this.uuidv4());
-    let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
-    // let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    // let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
     return (
       <React.Fragment>
        <WarningBanner type={this.props} />
@@ -78,7 +78,7 @@ export default class UploadComponent extends React.Component {
             let fileNameInfo = this.state.files[0].name.split('.');
             // this.props.onFinish(randomName + '.' + fileNameInfo[1]);
             dispatch(
-              change(REDUX_FORM_NAME, this.props.type, this.state.randomName + '.' + fileNameInfo[1])
+              change(REDUX_FORM_NAME, 'data.summary.'+this.props.type, this.state.randomName + '.' + fileNameInfo[1])
             )}}
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {

@@ -21,22 +21,27 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    
+
     name :{
       type: 'string',
       required : false
     },
-    
+
     title :{
       type: 'string',
       required : false
     },
-    
+
     description :{
       type: 'string',
       required : false
     },
-    
+
+    summary :{
+      type: 'json',
+      required : false
+    },
+
     tags :{
       type: 'json',
       columnType: 'array',
@@ -53,12 +58,12 @@ module.exports = {
       type: 'boolean',
       required : false
     },
-    
+
     thumbnail :{
       type: 'string',
       required : false
     },
-    
+
   },
 
 };
