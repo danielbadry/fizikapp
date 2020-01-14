@@ -77,11 +77,14 @@ export const ProductCreate = (props) => (
             
             <TextInput source="name" label="name" validate={validateProductName} />
             <LongTextInput source="title" label="title" validate={validateProductTitle} />
-            {/* <Tiny /> */}
+            <Tiny />
             {/* <MyEditor label="description" /> */}
             {/* <LongTextInput source="description" label="description" validate={validateProductDescription} /> */}
             <BooleanInput label="is medal" source="isMedal" />
-            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
+            {/* <TagComponent 
+                source="tags" 
+                label="select tags (optional)"
+                /> */}
             
             <Book 
                 {...props}
@@ -90,7 +93,6 @@ export const ProductCreate = (props) => (
             <UploadComponent 
                 type="thumbnail"
                 model="products"
-                
                 />
 
             <TextInput source="duration" label="duration in seconds" type="number" validate={validateProductDuration} />
@@ -112,17 +114,16 @@ export const ProductEdit = (props) => (
                 source="data.summary.name" 
                 label="name" 
                 />
-            <TextInput 
+             <TextInput 
                 source="data.summary.title" 
                 label="title" 
                 />
-            {/* <Tiny 
-                
-                /> */}
+            <Tiny 
+                />
             <BooleanInput 
                 label="is medal" 
                 source="data.summary.isMedal" 
-                />
+                /> 
             {/* <TagComponent 
                 default="data.summary.tags"
                 label="select tags (optional)"
@@ -130,19 +131,24 @@ export const ProductEdit = (props) => (
             <Book 
                 {...props}
                 />
-                <UploadComponent 
-                    type="thumbnail"
-                    model="products"
-                />
+
+            <UploadComponent 
+                type="thumbnail"
+                model="products"
+                default="data.summary.thumbnail"
+            />
+
             <TextInput 
                 source="data.summary.duration" 
                 label="duration in seconds" 
                 type="number" 
                 validate={validateProductDuration} 
-                />
+                /> 
+            
             <UploadComponent 
                 type="file"
                 model="products"
+                // default="data.summary.thumbnail"
                 />
         </SimpleForm>
     </Edit>
@@ -335,7 +341,7 @@ export const ProductsList = props => (
                 تصویر
             </Typography>} />
             <TextField 
-                source="name" 
+                source="summary.name" 
                 label={<Typography 
                     style={{ 
                         fontFamily: 'IranSans' ,

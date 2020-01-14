@@ -9,8 +9,24 @@ module.exports = {
 
   inputs: {
 
-    summary: {
+    name: {
+      type: 'string'
+    },
+    
+    title: {
+      type: 'string'
+    },
+    
+    data: {
       type: 'json'
+    },
+    
+    description: {
+      type: 'string'
+    },
+    
+    isMedal: {
+      type: 'boolean'
     },
 
     id: {
@@ -25,14 +41,16 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // return inputs.summary;
     return await Products.updateOne({
       id:inputs.id
     })
     .set({
-      name:inputs.summary.name,
-      title:inputs.summary.title,
-      duration:inputs.summary.duration
+      name:inputs.data.summary.name,
+      title:inputs.data.summary.title,
+      duration:inputs.data.summary.duration,
+      description:inputs.data.summary.description,
+      isMedal:inputs.data.summary.isMedal,
+      category:inputs.data.summary.category,
     });
 
   }

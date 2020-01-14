@@ -17,15 +17,32 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 // Our app
+function WarningBanner (props) {
+  if (typeof(props.type.record.data) !== 'undefined')
+    if (props.type.type === 'thumbnail') {
+      return (
+        <img 
+          alt=""
+          src={props.type.record.data.summary.thumbnail} 
+          style={{
+            width:'50px',
+            height:'50px',
+            borderRadius:'50%'
+          }}
+          />
+      )
+    }
+  return null;
+}
+
 export default class UploadComponent extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       // Set initial files, type 'local' means this is a file
       // that has already been uploaded to the server (see docs)
       files: [],
-      randomName : this.uuidv4()
+      randomName : this.uuidv4(),
     };
   }
 
@@ -39,13 +56,16 @@ export default class UploadComponent extends React.Component {
       return v.toString(16);
     });
   }
-  
+
   render() {
     // let randomName = this.uuidv4();
     // window.localStorage.setItem("randomName",this.uuidv4());
-    // let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
-    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    // let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
     return (
+      <React.Fragment>
+       <WarningBanner type={this.props} />
+        
       <FormDataConsumer>
       {({ formData, dispatch, ...rest }) => (
         <FilePond
@@ -68,10 +88,12 @@ export default class UploadComponent extends React.Component {
             }, () => {
               console.info('inja set shod');
             });
+            console.info('inam statesh:', this.state);
           }}
         />
         )}
         </FormDataConsumer>
+        </React.Fragment>
     );
   }
 

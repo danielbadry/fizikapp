@@ -12,12 +12,23 @@ class Tiny extends React.Component {
      console.log('Content was updated:', e.target.getContent());
    }
 
+   componentDidMount() {
+    console.info('componentDidMount happend');
+   }
+
    render() {
-     return (
+    let initVal;
+    if (typeof(this.props.record.data) !== 'undefined'){
+      initVal = this.props.record.data.summary.description;
+    }
+      
+    else
+      initVal = '';
+    return (
       <FormDataConsumer>
       {({ formData, dispatch, ...rest }) => (
        <Editor
-         initialValue={this.props.record.data.summary.description}
+         initialValue={initVal}
          init={{
            height: 500,
            menubar: false,
@@ -36,7 +47,7 @@ class Tiny extends React.Component {
         onChange={
           (e) => {
               dispatch(
-                  change(REDUX_FORM_NAME, 'description', e.target.getContent())
+                  change(REDUX_FORM_NAME, 'data.summary.description', e.target.getContent())
               )
           }
       }

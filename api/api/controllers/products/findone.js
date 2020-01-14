@@ -132,11 +132,20 @@ module.exports = {
               }
             }
           }
-          summary.part = pIds[0].id;
-          summary.section = pIds[1].id;
-          summary.season = pIds[2].id;
-          summary.book = pIds[3].id;
-          //
+          let reversArr = pIds.reverse();
+          if (typeof(reversArr[0]) !== 'undefined') {
+            summary.book = reversArr[0].id;
+          }
+          if (typeof(reversArr[1]) !== 'undefined') {
+            summary.season = reversArr[1].id;
+          }
+          if (typeof(reversArr[2]) !== 'undefined') {
+            summary.section = reversArr[2].id;
+          }
+          if (typeof(reversArr[3]) !== 'undefined') {
+            summary.part = reversArr[3].id;
+          }
+
           moment.locale('en');
           summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
           moment.locale('fa');

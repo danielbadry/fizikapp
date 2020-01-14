@@ -8,12 +8,15 @@ class TagForm extends React.Component {
     super (props);
     this.state = {
       tags : [],
-      defualtValue : eval('this.props.record.' + this.props.default)
-    }   
+      defualtValue : null
+    }
   }
 
   componentDidMount () {
-    console.info("inja ", this.state);
+    console.info('propp:', eval('this.props.record.data.summary' + this.props.default));
+    this.setState({
+      defualtValue : eval('this.props.record.data.summary' + this.props.default)
+    });
     let finalList = [];
     let tempObj = {};
     fetch(process.env.REACT_APP_API_URL+'/tags', { method: 'GET', headers: {}})
@@ -41,7 +44,6 @@ class TagForm extends React.Component {
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
       <React.Fragment>
         <div
@@ -60,11 +62,11 @@ class TagForm extends React.Component {
           />
       </React.Fragment>
     );
-
   }
-  
 }
+
 TagForm.defaultProps = {
   addLabel: true,
 };
+
 export default reduxForm({ form: 'record-form' })(TagForm);

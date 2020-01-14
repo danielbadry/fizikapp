@@ -27,6 +27,11 @@ module.exports = {
       required : false
     },
     
+    summary :{
+      type: 'json',
+      required : false
+    },
+    
     title :{
       type: 'string',
       required : false
