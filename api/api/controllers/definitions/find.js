@@ -107,15 +107,20 @@ module.exports = {
     for(i = 0; i < allRequests.length; i++) {
       let tempObj = {};
       let tempObj2 = {};
-      tempObj.name = allRequests[0].name;
-      tempObj.createdAt = allRequests[0].createdAt;
-      tempObj.updatedAt = allRequests[0].updatedAt;
-      tempObj.isDeleted = allRequests[0].isDeleted;
-      tempObj.id = allRequests[0].id;
-      tempObj.title = allRequests[0].title;
-      tempObj.description = allRequests[0].description;
-      tempObj.thumbnail = allRequests[0].thumbnail;
-      tempObj.jalaaliCreatedDate = allRequests[0].jalaaliCreatedDate;
+      tempObj.name = allRequests[i].name;
+      tempObj.createdAt = allRequests[i].createdAt;
+      tempObj.updatedAt = allRequests[i].updatedAt;
+      tempObj.isDeleted = allRequests[i].isDeleted;
+      tempObj.id = allRequests[i].id;
+      tempObj.title = allRequests[i].title;
+      tempObj.description = allRequests[i].description;
+      if (allRequests[i].thumbnail !== ''){
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/definitionImage/' + allRequests[i].thumbnail;
+      }
+      else {
+        tempObj.thumbnail = '';
+      }
+      tempObj.jalaaliCreatedDate = allRequests[i].jalaaliCreatedDate;
       moment.locale('en');
       tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
@@ -144,9 +149,10 @@ module.exports = {
       tempObj.hasQuiz = false;
       if (quizs.length)
       {tempObj.hasQuiz = true;}
-      tempObj2.id = allRequests[0].id;
+      tempObj2.id = allRequests[i].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;
+      tempObj2.data.thumbnail = tempObj.thumbnail;
       finalProducts.push(tempObj2);
     }
     // for (let definition of allRequests) {

@@ -68,6 +68,38 @@ module.exports = {
             id: inputs.id
           });
 
+          // find hierarchical structure in its categories
+          let allCategories = await Categories.find();
+          let pIds = [];
+          let currentCat = summary.category;
+          // return currentCat;
+          for (let i = 0; i < 10; i++) {
+            for (let c of allCategories) {
+              if (c.id === currentCat) {
+                currentCat = c.parentId;
+                let temp = {
+                  id: c.id,
+                  name: c.name,
+                  parentId: c.parentId,
+                };
+                pIds.push(temp);
+              }
+            }
+          }
+          let reversArr = pIds.reverse();
+          if (typeof(reversArr[0]) !== 'undefined') {
+            summary.book = reversArr[0].id;
+          }
+          if (typeof(reversArr[1]) !== 'undefined') {
+            summary.season = reversArr[1].id;
+          }
+          if (typeof(reversArr[2]) !== 'undefined') {
+            summary.section = reversArr[2].id;
+          }
+          if (typeof(reversArr[3]) !== 'undefined') {
+            summary.part = reversArr[3].id;
+          }
+
           moment.locale('en');
           summary.jalaaliCreatedDate = momentJalaali(summary.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
           moment.locale('fa');

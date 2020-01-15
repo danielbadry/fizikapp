@@ -4,7 +4,7 @@ module.exports = {
   friendlyName: 'Update',
 
 
-  description: 'Update products.',
+  description: 'Update definitions.',
 
 
   inputs: {
@@ -45,7 +45,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    return await Beyondthebooks.updateOne({
+    return await Definitions.updateOne({
       id:inputs.id
     })
     .set({

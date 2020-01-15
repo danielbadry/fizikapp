@@ -60,8 +60,8 @@ export default class UploadComponent extends React.Component {
   render() {
     // let randomName = this.uuidv4();
     // window.localStorage.setItem("randomName",this.uuidv4());
-    let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
-    // let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    // let uploadUrl = `http://localhost/upload/upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
+    let uploadUrl = `../upload.php?model=${this.props.model}&type=${this.props.type}&name=${this.state.randomName}`
     return (
       <React.Fragment>
        <WarningBanner type={this.props} />

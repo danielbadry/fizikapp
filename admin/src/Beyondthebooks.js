@@ -198,7 +198,9 @@ export const BeyondthebooksList = props => (
     
     <List {...props} pagination={<BeyondthebookPagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label={<Typography 
+            <Thumbnail 
+                source="data.thumbnail" 
+                label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',

@@ -50,22 +50,27 @@ module.exports = {
     for(i = 0; i < allBeyondthebooks.length; i++) {
       let tempObj = {};
       let tempObj2 = {};
-      tempObj.name = allBeyondthebooks[0].name;
-      tempObj.createdAt = allBeyondthebooks[0].createdAt;
-      tempObj.updatedAt = allBeyondthebooks[0].updatedAt;
-      tempObj.isDeleted = allBeyondthebooks[0].isDeleted;
-      tempObj.id = allBeyondthebooks[0].id;
-      tempObj.title = allBeyondthebooks[0].title;
-      tempObj.description = allBeyondthebooks[0].description;
-      tempObj.category = allBeyondthebooks[0].category;
-      tempObj.isMedal = allBeyondthebooks[0].isMedal;
-      tempObj.priority = allBeyondthebooks[0].priority;
-      tempObj.thumbnail = allBeyondthebooks[0].thumbnail;
-      tempObj.file = allBeyondthebooks[0].file;
-      tempObj.duration = allBeyondthebooks[0].duration;
-      tempObj.videoAddress = allBeyondthebooks[0].videoAddress;
-      tempObj.userCanSeeVideo = allBeyondthebooks[0].userCanSeeVideo;
-      tempObj.jalaaliCreatedDate = allBeyondthebooks[0].jalaaliCreatedDate;
+      tempObj.name = allBeyondthebooks[i].name;
+      tempObj.createdAt = allBeyondthebooks[i].createdAt;
+      tempObj.updatedAt = allBeyondthebooks[i].updatedAt;
+      tempObj.isDeleted = allBeyondthebooks[i].isDeleted;
+      tempObj.id = allBeyondthebooks[i].id;
+      tempObj.title = allBeyondthebooks[i].title;
+      tempObj.description = allBeyondthebooks[i].description;
+      tempObj.category = allBeyondthebooks[i].category;
+      tempObj.isMedal = allBeyondthebooks[i].isMedal;
+      tempObj.priority = allBeyondthebooks[i].priority;
+      if (allBeyondthebooks[i].thumbnail !== ''){
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/beyondthebooksImage/' + allBeyondthebooks[i].thumbnail;
+      }
+      else {
+        tempObj.thumbnail = '';
+      }
+      tempObj.file = allBeyondthebooks[i].file;
+      tempObj.duration = allBeyondthebooks[i].duration;
+      tempObj.videoAddress = allBeyondthebooks[i].videoAddress;
+      tempObj.userCanSeeVideo = allBeyondthebooks[i].userCanSeeVideo;
+      tempObj.jalaaliCreatedDate = allBeyondthebooks[i].jalaaliCreatedDate;
       moment.locale('en');
       tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
@@ -94,9 +99,10 @@ module.exports = {
       tempObj.hasQuiz = false;
       if (quizs.length)
       {tempObj.hasQuiz = true;}
-      tempObj2.id = allBeyondthebooks[0].id;
+      tempObj2.id = allBeyondthebooks[i].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;
+      tempObj2.data.thumbnail = tempObj.thumbnail;
       finalProducts.push(tempObj2);
     }
     // for (let beyondthebook of allBeyondthebooks) {
