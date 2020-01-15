@@ -50,22 +50,27 @@ module.exports = {
     for(i = 0; i < allProducts.length; i++) {
       let tempObj = {};
       let tempObj2 = {};
-      tempObj.name = allProducts[0].name;
-      tempObj.createdAt = allProducts[0].createdAt;
-      tempObj.updatedAt = allProducts[0].updatedAt;
-      tempObj.isDeleted = allProducts[0].isDeleted;
-      tempObj.id = allProducts[0].id;
-      tempObj.title = allProducts[0].title;
-      tempObj.description = allProducts[0].description;
-      tempObj.category = allProducts[0].category;
-      tempObj.isMedal = allProducts[0].isMedal;
-      tempObj.priority = allProducts[0].priority;
-      tempObj.thumbnail = allProducts[0].thumbnail;
-      tempObj.file = allProducts[0].file;
-      tempObj.duration = allProducts[0].duration;
-      tempObj.videoAddress = allProducts[0].videoAddress;
-      tempObj.userCanSeeVideo = allProducts[0].userCanSeeVideo;
-      tempObj.jalaaliCreatedDate = allProducts[0].jalaaliCreatedDate;
+      tempObj.name = allProducts[i].name;
+      tempObj.createdAt = allProducts[i].createdAt;
+      tempObj.updatedAt = allProducts[i].updatedAt;
+      tempObj.isDeleted = allProducts[i].isDeleted;
+      tempObj.id = allProducts[i].id;
+      tempObj.title = allProducts[i].title;
+      tempObj.description = allProducts[i].description;
+      tempObj.category = allProducts[i].category;
+      tempObj.isMedal = allProducts[i].isMedal;
+      tempObj.priority = allProducts[i].priority;
+      if (allProducts[i].thumbnail !== ''){
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + allProducts[i].thumbnail;
+      }
+      else {
+        tempObj.thumbnail = '';
+      }
+      tempObj.file = sails.config.custom.apiUrl + '/files/productFiles/' + allProducts[i].file;
+      tempObj.duration = allProducts[i].duration;
+      tempObj.videoAddress = allProducts[i].videoAddress;
+      tempObj.userCanSeeVideo = allProducts[i].userCanSeeVideo;
+      tempObj.jalaaliCreatedDate = allProducts[i].jalaaliCreatedDate;
       moment.locale('en');
       tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
@@ -94,9 +99,10 @@ module.exports = {
       tempObj.hasQuiz = false;
       if (quizs.length)
       {tempObj.hasQuiz = true;}
-      tempObj2.id = allProducts[0].id;
+      tempObj2.id = allProducts[i].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;
+      tempObj2.data.thumbnail = tempObj.thumbnail;
       finalProducts.push(tempObj2);
     }
 

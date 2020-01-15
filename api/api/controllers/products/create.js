@@ -30,6 +30,12 @@ module.exports = {
       columnType: 'array',
       required : false
     },
+    
+    data :{
+      type: 'json',
+      columnType: 'array',
+      required : false
+    },
 
     category :{
       type: 'string',
@@ -66,7 +72,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
+// return (inputs.data);
     if(typeof(this.req.headers.authorization) !== 'undefined') {
       token = this.req.headers.authorization;
       let TokenArray = token.split(' ');

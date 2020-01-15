@@ -98,6 +98,9 @@ class Book extends React.Component{
                                         dispatch(
                                             change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
                                         )
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                        )
                                     }
                                 }
                                 {...rest}
@@ -108,9 +111,16 @@ class Book extends React.Component{
                                 label="season"
                                 choices={(formData)?this.GetSeasons(formData.book):null}
                                 defaultValue = {season}
-                                onChange={value => dispatch(
-                                    change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
-                                )}
+                                onChange={
+                                    (value) => {
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
+                                        )
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                        )
+                                    }
+                                }
                                 {...rest}
                             />
                             
@@ -119,9 +129,16 @@ class Book extends React.Component{
                                 label="section"
                                 defaultValue = {section}
                                 choices={(formData)?this.GetSeasons(formData.season):null}
-                                onChange={value => dispatch(
-                                    change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
-                                )}
+                                onChange={
+                                    (value) => {
+                                    dispatch(
+                                        change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
+                                    )
+                                    dispatch(
+                                        change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                    )
+                                    }
+                                }
                                 {...rest}
                             />
                             
@@ -130,9 +147,17 @@ class Book extends React.Component{
                                 label="part"
                                 defaultValue = {part}
                                 choices={(formData)?this.GetSeasons(formData.section):null}
-                                onChange={value => dispatch(
-                                    change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
-                                )}
+                                onChange={
+                                    (value) =>{
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'data.summary.category', this.retVal(value))
+                                        )
+                                        dispatch(
+                                            change(REDUX_FORM_NAME, 'category', this.retVal(value))
+                                        )
+                                    } 
+                                    
+                                }
                                 {...rest}
                             />
                         </Fragment>

@@ -335,10 +335,13 @@ export const ProductShow = (props) => (
 const ProductPagination = props => <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
 
 export const ProductsList = props => (
-    
+    <React.Fragment>
+    <div>{props.length}</div>
     <List {...props} pagination={<ProductPagination />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label={<Typography 
+            <Thumbnail 
+                source="data.thumbnail" 
+                label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',
@@ -453,4 +456,5 @@ export const ProductsList = props => (
             </Typography>}/>
         </Datagrid>
     </List>
+    </React.Fragment>
 );

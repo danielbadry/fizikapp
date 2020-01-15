@@ -47,7 +47,7 @@ class Tiny extends React.Component {
         onChange={
           (e) => {
               dispatch(
-                  change(REDUX_FORM_NAME, 'data.summary.description', e.target.getContent())
+                  change(REDUX_FORM_NAME, 'description', e.target.getContent())
               )
           }
       }
