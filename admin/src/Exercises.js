@@ -111,13 +111,19 @@ export const ExercisesCreate = (props) => (
 export const ExercisesEdit = (props) => (
     <Edit title="Product edit" {...props}>
         <SimpleForm>
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
+            <TextInput 
+                source="data.summary.name" 
+                label="name" 
+                />
+            <LongTextInput 
+                source="data.summary.title" 
+                label="title" 
+                />
             <Tiny />
             <InsertSubject />
             <RadioButtonGroupInput 
                 validate={validateExercisesField}
-                source="field"
+                source="data.summary.field"
                 choices={[
                     { id: 'riazi', name: 'riazi' },
                     { id: 'tajrobi', name: 'tajrobi' }
@@ -125,14 +131,16 @@ export const ExercisesEdit = (props) => (
             
             <RadioButtonGroupInput 
                 validate={validateExercisesReference}
-                source="reference" choices={[
-                { id: 'in', name: 'in' },
-                { id: 'out', name: 'out' }
-            ]} />
+                source="data.summary.reference" 
+                choices={[
+                    { id: 'in', name: 'in' },
+                    { id: 'out', name: 'out' }
+                ]} 
+            />
 
             <SelectInput 
                 validate={validateExercisesYear}
-                source="year" 
+                source="data.summary.year" 
                 choices={[
                 { id: '1381', name: '1381' },
                 { id: '1382', name: '1382' },
@@ -219,20 +227,10 @@ export const ExercisesList = props => (
     <List {...props} pagination={<ExercisesPagination />}>
         <Datagrid rowClick="show">
             <Thumbnail 
-                source="data.summary.thumbnail" 
+                source="data.thumbnail" 
                 label="thumbnail" 
                 />
-            <TextField 
-                source="data.summary.name" 
-                label="Name" 
-                style={{ 
-                    fontFamily: 'Far_Kamran' ,
-                    fontSize: '19px',
-                    fontWeight : 'bold',
-                    color: 'black',
-                    direction: 'rtl'
-                  }}
-                />
+            
             <TextField 
                 source="data.summary.title" 
                 label="Title" 
@@ -244,17 +242,7 @@ export const ExercisesList = props => (
                     direction: 'rtl'
                   }}
                 />
-            <TextField 
-                source="data.summary.description" 
-                label="Description" 
-                style={{ 
-                    fontFamily: 'Far_Kamran' ,
-                    fontSize: '19px',
-                    fontWeight : 'bold',
-                    color: 'black',
-                    direction: 'rtl'
-                  }}
-                />
+            
             <TextField 
                 source="data.summary.year" 
                 label="year" 

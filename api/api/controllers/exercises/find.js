@@ -95,7 +95,7 @@ module.exports = {
     )
     .limit(inputs.limit)
     .skip(inputs.skip);
-    
+
     let allEx = [];
     for (let exercise of exercises) {
       if (inputs.subjects) {
@@ -112,21 +112,35 @@ module.exports = {
     for(i = 0; i < exercises.length; i++) {
       let tempObj = {};
       let tempObj2 = {};
-      tempObj.name = exercises[0].name;
-      tempObj.createdAt = exercises[0].createdAt;
-      tempObj.updatedAt = exercises[0].updatedAt;
-      tempObj.isDeleted = exercises[0].isDeleted;
-      tempObj.id = exercises[0].id;
-      tempObj.title = exercises[0].title;
-      tempObj.description = exercises[0].description;
-      tempObj.category = exercises[0].category;
-      tempObj.priority = exercises[0].priority;
-      tempObj.thumbnail = exercises[0].thumbnail;
-      tempObj.file = exercises[0].file;
-      tempObj.duration = exercises[0].duration;
-      tempObj.videoAddress = exercises[0].videoAddress;
-      tempObj.userCanSeeVideo = exercises[0].userCanSeeVideo;
-      tempObj.jalaaliCreatedDate = exercises[0].jalaaliCreatedDate;
+      tempObj.name = exercises[i].name;
+      tempObj.createdAt = exercises[i].createdAt;
+      tempObj.updatedAt = exercises[i].updatedAt;
+      tempObj.isDeleted = exercises[i].isDeleted;
+      tempObj.id = exercises[i].id;
+      tempObj.title = exercises[i].title;
+      tempObj.description = exercises[i].description;
+      tempObj.category = exercises[i].category;
+      tempObj.year = exercises[i].year;
+
+      if (exercises[i].field === 'riazi') {
+        tempObj.isRiazi = true;
+      }
+
+      if (exercises[i].field === 'tajrobi') {
+        tempObj.isTajrobi = true;
+      }
+
+      if (exercises[i].thumbnail !== ''){
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/exerciseImage/' + exercises[i].thumbnail;
+      }
+      else {
+        tempObj.thumbnail = '';
+      }
+      tempObj.file = exercises[i].file;
+      tempObj.duration = exercises[i].duration;
+      tempObj.videoAddress = exercises[i].videoAddress;
+      tempObj.userCanSeeVideo = exercises[i].userCanSeeVideo;
+      tempObj.jalaaliCreatedDate = exercises[i].jalaaliCreatedDate;
       moment.locale('en');
       tempObj.jalaaliCreatedDate = momentJalaali(tempObj.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
       moment.locale('fa');
@@ -155,9 +169,10 @@ module.exports = {
       tempObj.hasQuiz = false;
       if (quizs.length)
       {tempObj.hasQuiz = true;}
-      tempObj2.id = exercises[0].id;
+      tempObj2.id = exercises[i].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;
+      tempObj2.data.thumbnail = tempObj.thumbnail;
       finalProducts.push(tempObj2);
     }
 

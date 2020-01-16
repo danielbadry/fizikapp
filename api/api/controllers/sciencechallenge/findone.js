@@ -85,12 +85,21 @@ module.exports = {
           summary.jalaaliUserFriendlyCreatedDate = moment(summary.createdAt).fromNow();
           summary.thumbnail = sails.config.custom.apiUrl + '/files/sciencechallengeImage/' + summary.thumbnail;
           summary.videoAddress = sails.config.custom.apiUrl + '/files/sciencechallengeFiles/' + summary.file;
+
+          finalProducts = [];
+          tempObj2 = {};
+          // tempObj2.id = summary.id;
+          tempObj2.summary = summary;
+          tempObj2.thumbnail = summary.thumbnail;
+          // tempObj2.isUserAnswered = isUserAnswered;
+          finalProducts.push(tempObj2);
+
           return ({
             id: inputs.id,
-            summary,
+            errorMessage: null,
+            data:tempObj2,
             thumbnail: summary.thumbnail,
-            isUserAnswered: isUserAnswered,
-            isAuthenticated: true
+            auth: true
           });
         }
       });
@@ -107,13 +116,14 @@ module.exports = {
       summary.videoAddress = sails.config.custom.apiUrl + '/files/sciencechallengeFiles/' + summary.file;
       return ({
         id: inputs.id,
+        errorMessage: null,
         summary,
         thumbnail: summary.thumbnail,
         isUserAnswered: {
           data:{},
           isUserAnswered:false
         },
-        isAuthenticated: false
+        auth: false
       });
 
     }

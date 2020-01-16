@@ -59,7 +59,7 @@ module.exports = {
       targetCategoryId = inputs.parentId;
     }
 
-    let childrenCat = await Categories.find({
+    let childrenCat = await Subjects.find({
       parentId : targetCategoryId
     });
 
@@ -101,7 +101,7 @@ module.exports = {
           priority: ch.priority
         });
       } else {
-        await Categories.updateOne({
+        await Subjects.updateOne({
           id: ch.id
         })
         .set({

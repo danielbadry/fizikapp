@@ -594,11 +594,11 @@ export default function EnhancedTable() {
             fullWidth
           />
 
-          <UploadComponent 
+          {/* <UploadComponent 
             type="thumbnail"
             model="categories"
             onFinish={onFinish}
-            />
+            /> */}
 
         </DialogContent>
         <DialogActions>

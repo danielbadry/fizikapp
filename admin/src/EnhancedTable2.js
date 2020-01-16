@@ -191,7 +191,7 @@ export default function EnhancedTable() {
             rowId: 0
         }
         if (firstTime) {
-            fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(0)}`, {
+            fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(0)}`, {
                 method: "GET",
                 headers: {},   
             })
@@ -199,7 +199,7 @@ export default function EnhancedTable() {
                 return response.json();
             })
             .then((myJson) => {
-                setRows(myJson.Categories);
+                setRows(myJson.data);
                 setFirstTime(false);
             })
             .catch((e) => {
@@ -254,7 +254,7 @@ export default function EnhancedTable() {
   
   function handleDoubleClick(event, row) {
     setCurrentDirectory(row);
-    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(row.id)}`, {
+    fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(row.id)}`, {
         method: "GET",
         headers: {},   
     })
@@ -281,7 +281,7 @@ export default function EnhancedTable() {
   }
   
   function handleGoHome () {
-    fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=0`, {
+    fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=0`, {
         method: "GET",
         headers: {},   
     })
@@ -363,7 +363,7 @@ export default function EnhancedTable() {
       thumbnail: thumbnail
     }
     
-    fetch(process.env.REACT_APP_API_URL+'/categories', { method: 'POST', 
+    fetch(process.env.REACT_APP_API_URL+'/subjects', { method: 'POST', 
       body : JSON.stringify(dataRecord), 
       headers: {}
     })
@@ -371,7 +371,7 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-      fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
+      fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`, {
           method: "GET",
           headers: {},   
       })
@@ -406,7 +406,7 @@ export default function EnhancedTable() {
   
   function sortDown (row, mode) {
     row.mode = mode;
-    var url = process.env.REACT_APP_API_URL+`/categories/categorize`;
+    var url = process.env.REACT_APP_API_URL+`/subjects/categorize`;
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(row),
@@ -421,15 +421,15 @@ export default function EnhancedTable() {
   }
 
   function goUp () {
-    var url = process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
+    var url = process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.parentId)}`;
     var result = fetch(url, {
         method: 'get',
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        let primes = data.Categories.concat(data.Products);
+        let primes = data.data;
         setRows(primes);
-        fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
+        fetch(process.env.REACT_APP_API_URL+`/subjects/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -565,7 +565,7 @@ export default function EnhancedTable() {
         </IconButton>
       </Tooltip> */}
       
-      <Tooltip title="create new folder">
+      <Tooltip title="create new subject">
         <IconButton 
             onClick={()=> setDialogOpen(true)} 
             color="primary"
@@ -578,7 +578,7 @@ export default function EnhancedTable() {
         onClose={()=>setDialogOpen(false)} 
         aria-labelledby="form-dialog-title"
         >
-        <DialogTitle id="form-dialog-title">Create New Directory</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create New Subject</DialogTitle>
         <DialogContent>
           <DialogContentText>
             
@@ -594,11 +594,11 @@ export default function EnhancedTable() {
             fullWidth
           />
 
-          <UploadComponent 
+          {/* <UploadComponent 
             type="thumbnail"
             model="categories"
             onFinish={onFinish}
-            />
+            /> */}
 
         </DialogContent>
         <DialogActions>

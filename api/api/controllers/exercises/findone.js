@@ -98,13 +98,16 @@ module.exports = {
             summary.tagsArray = [];
           }
 
-          return ({ auth: false, errorMessage:null,id: inputs.id, data:{
+          return ({
+            auth: true,
+            errorMessage:null,
             id: inputs.id,
-            summary,
-            tags: [],
-            thumbnail: summary.thumbnail,
-            auth: true
-          }});
+            data:{
+              id: inputs.id,
+              summary,
+              tags: [],
+              thumbnail: summary.thumbnail,
+            }});
         }});
     } else {
       let tagsArray = [];

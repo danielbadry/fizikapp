@@ -35,7 +35,7 @@ module.exports = {
       category.fullJalaali = category.jalaaliCreatedDate + ' ' + category.jalaaliUserFriendlyCreatedDate;
       category.itemType = 'folder';
       category.thumbnail = sails.config.custom.apiUrl + '/files/productImage/folder.png';
-    
+
       let allSubCategories = await Subjects.find({
         where : {
           isDeleted: false,
@@ -58,9 +58,13 @@ module.exports = {
     for (let product of allProducts) {
       product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
     }
-    
+
+    let data = allCategories.concat(allProducts);
+    data.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);
+
     finalData.Categories = allCategories;
-    finalData.Products = allProducts; 
+    finalData.Products = allProducts;
+    finalData.data = data;
 
     return finalData;
 

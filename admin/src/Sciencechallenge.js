@@ -65,9 +65,15 @@ export const SciencechallengeCreate = (props) => (
 export const SciencechallengeEdit = (props) => (
     <Edit title="Sciencechallenge edit" {...props}>
         <SimpleForm>
-            <TextInput source="name" label="name" />
-            <LongTextInput source="title" label="title" />
-            <LongTextInput source="description" label="description" />
+            <TextInput 
+                source="data.summary.name" 
+                label="name" 
+                />
+            <LongTextInput 
+                source="data.summary.title" 
+                label="title" 
+                />
+
             <Tiny />
             {/* <TagComponent source="tags" label="select tags (optional)" /> */}
             
@@ -75,7 +81,12 @@ export const SciencechallengeEdit = (props) => (
                 type="thumbnail"
                 model="sciencechallenge"
                 />
-            <TextInput source="duration" label="duration in seconds" type="number" validate={validateScienceChallengeDuration} />
+            <TextInput 
+                source="data.summary.duration" 
+                label="duration in seconds" 
+                type="number" 
+                validate={validateScienceChallengeDuration} 
+                />
 
             <UploadComponent 
                 type="file"
