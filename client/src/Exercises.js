@@ -155,7 +155,7 @@ class Exercises extends React.Component{
                                         >
                                         <CardActionArea>
                                             <CardMedia
-                                                image={item.thumbnail}
+                                                image={item.data.thumbnail}
                                                 title="Contemplative Reptile"
                                                 style={{
                                                     height:'120px'
@@ -171,7 +171,7 @@ class Exercises extends React.Component{
                                                     fontSize:'14px'
                                                 }}
                                                 >
-                                                {item.name}
+                                                {item.data.summary.name}
                                             </Typography>
                                             <Typography 
                                                 variant="body2" 
@@ -181,7 +181,7 @@ class Exercises extends React.Component{
                                                     fontFamily:'IranSans'
                                                 }}
                                                 >
-                                                {item.title}
+                                                {item.data.summary.title}
                                             </Typography>
                                             <Typography 
                                                 variant="body2" 
@@ -191,7 +191,7 @@ class Exercises extends React.Component{
                                                     fontFamily:'IranSans'
                                                 }}
                                                 >
-                                                {item.year}
+                                                {item.data.summary.year}
                                             </Typography>
                                             <Typography 
                                                 variant="body2" 
@@ -201,7 +201,7 @@ class Exercises extends React.Component{
                                                     fontFamily:'IranSans'
                                                 }}
                                                 >
-                                                {item.field}
+                                                {item.data.summary.field}
                                             </Typography>
                                             </CardContent>
                                         </CardActionArea>

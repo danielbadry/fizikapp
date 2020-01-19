@@ -207,7 +207,7 @@ export default function EnhancedTable() {
             });
         }
     });
-  const classes = useStyles();
+  // const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [itemsForCopy, setItemsForCopy] = React.useState([]);
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -298,10 +298,13 @@ export default function EnhancedTable() {
   }
 
   function deleteRows () {
+    if (selected.length === 0) {
+      alert('لطفا یک یا چند رکورد را انتخاب کنید');
+    }
     let itemToDelete = [];
     for (let select of selected) {
       for (let item of rows) {
-        if (select == item.name) {
+        if (select === item.name) {
           itemToDelete.push(item);
         }
       }
@@ -498,7 +501,7 @@ export default function EnhancedTable() {
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-  const classes1 = useToolbarStyles();
+  // const classes1 = useToolbarStyles();
   const { numSelected } = selected.length;
   const [values, setValues] = React.useState({
     name: ''
@@ -507,7 +510,9 @@ export default function EnhancedTable() {
     setValues({ ...values, [name]: event.target.value });
   };
   return (
-    <div className={classes1.root}>
+    <div 
+      // className={classes1.root}
+      >
       
         
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
@@ -520,11 +525,13 @@ export default function EnhancedTable() {
         margin="normal"
       /> */}
     <Toolbar
-      className={clsx(classes1.root, {
-        [classes1.highlight]: numSelected > 0,
-      })}
+      // className={clsx(classes1.root, {
+      //   [classes1.highlight]: numSelected > 0,
+      // })}
     >
-      <div className={classes1.title}>
+      <div 
+        // className={classes1.title}
+        >
         {numSelected > 0 ? (
           <Typography color="inherit" variant="subtitle1">
             {numSelected} selected
@@ -535,8 +542,12 @@ export default function EnhancedTable() {
           </Typography>
         )}
       </div>
-      <div className={classes1.spacer} />
-      <div className={classes1.actions}>
+      <div 
+        // className={classes1.spacer} 
+        />
+      <div 
+      // className={classes1.actions}
+      >
         {numSelected > 0 ? (
           <Tooltip title="paste">
             <IconButton>
@@ -630,14 +641,16 @@ export default function EnhancedTable() {
 {/* end */}
 
 
-        <div className={classes.tableWrapper}>
+        <div 
+          // className={classes.tableWrapper}
+          >
           <Table
-            className={classes.table}
+            // className={classes.table}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              classes={classes}
+              // classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -703,13 +716,13 @@ export default function EnhancedTable() {
                           <KeyboardArrowDown />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="delete">
+                      {/* <Tooltip title="delete">
                         <IconButton 
                           onClick={() => {}}
                           >
                           <DeleteIcon />
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> */}
                       </TableCell>
                       <TableCell 
                         align="right"

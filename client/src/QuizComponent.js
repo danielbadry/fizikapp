@@ -45,7 +45,7 @@ class QuizComponent extends React.Component {
     }
     
     getUserQuizResponse (token) {
-        fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelid=${this.props.modelid}`, {
+        fetch(process.env.REACT_APP_API_URL+`quizes/getuserquizresponse?model=${this.props.model}&modelId=${this.props.modelid}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -61,8 +61,8 @@ class QuizComponent extends React.Component {
             .then(response => {
                 
                 this.setState({
-                   quizesResponse: response.userQuizResponse,
-                   isAttended : response.isAttended
+                   quizesResponse: response.data.userQuizResponse,
+                   isAttended : response.data.isAttended
                 }, function() {
 
                     // console.info('props:', this.props);
@@ -117,7 +117,7 @@ class QuizComponent extends React.Component {
                     
                 });
             this.getUserQuizResponse(token);
-            fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelid=${this.props.modelid}`, {
+            fetch(process.env.REACT_APP_API_URL+`quizes?model=${this.props.model}&modelId=${this.props.modelid}`, {
                 method: 'GET', 
                 mode: 'cors',
                 cache: 'no-cache',
@@ -132,10 +132,11 @@ class QuizComponent extends React.Component {
                 .then(response => response.json())
                 .then(quizes => {
                     this.setState({
-                    quizes: quizes 
+                    quizes: quizes.data 
                     }, function() {
+                        console.info('enaa:', this.state.quizes);
                         // fill out answers array
-                        for (let qa of quizes) {
+                        for (let qa of quizes.data) {
                             
                             let tempObject = {
                                 userId : this.state.user.id,
@@ -159,7 +160,7 @@ class QuizComponent extends React.Component {
     handleDialogStatusForResponse = () => {
         this.setState({isQuizDialogOpen: !(this.state.isQuizDialogOpen)});
         this.setState({mode: 'showAnswers'});
-        this.setState({quizResultText: 'امتیاز شما از این کوییز 2 است'});
+        // this.setState({quizResultText: 'امتیاز شما از این کوییز 2 است'});
     }
     
     handleChange = () => {
@@ -205,6 +206,7 @@ class QuizComponent extends React.Component {
     }
     
     saveUserScoreInDatabase = () => {
+        let token = window.localStorage.getItem('token');
         let data = {
             answers : JSON.stringify(this.state.userAnswers)
         }
@@ -215,7 +217,7 @@ class QuizComponent extends React.Component {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'authorization': `Bearer ${token}`,
             },
             redirect: 'follow', // manual, *follow, error
             referrer: 'no-referrer', // no-referrer, *client
@@ -232,6 +234,7 @@ class QuizComponent extends React.Component {
     }
 
     checkForAnswer = (id) => {
+        console.info('rasid:', id);
         for (let oo of this.state.quizes[this.state.step].options) {
             if(oo.id == id && oo.isAnswer)
                 return true;
@@ -240,6 +243,19 @@ class QuizComponent extends React.Component {
         for (let oo of this.state.quizesResponse) {
             if(oo.responseId == id)
                 return true;
+        }
+    }
+    
+    checkForAnswerColor = (id) => {
+        console.info('rasid:', id);
+        for (let oo of this.state.quizes[this.state.step].options) {
+            if(oo.id === id && oo.isAnswer)
+                return 'green';
+        }
+        
+        for (let oo of this.state.quizesResponse) {
+            if(oo.responseId === id)
+                return 'blue';
         }
     }
 
@@ -273,7 +289,8 @@ class QuizComponent extends React.Component {
                                 fontSize: 12
                             }}
                             >
-                            {option.title}
+                                <div dangerouslySetInnerHTML={{__html: option.title}} />
+                            {/* {option.title} */}
                             </Typography>
                             }
                         />
@@ -291,7 +308,7 @@ class QuizComponent extends React.Component {
                                 checked = {this.checkForAnswer(option.id)}
                                 control={<Radio
                                 style={{
-                                    color : 'green'
+                                    color : this.checkForAnswerColor(option.id)
                                 }}
                                 />}
                             label={
@@ -301,7 +318,8 @@ class QuizComponent extends React.Component {
                                     fontSize: 12
                                 }}
                                 >
-                                {option.title} - {option.id}
+                                    <div dangerouslySetInnerHTML={{__html: option.title}} />
+                                {/* {option.title} - {option.id} */}
                                 </Typography>
                                 }
                             />
@@ -405,7 +423,7 @@ class QuizComponent extends React.Component {
                                                     fontSize: 12
                                                 }}
                                                 >
-                                                {quiz.question}
+                                                <div dangerouslySetInnerHTML={{__html: quiz.question}} />
                                             </Typography>
                                             {this.OptionsPad(quiz)}
                                         </div>:
@@ -427,30 +445,34 @@ class QuizComponent extends React.Component {
                             
                             </DialogContent>
                             <DialogActions>
-                            
-                        <Button 
-                                disabled = {this.state.step == 0}
-                                color="primary"
-                                onClick={this.checkAndGoBackStep}
-                                style={{
-                                    fontFamily: "IranSans"
-                                }}
-                                variant="contained"
-                                >
-                                سوال قبلی
-                            </Button>
+                            {/* {((!this.state.quizResultText) && (this.state.mode == 'quiz')) ? */}
+                            <React.Fragment>
+                                <Button 
+                                    disabled = {this.state.step == 0}
+                                    color="primary"
+                                    onClick={this.checkAndGoBackStep}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                    }}
+                                    variant="contained"
+                                    >
+                                    سوال قبلی
+                                </Button>
 
-                            <Button 
-                                disabled = {this.state.step == this.state.quizes.length - 1}
-                                color="primary"
-                                onClick={this.checkAndGoNextStep}
-                                style={{
-                                    fontFamily: "IranSans"
-                                }}
-                                variant="contained"
-                                >
-                                سوال بعدی
-                            </Button> 
+                                <Button 
+                                    disabled = {this.state.step == this.state.quizes.length - 1}
+                                    color="primary"
+                                    onClick={this.checkAndGoNextStep}
+                                    style={{
+                                        fontFamily: "IranSans"
+                                    }}
+                                    variant="contained"
+                                    >
+                                    سوال بعدی
+                                </Button>
+                            </React.Fragment>
+                                {/* : null
+                            } */}
                             
                             {((!this.state.quizResultText) && (this.state.mode == 'quiz')) ? 
                                 <Button 
@@ -466,7 +488,7 @@ class QuizComponent extends React.Component {
                                 </Button>    
                                 : null}
 
-                                {((!this.state.quizResultText) || (this.state.mode == 'showAnswers')) ? 
+                                {((this.state.quizResultText) || (this.state.mode == 'showAnswers')) ? 
                                     <Button 
                                         onClick={this.handleDialogStatus}
                                         style={{

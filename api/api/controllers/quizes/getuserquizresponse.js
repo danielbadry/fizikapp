@@ -13,15 +13,15 @@ module.exports = {
     userId: {
       type: 'string'
     },
-    
+
     model: {
       type: 'string'
     },
-    
+
     modelId: {
       type: 'string'
     },
-    
+
   },
 
 
@@ -32,7 +32,7 @@ module.exports = {
 
   fn: async function (inputs) {
     let token = this.req.headers.authorization;
-    let TokenArray = token.split(" ");
+    let TokenArray = token.split(' ');
     let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
     let userId = decodedToken.id;
 
@@ -43,29 +43,32 @@ module.exports = {
         modelId: inputs.modelId
       }
     });
-    
+
     // create array of quizes id
 
     let quizesIds = [];
     for (let q of quizes) {
       quizesIds.push(q.id);
     }
-    
+
     let userQuizResponse = await Quizesanswer.find({
       where : {
         userId:userId,
         quizId: { in: quizesIds }
       }
     });
-    
+
     if (userQuizResponse.length) {
       isAttended = true;
     }
 
-    return {
-      isAttended : isAttended,
-      userQuizResponse : userQuizResponse
-    };
+    let finalData = {};
+    finalData.data = {};
+    finalData.data.isAttended = isAttended;
+    finalData.data.userQuizResponse = userQuizResponse;
+    finalData.errorMessage = null;
+    finalData.auth= true;
+    return finalData;
 
   }
 

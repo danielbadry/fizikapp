@@ -629,16 +629,16 @@ class SingleProduct extends React.Component {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/* <QuizComponent
+                        <QuizComponent
                             endFunc={this.catchMeHere}
                             model='products'
-                            modelid={this.props.productid}
-                        /> */}
+                            modelid={this.props.match.path.split('/')[2]}
+                        />
                         <ArticlesToolBox
                             model='products'
                             modelid={this.props}
                             token={this.state.token}
-                            />
+                        />
                     </Grid>
 
                     <Grid container spacing={1} justify="center">

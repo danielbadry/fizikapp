@@ -28,6 +28,7 @@ module.exports.routes = {
   'GET /sciencechallenge/showmysciencechallenge': 'SciencechallengeController.showmysciencechallenge',
   'POST /categories/paste': 'CategoriesController.paste',
   'POST /categories/deleteitems': 'CategoriesController.deleteitems',
+  'POST /subjects/deleteitems': 'SubjectsController.deleteitems',
   'PUT /users/sendfcoin': 'UsersController.sendfcoin',
   'POST /shoppingplans/purchase': 'ShoppingplansController.purchase',
   'GET /shoppingplans/shoppingplanspurchasevelocity': 'ShoppingplansController.shoppingplanspurchasevelocity',

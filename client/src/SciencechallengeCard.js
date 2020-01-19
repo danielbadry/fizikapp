@@ -34,7 +34,7 @@ render() {
         to={`sciencechallenge/${this.props.item.id}`}>
       <Paper
         style={{
-          background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,
+          background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
           height:'142px',
           width: '253px',
           position: 'relative',
@@ -49,7 +49,7 @@ render() {
           top: '67%',
           right: '2%'
         }}>
-          {this.props.item.name}
+          {this.props.item.data.summary.name}
         </Typography>
         
         <Typography style={{
@@ -61,7 +61,7 @@ render() {
           right: '2%',
           fontSize: '14px'
         }}>
-        {this.props.item.title}
+        {this.props.item.data.summary.title}
         </Typography>
         
         <div style={{
@@ -88,7 +88,7 @@ render() {
                 marginLeft: '2px',
                 paddingTop: '5px',
                 position: 'absolute'
-            }}>{this.props.item.likes}</span>  
+            }}>{this.props.item.data.summary.likes}</span>  
         </div>
 
       </Paper>

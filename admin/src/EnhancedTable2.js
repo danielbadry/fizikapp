@@ -298,10 +298,13 @@ export default function EnhancedTable() {
   }
 
   function deleteRows () {
+    if (selected.length === 0) {
+      alert('لطفا یک یا چند رکورد را انتخاب کنید');
+    }
     let itemToDelete = [];
     for (let select of selected) {
       for (let item of rows) {
-        if (select == item.name) {
+        if (select === item.name) {
           itemToDelete.push(item);
         }
       }
@@ -311,14 +314,14 @@ export default function EnhancedTable() {
       itemsForDelete: itemToDelete,
     }
 
-    var url = process.env.REACT_APP_API_URL+'/categories/deleteitems';
+    var url = process.env.REACT_APP_API_URL+'/subjects/deleteitems';
     var result = fetch(url, {
         method: 'POST',
         body : JSON.stringify(dataRecord)
       }).then(function(response) {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
-        return fetch(process.env.REACT_APP_API_URL+`/categories/?rowId=${encodeURIComponent(currentDirectory.id)}`)
+        return fetch(process.env.REACT_APP_API_URL+`/subjects/?rowId=${encodeURIComponent(currentDirectory.id)}`)
         .then(function(resp){
           return resp.json();
         })
@@ -498,7 +501,7 @@ export default function EnhancedTable() {
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-  const classes1 = useToolbarStyles();
+  // const classes1 = useToolbarStyles();
   const { numSelected } = selected.length;
   const [values, setValues] = React.useState({
     name: ''
@@ -507,7 +510,9 @@ export default function EnhancedTable() {
     setValues({ ...values, [name]: event.target.value });
   };
   return (
-    <div className={classes1.root}>
+    <div 
+      // className={classes1.root}
+        >
       
         
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
@@ -520,11 +525,13 @@ export default function EnhancedTable() {
         margin="normal"
       /> */}
     <Toolbar
-      className={clsx(classes1.root, {
-        [classes1.highlight]: numSelected > 0,
-      })}
+      // className={clsx(classes1.root, {
+      //   [classes1.highlight]: numSelected > 0,
+      // })}
     >
-      <div className={classes1.title}>
+      <div 
+        // className={classes1.title}
+        >
         {numSelected > 0 ? (
           <Typography color="inherit" variant="subtitle1">
             {numSelected} selected
@@ -535,8 +542,12 @@ export default function EnhancedTable() {
           </Typography>
         )}
       </div>
-      <div className={classes1.spacer} />
-      <div className={classes1.actions}>
+      <div 
+        // className={classes1.spacer} 
+        />
+      <div 
+        // className={classes1.actions}
+        >
         {numSelected > 0 ? (
           <Tooltip title="paste">
             <IconButton>
@@ -703,13 +714,13 @@ export default function EnhancedTable() {
                           <KeyboardArrowDown />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="delete">
+                      {/* <Tooltip title="delete">
                         <IconButton 
-                          onClick={() => {}}
+                          onClick={()=> deleteRows()}
                           >
                           <DeleteIcon />
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> */}
                       </TableCell>
                       <TableCell 
                         align="right"

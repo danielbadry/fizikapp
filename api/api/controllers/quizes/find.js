@@ -8,11 +8,11 @@ module.exports = {
 
 
   inputs: {
-    
+
     model : {
       type : 'string'
     },
-    
+
     modelId : {
       type : 'string'
     },
@@ -32,21 +32,27 @@ module.exports = {
       model : inputs.model,
       modelId : inputs.modelId
     });
-
+    
     for (let quiz of quizes) {
-      let options = quiz.options;
       let finalOptions = [];
+      let options = quiz.options;
+
       for (let option of options) {
-        
+
         if (!option.isDeleted) {
           finalOptions.push(option);
         }
-        
+
       }
       quiz.options = finalOptions;
     }
-
-    return quizes;
+    let finalData = {};
+    finalData.data = {};
+    finalData.dataLength = quizes.length;
+    finalData.data = quizes;
+    finalData.errorMessage = null;
+    finalData.auth= true;
+    return finalData;
 
   }
 

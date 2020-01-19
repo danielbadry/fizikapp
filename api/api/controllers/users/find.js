@@ -106,15 +106,15 @@ dataLength = au.length;
       })
         .sort('createdAt DESC')
         .limit(1);
-      if (lastShop.length){
-        let id = lastShop[0].shoppingPlanId;
-        let res = await Shoppingplans.find({
-          where: {
-            id: id
-          }
-        });
-        user.subType = res[0].type;
-      }
+      // if (lastShop.length){
+      //   let id = lastShop[0].shoppingPlanId;
+      //   let res = await Shoppingplans.find({
+      //     where: {
+      //       id: id
+      //     }
+      //   });
+      //   user.subType = res[0].type;
+      // }
 
     }
     finalData.dataLength = dataLength;

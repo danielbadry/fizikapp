@@ -33,7 +33,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+// import Tiny  from './Tiny';
+import { Editor } from '@tinymce/tinymce-react';
 class QuizManager extends React.Component {
  
     constructor (props) {
@@ -63,13 +64,13 @@ class QuizManager extends React.Component {
     }
 
     fetchQuizes = () => {
-        fetch(process.env.REACT_APP_API_URL+'/quizes', { method: 'GET', headers: {}})
+        fetch(process.env.REACT_APP_API_URL+`/quizes/?model=${this.props.model}&modelId=${this.props.record.data.id}`, { method: 'GET', headers: {}})
         .then((response) => {
             return response.json();
         })
         .then((myJson) => {
             this.setState((state, props) => {
-                return {quizes: myJson};
+                return {quizes: myJson.data};
             });
             this.handleClose();
         })
@@ -194,16 +195,15 @@ class QuizManager extends React.Component {
     }
     
     setItemText = (event) => {
-        event.persist();
         this.setState((state, props) => {
-            return {text: event.target.value};
+            return {text: event.target.getContent()};
         });
     }
     
     setOptionText = (event) => {
-        event.persist();
+        // event.persist();
         this.setState((state, props) => {
-            return {optionText: event.target.value};
+            return {optionText: event.target.getContent()};
         });
     }
 
@@ -314,7 +314,27 @@ class QuizManager extends React.Component {
           <DialogContentText>
             write question here
           </DialogContentText>
-          <TextField
+          <Editor
+                // initialValue={initVal}
+                init={{
+                height: 500,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount '
+                ],
+                imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+                toolbar:
+                    'image imagetools undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }}
+                // onChange={this.handleEditorChange}
+                // onChange={this.setItemText.bind()}
+                onChange={(event)=>this.setItemText(event)}
+            />
+          {/* <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -322,7 +342,8 @@ class QuizManager extends React.Component {
             type="text"
             fullWidth
             onChange={this.setItemText.bind()}
-          />
+          /> */}
+
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={this.handleClose}>
@@ -369,7 +390,27 @@ class QuizManager extends React.Component {
           <DialogContentText>
             write option here
           </DialogContentText>
-          <TextField
+          <Editor
+                // initialValue={initVal}
+                init={{
+                height: 500,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount '
+                ],
+                imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+                toolbar:
+                    'image imagetools undo redo | formatselect | bold italic backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help'
+                }}
+                // onChange={this.handleEditorChange}
+                // onChange={this.setItemText.bind()}
+                onChange={(event)=>this.setOptionText(event)}
+            />
+          {/* <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -377,7 +418,8 @@ class QuizManager extends React.Component {
             type="text"
             fullWidth
             onChange={this.setOptionText.bind()}
-          />
+          /> */}
+
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={this.handleClose}>
@@ -401,7 +443,9 @@ class QuizManager extends React.Component {
                         <ListItemIcon>
                         <SlowMotionVideo />
                         </ListItemIcon>
-                        <ListItemText primary={item.question} />
+                        <ListItemText 
+                            primary={<div dangerouslySetInnerHTML={{__html: item.question}} />} 
+                            />
                         
                         {/* <Tooltip title="visible">
                             <IconButton>
@@ -453,7 +497,10 @@ class QuizManager extends React.Component {
                                         <TableRow 
                                             key={optionIndex}
                                             >
-                                            <TableCell component="th" scope="row">{option.title}</TableCell>
+                                            <TableCell component="th" scope="row">
+                                            {<div dangerouslySetInnerHTML={{__html: option.title}} />} 
+                                                {/* {option.title} */}
+                                            </TableCell>
                                             <TableCell align="right">
                     {option.isAnswer ?  
                     <Tooltip 
