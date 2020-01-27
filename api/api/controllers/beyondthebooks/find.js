@@ -64,7 +64,7 @@ module.exports = {
         tempObj.thumbnail = sails.config.custom.apiUrl + '/files/beyondthebooksImage/' + allBeyondthebooks[i].thumbnail;
       }
       else {
-        tempObj.thumbnail = '';
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/beyondthebooksImage/' + 'video.svg';
       }
       tempObj.file = allBeyondthebooks[i].file;
       tempObj.duration = allBeyondthebooks[i].duration;

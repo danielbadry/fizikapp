@@ -31,7 +31,8 @@ module.exports = {
 
     let user = await Users.findOne({
       where : {
-        mobile : inputs.mobile
+        mobile : inputs.mobile,
+        suspend : false
       }
     });
 

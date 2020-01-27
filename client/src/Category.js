@@ -75,7 +75,7 @@ class Category extends React.Component{
                     console.info('catss:', result);
                     this.setState((state, props) => {
                         return ({
-                            cats: result,
+                            cats: result.data.data,
                             // baseCatId: result[0].id,
                             // baseCatName: result[0].name,
                         });
@@ -107,9 +107,9 @@ class Category extends React.Component{
                 console.info('catss:', result);
                 this.setState((state, props) => {
                     return ({
-                        cats: result,
-                        baseCatId: result[0].id,
-                        baseCatName: result[0].name
+                        cats: result.data.data,
+                        baseCatId: result.data.baseCat.id,
+                        baseCatName: result.data.baseCat.name
                     });
                 }, () => {
                     this.setState({isRender: true})
@@ -172,7 +172,7 @@ class Category extends React.Component{
                 console.info('catss:', result);
                 this.setState((state, props) => {
                     return ({
-                        cats: result,
+                        cats: result.data.data,
                         baseCatId: item.id,
                         baseCatName: item.name,
                     });

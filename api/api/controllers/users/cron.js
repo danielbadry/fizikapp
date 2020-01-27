@@ -1,7 +1,18 @@
+var d = new Date();
+function z(n){
+  return (n<10?'0':'') + n;
+}
+var dd = function()
+{
+  return d.getFullYear() + '-' + z(d.getMonth()+1) + '-' +
+  z(d.getDate()) + 'T' + z(d.getHours()) + ':' +
+  z(d.getMinutes()) + ':' + z(d.getSeconds());
+};
+
 const mongo = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 mongo.connect(url, {
-  useNewUrlParser: true,
+  // useNewUrlParser: true,
   useUnifiedTopology: true
 }, (err, client) => {
   if (err) {
@@ -17,6 +28,7 @@ mongo.connect(url, {
       }
 
       for (user of result) {
+        let target = user;
         db.collection('shops').find({
           userId: user._id.toString()
         }).toArray((_err, result) => {
@@ -24,12 +36,15 @@ mongo.connect(url, {
             var current = new Date();
             var registerDate = new Date(user.createdAt);
             var followingDay = registerDate.setDate(registerDate.getDate() + 1);
-            if (current <= followingDay) {
+            let flag = current < followingDay;
+            if (flag) {
               messages.insertOne({
-                message: 'Roger',
-                userId : user._id,
+                message: 'هم اکنون میتوانید از تخفیف 50 درصدی استفاده کنید',
+                userId : target._id.toString(),
                 isRead : false,
-                isDeleted: false
+                isDeleted: false,
+                createdAt: dd(),
+                updatedAt: dd()
               }, (err, resultt) => {
                 if (err) {
                   console.info('error:', err);
@@ -42,28 +57,9 @@ mongo.connect(url, {
             }
           }
         });
+
       }
     });
-    // const messages = db.collection('messages');
-    // const users = db.collection('users');
-    // const shops = db.collection('shops');
-
-    // let allUsers = users.find({
-    //   '_id' : '5e1f32754be75b028cbacf1e'
-    // });
-    // console.info('allUsers:', allUsers);
-    // for (user of allUsers) {
-    //   let result = shops.find({
-    //     userId : user._id,
-    //   });
-
-    //   if (result.length === 1) {
-    //     // calculate register date
-    //     var current = new Date(); //'Mar 11 2015' current.getTime() = 1426060964567
-    //     var followingDay = new Date(user.createdAt.getTime() + 86400000); // + 1 day in ms
-    //     console.info('followingDay:', followingDay);
-    //   }
-    // }
 
   }
 

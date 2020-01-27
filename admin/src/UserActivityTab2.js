@@ -33,7 +33,7 @@ class AlignItemsList extends React.Component {
     }
 
     componentDidMount() {
-
+        // console.info('user idd:', this.props);
             fetch(process.env.REACT_APP_API_URL+`/users/listofuserquizes?userId=${this.props.record.id}`, { method: 'GET', headers: {}})
             .then((response) => {
                 return response.json();
@@ -96,7 +96,9 @@ class AlignItemsList extends React.Component {
                 <ListItemText
                 primary="Number of invitations"
                 secondary={
-                    <NumberOfInvitationsChart /> 
+                    <NumberOfInvitationsChart 
+                    
+                    /> 
                 }
                 />
                 <InvitationList />
@@ -115,10 +117,11 @@ class AlignItemsList extends React.Component {
                 <ListItemText
                 primary="Total online time"
                 secondary={
-                    <UserTotalOnlineTimeChart /> 
+                    <UserTotalOnlineTimeChart 
+                    userid={this.props.record.id}
+                    /> 
                 }
                 />
-                {/* <UserTotalOnlineTimeChart /> */}
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem alignItems="flex-start">

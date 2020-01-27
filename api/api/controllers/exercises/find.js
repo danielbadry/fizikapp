@@ -134,8 +134,9 @@ module.exports = {
         tempObj.thumbnail = sails.config.custom.apiUrl + '/files/exerciseImage/' + exercises[i].thumbnail;
       }
       else {
-        tempObj.thumbnail = '';
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/exerciseImage/' + 'video.svg';
       }
+
       tempObj.file = exercises[i].file;
       tempObj.duration = exercises[i].duration;
       tempObj.videoAddress = exercises[i].videoAddress;

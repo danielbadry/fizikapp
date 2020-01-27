@@ -46,9 +46,9 @@ class Category extends React.Component{
         .then(result => {
             this.setState((state, props) => {
                 return ({
-                    categories: result.Categories,
-                    baseCatId: result.Categories[0].allSubCategories[0].id,
-                    baseCatName: result.Categories[0].allSubCategories[0].name
+                    categories: result.data,
+                    baseCatId: result.data[0].allSubCategories[0].id,
+                    baseCatName: result.data[0].allSubCategories[0].name
                 });
             }, () => {
                 this.setState({isRender: true})
@@ -69,8 +69,11 @@ class Category extends React.Component{
                 })
                 .then(response => response.json())
                 .then(result => {
+                    console.info('1:', result);
                     this.setState((state, props) => {
-                        return ({cats: result});
+                        return ({
+                            cats: result.data.data
+                        });
                     }, () => {
                         this.setState({isRender: true})
                     });
@@ -96,11 +99,12 @@ class Category extends React.Component{
             })
             .then(response => response.json())
             .then(result => {
+                console.info('2:', parseInt(result.length) - 1);
                 this.setState((state, props) => {
                     return ({
-                        cats: result,
-                        baseCatId: result[0].id,
-                        baseCatName: result[0].name
+                        cats: result.data.data,
+                        baseCatId: result.data.baseCat.id,
+                        baseCatName: result.data.baseCat.name
                     });
                 }, () => {
                     this.setState({isRender: true})

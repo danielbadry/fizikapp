@@ -83,31 +83,31 @@ class SingleDefinition extends React.Component{
             .then(result => {
                 console.info('resd:', result);
                 var category = result.data[0].p;
-                fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data[0].p.id}&model=definitions`, {
-                    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                    mode: 'cors', // no-cors, cors, *same-origin
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: 'same-origin', // include, *same-origin, omit
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'authorization': `Bearer ${token}`,
-                    },
-                    redirect: 'follow', // manual, *follow, error
-                    referrer: 'no-referrer', // no-referrer, *client
-                    // body: JSON.stringify(data), // body data type must match "Content-Type" header
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        this.setState((state, props) => {
-                            return ({
-                                cats: result,
-                                targetCatId: category.id,
-                                targetCatName: category.name,
-                            });
-                        }, () => {
-                            this.setState({isRender: true})
-                        });
-                    });
+                // fetch(process.env.REACT_APP_API_URL+`categories/allcategories?rowId=${result.data.data[0].p.id}&model=definitions`, {
+                //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                //     mode: 'cors', // no-cors, cors, *same-origin
+                //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                //     credentials: 'same-origin', // include, *same-origin, omit
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         // 'authorization': `Bearer ${token}`,
+                //     },
+                //     redirect: 'follow', // manual, *follow, error
+                //     referrer: 'no-referrer', // no-referrer, *client
+                //     // body: JSON.stringify(data), // body data type must match "Content-Type" header
+                //     })
+                //     .then(response => response.json())
+                //     .then(result => {
+                //         this.setState((state, props) => {
+                //             return ({
+                //                 cats: result,
+                //                 targetCatId: category.id,
+                //                 targetCatName: category.name,
+                //             });
+                //         }, () => {
+                //             this.setState({isRender: true})
+                //         });
+                //     });
             });
 
         
@@ -129,46 +129,46 @@ class SingleDefinition extends React.Component{
             .then(definition => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(definition.summary)),
-                        tags: JSON.parse(JSON.stringify(definition.tags)),
-                        thumbnail: definition.thumbnail,
+                        summary: JSON.parse(JSON.stringify(definition.data.summary)),
+                        tags: JSON.parse(JSON.stringify(definition.data.tags)),
+                        thumbnail: definition.data.thumbnail,
                         id: definition.id,
-                        startTime : 30,
+                        // startTime : 30,
                     };
                   });
             });
     }
     
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.summary.id != this.props.match.path.split('/')[2]) {
-            const token = localStorage.getItem('token');
-            fetch(process.env.REACT_APP_API_URL+`definitions/${this.props.match.path.split('/')[2]}`, {
-                method: 'GET', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, cors, *same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, *same-origin, omit
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': `Bearer ${token}`,
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // no-referrer, *client
-                })
-                .then(response => response.json())
-                .then(definition => {
-                    this.setState(function(state, props) {
-                        return {
-                            summary: JSON.parse(JSON.stringify(definition.summary)),
-                            tags: JSON.parse(JSON.stringify(definition.tags)),
-                            thumbnail: definition.thumbnail,
-                            id: definition.id,
-                            startTime : 30,
-                        };
-                    });
-                });
-        }
-        window.scroll(0,0);
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if(prevState.summary.id != this.props.match.path.split('/')[2]) {
+    //         const token = localStorage.getItem('token');
+    //         fetch(process.env.REACT_APP_API_URL+`definitions/${this.props.match.path.split('/')[2]}`, {
+    //             method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    //             mode: 'cors', // no-cors, cors, *same-origin
+    //             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //             credentials: 'same-origin', // include, *same-origin, omit
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'authorization': `Bearer ${token}`,
+    //             },
+    //             redirect: 'follow', // manual, *follow, error
+    //             referrer: 'no-referrer', // no-referrer, *client
+    //             })
+    //             .then(response => response.json())
+    //             .then(definition => {
+    //                 this.setState(function(state, props) {
+    //                     return {
+    //                         summary: JSON.parse(JSON.stringify(definition.summary)),
+    //                         tags: JSON.parse(JSON.stringify(definition.tags)),
+    //                         thumbnail: definition.thumbnail,
+    //                         id: definition.id,
+    //                         startTime : 30,
+    //                     };
+    //                 });
+    //             });
+    //     }
+    //     window.scroll(0,0);
+    // }
 
     render () {
         return (
@@ -213,7 +213,7 @@ class SingleDefinition extends React.Component{
                                 margin:0
                             }}
                         >
-                            <Grid item xs={9} sm={4} md={4} lg={3} xl={3}>
+                            {/* <Grid item xs={9} sm={4} md={4} lg={3} xl={3}>
                                 <Paper>
                                 <div>{this.state.targetCatName}</div>
                                 {
@@ -223,7 +223,7 @@ class SingleDefinition extends React.Component{
                                 }
 
                                 </Paper>
-                            </Grid>
+                            </Grid> */}
                             
                             <Grid item xs={11} sm={7} md={7} lg={8} xl={8}>
                                 <Paper

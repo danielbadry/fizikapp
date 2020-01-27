@@ -10,29 +10,29 @@ class NumberOfOnlineUsers extends React.Component{
 
     componentDidMount() {
         let token = window.localStorage.getItem('token');
-        // let lu = () => {
-        //     fetch(`http://localhost:1337/users/listofonlines`, {
-        //             method: 'GET', 
-        //             mode: 'cors',
-        //             cache: 'no-cache',
-        //             credentials: 'same-origin',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //                 'authorization': `Bearer ${token}`,
-        //             },
-        //             redirect: 'follow',
-        //             referrer: 'no-referrer',
-        //             // body: JSON.stringify({token:token}),
-        //             })
-        //             .then(response => response.json())
-        //             .then(result => {
-        //                 this.setState({listofonlines: result});
-        //             });
-        // }
+        let lu = () => {
+            fetch(process.env.REACT_APP_API_URL+`/users/listofonlines`, {
+                    method: 'GET', 
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${token}`,
+                    },
+                    redirect: 'follow',
+                    referrer: 'no-referrer',
+                    // body: JSON.stringify({token:token}),
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        this.setState({listofonlines: result});
+                    });
+        }
 
-        // setInterval(function() { 
-        //     lu();
-        // }, 1000);
+        setInterval(function() { 
+            lu();
+        }, 1000);
     }
 
     render() {

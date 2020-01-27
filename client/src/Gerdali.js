@@ -32,7 +32,7 @@ class Gerdali extends React.Component {
                 // console.info('category:', category);
                 this.setState(function(state, props) {
                     return {
-                        categories: category.Categories
+                        categories: category.data
                         }
                   }, () => {
                     

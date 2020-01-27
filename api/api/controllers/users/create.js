@@ -121,9 +121,24 @@ module.exports = {
                 })
                 .fetch();
       let shop = await Shops.create({
-        shoppingPlanId : '5e15cfa65d8daa133ceea060',
+        shoppingPlanId : '5e24e19701dcbf2e351142de',
         userId : user.id
       });
+
+      let message1 = await Messages.create({
+        message: 'هم اکنون میتوانید از تخفیف 50 درصدی استفاده کنید',
+        userId : user.id,
+        isRead : false,
+        isDeleted: false,
+      });
+      
+      let message2 = await Messages.create({
+        message: 'مدیر مجموعه ثبت نام شما ارج می نهد',
+        userId : user.id,
+        isRead : false,
+        isDeleted: false,
+      });
+
       var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {
         expiresIn: 259200 // expires in 72 hours
       });

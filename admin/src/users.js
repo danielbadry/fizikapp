@@ -163,7 +163,10 @@ export const UsersList = props => (
 
     <List {...props} pagination={<UserPagination />} filters={<PostFilter />}>
         <Datagrid rowClick="show">
-            <Thumbnail source="thumbnail" label="thumbnail" />
+            <Thumbnail 
+                source="thumbnail" 
+                label="thumbnail" 
+                />
             <TextField 
                 source="userName" 
                 label="username" 

@@ -55,6 +55,7 @@ module.exports = {
       description:inputs.description,
       thumbnail:inputs.thumbnail,
       file:inputs.file,
+      category: inputs.category
     });
 
   }

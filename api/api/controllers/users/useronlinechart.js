@@ -1,15 +1,16 @@
-var jwt = require('jsonwebtoken');
 module.exports = {
 
 
-  friendlyName: 'Myonlinechart',
+  friendlyName: 'Useronlinechart',
 
 
-  description: 'Myonlinechart users.',
+  description: 'Useronlinechart users.',
 
 
   inputs: {
-
+    id:{
+      type:'string'
+    },
   },
 
 
@@ -17,18 +18,11 @@ module.exports = {
 
   },
 
-/*
-TODO: i must update below algorithm
-*/
+
   fn: async function (inputs) {
 
-    let token = this.req.headers.authorization;
-    let TokenArray = token.split(' ');
-    let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
-    let userId = decodedToken.id;
-
     let userOnlineTimes = await Onlineoffline.find({
-      userId : userId
+      userId : inputs.id
     });
 
     let finalData = {};
@@ -45,5 +39,6 @@ TODO: i must update below algorithm
     return finalData;
 
   }
+
 
 };

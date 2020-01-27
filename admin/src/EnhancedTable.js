@@ -199,7 +199,7 @@ export default function EnhancedTable() {
                 return response.json();
             })
             .then((myJson) => {
-                setRows(myJson.Categories);
+                setRows(myJson.data);
                 setFirstTime(false);
             })
             .catch((e) => {
@@ -290,7 +290,7 @@ export default function EnhancedTable() {
     })
     .then((myJson) => {
         let primes = myJson.Categories.concat(myJson.Products);
-        setRows(primes);
+        setRows(myJson.data);
     })
     .catch((e) => {
         
@@ -431,7 +431,7 @@ export default function EnhancedTable() {
         return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
         let primes = data.Categories.concat(data.Products);
-        setRows(primes);
+        setRows(data.data);
         fetch(process.env.REACT_APP_API_URL+`/categories/findparentdirectoryid/?rowId=${encodeURIComponent(data.Categories[0].parentId)}`)
         .then(function(resp){
           return resp.json();

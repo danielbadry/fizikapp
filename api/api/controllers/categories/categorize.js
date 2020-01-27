@@ -117,6 +117,25 @@ module.exports = {
       ch.jalaaliUserFriendlyCreatedDate = moment(ch.createdAt).fromNow();
       ch.fullJalaali = ch.jalaaliCreatedDate + ' ' + ch.jalaaliUserFriendlyCreatedDate;
       ch.itemType = (ch.category?'product':'folder');
+      if (ch.thumbnail === '') {
+        switch (ch.itemType) {
+          case 'folder':
+            ch.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + 'folder.svg';
+            break;
+          case 'product':
+            ch.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + 'video3.svg';
+            break;
+        }
+      } else {
+        switch (ch.itemType) {
+          case 'folder':
+            ch.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + ch.thumbnail;
+            break;
+          case 'product':
+            ch.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + ch.thumbnail;
+            break;
+        }
+      }
     }
 
     children.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);

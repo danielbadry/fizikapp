@@ -8,7 +8,7 @@ module.exports = {
 
 
   inputs: {
-    
+
     rowId: {
       type: 'string'
     },
@@ -41,6 +41,10 @@ module.exports = {
     let allCategories = await Categories.find();
     let finalArray = [];
 
+    let baseCat = await Categories.findOne({
+      id : inputs.rowId
+    });
+
     for (let c of allCategories) {
       if (c.id === catId) {
         finalArray.push(c);
@@ -65,18 +69,20 @@ module.exports = {
     }
 
     let allEntities = [];
-    allEntities = await Products.find();
+    // allEntities = await Products.find();
     switch (inputs.model) {
       case 'products':
         allEntities = await Products.find();
-      break;
+        break;
       case 'definitions' :
         allEntities = await Definitions.find();
-      break;
+        break;
     }
+
     let urlModel = null;
     let thumbnailAddress = null;
     let finalDefinitions = [];
+
     for (let fi of finalArray) {
       for (let df of allEntities) {
         if (df.category === fi.id) {
@@ -84,14 +90,14 @@ module.exports = {
           switch (inputs.model) {
             case 'definitions':
               urlModel = 'definition/';
-              thumbnailAddress = "/files/definitionImage/";
-            break;
+              thumbnailAddress = '/files/definitionImage/';
+              break;
             case 'products':
               urlModel = 'product/';
-              thumbnailAddress = "/files/productImage/";
-            break;
+              thumbnailAddress = '/files/productImage/';
+              break;
           }
-  
+
           df.url = urlModel + df.id;
           df.thumbnail = sails.config.custom.apiUrl + thumbnailAddress + df.thumbnail;
           finalDefinitions.push(df);
@@ -101,7 +107,12 @@ module.exports = {
 
     var children = finalArray.concat(finalDefinitions);
     children.sort((a, b) => (parseInt(a.priority) > parseInt(b.priority)) ? 1 : -1);
-    return children;
+    let finalData = {};
+    finalData.auth = true;
+    finalData.data = {};
+    finalData.data.baseCat = baseCat;
+    finalData.data.data = children;
+    return finalData;
 
   }
 

@@ -13,12 +13,12 @@ module.exports = {
       type: 'string',
       required : false
     },
-    
+
     title :{
       type: 'string',
       required : false
     },
-    
+
     description :{
       type: 'string',
       required : false
@@ -28,7 +28,7 @@ module.exports = {
       type: 'string',
       required : false
     },
-    
+
     thumbnail :{
       type: 'string',
       required : false
@@ -48,7 +48,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    return inputs;
+    let cat = inputs.category.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
     return await Definitions
       .create({
         createdAt : await sails.helpers.dateParse(),
@@ -58,7 +58,7 @@ module.exports = {
         thumbnail : inputs.thumbnail,
         description : inputs.description,
         tags : inputs.tags,
-        category:inputs.category,
+        category: cat,
         isDeleted : false,
       })
       .fetch();

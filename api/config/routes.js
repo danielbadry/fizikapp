@@ -11,8 +11,10 @@
 module.exports.routes = {
   'GET /users/signupprocess': 'UsersController.signupprocess',
   'GET /users/aboutuscontent': 'UsersController.aboutuscontent',
+  'POST /users/jwt': 'UsersController.jwt',
   'GET /users/getcurrentuserplan': 'UsersController.getcurrentuserplan',
   'GET /users/myonlinechart': 'UsersController.myonlinechart',
+  'GET /users/useronlinechart': 'UsersController.useronlinechart',
   'PUT /users/updateuserinfo': 'UsersController.updateuserinfo',
   'GET /quizes/getuserquizresponse': 'QuizesController.getuserquizresponse',
   'GET /shops/shopsprocess': 'ShopsController.shopsprocess',

@@ -27,13 +27,13 @@ class Book extends React.Component{
         })
         .then((myJson) => {
             
-            for(let cat in myJson) {
-                if(myJson[cat].parentId === '0') {
-                    roots.push(myJson[cat]);
+            for(let cat in myJson.data.data) {
+                if(myJson.data.data[cat].parentId === '0') {
+                    roots.push(myJson.data.data[cat]);
                 }
             }
 
-            this.setState({categories:myJson,root:roots},() => {
+            this.setState({categories:myJson.data.data,root:roots},() => {
                 this.setState({isRender:true})
             });
 

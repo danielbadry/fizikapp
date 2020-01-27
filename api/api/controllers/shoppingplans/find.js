@@ -35,8 +35,9 @@ module.exports = {
 
   fn: async function (inputs) {
     let finalData = {};
-    let dataLength = await Shoppingplans.find();
-    let allShoppingPlans = await Shoppingplans.find()
+    let allShoppingPlans = await Shoppingplans.find({
+      id: { nin: ['5e24e19701dcbf2e351142de'] }
+    })
     .limit(inputs.limit)
     .skip(inputs.skip);
     for (let sp of allShoppingPlans) {
@@ -48,7 +49,7 @@ module.exports = {
       sp.thumbnail = sails.config.custom.apiUrl + '/files/shoppingplansImage/' + sp.thumbnail;
       sp.purchaseLink = sails.config.custom.baseUrl + '/#/shoppingplans/purchasefrommobile/' + sp.id;
     }
-    finalData.dataLength = dataLength.length;
+    finalData.dataLength = allShoppingPlans.length;
     finalData.data = allShoppingPlans;
     finalData.auth = true;
     return finalData;

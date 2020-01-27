@@ -64,7 +64,7 @@ module.exports = {
         tempObj.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + allProducts[i].thumbnail;
       }
       else {
-        tempObj.thumbnail = '';
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + 'video3.svg';
       }
       tempObj.file = sails.config.custom.apiUrl + '/files/productFiles/' + allProducts[i].file;
       tempObj.duration = allProducts[i].duration;

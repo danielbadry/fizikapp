@@ -186,7 +186,17 @@ class StickyFooter extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item md={4}>
-                                        <Grid style={{
+
+                                    <img 
+                                        id = 'jxlzfukzapfuesgtwlaonbqe' 
+                                        style = {{
+                                            cursor: 'pointer'
+                                        }} 
+                                        onClick = {()=>window.open("https://logo.samandehi.ir/Verify.aspx?id=165042&p=rfthgvkadshwobpdaodsuiwk", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")}//window.open('https://www.google.com')}
+                                        alt = 'logo-samandehi'
+                                        src = 'https://logo.samandehi.ir/logo.aspx?id=165042&p=nbpdwlbqujynlymashwlodrf' 
+                                        />
+                                        {/* <Grid style={{
                                                 fontFamily: 'IranSans_Ultralight',
                                                 fontSize: '13px',
                                                 margin:'0',
@@ -212,7 +222,7 @@ class StickyFooter extends React.Component {
                                                 color:'white'
                                             }}>
                                             مدیریت
-                                        </Grid>
+                                        </Grid> */}
                                     </Grid>
                                     <Grid item md={4}>
                                         <Grid style={{

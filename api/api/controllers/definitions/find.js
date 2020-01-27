@@ -11,7 +11,7 @@ module.exports = {
     limit: {
       type: 'number'
     },
-    
+
     skip: {
       type: 'number'
     },
@@ -19,15 +19,15 @@ module.exports = {
     sort: {
       type: 'string'
     },
-    
+
     where: {
       type: 'string'
     },
-    
+
     tags: {
       type: 'string'
     },
-    
+
     searchText: {
       type: 'string'
     }
@@ -38,7 +38,7 @@ module.exports = {
   },
 
   fn: async function (inputs) {
-     let finalData = {};
+    let finalData = {};
     let finalRequests = [];
     let dataLength = await Definitions.find();
     let allRequests;
@@ -48,28 +48,26 @@ module.exports = {
       allRequests = await Definitions.find()
       .limit(inputs.limit)
       .skip(inputs.skip)
-      .sort([{updatedAt :'DESC'}])
-      ;
+      .sort([{updatedAt :'DESC'}]);
     }
-    
+
     else {
       allRequests = await Definitions.find({
         or : [
-            {
-              name:{contains: inputs.searchText}
-            },
-            {
-              title:{contains: inputs.searchText}
-            },
-            {
-              description:{contains: inputs.searchText}
-            }
-          ]
+          {
+            name:{contains: inputs.searchText}
+          },
+          {
+            title:{contains: inputs.searchText}
+          },
+          {
+            description:{contains: inputs.searchText}
+          }
+        ]
       })
       .limit(inputs.limit)
       .skip(inputs.skip)
-      .sort([{updatedAt :'DESC'}])
-      ;
+      .sort([{updatedAt :'DESC'}]);
     }
 
     // filter allRequest based on tags
@@ -82,7 +80,7 @@ module.exports = {
       } else {
         inTags = JSON.parse(inputs.tags);
       }
-      
+
       for(let inTag of inTags) {
         tagIds.push(inTag.id);
       }
@@ -97,7 +95,7 @@ module.exports = {
         for (let a of aa) {
           if (tagIds.includes(a)) {
             if (await sails.helpers.requesthelper(request, finalRequests))
-              finalRequests.push(request);
+            {finalRequests.push(request);}
           }
         }
       }
@@ -118,7 +116,7 @@ module.exports = {
         tempObj.thumbnail = sails.config.custom.apiUrl + '/files/definitionImage/' + allRequests[i].thumbnail;
       }
       else {
-        tempObj.thumbnail = '';
+        tempObj.thumbnail = sails.config.custom.apiUrl + '/files/definitionImage/' + 'definition.svg';
       }
       tempObj.jalaaliCreatedDate = allRequests[i].jalaaliCreatedDate;
       moment.locale('en');

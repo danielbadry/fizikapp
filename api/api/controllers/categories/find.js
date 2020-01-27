@@ -34,8 +34,12 @@ module.exports = {
       category.jalaaliUserFriendlyCreatedDate = moment(category.createdAt).fromNow();
       category.fullJalaali = category.jalaaliCreatedDate + ' ' + category.jalaaliUserFriendlyCreatedDate;
       category.itemType = 'folder';
-      category.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + category.thumbnail;
-
+      if (category.thumbnail !== ''){
+        category.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + category.thumbnail;
+      }
+      else {
+        category.thumbnail = sails.config.custom.apiUrl + '/files/categoriesImage/' + 'folder.svg';
+      }
       let allSubCategories = await Categories.find({
         where : {
           isDeleted: false,
@@ -56,7 +60,12 @@ module.exports = {
     });
 
     for (let product of allProducts) {
-      product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
+      if (product.thumbnail !== ''){
+        product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + product.thumbnail;
+      }
+      else {
+        product.thumbnail = sails.config.custom.apiUrl + '/files/productImage/' + 'video3.svg';
+      }
       product.itemType = 'product';
     }
 

@@ -22,17 +22,18 @@ module.exports = {
     let finalData = {};
     let url;
     let token = this.req.headers.authorization;
-    let TokenArray = token.split(" ");
+    let TokenArray = token.split(' ');
     let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
     let userId = decodedToken.id;
 
     let watchedvideos = await Watchedvideos.find({
       userId: userId
     });
-
+    let finalVideos = [];
     for (let watchedvideo of watchedvideos) {
-      
+
       let model = eval(watchedvideo.model[0].toUpperCase() + watchedvideo.model.slice(1));
+
       let allViews = 0;
       let allLikes = 0;
       let allDislikes = 0;
@@ -54,28 +55,33 @@ module.exports = {
       watchedvideo.dislikes = allDislikes;
       switch (watchedvideo.model[0].toUpperCase() + watchedvideo.model.slice(1)) {
         case 'Products' :
-          url = "/files/productImage/";
+          url = '/files/productImage/';
           break;
         case 'Sciencechallenge' :
-          url = "/files/sciencechallengeImage/";
+          url = '/files/sciencechallengeImage/';
           break;
         case 'Beyondthebooks' :
-          url = "/files/beyondthebooksImage/";
+          url = '/files/beyondthebooksImage/';
           break;
       }
+
       let info = await model.findOne({
         id: watchedvideo.modelId
       });
-      watchedvideo.name = info.name;
-      watchedvideo.title = info.title;
-      watchedvideo.description = info.description;
-      watchedvideo.duration = info.duration;
-      watchedvideo.percent = ((parseInt(watchedvideo.startTime)) * 100) / (parseInt(info.duration));
-      watchedvideo.thumbnail = sails.config.custom.apiUrl + url + info.thumbnail;
+      if (typeof(info) !== 'undefined') {
+        watchedvideo.name = info.name;
+        watchedvideo.title = info.title;
+        watchedvideo.description = info.description;
+        watchedvideo.duration = info.duration;
+        watchedvideo.percent = ((parseInt(watchedvideo.startTime)) * 100) / (parseInt(info.duration));
+        watchedvideo.thumbnail = sails.config.custom.apiUrl + url + info.thumbnail;
+        finalVideos.push(watchedvideo);
+      }
+
     }
 
-    finalData.dataLength = watchedvideos.length;
-    finalData.data = watchedvideos;
+    finalData.dataLength = finalVideos.length;
+    finalData.data = finalVideos;
     finalData.auth= true;
     finalData.errorMessage = null;
     return finalData;

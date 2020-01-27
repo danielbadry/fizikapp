@@ -43,50 +43,51 @@
   </body>
 </html>
 <script>
-  var appUrl = "http://localhost:1337";
+  var appUrl = "https://fizik.app/api";
+  // var appUrl = "http://localhost:1337";
   var token = window.localStorage.getItem('token');
 
-  // setInterval(function() { 
-  //   fetch(`${appUrl}/users/setonlineoffline`, {
-  //           method: 'POST', 
-  //           mode: 'cors',
-  //           cache: 'no-cache',
-  //           credentials: 'same-origin',
-  //           headers: {
-  //               'Content-Type': 'application/json',
-  //               'authorization': `Bearer ${token}`,
-  //           },
-  //           redirect: 'follow',
-  //           referrer: 'no-referrer',
-  //           body: JSON.stringify({token:token}),
-  //           })
-  //           .then(response => response.json())
-  //           .then(result => {
+  setInterval(function() { 
+    fetch(`${appUrl}/users/setonlineoffline`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            // body: JSON.stringify({token:token}),
+            })
+            .then(response => response.json())
+            .then(result => {
                 
-  //           });
-  // }, 1000);
+            });
+  }, 1000);
 
   window.onload = window.onunload = function analytics(event) {
   let data = {          
     token: window.localStorage.getItem("token"),
   }
-  // fetch('http://localhost:1337/users/setuseroffline', {
-  // method: 'POST',
-  // mode: 'cors',
-  // cache: 'no-cache',
-  // credentials: 'same-origin',
-  // headers: {
-  //     'Content-Type': 'application/json',
-  //     'authorization': `Bearer ${token}`,
-  // },
-  // redirect: 'follow',
-  // referrer: 'no-referrer',
+  fetch(`${appUrl}/users/setuseroffline`, {
+  method: 'POST',
+  mode: 'cors',
+  cache: 'no-cache',
+  credentials: 'same-origin',
+  headers: {
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${token}`,
+  },
+  redirect: 'follow',
+  referrer: 'no-referrer',
   // body: JSON.stringify(data),
-  // })
-  // .then(response => response.json())
-  // .then(result => {
+  })
+  .then(response => response.json())
+  .then(result => {
       
-  // });
+  });
 
   let urlData = window.location.hash.split('/');
   if(urlData.length === 3 && urlData[1] === 'product' && urlData[2].length === 24) {

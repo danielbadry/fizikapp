@@ -44,7 +44,7 @@ module.exports = {
       .skip(inputs.skip)
       .limit(inputs.limit)
       .sort([{createdAt :'DESC'}]);
-dataLength = au.length;
+      dataLength = au.length;
     }
     else {
       let conditions = JSON.parse(inputs.where);
@@ -63,7 +63,7 @@ dataLength = au.length;
           ]
         }
       );
-allUsers = await Users.find(
+      allUsers = await Users.find(
         {
           or : [
             {
@@ -81,7 +81,7 @@ allUsers = await Users.find(
       .limit(inputs.limit)
       .skip(inputs.skip)
       .sort([{createdAt :'DESC'}]);
-dataLength = au.length;
+      dataLength = au.length;
     }
 
     for (let user of allUsers) {
@@ -97,8 +97,14 @@ dataLength = au.length;
       user.numberOfInvitation = 3;
       user.jalaaliUserFriendlyCreatedDate = moment(user.createdAt).fromNow();
       user.jalaaliFullUserFriendlyCreatedDate = user.jalaaliRegisterDate + ' ' + user.jalaaliUserFriendlyCreatedDate;
-      user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + user.thumbnail;
+      if(user.thumbnail !== '') {
+        user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + user.thumbnail;
+      } else {
+        user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + 'unknown.png';
+      }
 
+      user.data = {};
+      user.data.thumbnail = user.thumbnail;
       let lastShop = await Shops.find({
         where: {
           userId: user.id

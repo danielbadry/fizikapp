@@ -33,7 +33,12 @@ module.exports = {
             id: userId
           }
         });
-        user.thumbnail = sails.config.custom.apiUrl + "/files/usersImage/" + user.thumbnail;
+        if(user.thumbnail !== '') {
+          user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + user.thumbnail;
+        } else {
+          user.thumbnail = sails.config.custom.apiUrl + '/files/usersImage/' + 'unknown.png';
+        }
+        // user.thumbnail = sails.config.custom.apiUrl + "/files/usersImage/" + user.thumbnail;
         return ({ auth: true, errorMessage:null, userinfo : user, data:user });
       }
     });
