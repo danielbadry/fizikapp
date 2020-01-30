@@ -17,15 +17,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import SingleRow from "./SingleRow";
 import Container from '@material-ui/core/Container';
-import RequestCard from "./RequestCard";
-import NiceCard2 from "./NiceCard";
-import StickyFooter from "./StickyFooter";
 import ItemsCarousel from 'react-items-carousel';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import UserToolInAppbar from './UserToolInAppbar';
+
+//import StickyFooter from "./StickyFooter";
+//import RequestCard from "./RequestCard";
+//import SingleRow from "./SingleRow";
+//import NiceCard2 from "./NiceCard";
+
 import {
   HashRouter,
   BrowserRouter as Router,

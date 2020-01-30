@@ -1,9 +1,10 @@
 import React from 'react';
 import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Requests from './Requests';
-import About from './About';
-import Home from './Home';
+import About from './components/About/About';
+import Home from './components/index/Home';
 // import Home from './MainContainer';
+/*
+import Requests from './Requests';
 import NewRequest from './NewRequest';
 // import SignUp from './SignUp';
 import SignUp from './SignUp2';
@@ -33,9 +34,9 @@ import PrivacyPolicy from './PrivacyPolicy';
 import Disclaimer from './Disclaimer';
 import Careers from './Careers';
 import TermsConditions from './TermsConditions';
-import PurchasefromMobile from './PurchasefromMobile';
+import PurchasefromMobile from './PurchasefromMobile';*/
 
-function HandleRequest({ match }) {
+/*function HandleRequest({ match }) {
     return (
         <Request 
             requestid={match.params.requestid}
@@ -98,14 +99,15 @@ function HandleSciencechallenge({ match }) {
     return (
         <Sciencechallenge match={match} />
     );
-}
+}*/
   
 class Routs extends React.Component {
     render() {
         return (
             <HashRouter>
                 <Route exact path="/" component={Home} />
-                <Route path="/requests" component={Requests} />
+                <Route path="/about" component={About} />
+                {/*<Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
                 <Route path="/shop-result" component={HandleShopResult} />
@@ -114,7 +116,6 @@ class Routs extends React.Component {
                 <Route path="/sciencechallenges" component={Sciencechallenges} />
                 <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
                 <Route path="/request/:requestid" component={HandleRequest} />
-                <Route path="/about" component={About} />
                 <Route path="/new-request" component={NewRequest} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
@@ -135,7 +136,7 @@ class Routs extends React.Component {
                 <Route path="/privacy-policy" component={PrivacyPolicy} />
                 <Route path="/disclaimer" component={Disclaimer} />
                 <Route path="/careers" component={Careers} />
-                <Route path="/terms-conditions" component={TermsConditions} />
+                <Route path="/terms-conditions" component={TermsConditions} />*/ }
             </HashRouter>
         );
     }
