@@ -24,33 +24,36 @@ class Home extends React.Component {
 		}
 	}
 	componentDidMount() {
-		let token = window.localStorage.getItem('token');
+		var token = window.localStorage.getItem('token');
 		// check if logged in user hase watched any video or not
-		fetch(process.env.REACT_APP_API_URL+`watchedvideos`, {
-			method: 'GET', // *GET, POST, PUT, DELETE, etc.
-			mode: 'cors', // no-cors, cors, *same-origin
-			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: 'same-origin', // include, *same-origin, omit
-			headers: {
-				'Content-Type': 'application/json',
-				'authorization': `Bearer ${token}`,
-			},
-			redirect: 'follow', // manual, *follow, error
-			referrer: 'no-referrer', // no-referrer, *client
-			// body: JSON.stringify(data), // body data type must match "Content-Type" header
-			})
-			.then(response => response.json())
-			.then(result => {
-				this.setState(function(state, props) {
-					return {
-						numberOfWatchedVideos: result.dataLength
-					}});
-			});
+		if(token != undefined){
+			fetch(process.env.REACT_APP_API_URL+`watchedvideos`, {
+				method: 'GET', // *GET, POST, PUT, DELETE, etc.
+				mode: 'cors', // no-cors, cors, *same-origin
+				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+				//credentials: 'same-origin', // include, *same-origin, omit
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': `Bearer ${token}`,
+				},
+				redirect: 'follow', // manual, *follow, error
+				referrer: 'no-referrer', // no-referrer, *client
+				// body: JSON.stringify(data), // body data type must match "Content-Type" header
+				})
+				.then(response => response.json())
+				.then(result => {
+					this.setState(function(state, props) {
+						return {
+							numberOfWatchedVideos: result.dataLength
+						}});
+				});
+		}
 
 		this.setState(function(state, props) {
 			return {
 				token: localStorage.getItem("token")
-			}});
+			}
+		});
 	}
 
 	render() {

@@ -42,27 +42,22 @@ class Gerdali extends React.Component {
 
     render() {
         return(
-            <div
-                style={{
-                    // backgroundColor : 'orange'
-                }}
-                >
-                    
+            <div>
                 {this.state.categories.map(
                     (item, index) => 
                     <Link 
-                            color="inherit"
-                            style={{
-                                fontFamily: 'IranSans_Ultralight',
-                                fontSize: '20px',
-                                margin:'0',
-                                lineHeight:'2',
-                                fontWeight: 'bold'
-                            }}
-                            component={RouterLink} 
-                            to={`/category/${item.id}`}>
+                        style={{
+                            fontFamily: 'IranSans_Ultralight',
+                            fontSize: '20px',
+                            margin:'0',
+                            lineHeight:'2',
+                            fontWeight: 'bold',
+                            color: 'inherit'
+                        }}
+                        key={'Gerdali_'+index}
+                        component={RouterLink} 
+                        to={`/category/${item.id}`}>
                         <div
-                        key={index}
                         style={{
                             position: 'relative',
                             height: '500px',
@@ -71,16 +66,16 @@ class Gerdali extends React.Component {
                         }}
                         >
                             <div id="profile-wrap">
-                            <div class="pulse1"></div>
-                            <div class="pulse2"></div>
-                            <div class="profile-overlay"
+                            <div className={"pulse1"}></div>
+                            <div className="pulse2"></div>
+                            <div className="profile-overlay"
                                 style={{
                                     backgroundImage: `url(${item.thumbnail})`,
                                     backgroundSize: 'cover'
                                 }}
                                 ></div>
-                            <div class="profile-image"></div>
-                            <div class="profile-name">
+                            <div className="profile-image"></div>
+                            <div className="profile-name">
                                 <h2>
                                     {item.name}
                                     <br />
@@ -89,7 +84,7 @@ class Gerdali extends React.Component {
                                     </span>
                                 </h2>
                             </div>
-                            <div class="profile-social">
+                            <div className="profile-social">
                                 <ul>
                                 <li>
                                     <a href={"/category/" + `${item.id}`} data-toggle="tooltip" title={item.name} target="_blank">
