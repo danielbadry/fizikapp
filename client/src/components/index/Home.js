@@ -60,7 +60,7 @@ class Home extends React.Component {
 		
 		return (
 			<React.Fragment>
-				<Container>
+				<Container disableGutters={true}>
 					<AdsPanel />
 					{/* <NiceCard /> */}
 					<Gerdali />

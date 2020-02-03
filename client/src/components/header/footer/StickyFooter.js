@@ -318,7 +318,7 @@ class StickyFooter extends React.Component {
                                 style={{
                                     marginRight:'15px'
                                 }}
-                                key={"footer_last_prodoct"}
+                                key={"footer_last_prodoct_main"}
                                 >
                                 <dt
                                     style={{
