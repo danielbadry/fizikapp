@@ -59,7 +59,7 @@ class MainHeader extends React.Component {
               </Button>
             </Paper>
             <Paper>
-              <PrimarySearchAppBar />
+              {/* <PrimarySearchAppBar /> */}
             </Paper>
           </div>
         )

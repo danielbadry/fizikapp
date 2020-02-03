@@ -49,7 +49,7 @@ class Request extends React.Component {
             .then(response => response.json())
             .then(request => {
                 this.setState((state, props) => {
-                return {request: request, usersAnswers:request.usersAnswers};
+                return {request: request.data, usersAnswers:request.data.usersAnswers};
                 });
             });
     }
@@ -95,7 +95,7 @@ class Request extends React.Component {
                     .then(response => response.json())
                     .then(request => {
                         this.setState((state, props) => {
-                        return {request: request, usersAnswers:request.usersAnswers};
+                        return {request: request.data, usersAnswers:request.data.usersAnswers};
                         });
                     });
             });

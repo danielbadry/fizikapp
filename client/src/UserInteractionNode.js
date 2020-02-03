@@ -27,13 +27,17 @@ class UserInteractionNode extends React.Component {
     
     constructor (props) {
       super(props);
+      this.textInput = React.createRef();
+      this.focusTextInput = this.focusTextInput.bind(this);
       this.state = {
-        interactionData: [],
-        replyMessage : 'hello'
-      }
+        interactionData: []
+      };
+      
     }
 
+    
     componentDidMount () {
+      // this.textInput.current.focusTextInput();
       this.fetchProductsQuestions();
     }
 
@@ -41,14 +45,22 @@ class UserInteractionNode extends React.Component {
       return this.replyMessage;
     }
 
+    makeTextEmpty = () => {
+      console.info(this);
+      // this.refs.somename.value = '';
+      // this.replyMessage = '';
+    }
+
     sendReplyToQuestion (item) {
+      console.info('item:', item);
       const dataRecord = {
-        message:this.state.replyMessage,
+        message:this.replyMessage,
         parentId: (item != null) ? item.id : '',
         modelId: this.props.modelid,
         model: this.props.model,
         type: this.props.type
       }
+      this.focusTextInput();
       const token = localStorage.getItem('token');
       fetch(process.env.REACT_APP_API_URL+'userinteractions', {
         method: 'POST', 
@@ -66,30 +78,33 @@ class UserInteractionNode extends React.Component {
         .then(response => response.json())
         .then((myJson) => {
           if (myJson.errorMessage !== '') {
-            window.alert(myJson.errorMessage);
+            console.info('result:', myJson);
           } else {
-            this.setState({
-              replyMessage: ''
-            });
+            
+            // this.setState({
+            //   replyMessage: ''
+            // });
             this.fetchProductsQuestions();
           }
         });
     }
 
+    getReplyMessage = () => {
+      return this.replyMessage;
+    }
+
     setReplyMessage = (e) => {
-      console.info('enaaaa');
-      this.setState({
-        replyMessage: e.target.value
-      });
+      this.replyMessage = e.target.value;
     };
-    sendByEnter = (event, item) => {
-        if (event.charCode == '13') {
-          this.sendReplyToQuestion(item);
-          }
+
+    sendByEnter = (event,m) => {
+      console.info('bexin:', event.charCode);
+      if (event.charCode === 13) {
+        this.sendReplyToQuestion(m);
+      }
     }
 
     deleteComment = (comment) => {
-      console.info('comment ID:', comment.id);
       fetch(process.env.REACT_APP_API_URL+`userinteractions/${comment.id}`, {
         method: 'DELETE', 
         mode: 'cors',
@@ -105,6 +120,12 @@ class UserInteractionNode extends React.Component {
         .then(interactionData => {
           this.fetchProductsQuestions();
         });
+    }
+
+    focusTextInput() {
+      // Explicitly focus the text input using the raw DOM API
+      // Note: we're accessing "current" to get the DOM node
+      this.textInput.current.value = '';
     }
 
     fetchProductsQuestions = () => {
@@ -217,33 +238,18 @@ class UserInteractionNode extends React.Component {
                             </Typography>
                             {(localStorage.getItem('token')) ? 
                             <div>
-                            <TextField
-                                // onKeyPress={(event)=>this.sendByEnter(event,m)}
-                                onKeyPress={(event)=>this.sendByEnter(event)}
+                            <input
+                                onKeyPress={(event)=>this.sendByEnter(event,m)}
                                 margin="dense"
                                 label="بنویسید"
                                 type="text"
-                                value={this.state.replyMessage}
                                 onChange={(e) => this.setReplyMessage(e)}
-                                // onChange={this.setReplyMessage.bind()}
-                                fullWidth
-                                InputLabelProps={{
-                                  style: {
-                                      fontFamily: "IranSans",
-                                      fontSize:'12px'
-                                  }
-                                }}
-                                InputProps={{
-                                    style: {
-                                        fontFamily: "IranSans",
-                                        fontSize:'12px'
-                                    }
-                                }}
                             />
                             
                             <Button 
                               variant="contained" 
-                              onClick= {this.sendReplyToQuestion.bind(this, m)}
+                              // onClick= {this.sendReplyToQuestion.bind(this, m)}
+                              onClick={()=>this.sendReplyToQuestion(m)}
                               color="primary"
                               style={{ 
                                 fontFamily: 'IranSans_UltraLight'
@@ -271,37 +277,43 @@ class UserInteractionNode extends React.Component {
           <React.Fragment>
             {(localStorage.getItem('token')) ? 
             <div>
-            <TextField
-                onKeyPress={(event)=>this.sendByEnter(event)}
-                margin="dense"
-                label="نظرتان را بنویسید"
-                type="text"
-                value={this.state.replyMessage}
-                onChange={(e) => this.setReplyMessage(e)}
-                fullWidth
-                InputLabelProps={{
-                  style: {
-                      fontFamily: "IranSans",
-                      fontSize:'12px'
-                  }
-                }}
-                InputProps={{
-                    style: {
-                        fontFamily: "IranSans",
-                        fontSize:'12px'
-                    }
-                }}
+            <input
+              type="text"
+              onKeyPress={(event)=>this.sendByEnter(event)}
+              margin="dense"
+              label="نظرتان را بنویسید"
+              // type="text"
+              ref={this.textInput}
+              // value={()=>this.getReplyMessage()}
+              onChange={(e) => this.setReplyMessage(e)}
+              // fullWidth
+              // InputLabelProps={{
+              //   style: {
+              //     fontFamily: "IranSans",
+              //     fontSize:'12px'
+              //   }
+              // }}
+              // InputProps={{
+              //   style: {
+              //     fontFamily: "IranSans",
+              //     fontSize:'12px'
+              //   }
+              // }}
             />
-            
+            {/* <input
+          type="button"
+          value="Focus the text input"
+          onClick={this.focusTextInput}
+        /> */}
             <Button 
               variant="contained" 
-              onClick= {this.sendReplyToQuestion.bind(this, null)}
+              onClick={()=>this.sendReplyToQuestion()}
               color="primary"
               style={{ 
                 fontFamily: 'IranSans_UltraLight'
               }}
               >
-              ارسال پیام
+              ارسال
             </Button>
             </div>
             :null}

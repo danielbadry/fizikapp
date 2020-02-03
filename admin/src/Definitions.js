@@ -31,8 +31,8 @@ import MyEditor  from './TextEditor';
 import ContentUserInteraction from "./ContentUserInteraction";
 import Tiny  from './Tiny';
 
-const validateDefinitionName = [required(), minLength(5), maxLength(30)];
-const validateDefinitionTitle = [required(), minLength(5), maxLength(30)];
+const validateDefinitionName = [required(), minLength(1), maxLength(30)];
+const validateDefinitionTitle = [required(), minLength(1), maxLength(30)];
 
 export const DefinitionsCreate = (props) => (
     <Create {...props} >

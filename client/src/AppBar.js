@@ -22,7 +22,7 @@ import {
   Link,
   Redirect,
   withRouter
-} from "react-router-dom";
+} from "react-router-dom"; 
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -207,7 +207,7 @@ if (isGoToSearchProcess) {
             <InputBase
               onChange={ (e) => setSearchContent(e) }
               onKeyDown={ (e) => redirectToSearchPage(e) }
-              placeholder="جستجو کنید"
+              placeholder="1جستجو کنید"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

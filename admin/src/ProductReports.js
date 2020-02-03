@@ -12,7 +12,7 @@ class ProductReports extends React.Component {
         super(props);
         console.info('props:', props);
         this.state = {
-            isEnabled : this.props.record.summary.isEnabled,
+            isEnabled : this.props.record.data.summary.isEnabled,
             reports : [
                 {
                     id : 1,

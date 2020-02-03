@@ -46,9 +46,11 @@ class Tiny extends React.Component {
            ],
            imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
            toolbar:
-             'emoticons insertfile image imagetools undo redo | fullscreen | formatselect | forecolor backcolor | bold italic | \
+             'fontsizeselect fontselect emoticons insertfile image imagetools undo redo | fullscreen | formatselect | forecolor backcolor | bold italic | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help'
+             bullist numlist outdent indent | removeformat | help',
+             content_css: ['//fonts.googleapis.com/css?family=Amiri|Changa|Tajawal|Lalezar|El Messiri|Almarai|Markazi Text|Reem Kufi|Lateef|Scheherazade|Lemonada|Mada|Baloo Bhaijaan|Harmattan|Mirza|Rakkas|Katibeh|Aref Ruqaa|Vibes|Jomhuria'],
+            font_formats: 'Arial Black=arial black,avant garde;Indie Flower=indie flower;Amiri=Amiri;Lateef=Lateef;Almarai=Almarai;Mada=Mada;Baloo Bhaijaan=Baloo Bhaijaan;Mirza=Mirza;Rakkas=Rakkas;Katibeh=Katibeh;Vibes=Vibes;Jomhuria=Jomhuria;Aref Ruqaa=Aref Ruqaa;Harmattan=Harmattan;Lemonada=Lemonada;Scheherazade=Scheherazade;Reem Kufi=Reem Kufi;Markazi Text=Markazi Text;Lalezar=Lalezar;El Messiri=El Messiri;Tajawal=Tajawal;Changa=Changa; cursive;Times New Roman=times new roman,times;'
          }}
         // onChange={this.handleEditorChange}
         onChange={

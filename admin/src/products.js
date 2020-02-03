@@ -58,8 +58,8 @@ const GetCategory = () => {
     return res;
 }
 
-const validateProductName = [required(), minLength(3), maxLength(30)];
-const validateProductTitle = [required(), minLength(5), maxLength(100)];
+const validateProductName = [required(), minLength(1), maxLength(30)];
+const validateProductTitle = [required(), minLength(1), maxLength(100)];
 const validateProductDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 const validateProductCreation = (values) => {
     const errors = {};

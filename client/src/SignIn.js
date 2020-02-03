@@ -60,6 +60,13 @@ class SignIn extends React.Component{
             });
     }
 
+    submitForm = (event) => {
+        var char = event.which || event.keyCode;
+        if (char === 13) {
+            this.checkUserForLogin();
+        }
+    }
+
     componentDidMount() {
         let token = window.localStorage.getItem('token');
         if (token)
@@ -94,6 +101,7 @@ class SignIn extends React.Component{
                             id="standard-lastname"
                             label="شماره تلفن"
                             margin="normal"
+                            onKeyPress={this.submitForm}
                             onChange={this.saveMobileNumber}
                             InputProps={{
                             style: {
@@ -114,6 +122,7 @@ class SignIn extends React.Component{
                             id="standard-lastname"
                             label="کلمه عبور"
                             margin="normal"
+                            onKeyPress={this.submitForm}
                             onChange={this.savePassword}
                             InputProps={{
                             style: {

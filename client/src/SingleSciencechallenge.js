@@ -90,8 +90,8 @@ class SingleSciencechallenge extends React.Component{
                     .then(result => {
                         this.setState(function(state, props) {
                             return {
-                                summary: JSON.parse(JSON.stringify(result.summary)),
-                                isUserAnswered: result.isUserAnswered,
+                                summary: JSON.parse(JSON.stringify(result.data.summary)),
+                                isUserAnswered: result.data.isUserAnswered,
                                 thumbnail: result.thumbnail,
                                 id: result.id,
                                 startTime : 30,
@@ -125,8 +125,8 @@ class SingleSciencechallenge extends React.Component{
             .then(result => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(result.summary)),
-                        isUserAnswered: result.isUserAnswered,
+                        summary: JSON.parse(JSON.stringify(result.data.summary)),
+                        isUserAnswered: result.data.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
                         isRender: true
@@ -202,8 +202,8 @@ class SingleSciencechallenge extends React.Component{
             .then(result => {
                 this.setState(function(state, props) {
                     return {
-                        summary: JSON.parse(JSON.stringify(result.summary)),
-                        isUserAnswered: result.isUserAnswered,
+                        summary: JSON.parse(JSON.stringify(result.data.summary)),
+                        isUserAnswered: result.data.isUserAnswered,
                         thumbnail: result.thumbnail,
                         id: result.id,
                         isRender: true

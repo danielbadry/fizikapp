@@ -34,8 +34,8 @@ import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
 import Tiny  from './Tiny';
 
-const validateScienceChallengeName = [required(), minLength(5), maxLength(30)];
-const validateScienceChallengeTitle = [required(), minLength(5), maxLength(30)];
+const validateScienceChallengeName = [required(), minLength(1), maxLength(30)];
+const validateScienceChallengeTitle = [required(), minLength(1), maxLength(30)];
 const validateScienceChallengeDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 export const SciencechallengeCreate = (props) => (
     <Create {...props} >
@@ -46,7 +46,7 @@ export const SciencechallengeCreate = (props) => (
             {/* <LongTextInput source="description" label="description" /> */}
             {/* <MyEditor /> */}
             <Tiny />
-            {/* <TagComponent source="tags" label="select tags (optional)" /> */}
+            <TagComponent source="tags" label="select tags (optional)" />
             
             <UploadComponent 
                 type="thumbnail"
