@@ -84,7 +84,7 @@ class Gerdali extends React.Component {
                                     </span>
                                 </h2>
                             </div>
-                            <div className="profile-social">
+                            { /*<div className="profile-social">
                                 <ul>
                                 <li>
                                     <a href={"/category/" + `${item.id}`} data-toggle="tooltip" title={item.name} target="_blank">
@@ -114,7 +114,7 @@ class Gerdali extends React.Component {
                                     </a>
                                 </li>
                                 </ul>
-                            </div>
+                            </div>*/ }
                             </div>
                         </div>
                     </Link>

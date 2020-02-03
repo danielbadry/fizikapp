@@ -22,7 +22,7 @@ class StickyFooter extends React.Component {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            //credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
                 
@@ -43,7 +43,7 @@ class StickyFooter extends React.Component {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            //credentials: 'same-origin', // include, *same-origin, omit
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -264,6 +264,7 @@ class StickyFooter extends React.Component {
                             }}
                             >
                             <dl
+                                key={"footer_def_main"}
                                 style={{
                                     marginRight:'15px'
                                 }}
@@ -282,7 +283,7 @@ class StickyFooter extends React.Component {
                                 {this.state.definitions.map(
                                     (item, index) => (
                                         <dd
-                                            key={item.id}
+                                            key={"footer_def_"+item.id}
                                             style={{
                                                 color:'white',
                                                 fontFamily: 'IranSans_Ultralight',
@@ -300,7 +301,8 @@ class StickyFooter extends React.Component {
                                                         lineHeight:'2'
                                                     }}
                                                     component={RouterLink} 
-                                                    to={`/definition/${item.id}`}>{item.name}
+                                                    to={"/definition/"+item.id}>
+                                                    {item.name}
                                                     </Link>
                                         </dd>
                                 ))}
@@ -316,6 +318,7 @@ class StickyFooter extends React.Component {
                                 style={{
                                     marginRight:'15px'
                                 }}
+                                key={"footer_last_prodoct"}
                                 >
                                 <dt
                                     style={{
@@ -331,7 +334,7 @@ class StickyFooter extends React.Component {
                                 {this.state.products.map(
                                     (item, index) => (
                                         <dd
-                                            key={item.id}
+                                            key={"footer_last_prodoct"+item.id}
                                             style={{
                                                 color:'white',
                                                 fontFamily: 'IranSans_Ultralight',
@@ -365,6 +368,7 @@ class StickyFooter extends React.Component {
                                 style={{
                                     marginRight:'15px'
                                 }}
+                                key={"footer_site_map"}
                                 >
                                 <dt
                                     style={{

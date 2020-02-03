@@ -25,7 +25,7 @@ export default (props) => {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
-            credentials: 'same-origin',
+            //credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${token}`,
