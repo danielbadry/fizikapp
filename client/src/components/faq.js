@@ -2,10 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
-import HeaderSlider from "./HeaderSlider";
 
+import StickyFooter from "./StickyFooter";
+//import HeaderSlider from "./HeaderSlider";
+//import MainHeader from "./MainHeader";
 class Faq extends React.Component {
 	render() {
 		return (

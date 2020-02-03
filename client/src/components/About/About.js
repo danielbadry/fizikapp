@@ -1,13 +1,13 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "../header/header/MainHeader";
 import StickyFooter from "../header/footer/StickyFooter";
-import HeaderSlider from "../header/header/HeaderSlider";
-import SocialShare from "./SocialShare";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+//import HeaderSlider from "../header/header/HeaderSlider";
+//import MainHeader from "../header/header/MainHeader";
+//import SocialShare from "./SocialShare";
 class About extends React.Component {
     constructor(props) {
         super(props);

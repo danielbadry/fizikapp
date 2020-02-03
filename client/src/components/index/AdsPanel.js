@@ -14,44 +14,38 @@ class AdsPanel extends React.Component{
 
 	render () {
 		return(
-			<Grid container spacing={3} alignItems="center" justify="center">
-				
-				<Grid item xs={12} sm={7} md={7} lg={7} xl={7}>
-					{/* <Paper
-						style={{
-							borderRadius:0
-						}}
-						> */}
-						<video 
-							id="bgVideo" 
-							loop="10"
-							controls = {false}
-							muted
-							preload="true" 
-							autoPlay = {true}
-							style={{
-								// position:'absolute',
-								width:'100%',
-								height:'100%',
-								zIndex:'-1',
-							}}
-							>
-							<source src="/assets/videos/background.mp4" type="video/mp4" /> 
-						</video>
-					{/* </Paper> */}
-				</Grid>
-
-				<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
-					<Paper 
+			<Grid container spacing={3} justify="center">
+				<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+					<div 
 						style={{
 							borderRadius:0,
-							fontFamily: 'IranSans'
+							fontFamily: 'IranSans',
+							border:"0px",
+							textAlign:'right',
+							padding:'5px'
 						}}
 						>
 						متن یا تبلیغات اینجا
-					</Paper>
+					</div>
 				</Grid>
-
+				<Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
+					<video 
+						id="bgVideo" 
+						loop="10"
+						controls = {false}
+						muted
+						preload="true" 
+						autoPlay = {true}
+						style={{
+							// position:'absolute',
+							width:'100%',
+							height:'100%',
+							zIndex:'-1',
+						}}
+						>
+						<source src="/assets/videos/background.mp4" type="video/mp4" /> 
+					</video>
+				</Grid>
 			</Grid>
 		);
 	}
