@@ -67,8 +67,7 @@ class UserToolInAppbar extends React.Component {
             return (
                 <React.Fragment>
                     <Button 
-                        variant="contained" 
-                        color="primary" 
+                        variant="outlined"
                         href="#/signin"
                         style={{
                             fontFamily: 'IranSans'

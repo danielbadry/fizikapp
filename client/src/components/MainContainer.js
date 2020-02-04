@@ -4,7 +4,7 @@ import { Link as RouterLink, HashRouter,
 	BrowserRouter as Router,
 	Route, Link, Redirect,
 	withRouter } from 'react-router-dom';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -87,6 +87,43 @@ const useStyles = makeStyles(theme => ({
 		padding: theme.spacing(0, 1),
 		...theme.mixins.toolbar,
 	},
+	search: {
+		position: 'relative',
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: fade(theme.palette.common.white, 0.15),
+		'&:hover': {
+			backgroundColor: fade(theme.palette.common.white, 0.25),
+		},
+		marginRight: theme.spacing(2),
+		marginLeft: 0,
+		width: '100%',
+		[theme.breakpoints.up('sm')]: {
+			marginLeft: theme.spacing(3),
+			width: 'auto',
+		},
+		border: "1px solid #c1c1c1",
+	},
+	searchIcon: {
+		width: theme.spacing(7),
+		height: '100%',
+		position: 'absolute',
+		pointerEvents: 'none',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	inputRoot: {
+		color: 'inherit',
+	},
+	inputInput: {
+		padding: theme.spacing(1, 1, 1, 7),
+		transition: theme.transitions.create('width'),
+		width: '100%',
+		[theme.breakpoints.up('md')]: {
+			width: 200,
+		},
+		textAlign: "right"
+	},
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing(3),
@@ -136,7 +173,7 @@ export default function MainContainer() {
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
-			<AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: open, })} >
+			<AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: open, })}  color="default">
 				<Toolbar>
 					<IconButton
 					color="inherit"
@@ -149,7 +186,8 @@ export default function MainContainer() {
 					>
 					<MenuIcon />
 					</IconButton>
-					<div className={classes.search}>
+					<div style={{ display: "block", flexGrow:1 }}> </div>
+					<div className={classes.search} edge="start">
 						<div className={classes.searchIcon}>
 							<SearchIcon />
 						</div>
@@ -170,7 +208,7 @@ export default function MainContainer() {
 						}}
 						/>
 					</div>
-					<UserToolInAppbar />
+					<UserToolInAppbar edge="start" />
 				</Toolbar>
 			</AppBar>
 			<Drawer

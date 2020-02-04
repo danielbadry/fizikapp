@@ -102,7 +102,7 @@ export default (props) => {
                 </ItemsCarousel>
             </div> */}
 
-                <div style={{ padding: `0 ${chevronWidth}px` }}>
+                <div style={{ padding:0 }}>
                     <ItemsCarousel
                         requestToChangeActive={setActiveItemIndex}
                         activeItemIndex={activeItemIndex}
