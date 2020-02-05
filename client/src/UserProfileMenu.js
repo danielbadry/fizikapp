@@ -19,6 +19,7 @@ export default function UserProfileMenu(props) {
   };
 
   const logOut = () => {
+    
     window.localStorage.removeItem('token');
     setAnchorEl(null);
     // window.location.reload();

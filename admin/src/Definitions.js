@@ -31,14 +31,14 @@ import MyEditor  from './TextEditor';
 import ContentUserInteraction from "./ContentUserInteraction";
 import Tiny  from './Tiny';
 
-const validateDefinitionName = [required(), minLength(1), maxLength(30)];
+// const validateDefinitionName = [required(), minLength(1), maxLength(30)];
 const validateDefinitionTitle = [required(), minLength(1), maxLength(30)];
 
 export const DefinitionsCreate = (props) => (
     <Create {...props} >
         
         <SimpleForm redirect="list" submitOnEnter={true}>
-            <TextInput source="name" label="name" validate={validateDefinitionName} />
+            {/* <TextInput source="name" label="name" validate={validateDefinitionName} /> */}
             <TextInput source="title" label="title" validate={validateDefinitionTitle} />
             <Book 
                 {...props}
@@ -56,10 +56,10 @@ export const DefinitionsCreate = (props) => (
 export const DefinitionsEdit = (props) => (
     <Edit title="Definitions edit" {...props}>
         <SimpleForm>
-            <TextInput 
+            {/* <TextInput 
                 source="data.summary.name" 
                 label="name" 
-                />
+                /> */}
             <LongTextInput 
                 source="data.summary.title" 
                 label="title" 
@@ -101,7 +101,7 @@ export const DefinitionsShow = (props) => (
                 <TextField source="id" label="Id" />
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
-                <TextField source="summary.name" label="name" />
+                {/* <TextField source="summary.name" label="name" /> */}
                 <TextField source="summary.description" label="description" />
                 <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
@@ -137,7 +137,7 @@ export const DefinitionsList = props => (
                 source="data.summary.thumbnail" 
                 label="thumbnail" 
                 />
-            <TextField 
+            {/* <TextField 
                 source="data.summary.name" 
                 label="Name" 
                 style={{ 
@@ -147,7 +147,7 @@ export const DefinitionsList = props => (
                     color: 'black',
                     direction: 'rtl'
                   }}
-                />
+                /> */}
             <TextField 
                 source="data.summary.title" 
                 label="title" 

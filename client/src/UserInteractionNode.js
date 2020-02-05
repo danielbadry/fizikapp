@@ -199,8 +199,9 @@ class UserInteractionNode extends React.Component {
 
                         primary={<Typography 
                           style={{ 
-                            fontFamily: 'IranSans_UltraLight',
-                            color:'black'
+                            fontFamily: 'Almarai',
+                            color:'black',
+                            fontSize:'12px'
                           }}
                           >
                           {m.message}
@@ -215,7 +216,7 @@ class UserInteractionNode extends React.Component {
                             >
                             <Link 
                               href={m.userInfo.url}
-                              style={{ fontFamily: 'IranSans_UltraLight' }}
+                              style={{ fontFamily: 'Almarai', fontSize:'12px' }}
                               >
                               {m.userInfo.firstName + ' ' + m.userInfo.lastName}
                             </Link>
@@ -223,7 +224,7 @@ class UserInteractionNode extends React.Component {
                             </Typography>
                             &nbsp;
                             <Typography
-                            style={{ fontFamily: 'IranSans_UltraLight' }}
+                            style={{ fontFamily: 'Almarai', fontSize:'12px' }}
                             >
                             {m.jalaaliUserFriendlyCreatedDate}
                             </Typography> 
@@ -241,7 +242,7 @@ class UserInteractionNode extends React.Component {
                             <input
                                 onKeyPress={(event)=>this.sendByEnter(event,m)}
                                 margin="dense"
-                                label="بنویسید"
+                                placeholder="نظر شما چیست"
                                 type="text"
                                 onChange={(e) => this.setReplyMessage(e)}
                             />
@@ -254,9 +255,7 @@ class UserInteractionNode extends React.Component {
                               style={{ 
                                 fontFamily: 'IranSans_UltraLight'
                               }}
-                              >
-                              ارسال پیام
-                            </Button>
+                              >ارسال</Button>
                             </div>
                             :null}
                             &nbsp;
@@ -281,7 +280,7 @@ class UserInteractionNode extends React.Component {
               type="text"
               onKeyPress={(event)=>this.sendByEnter(event)}
               margin="dense"
-              label="نظرتان را بنویسید"
+              placeholder="نظر شما چیست"
               // type="text"
               ref={this.textInput}
               // value={()=>this.getReplyMessage()}

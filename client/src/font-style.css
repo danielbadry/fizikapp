@@ -1,4 +1,29 @@
 @font-face {
+  font-family: 'B Jadid';
+  src: local('B Jadid'), url(woff2/B_Jadid_Bold_0.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'B Morvarid';
+  src: local('B Morvarid'), url(woff2/B_Morvarid_Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'B Kamran';
+  src: local('B Kamran'), url(woff2/Far_Kamran.woff) format('woff');
+}
+
+@font-face {
+  font-family: "B Nazanin"; 
+  src: url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.eot"); 
+  src: url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.eot?#iefix") format("embedded-opentype"), 
+  url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.woff2") format("woff2"), 
+  url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.woff") format("woff"), 
+  url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.ttf") format("truetype"), 
+  url("//db.onlinewebfonts.com/t/3671adca6f650c92b83f906e49656986.svg#B Nazanin") format("svg"); 
+}
+
+@font-face {
   font-family: 'IranSans';
   src: local('IranSans'), url(woff2/IRANSansWeb.woff2) format('woff2');
 }

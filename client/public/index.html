@@ -47,25 +47,25 @@
   // var appUrl = "http://localhost:1337";
   var token = window.localStorage.getItem('token');
 
-  // setInterval(function() { 
-  //   fetch(`${appUrl}/users/setonlineoffline`, {
-  //           method: 'POST', 
-  //           mode: 'cors',
-  //           cache: 'no-cache',
-  //           credentials: 'same-origin',
-  //           headers: {
-  //               'Content-Type': 'application/json',
-  //               'authorization': `Bearer ${token}`,
-  //           },
-  //           redirect: 'follow',
-  //           referrer: 'no-referrer',
-  //           // body: JSON.stringify({token:token}),
-  //           })
-  //           .then(response => response.json())
-  //           .then(result => {
+  setInterval(function() { 
+    fetch(`${appUrl}/users/setonlineoffline`, {
+            method: 'POST', 
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            // body: JSON.stringify({token:token}),
+            })
+            .then(response => response.json())
+            .then(result => {
                 
-  //           });
-  // }, 1000);
+            });
+  }, 1000);
 
   window.onload = window.onunload = function analytics(event) {
   let data = {          

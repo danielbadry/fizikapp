@@ -40,13 +40,13 @@ class Tiny extends React.Component {
           // tinydrive_upload_path: '/uploads',
           tinydrive_token_provider : 'http://localhost:1337/users/jwt',
            plugins: [
-             'emoticons textcolor tinydrive advlist autolink lists link image charmap print preview anchor',
+             'code emoticons textcolor tinydrive advlist autolink lists link image charmap print preview anchor',
              'searchreplace visualblocks code fullscreen',
              'insertdatetime media table paste code help wordcount '
            ],
            imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
            toolbar:
-             'fontsizeselect fontselect emoticons insertfile image imagetools undo redo | fullscreen | formatselect | forecolor backcolor | bold italic | \
+             'code fontsizeselect fontselect emoticons insertfile image imagetools undo redo | fullscreen | formatselect | forecolor backcolor | bold italic | \
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help',
              content_css: ['//fonts.googleapis.com/css?family=Amiri|Changa|Tajawal|Lalezar|El Messiri|Almarai|Markazi Text|Reem Kufi|Lateef|Scheherazade|Lemonada|Mada|Baloo Bhaijaan|Harmattan|Mirza|Rakkas|Katibeh|Aref Ruqaa|Vibes|Jomhuria'],
