@@ -129,6 +129,7 @@ class UserInteractionNode extends React.Component {
     }
 
     fetchProductsQuestions = () => {
+      const token = localStorage.getItem('token');
       this.setState({
         replyMessage: null
       });
@@ -139,6 +140,7 @@ class UserInteractionNode extends React.Component {
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
         },
         redirect: 'follow',
         referrer: 'no-referrer',
@@ -231,7 +233,7 @@ class UserInteractionNode extends React.Component {
                             <Typography
                             style={{ fontFamily: 'IranSans_UltraLight' }}
                             >
-                              {m.userInfo.isAdmin ? 
+                              {m.canDelete ? 
                                 <div
                                 onClick={()=>this.deleteComment(m)}
                                 >X</div> : null  

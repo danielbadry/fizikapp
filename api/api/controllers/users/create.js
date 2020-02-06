@@ -66,6 +66,11 @@ module.exports = {
       type: 'string',
       required : false
     },
+    
+    inviter :{
+      type: 'string',
+      required : false
+    },
 
   },
 
@@ -131,12 +136,27 @@ module.exports = {
         isRead : false,
         isDeleted: false,
       });
-      
+
       let message2 = await Messages.create({
         message: 'مدیر مجموعه ثبت نام شما ارج می نهد',
         userId : user.id,
         isRead : false,
         isDeleted: false,
+      });
+
+      let data = inputs.inviter;
+      let buff = new Buffer(data, 'base64');
+      let text = buff.toString('ascii');
+      // return text;
+      // let inviter = await Users.findOne({
+      //   id : text
+      // });
+
+      await Users.updateOne({
+        id: text
+      })
+      .set({
+        fCoin : 236
       });
 
       var token = jwt.sign({ id: user.id }, sails.config.custom.secret, {

@@ -17,28 +17,52 @@ class Inbox extends React.Component {
     }
   }
 
-  componentDidMount() {
+  getMessages() {
     let token = localStorage.getItem('token');
     fetch(process.env.REACT_APP_API_URL+'messages', {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-        .then(response => response.json())
-        .then(messages => {
-            console.info('messages:', messages);
-            this.setState((state, props) => {
-              return {messages: messages.data};
-            });
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+    .then(response => response.json())
+    .then(messages => {
+        this.setState((state, props) => {
+          return {messages: messages.data};
         });
+    });
+  }
+
+  clearNotify() {
+    let token = localStorage.getItem('token');
+    fetch(process.env.REACT_APP_API_URL+'messages/clearnotify', {
+        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+    .then(response => response.json())
+    .then(messages => {
+      this.getMessages();
+    });
+  }
+
+  componentDidMount() {
+    this.clearNotify();
   }
 
   render() {

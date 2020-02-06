@@ -37,6 +37,9 @@ function getSteps() {
 }
 
 function HorizontalLinearStepper(props) {
+  var urlParams = window.location;
+  let inviter = urlParams.hash.split('decstr=')[1];
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [isSignupSuccess, setisSignupSuccess] = React.useState(false);
@@ -211,7 +214,8 @@ function HorizontalLinearStepper(props) {
       lastName:lastName,
       grade:grade,
       password:password,
-      mobile:mobileNumber
+      mobile:mobileNumber,
+      inviter : inviter
     }
     fetch(process.env.REACT_APP_API_URL + `users`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
