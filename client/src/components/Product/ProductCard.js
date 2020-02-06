@@ -15,88 +15,79 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
-  },
+	card: {
+		maxWidth: 345,
+	},
 });
 
 class ProductCard extends React.Component {
 
 constructor(props) {
-  super (props);
-  console.info('pppp:', props);
+	super (props);
+	console.info('pppp:', props);
 }
 
 render() {
-  return (
-    <React.Fragment>
-      <Link
-        component={RouterLink} 
-        to={`product/${this.props.item.id}`}>
-      <Paper
-        style={{
-          background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
-          height:'142px',
-          width: '253px',
-          position: 'relative',
-          borderRadius:0
-        }}
-      >
-        <Typography style={{
-          fontFamily: 'IranSans',
-          color: 'white',
-          direction: 'rtl',
-          position: 'relative',
-          top: '67%',
-          right: '2%'
-        }}>
-          {this.props.item.data.summary.name}
-        </Typography>
-        
-        <Typography style={{
-          fontFamily: 'IranSans_UltraLight',
-          color: 'white',
-          direction: 'rtl',
-          position: 'relative',
-          top: '67%',
-          right: '2%',
-          fontSize: '14px'
-        }}>
-        {this.props.item.data.summary.title}
-        </Typography>
-        
-        <div style={{
-          bottom: '0',
-          position: 'absolute',
-          backgroundColor:'#0000004d',
-          width: '100%',
-          // borderRadius: '7px'
-        }}>
-          
-          <ThumbUp 
-            fontSize="small" 
-            style={{
-                color : 'white',
-                marginLeft: '8px',
-                marginTop: '2px',
-                marginBottom: '0px'
-            }}
-          />
-          <span style={{
-                color: 'white',
-                fontFamily: 'verdana',
-                fontSize: '14px',
-                marginLeft: '2px',
-                paddingTop: '5px',
-                position: 'absolute'
-            }}>{this.props.item.data.summary.likes}</span>  
-        </div>
-
-      </Paper>
-      </Link>
-    </React.Fragment>
-    
-  );
+	return (
+		<React.Fragment>
+			<Link component={RouterLink} to={`product/${this.props.item.id}`} underline="none" >
+				<Paper
+				style={{
+				background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
+				height:'142px',
+				width: '100%',
+				position: 'relative',
+				borderRadius:0
+				}}
+				>
+					<div style={{
+					bottom: '0',
+					position: 'absolute',
+					backgroundColor:'#0000004d',
+					width: '100%',
+					// borderRadius: '7px'
+					}}>
+		          
+						<ThumbUp 
+						fontSize="small" 
+						style={{
+						color : 'white',
+						marginLeft: '8px',
+						marginTop: '2px',
+						marginBottom: '0px'
+						}}
+						/>
+						<span style={{
+						color: 'white',
+						fontFamily: 'verdana',
+						fontSize: '14px',
+						marginLeft: '2px',
+						paddingTop: '5px',
+						position: 'absolute'
+						}}>{this.props.item.data.summary.likes}</span>
+					</div>
+				</Paper>
+				<Typography style={{
+				fontFamily: 'IranSans_Bold',
+				color: '#000',
+				direction: 'rtl',
+				fontSize: "15px",
+				maxHeight: "4rem",
+				marginTop: "10px",
+				marginBottom: "5px"}}>
+					{this.props.item.data.summary.name}
+				</Typography>
+				<Typography style={{
+				fontFamily: 'IranSans_UltraLight',
+				color: '#606060',
+				direction: 'rtl',
+				fontSize: '14px'
+				}}>
+					{this.props.item.data.summary.title}
+				</Typography>
+			</Link>
+		</React.Fragment>
+    );
 }
   
 }

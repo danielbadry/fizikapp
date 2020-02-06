@@ -116,7 +116,7 @@ export default (props) => {
 
                         {rows.map(
                             (item, index) => 
-                                <SelectCorrectCard modelType={props.model} item={item} key={index} />
+                                <SelectCorrectCard style={{marginLeft:"15px"}} modelType={props.model} item={item} key={index} />
                         )}
                         
                     </ItemsCarousel>

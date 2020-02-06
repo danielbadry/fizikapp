@@ -55,7 +55,7 @@ html {
 }
 
 #profile-wrap:hover .profile-name h2 span {
-    opacity: 0;
+    /*opacity: 0;*/
 }
 #profile-wrap:hover .profile-social {
     opacity: 1;
