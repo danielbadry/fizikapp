@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  // return ['شماره تلفن','تایید کد','اطلاعات فردی'];
-  return ['اطلاعات فردی'];
+  return ['شماره تلفن','تایید کد','اطلاعات فردی'];
+  // return ['اطلاعات فردی'];
 }
 
 function HorizontalLinearStepper(props) {
@@ -83,7 +83,8 @@ function HorizontalLinearStepper(props) {
   };
 
   const sendVerificationCodeViaSMS = () => {
-    
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    return;
     fetch(`http://localhost/test/sms.php?mobileNumber=${mobileNumber}`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
@@ -346,7 +347,7 @@ if(isSignupSuccess) {
         ) : (
           <div>
             {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
-            {/* {activeStep === 0 ? 
+            {activeStep === 0 ? 
               <Typography className={classes.instructions}>
                 <TextField
                   id="standard-phone"
@@ -368,8 +369,8 @@ if(isSignupSuccess) {
                     }
                   }}
                 />
-              </Typography> : null} */}
-            {/* {activeStep === 0 ? 
+              </Typography> : null}
+            {activeStep === 1 ? 
               <Typography className={classes.instructions}>
                 <TextField
                   id="standard-verifycode"
@@ -389,8 +390,8 @@ if(isSignupSuccess) {
                       }
                     }}
                 />
-              </Typography> : null} */}
-            {activeStep === 0 ? 
+              </Typography> : null}
+            {activeStep === 2 ? 
               <React.Fragment
                 style={{
                   direction:'rtl'
@@ -561,7 +562,7 @@ if(isSignupSuccess) {
               null  
             }
               
-               {/* {activeStep === 0 ? 
+              {activeStep === 0 ? 
                 <Button
                   variant="contained"
                   color="primary"
@@ -571,9 +572,9 @@ if(isSignupSuccess) {
                 >
                 ارسال کد تایید
               </Button>
-              : null} */}
+              : null}
 
-              {/* {activeStep === 1 ? 
+              {activeStep === 1 ? 
                 <Button
                   variant="contained"
                   color="primary"
@@ -583,8 +584,7 @@ if(isSignupSuccess) {
                   تایید کد و مرحله ی بعد
                 </Button>
               : null}
-*/}
-              {activeStep === 0 ? 
+              {activeStep === 2 ? 
                 <Button
                   variant="contained"
                   color="primary"

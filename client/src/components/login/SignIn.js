@@ -75,10 +75,22 @@ class SignIn extends React.Component{
 			title:{
 				display: 'block',
 				fontFamily: 'IranSans',
-				textAlign: 'center',
+				textAlign: 'right',
 				width: "100%",
-				padding: theme.spacing(1),
-				paddingTop:theme.spacing(4),
+			},
+			main_signup:{
+				padding:theme.spacing(4),
+				direction: "rtl",
+			},
+			button:{
+				fontFamily: 'IranSans',
+				fontSize: '14px',
+				marginBottom:theme.spacing(2),
+			},
+			container_buttons:{
+				display:"flex",
+				flexDirection:"column",
+				marginTop:theme.spacing(2),
 			}
 		}
 		if(this.state.isUserLoggedIn) {
@@ -89,15 +101,16 @@ class SignIn extends React.Component{
 		return(
 			<React.Fragment>
 				<Grid container justify="center" alignItems="center" spacing={0}>
-					<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-						<Paper>
-							<Grid container justify="center" alignItems="center" spacing={0}>
+					<Grid item xs={12} sm={8} md={8} lg={4} xl={4}>
+						<Paper style={classes.main_signup}>
+							<Grid container spacing={0}>
 								<Typography style={classes.title} >
-									ورود
+									ورود از طریق شماره تلفن همراه
 								</Typography>
 								<TextField
 									id="standard-lastname"
 									label="شماره تلفن"
+									fullWidth
 									margin="normal"
 									onChange={this.saveMobileNumber}
 									InputProps={{
@@ -119,6 +132,7 @@ class SignIn extends React.Component{
 									id="standard-lastname"
 									label="کلمه عبور"
 									margin="normal"
+									fullWidth
 									onChange={this.savePassword}
 									InputProps={{
 									style: {
@@ -135,50 +149,33 @@ class SignIn extends React.Component{
 									type="password"
 								/>
 							</Grid>
-							<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+							<div style={classes.container_buttons}>
 								<Button
 									variant="outlined"
 									color="primary"
 									onClick={this.checkUserForLogin}
 									// className={classes.button}
-									style={{
-										fontFamily: 'IranSans',
-										fontSize: '14px'
-									}}
+									style={classes.button}
 									>
 									ورود
 								</Button>
-							</Grid>
-							<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 								<Button
 									href="#forget-password"
-									variant="outlined"
-									color="primary"
 									// onClick={sendVerificationCodeToEmail}
 									// className={classes.button}
-									style={{
-										fontFamily: 'IranSans',
-										fontSize: '14px'
-									}}
+									style={classes.button}
 									>
 									کلمه عبور خود را فراموش کرده اید؟
 								</Button>
-							</Grid>
-							<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 								<Button
 									href="#signup"
-									variant="outlined"
-									color="primary"
 									// onClick={sendVerificationCodeToEmail}
 									// className={classes.button}
-									style={{
-										fontFamily: 'IranSans',
-										fontSize: '14px'
-									}}
+									style={classes.button}
 									>
 									ایجاد حساب کاربری جدید
 								</Button>
-							</Grid>
+							</div>
 						</Paper>
 					</Grid>
 				</Grid>

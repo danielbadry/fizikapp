@@ -3,12 +3,12 @@ import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-do
 import About from './components/About/About';
 import Home from './components/index/Home';
 import SignIn from './components/login/SignIn';
+import SignUp from './components/login/SignUp/SignUp';
+
 // import Home from './MainContainer';
 /*
 import Requests from './Requests';
 import NewRequest from './NewRequest';
-// import SignUp from './SignUp';
-import SignUp from './SignUp2';
 
 import ForgetPassword from './ForgetPassword';
 import ShopResult from './ShopResult';
@@ -109,6 +109,7 @@ class Routs extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/signin" component={SignIn} />
+                <Route path="/signup" component={SignUp} />
                 {/*<Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
@@ -119,7 +120,7 @@ class Routs extends React.Component {
                 <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/new-request" component={NewRequest} />
-                <Route path="/signup" component={SignUp} />
+                
                 <Route path="/forget-password" component={ForgetPassword} />
                 <Route path="/categories" component={Categories} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
