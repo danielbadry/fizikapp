@@ -38,6 +38,7 @@ export default function UserProfileMenu(props) {
     })
     .then(response => response.json())
     .then(data => {
+      setTimeout(function(){ console.info('user logged out'); }, 2000);
       window.localStorage.removeItem('token');
       window.location.replace("/");
     });

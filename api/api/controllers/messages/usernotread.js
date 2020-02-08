@@ -4,10 +4,10 @@ var momentJalaali = require('moment-jalaali');
 module.exports = {
 
 
-  friendlyName: 'Find',
+  friendlyName: 'Usernotread',
 
 
-  description: 'Find messages.',
+  description: 'Usernotread messages.',
 
 
   inputs: {
@@ -22,15 +22,6 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    // let token = this.req.headers.authorization;
-    // let TokenArray = token.split(" ");
-    // let decodedToken = jwt.verify(TokenArray[1], sails.config.custom.secret);
-    // let userId = decodedToken.id;
-    // let messages = await Messages.find({
-    //   userId: userId
-    // });
-    // return messages;
-
     let token = this.req.headers.authorization;
     let TokenArray = token.split(' ');
     return jwt.verify(TokenArray[1], sails.config.custom.secret, async (err, decoded) => {
@@ -41,6 +32,7 @@ module.exports = {
         let userId = decodedToken.id;
         let messages = await Messages.find({
           userId: userId,
+          isRead: false
         });
         for (message of messages) {
           moment.locale('en');
@@ -55,5 +47,6 @@ module.exports = {
     });
 
   }
+
 
 };

@@ -48,7 +48,7 @@ module.exports = {
           id: rec.id,
           userId: decoded.id
         }).set({
-          seconds : rec.seconds + 1
+          seconds : rec.seconds + 5
         });
 
         // set isOnline flag on USERS model

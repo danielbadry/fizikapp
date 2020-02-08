@@ -11,7 +11,7 @@ export default function UserSystemMessageMenu() {
 
   useEffect(() => {
     let token = window.localStorage.getItem('token');
-    fetch(process.env.REACT_APP_API_URL+`messages`, {
+    fetch(process.env.REACT_APP_API_URL+`messages/usernotread`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
