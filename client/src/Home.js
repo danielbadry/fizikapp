@@ -12,6 +12,7 @@ import HeaderSlider from "./HeaderSlider";
 import ReactTourGuideSlider from "./ReactTourGuideSlider";
 import NiceCard from "./NiceCard";
 import Gerdali from "./Gerdali";
+import EnjoyHint from "./EnjoyHint";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
@@ -21,7 +22,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             token : null,
-            numberOfWatchedVideos : 0
+            numberOfWatchedVideos : 0,
         }
     }
 
@@ -56,15 +57,18 @@ class Home extends React.Component {
     }
 
     render() {
-        
+        const { stepsEnabled, steps, initialStep, hintsEnabled, hints } = this.state;
         return (
+            
             <React.Fragment>
+                
                  <Container>
                     <AdsPanel />
                     {/* <NiceCard /> */}
                     <Gerdali />
                     <br />
                     <SingleRow
+                        className="hello"
                         label="تازه های فیزیک اپ"
                         footer=""
                         model="products"
@@ -84,6 +88,7 @@ class Home extends React.Component {
                     }
 
                     <SingleRow
+                        className="hello"
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"

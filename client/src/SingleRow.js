@@ -12,13 +12,66 @@ import RequestCard from './RequestCard';
 import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
+import { Steps, Hints } from 'intro.js-react';
+import 'intro.js/introjs.css';
+import './index.css';
 
 export default (props) => {
 
     const [rows, setRows] = useState([]);
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
-
+    const [stepsEnabled, setStepsEnabled] = useState(true);
+    const [initialStep, setInitialStep] = useState(0);
+    
+    const [steps, setSteps] = useState([
+        {
+        element: '.hello',
+        intro: 'معرفی اول',
+        },
+        {
+        element: '.world',
+        intro: 'معرفی دوم',
+        },
+    ]);
+    const [hintsEnabled, setHintsEnabled] = useState(true);
+    const [hints, setHints] = useState([
+        {
+        element: '.hello',
+        hint: 'Hello hint',
+        hintPosition: 'middle-right',
+        }
+    ]);
+    const onExit = () => {
+        this.setState(() => ({ stepsEnabled: false }));
+      };
+      
+    const toggleSteps = () => {
+        this.setState(prevState => ({ stepsEnabled: !prevState.stepsEnabled }));
+      };
+    
+    const addStep = () => {
+        const newStep = {
+          element: '.alive',
+          intro: 'Alive step',
+        };
+    
+        this.setState(prevState => ({ steps: [...prevState.steps, newStep] }));
+      };
+    
+    const toggleHints = () => {
+        this.setState(prevState => ({ hintsEnabled: !prevState.hintsEnabled }));
+    };
+    
+     const addHint = () => {
+        const newHint = {
+          element: '.alive',
+          hint: 'Alive hint',
+          hintPosition: 'middle-right',
+        };
+    
+        this.setState(prevState => ({ hints: [...prevState.hints, newHint] }));
+      }
     useEffect(() => {
         const token = localStorage.getItem('token');
         fetch(process.env.REACT_APP_API_URL+`${props.model}?limit=${props.count}`, {
@@ -64,6 +117,17 @@ export default (props) => {
     }
     return (
         <React.Fragment>
+            <Steps
+                enabled={true}
+                steps={steps}
+                initialStep={initialStep}
+                // onExit={this.onExit}
+                />
+                <Hints
+                enabled={hintsEnabled}
+                hints={hints}
+                />
+
             <div 
                 style={{
                     display: 'block',
@@ -79,28 +143,6 @@ export default (props) => {
                 >
                 {props.label}
             </div>
-
-            {/* <div style={{ padding: `0 ${chevronWidth}px` }}>
-                <ItemsCarousel
-                    requestToChangeActive={setActiveItemIndex}
-                    activeItemIndex={activeItemIndex}
-                    numberOfCards={4}
-                    gutter={20}
-                    leftChevron={<button>{'<'}</button>}
-                    rightChevron={<button>{'>'}</button>}
-                    outsideChevron
-                    chevronWidth={chevronWidth}
-                >
-                    <div style={{ height: 200, background: '#EEE' }}>First card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Second card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Third card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Fourth card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>First card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Second card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Third card</div>
-                    <div style={{ height: 200, background: '#EEE' }}>Fourth card</div>
-                </ItemsCarousel>
-            </div> */}
 
                 <div style={{ padding: `0 ${chevronWidth}px` }}>
                     <ItemsCarousel
