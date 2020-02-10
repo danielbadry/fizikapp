@@ -283,29 +283,10 @@ class UserInteractionNode extends React.Component {
               onKeyPress={(event)=>this.sendByEnter(event)}
               margin="dense"
               placeholder="نظر شما چیست"
-              // type="text"
               ref={this.textInput}
-              // value={()=>this.getReplyMessage()}
               onChange={(e) => this.setReplyMessage(e)}
-              // fullWidth
-              // InputLabelProps={{
-              //   style: {
-              //     fontFamily: "IranSans",
-              //     fontSize:'12px'
-              //   }
-              // }}
-              // InputProps={{
-              //   style: {
-              //     fontFamily: "IranSans",
-              //     fontSize:'12px'
-              //   }
-              // }}
             />
-            {/* <input
-          type="button"
-          value="Focus the text input"
-          onClick={this.focusTextInput}
-        /> */}
+
             <Button 
               variant="contained" 
               onClick={()=>this.sendReplyToQuestion()}

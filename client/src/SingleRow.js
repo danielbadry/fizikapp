@@ -13,7 +13,7 @@ import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
 import { Steps, Hints } from 'intro.js-react';
-import 'intro.js/introjs.css';
+// import 'intro.js/introjs.css';
 import './index.css';
 
 export default (props) => {
@@ -22,7 +22,7 @@ export default (props) => {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
     const [stepsEnabled, setStepsEnabled] = useState(true);
-    const [initialStep, setInitialStep] = useState(0);
+    // const [initialStep, setInitialStep] = useState(0);
     
     const [steps, setSteps] = useState([
         {
@@ -118,9 +118,9 @@ export default (props) => {
     return (
         <React.Fragment>
             <Steps
-                enabled={true}
+                enabled={false}
                 steps={steps}
-                initialStep={initialStep}
+                // initialStep={initialStep}
                 // onExit={this.onExit}
                 />
                 <Hints
