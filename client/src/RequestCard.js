@@ -69,8 +69,8 @@ export default function RequestCars(props) {
               <Avatar 
                   aria-label="recipe" 
                   className={classes.avatar}
-                  src="https://material-ui.com/static/images/avatar/1.jpg"
-                  title="میلاد خان محمدی"
+                  src={props.item.userInfo.thumbnail}
+                  title="کاربرد درخواست دهنده"
                   >
                   R
               </Avatar>

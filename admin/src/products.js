@@ -58,7 +58,7 @@ const GetCategory = () => {
     return res;
 }
 
-const validateProductName = [required(), minLength(1), maxLength(30)];
+const validateProductName = [required(), minLength(1), maxLength(50)];
 const validateProductTitle = [required(), minLength(1), maxLength(100)];
 const validateProductDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 const validateProductCreation = (values) => {
@@ -235,7 +235,7 @@ export const ProductShow = (props) => (
                     </Typography>}
                     />
                 {/* <VideoPlayerField /> */}
-                <TextField source="data.summary.description" label={<Typography 
+                <RichTextField source="data.summary.description" label={<Typography 
                 style={{ 
                     fontFamily: 'IranSans' ,
                     fontSize: '13px',

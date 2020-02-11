@@ -33,7 +33,7 @@ import MyEditor  from './TextEditor';
 import Typography from '@material-ui/core/Typography';
 import Tiny  from './Tiny';
 
-const validateBeyondTheBookName = [required(), minLength(1), maxLength(30)];
+const validateBeyondTheBookName = [required(), minLength(1), maxLength(50)];
 const validateBeyondTheBookTitle = [required(), minLength(1), maxLength(100)];
 const validateBeyondTheBookDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 
@@ -133,7 +133,7 @@ export const BeyondthebooksShow = (props) => (
                 <TextField source="data.summary.title" label="title" />
                 <TextField source="data.summary.name" label="name" />
                 <VideoPlayerField />
-                <TextField source="data.summary.description" label="description" />
+                <RichTextField source="data.summary.description" label="description" />
                 <ArrayField source="data.summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />

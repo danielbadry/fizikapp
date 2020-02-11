@@ -32,7 +32,7 @@ import UploadComponent from './UploadComponent';
 import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
 import Tiny  from './Tiny';
-const validateExercisesName = [required(), minLength(1), maxLength(30)];
+const validateExercisesName = [required(), minLength(1), maxLength(50)];
 const validateExercisesTitle = [required(), minLength(1), maxLength(100)];
 const validateExercisesField = [required()];
 const validateExercisesReference = [required()];

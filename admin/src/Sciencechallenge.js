@@ -34,7 +34,7 @@ import ContentUserInteraction from "./ContentUserInteraction";
 import MyEditor  from './TextEditor';
 import Tiny  from './Tiny';
 
-const validateScienceChallengeName = [required(), minLength(1), maxLength(30)];
+const validateScienceChallengeName = [required(), minLength(1), maxLength(50)];
 const validateScienceChallengeTitle = [required(), minLength(1), maxLength(30)];
 const validateScienceChallengeDuration = [required(), minLength(1), maxLength(2000), minValue(1)];
 export const SciencechallengeCreate = (props) => (
@@ -122,7 +122,7 @@ export const SciencechallengeShow = (props) => (
                 <TextField source="summary.title" label="title" />
                 <TextField source="summary.name" label="name" />
                 <VideoPlayerField />
-                <TextField source="summary.description" label="description" />
+                <RichTextField source="summary.description" label="description" />
                 <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />

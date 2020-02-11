@@ -32,7 +32,7 @@ import ContentUserInteraction from "./ContentUserInteraction";
 import Tiny  from './Tiny';
 
 // const validateDefinitionName = [required(), minLength(1), maxLength(30)];
-const validateDefinitionTitle = [required(), minLength(1), maxLength(30)];
+const validateDefinitionTitle = [required(), minLength(1), maxLength(50)];
 
 export const DefinitionsCreate = (props) => (
     <Create {...props} >
@@ -102,7 +102,7 @@ export const DefinitionsShow = (props) => (
                 <Thumbnail source="thumbnail" label="thumbnail" />
                 <TextField source="summary.title" label="title" />
                 {/* <TextField source="summary.name" label="name" /> */}
-                <TextField source="summary.description" label="description" />
+                <RichTextField source="summary.description" label="description" />
                 <ArrayField source="summary.tagsArray" label="tags">
                     <SingleFieldList>
                         <ChipField source="name" />

@@ -106,13 +106,13 @@ class Home extends React.Component {
             
             <React.Fragment>
                 <Steps
-                    enabled={stepsEnabled}
+                    enabled={false}
                     steps={steps}
                     initialStep={initialStep}
                     onExit={this.onExit}
                     />
                     <Hints
-                    enabled={hintsEnabled}
+                    enabled={false}
                     hints={hints}
                     />
                  <Container>
