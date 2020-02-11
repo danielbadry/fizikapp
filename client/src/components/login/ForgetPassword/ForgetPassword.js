@@ -6,9 +6,6 @@ import ForgetPasswordStepper from './ForgetPasswordStepper';
 import Typography from '@material-ui/core/Typography';
 
 class ForgetPassword extends React.Component{
-	constructor(props) {
-		super(props);
-	}
 
 	componentDidMount() {
 

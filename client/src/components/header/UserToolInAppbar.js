@@ -50,7 +50,7 @@ class UserToolInAppbar extends React.Component {
                     <Typography 
                         color="textPrimary"
                         style={{
-                            color:'white',
+                            color:'inherit',
                             fontFamily:'IranSans_Light',
                             fontSize:'14px'
                         }}

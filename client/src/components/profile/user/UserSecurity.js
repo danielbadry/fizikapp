@@ -4,9 +4,6 @@ import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 
 class UserSecurity extends React.Component{
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <React.Fragment>

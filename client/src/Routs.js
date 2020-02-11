@@ -1,10 +1,11 @@
 import React from 'react';
-import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {HashRouter, Route } from "react-router-dom";
 import About from './components/About/About';
 import Home from './components/index/Home';
 import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp/SignUp';
 import ForgetPassword from './components/login/ForgetPassword/ForgetPassword';
+import Profile from './components/profile/Profile';
 // import Home from './MainContainer';
 /*
 import Requests from './Requests';
@@ -22,7 +23,7 @@ import Beyondthebook from './Beyondthebook';
 import Products from './Products';
 import Beyondthebooks from './Beyondthebooks';
 import Sciencechallenge from './Sciencechallenge';
-import Profile from './Profile';
+
 import Shoppingplans from './Shoppingplans';
 import Search from './Search';
 import Exercises from './Exercises';
@@ -111,6 +112,7 @@ class Routs extends React.Component {
                 <Route path="/signin" component={SignIn} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/forget-password" component={ForgetPassword} />
+                <Route path="/profile" component={Profile} />
                 {/*<Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
@@ -129,7 +131,7 @@ class Routs extends React.Component {
                 <Route path="/beyondthebook/:beyondthebookid" component={HandleBeyondthebook} />
                 <Route path="/products" component={Products} />
                 <Route path="/beyondthebooks" component={Beyondthebooks} />
-                <Route path="/profile" component={Profile} />
+                
                 <Route path="/search/:searchTerm" component={HandleSearch} />
                 <Route path="/exercises" component={Exercises} />
                 <Route path="/exercise/:exerciseid" component={HandleExercise} />

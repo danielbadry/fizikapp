@@ -1,9 +1,6 @@
 import React from 'react';
 import Routs from '../Routs';
-import { Link as RouterLink, HashRouter,
-	BrowserRouter as Router,
-	Route, Link, Redirect,
-	withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,12 +18,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Container from '@material-ui/core/Container';
-import ItemsCarousel from 'react-items-carousel';
+
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import UserToolInAppbar from './header/UserToolInAppbar';
 import clsx from 'clsx';
+//import Container from '@material-ui/core/Container';
+//import ItemsCarousel from 'react-items-carousel';
 //import StickyFooter from "./StickyFooter";
 //import RequestCard from "./RequestCard";
 //import SingleRow from "./SingleRow";
@@ -150,14 +148,6 @@ export default function MainContainer() {
 		}
 	}
 
-	function redirectToSearchPage (e) {
-		console.info(e.keyCode);
-		switch (e.keyCode) {
-			case 13 :
-				setIsGoToSearchProcess(true);
-		}
-	}
-
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -244,7 +234,7 @@ export default function MainContainer() {
 				</List>
         		<Divider />
 				<List>
-					{[, {'text':'خرید اشتراک', 'link':'/shopping-plans'}, {'text':'هدف ما', 'link':'/about'}].map((text, index) => (
+					{[ {'text':'خرید اشتراک', 'link':'/shopping-plans'}, {'text':'هدف ما', 'link':'/about'}].map((text, index) => (
 						<ListItem button key={index} component={Link} to={text.link}>
 							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
 							<ListItemText primary={<Typography style={{

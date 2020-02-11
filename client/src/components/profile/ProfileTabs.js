@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -7,10 +6,12 @@ import { withStyles } from "@material-ui/core/styles";
 import Badge from '@material-ui/core/Badge';
 import Inbox from './Inbox';
 import WatchedVideosList from './WatchedVideosList';
-import UserBasics from './UserBasics';
-import UserFinancialTab from './UserFinancialTab';
+import UserBasics from './user/UserBasics';
+import UserFinancialTab from './user/UserFinancialTab';
 import UserRequests from './UserRequests';
 import FavoriteVideos from './FavoriteVideos';
+
+//import ReactDOM from "react-dom";
 
 class ProfileTabs extends React.PureComponent {
   state = { activeIndex: 0 };

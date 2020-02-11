@@ -1,17 +1,9 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
+//import Paper from '@material-ui/core/Paper';
+
 class AdsPanel extends React.Component{
-	
-	constructor(props) {
-		super(props);
-	}
-
-	componentDidMount() {
-
-	}
-
 	render () {
 		return(
 			<Grid container spacing={3} justify="center">

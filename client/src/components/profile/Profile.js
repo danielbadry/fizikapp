@@ -1,14 +1,12 @@
 import React from 'react';
-import ProfileTabs from './ProfileTabs';
 import Grid from '@material-ui/core/Grid';
-import StickyFooter from "./StickyFooter";
+import StickyFooter from "../header/footer/StickyFooter";
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -16,11 +14,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import MessageIcon from '@material-ui/icons/Message';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import UserBasics from './UserBasics';
-import UserSecurity from './UserSecurity';
-import UserFinancialTab from './UserFinancialTab';
+import UserBasics from './user/UserBasics';
+import UserSecurity from './user/UserSecurity';
+import UserFinancialTab from './user/UserFinancialTab';
 import UserSciencechallenges from './UserSciencechallenges';
 import Dashboard from './Dashboard';
 import Inbox from './Inbox';
@@ -29,6 +25,11 @@ import FavoriteVideos from './FavoriteVideos';
 import UserRequests from './UserRequests';
 import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { func } from 'prop-types';
+
+//import ProfileTabs from './ProfileTabs';
+//import Divider from '@material-ui/core/Divider';
+//import InboxIcon from '@material-ui/icons/Inbox';
+//import DraftsIcon from '@material-ui/icons/Drafts';
 
 class Profile extends React.Component {
     

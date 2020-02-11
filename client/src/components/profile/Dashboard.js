@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import ChartExample1 from "./ChartExample1";
+import Chart_activity from "./Chart_activity";
 import { Typography } from '@material-ui/core';
 
 class Dashboard extends React.Component {
@@ -106,7 +106,7 @@ class Dashboard extends React.Component {
             </Grid>
             
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                <ChartExample1 />
+                <Chart_activity />
             </Grid>
         </React.Fragment>
         );
