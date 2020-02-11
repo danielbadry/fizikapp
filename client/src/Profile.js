@@ -29,13 +29,48 @@ import FavoriteVideos from './FavoriteVideos';
 import UserRequests from './UserRequests';
 import {HashRouter, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { func } from 'prop-types';
+import { Steps, Hints } from 'intro.js-react';
+import 'intro.js/introjs.css';
 
 class Profile extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            user : {}
+            user : {},
+            stepsEnabled: true,
+            initialStep: 0,
+            steps: [
+              {
+                element: '.invitehelp',
+                intro: 'دوستانی که دعوت کرده ای اینجا میبینی',
+              },
+              {
+                element: '.fpointhelp',
+                intro: 'تو این سایت میتونی امتیاز جمع کنیو منفعت هایی ازون کسب کنی',
+              },
+              {
+                element: '.sendinvitehelp',
+                intro: 'کافی است ایمیل دوستت رو اینجا وارد کنی اگه ثبت نام کرد تو اف پوینت میگیری',
+              },
+              {
+                element: '.inboxhelp',
+                intro: 'تمام پیام ها و اعلانات اینجا هستش',
+              },
+              {
+                element: '.generalhelp',
+                intro: 'اطلاعات عمومیت رو صحیح وارد کن واگه دوست داشتی یه عکس از خودت بذار',
+              },
+              
+            ],
+            hintsEnabled: true,
+            hints: [
+              {
+                element: '.hello',
+                hint: 'Hello hint',
+                hintPosition: 'middle-right',
+              }
+            ]
         }
     }
 
@@ -118,9 +153,19 @@ class Profile extends React.Component {
     }
 
     render() {
+        const { stepsEnabled, steps, initialStep, hintsEnabled, hints } = this.state;
         return (
             <React.Fragment>
-
+                <Steps
+                    enabled={stepsEnabled}
+                    steps={steps}
+                    initialStep={initialStep}
+                    onExit={this.onExit}
+                    />
+                    <Hints
+                    enabled={hintsEnabled}
+                    hints={hints}
+                    />
                 <Grid container spacing={2} justify="center">
 
                     <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
@@ -200,7 +245,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
+                                                primary={<Typography className="generalhelp" type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                             عمومی
                                                          </Typography>} />
                                         </ListItem>
@@ -248,7 +293,7 @@ class Profile extends React.Component {
                                                 }} />
                                             </ListItemIcon>
                                             <ListItemText 
-                                                primary={<Typography type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
+                                                primary={<Typography className="inboxhelp" type="body2" style={{ textAlign: 'right', fontFamily:'IranSans', fontSize:'13px' }}>
                                                         صندوق پیام
                                                         </Typography>} />
                                         </ListItem>

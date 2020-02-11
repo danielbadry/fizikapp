@@ -209,8 +209,15 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {[{'text':'صفحه اصلی آموزش','link':'/'}, {'text':'حل تست و تمرین','link':'/exercises'}, {'text':'تعریفی ها', 'link':'/definitions'}, {'text':'فراتر از کتاب','link':'/beyondthebooks'}, {'text':'چالش های علمی','link':'/sciencechallenges'}, {'text':'درخواست ها','link':'/requests'},].map((text, index) => (
-            <ListItem button key={index} component={Link} to={text.link}>
+          {[
+            {'text':'صفحه اصلی آموزش','link':'/'}, 
+            {'text':'حل تست و تمرین','link':'/exercises', 'classname':'exerciseshelp'}, 
+            {'text':'تعریفی ها', 'link':'/definitions', 'classname':'definitionshelp'}, 
+            {'text':'فراتر از کتاب','link':'/beyondthebooks', 'classname':'beyondhelp'}, 
+            {'text':'چالش های علمی','link':'/sciencechallenges', 'classname':'sciencechallengeshelp'}, 
+            {'text':'درخواست ها','link':'/requests', 'classname':'requestshelp'}
+          ].map((text, index) => (
+            <ListItem className={text.classname} button key={index} component={Link} to={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{
                 fontFamily: 'IranSans',
@@ -221,8 +228,11 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {[, {'text':'خرید اشتراک', 'link':'/shopping-plans'}, {'text':'هدف ما', 'link':'/about'}].map((text, index) => (
-            <ListItem button key={index} component={Link} to={text.link}>
+          {[
+            {'text':'خرید اشتراک', 'link':'/shopping-plans'}, 
+            {'text':'هدف ما', 'link':'/about', 'classname':'abouthelp'}
+          ].map((text, index) => (
+            <ListItem className={text.classname} button key={index} component={Link} to={text.link}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={<Typography style={{
                 fontFamily: 'IranSans',

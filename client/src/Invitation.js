@@ -49,7 +49,7 @@ class Invitation extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <div>لطفا ایمیل دوستتان را وارد کنید</div>
+                <div className="sendinvitehelp">لطفا ایمیل دوستتان را وارد کنید</div>
                 <TextField
                     margin="dense"
                     label="write your idea"

@@ -43,14 +43,16 @@ class Gerdali extends React.Component {
     render() {
         return(
             <div
+                className="gerdali"
                 style={{
                     // backgroundColor : 'orange'
                 }}
                 >
-                    
+                  {/* <h1 className="hello">Hello,</h1> */}
+        
                 {this.state.categories.map(
                     (item, index) => 
-                    <Link 
+                    <Link   
                             color="inherit"
                             style={{
                                 fontFamily: 'IranSans_Ultralight',

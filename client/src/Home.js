@@ -15,6 +15,8 @@ import Gerdali from "./Gerdali";
 import EnjoyHint from "./EnjoyHint";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { Steps, Hints } from 'intro.js-react';
+import 'intro.js/introjs.css';
 
 class Home extends React.Component {
 
@@ -23,9 +25,51 @@ class Home extends React.Component {
         this.state = {
             token : null,
             numberOfWatchedVideos : 0,
-        }
+            stepsEnabled: true,
+            initialStep: 0,
+            steps: [
+              {
+                element: '.gerdali',
+                intro: 'انتخاب کن کدوم میخوای در کدوم مقطع فیلم آموزشی ببینی',
+              },
+              {
+                element: '.exerciseshelp',
+                intro: 'حل تمامی تستهای 10 سال اخیر کنکور سراسری شامل رشته های ریاضی تجربی داخل و خارج کشور به تفکیک',
+              },
+              {
+                element: '.definitionshelp',
+                intro: 'شب امتحان میتونی به عنوان تمرین کاملترین منبع سوالات تعریفی و درک مطلب از اینجا استفاده کنی',
+              },
+              {
+                element: '.beyondhelp',
+                intro: 'اگر به فیزیک علاقه داری، اینجا موضوعات فراتر از کتاب درسی رو به بیانی ساده و جذاب توضیح دادیم',
+              },
+              {
+                element: '.sciencechallengeshelp',
+                intro: 'هر از گاهی ذهن با قراردادن معماهای جالب فیزیکی و احتمالا جایزه ای پشت بندش ذهن شما رو به چالش میکشیم',
+              },
+              {
+                element: '.requestshelp',
+                intro: 'هر سوالی مربوط به فیزیک داشتی از ما بپرس قول میدیم حداکثر تا یک روز بعدش جواب مناسب رو دریافت کنی',
+              },
+              {
+                element: '.abouthelp',
+                intro: 'میخوای بدونی چرا این سایت رو ساختیم',
+              },
+            ],
+            hintsEnabled: true,
+            hints: [
+              {
+                element: '.hello',
+                hint: 'Hello hint',
+                hintPosition: 'middle-right',
+              }
+            ]
+        };
     }
-
+    onExit = () => {
+        this.setState(() => ({ stepsEnabled: false }));
+      };
     componentDidMount() {
         let token = window.localStorage.getItem('token');
         // check if logged in user hase watched any video or not
@@ -61,14 +105,25 @@ class Home extends React.Component {
         return (
             
             <React.Fragment>
-                
+                <Steps
+                    enabled={stepsEnabled}
+                    steps={steps}
+                    initialStep={initialStep}
+                    onExit={this.onExit}
+                    />
+                    <Hints
+                    enabled={hintsEnabled}
+                    hints={hints}
+                    />
                  <Container>
-                    <AdsPanel />
+                    {/* <AdsPanel /> */}
                     {/* <NiceCard /> */}
-                    <Gerdali />
-                    <br />
+                    <Gerdali 
+                        
+                    />
+                   
                     <SingleRow
-                        className="hello"
+                        // className="hello"
                         label="تازه های فیزیک اپ"
                         footer=""
                         model="products"
@@ -88,7 +143,6 @@ class Home extends React.Component {
                     }
 
                     <SingleRow
-                        className="hello"
                         label="چالش های علمی"
                         footer="مشاهده بیشتر"
                         model="sciencechallenge"
@@ -118,7 +172,7 @@ class Home extends React.Component {
                         model="requests"
                         linkToShowMore='requests'
                         count='10'
-                    />
+                    /> 
 
              </Container>
              <StickyFooter />
