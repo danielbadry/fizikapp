@@ -3,10 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { createMuiTheme } from '@material-ui/core/styles';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import DoneIcon from '@material-ui/icons/Done';
-import MusicVideoIcon from '@material-ui/icons/MusicVideo';
 import './gerdali.css';
+
+//import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+//import DoneIcon from '@material-ui/icons/Done';
+//import MusicVideoIcon from '@material-ui/icons/MusicVideo';
 class Gerdali extends React.Component {
 	
 	constructor(props) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -6,9 +7,6 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { withSnackbar } from 'notistack';
 import Radio from '@material-ui/core/Radio';
@@ -17,19 +15,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Redirect } from "react-router-dom";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		width: '100%',
-	},
-	button: {
-		marginRight: theme.spacing(1),
-		fontFamily: 'IranSans'
-	},
-	instructions: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1),
-	},
-}));
+//import Select from '@material-ui/core/Select';
+//import InputLabel from '@material-ui/core/InputLabel';
+//import MenuItem from '@material-ui/core/MenuItem';
 
 function getSteps() {
 	return ['شماره تلفن','تایید کد','اطلاعات فردی'];
@@ -37,6 +25,25 @@ function getSteps() {
 }
 
 function HorizontalLinearStepper(props) {
+	const useStyles = makeStyles(theme => ({
+		root: {
+			width: '100%',
+		},
+		instructions: {
+			marginTop: theme.spacing(1),
+			marginBottom: theme.spacing(1),
+		},
+		container_buttons:{
+			display:"flex",
+			flexDirection:"column",
+			marginTop:theme.spacing(2),
+		},
+		button: {
+			fontFamily: 'IranSans',
+			fontSize: '14px',
+			marginBottom:theme.spacing(2),
+		},
+	}));
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [isSignupSuccess, setisSignupSuccess] = React.useState(false);
@@ -258,7 +265,7 @@ function HorizontalLinearStepper(props) {
 			}
 		});
 	}
-	const handleNext = () => {
+	/*const handleNext = () => {
 		let newSkipped = skipped;
 		if (isStepSkipped(activeStep)) {
 			newSkipped = new Set(newSkipped.values());
@@ -266,13 +273,8 @@ function HorizontalLinearStepper(props) {
 		}
 		setActiveStep(prevActiveStep => prevActiveStep + 1);
 		setSkipped(newSkipped);
-	};
-
-	const handleBack = () => {
-		setActiveStep(prevActiveStep => prevActiveStep - 1);
-	};
-
-	const handleSkip = () => {
+	};*/
+	/*const handleSkip = () => {
 		if (!isStepOptional(activeStep)) {
 			// You probably want to guard against something like this,
 			// it should never occur unless someone's actively trying to break something.
@@ -284,6 +286,10 @@ function HorizontalLinearStepper(props) {
 			newSkipped.add(activeStep);
 			return newSkipped;
 		});
+	};*/
+
+	const handleBack = () => {
+		setActiveStep(prevActiveStep => prevActiveStep - 1);
 	};
 
 	const handleReset = () => {
@@ -317,7 +323,7 @@ function HorizontalLinearStepper(props) {
 					);
 				})}
 			</Stepper>
-			<div>
+			<div className={classes.container_buttons}>
 				{
 					activeStep === steps.length ? (
 					<div>
@@ -333,8 +339,9 @@ function HorizontalLinearStepper(props) {
 						{/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
 						{
 							activeStep === 0 ? 
-							<Typography className={classes.instructions}>
+							<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 								<TextField
+								fullWidth
 								id="standard-phone"
 								label="شماره تلفن"
 								margin="normal"
@@ -354,12 +361,13 @@ function HorizontalLinearStepper(props) {
 								}
 								}}
 								/>
-							</Typography> : null
+							</Grid> : null
 						}
 						{
 							activeStep === 1 ? 
 							<Typography className={classes.instructions}>
 								<TextField
+									fullWidth
 									id="standard-verifycode"
 									label="کد تایید"
 									margin="normal"
@@ -388,6 +396,7 @@ function HorizontalLinearStepper(props) {
 								>
 								<div>
 									<TextField
+									fullWidth
 										id="standard-firstname"
 										label="نام"
 										margin="normal"
@@ -411,6 +420,7 @@ function HorizontalLinearStepper(props) {
 								</div>
 								<div>
 									<TextField
+									fullWidth
 									id="standard-lastname"
 									label="نام خانوادگی"
 									margin="normal"
@@ -431,6 +441,7 @@ function HorizontalLinearStepper(props) {
 								</div>
 								<div>
 									<TextField
+									fullWidth
 									id="standard-lastname"
 									label="کلمه ی عبور"
 									margin="normal"
@@ -452,6 +463,7 @@ function HorizontalLinearStepper(props) {
 								</div>
 								<div>
 									<TextField
+									fullWidth
 									id="standard-mobile"
 									onChange={saveMobileNumber}
 									label="موبایل"
@@ -539,7 +551,7 @@ function HorizontalLinearStepper(props) {
 								</div>
 							</React.Fragment> : null
 						}
-						<div>
+						<div className={classes.container_buttons}>
 							{activeStep === 1 ? 
 								<Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
 									تصحیح شماره تلفن
@@ -584,6 +596,12 @@ function HorizontalLinearStepper(props) {
 								</Button>
 								: null
 							} 
+							<Button
+							href="#signin"
+							className={classes.button}
+							>
+							حساب کاربری دارید؟ وارد شوید
+							</Button>
 						</div>
 					</div>
 				)}

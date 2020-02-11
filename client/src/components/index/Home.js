@@ -1,20 +1,20 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import StickyFooter from "../header/footer/StickyFooter";
 import AdsPanel from "./AdsPanel";
 import Gerdali from "./Gerdali/Gerdali";
 import SingleRow from "./SingleRow";
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 
+//import Grid from '@material-ui/core/Grid';
+//import Paper from '@material-ui/core/Paper';
 //import NiceCard from "./NiceCard";
 //import MainHeader from "./MainHeader";
 //import MainFooter from "./MainFooter";
 //import RequestCard from "./RequestCard";
 //import HeaderSlider from "../header/header/HeaderSlider";
 //import ReactTourGuideSlider from "./ReactTourGuideSlider";
+//import Typography from '@material-ui/core/Typography';
 class Home extends React.Component {
 	constructor(props) {
 		super(props);

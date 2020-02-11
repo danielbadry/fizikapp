@@ -3,11 +3,12 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import { Link as RouterLink } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Redirect } from "react-router-dom";
+
+//import Link from '@material-ui/core/Link';
+//import { Link as RouterLink } from 'react-router-dom';
 //import SignUpStepper from './SignUp/SignUpStepper';
 
 class SignIn extends React.Component{

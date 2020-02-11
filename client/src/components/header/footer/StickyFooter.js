@@ -1,11 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import LocalPhone from '@material-ui/icons/LocalPhone';
+
+//import Paper from '@material-ui/core/Paper';
+//import Container from '@material-ui/core/Container';
 
 class StickyFooter extends React.Component {
     constructor(props) {

@@ -2,10 +2,11 @@ import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
-import { AccountCircle } from '@material-ui/icons';
 import Divider from '@material-ui/core/Divider';
-import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+
+//import { AccountCircle } from '@material-ui/icons';
+//import { Link as RouterLink } from 'react-router-dom';
 
 export default function UserProfileMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,6 +43,7 @@ export default function UserProfileMenu(props) {
                   borderRadius: '50%',
                   width: '34px'
                 }}
+                alt={"حساب کاربری"}
                 />
             </IconButton>
             <Menu

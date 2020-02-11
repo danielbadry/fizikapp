@@ -4,13 +4,13 @@ import About from './components/About/About';
 import Home from './components/index/Home';
 import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp/SignUp';
-
+import ForgetPassword from './components/login/ForgetPassword/ForgetPassword';
 // import Home from './MainContainer';
 /*
 import Requests from './Requests';
 import NewRequest from './NewRequest';
 
-import ForgetPassword from './ForgetPassword';
+
 import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
@@ -110,6 +110,7 @@ class Routs extends React.Component {
                 <Route path="/about" component={About} />
                 <Route path="/signin" component={SignIn} />
                 <Route path="/signup" component={SignUp} />
+                <Route path="/forget-password" component={ForgetPassword} />
                 {/*<Route path="/requests" component={Requests} />
                 <Route path="/shopping-plans" component={Shoppingplans} />
                 <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
@@ -121,7 +122,7 @@ class Routs extends React.Component {
                 <Route path="/request/:requestid" component={HandleRequest} />
                 <Route path="/new-request" component={NewRequest} />
                 
-                <Route path="/forget-password" component={ForgetPassword} />
+                
                 <Route path="/categories" component={Categories} />
                 <Route path="/category/:categoryid" component={HandleCategory} />
                 <Route path="/product/:productid" component={HandleProduct} />
