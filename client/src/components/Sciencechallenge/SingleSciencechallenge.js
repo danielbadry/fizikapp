@@ -11,16 +11,15 @@ import {
     PlaybackRateMenuButton,
     VolumeMenuButton
   } from 'video-react';
-import "../node_modules/video-react/dist/video-react.css"; // import css
-import ContentUserInteraction from "./ContentUserInteraction";
-import MainHeader from "./MainHeader";
-import SocialShare from "./SocialShare";
+import "../other/video-react.css"; // import css
 import Grid from '@material-ui/core/Grid';
-import StickyFooter from "./StickyFooter";
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import ArticlesToolBox from "./ArticlesToolBox";
-
+import ContentUserInteraction from "../comments/ContentUserInteraction";
+import ArticlesToolBox from "../ArticlesToolBox";
+//import MainHeader from "./MainHeader";
+//import SocialShare from "./SocialShare";
+//import StickyFooter from "./StickyFooter";
 class SingleSciencechallenge extends React.Component{
 
     constructor(props) {

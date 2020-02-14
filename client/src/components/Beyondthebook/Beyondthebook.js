@@ -1,6 +1,6 @@
 import React from 'react';
-import StickyFooter from "./StickyFooter";
-import SingleSciencechallenge from "./SingleSciencechallenge";
+import StickyFooter from "../header/footer/StickyFooter";
+import SingleBeyondthebook from "./SingleBeyondthebook";
 import {Route} from "react-router-dom";
 
 class Product extends React.Component {
@@ -9,16 +9,16 @@ class Product extends React.Component {
         super(props);
     }
 
-    HandleSciencechallenge = ({ match }) => {
+    HandleBeyondthebook = ({ match }) => {
         return (
-            <SingleSciencechallenge match={match} />
+            <SingleBeyondthebook match={match} />
         );
     }
 
     render () {
         return (
             <React.Fragment>
-                <Route path={`/sciencechallenge/${this.props.match.params.sciencechallengeid}`} component={this.HandleSciencechallenge}/>
+                <Route path={`/beyondthebook/${this.props.match.params.beyondthebookid}`} component={this.HandleBeyondthebook}/>
                 <StickyFooter />
             </React.Fragment> 
 

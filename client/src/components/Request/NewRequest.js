@@ -1,8 +1,8 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
+//import MainHeader from "./MainHeader";
+import StickyFooter from "../header/footer/StickyFooter";
 
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';

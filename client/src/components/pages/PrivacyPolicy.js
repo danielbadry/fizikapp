@@ -1,9 +1,9 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
-import HeaderSlider from "./HeaderSlider";
+import StickyFooter from "../header/footer/StickyFooter";
+//import MainHeader from "./MainHeader";
+//import HeaderSlider from "./HeaderSlider";
 
 class PrivacyPolicy extends React.Component {
     render() {

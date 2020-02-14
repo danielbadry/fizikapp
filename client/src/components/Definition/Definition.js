@@ -1,5 +1,5 @@
 import React from 'react';
-import StickyFooter from "./StickyFooter";
+import StickyFooter from "../header/footer/StickyFooter";
 import SingleDefinition from "./SingleDefinition";
 import {Route} from "react-router-dom";
 

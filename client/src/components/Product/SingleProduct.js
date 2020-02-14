@@ -1,5 +1,4 @@
 import React from 'react';
-import RelatedProducts from "./RelatedProducts";
 import Typography from '@material-ui/core/Typography';
 import {
 	Player,
@@ -11,10 +10,7 @@ import {
 	PlaybackRateMenuButton,
 	VolumeMenuButton
   } from 'video-react';
-import ContentUserInteraction from "../comments/ContentUserInteraction";
-import QuizComponent from '../QuizComponent';
 import Grid from '@material-ui/core/Grid';
-import ArticlesToolBox from "../ArticlesToolBox";
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -36,7 +32,12 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { createMuiTheme } from '@material-ui/core/styles';
-import css from "./video-react.css"
+
+import ContentUserInteraction from "../comments/ContentUserInteraction";
+import RelatedProducts from "../RelatedProducts";
+import ArticlesToolBox from "../ArticlesToolBox";
+import QuizComponent from '../QuizComponent';
+import css from "../other/video-react.css"
 
 //import MainHeader from "./MainHeader";
 class SingleProduct extends React.Component {
@@ -432,212 +433,176 @@ class SingleProduct extends React.Component {
 									} 
 								</Grid>
 								<Grid item xs={12} sm={12} md={4} lg={4} xl={4} style={classes.div_main}>
-									{this.state.summary.name}
+									{(this.state.token && this.state.summary.userCanSeeVideo) ? 
+										<React.Fragment>
+											<Button
+											variant="contained"
+											color="primary"
+											size="small"
+											className={classes.button}
+											startIcon={<BookmarkIcon />}
+											style={classes.button_margin}
+											onClick={this.addToFavorites}
+											>
+											افزودن به علاقه مندی ها
+											</Button>
+											<Button
+											variant="contained"
+											color="primary"
+											size="small"
+											className={classes.button}
+											startIcon={<ReportProblemIcon />}
+											style={classes.button_margin}
+											onClick={this.addToFavorites}
+											>
+											گزارش خرابی
+											</Button>
+											<Dialog
+												open={this.state.reportDialog}
+												onClose={this.handleClose}
+												aria-labelledby="alert-dialog-title"
+												aria-describedby="alert-dialog-description"
+												style={{
+													direction: 'rtl'
+												}}
+											>
+												<DialogTitle id="alert-dialog-title">
+												<Typography
+													style = {{
+														fontFamily: 'IranSans_Light',
+														// fontWeight: 'bold',
+													}}
+													>
+													این ویدیو چه مشکلی دارد :
+												</Typography>
+												</DialogTitle>
+												<DialogContent>
+												<DialogContentText id="alert-dialog-description">
+												<FormControl 
+													component="fieldset" 
+													// className={classes.formControl}
+													>
+													{/* <FormLabel component="legend">Gender</FormLabel> */}
+													<RadioGroup 
+														aria-label="gender" 
+														name="gender1" 
+														value={this.state.reportValue} 
+														onChange={(event) => this.reportUse(event)}
+														>
+													<FormControlLabel 
+														value="r1" 
+														control={<Radio />} 
+														label={<Typography
+															style = {{
+																fontFamily: 'IranSans_Light',
+																fontSize: '14px',
+																color: 'black'
+															}}
+															>
+															ویدیو خراب است
+														</Typography>} 
+														/>
+													<FormControlLabel 
+														value="r2" 
+														control={<Radio />} 
+														label={<Typography
+															style = {{
+																fontFamily: 'IranSans_Light',
+																fontSize: '14px',
+																color: 'black'
+															}}
+															>
+															کیفیت بسیار پایینی دارد
+														</Typography>} 
+														/>
+													<FormControlLabel 
+														value="r3" 
+														control={<Radio />} 
+														label={<Typography
+															style = {{
+																fontFamily: 'IranSans_Light',
+																fontSize: '14px',
+																color: 'black'
+															}}
+															>
+															سایر
+														</Typography>}
+														/>
+													</RadioGroup>
+												</FormControl>
+												</DialogContentText>
+												</DialogContent>
+												<DialogActions>
+												<Button 
+													onClick={this.handleClose} 
+													color="primary"
+													style = {{
+														fontFamily: 'IranSans_Light',
+														// fontWeight: 'bold',
+													}}
+													>
+													لغو
+												</Button>
+												<Button 
+													onClick={this.handleClose} 
+													color="primary" 
+													autoFocus
+													style = {{
+														fontFamily: 'IranSans_Light',
+														// fontWeight: 'bold',
+													}}
+													>
+													ارسال
+												</Button>
+												</DialogActions>
+											</Dialog>
+										</React.Fragment>
+										:
+										null
+									}
 									<br/>
-									{/*
-										مناسب برای مقطع دوازدهم
+									<div style={classes.button_margin}>
+										{this.state.summary.name}
+										<br/>
+										{/*
+											مناسب برای مقطع دوازدهم
 
-										-----------------------
+											-----------------------
 
-										کارگردان ایمان ارقامی
+											کارگردان ایمان ارقامی
 
-										-----------------------
+											-----------------------
 
-										مدت زمان یک ساعت و چند دقیقه
+											مدت زمان یک ساعت و چند دقیقه
 
-										-----------------------
+											-----------------------
 
-										زیر نویس دارد
-									*/}
-									موضوع: {this.state.summary.title}
+											زیر نویس دارد
+										*/}
+										موضوع: {this.state.summary.title}
+
+										<hr/>
+										<QuizComponent
+											endFunc={this.catchMeHere}
+											model='products'
+											modelid={this.props.match.path.split('/')[2]}
+										/>
+									</div>
 								</Grid>
 							</Grid>
-						</Grid>
-						
-						<Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={classes.div_main}>
-							
-							{(this.state.token && this.state.summary.userCanSeeVideo) ? 
-								<Fab aria-label="like" style={classes.button_margin}
-									onClick={this.switchBetweenVideo}
-									title="نمایش فیلم"
-									>
-									<PlayCircleFilledIcon />
-								</Fab> :
-								null
-							}
-							{(this.state.token && this.state.summary.userCanSeeVideo) ? 
-								<React.Fragment>
-									<Button
-									variant="contained"
-									color="primary"
-									size="small"
-									className={classes.button}
-									startIcon={<BookmarkIcon />}
-									style={classes.button_margin}
-									onClick={this.addToFavorites}
-									>
-									افزودن به علاقه مندی ها
-									</Button>
-									
-									<Fab 
-										aria-label="like" 
-										style={classes.button_margin}
-										onClick={this.openReportDialog}
-										title="گزارش خرابی"
-										>
-										<ReportProblemIcon />
-									</Fab>
-									<Dialog
-										open={this.state.reportDialog}
-										onClose={this.handleClose}
-										aria-labelledby="alert-dialog-title"
-										aria-describedby="alert-dialog-description"
-										style={{
-											direction: 'rtl'
-										}}
-									>
-										<DialogTitle id="alert-dialog-title">
-										<Typography
-											style = {{
-												fontFamily: 'IranSans_Light',
-												// fontWeight: 'bold',
-											}}
-											>
-											این ویدیو چه مشکلی دارد :
-										</Typography>
-										</DialogTitle>
-										<DialogContent>
-										<DialogContentText id="alert-dialog-description">
-										<FormControl 
-											component="fieldset" 
-											// className={classes.formControl}
-											>
-											{/* <FormLabel component="legend">Gender</FormLabel> */}
-											<RadioGroup 
-												aria-label="gender" 
-												name="gender1" 
-												value={this.state.reportValue} 
-												onChange={(event) => this.reportUse(event)}
-												>
-											<FormControlLabel 
-												value="r1" 
-												control={<Radio />} 
-												label={<Typography
-													style = {{
-														fontFamily: 'IranSans_Light',
-														fontSize: '14px',
-														color: 'black'
-													}}
-													>
-													ویدیو خراب است
-												</Typography>} 
-												/>
-											<FormControlLabel 
-												value="r2" 
-												control={<Radio />} 
-												label={<Typography
-													style = {{
-														fontFamily: 'IranSans_Light',
-														fontSize: '14px',
-														color: 'black'
-													}}
-													>
-													کیفیت بسیار پایینی دارد
-												</Typography>} 
-												/>
-											<FormControlLabel 
-												value="r3" 
-												control={<Radio />} 
-												label={<Typography
-													style = {{
-														fontFamily: 'IranSans_Light',
-														fontSize: '14px',
-														color: 'black'
-													}}
-													>
-													سایر
-												</Typography>}
-												/>
-											</RadioGroup>
-										</FormControl>
-										</DialogContentText>
-										</DialogContent>
-										<DialogActions>
-										<Button 
-											onClick={this.handleClose} 
-											color="primary"
-											style = {{
-												fontFamily: 'IranSans_Light',
-												// fontWeight: 'bold',
-											}}
-											>
-											لغو
-										</Button>
-										<Button 
-											onClick={this.handleClose} 
-											color="primary" 
-											autoFocus
-											style = {{
-												fontFamily: 'IranSans_Light',
-												// fontWeight: 'bold',
-											}}
-											>
-											ارسال
-										</Button>
-										</DialogActions>
-									</Dialog>
-								</React.Fragment>
-								:
-								null
-							}
 						</Grid>
 					</Grid>
 				</Grid>
 				<Grid item xs={12}>
-					<QuizComponent
-						endFunc={this.catchMeHere}
-						model='products'
-						modelid={this.props.match.path.split('/')[2]}
-					/>
-					<ArticlesToolBox
-						model='products'
-						modelid={this.props}
-						token={this.state.token}
-					/>
-				</Grid>
-
-				<Grid container spacing={1} justify="center">
-					<Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
-						<Paper>
-							<div>{this.state.targetCatName}</div>
-							{
-							(this.state.isRender) ? 
-								this.Subjects(this.state.targetCatId)
-									: null
-							}
-						</Paper>
-					</Grid>
-				   
-				<Grid item xs={7}>
-					<Paper
+					<div
 						style = {{
 							fontFamily: 'IranSans_Light',
 							direction: 'rtl',
 							textAlign: 'justify',
-							padding: '3%',
 							// margin: '1%'
 						}}
 						>
-						<Typography
-							style = {{
-								fontFamily: 'IranSans_Light',
-								fontWeight: 'bold',
-								
-							}}
-							>
-							عنوان :
-						</Typography>
-						<Typography 
+						{ /*<Typography 
 							variant="span" 
 							gutterBottom
 							style={{ 
@@ -647,7 +612,7 @@ class SingleProduct extends React.Component {
 							}}
 							>
 							
-						</Typography>
+						</Typography>*/ }
 						<hr />
 						<Typography
 							style = {{
@@ -669,15 +634,26 @@ class SingleProduct extends React.Component {
 							>
 							<div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
 						</Typography>
-					</Paper>
+					</div>
 				</Grid>
-				
 				<Grid item xs={12}>
-				<ContentUserInteraction
-					config={this.state.userInteractionConfig}
-					modelid={this.props.match.path.split('/')[2]}
-					/>
+					<ContentUserInteraction
+						config={this.state.userInteractionConfig}
+						modelid={this.props.match.path.split('/')[2]}
+						style={{width:"100%"}}
+						/>
 				</Grid>
+				<Grid container spacing={1} justify="center">
+					<Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+						<Paper>
+							<div>{this.state.targetCatName}</div>
+							{
+							(this.state.isRender) ? 
+								this.Subjects(this.state.targetCatId)
+									: null
+							}
+						</Paper>
+					</Grid>
 				</Grid>
 			</Grid>
 		);

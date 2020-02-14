@@ -1,8 +1,5 @@
 import React from 'react';
-import ShoppingPlanCard from './ShoppingplanCard';
-import MainHeader from "./MainHeader";
 import Container from '@material-ui/core/Container';
-import StickyFooter from "./StickyFooter";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,7 +21,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import { blue } from '@material-ui/core/colors';
+import StickyFooter from "../header/footer/StickyFooter";
+import ShoppingPlanCard from './ShoppingplanCard';
 
+
+//import MainHeader from "./MainHeader";
 class Shoppingplans extends React.Component {
     
     constructor (props) {

@@ -1,6 +1,5 @@
 import React from 'react';
-import MainHeader from "./MainHeader";
-import RelatedProducts from "./RelatedProducts";
+import RelatedProducts from "../RelatedProducts";
 import Typography from '@material-ui/core/Typography';
 import {
     Player,
@@ -12,18 +11,29 @@ import {
     PlaybackRateMenuButton,
     VolumeMenuButton
   } from 'video-react';
-import "../node_modules/video-react/dist/video-react.css"; // import css
-import ContentUserInteraction from "./ContentUserInteraction";
-import QuizComponent from './QuizComponent';
+import css from "../other/video-react.css"
+import ContentUserInteraction from "../comments/ContentUserInteraction";
 import Grid from '@material-ui/core/Grid';
-import StickyFooter from "./StickyFooter";
-import ArticlesToolBox from "./ArticlesToolBox";
+import StickyFooter from "../header/footer/StickyFooter";
+import ArticlesToolBox from "../ArticlesToolBox";
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Chip from '@material-ui/core/Chip';
+import Editor from 'draft-js-plugins-editor'
+import { EditorState, convertFromRaw } from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
+import createMathjaxPlugin from 'draft-js-mathjax-plugin'
 
-class SingleBeyondthebook extends React.Component {
+//import MainHeader from "./MainHeader";
+//import QuizComponent from './QuizComponent';
+const mathjaxPlugin = createMathjaxPlugin(/* optional configuration object */)
+
+const plugins = [
+  mathjaxPlugin,
+]
+
+class SingleExercise extends React.Component {
     constructor(props, context){
         super(props, context);
         this.state = {
@@ -49,7 +59,8 @@ class SingleBeyondthebook extends React.Component {
                     label:'نظرات',
                     model:'beyondthebook'
                 }
-            ]
+            ],
+        //    editorState: EditorState.createWithContent(convertFromRaw(JSON.parse('{"blocks":[{"key":"1oi1h","text":"hello \t\t  is a formula","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":6,"length":2,"key":0}],"data":{}}],"entityMap":{"0":{"type":"INLINETEX","mutability":"IMMUTABLE","data":{"teX":"\\Delta = a + b","displaystyle":false}}}}'))),
         }
 
     };
@@ -68,7 +79,7 @@ class SingleBeyondthebook extends React.Component {
     }
 
     fetchProduct = (token) => {
-        fetch(process.env.REACT_APP_API_URL+`beyondthebooks/${this.props.match.path.split('/')[2]}`, {
+        fetch(process.env.REACT_APP_API_URL+`exercises/${this.props.match.path.split('/')[2]}`, {
             method: 'GET', 
             mode: 'cors',
             cache: 'no-cache',
@@ -82,8 +93,10 @@ class SingleBeyondthebook extends React.Component {
             })
             .then(response => response.json())
             .then(product => {
+                // console.info('aslesh', product.summary.description);
                 this.setState(function(state, props) {
                     return {
+                        // description : stateToHTML(convertFromRaw(JSON.parse('{"blocks":[{"key":"92op2","text":" \t\t ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":1,"length":2,"key":0}],"data":{}}],"entityMap":{"0":{"type":"INLINETEX","mutability":"IMMUTABLE","data":{"teX":"\\Delta = a + b","displaystyle":false}}}}'))),
                         summary: JSON.parse(JSON.stringify(product.data.summary)),
                         tags: JSON.parse(JSON.stringify(product.data.tags)),
                         thumbnail: product.data.thumbnail,
@@ -106,7 +119,7 @@ class SingleBeyondthebook extends React.Component {
         let data = {
             modelId: this.props.match.path.split('/')[2],
             startTime: player.currentTime,
-            model:'beyondthebooks'
+            model:'exercises'
         }
         fetch(process.env.REACT_APP_API_URL+`watchedvideos/setuserwatchstatus`, {
             method: 'POST', 
@@ -133,12 +146,14 @@ class SingleBeyondthebook extends React.Component {
           player: state,
           currentTime: state.currentTime
         });
-        window.localStorage.setItem('model', 'beyondthebooks');
+        window.localStorage.setItem('model', 'exercises');
         window.localStorage.setItem('modelId', this.props.match.path.split('/')[2]);
         window.localStorage.setItem('currentTime', this.state.currentTime);
       }
 
     componentDidMount(){
+        
+        // console.info('mohtava:', stateToHTML(convertFromRaw(JSON.parse('{"blocks":[{"key":"5994h","text":"hello","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}'))));
         const token = localStorage.getItem('token');
         this.setState(function(state, props) {
             return {
@@ -156,6 +171,7 @@ class SingleBeyondthebook extends React.Component {
     }
 
     render() {
+        var newContentState = convertFromRaw(JSON.parse('{"blocks":[{"key":"5994h","text":"hello","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}'));
         return (
                 <Grid container spacing={0}>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} 
@@ -351,7 +367,7 @@ class SingleBeyondthebook extends React.Component {
                             modelid={this.props.productid}
                         /> */}
                         <ArticlesToolBox
-                            model='beyondthebooks'
+                            model='exercises'
                             modelid={this.props}
                             token={this.state.token}
                             />
@@ -413,8 +429,17 @@ class SingleBeyondthebook extends React.Component {
                                     lineHeight: '1.8rem'
                                 }}
                                 >
-                                    <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
-                                {/* {this.state.summary.description} */}
+                                    {/* <Editor
+                                        editorState={this.state.editorState}
+                                        readOnly='true'
+                                        plugins={plugins}
+                                        onChange={()=>EditorState.createWithContent(convertFromRaw(JSON.parse('{"blocks":[{"key":"5994h","text":"سلام","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}')))}
+                                        textAlignment = 'right'
+                                        placeholder = 'زیر این نوشته کلیک کنید و شروع به نوشتن متن و فرمول کنید'
+                                        /> */}
+                                {/* <div dangerouslySetInnerHTML={{__html:this.state.description}} />  */}
+                                <div dangerouslySetInnerHTML={{__html: this.state.summary.description}} />
+                                {/* {stateToHTML(convertFromRaw(JSON.parse(this.state.summary.description)))} */}
                             </Typography>
                         </Paper>
                     </Grid>
@@ -432,4 +457,4 @@ class SingleBeyondthebook extends React.Component {
         );
     }
 }
-export default SingleBeyondthebook;
+export default SingleExercise;

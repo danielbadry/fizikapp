@@ -6,7 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import StickyFooter from "./StickyFooter";
+import StickyFooter from "../header/footer/StickyFooter";
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import Card from '@material-ui/core/Card';

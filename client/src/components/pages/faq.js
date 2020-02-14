@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-import StickyFooter from "./StickyFooter";
+import StickyFooter from "../header/footer/StickyFooter";
 //import HeaderSlider from "./HeaderSlider";
 //import MainHeader from "./MainHeader";
 class Faq extends React.Component {

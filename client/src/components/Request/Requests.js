@@ -1,8 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import MainHeader from "./MainHeader";
-import StickyFooter from "./StickyFooter";
+import StickyFooter from "../header/footer/StickyFooter"; 
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
@@ -17,6 +16,10 @@ import { Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
+
+
+//import MainHeader from "./MainHeader";
+
 
 class Requests extends React.Component {
     constructor (props) {

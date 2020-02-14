@@ -1,11 +1,11 @@
 import React from 'react';
-import ContentUserInteraction from "./ContentUserInteraction";
-import StickyFooter from "./StickyFooter";
+import ContentUserInteraction from "../comments/ContentUserInteraction";
+import StickyFooter from "../header/footer/StickyFooter";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
-import ArticlesToolBox from "./ArticlesToolBox";
+import ArticlesToolBox from "../ArticlesToolBox";
 import Tree2 from "./Tree2";
 import SimpleTreeView from "./SimpleTreeView";
 
