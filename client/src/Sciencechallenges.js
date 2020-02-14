@@ -151,7 +151,7 @@ class Sciencechallenges extends React.Component {
                                 key={index}
                                 >
                                 <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src={request.thumbnail} />
+                                <Avatar alt="Cindy Baker" src={request.data.thumbnail} />
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={
@@ -159,7 +159,7 @@ class Sciencechallenges extends React.Component {
                                             component={RouterLink} 
                                             to={`/sciencechallenge/${request.id}`}
                                             >
-                                    {request.title}
+                                    {request.data.summary.title}
                                 </Link>}
                                 secondary={
                                     <React.Fragment>
@@ -172,7 +172,7 @@ class Sciencechallenges extends React.Component {
                                             ali
                                         </Link> */}
                                     </Typography>
-                                    {request.description}
+                                    {request.data.summary.description}
                                     </React.Fragment>
                                 }
                                 />
