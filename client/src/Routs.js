@@ -6,7 +6,13 @@ import SignIn from './components/login/SignIn';
 import SignUp from './components/login/SignUp/SignUp';
 import ForgetPassword from './components/login/ForgetPassword/ForgetPassword';
 import Profile from './components/profile/Profile';
+import Category from './components/Categories/Category';
+import Product from './components/Product/Product';
+
+
 // import Home from './MainContainer';
+//import Products from './components/Product/Products';
+
 /*
 import Requests from './Requests';
 import NewRequest from './NewRequest';
@@ -16,11 +22,10 @@ import ShopResult from './ShopResult';
 import Request from './Request';
 import Definition from './Definition';
 import Sciencechallenges from './Sciencechallenges';
-import Categories from './Categories';
-import Category from './Category';
-import Product from './Product';
+
+
 import Beyondthebook from './Beyondthebook';
-import Products from './Products';
+
 import Beyondthebooks from './Beyondthebooks';
 import Sciencechallenge from './Sciencechallenge';
 
@@ -39,112 +44,114 @@ import TermsConditions from './TermsConditions';
 import PurchasefromMobile from './PurchasefromMobile';*/
 
 /*function HandleRequest({ match }) {
-    return (
-        <Request 
-            requestid={match.params.requestid}
-            />
-    );
+	return (
+		<Request 
+			requestid={match.params.requestid}
+			/>
+	);
 }
 
 function HandleDefinition({ match }) {
-    return (
-        <Definition match={match} />
-    );
+	return (
+		<Definition match={match} />
+	);
 }
 
 function HandleExercise({ match }) {
-    return (
-        <Exercise match={match} />
-    );
+	return (
+		<Exercise match={match} />
+	);
 }
 
 function HandlePurchasefromMobile({ match }) {
-    return (
-        <PurchasefromMobile match={match} />
-    );
+	return (
+		<PurchasefromMobile match={match} />
+	);
 }
 
 function HandleShopResult({ match }) {
-    return (
-        <ShopResult
-            />
-    );
+	return (
+		<ShopResult
+			/>
+	);
 }
 
 function HandleCategory({ match }) {
-    return (
-        <Category match={match} />
-    );
+	return (
+		<Category match={match} />
+	);
 }
 
 function HandleSearch({ match }) {
-    return (
-        <Search 
-            searchTerm={match.params.searchTerm}
-            />
-    );
+	return (
+		<Search 
+			searchTerm={match.params.searchTerm}
+			/>
+	);
 }
   
 function HandleProduct({ match }) {
-    return (
-        <Product match={match} />
-    );
+	return (
+		<Product match={match} />
+	);
 }
 
 function HandleBeyondthebook({ match }) {
-    return (
-        <Beyondthebook match={match} />
-    );
+	return (
+		<Beyondthebook match={match} />
+	);
 }
 
 function HandleSciencechallenge({ match }) {
-    return (
-        <Sciencechallenge match={match} />
-    );
+	return (
+		<Sciencechallenge match={match} />
+	);
 }*/
   
 class Routs extends React.Component {
-    render() {
-        return (
-            <HashRouter>
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/signin" component={SignIn} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/forget-password" component={ForgetPassword} />
-                <Route path="/profile" component={Profile} />
-                {/*<Route path="/requests" component={Requests} />
-                <Route path="/shopping-plans" component={Shoppingplans} />
-                <Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
-                <Route path="/shop-result" component={HandleShopResult} />
-                <Route path="/definitions" component={Definitions} />
-                <Route path="/definition/:definitionid" component={HandleDefinition} />
-                <Route path="/sciencechallenges" component={Sciencechallenges} />
-                <Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
-                <Route path="/request/:requestid" component={HandleRequest} />
-                <Route path="/new-request" component={NewRequest} />
-                
-                
-                <Route path="/categories" component={Categories} />
-                <Route path="/category/:categoryid" component={HandleCategory} />
-                <Route path="/product/:productid" component={HandleProduct} />
-                <Route path="/beyondthebook/:beyondthebookid" component={HandleBeyondthebook} />
-                <Route path="/products" component={Products} />
-                <Route path="/beyondthebooks" component={Beyondthebooks} />
-                
-                <Route path="/search/:searchTerm" component={HandleSearch} />
-                <Route path="/exercises" component={Exercises} />
-                <Route path="/exercise/:exerciseid" component={HandleExercise} />
-                <Route path="/learning-playground" component={LearningPlayground} />
-                <Route path="/faq" component={Faq} />
-                <Route path="/contact-us" component={ContactUs} />
-                <Route path="/privacy-policy" component={PrivacyPolicy} />
-                <Route path="/disclaimer" component={Disclaimer} />
-                <Route path="/careers" component={Careers} />
-                <Route path="/terms-conditions" component={TermsConditions} />*/ }
-            </HashRouter>
-        );
-    }
+	render() {
+		return (
+			<HashRouter>
+				<Route exact path="/" component={Home} />
+				<Route path="/about" component={About} />
+				<Route path="/signin" component={SignIn} />
+				<Route path="/signup" component={SignUp} />
+				<Route path="/forget-password" component={ForgetPassword} />
+				<Route path="/profile" component={Profile} />
+				<Route path="/category/:categoryid" component={Category} />
+				<Route path="/product/:productid" component={Product} />
+				{/*<Route path="/requests" component={Requests} />
+				<Route path="/shopping-plans" component={Shoppingplans} />
+				<Route path="/shoppingplans/purchasefrommobile/:shoppingplanid" component={HandlePurchasefromMobile} />
+				<Route path="/shop-result" component={HandleShopResult} />
+				<Route path="/definitions" component={Definitions} />
+				<Route path="/definition/:definitionid" component={HandleDefinition} />
+				<Route path="/sciencechallenges" component={Sciencechallenges} />
+				<Route path="/sciencechallenge/:sciencechallengeid" component={HandleSciencechallenge} />
+				<Route path="/request/:requestid" component={HandleRequest} />
+				<Route path="/new-request" component={NewRequest} />
+				
+				
+				
+				
+				<Route path="/beyondthebook/:beyondthebookid" component={HandleBeyondthebook} />
+				
+				<Route path="/beyondthebooks" component={Beyondthebooks} />
+				
+				<Route path="/search/:searchTerm" component={HandleSearch} />
+				<Route path="/exercises" component={Exercises} />
+				<Route path="/exercise/:exerciseid" component={HandleExercise} />
+				<Route path="/learning-playground" component={LearningPlayground} />
+				<Route path="/faq" component={Faq} />
+				<Route path="/contact-us" component={ContactUs} />
+				<Route path="/privacy-policy" component={PrivacyPolicy} />
+				<Route path="/disclaimer" component={Disclaimer} />
+				<Route path="/careers" component={Careers} />
+				<Route path="/terms-conditions" component={TermsConditions} />
+				<Route path="/products" component={Products} />*/ }
+			</HashRouter>
+		);
+	}
 }
 
 export default Routs;

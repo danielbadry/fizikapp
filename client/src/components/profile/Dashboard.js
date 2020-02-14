@@ -62,7 +62,6 @@ class Dashboard extends React.Component {
             
         <React.Fragment>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                <Paper>
                 <Typography
                     style={{
                         fontFamily:'IranSans'
@@ -70,11 +69,6 @@ class Dashboard extends React.Component {
                     >
                     تعداد دعوت شده ها 
                 </Typography>
-                </Paper> 
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                <Paper>
                 <Typography
                     style={{
                         fontFamily:'IranSans'
@@ -82,27 +76,6 @@ class Dashboard extends React.Component {
                     >
                     تعداد اف پوینت شما {this.state.userinfo.fCoin} است 
                 </Typography>
-                </Paper>
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                <Paper>
-                    <div
-                    style={{
-                        fontFamily:'IranSans'
-                    }}
-                     >اشتراک کنونی به صورت</div>
-                    <Typography
-                        style={{
-                            fontFamily:'IranSans'
-                        }}
-                        >
-                    {this.state.myPlan.map(
-                        (item, index) => 
-                        <div>{item.shoppingPlanName}</div>
-                    )}
-                    </Typography>
-                </Paper>
             </Grid>
             
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
