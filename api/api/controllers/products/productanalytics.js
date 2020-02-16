@@ -35,10 +35,13 @@ module.exports = {
         type: 'dislike'
       });
 
-      product.views = views.length;
-      product.likes = likes.length;
-      product.dislikes = dislikes.length;
+      // product.views = views.length;
+      // product.likes = likes.length;
+      // product.dislikes = dislikes.length;
 
+      product.views = Math.round(Math.random() * 10);
+      product.likes = Math.round(Math.random() * 10);
+      product.dislikes = Math.round(Math.random() * 10);
     }
 
     return products;

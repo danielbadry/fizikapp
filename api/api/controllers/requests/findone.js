@@ -23,12 +23,12 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
+    
     let request = await Requests.findOne({
       id: inputs.id,
       isDeleted : false
     });
-    
+
     let user = await Users.find({
       where : {
         id: request.userId,
@@ -37,9 +37,9 @@ module.exports = {
     });
 
     request.userInfo = user[0];
-    request.thumbnail = sails.config.custom.apiUrl + "files/usersImage/" + request.userInfo.thumbnail;
+    request.thumbnail = sails.config.custom.apiUrl + 'files/usersImage/' + request.userInfo.thumbnail;
     request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
-    request.isResponsed = true;  
+    request.isResponsed = true;
     moment.locale('en');
     request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');
     moment.locale('fa');
@@ -61,15 +61,19 @@ module.exports = {
       requestUserAnswer.userInfo.url = 'http://localhost:3000/#/users/' + requestUserAnswer.userInfo.id + '/show';
       requestUserAnswer.thumbnail = sails.config.custom.apiUrl + 'files/usersImage/' + requestUserAnswer.userInfo.thumbnail;
     }
-    
+
     // fetch admin answer
     request.adminAnswer = await Requests.find({
       isDeleted: false,
       parentId: inputs.id,
       userId: null
     });
-    request.isAuthenticated= true;
-    return request;
+    let finalData = {};
+    finalData.dataLength = request.length;
+    finalData.data = request;
+    finalData.errorMessage = null;
+    finalData.auth= true;
+    return finalData;
   }
 
 

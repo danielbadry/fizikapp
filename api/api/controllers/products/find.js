@@ -40,6 +40,7 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    // return 'milad khan 2';
     let finalData = {};
     let tagsArray = [];
     let dataLength = await Products.find();

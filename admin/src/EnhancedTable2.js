@@ -289,8 +289,8 @@ export default function EnhancedTable() {
         return response.json();
     })
     .then((myJson) => {
-        let primes = myJson.Categories.concat(myJson.Products);
-        setRows(primes);
+        // let primes = myJson.Categories.concat(myJson.Products);
+        setRows(myJson.data);
     })
     .catch((e) => {
         

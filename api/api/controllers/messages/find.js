@@ -41,7 +41,6 @@ module.exports = {
         let userId = decodedToken.id;
         let messages = await Messages.find({
           userId: userId,
-          isRead: false
         });
         for (message of messages) {
           moment.locale('en');

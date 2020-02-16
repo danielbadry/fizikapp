@@ -91,7 +91,7 @@ module.exports = {
           // tempObj2.id = summary.id;
           tempObj2.summary = summary;
           tempObj2.thumbnail = summary.thumbnail;
-          // tempObj2.isUserAnswered = isUserAnswered;
+          tempObj2.isUserAnswered = isUserAnswered;
           finalProducts.push(tempObj2);
 
           return ({

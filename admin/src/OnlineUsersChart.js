@@ -98,13 +98,29 @@ class OnlineUsersChart extends React.Component {
     });
     
     setInterval(() => {
-      let value = Math.round(Math.random() * 100);
-      label.text = value + "%";
-      let animation = new am4core.Animation(hand, {
-        property: "value",
-        to: value
-      }, 1000, am4core.ease.cubicOut).start();
-    }, 2000);
+      let token = window.localStorage.getItem('token');
+      fetch(process.env.REACT_APP_API_URL+`/users/listofonlinesinpercent`, {
+        method: 'GET', 
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        redirect: 'follow',
+        referrer: 'no-referrer',
+        })
+        .then(response => response.json())
+        .then(result => {
+          let value = result.data;
+          label.text = value + "%";
+          let animation = new am4core.Animation(hand, {
+            property: "value",
+            to: value
+          }, 1000, am4core.ease.cubicOut).start();
+        });
+    }, 5000);
   }
 
   componentWillUnmount() {

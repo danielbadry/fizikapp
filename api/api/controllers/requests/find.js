@@ -122,14 +122,15 @@ module.exports = {
     allRequests = requestWithNoResponse.concat(requestWithResponse);
     // return allRequests;
       for (let request of allRequests) {
-        let user = await Users.find ({
+        let user = await Users.findOne ({
           where : {
             id : request.userId
           }
         });
-        request.userInfo = user[0];
+        user.thumbnail = sails.config.custom.apiUrl + "/files/usersImage/" + user.thumbnail;
+        request.userInfo = user;
         request.userInfo.fullName = request.userInfo.firstName + ' ' + request.userInfo.lastName;
-        request.thumbnail = "http://localhost:1337/files/usersImage/" + request.userInfo.thumbnail;
+        // request.thumbnail = "http://localhost:1337/files/usersImage/" + request.userInfo.thumbnail;
           
         moment.locale('en');
         request.jalaaliCreatedDate = momentJalaali(request.createdAt, 'YYYY-M-D HH:mm:ss').format('jYYYY/jM/jD HH:mm:ss');

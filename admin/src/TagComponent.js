@@ -13,10 +13,10 @@ class TagForm extends React.Component {
   }
 
   componentDidMount () {
-    console.info('propp:', eval('this.props.record.data.summary' + this.props.default));
-    this.setState({
-      defualtValue : eval('this.props.record.data.summary' + this.props.default)
-    });
+    // console.info('propp:', eval('this.props.record.data.summary' + this.props.default));
+    // this.setState({
+    //   defualtValue : eval('this.props.record.data.summary' + this.props.default)
+    // });
     let finalList = [];
     let tempObj = {};
     fetch(process.env.REACT_APP_API_URL+'/tags', { method: 'GET', headers: {}})
@@ -58,7 +58,7 @@ class TagForm extends React.Component {
           onChange={handleSubmit} 
           component={ReduxFormSelect} 
           options={this.state.tags}
-          pishfarz={this.state.defualtValue}
+          // pishfarz={this.state.defualtValue}
           />
       </React.Fragment>
     );

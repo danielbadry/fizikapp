@@ -15,6 +15,11 @@ module.exports = {
       required : false
     },
     
+    isOnline :{
+      type: 'boolean',
+      required : false
+    },
+    
     lastName :{
       type: 'string',
       required : false
@@ -54,7 +59,8 @@ module.exports = {
             firstName : inputs.firstName,
             lastName : inputs.lastName,
             email : inputs.email,
-            thumbnail : inputs.thumbnail
+            thumbnail : inputs.thumbnail,
+            isOnline : inputs.isOnline
           });
           // return updatedUser;
           finalData.dataLength = 1;
