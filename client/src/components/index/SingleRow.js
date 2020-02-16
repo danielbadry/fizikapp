@@ -12,7 +12,7 @@ import RequestCard from '../Request/RequestCard';
 import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 import IconButton from '@material-ui/core/IconButton';
-import './index.css';
+//import './index.css';
 
 export default (props) => {
 
