@@ -12,7 +12,9 @@ import Request from './components/Request/Request';
 import Requests from './components/Request/Requests';
 import NewRequest from './components/Request/NewRequest';
 import Definition from './components/Definition/Definition';
+import Definitions from './components/Definition/Definitions';
 import Beyondthebook from './components/Beyondthebook/Beyondthebook';
+import Beyondthebooks from './components/Beyondthebook/Beyondthebooks';
 import Exercises from './components/Exercise/Exercises';
 import Exercise from './components/Exercise/Exercise';
 import Sciencechallenges from './components/Sciencechallenge/Sciencechallenges';
@@ -29,10 +31,9 @@ import PurchasefromMobile from './components/pages/PurchasefromMobile';
 import Disclaimer from './components/pages/Disclaimer';
 import Careers from './components/pages/Careers';
 
-
 // import Home from './MainContainer';
-//import Definitions from './Definitions';
-//import Beyondthebooks from './Beyondthebooks';
+//
+//
 
 /*function HandleRequest({ match }) {
 	return (
@@ -122,7 +123,9 @@ class Routs extends React.Component {
 				<Route path="/request/:requestid" component={Request} />
 				<Route path="/new-request" component={NewRequest} />
 				<Route path="/definition/:definitionid" component={Definition} />
+				<Route path="/definitions" component={Definitions} />
 				<Route path="/beyondthebook/:beyondthebookid" component={Beyondthebook} />
+				<Route path="/beyondthebooks" component={Beyondthebooks} />
 				<Route path="/exercises" component={Exercises} />
 				<Route path="/exercise/:exerciseid" component={Exercise} />
 				<Route path="/sciencechallenges" component={Sciencechallenges} />

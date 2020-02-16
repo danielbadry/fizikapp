@@ -1,16 +1,15 @@
 import React from 'react';
-import StickyFooter from "./StickyFooter";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import Tree2 from "./Tree2";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import StickyFooter from "../header/footer/StickyFooter";
+import Tree2 from "./Tree2";
 class Category extends React.Component{
     
     constructor(props) {
