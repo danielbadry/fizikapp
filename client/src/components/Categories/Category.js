@@ -49,9 +49,9 @@ class Category extends React.Component{
 		.then(result => {
 			this.setState((state, props) => {
 				return ({
-					categories: result.Categories,
-					baseCatId: result.Categories[0].id,
-					baseCatName: result.Categories[0].name,
+					categories: result.data,
+					baseCatId: result.data[0].id,
+					baseCatName: result.data[0].name,
 				});
 			}, () => {
 				this.setState({isRender: true}, () => {

@@ -151,14 +151,8 @@ module.exports = {
       }
       else
       {tempObj.tagsArray = [];}
-      let quizs = await Quizes.find({
-        where : {
-          modelId: tempObj.id
-        }
-      });
-      tempObj.hasQuiz = false;
-      if (quizs.length)
-      {tempObj.hasQuiz = true;}
+      
+      // return allRequests;
       tempObj2.id = allRequests[i].id;
       tempObj2.data = {};
       tempObj2.data.summary = tempObj;
