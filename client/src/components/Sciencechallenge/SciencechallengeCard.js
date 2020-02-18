@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ThumbUp from '@material-ui/icons/ThumbUp';
@@ -16,11 +16,6 @@ import Link from '@material-ui/core/Link';
 //import ThumbDown from '@material-ui/icons/ThumbDown';
 //import Visibility from '@material-ui/icons/Visibility';
 
-const useStyles = makeStyles({
-	card: {
-		maxWidth: 345,
-	},
-});
 
 class SciencechallengeCard extends React.Component {
 
@@ -29,9 +24,19 @@ constructor(props) {
 }
 
 render() {
+	const theme = createMuiTheme();
+	const classes = {
+		card: {
+		maxWidth: 345,
+		},
+		padding_style:{
+			paddingLeft: theme.spacing(1),
+			paddingRight: theme.spacing(1),
+		}
+	}
 	return (
 		<React.Fragment>
-			<Link component={RouterLink}  to={`sciencechallenge/${this.props.item.id}`} underline="none" >
+			<div style={classes.padding_style} >
 				<Paper
 				style={{
 				background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
@@ -71,26 +76,28 @@ render() {
 					</div>
 
 				</Paper>
-				<Typography style={{
-				fontFamily: 'IranSans_Bold',
-				color: '#000',
-				direction: 'rtl',
-				fontSize: "15px",
-				maxHeight: "4rem",
-				marginTop: "10px",
-				marginBottom: "5px"}}>
-				{this.props.item.data.summary.name}
-				</Typography>
+				<Link component={RouterLink}  to={`sciencechallenge/${this.props.item.id}`} underline="none" >
+					<Typography style={{
+					fontFamily: 'IranSans_Bold',
+					color: '#000',
+					direction: 'rtl',
+					fontSize: "15px",
+					maxHeight: "4rem",
+					marginTop: "10px",
+					marginBottom: "5px"}}>
+					{this.props.item.data.summary.name}
+					</Typography>
 
-				<Typography style={{
-				fontFamily: 'IranSans_UltraLight',
-				color: '#606060',
-				direction: 'rtl',
-				fontSize: '14px'
-				}}>
-				{this.props.item.data.summary.title}
-				</Typography>
-			</Link>
+					<Typography style={{
+					fontFamily: 'IranSans_UltraLight',
+					color: '#606060',
+					direction: 'rtl',
+					fontSize: '14px'
+					}}>
+					{this.props.item.data.summary.title}
+					</Typography>
+				</Link>
+			</div>
 		</React.Fragment>
     
 		);

@@ -17,14 +17,14 @@ import "../../assets/slick/slick.css";
 import "../../assets/slick/slick-theme.css";
 //import './index.css';
 var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay : true,
-    autoplaySpeed : 3000,
-    pauseOnHover : true
+	dots: false,
+	infinite: true,
+	speed: 500,
+	slidesToShow: 4,
+	slidesToScroll: 1,
+	autoplay : true,
+	autoplaySpeed : 3000,
+	pauseOnHover : true
   };
 export default (props) => {
 
@@ -76,7 +76,7 @@ export default (props) => {
 		return <div>hichi</div>;
 	}
 	return (
-        
+		
 		<React.Fragment>
 			<div 
 				style={{
@@ -93,18 +93,16 @@ export default (props) => {
 				>
 				{props.label}
 			</div>
-            <Slider {...settings}>
-                {rows.map(
-                    (item,index) => 
-                        <div 
-                            key={index}
-                        >
-                            <SelectCorrectCard style={{marginLeft:"15px"}} modelType={props.model} item={item} key={index} />
-                        </div>
-                )}
-                
-                
-            </Slider>
+			<Slider {...settings}>
+				{rows.map(
+					(item,index) => 
+						<div 
+							key={index}
+						>
+							<SelectCorrectCard style={{marginLeft:"15px"}} modelType={props.model} item={item} key={index} />
+						</div>
+				)}
+			</Slider>
 			{/* <div style={{ padding: `0 ${chevronWidth}px` }}>
 				<ItemsCarousel
 					requestToChangeActive={setActiveItemIndex}

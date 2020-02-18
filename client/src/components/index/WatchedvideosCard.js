@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ThumbUp from '@material-ui/icons/ThumbUp';
@@ -52,8 +52,19 @@ componentDidMount() {
   this.setState({targetUrl: targetUrl});
 }
 render() {
+  const theme = createMuiTheme();
+  const classes = {
+    card: {
+    maxWidth: 345,
+    },
+    padding_style:{
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    }
+  }
   return (
     <React.Fragment>
+    <div style={classes.padding_style} >
       <Link
         component={RouterLink} 
         to={`${this.state.targetUrl}/${this.props.item.modelId}`}>
@@ -62,7 +73,7 @@ render() {
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,
           height:'142px',
           backgroundSize: "cover",
-          width: '253px',
+          width: '100%',
           position: 'relative',
           borderRadius:0
         }}
@@ -128,6 +139,7 @@ render() {
         </div>
         <div
           style={{
+            bottom: '-15px',
             position: 'absolute',
             backgroundColor:'#0000004d',
             width: '100%',
@@ -135,6 +147,7 @@ render() {
         >
           <div
             style={{
+              bottom: '0',
               position: 'absolute',
               backgroundColor:'red',
               width: `${this.props.item.percent}%`,
@@ -145,6 +158,7 @@ render() {
         </div>
       </Paper>
       </Link>
+    </div>
     </React.Fragment>
     
   );
