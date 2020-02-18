@@ -35,6 +35,7 @@ render() {
 				<Paper
 				style={{
 				background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
+				backgroundSize: "cover",
 				height:'142px',
 				width: '100%',
 				position: 'relative',
@@ -71,15 +72,13 @@ render() {
 
 				</Paper>
 				<Typography style={{
-				fontFamily: 'IranSans',
+				fontFamily: 'IranSans_Bold',
 				color: '#000',
 				direction: 'rtl',
-				fontSize: "1.4rem",
-				lineHeight: "2rem",
+				fontSize: "15px",
 				maxHeight: "4rem",
 				marginTop: "10px",
-				marginBottom: "5px"
-				}}>
+				marginBottom: "5px"}}>
 				{this.props.item.data.summary.name}
 				</Typography>
 

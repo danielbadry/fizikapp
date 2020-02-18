@@ -61,6 +61,7 @@ render() {
         style={{
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.thumbnail})`,
           height:'142px',
+          backgroundSize: "cover",
           width: '253px',
           position: 'relative',
           borderRadius:0

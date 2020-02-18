@@ -35,6 +35,7 @@ render() {
 				<Paper
 				style={{
 				background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${this.props.item.data.thumbnail})`,
+				backgroundSize: "cover",
 				height:'142px',
 				width: '100%',
 				position: 'relative',
