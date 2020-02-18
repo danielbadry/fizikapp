@@ -16,7 +16,16 @@ import IconButton from '@material-ui/core/IconButton';
 import "../../assets/slick/slick.css";
 import "../../assets/slick/slick-theme.css";
 //import './index.css';
-
+var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay : true,
+    autoplaySpeed : 3000,
+    pauseOnHover : true
+  };
 export default (props) => {
 
 	const [rows, setRows] = useState([]);
@@ -67,6 +76,7 @@ export default (props) => {
 		return <div>hichi</div>;
 	}
 	return (
+        
 		<React.Fragment>
 			<div 
 				style={{
@@ -83,7 +93,18 @@ export default (props) => {
 				>
 				{props.label}
 			</div>
-
+            <Slider {...settings}>
+                {rows.map(
+                    (item,index) => 
+                        <div 
+                            key={index}
+                        >
+                            <SelectCorrectCard style={{marginLeft:"15px"}} modelType={props.model} item={item} key={index} />
+                        </div>
+                )}
+                
+                
+            </Slider>
 			{/* <div style={{ padding: `0 ${chevronWidth}px` }}>
 				<ItemsCarousel
 					requestToChangeActive={setActiveItemIndex}
@@ -106,7 +127,7 @@ export default (props) => {
 				</ItemsCarousel>
 			</div> */}
 
-				<div style={{ padding:0}}>
+				{/* <div style={{ padding:0}}>
 					<Slider 
 						dots={ false }
 						infinite={ true }
@@ -125,21 +146,21 @@ export default (props) => {
 						rightChevron={<IconButton aria-label="delete"><RightIcon /></IconButton>}
 						outsideChevron
 						chevronWidth={chevronWidth} */ }
-						{rows.map(
+						{/*</React.Fragment>{rows.map(
 							(item, index) => 
 								<SelectCorrectCard style={{marginLeft:"15px"}} modelType={props.model} item={item} key={index} />
 						)}
 						
 					</Slider>
-				</div>
+				</div> */}
 
-			<Link 
+			{/* <Link 
 				component={RouterLink} 
 				to={props.linkToShowMore}
 				style={{ fontFamily: 'IranSans_Light' }}
 				>
 				{props.footer}
-			</Link>
+			</Link> */}
 			
 		</React.Fragment>
 	)

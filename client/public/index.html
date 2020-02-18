@@ -91,121 +91,121 @@
 	var appUrl = "https://fizik.app/api";
   // var appUrl = "http://localhost:1337";
 	var token = window.localStorage.getItem('token');
-	setInterval(function() { 
-		fetch(`${appUrl}/users/setonlineoffline`, {
-            method: 'POST', 
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            // body: JSON.stringify({token:token}),
-            })
-            .then(response => response.json())
-            .then(result => {
+// 	setInterval(function() { 
+// 		fetch(`${appUrl}/users/setonlineoffline`, {
+//             method: 'POST', 
+//             mode: 'cors',
+//             cache: 'no-cache',
+//             credentials: 'same-origin',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'authorization': `Bearer ${token}`,
+//             },
+//             redirect: 'follow',
+//             referrer: 'no-referrer',
+//             // body: JSON.stringify({token:token}),
+//             })
+//             .then(response => response.json())
+//             .then(result => {
                 
-            });
-  }, 5000);
-window.onload = window.onunload = function analytics(event) {
-	let data = {
-		token: window.localStorage.getItem("token"),
-	}
-	fetch(`${appUrl}/users/setuseroffline`, {
-		method: 'POST',
-		mode: 'cors',
-		cache: 'no-cache',
-		credentials: 'same-origin',
-		headers: {
-		  'Content-Type': 'application/json',
-		  'authorization': `Bearer ${token}`,
-		},
-		redirect: 'follow',
-		referrer: 'no-referrer',
-		// body: JSON.stringify(data),
-	}).then(response => response.json())
-	.then( result => {} );
-	/******************************************/
-	let urlData = window.location.hash.split('/');
-	if(urlData.length === 3 && urlData[1] === 'product' && urlData[2].length === 24) {
-		const token = localStorage.getItem('token');
-		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
-		// Create the data to send
-		let data = {
-			modelId: urlData[2],
-			startTime: window.localStorage.getItem("currentTime"),
-			model:'products'
-		}
-		fetch(url, {
-			method: 'POST', 
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-			'Content-Type': 'application/json',
-			'authorization': `Bearer ${token}`,
-			},
-			redirect: 'follow',
-			referrer: 'no-referrer',
-			body: JSON.stringify(data),
-		})
-		.then(response => response.json())
-		.then(result => {});
-	}
-	if(urlData.length === 3 && urlData[1] === 'sciencechallenge' && urlData[2].length === 24){
-		const token = localStorage.getItem('token');
-		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
+//             });
+//   }, 5000);
+// window.onload = window.onunload = function analytics(event) {
+// 	let data = {
+// 		token: window.localStorage.getItem("token"),
+// 	}
+// 	fetch(`${appUrl}/users/setuseroffline`, {
+// 		method: 'POST',
+// 		mode: 'cors',
+// 		cache: 'no-cache',
+// 		credentials: 'same-origin',
+// 		headers: {
+// 		  'Content-Type': 'application/json',
+// 		  'authorization': `Bearer ${token}`,
+// 		},
+// 		redirect: 'follow',
+// 		referrer: 'no-referrer',
+// 		// body: JSON.stringify(data),
+// 	}).then(response => response.json())
+// 	.then( result => {} );
+// 	/******************************************/
+// 	let urlData = window.location.hash.split('/');
+// 	if(urlData.length === 3 && urlData[1] === 'product' && urlData[2].length === 24) {
+// 		const token = localStorage.getItem('token');
+// 		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
+// 		// Create the data to send
+// 		let data = {
+// 			modelId: urlData[2],
+// 			startTime: window.localStorage.getItem("currentTime"),
+// 			model:'products'
+// 		}
+// 		fetch(url, {
+// 			method: 'POST', 
+// 			mode: 'cors',
+// 			cache: 'no-cache',
+// 			credentials: 'same-origin',
+// 			headers: {
+// 			'Content-Type': 'application/json',
+// 			'authorization': `Bearer ${token}`,
+// 			},
+// 			redirect: 'follow',
+// 			referrer: 'no-referrer',
+// 			body: JSON.stringify(data),
+// 		})
+// 		.then(response => response.json())
+// 		.then(result => {});
+// 	}
+// 	if(urlData.length === 3 && urlData[1] === 'sciencechallenge' && urlData[2].length === 24){
+// 		const token = localStorage.getItem('token');
+// 		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
 
-		// Create the data to send
-		let data = {
-			modelId: urlData[2],
-			startTime: window.localStorage.getItem("currentTime"),
-			model:'sciencechallenges'
-		}
-		fetch(url, {
-			method: 'POST', 
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-			'Content-Type': 'application/json',
-			'authorization': `Bearer ${token}`,
-			},
-			redirect: 'follow',
-			referrer: 'no-referrer',
-			body: JSON.stringify(data),
-		}).then(response => response.json())
-		.then(result => {});
-	}
-	if(urlData.length === 3 && urlData[1] === 'beyondthebook' && urlData[2].length === 24) {
-		const token = localStorage.getItem('token');
-		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
-		// Create the data to send
-		let data = {
-			modelId: urlData[2],
-			startTime: window.localStorage.getItem("currentTime"),
-			model:'beyondthebooks'
-		}
-		fetch(url, {
-			method: 'POST', 
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-			'Content-Type': 'application/json',
-			'authorization': `Bearer ${token}`,
-			},
-			redirect: 'follow',
-			referrer: 'no-referrer',
-			body: JSON.stringify(data),
-		})
-		.then(response => response.json())
-		.then(result => {
+// 		// Create the data to send
+// 		let data = {
+// 			modelId: urlData[2],
+// 			startTime: window.localStorage.getItem("currentTime"),
+// 			model:'sciencechallenges'
+// 		}
+// 		fetch(url, {
+// 			method: 'POST', 
+// 			mode: 'cors',
+// 			cache: 'no-cache',
+// 			credentials: 'same-origin',
+// 			headers: {
+// 			'Content-Type': 'application/json',
+// 			'authorization': `Bearer ${token}`,
+// 			},
+// 			redirect: 'follow',
+// 			referrer: 'no-referrer',
+// 			body: JSON.stringify(data),
+// 		}).then(response => response.json())
+// 		.then(result => {});
+// 	}
+// 	if(urlData.length === 3 && urlData[1] === 'beyondthebook' && urlData[2].length === 24) {
+// 		const token = localStorage.getItem('token');
+// 		var url = `${appUrl}/watchedvideos/setuserwatchstatus`;
+// 		// Create the data to send
+// 		let data = {
+// 			modelId: urlData[2],
+// 			startTime: window.localStorage.getItem("currentTime"),
+// 			model:'beyondthebooks'
+// 		}
+// 		fetch(url, {
+// 			method: 'POST', 
+// 			mode: 'cors',
+// 			cache: 'no-cache',
+// 			credentials: 'same-origin',
+// 			headers: {
+// 			'Content-Type': 'application/json',
+// 			'authorization': `Bearer ${token}`,
+// 			},
+// 			redirect: 'follow',
+// 			referrer: 'no-referrer',
+// 			body: JSON.stringify(data),
+// 		})
+// 		.then(response => response.json())
+// 		.then(result => {
 
-		});
-	}
-};
+// 		});
+// 	}
+// };
 </script>

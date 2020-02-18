@@ -88,7 +88,7 @@ class Home extends React.Component {
 						model="sciencechallenge"
 						linkToShowMore='sciencechallenges'
 						count='10'
-					/> 
+					/>  
 					{/* <SingleRow
 						label="تعریفی ها"
 						footer="مشاهده بیشتر"
