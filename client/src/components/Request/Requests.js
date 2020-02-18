@@ -16,7 +16,8 @@ import { Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
-
+import Icon from '@material-ui/core/Icon';
+import AddIcon from '@material-ui/icons/Add';
 
 //import MainHeader from "./MainHeader";
 
@@ -118,40 +119,30 @@ class Requests extends React.Component {
     }
 
     render() {
-        
+        const mystyle = {
+            fontFamily: "IranSans"
+          };
         return (
-            <Grid container spacing={3}>
-                  
-                    {/* <Grid item xs={12}>
-                        <TextField
-                            id="standard-message"
-                            label="فیلتر"
-                            // className={classes.textField}
-                            // value={this.state.message}
-                            onChange={this.handleChange('message')}
-                            margin="normal"
-                            InputLabelProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                            InputProps={{
-                                style: {
-                                    fontFamily: "IranSans"
-                                }
-                            }}
-                        />
-                    </Grid> */}
+            <Grid 
+                container 
+                spacing={3}
+                style={mystyle}
+                >
                     <Grid item xs={12}>
-                    <Button 
-                        href="#/new-request"
+                    <Button
                         variant="contained"
+                        color="primary"
+                        size="large"
+                        href="#/new-request"
                         style={{
-                            fontFamily: "IranSans"
+                            fontFamily: "IranSans",
+                            fontSize : '14px'
                           }}
-                        >
-                        ارسال درخواست
+                        startIcon={<AddIcon />}
+                    >
+                    &nbsp; درخواست جدید
                     </Button>
+                    
                     </Grid>
                     
                     <Grid item xs={12}>
@@ -179,15 +170,30 @@ class Requests extends React.Component {
                     
                     <Grid item xs={12}>
                         <Paper>
-                        <List>    
+                        <List
+                        style={{
+                            direction: 'rtl',
+                            padding : '8px'
+                        }}
+                        >    
                             {this.state.requests.map(
                             (request, index) => 
                             <ListItem 
                                 alignItems="flex-start"
                                 key={index}
+                                style={{
+                                    textAlign: 'right',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                    borderRadius: '6px',
+                                    width: '100%',
+                                    marginBottom: '7px'
+                                }}
                                 >
                                 <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                                <Avatar 
+                                    alt="Cindy Baker" 
+                                    src={request.userInfo.thumbnail}
+                                    />
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={
@@ -195,8 +201,17 @@ class Requests extends React.Component {
                                             component={RouterLink} 
                                             to={`/request/${request.id}`}
                                             >
-                                    {request.title}
-                                </Link>}
+                                                <Typography
+                                                    style={{
+                                                        fontFamily : 'IranSans',
+                                                        color: 'black',
+                                                        fontSize: '14px'
+                                                    }}
+                                                >
+                                                
+                                                {request.title}
+                                                </Typography>
+                                            </Link>}
                                 secondary={
                                     <React.Fragment>
                                     <Typography
@@ -204,11 +219,14 @@ class Requests extends React.Component {
                                         variant="body2"
                                         color="textPrimary"
                                     >
-                                        <Link component={RouterLink} to={'https://google.com'}>
-                                            {request.userInfo.fullName}
-                                        </Link>
+                                        <Typography
+                                            style={{
+                                                fontFamily : 'IranSans',
+                                                color: '#626262',
+                                                fontSize: '12px'
+                                            }}
+                                        >{request.userInfo.fullName}</Typography>
                                     </Typography>
-                                    {' — Do you have Paris recommendations? Have you ever…'}
                                     </React.Fragment>
                                 }
                                 />

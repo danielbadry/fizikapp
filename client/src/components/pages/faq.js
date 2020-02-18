@@ -41,7 +41,10 @@ class Faq extends React.Component {
 						fontFamily: 'IranSans_Light',
 					}}
 					>
-						<ul>
+						<ul style={{
+							lineHeight: '32px',
+							textAlign: 'justify'
+						}}>
 							<li>
 								<span style={{ fontWeight: 'bold', }} >
 									چرا سفارشم دو مرسوله شده است؟

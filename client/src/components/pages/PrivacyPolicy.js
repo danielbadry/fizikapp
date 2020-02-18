@@ -47,7 +47,8 @@ class PrivacyPolicy extends React.Component {
                             direction: 'rtl',
                             fontFamily: 'IranSans_Light',
                             padding: '3%',
-                            textAlign: 'justify'
+                            textAlign: 'justify',
+                            lineHeight : '28px'
                         }}
                         >
                             <p>

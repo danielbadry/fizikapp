@@ -9,7 +9,11 @@ class Disclaimer extends React.Component {
         
         return (
             <div>
-                <Grid container spacing={0}>
+                <Grid 
+                    container 
+                    spacing={0}
+                    
+                    >
                    
                     <Grid 
                         item
@@ -46,7 +50,8 @@ class Disclaimer extends React.Component {
                             direction: 'rtl',
                             fontFamily: 'IranSans_Light',
                             padding:'20px',
-                            textAlign:'justify'
+                            textAlign:'justify',
+                            lineHeight : '28px'
                         }}
                         >
                         <p>

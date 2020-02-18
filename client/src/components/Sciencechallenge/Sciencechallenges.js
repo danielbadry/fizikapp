@@ -16,6 +16,11 @@ import { Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 
 //import MainHeader from "./MainHeader";
 class Sciencechallenges extends React.Component {
@@ -143,40 +148,121 @@ class Sciencechallenges extends React.Component {
                     
                     <Grid item xs={12}>
                         <Paper>
-                        <List>    
+                        <List
+                        style={{
+                            direction: 'rtl',
+                            padding : '8px',
+                            display: 'flex',
+                            flexFlow: 'row-reverse wrap',
+                            justifyContent: 'center'
+                        }}
+                        >    
                             {this.state.requests.map(
-                            (request, index) => 
-                            <ListItem 
-                                alignItems="flex-start"
-                                key={index}
-                                >
-                                <ListItemAvatar>
-                                <Avatar alt="Cindy Baker" src={request.data.thumbnail} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={
-                                        <Link 
-                                            component={RouterLink} 
-                                            to={`/sciencechallenge/${request.id}`}
-                                            >
-                                    {request.data.summary.title}
-                                </Link>}
-                                secondary={
-                                    <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                    >
-                                        {/* <Link>
-                                            ali
-                                        </Link> */}
-                                    </Typography>
-                                    {request.data.summary.description}
-                                    </React.Fragment>
-                                }
-                                />
-                            </ListItem>
+                            (sciencechallenge, index) => 
+                            <Card
+                                        component="a"
+                                        href={`#/sciencechallenge/${sciencechallenge.id}`}
+                                        key={index}
+                                        style={{
+                                            direction:'rtl',
+                                            margin: '1rem',
+                                            width : '300px'
+                                        }}
+                                        >
+                                        <CardActionArea>
+                                            <CardMedia
+                                                image={sciencechallenge.data.summary.thumbnail}
+                                                title="Contemplative Reptile"
+                                                style={{
+                                                    height:'120px'
+                                                }}
+                                                />
+                                            <CardContent>
+                                            <Typography 
+                                                gutterBottom 
+                                                variant="h6" 
+                                                component="h2"
+                                                style={{
+                                                    fontFamily:'IranSans',
+                                                    fontSize:'14px'
+                                                }}
+                                                >
+                                                {sciencechallenge.data.summary.name}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {sciencechallenge.data.summary.title}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {sciencechallenge.data.summary.year}
+                                            </Typography>
+                                            <Typography 
+                                                variant="body2" 
+                                                color="textSecondary" 
+                                                component="p"
+                                                style={{
+                                                    fontFamily:'IranSans'
+                                                }}
+                                                >
+                                                {sciencechallenge.data.summary.field}
+                                            </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        {/* <CardActions>
+                                            
+                                        </CardActions> */}
+                                    </Card>
+                            // <ListItem 
+                            //     alignItems="flex-start"
+                            //     key={index}
+                            //     style={{
+                            //         textAlign: 'right',
+                            //         backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                            //         borderRadius: '6px',
+                            //         width: '100%',
+                            //         marginBottom: '7px'
+                            //     }}
+                            //     >
+                            //     <ListItemAvatar>
+                            //     <Avatar alt="Cindy Baker" src={request.data.thumbnail} />
+                            //     </ListItemAvatar>
+                            //     <ListItemText
+                            //         primary={
+                            //             <Link 
+                            //                 component={RouterLink} 
+                            //                 to={`/sciencechallenge/${request.id}`}
+                            //                 >
+                            //         {request.data.summary.title}
+                            //     </Link>}
+                            //     secondary={
+                            //         <React.Fragment>
+                            //         <Typography
+                            //             component="span"
+                            //             variant="body2"
+                            //             color="textPrimary"
+                            //         >
+                            //             {/* <Link>
+                            //                 ali
+                            //             </Link> */}
+                            //         </Typography>
+                            //         {request.data.summary.description}
+                            //         </React.Fragment>
+                            //     }
+                            //     />
+                            // </ListItem>
                             )}
                             </List>
                         </Paper>

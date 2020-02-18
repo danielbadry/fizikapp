@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 //import MainHeader from "./MainHeader";
 import StickyFooter from "../header/footer/StickyFooter";
 
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import RequestTag from './RequestTag';
 
@@ -69,12 +69,32 @@ class NewRequest extends React.Component {
             currency: 'EUR',
           };
         return (
-            <Grid container spacing={3}>
+            <Grid 
+                container 
+                spacing={3} 
+                alignContent="center" 
+                alignItems="center"
+                style={{
+                    direction: 'rtl'
+                }}
+                >
                
-                <Grid item xs={12}>
-                    <Paper>
+                <Grid item xs={12} sm={12} md={10} lg={10} xl={10} >
+                    <Paper
+                    style={{
+                        direction : 'rtl'
+                    }}
+                    >
                     <form noValidate autoComplete="off">
-                        
+                        <Typography
+                        style={{
+                            fontFamily: 'IranSans',
+                            paddingTop: '1%',
+                            paddingRight : '1%'
+                        }}
+                        >
+                            لطفا درخواست خود را در فرم زیر وارد نمایید
+                        </Typography>
                         <TextField
                             id="standard-name"
                             label="عنوان"
@@ -83,12 +103,14 @@ class NewRequest extends React.Component {
                             margin="normal"
                             InputLabelProps={{
                                 style: {
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    fontSize: '14px'
                                 }
                             }}
                             InputProps={{
                                 style: {
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    fontSize: '14px'
                                 }
                             }}
                         />
@@ -102,12 +124,14 @@ class NewRequest extends React.Component {
                             fullWidth
                             InputLabelProps={{
                                 style: {
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    fontSize: '14px'
                                 }
                             }}
                             InputProps={{
                                 style: {
-                                    fontFamily: "IranSans"
+                                    fontFamily: "IranSans",
+                                    fontSize: '14px'
                                 }
                             }}
                         />

@@ -7,6 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import StickyFooter from "../header/footer/StickyFooter";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import SendIcon from '@material-ui/icons/Send';
+import Typography from '@material-ui/core/Typography';
 
 class ContactUs extends React.Component {
     
@@ -103,7 +107,31 @@ class ContactUs extends React.Component {
         
         return (
             <React.Fragment>
-
+              <Grid 
+                container 
+                spacing={3} 
+                alignContent="center" 
+                alignItems="center"
+                style={{
+                    direction: 'rtl'
+                }}
+                >
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    <Paper
+                    style={{
+                        direction : 'rtl',
+                        paddingRight: '1%'
+                    }}
+                    >
+                      <br />
+                      <Typography
+                        style={{
+                          fontFamily: 'IranSans'
+                        }}
+                      >
+                        دانش آموزان گرامی نظرات خود را با ما در میان بگذارید
+                      </Typography>
+                    <form noValidate autoComplete="off">
                 <TextField
                     id="standard-fullname"
                     label="نام و نام خانوادگی"
@@ -112,7 +140,8 @@ class ContactUs extends React.Component {
                     disabled = {this.state.existingUser ? true : false}
                     onChange={this.handleChange('fullName')}
                     style={{
-                      fontFamily: "IranSans"
+                      fontFamily: "IranSans",
+                      display : 'block'
                     }}
                     InputProps={{
                       style: {
@@ -136,7 +165,8 @@ class ContactUs extends React.Component {
                     margin="normal"
                     onChange={this.handleChange('mobile')}
                     style={{
-                      fontFamily: "IranSans"
+                      fontFamily: "IranSans",
+                      display : 'block'
                     }}
                     InputProps={{
                       style: {
@@ -160,7 +190,8 @@ class ContactUs extends React.Component {
                     disabled = {this.state.existingUser ? true : false}
                     onChange={this.handleChange('email')}
                     style={{
-                      fontFamily: "IranSans"
+                      fontFamily: "IranSans",
+                      display : 'block'
                     }}
                     InputProps={{
                       style: {
@@ -176,43 +207,75 @@ class ContactUs extends React.Component {
                     }}
                 />
 
-                <FormControl>
-                    <InputLabel id="demo-simple-select-label">دسته بندی مرتبط را انتخاب کنید</InputLabel>
+                <FormControl style={{
+                  direction: 'rtl'
+                }}>
+                    <InputLabel 
+                      id="demo-simple-select-label"
+                      >
+                        دسته بندی مرتبط را انتخاب کنید
+                      </InputLabel>
                     <Select
+                    MenuProps={{ style: { direction: 'rtl' } }}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={1}
                         onChange={this.handleChange('type')}
                         >
-                        <MenuItem value={1}>خرید یا فعال سازی اشتراک</MenuItem>
-                        <MenuItem value={2}>مشکلات حساب کاربری</MenuItem>
-                        <MenuItem value={3}>مشکل در تماشای فیلم</MenuItem>
-                        <MenuItem value={4}>موارد محتوایی</MenuItem>
-                        <MenuItem value={5}>سایر موضوعات</MenuItem>
-                        <MenuItem value={6}>درخواست همکاری</MenuItem>
-                        <MenuItem value={7}>پیشنهاد یا انتقاد</MenuItem>
+                        <MenuItem value={1} style={{fontFamily:'IranSans', fontSize:'12px'}}>خرید یا فعال سازی اشتراک</MenuItem>
+                        <MenuItem value={2} style={{fontFamily:'IranSans', fontSize:'12px'}}>مشکلات حساب کاربری</MenuItem>
+                        <MenuItem value={3} style={{fontFamily:'IranSans', fontSize:'12px'}}>مشکل در تماشای فیلم</MenuItem>
+                        <MenuItem value={4} style={{fontFamily:'IranSans', fontSize:'12px'}}>موارد محتوایی</MenuItem>
+                        <MenuItem value={5} style={{fontFamily:'IranSans', fontSize:'12px'}}>سایر موضوعات</MenuItem>
+                        <MenuItem value={6} style={{fontFamily:'IranSans', fontSize:'12px'}}>درخواست همکاری</MenuItem>
+                        <MenuItem value={7} style={{fontFamily:'IranSans', fontSize:'12px'}}>پیشنهاد یا انتقاد</MenuItem>
                     </Select>
                 </FormControl>
 
                 <TextField
                     id="standard-multiline-static"
-                    label="Multiline"
+                    label="پیام خود را اینجا بنویسید"
                     multiline
                     rows="4"
                     defaultValue=""
                     onChange={this.handleChange('message')}
+                    style={{
+                      fontFamily: "IranSans",
+                      display : 'block'
+                    }}
+                    InputProps={{
+                      style: {
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      },
+                    }}
+                    InputLabelProps={{
+                      style:{
+                        fontFamily: 'IranSans',
+                        fontSize: '14px'
+                      }
+                    }}
                     />
-
+                <br />
                 <Button 
                     variant="contained" 
                     color="secondary"
                     onClick={this.insertCritisism}
+                    style={{
+                      fontFamily: 'IranSans'
+                    }}
+                    startIcon={<SendIcon />}
                     >
+                      &nbsp;
                     ثبت نظر
                 </Button>
-
+                </form>    
+                    </Paper>
+                </Grid>
+                
+                
+                </Grid>
                 <StickyFooter />
-
             </React.Fragment>
         );
     }

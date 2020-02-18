@@ -46,11 +46,17 @@ class TermsConditions extends React.Component {
                     style={{
                         direction: 'rtl',
                         fontFamily: 'IranSans_Light',
+                        lineHeight : '28px'
                     }}
                     >
                     
-                        <ul>
-                            <li>
+                        <ul 
+                            style={{
+                                paddingRight: '9px'
+                            }}>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -58,32 +64,56 @@ class TermsConditions extends React.Component {
                             >
                                 بند اول
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     افراد برای عضویت در سایت باید به قسمت عضویت مراجعه کنند. در این مرحله با وارد کردن اطلاعات لازم مانند نام و نام خانوادگی، نام کاربری ،رمز عبور و آدرس پست الکترونیکی و شماره تلفن همراه کد تایید عضویت برای آنان ارسال می‌شود که کاربران با وارد کردن آن، مراحل عضویت را تایید می‌کنند.
-                                    <ul>
-                                        <li>
+                                    <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                             تبصره 1
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 کاربر باید رمز عبور و نام کاربری خود را حفظ نموده و چنانچه آن را فراموش کند، می‌تواند برای ثبت نام مجدد و اخذ کلمه عبور جدید اقدام کند.
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                             تبصره 2
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 کاربر باید آدرس پست الکترونیک خود را به همراه سایر اطلاعات درخواستی به‌طور صحیح اعلام نموده و مسئولیت ثبت اشتباه و یا خلاف واقع بر عهده شخص کاربر است.
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                             تبصره 3
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 عضویت در سایت فیزیک اپ رایگان است.
                                                 </li>
 
@@ -95,7 +125,9 @@ class TermsConditions extends React.Component {
                                 
                                 </ul>
                             </li>
-                            <li>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -103,50 +135,86 @@ class TermsConditions extends React.Component {
                             >
                                 بند دوم
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     فرایند خرید از سایت توسط کاربر به این شرح است:
-                                    <ul>
-                                        <li>
+                                    <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                         قسمت اول
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 بازدید از محتوا و خدمات ارائه شده در سایت
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                         قسمت دوم
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 انتخاب طرح اشتراکی مورد نظر
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                         قسمت سوم
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 پرداخت مبلغ معین( یا اعمال کوپن ) به‌صورت آنلاین توسط خریدار
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                         قسمت چهارم
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 استفاده با دسترسی کامل از محتوای سایت تا مدا معین (بسته به نوع طرح انتخابی)
                                                 </li>
 
                                             </ul>
                                         </li>
-                                        <li>
+                                        <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                         تبصره
-                                            <ul>
-                                                <li>
+                                            <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                                <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                                 چنانچه خریدار با هویت غیرواقعی اعم از نام، نام خانوادگی و … اقدام به خرید کند و موضوع مشخص شود، فیزیک اپ حق دارد سفارش را باطل کند. 
                                                 </li>
 
@@ -158,7 +226,9 @@ class TermsConditions extends React.Component {
                                 
                                 </ul>
                             </li>
-                            <li>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -166,13 +236,19 @@ class TermsConditions extends React.Component {
                             >
                                 بند سوم
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     حق امتیاز کلیه کالاها و محتویات این سایت برای تهیه کننده اثر محفوظ بوده و کلیه محتویات دارای مجوز رسمی از وزارت آموزش و پروش است  و هرگونه کپی‌برداری یا استفاده از بخش یا کل مطالب کالاها غیرمجاز بوده و پیگرد قانونی دارد.
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -180,13 +256,19 @@ class TermsConditions extends React.Component {
                             >
                                 بند چهارم
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     مدیریت سایت این اختیار را دارد تا در هر زمانی هر کاربری را که به هر دلیلی فعالیت های او مغایر با قوانین سایت باشد ، حذف کند.
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -194,13 +276,19 @@ class TermsConditions extends React.Component {
                             >
                                 بند پنجم
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     کاربر نباید در سایت ( تالار گفت‌وگو ، پرسشو پاسخ  و یا هر قسمت دیگر) اظهاراتی (Comment) را بگذارد و‌ یا اقدامی نماید که مبین نقض حقوق اشخاص دیگر باشد و یا عمل مجرمانه‌ای را به دنبال داشته باشد. همچنین کاربران نباید در خصوص امور مذهبی و سیاسی در این سایت اظهار نظر کنند. چنانچه هر یک از کاربران این ماده را رعایت نکنند، بلافاصله از سایت اخراج شده و چنانچه خریدی انجام داده باشند، وجه واریزی به آنان مسترد نمی‌شود. همچنین کاربر (عضو) حق استفاده از این سایت را  از دست می‌دهد.
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                             <span
                             style={{
                                 fontWeight: 'bold',
@@ -208,8 +296,12 @@ class TermsConditions extends React.Component {
                             >
                                 بند ششم
                             </span>
-                                <ul>
-                                    <li>
+                                <ul     style={{
+                                paddingRight: '9px'
+                            }}>
+                                    <li style={{
+                                        textAlign: 'justify'
+                                    }}>
                                     تمامی حقوق این سایت متعلق به شرکت " پیشگامان فناوری زندگی آرمانی " می‌باشد. 
 این سایت در زمینه آموزش فیزیک و تحت قوانین جمهوری اسلامی ایران فعالیت می‌کند.
                                     </li>
