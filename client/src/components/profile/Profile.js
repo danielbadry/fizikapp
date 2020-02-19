@@ -25,13 +25,15 @@ import WatchedVideosList from './WatchedVideosList';
 import FavoriteVideos from './FavoriteVideos';
 import UserRequests from './UserRequests';
 import {HashRouter, Route } from "react-router-dom";
-
-
+import Hidden from '@material-ui/core/Hidden';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 //import ProfileTabs from './ProfileTabs';
 //import Divider from '@material-ui/core/Divider';
 //import InboxIcon from '@material-ui/icons/Inbox';
 //import DraftsIcon from '@material-ui/icons/Drafts';
 //import { func } from 'prop-types';
+import AddIcon from '@material-ui/icons/Add';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -174,7 +176,24 @@ class Profile extends React.Component {
 		return (
 			<React.Fragment>
 				<Grid container spacing={1} justify="center">
-					<Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
+				<Hidden only={['md', 'lg','xl']}>
+				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+					<ButtonGroup color="primary" aria-label="outlined primary button group">
+						<Button startIcon={<DashboardIcon />} />
+						<Button startIcon={<EditIcon />} />
+						<Button startIcon={<AttachMoneyIcon />} />
+						<Button startIcon={<AttachMoneyIcon />} />
+						<Button startIcon={<MessageIcon />} />
+					</ButtonGroup>
+					<ButtonGroup color="primary" aria-label="outlined primary button group">
+						<Button startIcon={<VideocamIcon />} />
+						<Button startIcon={<FavoriteIcon />} />
+						<Button startIcon={<QuestionAnswerIcon />} />
+						<Button startIcon={<QuestionAnswerIcon />} />
+					</ButtonGroup>
+				</Grid>
+				</Hidden>
+					<Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
 						<Paper style={classes.main_container}>
 							<HashRouter>
 								<Route exact path="/profile" component={this.HandleDashboard} />
@@ -189,6 +208,7 @@ class Profile extends React.Component {
 							</HashRouter>
 						</Paper>
 					</Grid>
+					<Hidden smDown>
 					<Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
 						<Paper>
 							<Grid container spacing={0}>
@@ -366,7 +386,7 @@ class Profile extends React.Component {
 							</Grid>
 						</Paper>
 					</Grid>
-
+					</Hidden>
 				</Grid>
 
 				<StickyFooter />
