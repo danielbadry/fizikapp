@@ -126,7 +126,7 @@ render() {
                 marginLeft: '2px',
                 paddingTop: '5px',
                 position: 'absolute'
-            }}>میزان دیدن اون ویدیو : {this.props.item.likes}</span>
+            }}>{this.props.item.likes}</span>
 
             <span style={{
                 color: 'white',
@@ -153,7 +153,6 @@ render() {
               width: `${this.props.item.percent}%`,
             }}
           >
-          percent
         </div>
         </div>
       </Paper>

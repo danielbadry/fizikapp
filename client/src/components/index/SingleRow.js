@@ -24,8 +24,42 @@ var settings = {
 	slidesToScroll: 1,
 	autoplay : true,
 	autoplaySpeed : 3000,
-	pauseOnHover : true
-  };
+	pauseOnHover : true,
+	responsive: [{
+		breakpoint: 780,
+		settings: {
+			slidesToShow: 2,
+			infinite: true,
+			dots: false,
+			slidesToScroll: 1,
+			autoplay : true,
+			autoplaySpeed : 3000,
+			pauseOnHover : true,
+		}
+	}, {
+		breakpoint: 600,
+		settings: {
+			slidesToShow: 1,
+			infinite: true,
+			dots: false,
+			slidesToScroll: 1,
+			autoplay : true,
+			autoplaySpeed : 3000,
+			pauseOnHover : true,
+		}
+    }, {
+		breakpoint: 300,
+		settings: {
+			slidesToShow: 1,
+			infinite: true,
+			dots: false,
+			slidesToScroll: 1,
+			autoplay : true,
+			autoplaySpeed : 3000,
+			pauseOnHover : true,
+		}
+    }]
+};
 export default (props) => {
 
 	const [rows, setRows] = useState([]);
