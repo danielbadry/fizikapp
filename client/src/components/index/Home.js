@@ -3,6 +3,7 @@ import StickyFooter from "../header/footer/StickyFooter";
 import AdsPanel from "./AdsPanel";
 import Gerdali from "./Gerdali/Gerdali";
 import SingleRow from "./SingleRow";
+import RequestRow from "./RequestRow";
 import Container from '@material-ui/core/Container';
 
 
@@ -60,12 +61,13 @@ class Home extends React.Component {
 		
 		return (
 			<React.Fragment>
-				<Container disableGutters={true}>
+				{/* <Container disableGutters={true}> */}
 					<AdsPanel />
 					{/* <NiceCard /> */}
-					<Gerdali />
-					<br />
+				<Gerdali />
+					
 					<SingleRow
+					slidecount="4"
 					label="تازه های فیزیک اپ"
 					footer=""
 					model="products"
@@ -73,6 +75,7 @@ class Home extends React.Component {
 					count='10'
 					/>
 					{(this.state.token && (this.state.numberOfWatchedVideos > 0)) ? <SingleRow
+						slidecount="4"
 						label="ادامه ی ویدیوهای قبلی"
 						footer=""
 						model="watchedvideos"
@@ -83,6 +86,7 @@ class Home extends React.Component {
 						null
 						}
 					<SingleRow
+						slidecount="4"
 						label="چالش های علمی"
 						footer="مشاهده بیشتر"
 						model="sciencechallenge"
@@ -98,6 +102,7 @@ class Home extends React.Component {
 					/> */}
 					
 					<SingleRow
+						slidecount="4"
 						label="فراتر از کتاب"
 						footer="مشاهده بیشتر"
 						model="beyondthebooks"
@@ -105,14 +110,15 @@ class Home extends React.Component {
 						count='10'
 					/>
 
-					<SingleRow
+					<RequestRow
+						slidecount="4"
 						label="درخواست ها"
 						footer="مشاهده بیشتر"
 						model="requests"
 						linkToShowMore='requests'
 						count='10'
 					/>
-				</Container>
+				{/* </Container> */}
 			<StickyFooter />
 				
 			{/* <ReactTourGuideSlider /> */}

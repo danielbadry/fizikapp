@@ -35,6 +35,7 @@ render() {
 	}
 	return (
 		<React.Fragment>
+			<Link component={RouterLink} to={`product/${this.props.item.id}`} underline="none" >
 			<div style={classes.padding_style} >
 				<Paper
 				style={{
@@ -73,12 +74,12 @@ render() {
 						}}>{this.props.item.data.summary.likes}</span>
 					</div>
 				</Paper>
-				<Link component={RouterLink} to={`product/${this.props.item.id}`} underline="none" >
+				
 					<Typography style={{
 					fontFamily: 'IranSans_Bold',
 					color: '#000',
 					direction: 'rtl',
-					fontSize: "15px",
+					fontSize: "12px",
 					maxHeight: "4rem",
 					marginTop: "10px",
 					marginBottom: "5px"}}>
@@ -88,12 +89,13 @@ render() {
 					fontFamily: 'IranSans_UltraLight',
 					color: '#606060',
 					direction: 'rtl',
-					fontSize: '14px'
+					fontSize: '12px'
 					}}>
 						{this.props.item.data.summary.title}
 					</Typography>
-				</Link>
+				
 			</div>
+			</Link>
 		</React.Fragment>
     );
 }

@@ -62,7 +62,9 @@ class Requests extends React.Component {
               {this.state.requests.map(
               (request, index) => 
               <ListItem 
-                  alignItems="flex-start"
+                  style={{
+                      textAlign : 'right'
+                  }}
                   key={index}
                   >
                   
@@ -87,13 +89,6 @@ class Requests extends React.Component {
                             >
                             {request.jalaaliUserFriendlyCreatedDate}
                         </div>
-                          {/* <Link 
-                            component={RouterLink} 
-                            to={'https://google.com'}
-                            style={{ fontFamily: 'IranSans_Light' }}
-                            >
-                              {request.userInfo.fullName}
-                          </Link> */}
                       </Typography>
                         <div
                         style={{ fontFamily: 'IranSans_Light' }}

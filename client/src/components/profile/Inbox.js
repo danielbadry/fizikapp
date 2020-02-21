@@ -54,7 +54,7 @@ class Inbox extends React.Component {
 					<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
 					</ListItemAvatar> */}
 						<ListItemText
-						primary={message.message}
+						primary={<Typography style={{fontFamily: 'IranSans', fontSize:'13px'}}>{message.message}</Typography>}
 						secondary={
 							<React.Fragment>
 							{/* <Typography

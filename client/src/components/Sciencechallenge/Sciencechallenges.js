@@ -122,9 +122,21 @@ class Sciencechallenges extends React.Component {
     render() {
         
         return (
-            <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <Paper>
+            <React.Fragment>
+                    <Grid item 
+                        xs={12} 
+                        sm={12} 
+                        md={12} 
+                        lg={12} 
+                        xl={12}
+                        style={{
+                            direction : 'rtl',
+                            textAlign : 'right'
+                        }}>
+                        <br />
+                        <Paper style={{
+                            margin :'1%'
+                        }}>
 
                         {this.state.tags.map(
                             (tag, index) =>
@@ -147,7 +159,7 @@ class Sciencechallenges extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                        <Paper>
+                        {/* <Paper> */}
                         <List
                         style={{
                             direction: 'rtl',
@@ -265,11 +277,11 @@ class Sciencechallenges extends React.Component {
                             // </ListItem>
                             )}
                             </List>
-                        </Paper>
+                        {/* </Paper> */}
                     </Grid>
 
                     <StickyFooter />
-            </Grid>
+            </React.Fragment>
         );
     }
 }

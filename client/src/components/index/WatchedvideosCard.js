@@ -84,22 +84,23 @@ render() {
           direction: 'rtl',
           position: 'relative',
           top: '67%',
-          right: '2%'
+          right: '2%',
+          fontSize: '12px'
         }}>
           {this.props.item.name}
         </Typography>
         
-        <Typography style={{
+        {/* <Typography style={{
           fontFamily: 'IranSans_UltraLight',
           color: 'white',
           direction: 'rtl',
           position: 'relative',
           top: '67%',
           right: '2%',
-          fontSize: '14px'
+          fontSize: '12px'
         }}>
         {this.props.item.title}
-        </Typography>
+        </Typography> */}
         
         <div style={{
           bottom: '0',
@@ -118,20 +119,10 @@ render() {
                 marginBottom: '0px'
             }}
           />
-
-            <span style={{
+        <span style={{
                 color: 'white',
                 fontFamily: 'verdana',
-                fontSize: '14px',
-                marginLeft: '2px',
-                paddingTop: '5px',
-                position: 'absolute'
-            }}>میزان دیدن اون ویدیو : {this.props.item.likes}</span>
-
-            <span style={{
-                color: 'white',
-                fontFamily: 'verdana',
-                fontSize: '14px',
+                fontSize: '12px',
                 marginLeft: '2px',
                 paddingTop: '5px',
                 position: 'absolute'
@@ -139,7 +130,7 @@ render() {
         </div>
         <div
           style={{
-            bottom: '-15px',
+            bottom: '0',
             position: 'absolute',
             backgroundColor:'#0000004d',
             width: '100%',
@@ -150,10 +141,11 @@ render() {
               bottom: '0',
               position: 'absolute',
               backgroundColor:'red',
+              height: '8px',
               width: `${this.props.item.percent}%`,
             }}
           >
-          percent
+          {/* percent */}
         </div>
         </div>
       </Paper>

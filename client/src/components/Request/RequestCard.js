@@ -22,7 +22,7 @@ import Link from '@material-ui/core/Link';
 //import Collapse from '@material-ui/core/Collapse';
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: '92%',
   },
   media: {
     height: 0,
@@ -79,13 +79,13 @@ export default function RequestCars(props) {
               
               title={<Typography style={{
                 fontFamily: 'IranSans',
-                fontSize: '14px'
+                fontSize: '1.4vw'
               }}>
-                {props.item.userInfo[Object.keys(props.item.userInfo)[4]] + props.item.userInfo[Object.keys(props.item.userInfo)[5]]}
+                {props.item.userInfo[Object.keys(props.item.userInfo)[4]] + ' ' + props.item.userInfo[Object.keys(props.item.userInfo)[5]]}
               </Typography>}
               subheader={<Typography style={{
                 fontFamily: 'IranSans',
-                fontSize: '12px',
+                fontSize: '1.4vw',
                 color: 'rgba(0, 0, 0, 0.54)'
               }}>
                 {props.item.jalaaliUserFriendlyCreatedDate}
@@ -100,6 +100,7 @@ export default function RequestCars(props) {
                 component="p"
                 style={{
                   fontFamily:'IranSans',
+                  fontSize: '12px',
                   color: 'black',
                   fontWeight: 'bold',
                   direction: 'rtl'
@@ -116,21 +117,20 @@ export default function RequestCars(props) {
                   fontFamily: 'IranSans',
                   textAlign: 'justify',
                   direction: 'rtl',
-                  color: 'rgb(93, 93, 93)',
+                  color: 'rgb(23, 22, 22)',
                   marginTop: '8%',
-                  lineHeight: '1.7rem'
+                  lineHeight: '1.6rem',
+                  fontSize: '12px',
+                  maxHeight: '100px',
+                  height: '100px',
+                  letterSpacing: '0px',
+                  textOverflow: 'ellipsis',
                 }}
                 >
                 {props.item.message}
               </Typography>
 
           </CardContent>
-
-          <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-              </IconButton>
-          </CardActions>
           
           </Card>
           </Link>

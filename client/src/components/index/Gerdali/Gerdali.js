@@ -55,12 +55,13 @@ class Gerdali extends React.Component {
 				color: 'inherit',
 				display: "block",
 				width: "100%",
-				padding:theme.spacing(2),
-				overflow:"hidden"
+				padding:theme.spacing(1),
+				overflow:"hidden",
+				textAlign: 'center'
 			},
 			gerdali_main:{
 				position: 'relative',
-				height: '500px',
+				height: '30vh',
 				width: '100%',
 				display: 'inline-block'
 			}
@@ -69,7 +70,7 @@ class Gerdali extends React.Component {
 			<Grid container justify="center" alignItems="center" spacing={0}>
 				{this.state.categories.map(
 					(item, index) => 
-					<Grid container item xs={12} sm={12} md={4} lg={4} xl={4}>
+					<Grid container item xs={4} sm={4} md={4} lg={4} xl={4}>
 						<Link 
 							style={classes.gerdali_link}
 							key={'Gerdali_'+index}
@@ -92,43 +93,13 @@ class Gerdali extends React.Component {
 								<div className="profile-name">
 									<h2>
 										{item.name}
-										<br />
+										
 										<span> 
 											ویدیوهای آموزشی
 										</span>
 									</h2>
 								</div>
-								{ /*<div className="profile-social">
-									<ul>
-									<li>
-										<a href={"/category/" + `${item.id}`} data-toggle="tooltip" title={item.name} target="_blank">
-											<AddShoppingCartIcon 
-											style = {{
-												paddingTop: '12px'
-											}}
-											/>
-										</a>
-									</li>
-									<li>
-										<a href={"/category/" + `${item.id}`} data-toggle="tooltip" title={item.name} target="_blank">
-											<DoneIcon 
-											style = {{
-												paddingTop: '12px'
-											}}
-											/>
-										</a>
-									</li>
-									<li>
-										<a href={"/category/" + `${item.id}`} data-toggle="tooltip" title={item.name} target="_blank">
-											<MusicVideoIcon 
-											style = {{
-												paddingTop: '12px'
-											}}
-											/>
-										</a>
-									</li>
-									</ul>
-								</div>*/ }
+								
 								</div>
 							</div>
 						</Link>

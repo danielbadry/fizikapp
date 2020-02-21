@@ -52,10 +52,11 @@ class UserToolInAppbar extends React.Component {
                         style={{
                             color:'inherit',
                             fontFamily:'IranSans_Light',
-                            fontSize:'14px'
+                            fontSize:'12px',
+                            textAlign:'rigth'
                         }}
                         >
-                        {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName} خوش آمدید 
+                        {this.state.userinfo.firstName + ' ' +this.state.userinfo.lastName}   
                     </Typography>
                     
                     <UserSystemMessageMenu />

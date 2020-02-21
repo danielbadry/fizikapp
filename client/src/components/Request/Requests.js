@@ -123,12 +123,9 @@ class Requests extends React.Component {
             fontFamily: "IranSans"
           };
         return (
-            <Grid 
-                container 
-                spacing={3}
-                style={mystyle}
-                >
+            <React.Fragment>
                     <Grid item xs={12}>
+                        <br />
                     <Button
                         variant="contained"
                         color="primary"
@@ -140,13 +137,27 @@ class Requests extends React.Component {
                           }}
                         startIcon={<AddIcon />}
                     >
+                        
                     &nbsp; درخواست جدید
                     </Button>
                     
                     </Grid>
-                    
-                    <Grid item xs={12}>
-                        <Paper>
+                    <br />
+                    <Grid 
+                        item 
+                        xs={12} 
+                        sm={12} 
+                        md={12} 
+                        lg={12} 
+                        xl={12}
+                        style={{
+                            direction : 'rtl',
+                            textAlign : 'right'
+                        }}
+                        >
+                        <Paper style={{
+                            margin :'1%'
+                        }}>
 
                         {this.state.tags.map(
                             (tag, index) =>
@@ -169,7 +180,7 @@ class Requests extends React.Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                        <Paper>
+                        {/* <Paper> */}
                         <List
                         style={{
                             direction: 'rtl',
@@ -233,11 +244,11 @@ class Requests extends React.Component {
                             </ListItem>
                             )}
                             </List>
-                        </Paper>
+                        {/* </Paper> */}
                     </Grid>
 
                     <StickyFooter />
-            </Grid>
+            </React.Fragment>
         );
     }
 }

@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import StickyFooter from "../header/footer/StickyFooter";
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import Fab from '@material-ui/core/Fab';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import SettingsIcon from '@material-ui/icons/Settings';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
@@ -34,6 +37,10 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 //import DraftsIcon from '@material-ui/icons/Drafts';
 //import { func } from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -41,10 +48,24 @@ class Profile extends React.Component {
 		this.state = {
 			user : {
 				firstName:"",
-				lastName:""
+				lastName:"",
+				mobilemenu : false
 			},
 			myPlan : []
 		}
+	}
+
+	openMobileMenu = () => {
+		this.setState({
+			mobilemenu : true
+		});
+	}
+	
+	closeMobileMenu = () => {
+		console.info('residesh');
+		this.setState({
+			mobilemenu : false
+		});
 	}
 
 	HandleDashboard = ({ match }) => {
@@ -175,26 +196,86 @@ class Profile extends React.Component {
 		}
 		return (
 			<React.Fragment>
-				<Grid container spacing={1} justify="center">
 				<Hidden only={['md', 'lg','xl']}>
-				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-					<ButtonGroup color="primary" aria-label="outlined primary button group">
-						<Button startIcon={<DashboardIcon />} />
-						<Button startIcon={<EditIcon />} />
-						<Button startIcon={<AttachMoneyIcon />} />
-						<Button startIcon={<AttachMoneyIcon />} />
-						<Button startIcon={<MessageIcon />} />
-					</ButtonGroup>
-					<ButtonGroup color="primary" aria-label="outlined primary button group">
-						<Button startIcon={<VideocamIcon />} />
-						<Button startIcon={<FavoriteIcon />} />
-						<Button startIcon={<QuestionAnswerIcon />} />
-						<Button startIcon={<QuestionAnswerIcon />} />
-					</ButtonGroup>
+				<Grid
+					container
+					spacing={0}
+					direction="column"
+					alignItems="center"
+					justify="center"
+					style={{ 
+						width : '100%'
+					}}
+					>
+				<Grid 
+					item 
+					xs={12} 
+					sm={12} 
+					md={12} 
+					lg={12} 
+					xl={12}
+					style={{
+						direction: 'rtl',
+						width: '100%',
+						textAlign : 'center'
+					}}
+					>
+						<br />
+
+				<Button 
+					variant="contained" 
+					color="secondary" 
+					onClick={()=>this.openMobileMenu()}
+					disableElevation
+					style={{
+						fontFamily: 'IranSans',
+						width : '80%',
+						backgroundColor : '#f50057'
+					}}
+					startIcon={<SettingsIcon />}
+					>
+					منوی کاربری
+				</Button>
+				</Grid>
+				<br />
 				</Grid>
 				</Hidden>
+				
+				<Drawer 
+					open={this.state.mobilemenu} 
+					anchor="bottom"
+					>
+					<div
+						className={classes.fullList}
+						role="presentation"
+						onClick={()=>this.closeMobileMenu()}
+						// onKeyDown={toggleDrawer(side, false)}
+						>
+						<List>
+							{[{text:'داشبورد', link: '/profile/'}, {text:'عمومی', link:'/profile/general'}, {text:'مالی',link:'/profile/financial'}, {text:'امنیت', link:'/profile/security'},{text:'صندوق پیام', link:'/profile/inbox'}, {text:'ویدیوهای دیده شده', link:'/profile/watchedvideos'},{text:'مورد علاقه ها', link:'/profile/myfavorites'}, {text:'درخواست ها من',link:'/profile/myrequests'},{text:'چالش های علمی من',link:'/profile/mysciencechallenges'}].map((item, index) => (
+							<ListItem
+								component={Link} 
+								to={item.link} 
+								button 
+								key={index}
+								style={{
+									direction : 'rtl',
+									textAlign : 'right'
+								}}
+								>
+								<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+								<ListItemText 
+									primary={<Typography style={{fontFamily:'IranSans'}}>{item.text}</Typography>}
+									/>
+							</ListItem>
+							))}
+						</List>
+					</div>
+				</Drawer>
+				<Grid container spacing={0} justify="center">
+				
 					<Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-						<Paper style={classes.main_container}>
+						{/* <Paper style={classes.main_container}> */}
 							<HashRouter>
 								<Route exact path="/profile" component={this.HandleDashboard} />
 								<Route exact path="/profile/financial" component={this.HandleFinancial} />
@@ -206,7 +287,7 @@ class Profile extends React.Component {
 								<Route exact path="/profile/myrequests" component={this.HandleRequests} />
 								<Route exact path="/profile/mysciencechallenges" component={this.HandleSciencechallenges} />
 							</HashRouter>
-						</Paper>
+						{/* </Paper> */}
 					</Grid>
 					<Hidden smDown>
 					<Grid item xs={3} sm={3} md={3} lg={3} xl={3}>

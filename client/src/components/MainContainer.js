@@ -18,7 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import StickyFooter from "./header/footer/StickyFooter"; 
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import UserToolInAppbar from './header/UserToolInAppbar';
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 		}),
 	},
 	menuButton: {
-		marginRight: 36,
+		marginRight: 1,
 	},
 	hide: {
 		display: 'none',
@@ -94,7 +94,7 @@ const useStyles = makeStyles(theme => ({
 		},
 		marginRight: theme.spacing(2),
 		marginLeft: 0,
-		width: '100%',
+		width: '50%',
 		[theme.breakpoints.up('sm')]: {
 			marginLeft: theme.spacing(3),
 			width: 'auto',
@@ -124,8 +124,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	content: {
 		flexGrow: 1,
-		padding: theme.spacing(3),
-		paddingLeft:theme.spacing(12),
+		padding: theme.spacing(0),
+		paddingLeft:theme.spacing(7),
 	},
 }));
 

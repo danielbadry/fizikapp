@@ -36,6 +36,7 @@ render() {
 	}
 	return (
 		<React.Fragment>
+			<Link component={RouterLink}  to={`sciencechallenge/${this.props.item.id}`} underline="none" >
 			<div style={classes.padding_style} >
 				<Paper
 				style={{
@@ -68,7 +69,7 @@ render() {
 						<span style={{
 						color: 'white',
 						fontFamily: 'verdana',
-						fontSize: '14px',
+						fontSize: '12px',
 						marginLeft: '2px',
 						paddingTop: '5px',
 						position: 'absolute'
@@ -76,28 +77,29 @@ render() {
 					</div>
 
 				</Paper>
-				<Link component={RouterLink}  to={`sciencechallenge/${this.props.item.id}`} underline="none" >
+				
 					<Typography style={{
 					fontFamily: 'IranSans_Bold',
 					color: '#000',
 					direction: 'rtl',
-					fontSize: "15px",
+					fontSize: "12px",
 					maxHeight: "4rem",
 					marginTop: "10px",
 					marginBottom: "5px"}}>
 					{this.props.item.data.summary.name}
 					</Typography>
 
-					<Typography style={{
+					{/* <Typography style={{
 					fontFamily: 'IranSans_UltraLight',
 					color: '#606060',
 					direction: 'rtl',
-					fontSize: '14px'
+					fontSize: '12px'
 					}}>
 					{this.props.item.data.summary.title}
-					</Typography>
-				</Link>
+					</Typography> */}
+				
 			</div>
+			</Link>
 		</React.Fragment>
     
 		);

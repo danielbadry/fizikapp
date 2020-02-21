@@ -46,40 +46,52 @@ class WatchedVideosList extends React.Component {
 			<List>
 				{this.state.watchedVideosList.map(
 					(uw, index) => 
-					<ListItem alignItems="flex-start">
-						<ListItemAvatar>
-							<Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-						</ListItemAvatar>
-						<ListItemText
-						// primary={
-						// <Link 
-						//     component={RouterLink} 
-						//     to={`/product/${uw.recordData.id}`}
-						//     style={{ fontFamily: 'IranSans_Light' }}
-						//     >
-						//   {uw.recordData.name}
-						// </Link>
-						// }
-						// primary={uw.recordData.name}
-						secondary={
-							<React.Fragment>
-								<Typography
-								component="span"
-								variant="body2"
-								color="textPrimary"
-								>
-									<div
-									style={{ fontFamily: 'IranSans_Light' }} dangerouslySetInnerHTML={{__html: uw.jalaaliUserFriendlyCreatedDate}}
-									>
-									</div>
-								</Typography>
-								<div
-								style={{ fontFamily: 'IranSans_Light' }} dangerouslySetInnerHTML={{__html: uw.description }}
-								></div>
-							</React.Fragment>
-							}
-						/>
-					</ListItem>
+					<Link 
+						component={RouterLink} 
+						to={`/product/${uw.id}`}
+						style={{ fontFamily: 'IranSans_Light' }}
+						>
+						<div style={{
+							display: 'flex',
+							height : '100px',
+							marginBottom : '1%',
+							paddingRight: '1%'
+						}}>
+							<div style={{
+								width:'70%',
+								fontFamily : 'IranSans',
+								direction : 'rtl'
+							}}>
+								{uw.name}
+							</div>
+							<div style={{
+								width : '30%',
+								position : 'relative'
+							}}>
+								<div style={{
+									background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${uw.thumbnail})`,
+									width : '100%',
+									height : '90px',
+									position : 'absolute',
+									left : '0',
+									top :'0',
+									bottom : '10px'
+								}}>
+									
+								</div>
+								<div style={{
+									backgroundColor : 'red',
+									width: `${uw.percent}%`,
+									height : '10%',
+									position : 'absolute',
+									left : '0',
+									bottom : '10%'
+								}}>
+
+								</div>
+							</div>
+						</div>
+						</Link>
 				)}
 			</List>
 		)

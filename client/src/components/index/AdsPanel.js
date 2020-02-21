@@ -23,7 +23,6 @@ class AdsPanel extends React.Component{
 				<Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
 					<video 
 						id="bgVideo" 
-						loop="10"
 						controls = {false}
 						muted
 						preload="true" 
