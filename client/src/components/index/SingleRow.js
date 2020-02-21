@@ -60,6 +60,7 @@ var settings = {
         }
       ]
   };
+
 export default (props) => {
 
 	const [rows, setRows] = useState([]);

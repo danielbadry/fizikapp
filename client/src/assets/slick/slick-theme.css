@@ -49,7 +49,7 @@
 }
 .slick-prev
 {
-    left: -23px;
+    left: -12px;
     /*border-top-right-radius: 21px;
     border-bottom-right-radius: 21px;*/
     background-image:url("../images/arrow_left.png");
@@ -58,7 +58,7 @@
 
 .slick-next
 {
-    right: -23px;
+    right: -12px;
     /*border-top-left-radius: 21px;
     border-bottom-left-radius: 21px;*/
     background-image:url("../images/arrow_right.png");
